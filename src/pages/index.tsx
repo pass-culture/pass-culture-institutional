@@ -1,9 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
-import { ExternalLink } from '@/ui/components/links/ExternalLink'
-import { InternalLink } from '@/ui/components/links/InternalLink'
+
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
+import { ExternalLink } from '@/ui/components/links/ExternalLink'
+import { InternalLink } from '@/ui/components/links/InternalLink'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 

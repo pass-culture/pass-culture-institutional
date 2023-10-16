@@ -1,9 +1,10 @@
 import React from 'react'
-import { axe } from 'vitest-axe'
-import { describe, it, expect } from 'vitest'
-import About from './about'
 import { render } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
+import { describe, expect, it } from 'vitest'
+import { axe } from 'vitest-axe'
+
+import About from './about'
 import { theme } from '@/theme/theme'
 
 describe('About page', () => {
