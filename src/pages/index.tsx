@@ -1,3 +1,4 @@
+import React from 'react'
 import Head from 'next/head'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
 import { InternalLink } from '@/ui/components/links/InternalLink'

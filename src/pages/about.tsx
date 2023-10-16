@@ -1,3 +1,4 @@
+import React from 'react'
 import { InternalLink } from '@/ui/components/links/InternalLink'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { Main } from '@/ui/components/containers/Main'
