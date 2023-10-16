@@ -9,7 +9,7 @@
     "start": "next start",
     "test": "vitest",
     "test:deadcode": "ts-prune",
-    "typecheck": "vitest typecheck"
+    "test:typecheck": "vitest typecheck"
   },
   "dependencies": {
     "next": "13.5.4",
