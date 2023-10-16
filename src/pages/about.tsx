@@ -1,8 +1,8 @@
-import { InternalLink } from "@/ui/components/links/InternalLink";
-import { PageContainer } from "@/ui/components/containers/PageContainer";
-import { Main } from "@/ui/components/containers/Main";
-import { CodeTag } from "@/ui/components/tags/CodeTag";
-import { Typo } from "@/ui/components/typographies";
+import { InternalLink } from '@/ui/components/links/InternalLink'
+import { PageContainer } from '@/ui/components/containers/PageContainer'
+import { Main } from '@/ui/components/containers/Main'
+import { CodeTag } from '@/ui/components/tags/CodeTag'
+import { Typo } from '@/ui/components/typographies'
 
 export default function About() {
   return (
@@ -18,5 +18,5 @@ export default function About() {
         <InternalLink name="&larr; Go Back" href="/" />
       </Main>
     </PageContainer>
-  );
+  )
 }

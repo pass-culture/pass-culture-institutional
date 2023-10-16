@@ -1,10 +1,10 @@
-import Head from "next/head";
-import { ExternalLink } from "@/ui/components/links/ExternalLink";
-import { InternalLink } from "@/ui/components/links/InternalLink";
-import { Main } from "@/ui/components/containers/Main";
-import { PageContainer } from "@/ui/components/containers/PageContainer";
-import { CodeTag } from "@/ui/components/tags/CodeTag";
-import { Typo } from "@/ui/components/typographies";
+import Head from 'next/head'
+import { ExternalLink } from '@/ui/components/links/ExternalLink'
+import { InternalLink } from '@/ui/components/links/InternalLink'
+import { Main } from '@/ui/components/containers/Main'
+import { PageContainer } from '@/ui/components/containers/PageContainer'
+import { CodeTag } from '@/ui/components/tags/CodeTag'
+import { Typo } from '@/ui/components/typographies'
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
       <Main>
         <Typo.Title1>
-          Welcome to{" "}
+          Welcome to{' '}
           <ExternalLink href="https://nextjs.org">Next.js!</ExternalLink>
         </Typo.Title1>
 
@@ -31,5 +31,5 @@ export default function Home() {
         <InternalLink href="/about" name="About &rarr;" />
       </Main>
     </PageContainer>
-  );
+  )
 }
