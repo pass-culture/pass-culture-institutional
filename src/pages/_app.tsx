@@ -6,11 +6,9 @@ import { ThemeProvider } from 'styled-components'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <React.Fragment>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </React.Fragment>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </ThemeProvider>
   )
 }
