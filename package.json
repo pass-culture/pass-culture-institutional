@@ -3,22 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
     "start": "next start",
-    "lint": "next lint"
+    "test": "vitest",
+    "test:deadcode": "ts-prune",
+    "test:typecheck": "vitest typecheck"
   },
   "dependencies": {
+    "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.4"
+    "styled-components": "^6.0.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@testing-library/react": "^14.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "jsdom": "^22.1.0",
+    "prettier": "^3.0.3",
+    "ts-prune": "^0.10.3",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "^0.34.6",
+    "vitest-axe": "^0.1.0",
+    "vitest-canvas-mock": "^0.3.3"
   }
 }
