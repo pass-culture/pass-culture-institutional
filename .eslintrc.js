@@ -1,0 +1,17 @@
+module.exports = {
+  plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
+  extends: [
+    'eslint:recommended',
+    'next/core-web-vitals',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'prettier',
+  ],
+  rules: {
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    'react/jsx-fragments': ['error', 'element'],
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': ['error', { groups: [['^react', '^@?\\w']] }],
+  },
+}
