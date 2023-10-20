@@ -1,32 +1,27 @@
 # pass Culture Institutional
 
-## Installation
+Welcome to the pass culture institutional project !
 
-1. Ensure you have [Node.js](https://nodejs.org/) installed on your system.
-2. Clone this repository to your machine using the following command:
+## Local Database
+If you want to run the backend locally, you need to install Postgres on your machine. 
+With commands (or PgAdmin) you must create a db with the following:
+- Database name: db_institutional
 
-```bash
-git clone https://github.com/your-username/pass-culture-institutional.git
-```
+## Project Scripts
+Before you can use the scripts, ensure you have Yarn installed on your system.
+The project includes several scripts to simplify development and setup:
 
-## Start the project
+- `frontend`: Start the development server for the frontend part of the application.
 
-Navigate to the project directory and install the dependencies by running the following commands:
+- `backend`: Start the development server for the backend part of the application.
 
-```bash
-cd pass-culture-institutional
-yarn install
-yarn dev
-```
+- `clear`: Remove temporary files and caches in the frontend directory.
 
-## Available Scripts
+- `setup:frontend`: Install dependencies for the frontend part of the application.
 
-In the project directory, you can run the following commands:
+- `setup:backend`: Install dependencies for the backend part of the application.
 
-- `yarn build:` Build the application for production.
-- `yarn dev:` Start the Next.js development server.
-- `yarn lint:` Run the linter to check code quality.
-- `yarn start:` Start the application in production mode.
-- `yarn test:` Run tests using Vitest.
-- `yarn test:deadcode:` Find and remove unused TypeScript code using ts-prune.
-- `yarn test:typecheck:` Check types using Vitest Typecheck.
+- `setup`: Install all project dependencies and set up both frontend and backend components.
+
+- `dev`: This is the main script to run during development. It clears caches, and concurrently starts both the frontend and backend servers, allowing you to work on both parts of the application simultaneously.
+

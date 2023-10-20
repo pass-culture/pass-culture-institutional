@@ -24,7 +24,6 @@ export default function Home() {
           Welcome to{' '}
           <ExternalLink href="https://nextjs.org">Next.js!</ExternalLink>
         </Typo.Title1>
-
         <Typo.Body>
           Get started by editing
           <CodeTag>pages/index.tsx</CodeTag>

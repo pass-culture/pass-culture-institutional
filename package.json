@@ -2,39 +2,17 @@
   "name": "pass-culture-institutional",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start",
-    "test": "vitest",
-    "test:deadcode": "ts-prune",
-    "test:typecheck": "vitest typecheck"
+    "frontend": "yarn dev --prefix ../frontend/",
+    "backend": "yarn dev --prefix ../backend/",
+    "clear": "cd frontend && rm -rf .next && rm -rf cache",
+    "setup:frontend": "cd frontend && yarn",
+    "setup:backend": "cd backend && yarn",
+    "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
+    "dev": "yarn clear && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\""
   },
   "dependencies": {
-    "next": "13.5.4",
-    "react": "^18",
-    "react-dom": "^18",
-    "styled-components": "^6.0.8"
-  },
-  "devDependencies": {
-    "@testing-library/react": "^14.0.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.4",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
-    "jsdom": "^22.1.0",
-    "prettier": "^3.0.3",
-    "ts-prune": "^0.10.3",
-    "typescript": "^5",
-    "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6",
-    "vitest-axe": "^0.1.0",
-    "vitest-canvas-mock": "^0.3.3"
+    "concurrently": "^8.2.2"
   }
 }
