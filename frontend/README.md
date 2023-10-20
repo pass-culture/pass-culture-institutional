@@ -1,4 +1,4 @@
-# pass Culture Institutional
+# pass Culture Institutional frontend
 
 ## Installation
 
