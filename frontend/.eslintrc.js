@@ -13,5 +13,13 @@ module.exports = {
     'react/jsx-fragments': ['error', 'element'],
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': ['error', { groups: [['^react', '^@?\\w']] }],
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          { name: '@testing-library/react', message: 'use @/tests instead' },
+        ],
+      },
+    ],
   },
 }
