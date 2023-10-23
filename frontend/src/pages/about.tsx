@@ -7,7 +7,7 @@ import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 import { fetchAPI } from '@/utils/fetchAPI'
 
-interface HomeData {
+export type HomeData = {
   attributes: {
     description: string
     name: string
@@ -19,13 +19,13 @@ interface HomeData {
 }
 
 export default function About() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<HomeData[]>([])  
   const [isLoading, setLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
     setLoading(true)
     try {
-      const responseData = await fetchAPI('/restaurants')
+      const responseData = await fetchAPI<HomeData[]>('/restaurants')
       setData(responseData.data)
     } catch (error) {
       console.error(error)
