@@ -11,4 +11,10 @@ describe('Home page', () => {
 
     expect(await axe(container)).toHaveNoViolations()
   })
+
+  it('should render the page', () => {
+    const { container } = render(<Home />)
+
+    expect(container).toMatchSnapshot()
+  })
 })

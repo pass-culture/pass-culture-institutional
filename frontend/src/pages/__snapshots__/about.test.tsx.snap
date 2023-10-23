@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`About page > should render the page 1`] = `
+<div>
+  <p
+    class="sc-iBdoyZ zlGK"
+  >
+    Chargement...
+  </p>
+</div>
+`;
