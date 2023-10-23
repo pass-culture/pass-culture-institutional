@@ -30,6 +30,18 @@ exports[`Home page > should render the page 1`] = `
           pages/index.tsx
         </code>
       </p>
+      <div>
+        <input
+          id="acceptTerms"
+          role="checkbox"
+          type="checkbox"
+        />
+        <label
+          for="acceptTerms"
+        >
+          Checkbox à cocher
+        </label>
+      </div>
       <div
         class="sc-hLQTFJ hHliZR"
       >
