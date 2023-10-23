@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "(BSR) chore(deps):"
+    reviewers:
+      - "Lucasbeneston"
+
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "(BSR) chore(deps):"
+    reviewers:
+      - "Lucasbeneston"
+
+  - package-ecosystem: "npm"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "(BSR) chore(deps):"
+    reviewers:
+      - "Lucasbeneston"
