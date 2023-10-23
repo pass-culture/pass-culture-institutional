@@ -29,6 +29,6 @@ export const theme = {
       color: Colors.BLACK,
     },
   },
-} as const 
+} as const
 
 export type AppTheme = typeof theme
