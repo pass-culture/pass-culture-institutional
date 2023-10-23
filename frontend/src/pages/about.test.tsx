@@ -3,11 +3,15 @@ import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import About from './about'
-import { act, render } from '@/tests'
+import { act, render, screen, waitFor } from '@/tests'
 
 describe('About page', () => {
   it('should pass axe accessibility tests', async () => {
     const { container } = render(<About />)
+
+    await waitFor(() => {
+      expect(screen.queryByText('Chargement...')).toBeFalsy()
+    })
 
     let a11yResult
     await act( async () => {
@@ -17,8 +21,12 @@ describe('About page', () => {
     expect(a11yResult).toHaveNoViolations()
   })
 
-  it('should render the page', () => {
+  it('should render the page', async () => {
     const { container } = render(<About />)
+
+    await waitFor(() => {
+      expect(screen.queryByText('Chargement...')).toBeFalsy()
+    })
 
     expect(container).toMatchSnapshot()
   })
