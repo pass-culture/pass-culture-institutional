@@ -1,8 +1,6 @@
-import { DefaultTheme } from 'styled-components'
-
 import { Colors } from './colors'
 
-export const theme: DefaultTheme = {
+export const theme = {
   colors: {
     primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
@@ -31,4 +29,6 @@ export const theme: DefaultTheme = {
       color: Colors.BLACK,
     },
   },
-}
+} as const 
+
+export type AppTheme = typeof theme
