@@ -3,13 +3,17 @@ import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import Home from './index'
-import { fireEvent, render, screen } from '@/tests'
+import { act, fireEvent, render, screen } from '@/tests'
 
 describe('Home page', () => {
   it('should pass axe accessibility tests', async () => {
     const { container } = render(<Home />)
 
-    expect(await axe(container)).toHaveNoViolations()
+    let a11yResult
+    await act( async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
   })
 
   it('should render the page', () => {
