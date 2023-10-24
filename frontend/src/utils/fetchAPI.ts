@@ -1,6 +1,10 @@
 import { getStrapiURL } from './apiHelpers'
 
-export async function fetchAPI(path: string) {
+type HttpResponse<T> = {
+  data: T
+}
+
+export async function fetchAPI<T>(path: string) {
   try {
     const mergedOptions = {
       headers: { 'Content-Type': 'application/json' },
@@ -9,7 +13,7 @@ export async function fetchAPI(path: string) {
     const requestUrl = `${getStrapiURL(`/api${path}`)}`
 
     const response = await fetch(requestUrl, mergedOptions)
-    const data = await response.json()
+    const data: HttpResponse<T> = await response.json()
     return data
   } catch (error) {
     console.error(error)

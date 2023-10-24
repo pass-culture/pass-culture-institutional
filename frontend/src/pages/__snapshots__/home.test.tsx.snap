@@ -1,0 +1,62 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home page > should render the page 1`] = `
+<div>
+  <div
+    class="sc-guDMob kjJDxW"
+  >
+    <main
+      class="sc-beyTiQ AfwsS"
+    >
+      <h1
+        class="sc-iBdoyZ kqGUgJ"
+      >
+        Welcome to
+         
+        <a
+          class="sc-dmyDmy dPmvRl"
+          href="https://nextjs.org"
+        >
+          Next.js!
+        </a>
+      </h1>
+      <p
+        class="sc-fsYfxw gRDVXU"
+      >
+        Get started by editing
+        <code
+          class="sc-gLLuHO fhjfjc"
+        >
+          pages/index.tsx
+        </code>
+      </p>
+      <div>
+        <input
+          id="acceptTerms"
+          role="checkbox"
+          type="checkbox"
+        />
+        <label
+          for="acceptTerms"
+        >
+          Checkbox à cocher
+        </label>
+      </div>
+      <div
+        class="sc-hLQTFJ hHliZR"
+      >
+        <div
+          class="sc-eDLKEg gZPZKf"
+        >
+          <a
+            class="sc-jTQDJr fAvfvS"
+            href="/about"
+          >
+            About →
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;

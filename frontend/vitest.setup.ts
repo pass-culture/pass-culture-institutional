@@ -1,8 +1,18 @@
+import { afterAll, beforeAll, expect } from 'vitest'
+import type { AxeMatchers } from 'vitest-axe/matchers'
+import * as matchers from 'vitest-axe/matchers'
+
 import 'vitest'
 import 'vitest-canvas-mock'
-import * as matchers from 'vitest-axe/matchers'
-import { expect } from 'vitest'
-import type { AxeMatchers } from 'vitest-axe/matchers'
+import { server } from '@/tests/server'
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterAll(() => {
+  server.close()
+})
 
 expect.extend(matchers)
 

@@ -1,0 +1,24 @@
+{
+  "React-Native Component": {
+    "prefix": "a11y-test",
+    "scope": "javascriptreact, typescriptreact",
+    "body": [
+      "import React from 'react'",
+      "import { describe, expect, it } from 'vitest'",
+      "import { axe } from 'vitest-axe'",
+      "",
+      "import { ${1:PageName} } from './${1:PageName}'",
+      "import { render } from '@/tests'",
+      "",
+      "describe('<${1:PageName}/>', () => {",
+      "  it('should not have basic accessibility issues', async () => {",
+      "    const { container } = render(<${1:PageName} />)",
+      "",
+      "    expect(await axe(container)).toHaveNoViolations()",
+      "  })",
+      "})",
+      ""
+    ],
+    "description": "Create an accessibility test for a page"
+  }
+}

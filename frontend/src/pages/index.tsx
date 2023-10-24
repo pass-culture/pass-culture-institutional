@@ -8,6 +8,8 @@ import { InternalLink } from '@/ui/components/links/InternalLink'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 
+const CHECKBOX_ID = 'acceptTerms'
+
 export default function Home() {
   return (
     <PageContainer>
@@ -28,6 +30,11 @@ export default function Home() {
           Get started by editing
           <CodeTag>pages/index.tsx</CodeTag>
         </Typo.Body>
+
+        <div>
+          <input type="checkbox" role="checkbox" id={CHECKBOX_ID} />
+          <label htmlFor={CHECKBOX_ID}>Checkbox à cocher</label>
+        </div>
 
         <InternalLink href="/about" name="About &rarr;" />
       </Main>

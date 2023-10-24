@@ -1,20 +1,34 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
 import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import About from './about'
-import { theme } from '@/theme/theme'
+import { act, render, screen, waitFor } from '@/tests'
 
 describe('About page', () => {
   it('should pass axe accessibility tests', async () => {
-    const { container } = render(
-      <ThemeProvider theme={theme}>
-        <About />
-      </ThemeProvider>
-    )
+    const { container } = render(<About />)
 
-    expect(await axe(container)).toHaveNoViolations()
+    await waitFor(() => {
+      expect(screen.queryByText('Chargement...')).toBeFalsy()
+    })
+
+    let a11yResult
+    await act( async () => {
+      a11yResult = await axe(container)
+    })
+
+    expect(a11yResult).toHaveNoViolations()
   })
+
+  it('should render the page', async () => {
+    const { container } = render(<About />)
+
+    await waitFor(() => {
+      expect(screen.queryByText('Chargement...')).toBeFalsy()
+    })
+
+    expect(container).toMatchSnapshot()
+  })
+
 })
