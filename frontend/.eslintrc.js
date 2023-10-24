@@ -1,18 +1,31 @@
 module.exports = {
-  plugins: ['react', '@typescript-eslint', 'simple-import-sort'],
+  ignorePatterns: ['node_modules'],
+  plugins: [
+    'react',
+    '@typescript-eslint',
+    'simple-import-sort',
+    'unused-imports',
+  ],
   extends: [
     'eslint:recommended',
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'prettier',
+    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
   ],
   rules: {
-    '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-explicit-any': 'error',
     'react/jsx-fragments': ['error', 'element'],
+    'react/jsx-no-useless-fragment': 'error',
+    'react/no-unstable-nested-components': 'error',
+    'react/no-unused-prop-types': 'warn',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': ['error', { groups: [['^react', '^@?\\w']] }],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-return-await': 'error',
+    'array-callback-return': 'error',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': 'error',
     'no-restricted-imports': [
       'error',
       {
@@ -22,4 +35,17 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.test.ts', '**/*.test.tsx', '__mocks__'],
+      env: { jest: true },
+      plugins: ['jest', 'jest-formatting', 'testing-library'],
+      rules: {
+        'react/jsx-no-constructed-context-values': 'off',
+        'jest/no-conditional-in-test': 'error',
+        'jest/no-focused-tests': 'warn',
+        'jest/prefer-called-with': 'error',
+      },
+    },
+  ],
 }

@@ -14,7 +14,7 @@ describe('About page', () => {
     })
 
     let a11yResult
-    await act( async () => {
+    await act(async () => {
       a11yResult = await axe(container)
     })
 
@@ -30,5 +30,4 @@ describe('About page', () => {
 
     expect(container).toMatchSnapshot()
   })
-
 })

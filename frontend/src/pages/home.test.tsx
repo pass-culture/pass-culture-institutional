@@ -10,7 +10,7 @@ describe('Home page', () => {
     const { container } = render(<Home />)
 
     let a11yResult
-    await act( async () => {
+    await act(async () => {
       a11yResult = await axe(container)
     })
     expect(a11yResult).toHaveNoViolations()
