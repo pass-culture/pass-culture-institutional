@@ -19,7 +19,7 @@ export type HomeData = {
 }
 
 export default function About() {
-  const [data, setData] = useState<HomeData[]>([])  
+  const [data, setData] = useState<HomeData[]>([])
   const [isLoading, setLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
