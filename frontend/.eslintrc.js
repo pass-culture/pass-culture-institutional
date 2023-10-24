@@ -5,7 +5,8 @@ module.exports = {
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'prettier',
+    'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
