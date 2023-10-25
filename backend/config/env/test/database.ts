@@ -1,4 +1,6 @@
-module.exports = ({ env }) => ({
+import path from "path";
+
+export default ({ env }) => ({
   connection: {
     client: "sqlite",
     connection: {

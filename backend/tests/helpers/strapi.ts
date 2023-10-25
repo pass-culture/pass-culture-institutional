@@ -1,11 +1,11 @@
-const Strapi = require("@strapi/strapi");
-const fs = require("fs");
+import strapiFactory, { Strapi } from "@strapi/strapi";
+import fs from "fs";
 
-let instance;
+let instance: Strapi;
 
-async function setupStrapi() {
+export async function setupStrapi() {
   if (!instance) {
-    instance = await Strapi({ distDir: "./dist" }).load();
+    instance = await strapiFactory({ distDir: "./dist" }).load();
     // Argument distDir required or error running tests
     // https://github.com/strapi/strapi/issues/12894#issuecomment-1143282553
     // https://docs.strapi.io/dev-docs/typescript#start-strapi-programmatically
@@ -14,8 +14,8 @@ async function setupStrapi() {
   return instance;
 }
 
-async function cleanupStrapi() {
-  const dbSettings = strapi.config.get("database.connection");
+export async function cleanupStrapi() {
+  const dbSettings: any = strapi.config.get("database.connection");
 
   //close server to release the db-file
   await strapi.server.httpServer.close();
@@ -31,5 +31,3 @@ async function cleanupStrapi() {
     }
   }
 }
-
-module.exports = { setupStrapi, cleanupStrapi };

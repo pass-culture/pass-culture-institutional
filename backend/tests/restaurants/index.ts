@@ -1,33 +1,29 @@
-const request = require("supertest");
+import request from "supertest";
+import { describe, beforeAll, afterAll, it, expect } from "@jest/globals";
 
 it("should return restaurants", async () => {
   //   await strapi.services.restaurant.create({
   //     name: "Test Restaurant",
   //     description: "Test Description",
   //   });
-  await request(strapi.server.httpServer)
+  await request((strapi as any).server.httpServer) // Replace 'any' with the appropriate type
     .post("/api/restaurants")
     .send({
-      type: "api::restaurant.restaurant",
-      id: 1,
       data: {
-        name: "Resto trop bon",
-        description: "Y'a de la viande à gogo",
-        createdAt: "2023-10-23T12:00:49.307Z",
-        updatedAt: "2023-10-23T12:00:50.525Z",
-        publishedAt: "2023-10-23T12:00:50.522Z",
+        name: "Resto degeu",
+        description: "C'est cher en plus",
       },
     })
     .then((data) => {
       console.log({ data: data.text });
     });
 
-  await request(strapi.server.httpServer)
+  await request((strapi as any).server.httpServer) // Replace 'any' with the appropriate type
     .get("/api/restaurants")
     .expect(200) // Expect response http code 200
     .then((data) => {
       const response = JSON.parse(data.text);
-      console.log({ response: response.data[0] });
+      console.log({ response: response.data[1] });
       expect(response).toBeTruthy();
     });
 });
