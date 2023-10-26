@@ -1,5 +1,5 @@
 import request from "supertest";
-import { describe, beforeAll, afterAll, it, expect } from "@jest/globals";
+import { describe, it, expect } from "@jest/globals";
 import { newRestaurant } from "../helpers/fixtures";
 
 describe("endpoint restaurants", () => {

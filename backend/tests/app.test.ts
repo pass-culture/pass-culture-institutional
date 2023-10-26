@@ -1,7 +1,6 @@
-// import * as fs from "fs";
 import { setupStrapi, cleanupStrapi } from "./helpers/strapi";
 import { Strapi } from "@strapi/strapi";
-import { describe, beforeAll, afterAll, it, expect } from "@jest/globals";
+import { beforeAll, afterAll, it, expect } from "@jest/globals";
 
 let strapiInstance: Strapi;
 
