@@ -1,0 +1,27 @@
+name: Initiate workflow
+
+on:
+  push:
+    branches:
+      - main
+    tags: "*"
+  pull_request:
+
+jobs:
+  run_frontend_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "frontend/.nvmrc"
+      - name: Install global dependencies
+        run: yarn install
+      - name: Install frontend dependencies
+        run: cd frontend && yarn install
+      - name: Lint frontend
+        run: cd frontend && yarn lint
+      - name: Test typescript
+        run: cd frontend && yarn tsc --noEmit
+      - name: Test frontend
+        run: cd frontend && yarn test
