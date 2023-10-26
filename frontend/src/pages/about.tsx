@@ -50,8 +50,8 @@ export default function About() {
           <CodeTag>pages/about.tsx</CodeTag>
         </Typo.Body>
 
-        {data.map((value: HomeData, index) => (
-          <React.Fragment key={index}>
+        {data.map((value: HomeData) => (
+          <React.Fragment key={value.id}>
             <Typo.Title1>{value.attributes.name}</Typo.Title1>
             <Typo.Body>{value.attributes.description}</Typo.Body>
           </React.Fragment>
