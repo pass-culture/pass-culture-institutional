@@ -14,6 +14,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    'plugin:jsx-a11y/recommended',
   ],
   rules: {
     'react/jsx-fragments': ['error', 'element'],
