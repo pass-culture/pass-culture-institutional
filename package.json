@@ -7,10 +7,11 @@
     "frontend": "yarn dev --prefix ../frontend/",
     "backend": "yarn dev --prefix ../backend/",
     "clear": "cd frontend && rm -rf .next && rm -rf cache",
+    "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
     "setup:frontend": "cd frontend && yarn",
     "setup:backend": "cd backend && yarn",
-    "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
-    "dev": "yarn clear && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\""
+    "dev": "yarn clear && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
+    "audit:all": "yarn audit && concurrently \"cd frontend && yarn audit\" \"cd backend && yarn audit\""
   },
   "dependencies": {
     "concurrently": "^8.2.2"
