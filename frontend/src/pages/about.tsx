@@ -20,17 +20,17 @@ export type HomeData = {
 
 export default function About() {
   const [data, setData] = useState<HomeData[]>([])
-  const [isLoading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
+    setIsLoading(true)
     try {
       const responseData = await fetchAPI<HomeData[]>('/restaurants')
       setData(responseData.data)
     } catch (error) {
       console.error(error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }, [])
 
