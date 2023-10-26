@@ -17,10 +17,10 @@ export default ({ env }) => ({
 
 // Got this file from:
 // https://docs.strapi.io/dev-docs/configurations/sqlite#install-sqlite-manually
-// Just added the debug: false line as it was given in the test documentation:
+// Just added the "debug: false" line as it was given in the test documentation:
 // https://docs.strapi.io/dev-docs/testing#set-up-a-testing-environment
 
 // Also in the strapi test documentation, they tell us to install the following:
 // yarn add --dev jest supertest sqlite3
-// But I actaully had to install the following:
+// But I actually had to install the following (sqlite3) was giving me errors:
 // yarn add better-sqlite3
