@@ -2,12 +2,18 @@
 
 Welcome to the pass culture institutional project !
 
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=code_smells)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
+
 ## Local Database
-If you want to run the backend locally, you need to install Postgres on your machine. 
+
+If you want to run the backend locally, you need to install Postgres on your machine.
 With commands (or PgAdmin) you must create a db with the following:
+
 - Database name: db_institutional
 
 ## Project Scripts
+
 Before you can use the scripts, ensure you have Yarn installed on your system.
 The project includes several scripts to simplify development and setup:
 
@@ -24,4 +30,3 @@ The project includes several scripts to simplify development and setup:
 - `setup`: Install all project dependencies and set up both frontend and backend components.
 
 - `dev`: This is the main script to run during development. It clears caches, and concurrently starts both the frontend and backend servers, allowing you to work on both parts of the application simultaneously.
-
