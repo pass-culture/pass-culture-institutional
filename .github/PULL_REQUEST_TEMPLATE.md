@@ -4,7 +4,7 @@ Link to JIRA ticket: https://passculture.atlassian.net/browse/PC-XXXXX
 
 I have:
 
-- [ ] Made sure my feature is working on the relevant real / virtual devices.
+- [ ] Made sure my feature is **working on different browsers** (Chrome, Firefox, Safari).
 - [ ] Written **unit tests** for my feature.
 - [ ] Added a **screenshot** for UI tickets or deleted the screenshot section if no UI change.
 
