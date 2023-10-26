@@ -19,18 +19,18 @@ export type HomeData = {
 }
 
 export default function About() {
-  const [data, setData] = useState<HomeData[]>([])
-  const [isLoading, setLoading] = useState(true)
+  const [restaurants, setRestaurants] = useState<HomeData[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
+    setIsLoading(true)
     try {
       const responseData = await fetchAPI<HomeData[]>('/restaurants')
-      setData(responseData.data)
+      setRestaurants(responseData.data)
     } catch (error) {
       console.error(error)
     } finally {
-      setLoading(false)
+      setIsLoading(false)
     }
   }, [])
 
@@ -50,10 +50,10 @@ export default function About() {
           <CodeTag>pages/about.tsx</CodeTag>
         </Typo.Body>
 
-        {data.map((value: HomeData, index) => (
-          <React.Fragment key={index}>
-            <Typo.Title1>{value.attributes.name}</Typo.Title1>
-            <Typo.Body>{value.attributes.description}</Typo.Body>
+        {restaurants.map((restaurant: HomeData) => (
+          <React.Fragment key={restaurant.id}>
+            <Typo.Title1>{restaurant.attributes.name}</Typo.Title1>
+            <Typo.Body>{restaurant.attributes.description}</Typo.Body>
           </React.Fragment>
         ))}
 

@@ -10,7 +10,8 @@ export async function fetchAPI<T>(path: string) {
       headers: { 'Content-Type': 'application/json' },
     }
 
-    const requestUrl = `${getStrapiURL(`/api${path}`)}`
+    const apiPath = `/api${path}`
+    const requestUrl = `${getStrapiURL(apiPath)}`
 
     const response = await fetch(requestUrl, mergedOptions)
     const data: HttpResponse<T> = await response.json()
