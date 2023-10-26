@@ -11,7 +11,9 @@ describe("endpoint restaurants", () => {
         data: newRestaurant,
       })
       .then((data) => {
-        console.log({ data: data.text });
+        const response = JSON.parse(data.text);
+        console.log({ response });
+        expect(response.data.id).toBeTruthy();
       });
   });
 
