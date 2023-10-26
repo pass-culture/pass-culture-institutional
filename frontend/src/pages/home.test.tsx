@@ -25,7 +25,7 @@ describe('Home page', () => {
   it('should select the checkbox when clicking on its label', () => {
     render(<Home />)
 
-    const checkbox = screen.getByRole('checkbox')
+    const checkbox = screen.getByTestId('checkbox-acceptTerms')
     const label = screen.getByText('Checkbox à cocher')
 
     fireEvent.click(label)

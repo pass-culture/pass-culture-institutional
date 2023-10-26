@@ -32,8 +32,8 @@ exports[`Home page > should render the page 1`] = `
       </p>
       <div>
         <input
+          data-testid="checkbox-acceptTerms"
           id="acceptTerms"
-          role="checkbox"
           type="checkbox"
         />
         <label

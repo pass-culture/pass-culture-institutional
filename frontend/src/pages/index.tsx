@@ -32,7 +32,11 @@ export default function Home() {
         </Typo.Body>
 
         <div>
-          <input type="checkbox" role="checkbox" id={CHECKBOX_ID} />
+          <input
+            type="checkbox"
+            id={CHECKBOX_ID}
+            data-testid={`checkbox-${CHECKBOX_ID}`}
+          />
           <label htmlFor={CHECKBOX_ID}>Checkbox à cocher</label>
         </div>
 

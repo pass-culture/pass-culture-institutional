@@ -8,11 +8,13 @@ module.exports = {
   ],
   extends: [
     'eslint:recommended',
+    'next',
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
+    'plugin:jsx-a11y/recommended',
   ],
   rules: {
     'react/jsx-fragments': ['error', 'element'],
