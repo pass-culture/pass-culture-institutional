@@ -2,6 +2,7 @@
   "name": "pass-culture-institutional-frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 300€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
   "scripts": {
     "build": "next build",
@@ -46,5 +47,10 @@
     "vitest": "^0.34.6",
     "vitest-axe": "^0.1.0",
     "vitest-canvas-mock": "^0.3.3"
+  },
+  "engines": {
+    "node": ">=18.17.0 <=20.x.x",
+    "npm": "please-use-yarn",
+    "yarn": ">=1.22.19"
   }
 }
