@@ -3,29 +3,29 @@
 exports[`Home page > should render the page 1`] = `
 <div>
   <div
-    class="sc-guDMob kjJDxW"
+    class="sc-gtsqUy qFqbA"
   >
     <main
-      class="sc-beyTiQ AfwsS"
+      class="sc-bdnyFh cOrhoO"
     >
       <h1
-        class="sc-iBdoyZ kqGUgJ"
+        class="sc-iCoHzw fCjlwP"
       >
         Welcome to
          
         <a
-          class="sc-dmyDmy dPmvRl"
+          class="sc-dlniIP LWZKO"
           href="https://nextjs.org"
         >
           Next.js!
         </a>
       </h1>
       <p
-        class="sc-fsYfxw gRDVXU"
+        class="sc-fujznN laCVKD"
       >
         Get started by editing
         <code
-          class="sc-gLLuHO fhjfjc"
+          class="sc-gKAaef kvBqav"
         >
           pages/index.tsx
         </code>
@@ -43,13 +43,13 @@ exports[`Home page > should render the page 1`] = `
         </label>
       </div>
       <div
-        class="sc-hLQTFJ hHliZR"
+        class="sc-hKFymg jLSsZz"
       >
         <div
-          class="sc-eDLKEg gZPZKf"
+          class="sc-eCAqax bAJkMV"
         >
           <a
-            class="sc-jTQDJr fAvfvS"
+            class="sc-jSFipO fkzsOZ"
             href="/about"
           >
             About →

@@ -3,44 +3,44 @@
 exports[`About page > should render the page 1`] = `
 <div>
   <div
-    class="sc-guDMob kjJDxW"
+    class="sc-gtsqUy qFqbA"
   >
     <main
-      class="sc-beyTiQ AfwsS"
+      class="sc-bdnyFh cOrhoO"
     >
       <h1
-        class="sc-gLLuHO cKSPKT"
+        class="sc-gKAaef ljqyJc"
       >
         About Page
       </h1>
       <p
-        class="sc-iBdoyZ zlGK"
+        class="sc-iCoHzw jGcKYw"
       >
         Get started by editing
         <code
-          class="sc-jTQDJr bDrEKW"
+          class="sc-jSFipO cMRfmt"
         >
           pages/about.tsx
         </code>
       </p>
       <h1
-        class="sc-gLLuHO cKSPKT"
+        class="sc-gKAaef ljqyJc"
       >
         Lorem ipsum dolor sit amet
       </h1>
       <p
-        class="sc-iBdoyZ zlGK"
+        class="sc-iCoHzw jGcKYw"
       >
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquam nunc, vitae aliquam nisl nunc eu
       </p>
       <div
-        class="sc-dmyDmy gxSEos"
+        class="sc-dlniIP RElFz"
       >
         <div
-          class="sc-hLQTFJ hlfxKm"
+          class="sc-hKFymg gVqXtY"
         >
           <a
-            class="sc-eDLKEg bsONgp"
+            class="sc-eCAqax jVKTjr"
             href="/"
           >
             ← Go Back
