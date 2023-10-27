@@ -14,7 +14,7 @@
     "test:typecheck": "vitest typecheck"
   },
   "dependencies": {
-    "next": "13.5.4",
+    "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.0.8"
