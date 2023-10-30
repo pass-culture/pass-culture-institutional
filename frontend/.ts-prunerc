@@ -1,3 +1,3 @@
 {
-  "ignore": "src/pages/*"
+  "ignore": "(index.*)|(.config.*)|(src/pages/*)"
 }
