@@ -1,17 +1,51 @@
 module.exports = {
   root: true,
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:node/recommended",
+    "plugin:import/errors",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: { project: ["./tsconfig.json"] },
   plugins: ["@typescript-eslint"],
   rules: {
-    "@typescript-eslint/strict-boolean-expressions": [
-      2,
-      {
-        allowString: false,
-        allowNumber: false,
-      },
+    // avoid errors on strapi generated code
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "@typescript-eslint/no-unused-vars": 0,
+    "@typescript-eslint/ban-types": 0,
+    "node/no-unsupported-features/es-syntax": 0,
+    // other rules
+    "no-console": ["error", { allow: ["warn", "error"] }],
+    "no-return-await": "error",
+    // strapi backend rules https://www.npmjs.com/package/@strapi-community/eslint-config?activeTab=code
+    "no-param-reassign": ["error", { props: false }],
+    "global-require": "off",
+    "no-return-await": "error",
+    "object-shorthand": [
+      "error",
+      "always",
+      { avoidExplicitReturnArrows: true },
     ],
+    "import/order": "error",
+    "import/no-cycle": "error",
+    "import/no-useless-path-segments": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "node/exports-style": ["error", "module.exports"],
+    "node/no-new-require": "error",
+    "node/no-path-concat": "error",
+    "node/no-callback-literal": "error",
+    "node/handle-callback-err": "error",
+    "one-var": ["error", "never"],
   },
-  ignorePatterns: ["src/**/*.test.ts", "dist/*", "src/admin/*", ".eslintrc.js"],
+  ignorePatterns: [
+    "node_modules",
+    "src/**/*.test.ts",
+    "dist/*",
+    "src/admin/*",
+    ".eslintrc.js",
+    "build",
+    ".cache",
+  ],
 };
