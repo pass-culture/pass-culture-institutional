@@ -14,19 +14,16 @@ With commands (or PgAdmin) you must create a db with the following:
 
 ## Project Scripts
 
-Before you can use the scripts, ensure you have Yarn installed on your system.
+Before you can use the scripts, ensure you have `Yarn` installed on your system.
 The project includes several scripts to simplify development and setup:
 
-- `frontend`: Start the development server for the frontend part of the application.
-
-- `backend`: Start the development server for the backend part of the application.
-
-- `clear`: Remove temporary files and caches in the frontend directory.
-
-- `setup:frontend`: Install dependencies for the frontend part of the application.
-
-- `setup:backend`: Install dependencies for the backend part of the application.
-
-- `setup`: Install all project dependencies and set up both frontend and backend components.
-
-- `dev`: This is the main script to run during development. It clears caches, and concurrently starts both the frontend and backend servers, allowing you to work on both parts of the application simultaneously.
+- `yarn frontend`: Start the frontend development server.
+- `yarn backend`: Start the backend development server.
+- `yarn clear`: Remove temporary files and caches in the frontend directory.
+- `yarn setup:frontend`: Install the frontend dependencies.
+- `yarn setup:backend`: Install the backen dependencies.
+- `yarn setup`: Install the frontend and backend project dependencies.
+- `yarn dev`: Run during development. It clears caches, and starts the frontend and backend servers.
+- `yarn audit:all`: Test all the vulnerabilities packages.
+- `yarn test:deadcode`: Test the frontend and backend dead code.
+- `yarn test:deadcode:update`: Update the frontend and backend dead code snapshots.
