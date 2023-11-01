@@ -1,9 +1,13 @@
 import React from 'react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import Home from './index'
+import { analyticsProvider } from '@/libs/analytics/analyticsProvider'
 import { act, fireEvent, render, screen } from '@/tests'
+
+vi.mock('@/libs/analytics/analyticsProvider')
+const mockLogEvent = analyticsProvider.logEvent
 
 describe('Home page', () => {
   it('should pass axe accessibility tests', async () => {
@@ -31,5 +35,16 @@ describe('Home page', () => {
     fireEvent.click(label)
 
     expect(checkbox).toHaveProperty('checked', true)
+  })
+
+  it('should trigger test event when clicking on the button', () => {
+    render(<Home />)
+
+    const button = screen.getByRole('button')
+    fireEvent.click(button)
+
+    expect(mockLogEvent).toHaveBeenCalledWith('testEvent', {
+      param: 'testParam',
+    })
   })
 })
