@@ -27,6 +27,7 @@ const FlexContainer = styled.div({
 })
 
 const Card = styled.div(({ theme }) => ({
+  display: 'flex',
   padding: '1.35rem',
   color: 'inherit',
   textAlign: 'center',
@@ -34,7 +35,6 @@ const Card = styled.div(({ theme }) => ({
   border: `2px solid ${theme.colors.black}`,
   borderRadius: '10px',
   transition: 'color 0.15s ease, border-color 0.15s ease',
-  width: '100%',
   ['&:hover, :focus, :active']: {
     color: theme.colors.primary,
     borderColor: theme.colors.primary,

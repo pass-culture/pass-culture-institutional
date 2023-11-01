@@ -9,7 +9,7 @@ exports[`Home page > should render the page 1`] = `
       class="sc-bdnyFh cOrhoO"
     >
       <h1
-        class="sc-iCoHzw fCjlwP"
+        class="sc-pNWRh djejpM"
       >
         Welcome to
          
@@ -21,15 +21,19 @@ exports[`Home page > should render the page 1`] = `
         </a>
       </h1>
       <p
-        class="sc-fujznN laCVKD"
+        class="sc-jrsKJM eHsNYH"
       >
         Get started by editing
         <code
-          class="sc-gKAaef kvBqav"
+          class="sc-fujznN SvhJn"
         >
           pages/index.tsx
         </code>
       </p>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
       <div>
         <input
           data-testid="checkbox-acceptTerms"
@@ -46,7 +50,7 @@ exports[`Home page > should render the page 1`] = `
         class="sc-hKFymg jLSsZz"
       >
         <div
-          class="sc-eCAqax bAJkMV"
+          class="sc-eCAqax blQmze"
         >
           <a
             class="sc-jSFipO fkzsOZ"
@@ -56,6 +60,13 @@ exports[`Home page > should render the page 1`] = `
           </a>
         </div>
       </div>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
+      <button>
+        Trigger analytics event
+      </button>
     </main>
   </div>
 </div>
