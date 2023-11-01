@@ -3,7 +3,6 @@
     // stricter rules
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "strict": true,

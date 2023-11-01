@@ -1,10 +1,12 @@
 import React from 'react'
 import Head from 'next/head'
 
+import { analyticsProvider } from '@/libs/analytics/analyticsProvider'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
 import { InternalLink } from '@/ui/components/links/InternalLink'
+import { Spacer } from '@/ui/components/Spacer'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 
@@ -31,6 +33,7 @@ export default function Home() {
           <CodeTag>pages/index.tsx</CodeTag>
         </Typo.Body>
 
+        <Spacer.Vertical spaces={2} />
         <div>
           <input
             type="checkbox"
@@ -39,8 +42,14 @@ export default function Home() {
           />
           <label htmlFor={CHECKBOX_ID}>Checkbox à cocher</label>
         </div>
-
         <InternalLink href="/about" name="About &rarr;" />
+        <Spacer.Vertical spaces={2} />
+        <button
+          onClick={() =>
+            analyticsProvider.logEvent('testEvent', { param: 'testParam' })
+          }>
+          Trigger analytics event
+        </button>
       </Main>
     </PageContainer>
   )
