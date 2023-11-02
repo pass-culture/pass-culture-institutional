@@ -1,2 +1,5 @@
 # dependencies
 node_modules
+
+# ts prune
+scripts/dead_code_current.txt

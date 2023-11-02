@@ -19,14 +19,15 @@ yarn install
 yarn dev
 ```
 
-## Available Scripts
+## Project Scripts
 
-In the project directory, you can run the following commands:
+Before you can use the scripts, ensure you have `Yarn` installed on your system.
+The project includes several scripts to simplify development and setup:
 
 - `yarn build:` Build the application for production.
 - `yarn dev:` Start the Next.js development server.
 - `yarn lint:` Run the linter to check code quality.
 - `yarn start:` Start the application in production mode.
 - `yarn test:` Run tests using Vitest.
-- `yarn test:deadcode:` Find and remove unused TypeScript code using ts-prune.
+- `yarn test:deadcode:` Find unused code using ts-prune.
 - `yarn test:typecheck:` Check types using Vitest Typecheck.

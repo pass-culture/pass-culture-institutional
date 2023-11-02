@@ -1,0 +1,19 @@
+name: Check no dead code is introduced
+
+on:
+  pull_request:
+    branches: main
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  yarn-ts-prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: yarn setup
+      - name: Dead code scan
+        run: ./scripts/check_dead_code_introduced.sh

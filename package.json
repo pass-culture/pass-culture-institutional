@@ -11,10 +11,12 @@
     "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
     "setup:frontend": "cd frontend && yarn",
     "setup:backend": "cd backend && yarn",
-    "dev": "yarn clear && concurrently \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
-    "audit:all": "yarn audit && concurrently \"cd frontend && yarn audit\" \"cd backend && yarn audit\""
+    "dev": "concurrently \"yarn clear\" \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
+    "audit:all": "concurrently \"yarn audit\" \"cd frontend && yarn audit\" \"cd backend && yarn audit\"",
+    "test:deadcode": "scripts/check_dead_code.sh",
+    "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt"
   },
-  "dependencies": {
+  "devDependencies": {
     "concurrently": "^8.2.2"
   }
 }

@@ -98,39 +98,16 @@ Now if you go make to `http://localhost:1337/api/restaurants`, you should see:
 {"data":[{"id":1,"attributes":{"name":"Resto trop bon","description":"Y'a de la viande à gogo","createdAt":"2023-10-23T12:00:49.307Z","updatedAt":"2023-10-23T12:00:50.525Z","publishedAt":"2023-10-23T12:00:50.522Z"}}],"meta":{"pagination":{"page":1,"pageSize":25,"pageCount":1,"total":1}}}
 ```
 
-## More info...
+## Project Scripts
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+Before you can use the scripts, ensure you have `Yarn` installed on your system.
 
-### `develop`
-
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
-
-```
-npm run develop
-# or
-yarn develop
-```
-
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
-```
-
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
-```
+- `yarn develop`: Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+- `yarn start`: Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+- `yarn build`: Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+- `yarn strapi`: Discover other features provided by Strapi.
+- `yarn test:deadcode:` Find unused code using ts-prune.
 
 ## ⚙️ Deployment
 
@@ -151,7 +128,3 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 - [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
 - [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
 - [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
