@@ -14,22 +14,31 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: "OpenID Connect Authentication"
-        uses: 'google-github-actions/auth@v1'
+        uses: "google-github-actions/auth@v1"
         with:
           workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
 
+      - name: Install global dependencies
+        run: yarn install
+
+      - name: Install frontend dependencies
+        run: cd frontend && yarn install
+
+      - name: Get frontend coverage
+        run: cd frontend && yarn test:coverage
+
       - name: Get Secret
-        id: 'sonar_secrets'
-        uses: 'google-github-actions/get-secretmanager-secrets@v1'
+        id: "sonar_secrets"
+        uses: "google-github-actions/get-secretmanager-secrets@v1"
         with:
           secrets: |-
             SONAR_TOKEN:passculture-metier-ehp/passculture-institutional-sonar-token

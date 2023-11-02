@@ -7,6 +7,9 @@ export default defineConfig({
     alias: { '@/*': './src/*' },
     environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
-    globals: true
+    globals: true,
+    coverage: {
+      reporter: ['text', 'lcov'],
+    },
   },
 })
