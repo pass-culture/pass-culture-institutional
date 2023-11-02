@@ -5,10 +5,20 @@ Welcome to the pass culture institutional project !
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=code_smells)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 
+## Start the project
+
+Navigate to the project directory and install the dependencies by running the following commands:
+
+```bash
+yarn install
+yarn dev
+```
+
+> Don't forget to add `/frontend` and `/backend` `.env` with correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+
 ## Local Database
 
-If you want to run the backend locally, you need to install Postgres on your machine.
-With commands (or PgAdmin) you must create a db with the following:
+If you want to run the backend locally, you need to install Postgres on your machine. With commands (or PgAdmin) you must create a db with the following:
 
 - Database name: db_institutional
 

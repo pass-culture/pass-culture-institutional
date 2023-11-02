@@ -11,6 +11,8 @@ git clone https://github.com/your-username/pass-culture-institutional.git
 
 ## Start the project
 
+Create a `.env` with correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+
 Navigate to the project directory and install the dependencies by running the following commands:
 
 ```bash
