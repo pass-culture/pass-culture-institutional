@@ -43,7 +43,7 @@ CREATE DATABASE db_institutional;
 
 ## Configure environment variables
 
-Go back to the project, and create a `.env` for the backend. Get the full version from 1Password.
+Go back to the project, and create a `.env` for the backend. Get the full version from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
 
 Be sure to replace `DATABASE_NAME` and `DATABASE_PASSWORD` with a Postgres user with sufficient permissions to access the database `db_institutional` you created earlier:
 
