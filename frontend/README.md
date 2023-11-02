@@ -29,5 +29,5 @@ The project includes several scripts to simplify development and setup:
 - `yarn lint:` Run the linter to check code quality.
 - `yarn start:` Start the application in production mode.
 - `yarn test:` Run tests using Vitest.
-- `yarn test:deadcode:` Find and remove unused code using ts-prune.
+- `yarn test:deadcode:` Find unused code using ts-prune.
 - `yarn test:typecheck:` Check types using Vitest Typecheck.

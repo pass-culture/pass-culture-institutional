@@ -107,7 +107,7 @@ Before you can use the scripts, ensure you have `Yarn` installed on your system.
 - `yarn start`: Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
 - `yarn build`: Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
 - `yarn strapi`: Discover other features provided by Strapi.
-- `yarn test:deadcode:` Find and remove unused code using ts-prune.
+- `yarn test:deadcode:` Find unused code using ts-prune.
 
 ## ⚙️ Deployment
 
