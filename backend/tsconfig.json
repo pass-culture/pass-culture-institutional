@@ -4,19 +4,14 @@
     "outDir": "dist",
     "rootDir": "."
   },
-  "include": [
-    "./",
-    "./**/*.ts",
-    "./**/*.js",
-    "src/**/*.json"
-  ],
+  "include": ["./", "./**/*.ts", "./**/*.js", "./src/**/*.json"],
   "exclude": [
     "node_modules/",
     "build/",
     "dist/",
     ".cache/",
     ".tmp/",
-    "src/admin/",
+    "src/admin/**", // admin contains its own tsconfig
     "**/*.test.*",
     "src/plugins/**"
   ]
