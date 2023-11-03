@@ -7,7 +7,7 @@
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
-    "eslint": "eslint .",
+    "lint": "eslint .",
     "start": "strapi start",
     "strapi": "strapi",
     "test:deadcode": "ts-prune"

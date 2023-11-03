@@ -7,8 +7,6 @@ module.exports = {
     "tsconfig.json",
     "build",
     ".cache",
-    // "src/**/*.test.ts",
-    // "src/admin/*",
   ],
   overrides: [
     {
@@ -17,18 +15,11 @@ module.exports = {
         es2021: true,
         commonjs: true,
       },
-      rules: {
-        // "no-unused-vars": 0,
-      },
     },
     {
       files: ["src/**/*.js", "src/**/*.ts"],
       excludedFiles: [
         "*.tests.js",
-        // "src/admin/**/*.js",
-        // "**/admin/src/**/*.js",
-        // "src/admin/**/*.ts",
-        // "**/admin/src/**/*.ts",
         "webpack.config.js",
         "webpack.config.example.js",
       ],
@@ -42,15 +33,9 @@ module.exports = {
       parserOptions: { project: ["./tsconfig.json"] },
       plugins: ["@typescript-eslint"],
       rules: {
-        // avoid errors on strapi generated code
-        // "@typescript-eslint/strict-boolean-expressions": 0,
-        // "@typescript-eslint/no-unused-vars": 0,
-        // "@typescript-eslint/ban-types": 0,
-        "node/no-unsupported-features/es-syntax": 0,
-        // other rules
+        "node/no-unsupported-features/es-syntax": 0, // avoid errors on strapi generated code
         "no-console": ["error", { allow: ["warn", "error"] }],
         "no-return-await": "error",
-        // strapi backend rules https://www.npmjs.com/package/@strapi-community/eslint-config?activeTab=code
         "no-param-reassign": ["error", { props: false }],
         "global-require": "off",
         "no-return-await": "error",
