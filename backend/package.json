@@ -7,11 +7,11 @@
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
-    "lint": "eslint .",
     "start": "strapi start",
     "strapi": "strapi",
     "test:deadcode": "ts-prune",
-    "test:types": "yarn tsc --noEmit"
+    "test:types": "yarn tsc --noEmit",
+    "test:lint": "eslint ."
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.15.0",
