@@ -20,9 +20,9 @@ jobs:
       - name: Install frontend dependencies
         run: cd frontend && yarn install
       - name: Lint frontend
-        run: cd frontend && yarn lint
+        run: cd frontend && yarn test:lint
       - name: Test typescript
-        run: cd frontend && yarn tsc --noEmit
+        run: cd frontend && yarn test:types
       - name: Test frontend
         run: cd frontend && yarn test
   run_backend_tests:
@@ -37,6 +37,6 @@ jobs:
       - name: Install backend dependencies
         run: cd backend && yarn install
       - name: Lint backend
-        run: cd backend && yarn lint
+        run: cd backend && yarn test:lint
       - name: Test typescript
-        run: cd backend && yarn tsc --noEmit
+        run: cd backend && yarn test:types

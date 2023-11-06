@@ -6,13 +6,13 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
+    "dev": "next dev --turbo",
     "start": "next start",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:deadcode": "ts-prune",
-    "test:typecheck": "vitest typecheck"
+    "test:lint": "next lint",
+    "test:types": "yarn tsc --noEmit"
   },
   "dependencies": {
     "firebase": "^10.5.2",

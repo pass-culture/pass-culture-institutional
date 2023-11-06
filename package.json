@@ -14,7 +14,9 @@
     "dev": "concurrently \"yarn clear\" \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
     "audit:all": "concurrently \"yarn audit\" \"cd frontend && yarn audit\" \"cd backend && yarn audit\"",
     "test:deadcode": "scripts/check_dead_code.sh",
-    "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt"
+    "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt",
+    "test:lint": "concurrently \"cd frontend && yarn test:lint\" \"cd backend && yarn test:lint\"",
+    "test:types": "concurrently \"cd frontend && yarn test:types\" \"cd backend && yarn test:types\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
