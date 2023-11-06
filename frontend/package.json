@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "lint": "next lint",
     "start": "next start",
     "test": "vitest",
