@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "start": "strapi start",
     "strapi": "strapi",
-    "test:deadcode": "ts-prune"
+    "test:deadcode": "ts-prune",
+    "test:types": "yarn tsc --noEmit"
   },
   "dependencies": {
     "@strapi/plugin-i18n": "4.15.0",

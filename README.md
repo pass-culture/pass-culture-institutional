@@ -38,3 +38,5 @@ The project includes several scripts to simplify development and setup:
 - `yarn audit:all`: Test all the vulnerabilities packages.
 - `yarn test:deadcode`: Test both frontend and backend dead code.
 - `yarn test:deadcode:update`: Update the frontend and backend dead code snapshots.
+- `yarn test:lint:` Test both frontend and backend linting.
+- `yarn test:types:` Test both frontend and backend typing.

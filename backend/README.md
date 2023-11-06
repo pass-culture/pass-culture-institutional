@@ -108,6 +108,8 @@ Before you can use the scripts, ensure you have `Yarn` installed on your system.
 - `yarn build`: Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
 - `yarn strapi`: Discover other features provided by Strapi.
 - `yarn test:deadcode:` Find unused code using ts-prune.
+- `yarn test:lint:` Check linting.
+- `yarn test:types:` Check typing.
 
 ## ⚙️ Deployment
 
