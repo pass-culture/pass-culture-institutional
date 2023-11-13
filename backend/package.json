@@ -14,7 +14,7 @@
     "test:lint": "eslint ."
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.15.0",
+    "@strapi/plugin-i18n": "4.15.4",
     "@strapi/plugin-users-permissions": "4.15.0",
     "@strapi/strapi": "4.15.0",
     "pg": "8.11.3"
