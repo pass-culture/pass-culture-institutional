@@ -77,7 +77,7 @@ cd backend && yarn develop
 You should be redirected to the Strapi web interface at `localhost:1337`.
 Create an account or connect to an existing one.
 
-## Testing Strapi
+## Getting started with Strapi
 
 Once connected, if you go to `Content-Type Builder`, you will find collection types like `Category` or `Restaurant`.
 Go to the `Content Manager` and add a `Restaurant` by clicking on `Create an entry`.
