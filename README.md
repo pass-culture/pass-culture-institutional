@@ -65,7 +65,7 @@ We also use snapshot testing, so when intended UI changes are made, be sure to u
 
 ### Backend
 
-As of end of 2023, Strapi has not documented a satisfying way to implement unit testing. The [example provided in the Strapi documentation](https://docs.strapi.io/dev-docs/testing) does not respect the principle of [immutable infrastructure](https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure).
+No tests have been written yet. As of end of 2023, Strapi has not documented a satisfying way to implement unit testing. The [example provided in the Strapi documentation](https://docs.strapi.io/dev-docs/testing) does not respect the principle of [immutable infrastructure](https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure).
 
 The Strapi documentation recommends to use a temp local file to host a SQLite database for unit testing. We would be using a different database instance from the one used in production. This means that we could successfully pass our unit tests but the server could be down in production.
 
@@ -74,14 +74,14 @@ The Strapi documentation recommends to use a temp local file to host a SQLite da
 ### Why
 
 - To have consistent PR titles
-- To have consistent commit messages on master
+- To have consistent commit messages on `main`
 
 ##### About squashing the PR commits
 
-If we squash the PR when we merge it, the PR title becomes the commit message on master.
-As a result, we just need to enforce consistency on the title of the PR to have consistent commit message on master.
+If we squash the PR when we merge it, the PR title becomes the commit message on `main`.
+As a result, we just need to enforce consistency on the title of the PR to have consistent commit message on `main`.
 
-The commits of the PR won't be on main, but are still useful for PR readiness and for future reference.
+The commits of the PR won't be on `main`, but are still useful for PR readiness and for future reference.
 
 ### Key points
 
@@ -99,9 +99,7 @@ The commits of the PR won't be on main, but are still useful for PR readiness an
   │       └─⫸ PR Type: build, ci, docs, feat, fix, perf, refactor or test.
   |            See https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type
   │
-  └─⫸ Jira ticket number: with parentheses -> (PC-1234).
+  └─⫸ Jira ticket number: with parentheses -> PC-1234.
 ```
-
-Available types: `build`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor` and `test`.
 
 - GitHub action to ensure that the PR title is in the right format: [dev_on_pull_request_title_checker.yml](./.github/workflows/dev_on_pull_request_title_checker.yml)
