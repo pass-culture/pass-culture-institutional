@@ -64,6 +64,10 @@ DATABASE_USERNAME=postgres
 DATABASE_PASSWORD=your-password
 DATABASE_SSL=false
 JWT_SECRET=xxx
+
+# GHA Deployment
+GITHUB_TOKEN="xxx" # A github personal access token that grants access to running the deployments
+DEPLOY_GHA_WORKFLOW_ID="<env>-on-dispatch-deploy-strapi.yml" # Workflow file to execute when triggering build in the UI
 ```
 
 ## Starting Strapi
@@ -113,7 +117,12 @@ Before you can use the scripts, ensure you have `Yarn` installed on your system.
 
 ## ⚙️ Deployment
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+### Deploying the site via Strapi UI
+
+We use the plugin https://github.com/everythinginjs/strapi-plugin-update-static-content to allow users to automatically deploy the site.
+When a user uses the plugin to trigger a deployment, this will in turn trigger the configured workflow (env variable : `DEPLOY_GHA_WORKFLOW_ID`).
+
+The workflow must be present on the main branch of this repository.
 
 ## 📚 Learn more
 
