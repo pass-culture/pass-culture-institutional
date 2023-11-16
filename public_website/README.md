@@ -1,4 +1,4 @@
-# pass Culture Institutional public_website
+# pass Culture Institutional public website
 
 ## Installation
 

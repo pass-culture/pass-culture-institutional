@@ -8,9 +8,9 @@ This README contains general information that concerns the both folders.
 
 For more specific information:
 
-[public_website documentation](./public_website/README.md)
+[Public website documentation](./public_website/README.md)
 
-[content_management_system documentation](./content_management_system/README.md)
+[Content management system documentation](./content_management_system/README.md)
 
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=code_smells)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=coverage)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
@@ -25,7 +25,7 @@ yarn install
 yarn dev
 ```
 
-> Don't forget to add `/public_website` and `/content_management_system` `.env` with correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+> Don't forget to add to `/public_website` and `/content_management_system` the `.env` with the correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
 
 ## Local Database
 
