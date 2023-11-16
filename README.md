@@ -2,9 +2,9 @@
 
 Welcome to the pass culture institutional project !
 
-This repo contains the public_website (Next) and content_management_system (Strapi) for the institutional site.
+This repo contains two important folders `public_website` (Next) and `content_management_system` (Strapi) for the institutional site.
 
-This README contains general information that concerns the front & back.
+This README contains general information that concerns the both folders.
 
 For more specific information:
 
@@ -55,7 +55,7 @@ The project includes several scripts to simplify development and setup:
 
 ## Testing
 
-### public_website
+### Public website
 
 Unit tests should be created for components and functions.
 
@@ -63,7 +63,7 @@ When a component is created to be used in several places and when it contains lo
 
 We also use snapshot testing, so when intended UI changes are made, be sure to update the snapshot.
 
-### content_management_system
+### Content management system
 
 No tests have been written yet. As of end of 2023, Strapi has not documented a satisfying way to implement unit testing. The [example provided in the Strapi documentation](https://docs.strapi.io/dev-docs/testing) does not respect the principle of [immutable infrastructure](https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure).
 
