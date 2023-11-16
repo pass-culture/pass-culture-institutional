@@ -8,35 +8,35 @@ on:
   pull_request:
 
 jobs:
-  run_frontend_tests:
+  run_public_website_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: "frontend/.nvmrc"
+          node-version-file: "public_website/.nvmrc"
       - name: Install global dependencies
         run: yarn install
-      - name: Install frontend dependencies
-        run: cd frontend && yarn install
-      - name: Lint frontend
-        run: cd frontend && yarn test:lint
+      - name: Install public_website dependencies
+        run: cd public_website && yarn install
+      - name: Lint public_website
+        run: cd public_website && yarn test:lint
       - name: Test typescript
-        run: cd frontend && yarn test:types
-      - name: Test frontend
-        run: cd frontend && yarn test
-  run_backend_tests:
+        run: cd public_website && yarn test:types
+      - name: Test public_website
+        run: cd public_website && yarn test
+  run_content_managing_system_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: "backend/.nvmrc"
+          node-version-file: "content_managing_system/.nvmrc"
       - name: Install global dependencies
         run: yarn install
-      - name: Install backend dependencies
-        run: cd backend && yarn install
-      - name: Lint backend
-        run: cd backend && yarn test:lint
+      - name: Install content_managing_system dependencies
+        run: cd content_managing_system && yarn install
+      - name: Lint content_managing_system
+        run: cd content_managing_system && yarn test:lint
       - name: Test typescript
-        run: cd backend && yarn test:types
+        run: cd content_managing_system && yarn test:types

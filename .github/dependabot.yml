@@ -11,7 +11,7 @@ updates:
       - "Lucasbeneston"
 
   - package-ecosystem: "npm"
-    directory: "/frontend"
+    directory: "/public_website"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 3
@@ -21,7 +21,7 @@ updates:
       - "Lucasbeneston"
 
   - package-ecosystem: "npm"
-    directory: "/backend"
+    directory: "/content_managing_system"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 3

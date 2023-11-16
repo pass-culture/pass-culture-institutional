@@ -1,4 +1,4 @@
-# pass Culture Institutional backend
+# pass Culture Institutional content_managing_system
 
 ## Install and configure Postgres
 
@@ -43,7 +43,7 @@ CREATE DATABASE db_institutional;
 
 ## Configure environment variables
 
-Go back to the project, and create a `.env` for the backend. Get the full version from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+Go back to the project, and create a `.env` for the content_managing_system. Get the full version from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
 
 Be sure to replace `DATABASE_NAME` and `DATABASE_PASSWORD` with a Postgres user with sufficient permissions to access the database `db_institutional` you created earlier:
 
@@ -71,7 +71,7 @@ JWT_SECRET=xxx
 If you have Postgres configured and running, from the project repo, start Strapi with the command:
 
 ```
-cd backend && yarn develop
+cd content_managing_system && yarn develop
 ```
 
 You should be redirected to the Strapi web interface at `localhost:1337`.

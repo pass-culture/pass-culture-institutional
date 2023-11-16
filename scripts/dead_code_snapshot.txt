@@ -1,5 +1,5 @@
-⬇ frontend dead code ⬇
+⬇ public_website dead code ⬇
 $ ts-prune
 -------
-⬇ backend dead code ⬇
+⬇ content_managing_system dead code ⬇
 $ ts-prune

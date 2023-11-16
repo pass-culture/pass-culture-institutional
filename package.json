@@ -5,18 +5,18 @@
   "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 300€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
   "scripts": {
-    "frontend": "yarn dev --prefix ../frontend/",
-    "backend": "yarn dev --prefix ../backend/",
-    "clear": "cd frontend && rm -rf .next && rm -rf cache",
-    "setup": "yarn install && yarn setup:frontend && yarn setup:backend",
-    "setup:frontend": "cd frontend && yarn",
-    "setup:backend": "cd backend && yarn",
-    "dev": "concurrently \"yarn clear\" \"cd frontend && yarn dev\" \"cd backend && yarn develop\"",
-    "audit:all": "concurrently \"yarn audit\" \"cd frontend && yarn audit\" \"cd backend && yarn audit\"",
+    "public_website": "yarn dev --prefix ../public_website/",
+    "content_managing_system": "yarn dev --prefix ../content_managing_system/",
+    "clear": "cd public_website && rm -rf .next && rm -rf cache",
+    "setup": "yarn install && yarn setup:public_website && yarn setup:content_managing_system",
+    "setup:public_website": "cd public_website && yarn",
+    "setup:content_managing_system": "cd content_managing_system && yarn",
+    "dev": "concurrently \"yarn clear\" \"cd public_website && yarn dev\" \"cd content_managing_system && yarn develop\"",
+    "audit:all": "concurrently \"yarn audit\" \"cd public_website && yarn audit\" \"cd content_managing_system && yarn audit\"",
     "test:deadcode": "scripts/check_dead_code.sh",
     "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt",
-    "test:lint": "concurrently \"cd frontend && yarn test:lint\" \"cd backend && yarn test:lint\"",
-    "test:types": "concurrently \"cd frontend && yarn test:types\" \"cd backend && yarn test:types\""
+    "test:lint": "concurrently \"cd public_website && yarn test:lint\" \"cd content_managing_system && yarn test:lint\"",
+    "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_managing_system && yarn test:types\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

@@ -30,11 +30,11 @@ jobs:
       - name: Install global dependencies
         run: yarn install
 
-      - name: Install frontend dependencies
-        run: cd frontend && yarn install
+      - name: Install public_website dependencies
+        run: cd public_website && yarn install
 
-      - name: Get frontend coverage
-        run: cd frontend && yarn test:coverage
+      - name: Get public_website coverage
+        run: cd public_website && yarn test:coverage
 
       - name: Get Secret
         id: "sonar_secrets"
