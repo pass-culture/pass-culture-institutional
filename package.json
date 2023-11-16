@@ -6,17 +6,17 @@
   "license": "MIT",
   "scripts": {
     "public_website": "yarn dev --prefix ../public_website/",
-    "content_managing_system": "yarn dev --prefix ../content_managing_system/",
+    "content_management_system": "yarn dev --prefix ../content_management_system/",
     "clear": "cd public_website && rm -rf .next && rm -rf cache",
-    "setup": "yarn install && yarn setup:public_website && yarn setup:content_managing_system",
+    "setup": "yarn install && yarn setup:public_website && yarn setup:content_management_system",
     "setup:public_website": "cd public_website && yarn",
-    "setup:content_managing_system": "cd content_managing_system && yarn",
-    "dev": "concurrently \"yarn clear\" \"cd public_website && yarn dev\" \"cd content_managing_system && yarn develop\"",
-    "audit:all": "concurrently \"yarn audit\" \"cd public_website && yarn audit\" \"cd content_managing_system && yarn audit\"",
+    "setup:content_management_system": "cd content_management_system && yarn",
+    "dev": "concurrently \"yarn clear\" \"cd public_website && yarn dev\" \"cd content_management_system && yarn develop\"",
+    "audit:all": "concurrently \"yarn audit\" \"cd public_website && yarn audit\" \"cd content_management_system && yarn audit\"",
     "test:deadcode": "scripts/check_dead_code.sh",
     "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt",
-    "test:lint": "concurrently \"cd public_website && yarn test:lint\" \"cd content_managing_system && yarn test:lint\"",
-    "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_managing_system && yarn test:types\""
+    "test:lint": "concurrently \"cd public_website && yarn test:lint\" \"cd content_management_system && yarn test:lint\"",
+    "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_management_system && yarn test:types\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

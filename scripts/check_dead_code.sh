@@ -4,6 +4,6 @@ yarn test:deadcode
 
 echo "-------"
 
-echo "⬇ content_managing_system dead code ⬇"
-cd ../content_managing_system
+echo "⬇ content_management_system dead code ⬇"
+cd ../content_management_system
 yarn test:deadcode
