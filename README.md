@@ -103,7 +103,7 @@ Here is a recap:
 
 Here is a more detailed explanation for different types:
 
-build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+build: Changes that affect the build system or external dependencies
 chore: Changes that are routine tasks, maintenance work, or other non-functional activities that don't directly impact the user-facing features or bug fixes.
 ci: Changes to our CI configuration files and scripts
 docs: Documentation only changes
