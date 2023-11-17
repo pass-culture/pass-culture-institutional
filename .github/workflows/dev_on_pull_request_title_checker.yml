@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: Slashgear/action-check-pr-title@v4.3.0
         with:
-          regexp: '^(\((PC-[0-9]+|BSR)\) )?(build|lint|ci|docs|feat|fix|perf|refactor|test|chore)\(\w+\): \w+'
+          regexp: '^(feat|fix|build|chore|ci|docs|style|refactor|perf|test)(\([^\)]+\))?(\!)?\: .+(?:\n\n(.+))?(\n\n(?:[^\n]+\s*:\s*[^\n]+\n)+)?$'

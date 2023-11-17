@@ -85,21 +85,34 @@ The commits of the PR won't be on `main`, but are still useful for PR readiness 
 
 ### Key points
 
-- The agreed upon format for the PR title is:
+- We are simply following this [convention](https://www.conventionalcommits.org/en/v1.0.0/#specification)
+
+Here is a recap:
 
 ```
-<jira> <type>(<scope>): <short summary>
-  │       │      |             │
-  │       │      |             └─⫸ PR Summary: short summary of the Jira ticket title in English. Present tense.
-  │       │      |                  Not capitalized. No period at the end.
-  │       │      |
-  │       │      └─⫸ PR Scope: Hierarchical scope. Not capitalized, but snakeCase. For instance:
-  │       │           app, core, themeProvider... > identityCheck, eac, booking, search... > useSelectHomepageEntry...
-  │       │
-  │       └─⫸ PR Type: build, ci, docs, feat, fix, perf, refactor or test.
-  |            See https://github.com/angular/angular/blob/master/CONTRIBUTING.md#type
+<type>[optional scope]: <description>
+  │          │               │
+  │          │               └─⫸ PR Description: A short and concise summary of the changes. Present tense.
+  │          │                    Not capitalized.
+  │          │
+  │          └─⫸ PR Scope: A scope MUST consist of a noun describing a section of the codebase surrounded by parenthesis, e.g., fix(parser)
+  |
   │
-  └─⫸ Jira ticket number: with parentheses -> PC-1234.
+  └─⫸ PR Type: build:, chore:, ci:, docs:, feat:, fix:, perf:, refactor:, revert:, style:, test:
 ```
+
+Here is a more detailed explanation for different types:
+
+build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+chore: Changes that are routine tasks, maintenance work, or other non-functional activities that don't directly impact the user-facing features or bug fixes.
+ci: Changes to our CI configuration files and scripts
+docs: Documentation only changes
+feat: A new feature
+fix: A bug fix
+perf: A code change that improves performance
+refactor: A code change that neither fixes a bug nor adds a feature
+revert: indicate that the changes are reverting a previous commit/PR
+style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+test: Adding missing tests or correcting existing tests
 
 - GitHub action to ensure that the PR title is in the right format: [dev_on_pull_request_title_checker.yml](./.github/workflows/dev_on_pull_request_title_checker.yml)
