@@ -21,6 +21,24 @@ yarn install
 yarn dev
 ```
 
+## Naming Convention
+
+By default, Next.js will take into account any file ending with tsx, ts, jsx or js under the pages folder for the purpose of building pages/API routes and routing.
+
+To have the test files along side the page files, we have put in place the following naming convention:
+
+- For pages: `src/pages/*.page.[tsx, ts, jsx, tx]`
+- For test related files: `src/pages/*.test.[tsx, ts, jsx, tx]`
+
+This is configured in `next.config.js`:
+
+```
+module.exports = {
+    // Default value is ['tsx', 'ts', 'jsx', 'js']
+    pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
+}
+```
+
 ## Project Scripts
 
 Before you can use the scripts, ensure you have `Yarn` installed on your system.
