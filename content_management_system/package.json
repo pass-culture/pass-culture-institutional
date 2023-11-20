@@ -16,7 +16,7 @@
   "dependencies": {
     "@strapi/plugin-i18n": "4.15.4",
     "@strapi/plugin-users-permissions": "4.15.0",
-    "@strapi/strapi": "4.15.0",
+    "@strapi/strapi": "4.15.4",
     "pg": "8.11.3",
     "strapi-plugin-update-static-content": "https://github.com/pass-culture/strapi-plugin-update-static-content#main"
   },
