@@ -1,0 +1,21 @@
+version: '3'
+services:
+  cms:
+    build:
+      context: content_management_system 
+    ports:
+      - 1337:1337
+    env_file: content_management_system/.env
+    environment:
+      DATABASE_HOST: database
+    depends_on:
+      - database
+
+  database:
+    image: 'postgres:16.0'
+    ports:
+      - 5432:5432
+    env_file: content_management_system/.env
+    volumes:
+      - ./data/:/var/lib/postgresql/data/
+
