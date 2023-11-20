@@ -2,7 +2,7 @@ import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import Home from './index'
+import Home from './index.page'
 import { analyticsProvider } from '@/libs/analytics/analyticsProvider'
 import { act, fireEvent, render, screen } from '@/tests'
 
