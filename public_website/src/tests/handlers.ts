@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
-import { homeDataFixtures } from '@/pages/fixtures.test'
+import { homeDataFixtures } from '@/pages/fixtures'
 
 const BASE_URL = 'http://localhost:1337'
 

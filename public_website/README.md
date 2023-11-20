@@ -28,7 +28,7 @@ By default, Next.js will take into account any file ending with tsx, ts, jsx or 
 To have the test files along side the page files, we have put in place the following naming convention:
 
 - For pages: `src/pages/*.page.[tsx, ts, jsx, tx]`
-- For test related files: `src/pages/*.test.[tsx, ts, jsx, tx]`
+- For tests: `src/pages/*.test.[tsx, ts, jsx, tx]`
 
 This is configured in `next.config.js`:
 
