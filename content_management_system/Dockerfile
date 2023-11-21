@@ -9,9 +9,14 @@ RUN apk add git
 
 RUN yarn install --frozen-lockfile
 
-COPY . .
+COPY tsconfig.json /build/
+COPY public /build/public
+COPY config /build/config
+COPY database /build/database
+COPY types /build/types
+COPY src /build/src
 
-RUN yarn build
+RUN  yarn build
 
 # Runner
 FROM node:18.18-alpine3.18 as runner
