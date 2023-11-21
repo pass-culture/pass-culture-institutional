@@ -21,6 +21,9 @@ COPY --from=builder /build/node_modules /app/node_modules
 COPY --from=builder /build/dist /app
 COPY public /app/public
 COPY config /app/config
+COPY database /app/database
+
+USER node
 
 WORKDIR  /app
 CMD [ "yarn", "start" ]
