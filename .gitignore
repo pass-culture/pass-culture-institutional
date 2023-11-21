@@ -6,3 +6,8 @@ scripts/dead_code_current.txt
 
 # misc
 .DS_Store
+
+.next
+
+# db data
+data
