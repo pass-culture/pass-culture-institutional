@@ -2,7 +2,7 @@ import React from 'react'
 import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import About from './about'
+import About from './about.page'
 import { act, render, screen, waitFor } from '@/tests'
 
 describe('About page', () => {
