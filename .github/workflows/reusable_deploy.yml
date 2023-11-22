@@ -1,0 +1,66 @@
+name: Deploy maintenance site
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        description: Environment to deploy
+        required: true
+    secrets:
+      WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+      SECRETS_SERVICE_ACCOUNT:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read 
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, x64]
+    container:
+      image: node:20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
+
+      - name: Get Secret
+        id: 'secrets'
+        uses: 'google-github-actions/get-secretmanager-secrets@v1'
+        with:
+          secrets: |-
+            INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
+            INSTIT_SITE_BUCKET:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_site-bucket
+            INSTIT_SITE_URL_MAP:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_url-map
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      # Generate static site into dist folder
+      - name : "Next build"
+        working-directory: public_site
+        run: |
+          yarn build
+
+      - name: 'Push web site files to bucket'
+        working-directory: public_site
+        run:  gsutil rsync  -x '.*/\..*|^\..*' -r out ${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
+          
+       - name: 'Invalidate cache'
+         run: gcloud compute url-maps invalidate-cdn-cache ${{ steps.secrets.outputs.INSTIT_SITE_URL_MAP }} "/*"
