@@ -1,0 +1,12 @@
+on: push
+name: Déploiement site statique en staging
+
+jobs:
+  deploy-staging:
+    uses: ./.github/workflows/reusable_deploy.yml
+    with:
+      environment: staging
+    secrets:
+      WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+

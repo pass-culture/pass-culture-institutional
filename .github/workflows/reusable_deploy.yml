@@ -17,10 +17,11 @@ permissions:
   contents: read 
 
 jobs:
-  deploy:
-    runs-on: [self-hosted, linux, x64]
-    container:
-      image: node:20
+  deploy-static-site:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -54,13 +55,14 @@ jobs:
 
       # Generate static site into dist folder
       - name : "Next build"
-        working-directory: public_site
+        working-directory: public_website
         run: |
+          yarn install
           yarn build
 
       - name: 'Push web site files to bucket'
-        working-directory: public_site
-        run:  gsutil rsync  -x '.*/\..*|^\..*' -r out ${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
+        working-directory: public_website
+        run:  gsutil rsync -r out gs://${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
           
-       - name: 'Invalidate cache'
-         run: gcloud compute url-maps invalidate-cdn-cache ${{ steps.secrets.outputs.INSTIT_SITE_URL_MAP }} "/*"
+      - name: 'Invalidate cache'
+        run: gcloud compute url-maps invalidate-cdn-cache ${{ steps.secrets.outputs.INSTIT_SITE_URL_MAP }} --path="/*"
