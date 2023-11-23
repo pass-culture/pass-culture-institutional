@@ -6,8 +6,12 @@ on:
         type: string
         description: Environment to deploy
         required: true
+      workload_identity_provider_secret_name:
+        type: string
+        description: Secret name to retrieve the workload identity provider
+        required: true
     secrets:
-      WORKLOAD_IDENTITY_PROVIDER:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
       SECRETS_SERVICE_ACCOUNT:
         required: true
@@ -29,8 +33,11 @@ jobs:
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
 
       - name: Get Secret
         id: 'secrets'
@@ -40,26 +47,24 @@ jobs:
             INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             INSTIT_SITE_BUCKET:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_site-bucket
             INSTIT_SITE_URL_MAP:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_url-map
-
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+            GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
 
       # Generate static site into dist folder
-      - name : "Next build"
+      - name : "Install dependencies and build"
         working-directory: public_website
         run: |
           yarn install
           yarn build
 
-      - name: 'Push web site files to bucket'
+      - name: 'Push website to bucket'
         working-directory: public_website
         run:  gsutil rsync -r out gs://${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
