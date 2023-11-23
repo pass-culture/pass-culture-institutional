@@ -1,0 +1,16 @@
+on: 
+  push:
+    branches:
+      - main
+    
+name: Deploy testing static website
+
+jobs:
+  deploy-staging:
+    uses: ./.github/workflows/reusable_deploy.yml
+    with:
+      environment: testing 
+    secrets:
+      WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+

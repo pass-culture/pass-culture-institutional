@@ -1,5 +1,7 @@
-on: push
-name: Déploiement site statique en staging
+on: 
+  workflow_dispatch:
+    
+name: Deploy staging static website
 
 jobs:
   deploy-staging:
