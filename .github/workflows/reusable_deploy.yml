@@ -63,6 +63,3 @@ jobs:
       - name: 'Push web site files to bucket'
         working-directory: public_website
         run:  gsutil rsync -r out gs://${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
-          
-      - name: 'Invalidate cache'
-        run: gcloud compute url-maps invalidate-cdn-cache ${{ steps.secrets.outputs.INSTIT_SITE_URL_MAP }} --path="/*"
