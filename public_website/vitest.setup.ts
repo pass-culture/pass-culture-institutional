@@ -4,7 +4,7 @@ import * as matchers from 'vitest-axe/matchers'
 
 import 'vitest'
 import 'vitest-canvas-mock'
-import { server } from '@/tests/server'
+import { server } from './__tests__/server'
 
 beforeAll(() => {
   server.listen()

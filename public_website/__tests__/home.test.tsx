@@ -2,8 +2,8 @@ import React from 'react'
 import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import Home from './index.page'
-import { act, fireEvent, render, screen } from '@/tests'
+import Home from '../src/pages'
+import { act, fireEvent, render, screen } from '.'
 
 describe('Home page', () => {
   it('should pass axe accessibility tests', async () => {
