@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { analyticsProvider } from '@/libs/analytics/analyticsProvider'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
@@ -44,12 +43,6 @@ export default function Home() {
         </div>
         <InternalLink href="/about" name="About &rarr;" />
         <Spacer.Vertical spaces={2} />
-        <button
-          onClick={() =>
-            analyticsProvider.logEvent('testEvent', { param: 'testParam' })
-          }>
-          Trigger analytics event
-        </button>
       </Main>
     </PageContainer>
   )

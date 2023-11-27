@@ -21,23 +21,12 @@ yarn install
 yarn dev
 ```
 
-## Naming Convention
+## Test files location
 
 By default, Next.js will take into account any file ending with tsx, ts, jsx or js under the pages folder for the purpose of building pages/API routes and routing.
 
-To have the test files along side the page files, we have put in place the following naming convention:
-
-- For pages: `src/pages/*.page.[tsx, ts, jsx, tx]`
-- For tests: `src/pages/*.test.[tsx, ts, jsx, tx]`
-
-This is configured in `next.config.js`:
-
-```
-module.exports = {
-    // Default value is ['tsx', 'ts', 'jsx', 'js']
-    pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
-}
-```
+We follow Jest's convention by adding tests to the **tests** folder in the project's root directory.
+It is not possible to have the test files along side the page files or the build will fail.
 
 ## Project Scripts
 

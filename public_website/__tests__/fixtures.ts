@@ -1,4 +1,4 @@
-import { HomeData } from '@/pages/about.page'
+import { HomeData } from '@/pages/about'
 
 export const homeDataFixtures: HomeData[] = [
   {
