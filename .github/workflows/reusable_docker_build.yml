@@ -63,6 +63,7 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: ${{ inputs.push }} 
-          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.head_ref }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.sha }}
+          # Tag with branch name and tag, the variable to get the branch name differs if we are in a pull_request or push event
+          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.sha }}
           context: ${{ inputs.context }}
 
