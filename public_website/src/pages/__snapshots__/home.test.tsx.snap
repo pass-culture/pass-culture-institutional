@@ -64,9 +64,6 @@ exports[`Home page > should render the page 1`] = `
         class="sc-gKAaef cJkFME"
         spaces="2"
       />
-      <button>
-        Trigger analytics event
-      </button>
     </main>
   </div>
 </div>
