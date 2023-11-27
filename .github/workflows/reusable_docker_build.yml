@@ -63,6 +63,6 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           push: ${{ inputs.push }} 
-          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.head_ref }}
+          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.head_ref }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.sha }}
           context: ${{ inputs.context }}
 
