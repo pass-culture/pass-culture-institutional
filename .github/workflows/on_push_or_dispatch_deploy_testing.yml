@@ -1,4 +1,5 @@
 on: 
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -6,7 +7,7 @@ on:
 name: Deploy testing static website
 
 jobs:
-  deploy-staging:
+  deploy-testing:
     uses: ./.github/workflows/reusable_deploy.yml
     with:
       environment: testing 
