@@ -6,7 +6,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 3
     commit-message:
-      prefix: "(BSR) chore(deps):"
+      prefix: "chore:"
     reviewers:
       - "Lucasbeneston"
 
@@ -16,7 +16,7 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 3
     commit-message:
-      prefix: "(BSR) chore(deps):"
+      prefix: "chore:"
     reviewers:
       - "Lucasbeneston"
 
@@ -26,6 +26,6 @@ updates:
       interval: "weekly"
     open-pull-requests-limit: 3
     commit-message:
-      prefix: "(BSR) chore(deps):"
+      prefix: "chore:"
     reviewers:
       - "Lucasbeneston"
