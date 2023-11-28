@@ -40,7 +40,7 @@ jobs:
 
       - name: Output variables
         id: vars
-        run: echo "DOCKER_REPO=${DOCKER_REGISTRY_REGION}-docker.pkg.dev/${DOCKER_REGISTRY_PROJECT_ID}/${DOCKER_REGISTRY_REPOSITORY}" >> $GITHUB_ENV
+        run: echo "DOCKER_REPO=${DOCKER_REGISTRY_REGION}-docker.pkg.dev/${DOCKER_REGISTRY_PROJECT_ID}/${DOCKER_REGISTRY_REPOSITORY}" >> ${GITHUB_ENV}
 
       - id: openid-auth
         name: "OpenID Connect Authentication"
@@ -59,11 +59,19 @@ jobs:
           username: "oauth2accesstoken"
           password: "${{ steps.openid-auth.outputs.access_token }}"
 
+      # Convert / in branch name to -
+      - name: Sanitze branch name
+        id: sanitize-branch-name
+        run: |
+          BRANCH_NAME="${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}"
+          echo "SANITIZED_BRANCH_NAME=${BRANCH_NAME//\//-}" | tee -a ${GITHUB_ENV}
+
+
       - name: "Build and push ${{ inputs.image }} image"
         uses: docker/build-push-action@v3.2.0
         with:
           push: ${{ inputs.push }} 
           # Tag with branch name and tag, the variable to get the branch name differs if we are in a pull_request or push event
-          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.sha }}
+          tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ env.SANITIZED_BRANCH_NAME }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ github.sha }}
           context: ${{ inputs.context }}
 
