@@ -9,9 +9,11 @@
 git clone https://github.com/your-username/pass-culture-institutional.git
 ```
 
-## Start the project
+## Configure environment variables
 
-Create a `.env` with correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+You will find a template for the environnement variables under `public_website/.env.example`. Duplicate and rename the file `.env`. For running in a local development environnement, you should set `NEXT_PUBLIC_STRAPI_API_URL` to the port Strapi is running on, for example: `http://localhost:1337`.
+
+## Start the project
 
 Navigate to the project directory and install the dependencies by running the following commands:
 
