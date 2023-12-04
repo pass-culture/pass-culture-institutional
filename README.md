@@ -25,7 +25,7 @@ yarn install
 yarn dev
 ```
 
-> Don't forget to add to `/public_website` and `/content_management_system` the `.env` with the correct environment variables from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+> Don't forget to add to `/public_website` and `/content_management_system` the `.env` with the correct environment variables. You can find instructions for [the .env of the public_website](./public_website/README.md#configure-environment-variables) and [for the .env of the content_management_system](./content_management_system/README.md#configure-environment-variables).
 
 ## Local Database
 

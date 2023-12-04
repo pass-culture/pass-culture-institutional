@@ -43,9 +43,23 @@ CREATE DATABASE db_institutional;
 
 ## Configure environment variables
 
-Go back to the project, and create a `.env` for the content management system. Get the full version from pass Culture [1Password](https://team-passculture.1password.com/) (search "Site institutionnel" in "Tech" section).
+Go back to the project, and create a `.env` for the content management system.
 
-Be sure to replace `DATABASE_NAME` and `DATABASE_PASSWORD` with a Postgres user with sufficient permissions to access the database `db_institutional` you created earlier:
+You will find a template for the environnement variables under `content_management_system/.env.example`. Duplicate and rename the file `.env`.
+
+Specify the `PORT` you want Strapi to run on. You should take the note of this value for the `public_website/.env` (more specifically for `NEXT_PUBLIC_STRAPI_API_URL`).
+
+When developing locally, you can put whatever value you want for `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`.
+
+`DATABASE_CLIENT` should be set to `postgres`, and `DATABASE_PORT` to the port postgres is running on (usually `5432`).
+
+`DATABASE_NAME` should be set to whatever you called you database when setting up postgres, like `db_institutional` for example.
+
+Be sure to replace `DATABASE_USERNAME` and `DATABASE_PASSWORD` with a Postgres user with sufficient permissions to access the database you created.
+
+Lastly, when initiating Strapi, we choose to set `DATABASE_SSL` to false to make potential issues less likely.
+
+Here is an example of how to complete the `.env` (you can leave `xxx` for certain of these variables and it should work):
 
 ```
 HOST=0.0.0.0
