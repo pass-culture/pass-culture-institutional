@@ -1,4 +1,4 @@
-name: Deploy maintenance site
+name: Deploy public site
 on:
   workflow_call:
     inputs:

@@ -4,8 +4,8 @@ on:
 name: Deploy staging static website
 
 jobs:
-  deploy-staging:
-    uses: ./.github/workflows/reusable_deploy.yml
+  deploy-public-site-staging:
+    uses: ./.github/workflows/reusable_public_site_deploy.yml
     with:
       environment: staging
       workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
@@ -13,4 +13,16 @@ jobs:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
       
+  deploy-cms-staging:
+    uses: ./.github/workflows/reusable_cms_deploy.yml
+    with:
+      environment: staging 
+      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
+      teleport_version: 13.4.4
+      teleport_proxy: teleport.ehp.passculture.team:443
+      teleport_kubernetes_cluster: passculture-metier-ehp
+      image_tag: ${{ github.sha }}
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
 

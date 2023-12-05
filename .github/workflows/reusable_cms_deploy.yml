@@ -1,0 +1,98 @@
+name: Deploy public site
+on:
+  workflow_call:
+    inputs:
+      environment:
+        type: string
+        description: Environment to deploy
+        required: true
+      image_tag:
+        type: string
+        description: Image tag to deploy
+        required: true
+      workload_identity_provider_secret_name:
+        type: string
+        description: Secret name to retrieve the workload identity provider
+        required: true
+      teleport_version:
+        type: string
+        required: true
+      teleport_proxy:
+        type: string
+        required: true
+      teleport_kubernetes_cluster:
+        type: string
+        required: true
+      argocd_version:
+        type: string
+        required: false
+        default: v2.8.4
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+      SECRETS_SERVICE_ACCOUNT:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read 
+
+jobs:
+  deploy-static-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Get Secret
+        id: 'secrets'
+        uses: 'google-github-actions/get-secretmanager-secrets@v1'
+        with:
+          secrets: |-
+            INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
+            GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
+
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Install Kubectl
+        uses: azure/setup-kubectl@v3
+
+      - name: Install Teleport
+        uses: teleport-actions/setup@v1
+        with:
+          version: ${{ inputs.teleport_version }}
+
+      - name: Setup ArgoCD CLI 
+        uses: imajeetyadav/argocd-cli@v1
+        with:
+          version: ${{ inputs.argocd_version }}
+
+      - name: "Teleport Authentication"
+        uses: teleport-actions/auth-k8s@v1
+        with:
+          proxy: ${{ inputs.teleport_proxy }}
+          token: github-token
+          certificate-ttl: 1h
+          kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
+
+      - name: Sync argoCD application 
+        run: |
+          kubectl config set-context --current --namespace=argocd
+          argocd app set site-instit-${{ inputs.environment }} --core --plugin-env "ARGS=--set deployment.image.tag=${{ inputs.image_tag }}"
+          argocd app wait site-instit-${{ inputs.environment }} --core --sync --health --timeout 180
