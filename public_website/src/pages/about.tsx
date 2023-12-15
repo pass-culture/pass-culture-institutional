@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
@@ -18,27 +18,12 @@ export type HomeData = {
   id: number
 }
 
-export default function About() {
-  const [restaurants, setRestaurants] = useState<HomeData[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+type Props = {
+  restaurants: HomeData[]
+}
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true)
-    try {
-      const responseData = await fetchAPI<HomeData[]>('/restaurants')
-      setRestaurants(responseData.data)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  if (isLoading) return <Typo.Body>Chargement...</Typo.Body>
+export default function About({ restaurants }: Props) {
+  if (!restaurants) return <div>404</div>
 
   return (
     <PageContainer>
@@ -61,4 +46,17 @@ export default function About() {
       </Main>
     </PageContainer>
   )
+}
+
+export async function getStaticProps() {
+  // Call an external API endpoint to get restaurants
+  const response = await fetchAPI('/restaurants')
+
+  // By returning { props: { restaurants } }, the Blog component
+  // will receive `restaurants` as a prop at build time
+  return {
+    props: {
+      restaurants: response.data,
+    },
+  }
 }
