@@ -1,17 +1,18 @@
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
       - main
-    
+
 name: Deploy testing static website
 
 jobs:
   deploy-public-site-testing:
+    needs: [deploy-cms-testing]
     uses: ./.github/workflows/reusable_public_site_deploy.yml
     with:
-      environment: testing 
-      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
+      environment: testing
+      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
@@ -19,8 +20,8 @@ jobs:
   deploy-cms-testing:
     uses: ./.github/workflows/reusable_cms_deploy.yml
     with:
-      environment: testing 
-      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
+      environment: testing
+      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider
       teleport_version: 13.4.4
       teleport_proxy: teleport.ehp.passculture.team:443
       teleport_kubernetes_cluster: passculture-metier-ehp
