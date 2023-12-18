@@ -69,7 +69,7 @@ jobs:
       - name: Get commit hash
         id: get-commit-hash
         run: |
-          HASH="${{ github.event_name == 'pull_request' && github.event.pull_request.head.workflow_runsha || github.sha }}"
+          HASH="${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"
           echo "HASH=${HASH}" | tee -a ${GITHUB_ENV}
 
       - name: "Build and push ${{ inputs.image }} image"
