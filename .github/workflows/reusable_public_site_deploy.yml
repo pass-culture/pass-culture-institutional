@@ -10,6 +10,10 @@ on:
         type: string
         description: Secret name to retrieve the workload identity provider
         required: true
+      cms_url:
+        type: string
+        description: URL where Strapi is available to generate the static website
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -58,6 +62,8 @@ jobs:
       # Generate static site into dist folder
       - name : "Install dependencies and build"
         working-directory: public_website
+        env:
+          NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
         run: |
           yarn install
           yarn build
