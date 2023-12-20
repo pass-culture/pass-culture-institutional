@@ -9,6 +9,8 @@ const auth = new GoogleAuth()
 export async function googleIAPAuth() {
   try {
     // eslint-disable-next-line no-console
+    console.info(process.env['GOOGLE_APPLICATION_CREDENTIALS'])
+    // eslint-disable-next-line no-console
     console.info(
       `request IAP ${protectedUrl} with target audience ${targetAudience}`
     )
