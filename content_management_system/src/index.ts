@@ -25,11 +25,13 @@ export default {
         }
       );
       if (existingRestaurants.length > 0) {
+        // eslint-disable-next-line no-console
         console.log("Seed restaurants already exist", existingRestaurants);
         return;
       }
 
       for (let index = 0; index < 3; index++) {
+        // eslint-disable-next-line no-console
         console.log(`Creating Seed Restaurant ${index + 1}`);
 
         await strapi.entityService.create("api::restaurant.restaurant", {
