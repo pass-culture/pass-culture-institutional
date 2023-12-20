@@ -23,7 +23,7 @@ type Props = {
   restaurants: HomeData[]
 }
 
-export default function About({ restaurants }: Props) {
+export default function About({ restaurants }: Readonly<Props>) {
   if (!restaurants) return <div>404</div>
 
   return (

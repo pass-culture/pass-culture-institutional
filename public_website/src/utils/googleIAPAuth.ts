@@ -16,8 +16,8 @@ export async function googleIAPAuth() {
     const res = await client.request({ url: protectedUrl })
 
     return res.data
-  } catch (error) {
-    console.error(error)
+  } catch (error: unknown) {
+    console.error('errorGoogleIAP ===>>>', error)
     process.exitCode = 1
   }
 }
