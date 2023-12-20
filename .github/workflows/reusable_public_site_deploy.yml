@@ -71,6 +71,7 @@ jobs:
           NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
         run: |
           yarn install
+          sleep 3600
           yarn build
 
       - name: 'Push website to bucket'
