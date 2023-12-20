@@ -11,6 +11,8 @@ export async function fetchAPI<T>(path: string) {
       throw new Error('No token found')
     }
     // eslint-disable-next-line no-console
+    console.log(`fetching ${path} with token ${token}`)
+
     const mergedOptions = {
       headers: {
         'Content-Type': 'application/json',
