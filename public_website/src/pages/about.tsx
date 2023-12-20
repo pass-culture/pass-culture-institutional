@@ -51,7 +51,7 @@ export default function About({ restaurants }: Props) {
 
 export async function getStaticProps() {
   // Get google auth token
-  const token = await googleIAPAuth()
+  const token = process.env["ID_TOKEN"]
   // eslint-disable-next-line no-console
   console.log(token)
 
