@@ -1,9 +1,9 @@
 const protectedUrl = process.env['NEXT_PUBLIC_STRAPI_API_URL']
 const targetAudience =
-  'http://427121120704-9qg83t8p14i1ncdbv8fi44nfu2te28dm.apps.googleusercontent.com/'
+  '427121120704-9qg83t8p14i1ncdbv8fi44nfu2te28dm.apps.googleusercontent.com'
 
 import { GoogleAuth } from 'google-auth-library'
-// const { GoogleAuth } = require('google-auth-library')
+
 const auth = new GoogleAuth()
 
 export async function googleIAPAuth() {

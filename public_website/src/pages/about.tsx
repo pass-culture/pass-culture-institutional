@@ -6,6 +6,7 @@ import { InternalLink } from '@/ui/components/links/InternalLink'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 import { fetchAPI } from '@/utils/fetchAPI'
+import { googleIAPAuth } from '@/utils/googleIAPAuth'
 
 export type HomeData = {
   attributes: {
@@ -49,6 +50,10 @@ export default function About({ restaurants }: Props) {
 }
 
 export async function getStaticProps() {
+  const token = await googleIAPAuth()
+
+  // eslint-disable-next-line no-console
+  console.log('token', token)
   // Call an external API endpoint to get restaurants
   const response = await fetchAPI('/restaurants')
 
