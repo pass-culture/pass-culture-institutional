@@ -6,8 +6,14 @@ type HttpResponse<T> = {
 
 export async function fetchAPI<T>(path: string) {
   try {
+    const token = process.env['ID_TOKEN']
+    // eslint-disable-next-line no-console
+    console.log('token', token)
     const mergedOptions = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     }
 
     const apiPath = `/api${path}`

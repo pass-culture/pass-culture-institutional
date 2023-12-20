@@ -49,11 +49,6 @@ export default function About({ restaurants }: Props) {
 }
 
 export async function getStaticProps() {
-  // Get google auth token
-  const token = process.env['ID_TOKEN']
-  // eslint-disable-next-line no-console
-  console.log(token)
-
   // Call an external API endpoint to get restaurants
   const response = await fetchAPI('/restaurants')
 
