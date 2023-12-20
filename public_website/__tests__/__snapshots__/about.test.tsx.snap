@@ -23,16 +23,6 @@ exports[`About page > should render the page 1`] = `
           pages/about.tsx
         </code>
       </p>
-      <h1
-        class="sc-gKAaef ljqyJc"
-      >
-        Lorem ipsum dolor sit amet
-      </h1>
-      <p
-        class="sc-iCoHzw jGcKYw"
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies ultrices, nunc nisl aliquam nunc, vitae aliquam nisl nunc eu
-      </p>
       <div
         class="sc-dlniIP RElFz"
       >

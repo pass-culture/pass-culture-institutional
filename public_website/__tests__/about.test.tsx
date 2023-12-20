@@ -7,7 +7,7 @@ import { act, render, screen, waitFor } from '.'
 
 describe('About page', () => {
   it('should pass axe accessibility tests', async () => {
-    const { container } = render(<About />)
+    const { container } = render(<About restaurants={[]} />)
 
     await waitFor(() => {
       expect(screen.queryByText('Chargement...')).toBeFalsy()
@@ -22,7 +22,7 @@ describe('About page', () => {
   })
 
   it('should render the page', async () => {
-    const { container } = render(<About />)
+    const { container } = render(<About restaurants={[]} />)
 
     await waitFor(() => {
       expect(screen.queryByText('Chargement...')).toBeFalsy()
