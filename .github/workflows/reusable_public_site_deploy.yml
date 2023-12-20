@@ -56,9 +56,9 @@ jobs:
         with:
           workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
-          token_format: id_token
-          id_token_audience: 427121120704-9qg83t8p14i1ncdbv8fi44nfu2te28dm.apps.googleusercontent.com
-          id_token_include_email: true
+          create_credentials_file: true
+          export_environment_variables: true
+          token_format: access_token 
 
 
       - name: 'Set up Cloud SDK'
@@ -69,8 +69,6 @@ jobs:
         working-directory: public_website
         env:
           NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }} 
-          ID_TOKEN: ${{ steps.auth.outputs.id_token }}
         run: |
           yarn install
           yarn build
