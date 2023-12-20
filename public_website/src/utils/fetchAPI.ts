@@ -4,12 +4,12 @@ type HttpResponse<T> = {
   data: T
 }
 
-export async function fetchAPI<T>(path: string, token?: string) {
+export async function fetchAPI<T>(path: string) {
   try {
-    // const token = process.env['ID_TOKEN']
-    // if (!token) {
-    //   throw new Error('No token found')
-    // }
+    const token = process.env['ID_TOKEN']
+    if (!token) {
+      throw new Error('No token found')
+    }
     // eslint-disable-next-line no-console
     const mergedOptions = {
       headers: {
