@@ -1,10 +1,10 @@
 import fetchMock from 'fetch-mock'
-import { describe, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import { fetchAPI } from '@/utils/fetchAPI'
 
 describe('fetchAPI', async () => {
-  test('should fail if no token is found', async () => {
+  it('should fail if no token is found', async () => {
     await expect(fetchAPI('/test')).rejects.toThrow(
       'Environnement variable ID_TOKEN not found'
     )
