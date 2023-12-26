@@ -72,7 +72,7 @@ describe('getStaticProps', () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
     const mockGetStaticProps = vi.fn()
 
-    await mockGetStaticProps.mockReturnValue({
+    mockGetStaticProps.mockReturnValue({
       props: {
         restaurants: [
           {
