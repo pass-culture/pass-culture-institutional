@@ -19,7 +19,7 @@ export type HomeData = {
 }
 
 type Props = {
-  restaurants: HomeData[]
+  restaurants: HomeData[] | undefined
 }
 
 export default function About({ restaurants }: Readonly<Props>) {

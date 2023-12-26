@@ -41,3 +41,63 @@ exports[`About page > should render the page 1`] = `
   </div>
 </div>
 `;
+
+exports[`About page > should render the page with restaurants 1`] = `
+<div>
+  <div
+    class="sc-gtsqUy qFqbA"
+  >
+    <main
+      class="sc-bdnyFh cOrhoO"
+    >
+      <h1
+        class="sc-gKAaef ljqyJc"
+      >
+        About Page
+      </h1>
+      <p
+        class="sc-iCoHzw jGcKYw"
+      >
+        Get started by editing
+        <code
+          class="sc-jSFipO cMRfmt"
+        >
+          pages/about.tsx
+        </code>
+      </p>
+      <h1
+        class="sc-gKAaef ljqyJc"
+      >
+        name
+      </h1>
+      <p
+        class="sc-iCoHzw jGcKYw"
+      >
+        description
+      </p>
+      <div
+        class="sc-dlniIP RElFz"
+      >
+        <div
+          class="sc-hKFymg jUOIRL"
+        >
+          <a
+            class="sc-eCAqax jVKTjr"
+            href="/"
+          >
+            ← Go Back
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+`;
+
+exports[`About page > should show 404 when restaurants are falsy 1`] = `
+<div>
+  <div>
+    404
+  </div>
+</div>
+`;
