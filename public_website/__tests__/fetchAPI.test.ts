@@ -50,7 +50,7 @@ describe('fetchAPI', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
     mockFetch.mockResolvedValueOnce(await respondWith(mockSuccessfulResponse))
     const response = await fetchAPI('/test')
-    await expect(response).toEqual(mockSuccessfulResponse)
+    expect(response).toEqual(mockSuccessfulResponse)
   })
 
   it('should fail if response is not ok', async () => {
