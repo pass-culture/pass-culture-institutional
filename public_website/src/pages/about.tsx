@@ -7,7 +7,7 @@ import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 import { fetchAPI } from '@/utils/fetchAPI'
 
-export type HomeData = {
+export type RestaurantData = {
   attributes: {
     description: string
     name: string
@@ -19,7 +19,7 @@ export type HomeData = {
 }
 
 type Props = {
-  restaurants: HomeData[] | undefined
+  restaurants: RestaurantData[] | undefined
 }
 
 export default function About({ restaurants }: Readonly<Props>) {
@@ -35,7 +35,7 @@ export default function About({ restaurants }: Readonly<Props>) {
           <CodeTag>pages/about.tsx</CodeTag>
         </Typo.Body>
 
-        {restaurants.map((restaurant: HomeData) => (
+        {restaurants.map((restaurant: RestaurantData) => (
           <React.Fragment key={restaurant.id}>
             <Typo.Title1>{restaurant.attributes.name}</Typo.Title1>
             <Typo.Body>{restaurant.attributes.description}</Typo.Body>
@@ -49,7 +49,7 @@ export default function About({ restaurants }: Readonly<Props>) {
 }
 
 export async function getStaticProps() {
-  const response = await fetchAPI('/restaurants')
+  const response = await fetchAPI<RestaurantData[]>('/restaurants')
   return {
     props: {
       restaurants: response.data,

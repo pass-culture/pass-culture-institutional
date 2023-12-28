@@ -1,23 +1,8 @@
-import { http, HttpResponse } from 'msw'
-import { setupServer } from 'msw/node'
-import {
-  afterAll,
-  afterEach,
-  beforeAll,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import { fetchAPI } from '@/utils/fetchAPI'
 
 const mockFetch = vi.spyOn(global, 'fetch')
-const server = setupServer(
-  http.get('http://localhost:1337/api/test', () => {
-    return HttpResponse.json({ data: 'dummy data' })
-  })
-)
 
 const respondWith = async (
   body: unknown,
@@ -34,10 +19,6 @@ const respondWith = async (
     statusText,
   })
 }
-
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
 const mockSuccessfulResponse = { data: 'dummy data' }
 
 describe('fetchAPI', async () => {
