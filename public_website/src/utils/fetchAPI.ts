@@ -20,12 +20,9 @@ export async function fetchAPI<T>(path: string) {
 
     const apiPath = `/api${path}`
     const requestUrl = `${getStrapiURL(apiPath)}`
-    const nonOKStatuses = [
-      400, 401, 402, 403, 404, 405, 406, 429, 500, 502, 503, 504,
-    ]
 
     const response = await fetch(requestUrl, mergedOptions)
-    if (nonOKStatuses.includes(response.status)) {
+    if (!response.ok) {
       throw new Error(`Server returned a non-OK status: ${response.status}`)
     }
 
