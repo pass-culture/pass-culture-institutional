@@ -112,7 +112,7 @@ To make the route public (read & write), go to `content_management_system/src/ap
 
 import { factories } from "@strapi/strapi";
 
-// This makes the endpoint protected
+// This makes authentification necessary on the endpoint
 export default factories.createCoreRouter("api::restaurant.restaurant");
 ```
 
