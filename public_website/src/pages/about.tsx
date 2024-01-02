@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
@@ -7,7 +7,7 @@ import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
 import { fetchAPI } from '@/utils/fetchAPI'
 
-export type HomeData = {
+export type RestaurantData = {
   attributes: {
     description: string
     name: string
@@ -18,27 +18,12 @@ export type HomeData = {
   id: number
 }
 
-export default function About() {
-  const [restaurants, setRestaurants] = useState<HomeData[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+type Props = {
+  restaurants: RestaurantData[] | undefined
+}
 
-  const fetchData = useCallback(async () => {
-    setIsLoading(true)
-    try {
-      const responseData = await fetchAPI<HomeData[]>('/restaurants')
-      setRestaurants(responseData.data)
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
-
-  if (isLoading) return <Typo.Body>Chargement...</Typo.Body>
+export default function About({ restaurants }: Readonly<Props>) {
+  if (!restaurants) return <div>404</div>
 
   return (
     <PageContainer>
@@ -50,7 +35,7 @@ export default function About() {
           <CodeTag>pages/about.tsx</CodeTag>
         </Typo.Body>
 
-        {restaurants.map((restaurant: HomeData) => (
+        {restaurants.map((restaurant: RestaurantData) => (
           <React.Fragment key={restaurant.id}>
             <Typo.Title1>{restaurant.attributes.name}</Typo.Title1>
             <Typo.Body>{restaurant.attributes.description}</Typo.Body>
@@ -61,4 +46,13 @@ export default function About() {
       </Main>
     </PageContainer>
   )
+}
+
+export async function getStaticProps() {
+  const response = await fetchAPI<RestaurantData[]>('/restaurants')
+  return {
+    props: {
+      restaurants: response.data,
+    },
+  }
 }

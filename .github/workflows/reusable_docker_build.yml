@@ -1,4 +1,4 @@
-name: Build a Docker image 
+name: Build a Docker image
 
 on:
   workflow_call:
@@ -75,8 +75,7 @@ jobs:
       - name: "Build and push ${{ inputs.image }} image"
         uses: docker/build-push-action@v3.2.0
         with:
-          push: ${{ inputs.push }} 
+          push: ${{ inputs.push }}
           # Tag with branch name and tag, the variable to get the branch name differs if we are in a pull_request or push event
           tags: ${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ env.SANITIZED_BRANCH_NAME }},${{ env.DOCKER_REPO }}/${{ inputs.image }}:${{ env.HASH }}
           context: ${{ inputs.context }}
-

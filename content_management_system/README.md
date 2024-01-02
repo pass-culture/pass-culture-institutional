@@ -103,9 +103,35 @@ If you try to go to `http://localhost:1337/api/restaurants` in your browser, you
 {"data":null,"error":{"status":403,"name":"ForbiddenError","message":"Forbidden","details":{}}}
 ```
 
-To make the route public, go to `Settings`, and then under `Users & Permissions Plugin`you will find `Roles`.
-Then in the list of roles, you will see `Public`. Edit the role.
-Under `permissions` you should see `Restaurant`. Unfold and check the box `find`.
+To make the route public (read & write), go to `content_management_system/src/api/restaurant/routes/restaurant.ts`
+
+```ts
+/**
+ * restaurant router
+ */
+
+import { factories } from "@strapi/strapi";
+
+// This makes the endpoint protected
+export default factories.createCoreRouter("api::restaurant.restaurant");
+```
+
+Add a second parameter to `createCoreRouter` as such:
+
+```ts
+// This makes the endpoint public
+export default factories.createCoreRouter("api::restaurant.restaurant", {
+  config: {
+    find: {
+      auth: false,
+    },
+    create: {
+      auth: false,
+    },
+  },
+});
+```
+
 Now if you go make to `http://localhost:1337/api/restaurants`, you should see:
 
 ```

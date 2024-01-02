@@ -10,6 +10,10 @@ on:
         type: string
         description: Secret name to retrieve the workload identity provider
         required: true
+      cms_url:
+        type: string
+        description: URL where Strapi is available to generate the static website
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -48,9 +52,14 @@ jobs:
 
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
+        id: auth
         with:
           workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
+          create_credentials_file: true
+          export_environment_variables: true
+          token_format: access_token 
+
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
@@ -58,8 +67,11 @@ jobs:
       # Generate static site into dist folder
       - name : "Install dependencies and build"
         working-directory: public_website
+        env:
+          NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
         run: |
           yarn install
+          sleep 3600
           yarn build
 
       - name: 'Push website to bucket'
