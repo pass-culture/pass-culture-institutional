@@ -1,5 +1,7 @@
 import { RestaurantData } from '@/pages/about'
 
+export const testDataFixtures = { message: 'Hello World!' }
+
 export const restaurantDataFixtures: RestaurantData[] = [
   {
     attributes: {

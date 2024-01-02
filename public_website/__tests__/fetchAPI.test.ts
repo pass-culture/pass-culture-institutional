@@ -1,8 +1,9 @@
-import { describe, expect, it, vi } from 'vitest'
+import { http, HttpHandler } from 'msw'
+import { describe, expect, it } from 'vitest'
 
+import { testDataFixtures } from './fixtures'
+import { server } from './server'
 import { fetchAPI } from '@/utils/fetchAPI'
-
-const mockFetch = vi.spyOn(global, 'fetch')
 
 const respondWith = async (
   body: unknown,
@@ -19,7 +20,6 @@ const respondWith = async (
     statusText,
   })
 }
-const mockSuccessfulResponse = { data: 'dummy data' }
 
 describe('fetchAPI', async () => {
   it('should fail if no token is found', async () => {
@@ -29,37 +29,46 @@ describe('fetchAPI', async () => {
   })
   it('should pass if token is found', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    mockFetch.mockResolvedValueOnce(await respondWith(mockSuccessfulResponse))
+
     const response = await fetchAPI('/test')
-    expect(response).toEqual(mockSuccessfulResponse)
+
+    expect(response.data).toMatchObject(testDataFixtures)
   })
 
   it('should fail if response is not ok', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    mockFetch.mockResolvedValueOnce(await respondWith({}, 500))
+    const statusCode = 500
+    const responseResolver: HttpHandler = http.get(
+      'http://localhost:1337/api/test',
+      () => respondWith({}, statusCode)
+    )
+    server.use(responseResolver)
+
     await expect(fetchAPI('/test')).rejects.toThrow(
-      'Server returned a non-OK status: 500'
+      `Server returned a non-OK status: ${statusCode}`
     )
   })
 
-  it('should fail if response is not json', async () => {
+  it('should fail if response is html', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    mockFetch.mockResolvedValueOnce(
-      await respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
+    const responseResolver: HttpHandler = http.get(
+      'http://localhost:1337/api/test',
+      () => respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
     )
+    server.use(responseResolver)
+
     await expect(fetchAPI('/test')).rejects.toThrow(
       'Unexpected response. Content type received: text/html'
     )
   })
 
-  it('contentType should be false if no header is found', async () => {
+  it('should fail if the content-type is not specified', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-
-    mockFetch.mockResolvedValueOnce(
-      await respondWith(mockSuccessfulResponse, 200, 'OK', {
-        'content-type': '',
-      })
+    const responseResolver: HttpHandler = http.get(
+      'http://localhost:1337/api/test',
+      () => respondWith({}, 200, 'OK', { 'content-type': '' })
     )
+    server.use(responseResolver)
 
     await expect(fetchAPI('/test')).rejects.toThrow(
       'Unexpected response. Content type received: '
