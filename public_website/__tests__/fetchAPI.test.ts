@@ -22,11 +22,12 @@ const respondWith = async (
 }
 
 describe('fetchAPI', async () => {
-  it('should fail if no token is found', async () => {
+  it('should fail when no token is found', async () => {
     await expect(fetchAPI('/test')).rejects.toThrow(
       'Environnement variable ID_TOKEN not found'
     )
   })
+
   it('should pass if token is found', async () => {
     process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
 

@@ -10,8 +10,6 @@ export async function fetchAPI<T>(path: string) {
     if (!token) {
       throw new Error('Environnement variable ID_TOKEN not found')
     }
-    // eslint-disable-next-line no-console
-    console.log(`fetching ${path} with token ${token}`)
 
     const mergedOptions = {
       headers: {
