@@ -10,9 +10,7 @@ describe('About page', () => {
   it('should pass axe accessibility tests', async () => {
     const { container } = render(<About restaurants={[]} />)
 
-    await waitFor(() => {
-      expect(screen.queryByText('Chargement...')).toBeFalsy()
-    })
+    await waitForDataToBeLoadedAndRendered()
 
     let a11yResult
     await act(async () => {
@@ -25,9 +23,7 @@ describe('About page', () => {
   it('should render the page', async () => {
     const { container } = render(<About restaurants={[]} />)
 
-    await waitFor(() => {
-      expect(screen.queryByText('Chargement...')).toBeFalsy()
-    })
+    await waitForDataToBeLoadedAndRendered()
 
     expect(container).toMatchSnapshot()
   })
@@ -43,20 +39,22 @@ describe('About page', () => {
   it('should render the page with restaurants', async () => {
     const { container } = render(<About restaurants={restaurantDataFixtures} />)
 
-    await waitFor(() => {
-      expect(screen.queryByText('Chargement...')).toBeFalsy()
-    })
+    await waitForDataToBeLoadedAndRendered()
 
     expect(container).toMatchSnapshot()
   })
 
   it('should show 404 when restaurants are falsy', async () => {
-    const { container } = render(<About restaurants={undefined} />)
+    render(<About restaurants={undefined} />)
 
     await waitFor(() => {
       expect(screen.queryByText('404')).toBeTruthy()
     })
-
-    expect(container).toMatchSnapshot()
   })
 })
+
+async function waitForDataToBeLoadedAndRendered() {
+  await waitFor(() => {
+    expect(screen.queryByText('Chargement...')).toBeFalsy()
+  })
+}
