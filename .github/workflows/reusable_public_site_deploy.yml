@@ -48,6 +48,7 @@ jobs:
             INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             INSTIT_SITE_BUCKET:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_site-bucket
             INSTIT_SITE_URL_MAP:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_url-map
+            IAP_CLIENT_ID:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_iap-client-id
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: 'Authenticate to Google Cloud'
@@ -57,8 +58,9 @@ jobs:
           workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
           create_credentials_file: true
-          export_environment_variables: true
-          token_format: access_token 
+          token_format: id_token
+          id_token_audience: ${{ steps.secrets.outputs.IAP_CLIENT_ID }}
+          id_token_include_email: true
 
 
       - name: 'Set up Cloud SDK'
@@ -69,9 +71,9 @@ jobs:
         working-directory: public_website
         env:
           NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
+          ID_TOKEN: ${{ steps.auth.outputs.id_token }}
         run: |
           yarn install
-          sleep 3600
           yarn build
 
       - name: 'Push website to bucket'
