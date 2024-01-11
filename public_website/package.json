@@ -39,7 +39,7 @@
     "eslint-plugin-testing-library": "^6.1.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "jsdom": "^23.0.0",
-    "msw": "^2.0.9",
+    "msw": "^2.0.13",
     "prettier": "^3.0.3",
     "ts-prune": "^0.10.3",
     "typescript": "^5",
