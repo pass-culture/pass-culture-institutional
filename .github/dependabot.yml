@@ -29,3 +29,13 @@ updates:
       prefix: "chore:"
     reviewers:
       - "Lucasbeneston"
+
+- package-ecosystem: 'github-actions'
+    directory: '.github/workflows'
+    open-pull-requests-limit: 3
+    schedule:
+      interval: 'daily'
+    commit-message:
+      prefix: '(BSR) chore(ci):'
+    reviewers:
+      - 'Lucasbeneston'
