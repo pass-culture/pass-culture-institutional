@@ -30,7 +30,7 @@ updates:
     reviewers:
       - "Lucasbeneston"
 
-- package-ecosystem: "github-actions"
+  - package-ecosystem: "github-actions"
     directory: ".github/workflows"
     open-pull-requests-limit: 3
     schedule:
