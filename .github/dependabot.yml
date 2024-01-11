@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore:"
@@ -13,7 +13,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/public_website"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore:"
@@ -23,8 +23,18 @@ updates:
   - package-ecosystem: "npm"
     directory: "/content_management_system"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore:"
+    reviewers:
+      - "Lucasbeneston"
+
+  - package-ecosystem: "github-actions"
+    directory: ".github/workflows"
+    open-pull-requests-limit: 3
+    schedule:
+      interval: "daily"
     commit-message:
       prefix: "chore:"
     reviewers:
