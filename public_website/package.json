@@ -43,7 +43,7 @@
     "prettier": "^3.0.3",
     "ts-prune": "^0.10.3",
     "typescript": "^5",
-    "vite-tsconfig-paths": "^4.2.1",
+    "vite-tsconfig-paths": "^4.2.3",
     "vitest": "^0.34.6",
     "vitest-axe": "^0.1.0",
     "vitest-canvas-mock": "^0.3.3"
