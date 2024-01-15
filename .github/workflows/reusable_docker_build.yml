@@ -52,7 +52,7 @@ jobs:
           service_account: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
 
       - id: docker-login
-        uses: docker/login-action@v2.1.0
+        uses: docker/login-action@v3.0.0
         name: "Docker login"
         with:
           registry: "${{ env.DOCKER_REGISTRY_REGION }}-docker.pkg.dev"
