@@ -1,0 +1,20 @@
+{
+  "projects": {},
+  "targets": {
+    "pc-site-instit-testing": {
+      "hosting": {
+        "testing": [
+          "pc-site-instit-testing"
+        ]
+      }
+    },
+    "pc-site-instit-staging": {
+      "hosting": {
+        "staging": [
+          "pc-site-instit-staging"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

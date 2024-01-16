@@ -78,4 +78,7 @@ jobs:
 
       - name: 'Push website to bucket'
         working-directory: public_website
-        run:  gsutil rsync -r out gs://${{ steps.secrets.outputs.INSTIT_SITE_BUCKET }}
+        run: |
+          npm install -g firebase-tools
+          firebase use pc-site-instit-${{ inputs.environment }} 
+          firebase deploy --only hosting:${{ inputs.environment }} --project pc-site-instit-${{ inputs.environment }} --non-interactive 
