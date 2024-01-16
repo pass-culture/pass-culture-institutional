@@ -51,7 +51,7 @@ jobs:
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
 
       - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+        uses: 'google-github-actions/setup-gcloud@v2'
 
       - name: Get Secret
         id: 'secrets'
@@ -68,7 +68,7 @@ jobs:
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
 
       - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+        uses: 'google-github-actions/setup-gcloud@v2'
 
       - name: Install Kubectl
         uses: azure/setup-kubectl@v3
