@@ -42,7 +42,7 @@ jobs:
 
       - name: Get Secret
         id: 'secrets'
-        uses: 'google-github-actions/get-secretmanager-secrets@v1'
+        uses: 'google-github-actions/get-secretmanager-secrets@v2'
         with:
           secrets: |-
             INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
