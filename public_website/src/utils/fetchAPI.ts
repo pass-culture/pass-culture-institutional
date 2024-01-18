@@ -6,8 +6,11 @@ type HttpResponse<T> = {
 
 export async function fetchAPI<T>(path: string) {
   try {
+    const apiPath = `/api${path}`
+    const requestUrl = `${getStrapiURL(apiPath)}`
     const token = process.env['ID_TOKEN']
-    if (!token) {
+
+    if (!requestUrl.includes('localhost') && !token) {
       throw new Error('Environnement variable ID_TOKEN not found')
     }
 
@@ -17,9 +20,6 @@ export async function fetchAPI<T>(path: string) {
         Authorization: `Bearer ${token}`,
       },
     }
-
-    const apiPath = `/api${path}`
-    const requestUrl = `${getStrapiURL(apiPath)}`
 
     const response = await fetch(requestUrl, mergedOptions)
     if (!response.ok) {
