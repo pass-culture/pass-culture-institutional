@@ -1,5 +1,5 @@
 import { http, HttpHandler } from 'msw'
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
 
 import { testDataFixtures } from './fixtures'
 import { server } from './server'
@@ -21,58 +21,67 @@ const respondWith = async (
   })
 }
 
-describe('fetchAPI', async () => {
-  it('should fail when no token is found', async () => {
+describe('fetchAPI', () => {
+  const OLD_ENV = { ...process.env }
+
+  it('should fail when not in localhost and no token is found', async () => {
+    process.env = {
+      ...OLD_ENV,
+      NEXT_PUBLIC_STRAPI_API_URL:
+        'https://siteinstit-cms.testing.passculture.team',
+    }
+
     await expect(fetchAPI('/test')).rejects.toThrow(
       'Environnement variable ID_TOKEN not found'
     )
   })
 
-  it('should pass if token is found', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
+  describe('when token exists', () => {
+    beforeAll(() => {
+      process.env = { ...OLD_ENV, ID_TOKEN: 'your_dummy_token' }
+    })
 
-    const response = await fetchAPI('/test')
+    it('should pass', async () => {
+      const response = await fetchAPI('/test')
 
-    expect(response.data).toMatchObject(testDataFixtures)
-  })
+      expect(response.data).toMatchObject(testDataFixtures)
+    })
 
-  it('should fail if response is not ok', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    const statusCode = 500
-    const responseResolver: HttpHandler = http.get(
-      'http://localhost:1337/api/test',
-      () => respondWith({}, statusCode)
-    )
-    server.use(responseResolver)
+    it('should fail if response is not ok', async () => {
+      const statusCode = 500
+      const responseResolver: HttpHandler = http.get(
+        'http://localhost:1337/api/test',
+        () => respondWith({}, statusCode)
+      )
+      server.use(responseResolver)
 
-    await expect(fetchAPI('/test')).rejects.toThrow(
-      `Server returned a non-OK status: ${statusCode}`
-    )
-  })
+      await expect(fetchAPI('/test')).rejects.toThrow(
+        `Server returned a non-OK status: ${statusCode}`
+      )
+    })
 
-  it('should fail if response is html', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    const responseResolver: HttpHandler = http.get(
-      'http://localhost:1337/api/test',
-      () => respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
-    )
-    server.use(responseResolver)
+    it('should fail if response is html', async () => {
+      const responseResolver: HttpHandler = http.get(
+        'http://localhost:1337/api/test',
+        () => respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
+      )
+      server.use(responseResolver)
 
-    await expect(fetchAPI('/test')).rejects.toThrow(
-      'Unexpected response. Content type received: text/html'
-    )
-  })
+      await expect(fetchAPI('/test')).rejects.toThrow(
+        'Unexpected response. Content type received: text/html'
+      )
+    })
 
-  it('should fail if the content-type is not specified', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
-    const responseResolver: HttpHandler = http.get(
-      'http://localhost:1337/api/test',
-      () => respondWith({}, 200, 'OK', { 'content-type': '' })
-    )
-    server.use(responseResolver)
+    it('should fail if the content-type is not specified', async () => {
+      const responseResolver: HttpHandler = http.get(
+        'http://localhost:1337/api/test',
+        () => respondWith({}, 200, 'OK', { 'content-type': '' })
+      )
+      server.use(responseResolver)
 
-    await expect(fetchAPI('/test')).rejects.toThrow(
-      'Unexpected response. Content type received: '
-    )
+      await expect(fetchAPI('/test')).rejects.toThrow(
+        'Unexpected response. Content type received: '
+      )
+    })
   })
 })
