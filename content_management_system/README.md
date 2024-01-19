@@ -2,7 +2,7 @@
 
 ## Install and configure Postgres
 
-There is a Docker file `content_management_system/Dockerfile` that will create a container for the CMS and another container for Postgres.
+There is a Docker file `docker-compose.yaml` at the root of the project that will create a container for the CMS and another container for Postgres.
 
 But if you would like to install Postgres locally on Mac, follow the instructions bellow:
 
