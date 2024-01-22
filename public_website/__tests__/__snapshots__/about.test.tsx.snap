@@ -93,11 +93,3 @@ exports[`About page > should render the page with restaurants 1`] = `
   </div>
 </div>
 `;
-
-exports[`About page > should show 404 when restaurants are falsy 1`] = `
-<div>
-  <div>
-    404
-  </div>
-</div>
-`;

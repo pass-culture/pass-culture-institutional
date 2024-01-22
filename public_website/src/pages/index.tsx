@@ -13,7 +13,7 @@ import { fetchAPI } from '@/utils/fetchAPI'
 const CHECKBOX_ID = 'acceptTerms'
 
 type HomeProps = {
-  activePlaylistTags?: []
+  activePlaylistTags?: ActivePlaylistTag[]
 }
 
 export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {

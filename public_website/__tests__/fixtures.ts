@@ -1,3 +1,4 @@
+import { ActivePlaylistTag } from '@/pages'
 import { RestaurantData } from '@/pages/about'
 
 export const testDataFixtures = { message: 'Hello World!' }
@@ -13,5 +14,17 @@ export const restaurantDataFixtures: RestaurantData[] = [
       updatedAt: '2023-08-15T18:00:00.000Z',
     },
     id: 107,
+  },
+]
+
+export const activePlaylistTagsFixtures: ActivePlaylistTag[] = [
+  {
+    attributes: {
+      name: 'Bon_plans',
+      publishedAt: '2023-08-15T18:00:00.000Z',
+      createdAt: '2023-08-15T18:00:00.000Z',
+      updatedAt: '2023-08-15T18:00:00.000Z',
+    },
+    id: 45,
   },
 ]

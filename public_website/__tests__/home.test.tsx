@@ -3,7 +3,8 @@ import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import Home from '../src/pages'
-import { act, fireEvent, render, screen } from '.'
+import { act, fireEvent, render, screen, waitFor } from '.'
+import { activePlaylistTagsFixtures } from './fixtures'
 
 describe('Home page', () => {
   it('should pass axe accessibility tests', async () => {
@@ -32,4 +33,20 @@ describe('Home page', () => {
 
     expect(checkbox).toHaveProperty('checked', true)
   })
+
+  it('should render the active playlist tags', async () => {
+    const { container } = render(
+      <Home activePlaylistTags={activePlaylistTagsFixtures} />
+    )
+
+    await waitForDataToBeLoadedAndRendered()
+
+    expect(container).toMatchSnapshot()
+  })
 })
+
+async function waitForDataToBeLoadedAndRendered() {
+  await waitFor(() => {
+    expect(screen.queryByText('Chargement...')).toBeFalsy()
+  })
+}
