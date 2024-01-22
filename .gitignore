@@ -13,3 +13,6 @@ out
 
 # db data
 data
+
+# firebase
+.firebase

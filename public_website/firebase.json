@@ -1,0 +1,24 @@
+{
+  "hosting": [
+    {
+      "target": "testing",
+      "public": "out",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "cleanUrls": true
+    },
+    {
+      "target": "staging",
+      "public": "out",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "cleanUrls": true
+    }
+  ]
+}
