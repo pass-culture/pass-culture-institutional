@@ -39,8 +39,7 @@ describe('Home page', () => {
 
     const { props } = await getStaticProps()
     render(<Home {...props} />)
-    console.log(activePlaylistTagsFixtures[0]?.attributes.name)
-    screen.debug()
+
     expect(
       screen.queryByText(activePlaylistTagsFixtures[0]?.attributes.name ?? '')
     ).toBeTruthy()
