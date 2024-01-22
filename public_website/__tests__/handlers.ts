@@ -1,6 +1,10 @@
 import { http, HttpResponse } from 'msw'
 
-import { restaurantDataFixtures, testDataFixtures } from './fixtures'
+import {
+  activePlaylistTagsFixtures,
+  restaurantDataFixtures,
+  testDataFixtures,
+} from './fixtures'
 
 const BASE_URL = 'http://localhost:1337'
 
@@ -12,5 +16,8 @@ export const handlers = [
   }),
   http.get(`${BASE_URL}/api/restaurants`, () => {
     return jsonResponseOf(restaurantDataFixtures)
+  }),
+  http.get(`${BASE_URL}/api/active-playlist-tags`, () => {
+    return jsonResponseOf(activePlaylistTagsFixtures)
   }),
 ]
