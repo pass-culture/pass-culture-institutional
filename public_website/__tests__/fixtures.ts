@@ -20,7 +20,7 @@ export const restaurantDataFixtures: RestaurantData[] = [
 export const activePlaylistTagsFixtures: ActivePlaylistTag[] = [
   {
     attributes: {
-      name: 'Bon_plans',
+      name: 'Bons_plans_du_moment',
       publishedAt: '2023-08-15T18:00:00.000Z',
       createdAt: '2023-08-15T18:00:00.000Z',
       updatedAt: '2023-08-15T18:00:00.000Z',

@@ -2,7 +2,7 @@ import React from 'react'
 import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import Home from '../src/pages'
+import Home, { getStaticProps } from '../src/pages'
 import { act, fireEvent, render, screen, waitFor } from '.'
 import { activePlaylistTagsFixtures } from './fixtures'
 
@@ -32,6 +32,18 @@ describe('Home page', () => {
     fireEvent.click(label)
 
     expect(checkbox).toHaveProperty('checked', true)
+  })
+
+  it('should render the page with the response of the server', async () => {
+    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
+
+    const { props } = await getStaticProps()
+    render(<Home {...props} />)
+    console.log(activePlaylistTagsFixtures[0]?.attributes.name)
+    screen.debug()
+    expect(
+      screen.queryByText(activePlaylistTagsFixtures[0]?.attributes.name ?? '')
+    ).toBeTruthy()
   })
 
   it('should render the active playlist tags', async () => {
