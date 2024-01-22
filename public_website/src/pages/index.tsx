@@ -16,7 +16,7 @@ type HomeProps = {
   activePlaylistTags?: []
 }
 
-export default function Home({ activePlaylistTags }: HomeProps) {
+export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
   return (
     <PageContainer>
       <Head>
