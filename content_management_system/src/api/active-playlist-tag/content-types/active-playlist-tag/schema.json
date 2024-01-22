@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "active_playlist_tags",
+  "info": {
+    "singularName": "active-playlist-tag",
+    "pluralName": "active-playlist-tags",
+    "displayName": "Active Playlist Tag "
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}
