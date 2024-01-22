@@ -69,7 +69,7 @@ exports[`Home page > should render the active playlist tags 1`] = `
           <p
             class="sc-jrsKJM eHsNYH"
           >
-            Bons_plans_du_moment
+            Bons plans du moment
           </p>
         </li>
       </ul>
