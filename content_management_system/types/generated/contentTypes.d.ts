@@ -774,13 +774,15 @@ export interface ApiActivePlaylistTagActivePlaylistTag
   info: {
     singularName: 'active-playlist-tag';
     pluralName: 'active-playlist-tags';
-    displayName: 'Active Playlist Tag ';
+    displayName: 'Active Playlist Tag';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String;
+    tag: Attribute.String;
+    displayName: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

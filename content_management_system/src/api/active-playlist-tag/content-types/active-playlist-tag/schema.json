@@ -4,14 +4,18 @@
   "info": {
     "singularName": "active-playlist-tag",
     "pluralName": "active-playlist-tags",
-    "displayName": "Active Playlist Tag "
+    "displayName": "Active Playlist Tag",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "tag": {
+      "type": "string"
+    },
+    "displayName": {
       "type": "string"
     }
   }

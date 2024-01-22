@@ -41,7 +41,9 @@ describe('Home page', () => {
     render(<Home {...props} />)
 
     expect(
-      screen.queryByText(activePlaylistTagsFixtures[0]?.attributes.name ?? '')
+      screen.queryByText(
+        activePlaylistTagsFixtures[0]?.attributes.displayName ?? ''
+      )
     ).toBeTruthy()
   })
 

@@ -52,7 +52,7 @@ export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
           <ul>
             {activePlaylistTags.map((tag: ActivePlaylistTag) => (
               <li key={tag.id}>
-                <Typo.Body>{tag.attributes.name}</Typo.Body>
+                <Typo.Body>{tag.attributes.displayName}</Typo.Body>
               </li>
             ))}
           </ul>
@@ -73,7 +73,8 @@ export async function getStaticProps() {
 
 export type ActivePlaylistTag = {
   attributes: {
-    name: string
+    tag: string
+    displayName: string
     createdAt: string
     updatedAt: string
     publishedAt: string
