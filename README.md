@@ -16,12 +16,17 @@ For more specific information:
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=coverage)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 
+## Requirements
+
+1. Ensure you have [Node.js 20.8.0](https://nodejs.org/) installed on your system. If you are using `NVM` you can simply use the command `nvm install` if you don't have 20.8.0 previously installed or `nvm use` if you do.
+2. You should have `Yarn` installed: `corepack enable`
+
 ## Start the project
 
-Navigate to the project directory and install the dependencies by running the following commands:
+From the root of the project, you can install the dependencies for the `public_website` and the `content_management_system` with the following commands:
 
 ```bash
-yarn install
+yarn setup
 yarn dev
 ```
 

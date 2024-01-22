@@ -2,6 +2,10 @@
 
 ## Install and configure Postgres
 
+There is a Docker file `docker-compose.yaml` at the root of the project that will create a container for the CMS and another container for Postgres.
+
+But if you would like to install Postgres locally on Mac, follow the instructions bellow:
+
 #### Installing Postgres as a standardized Mac app (recommended)
 
 Install Postgres from this link:
@@ -79,6 +83,20 @@ DATABASE_PASSWORD=your-password
 DATABASE_SSL=false
 JWT_SECRET=xxx
 ```
+
+#### Running the CMS via Docker
+
+Once your environment files are setup, you can start the database and/or Strapi using :
+
+```
+docker-compose up --build # Builds the CMS image and starts the database
+docker-compose up database # Only starts the database
+```
+
+Your database data will be stored under the `data` folder at the root of the repository.
+This will make the Strapi instance available at [http://localhost:1337]
+
+You can also access the postgresql instance as you would if it was running natively. It is available at `localhost:5432`
 
 ## Starting Strapi
 
