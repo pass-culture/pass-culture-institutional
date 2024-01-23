@@ -84,7 +84,7 @@ jobs:
           version: ${{ inputs.argocd_version }}
 
       - name: "Teleport Authentication"
-        uses: teleport-actions/auth-k8s@v1
+        uses: teleport-actions/auth-k8s@v2
         with:
           proxy: ${{ inputs.teleport_proxy }}
           token: github-token
