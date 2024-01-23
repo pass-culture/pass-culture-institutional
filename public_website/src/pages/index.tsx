@@ -8,10 +8,15 @@ import { InternalLink } from '@/ui/components/links/InternalLink'
 import { Spacer } from '@/ui/components/Spacer'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
+import { fetchAPI } from '@/utils/fetchAPI'
 
 const CHECKBOX_ID = 'acceptTerms'
 
-export default function Home() {
+type HomeProps = {
+  activePlaylistTags?: ActivePlaylistTag[]
+}
+
+export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
   return (
     <PageContainer>
       <Head>
@@ -43,7 +48,36 @@ export default function Home() {
         </div>
         <InternalLink href="/about" name="About &rarr;" />
         <Spacer.Vertical spaces={2} />
+        {activePlaylistTags ? (
+          <ul>
+            {activePlaylistTags.map((tag: ActivePlaylistTag) => (
+              <li key={tag.id}>
+                <Typo.Body>{tag.attributes.displayName}</Typo.Body>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </Main>
     </PageContainer>
   )
+}
+
+export async function getStaticProps() {
+  const response = await fetchAPI<ActivePlaylistTag[]>('/active-playlist-tags')
+  return {
+    props: {
+      activePlaylistTags: response.data,
+    },
+  }
+}
+
+export type ActivePlaylistTag = {
+  attributes: {
+    tag: string
+    displayName: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  id: number
 }
