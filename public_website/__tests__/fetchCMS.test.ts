@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest'
 
 import { testDataFixtures } from './fixtures'
 import { server } from './server'
-import { fetchAPI } from '@/utils/fetchAPI'
+import { fetchCMS } from '@/utils/fetchCMS'
 
 const respondWith = async (
   body: unknown,
@@ -21,17 +21,16 @@ const respondWith = async (
   })
 }
 
-describe('fetchAPI', () => {
+describe('fetchCMS', () => {
   const OLD_ENV = { ...process.env }
 
   it('should fail when not in localhost and no token is found', async () => {
     process.env = {
       ...OLD_ENV,
-      NEXT_PUBLIC_STRAPI_API_URL:
-        'https://siteinstit-cms.testing.passculture.team',
+      STRAPI_API_URL: 'https://siteinstit-cms.testing.passculture.team',
     }
 
-    await expect(fetchAPI('/test')).rejects.toThrow(
+    await expect(fetchCMS('/test')).rejects.toThrow(
       'Environnement variable ID_TOKEN not found'
     )
   })
@@ -42,7 +41,7 @@ describe('fetchAPI', () => {
     })
 
     it('should pass', async () => {
-      const response = await fetchAPI('/test')
+      const response = await fetchCMS('/test')
 
       expect(response.data).toMatchObject(testDataFixtures)
     })
@@ -55,7 +54,7 @@ describe('fetchAPI', () => {
       )
       server.use(responseResolver)
 
-      await expect(fetchAPI('/test')).rejects.toThrow(
+      await expect(fetchCMS('/test')).rejects.toThrow(
         `Server returned a non-OK status: ${statusCode}`
       )
     })
@@ -67,7 +66,7 @@ describe('fetchAPI', () => {
       )
       server.use(responseResolver)
 
-      await expect(fetchAPI('/test')).rejects.toThrow(
+      await expect(fetchCMS('/test')).rejects.toThrow(
         'Unexpected response. Content type received: text/html'
       )
     })
@@ -79,7 +78,7 @@ describe('fetchAPI', () => {
       )
       server.use(responseResolver)
 
-      await expect(fetchAPI('/test')).rejects.toThrow(
+      await expect(fetchCMS('/test')).rejects.toThrow(
         'Unexpected response. Content type received: '
       )
     })

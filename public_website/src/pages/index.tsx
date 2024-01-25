@@ -8,7 +8,7 @@ import { InternalLink } from '@/ui/components/links/InternalLink'
 import { Spacer } from '@/ui/components/Spacer'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
-import { fetchAPI } from '@/utils/fetchAPI'
+import { fetchCMS } from '@/utils/fetchCMS'
 
 const CHECKBOX_ID = 'acceptTerms'
 
@@ -63,7 +63,7 @@ export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
 }
 
 export async function getStaticProps() {
-  const response = await fetchAPI<ActivePlaylistTag[]>('/active-playlist-tags')
+  const response = await fetchCMS<ActivePlaylistTag[]>('/active-playlist-tags')
   return {
     props: {
       activePlaylistTags: response.data,
