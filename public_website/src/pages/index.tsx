@@ -8,15 +8,17 @@ import { InternalLink } from '@/ui/components/links/InternalLink'
 import { Spacer } from '@/ui/components/Spacer'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
+import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 const CHECKBOX_ID = 'acceptTerms'
 
 type HomeProps = {
-  activePlaylistTags?: ActivePlaylistTag[]
+  tags?: Tag[]
+  playlist?: Offer[]
 }
 
-export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
+export default function Home({ tags, playlist }: Readonly<HomeProps>) {
   return (
     <PageContainer>
       <Head>
@@ -48,11 +50,21 @@ export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
         </div>
         <InternalLink href="/about" name="About &rarr;" />
         <Spacer.Vertical spaces={2} />
-        {activePlaylistTags ? (
+        {tags ? (
           <ul>
-            {activePlaylistTags.map((tag: ActivePlaylistTag) => (
+            {tags.map((tag: Tag) => (
               <li key={tag.id}>
                 <Typo.Body>{tag.attributes.displayName}</Typo.Body>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {playlist && playlist?.length > 0 ? (
+          <ul>
+            {playlist.map((offer: Offer) => (
+              <li key={offer.id}>
+                <Typo.Body>{offer.name}</Typo.Body>
+                <Typo.Body>{offer.stocks[0]?.price}</Typo.Body>
               </li>
             ))}
           </ul>
@@ -63,15 +75,22 @@ export default function Home({ activePlaylistTags }: Readonly<HomeProps>) {
 }
 
 export async function getStaticProps() {
-  const response = await fetchCMS<ActivePlaylistTag[]>('/active-playlist-tags')
+  const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
+  const tags = tagsResponse.data
+  const playlistResponse = await fetchBackend(
+    // `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
+    `institutional/playlist/Livre%20avec%20EAN`
+  )
   return {
     props: {
-      activePlaylistTags: response.data,
+      tags: tags || null,
+      playlist: playlistResponse || null,
+      // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
 }
 
-export type ActivePlaylistTag = {
+export type Tag = {
   attributes: {
     tag: string
     displayName: string
@@ -80,4 +99,22 @@ export type ActivePlaylistTag = {
     publishedAt: string
   }
   id: number
+}
+
+type Venue = {
+  id: number
+  commonName: string
+}
+
+type Stock = {
+  id: number
+  price: number
+}
+
+export type Offer = {
+  id: number
+  name: string
+  venue: Venue
+  image: null
+  stocks: Stock[]
 }

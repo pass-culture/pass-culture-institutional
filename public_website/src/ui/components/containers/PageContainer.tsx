@@ -6,6 +6,6 @@ export const PageContainer = styled.div({
   flexFlow: 'column nowrap',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '100vh',
+  // height: '100vh',
   minHeight: '100vh',
 })
