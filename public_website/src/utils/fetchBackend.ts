@@ -9,11 +9,11 @@ export async function fetchBackend<T>(path: string) {
       process.env['BACKEND_API_URL'] ||
       'https://backend.testing.passculture.team/'
     }${apiPath}`
-    const token = process.env['INSTITUTIONAL_API_TOKEN']
+    const key = process.env['INSTITUTIONAL_API_KEY']
 
-    if (!token) {
+    if (!key) {
       console.warn(
-        'Environnement variable INSTITUTIONAL_API_TOKEN not found, getting playlists from dummy data'
+        'Environnement variable INSTITUTIONAL_API_KEY not found, getting playlists from dummy data'
       )
       return { data: [] } //TODO: add dummy data
     }
@@ -21,7 +21,7 @@ export async function fetchBackend<T>(path: string) {
     const mergedOptions = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${key}`,
       },
     }
 

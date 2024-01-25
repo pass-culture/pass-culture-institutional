@@ -10,7 +10,7 @@ If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the 
 
 > Usually, to access environment variables in the browser, they have to be prefixed by `NEXT_PUBLIC_`. In our case, we only need `STRAPI_API_URL` to be available in the Node.js environment.
 
-There are also 2 environment variables that are used to build the playlists. Since `INSTITUTIONAL_API_TOKEN` is only available in our CI, it is not possible locally to get the playlists from our backend. We have included dummy playlist data directly in Next for local development.
+There are also 2 environment variables that are used to build the playlists. Since `INSTITUTIONAL_API_KEY` is only available in our CI for security reasons. In consequence, it is not possible locally to get the playlists from our backend. We have included dummy playlist data directly in Next for local development.
 
 ## Start the Public Website
 
