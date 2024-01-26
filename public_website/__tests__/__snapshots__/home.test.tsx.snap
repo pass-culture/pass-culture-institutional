@@ -3,7 +3,7 @@
 exports[`Home page > should render the active playlist tags 1`] = `
 <div>
   <div
-    class="sc-gtsqUy qFqbA"
+    class="sc-gtsqUy dWOEAx"
   >
     <main
       class="sc-bdnyFh cOrhoO"
@@ -64,15 +64,6 @@ exports[`Home page > should render the active playlist tags 1`] = `
         class="sc-gKAaef cJkFME"
         spaces="2"
       />
-      <ul>
-        <li>
-          <p
-            class="sc-jrsKJM eHsNYH"
-          >
-            Bons plans du moment
-          </p>
-        </li>
-      </ul>
     </main>
   </div>
 </div>
@@ -81,7 +72,7 @@ exports[`Home page > should render the active playlist tags 1`] = `
 exports[`Home page > should render the page 1`] = `
 <div>
   <div
-    class="sc-gtsqUy qFqbA"
+    class="sc-gtsqUy dWOEAx"
   >
     <main
       class="sc-bdnyFh cOrhoO"
