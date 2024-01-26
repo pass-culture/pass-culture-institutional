@@ -34,6 +34,47 @@ type Playlist = {
   data: Offer[]
 }
 
+export const playlistOffersWithImagesFixtures: Playlist = {
+  data: [
+    {
+      id: 1987,
+      name: 'Instrument de Dan',
+      venue: {
+        id: 839,
+        commonName: 'Espace des Gnoux',
+      },
+      image: {
+        url: 'https://storage.googleapis.com/passculture-metier-ehp-testing-assets-fine-grained/thumbs/mediations/LE',
+        credit: '',
+      },
+      stocks: [
+        {
+          id: 5108,
+          price: 2000,
+        },
+      ],
+    },
+    {
+      id: 1988,
+      name: 'Batterie (cymbale gauche de Christopher)',
+      venue: {
+        id: 839,
+        commonName: 'Espace des Gnoux',
+      },
+      image: {
+        url: 'https://storage.googleapis.com/passculture-metier-ehp-testing-assets-fine-grained/thumbs/mediations/L9',
+        credit: '',
+      },
+      stocks: [
+        {
+          id: 5109,
+          price: 1999,
+        },
+      ],
+    },
+  ],
+}
+
 export const playlistOffersFixtures: Playlist = {
   data: [
     {

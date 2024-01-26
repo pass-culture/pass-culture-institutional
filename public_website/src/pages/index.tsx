@@ -1,7 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 
-import { playlistOffersFixtures } from '../../__tests__/fixtures'
+import { playlistOffersWithImagesFixtures } from '../../__tests__/fixtures'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
@@ -39,12 +40,6 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
           Get started by editing
           <CodeTag>pages/index.tsx</CodeTag>
         </Typo.Body>
-        {/* <Image
-          src="https://storage.googleapis.com/passculture-metier-ehp-testing-assets-fine-grained/thumbs/mediations/LE"
-          alt="image"
-          width={200}
-          height={300}
-        /> */}
         <Spacer.Vertical spaces={2} />
         <div>
           <input
@@ -71,6 +66,14 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
               <li key={offer.id}>
                 <Typo.Body>{offer.name}</Typo.Body>
                 <Typo.Body>{offer.stocks[0]?.price}</Typo.Body>
+                {offer.image?.url && (
+                  <Image
+                    src={offer.image?.url}
+                    alt=""
+                    width={300}
+                    height={400}
+                  />
+                )}
               </li>
             ))}
           </ul>
@@ -85,7 +88,7 @@ export async function getStaticProps() {
   const tags = tagsResponse.data
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
-      ? playlistOffersFixtures
+      ? playlistOffersWithImagesFixtures
       : await fetchBackend<Offer[]>(
           `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
         )
@@ -114,6 +117,11 @@ type Venue = {
   commonName: string
 }
 
+type OfferImage = {
+  credit: string
+  url: string
+}
+
 type Stock = {
   id: number
   price: number
@@ -123,6 +131,6 @@ export type Offer = {
   id: number
   name: string
   venue: Venue
-  image: null
+  image: OfferImage | null
   stocks: Stock[]
 }

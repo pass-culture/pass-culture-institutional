@@ -11,7 +11,7 @@ export async function fetchBackend<T>(path: string) {
     }${path}`
     const key = process.env['INSTITUTIONAL_API_KEY']
 
-    if (!key || key === 'je_suis_un_jeton_non_devinable') {
+    if (!key) {
       throw new Error(
         `Environnement variable INSTITUTIONAL_API_KEY not found, ${requestUrl}`
       )

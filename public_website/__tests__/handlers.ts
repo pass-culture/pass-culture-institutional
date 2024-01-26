@@ -22,10 +22,7 @@ export const handlers = [
   http.get(`${CMS_BASE_URL}/api/active-playlist-tags`, () => {
     return jsonResponseOf(activePlaylistTagsFixtures)
   }),
-  http.get(
-    `${BACKEND_BASE_URL}/institutional/playlist/Livre%20avec%20EAN`,
-    () => {
-      return jsonResponseOf(playlistOffersFixtures)
-    }
-  ),
+  http.get(`${BACKEND_BASE_URL}/institutional/playlist/test`, () => {
+    return jsonResponseOf(playlistOffersFixtures)
+  }),
 ]
