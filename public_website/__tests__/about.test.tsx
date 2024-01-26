@@ -29,7 +29,7 @@ describe('About page', () => {
   })
 
   it('should render the page with the response of the server', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
+    process.env = { ...process.env, ID_TOKEN: 'dummy_token' }
 
     const { props } = await getStaticProps()
     render(<About {...props} />)

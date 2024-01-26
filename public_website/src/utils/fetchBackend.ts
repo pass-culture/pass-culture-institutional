@@ -1,5 +1,3 @@
-import { playlistOffersFixtures } from '../../__tests__/fixtures'
-
 type HttpResponse<T> = {
   data: T
 }
@@ -7,27 +5,26 @@ type HttpResponse<T> = {
 export async function fetchBackend<T>(path: string) {
   try {
     const requestUrl = `${
-      process.env['BACKEND_API_URL'] ||
-      'https://backend.testing.passculture.team/'
+      process.env['NODE_ENV'] === 'development'
+        ? 'http://dummy_localhost:5001/'
+        : process.env['BACKEND_API_URL']
     }${path}`
     const key = process.env['INSTITUTIONAL_API_KEY']
 
     if (!key || key === 'je_suis_un_jeton_non_devinable') {
-      console.warn(
-        'Environnement variable INSTITUTIONAL_API_KEY not found, getting playlists from dummy data'
+      throw new Error(
+        `Environnement variable INSTITUTIONAL_API_KEY not found, ${requestUrl}`
       )
-      return { data: playlistOffersFixtures }
     }
 
     const mergedOptions = {
       headers: {
-        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${key}`,
       },
     }
 
     const response = await fetch(requestUrl, mergedOptions)
-    // response.json().then((data) => console.log({ data }))
     if (!response.ok) {
       throw new Error(`Server returned a non-OK status: ${response.status}`)
     }
@@ -35,9 +32,8 @@ export async function fetchBackend<T>(path: string) {
     const data: HttpResponse<T> = await response.json()
     return data
   } catch (error) {
-    console.error(
+    throw new Error(
       `Please check if the backend is running and you set all the required tokens. ${error}`
     )
-    return { data: [] }
   }
 }

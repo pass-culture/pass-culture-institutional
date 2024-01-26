@@ -64,6 +64,15 @@ exports[`Home page > should render the active playlist tags 1`] = `
         class="sc-gKAaef cJkFME"
         spaces="2"
       />
+      <ul>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Bons plans du moment
+          </p>
+        </li>
+      </ul>
     </main>
   </div>
 </div>

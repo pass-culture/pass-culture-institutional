@@ -21,7 +21,7 @@ const respondWith = async (
   })
 }
 
-describe('fetchCMS', () => {
+describe('fetchBackend', () => {
   const OLD_ENV = { ...process.env }
 
   it('should fail when not in localhost and no token is found', async () => {

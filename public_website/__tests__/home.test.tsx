@@ -34,8 +34,13 @@ describe('Home page', () => {
     expect(checkbox).toHaveProperty('checked', true)
   })
 
-  it('should render the page with the response of the server', async () => {
-    process.env = { ...process.env, ID_TOKEN: 'your_dummy_token' }
+  it('should render the page with the response of the CMS', async () => {
+    process.env = {
+      ...process.env,
+      ID_TOKEN: 'dummy_token',
+      INSTITUTIONAL_API_KEY: 'dummy_key',
+      BACKEND_API_URL: 'http://dummy_localhost:5001/',
+    }
 
     const { props } = await getStaticProps()
     render(<Home {...props} />)
@@ -48,9 +53,7 @@ describe('Home page', () => {
   })
 
   it('should render the active playlist tags', async () => {
-    const { container } = render(
-      <Home activePlaylistTags={activePlaylistTagsFixtures} />
-    )
+    const { container } = render(<Home tags={activePlaylistTagsFixtures} />)
 
     await waitForDataToBeLoadedAndRendered()
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 
+import { playlistOffersFixtures } from '../../__tests__/fixtures'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
@@ -38,7 +39,12 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
           Get started by editing
           <CodeTag>pages/index.tsx</CodeTag>
         </Typo.Body>
-
+        {/* <Image
+          src="https://storage.googleapis.com/passculture-metier-ehp-testing-assets-fine-grained/thumbs/mediations/LE"
+          alt="image"
+          width={200}
+          height={300}
+        /> */}
         <Spacer.Vertical spaces={2} />
         <div>
           <input
@@ -77,14 +83,16 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
 export async function getStaticProps() {
   const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
   const tags = tagsResponse.data
-  const playlistResponse = await fetchBackend(
-    // `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
-    `institutional/playlist/Livre%20avec%20EAN`
-  )
+  const playlistResponse =
+    process.env['NODE_ENV'] === 'development'
+      ? playlistOffersFixtures
+      : await fetchBackend<Offer[]>(
+          `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
+        )
   return {
     props: {
       tags: tags || null,
-      playlist: playlistResponse || null,
+      playlist: playlistResponse.data || null,
       // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
