@@ -7,6 +7,9 @@ updates:
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore:"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     reviewers:
       - "Lucasbeneston"
 
@@ -17,6 +20,9 @@ updates:
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore:"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     reviewers:
       - "Lucasbeneston"
 
@@ -27,6 +33,9 @@ updates:
     open-pull-requests-limit: 3
     commit-message:
       prefix: "chore:"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     reviewers:
       - "Lucasbeneston"
 
@@ -37,5 +46,8 @@ updates:
       interval: "daily"
     commit-message:
       prefix: "chore:"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
     reviewers:
       - "Lucasbeneston"
