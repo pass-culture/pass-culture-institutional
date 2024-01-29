@@ -1,5 +1,5 @@
-import { Playlist, Tag } from '@/pages'
 import { RestaurantData } from '@/pages/about'
+import { Playlist, Tag } from '@/types/playlist'
 
 export const testDataFixtures = { message: 'Hello World!' }
 

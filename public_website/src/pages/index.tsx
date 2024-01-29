@@ -95,7 +95,7 @@ export async function getStaticProps() {
   return {
     props: {
       tags: tags || null,
-      playlist: playlistResponse.data || null,
+      playlist: playlistResponse?.data || null,
       // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
