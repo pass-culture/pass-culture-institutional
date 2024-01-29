@@ -21,7 +21,6 @@ type HomeProps = {
 }
 
 export default function Home({ tags, playlist }: Readonly<HomeProps>) {
-  console.log('playlist', playlist)
   return (
     <PageContainer>
       <Head>
