@@ -71,7 +71,7 @@ describe('Home page', () => {
     const { container } = render(
       <Home
         tags={activePlaylistTagsFixtures}
-        playlist={playlistOffersFixtures}
+        playlist={playlistOffersFixtures.data}
       />
     )
 

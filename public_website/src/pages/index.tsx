@@ -17,10 +17,11 @@ const CHECKBOX_ID = 'acceptTerms'
 
 type HomeProps = {
   tags?: Tag[]
-  playlist?: { data: { data: Offer[] } }
+  playlist?: Offer[]
 }
 
 export default function Home({ tags, playlist }: Readonly<HomeProps>) {
+  console.log('playlist', playlist)
   return (
     <PageContainer>
       <Head>
@@ -60,9 +61,9 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
             ))}
           </ul>
         ) : null}
-        {playlist && playlist?.data.length > 0 ? (
+        {playlist && playlist?.length > 0 ? (
           <ul>
-            {playlist.data.map((offer: Offer) => (
+            {playlist.map((offer: Offer) => (
               <li key={offer.id}>
                 <Typo.Body>{offer.name}</Typo.Body>
                 <Typo.Body>{offer.stocks[0]?.price}</Typo.Body>
@@ -87,19 +88,14 @@ export async function getStaticProps() {
   const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
   const tags = tagsResponse.data
   const firstTag = tags[0] ? tags[0].attributes.tag : ''
-  // TODO: remove "as unknown as { data: Offer[] }"
-  const playlistOffersWithImagesFixturesFixed = (
-    playlistOffersWithImagesFixtures.data as unknown as { data: Offer[] }
-  ).data
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
-      ? playlistOffersWithImagesFixturesFixed
+      ? playlistOffersWithImagesFixtures
       : await fetchBackend<Offer[]>(`institutional/playlist/${firstTag}`)
-
   return {
     props: {
       tags: tags || null,
-      playlist: playlistResponse || null,
+      playlist: playlistResponse.data || null,
       // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
