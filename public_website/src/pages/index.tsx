@@ -17,7 +17,7 @@ const CHECKBOX_ID = 'acceptTerms'
 
 type HomeProps = {
   tags?: Tag[]
-  playlist?: { data: Offer[] }
+  playlist?: { data: { data: Offer[] } }
 }
 
 export default function Home({ tags, playlist }: Readonly<HomeProps>) {
@@ -87,10 +87,15 @@ export async function getStaticProps() {
   const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
   const tags = tagsResponse.data
   const firstTag = tags[0] ? tags[0].attributes.tag : ''
+  // TODO: remove "as unknown as { data: Offer[] }"
+  const playlistOffersWithImagesFixturesFixed = (
+    playlistOffersWithImagesFixtures.data as unknown as { data: Offer[] }
+  ).data
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
-      ? playlistOffersWithImagesFixtures.data.data
+      ? playlistOffersWithImagesFixturesFixed
       : await fetchBackend<Offer[]>(`institutional/playlist/${firstTag}`)
+
   return {
     props: {
       tags: tags || null,
