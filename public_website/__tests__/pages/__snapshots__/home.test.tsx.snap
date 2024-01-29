@@ -142,6 +142,248 @@ exports[`Home page > should render the tags & playlist 1`] = `
           </p>
         </li>
       </ul>
+      <ul>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 1 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            500
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 2 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            600
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 3 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            700
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 4 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            800
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 1 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            500
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 2 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            600
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 3 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            700
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 4 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            800
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 1 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            500
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 2 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            600
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 3 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            700
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 4 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            800
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 1 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            500
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 2 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            600
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 3 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            700
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 4 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            800
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 1 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            500
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 2 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            600
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 3 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            700
+          </p>
+        </li>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Livre 4 avec EAN
+          </p>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            800
+          </p>
+        </li>
+      </ul>
     </main>
   </div>
 </div>
