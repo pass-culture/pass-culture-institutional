@@ -86,12 +86,11 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
 export async function getStaticProps() {
   const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
   const tags = tagsResponse.data
+  const firstTag = tags[0] ? tags[0].attributes.tag : ''
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
       ? playlistOffersWithImagesFixtures.data
-      : await fetchBackend<Offer[]>(
-          `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
-        )
+      : await fetchBackend<Offer[]>(`institutional/playlist/${firstTag}`)
   return {
     props: {
       tags: tags || null,
