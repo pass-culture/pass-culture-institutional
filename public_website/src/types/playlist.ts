@@ -31,7 +31,3 @@ export type Offer = {
   image: OfferImage | null
   stocks: Stock[]
 }
-
-export type Playlist = {
-  data: Offer[]
-}

@@ -9,7 +9,6 @@ import {
 
 const CMS_BASE_URL = 'http://localhost:1337'
 const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
-// http://localhost:5001/institutional/playlist/tag_example
 const jsonResponseOf = <T>(data: T) => HttpResponse.json({ data })
 
 export const handlers = [
@@ -23,12 +22,12 @@ export const handlers = [
     return jsonResponseOf(activePlaylistTagsFixtures)
   }),
   http.get(`${BACKEND_BASE_URL}/institutional/playlist/test`, () => {
-    return jsonResponseOf(playlistOffersFixtures)
+    return HttpResponse.json(playlistOffersFixtures)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
     () => {
-      return jsonResponseOf(playlistOffersFixtures)
+      return HttpResponse.json(playlistOffersFixtures)
     }
   ),
 ]

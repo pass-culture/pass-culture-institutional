@@ -47,7 +47,7 @@ describe('fetchBackend', () => {
     it('should pass', async () => {
       const response = await fetchBackend('institutional/playlist/test')
 
-      expect(response.data).toMatchObject(playlistOffersFixtures)
+      expect(response).toMatchObject(playlistOffersFixtures)
     })
 
     it('should fail if response is not ok', async () => {

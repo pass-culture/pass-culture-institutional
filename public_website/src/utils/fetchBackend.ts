@@ -1,12 +1,7 @@
-type HttpResponse<T> = {
-  data: T
-}
-
-export async function fetchBackend<T>(path: string) {
+export async function fetchBackend(path: string) {
   try {
     const requestUrl = `${process.env['BACKEND_API_URL']}${path}`
     const key = process.env['INSTITUTIONAL_API_KEY']
-
     if (!key) {
       throw new Error(
         `Environnement variable INSTITUTIONAL_API_KEY not found, ${requestUrl}`
@@ -25,7 +20,7 @@ export async function fetchBackend<T>(path: string) {
       throw new Error(`Server returned a non-OK status: ${response.status}`)
     }
 
-    const data: HttpResponse<T> = await response.json()
+    const data = await response.json()
     return data
   } catch (error) {
     throw new Error(

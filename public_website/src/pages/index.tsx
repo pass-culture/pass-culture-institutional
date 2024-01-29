@@ -75,17 +75,14 @@ export async function getStaticProps() {
   const tags = tagsResponse.data
   const firstTag = tags[0]
   const playlistResponse =
-    process.env['NODE_ENV'] === 'development' ||
-    process.env['NODE_ENV'] === 'test'
+    process.env['NODE_ENV'] === 'development'
       ? playlistOffersFixtures
-      : await fetchBackend<Offer[]>(
-          `institutional/playlist/${firstTag?.attributes.tag}`
-        )
+      : await fetchBackend(`institutional/playlist/${firstTag?.attributes.tag}`)
 
   return {
     props: {
       playlistName: firstTag?.attributes.displayName,
-      playlist: playlistResponse?.data,
+      playlist: playlistResponse,
     },
   }
 }
