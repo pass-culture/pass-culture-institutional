@@ -67,8 +67,13 @@ describe('Home page', () => {
     ).toBeTruthy()
   })
 
-  it('should render the active playlist tags', async () => {
-    const { container } = render(<Home tags={activePlaylistTagsFixtures} />)
+  it('should render the tags & playlist', async () => {
+    const { container } = render(
+      <Home
+        tags={activePlaylistTagsFixtures}
+        playlist={playlistOffersFixtures}
+      />
+    )
 
     await waitForDataToBeLoadedAndRendered()
 
