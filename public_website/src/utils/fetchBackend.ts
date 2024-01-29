@@ -4,11 +4,7 @@ type HttpResponse<T> = {
 
 export async function fetchBackend<T>(path: string) {
   try {
-    const requestUrl = `${
-      process.env['NODE_ENV'] === 'development'
-        ? 'http://dummy_localhost:5001/'
-        : process.env['BACKEND_API_URL']
-    }${path}`
+    const requestUrl = `${process.env['BACKEND_API_URL']}${path}`
     const key = process.env['INSTITUTIONAL_API_KEY']
 
     if (!key) {

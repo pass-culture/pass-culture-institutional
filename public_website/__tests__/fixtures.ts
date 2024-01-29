@@ -1,4 +1,4 @@
-import { Offer, Tag } from '@/pages'
+import { Playlist, Tag } from '@/pages'
 import { RestaurantData } from '@/pages/about'
 
 export const testDataFixtures = { message: 'Hello World!' }
@@ -29,10 +29,6 @@ export const activePlaylistTagsFixtures: Tag[] = [
     id: 45,
   },
 ]
-
-type Playlist = {
-  data: Offer[]
-}
 
 export const playlistOffersWithImagesFixtures: Playlist = {
   data: [

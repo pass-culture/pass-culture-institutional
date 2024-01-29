@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { playlistOffersWithImagesFixtures } from '../../__tests__/fixtures'
+import { Offer, Tag } from '@/types/playlist'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { ExternalLink } from '@/ui/components/links/ExternalLink'
@@ -98,38 +99,4 @@ export async function getStaticProps() {
       // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
-}
-
-export type Tag = {
-  attributes: {
-    tag: string
-    displayName: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
-  id: number
-}
-
-type Venue = {
-  id: number
-  commonName: string
-}
-
-type OfferImage = {
-  credit: string
-  url: string
-}
-
-type Stock = {
-  id: number
-  price: number
-}
-
-export type Offer = {
-  id: number
-  name: string
-  venue: Venue
-  image: OfferImage | null
-  stocks: Stock[]
 }
