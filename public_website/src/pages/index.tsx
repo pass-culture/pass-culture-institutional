@@ -89,12 +89,12 @@ export async function getStaticProps() {
   const firstTag = tags[0] ? tags[0].attributes.tag : ''
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
-      ? playlistOffersWithImagesFixtures.data
+      ? playlistOffersWithImagesFixtures.data.data
       : await fetchBackend<Offer[]>(`institutional/playlist/${firstTag}`)
   return {
     props: {
       tags: tags || null,
-      playlist: playlistResponse.data || null,
+      playlist: playlistResponse || null,
       // "|| null" to avoid: "undefined cannot be serialized as JSON." https://github.com/vercel/next.js/discussions/11209
     },
   }
