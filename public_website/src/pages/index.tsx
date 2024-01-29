@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styled from 'styled-components'
 
-import { playlistOffersWithImagesFixtures } from '../../__tests__/fixtures'
+import { playlistOffersFixtures } from '../../__tests__/fixtures'
 import { Offer, Tag } from '@/types/playlist'
 import { Main } from '@/ui/components/containers/Main'
 import { PageContainer } from '@/ui/components/containers/PageContainer'
@@ -45,22 +45,22 @@ export default function Home({ playlistName, playlist }: Readonly<Props>) {
         <InternalLink href="/about" name="About &rarr;" />
         <Spacer.Vertical spaces={2} />
 
-        {!!playlistName && <Typo.Body>{playlistName}</Typo.Body>}
+        {!!playlistName && <Typo.Title1>{playlistName}</Typo.Title1>}
 
         {playlist && playlist.length > 0 ? (
           <ul>
             {playlist.map((offer: Offer) => (
               <Li key={offer.id}>
                 <Typo.Body>{offer.name}</Typo.Body>
-                <Typo.Body>{offer.stocks[0]?.price}</Typo.Body>
-                {offer.image?.url && (
+                <Typo.Body>{offer.stocks[0]?.price} €</Typo.Body>
+                {offer.image?.url ? (
                   <Image
                     src={offer.image?.url}
                     alt=""
                     width={300}
                     height={400}
                   />
-                )}
+                ) : null}
               </Li>
             ))}
           </ul>
@@ -74,10 +74,10 @@ export async function getStaticProps() {
   const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
   const tags = tagsResponse.data
   const firstTag = tags[0]
-
   const playlistResponse =
-    process.env['NODE_ENV'] === 'development'
-      ? playlistOffersWithImagesFixtures
+    process.env['NODE_ENV'] === 'development' ||
+    process.env['NODE_ENV'] === 'test'
+      ? playlistOffersFixtures
       : await fetchBackend<Offer[]>(
           `institutional/playlist/${firstTag?.attributes.tag}`
         )

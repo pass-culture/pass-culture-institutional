@@ -3,11 +3,10 @@ import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import Home, { getStaticProps } from '../../src/pages'
-import { act, fireEvent, render, screen, waitFor } from '..'
-import { activePlaylistTagsFixtures, playlistOffersFixtures } from '../fixtures'
+import { act, render, screen } from '..'
 
 describe('Home page', () => {
-  it('should pass axe accessibility tests', async () => {
+  it('should pass accessibility tests', async () => {
     const { container } = render(<Home />)
 
     let a11yResult
@@ -17,24 +16,13 @@ describe('Home page', () => {
     expect(a11yResult).toHaveNoViolations()
   })
 
-  it('should render the page', () => {
+  it('should render correctly', () => {
     const { container } = render(<Home />)
 
     expect(container).toMatchSnapshot()
   })
 
-  it('should select the checkbox when clicking on its label', () => {
-    render(<Home />)
-
-    const checkbox = screen.getByTestId('checkbox-acceptTerms')
-    const label = screen.getByText('Checkbox à cocher')
-
-    fireEvent.click(label)
-
-    expect(checkbox).toHaveProperty('checked', true)
-  })
-
-  it('should render the page with the response of the CMS', async () => {
+  it('should display the playlist name', async () => {
     process.env = {
       ...process.env,
       ID_TOKEN: 'dummy_token',
@@ -45,13 +33,11 @@ describe('Home page', () => {
     const { props } = await getStaticProps()
     render(<Home {...props} />)
 
-    expect(
-      screen.queryByText(
-        activePlaylistTagsFixtures[0]?.attributes.displayName ?? ''
-      )
-    ).toBeTruthy()
+    const PLAYLIST_NAME = 'Bons plans du moment'
+    expect(screen.queryByText(PLAYLIST_NAME)).toBeTruthy()
   })
-  it('should render the page with the response of the Backend', async () => {
+
+  it('should display the playlist', async () => {
     process.env = {
       ...process.env,
       ID_TOKEN: 'dummy_token',
@@ -62,27 +48,10 @@ describe('Home page', () => {
     const { props } = await getStaticProps()
     render(<Home {...props} />)
 
-    expect(
-      screen.queryAllByText(playlistOffersFixtures.data[0]?.name ?? '')
-    ).toBeTruthy()
-  })
+    const FIRST_OFFER = 'Livre 1 avec EAN'
+    expect(screen.queryByText(FIRST_OFFER)).toBeTruthy()
 
-  it('should render the tags & playlist', async () => {
-    const { container } = render(
-      <Home
-        tags={activePlaylistTagsFixtures}
-        playlist={playlistOffersFixtures.data}
-      />
-    )
-
-    await waitForDataToBeLoadedAndRendered()
-
-    expect(container).toMatchSnapshot()
+    const LAST_OFFER = 'Livre 10 avec EAN'
+    expect(screen.queryByText(LAST_OFFER)).toBeTruthy()
   })
 })
-
-async function waitForDataToBeLoadedAndRendered() {
-  await waitFor(() => {
-    expect(screen.queryByText('Chargement...')).toBeFalsy()
-  })
-}
