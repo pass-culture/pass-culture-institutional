@@ -25,4 +25,10 @@ export const handlers = [
   http.get(`${BACKEND_BASE_URL}/institutional/playlist/test`, () => {
     return jsonResponseOf(playlistOffersFixtures)
   }),
+  http.get(
+    `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
+    () => {
+      return jsonResponseOf(playlistOffersFixtures)
+    }
+  ),
 ]

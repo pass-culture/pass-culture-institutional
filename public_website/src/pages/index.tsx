@@ -17,7 +17,7 @@ const CHECKBOX_ID = 'acceptTerms'
 
 type HomeProps = {
   tags?: Tag[]
-  playlist?: Offer[]
+  playlist?: { data: Offer[] }
 }
 
 export default function Home({ tags, playlist }: Readonly<HomeProps>) {
@@ -60,9 +60,9 @@ export default function Home({ tags, playlist }: Readonly<HomeProps>) {
             ))}
           </ul>
         ) : null}
-        {playlist && playlist?.length > 0 ? (
+        {playlist && playlist?.data.length > 0 ? (
           <ul>
-            {playlist.map((offer: Offer) => (
+            {playlist.data.map((offer: Offer) => (
               <li key={offer.id}>
                 <Typo.Body>{offer.name}</Typo.Body>
                 <Typo.Body>{offer.stocks[0]?.price}</Typo.Body>
@@ -88,7 +88,7 @@ export async function getStaticProps() {
   const tags = tagsResponse.data
   const playlistResponse =
     process.env['NODE_ENV'] === 'development'
-      ? playlistOffersWithImagesFixtures
+      ? playlistOffersWithImagesFixtures.data
       : await fetchBackend<Offer[]>(
           `institutional/playlist/${tags[0] ? tags[0].attributes.tag : ''}`
         )
