@@ -1,0 +1,148 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home page > should render the active playlist tags 1`] = `
+<div>
+  <div
+    class="sc-gtsqUy dWOEAx"
+  >
+    <main
+      class="sc-bdnyFh cOrhoO"
+    >
+      <h1
+        class="sc-pNWRh djejpM"
+      >
+        Welcome to
+         
+        <a
+          class="sc-dlniIP LWZKO"
+          href="https://nextjs.org"
+        >
+          Next.js!
+        </a>
+      </h1>
+      <p
+        class="sc-jrsKJM eHsNYH"
+      >
+        Get started by editing
+        <code
+          class="sc-fujznN SvhJn"
+        >
+          pages/index.tsx
+        </code>
+      </p>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
+      <div>
+        <input
+          data-testid="checkbox-acceptTerms"
+          id="acceptTerms"
+          type="checkbox"
+        />
+        <label
+          for="acceptTerms"
+        >
+          Checkbox à cocher
+        </label>
+      </div>
+      <div
+        class="sc-hKFymg jLSsZz"
+      >
+        <div
+          class="sc-eCAqax blQmze"
+        >
+          <a
+            class="sc-jSFipO fkzsOZ"
+            href="/about"
+          >
+            About →
+          </a>
+        </div>
+      </div>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
+      <ul>
+        <li>
+          <p
+            class="sc-jrsKJM eHsNYH"
+          >
+            Bons plans du moment
+          </p>
+        </li>
+      </ul>
+    </main>
+  </div>
+</div>
+`;
+
+exports[`Home page > should render the page 1`] = `
+<div>
+  <div
+    class="sc-gtsqUy dWOEAx"
+  >
+    <main
+      class="sc-bdnyFh cOrhoO"
+    >
+      <h1
+        class="sc-pNWRh djejpM"
+      >
+        Welcome to
+         
+        <a
+          class="sc-dlniIP LWZKO"
+          href="https://nextjs.org"
+        >
+          Next.js!
+        </a>
+      </h1>
+      <p
+        class="sc-jrsKJM eHsNYH"
+      >
+        Get started by editing
+        <code
+          class="sc-fujznN SvhJn"
+        >
+          pages/index.tsx
+        </code>
+      </p>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
+      <div>
+        <input
+          data-testid="checkbox-acceptTerms"
+          id="acceptTerms"
+          type="checkbox"
+        />
+        <label
+          for="acceptTerms"
+        >
+          Checkbox à cocher
+        </label>
+      </div>
+      <div
+        class="sc-hKFymg jLSsZz"
+      >
+        <div
+          class="sc-eCAqax blQmze"
+        >
+          <a
+            class="sc-jSFipO fkzsOZ"
+            href="/about"
+          >
+            About →
+          </a>
+        </div>
+      </div>
+      <div
+        class="sc-gKAaef cJkFME"
+        spaces="2"
+      />
+    </main>
+  </div>
+</div>
+`;

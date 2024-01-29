@@ -2,9 +2,9 @@ import React from 'react'
 import { describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import About, { getStaticProps } from '../src/pages/about'
-import { act, render, screen, waitFor } from '.'
-import { restaurantDataFixtures } from './fixtures'
+import About, { getStaticProps } from '../../src/pages/about'
+import { act, render, screen, waitFor } from '..'
+import { restaurantDataFixtures } from '../fixtures'
 
 describe('About page', () => {
   it('should pass axe accessibility tests', async () => {

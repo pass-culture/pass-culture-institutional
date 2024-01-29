@@ -1,8 +1,8 @@
 import { http, HttpHandler } from 'msw'
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { testDataFixtures } from './fixtures'
-import { server } from './server'
+import { testDataFixtures } from '../fixtures'
+import { server } from '../server'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 const respondWith = async (

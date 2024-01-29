@@ -1,8 +1,8 @@
 import { http, HttpHandler } from 'msw'
 import { beforeAll, describe, expect, it } from 'vitest'
 
-import { playlistOffersFixtures } from './fixtures'
-import { server } from './server'
+import { playlistOffersFixtures } from '../fixtures'
+import { server } from '../server'
 import { fetchBackend } from '@/utils/fetchBackend'
 
 const respondWith = async (
