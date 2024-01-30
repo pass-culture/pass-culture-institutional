@@ -20,10 +20,9 @@ const respondWith = async (
     statusText,
   })
 }
+const OLD_ENV = { ...process.env }
 
 describe('fetchCMS', () => {
-  const OLD_ENV = { ...process.env }
-
   it('should fail when not in localhost and no token is found', async () => {
     process.env = {
       ...OLD_ENV,

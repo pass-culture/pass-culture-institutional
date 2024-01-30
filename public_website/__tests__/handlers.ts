@@ -21,9 +21,6 @@ export const handlers = [
   http.get(`${CMS_BASE_URL}/api/active-playlist-tags`, () => {
     return jsonResponseOf(activePlaylistTagsFixtures)
   }),
-  http.get(`${BACKEND_BASE_URL}/institutional/playlist/test`, () => {
-    return HttpResponse.json(playlistOffersFixtures)
-  }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
     () => {
