@@ -4,7 +4,7 @@ type HttpResponse<T> = {
   data: T
 }
 
-export async function fetchAPI<T>(path: string) {
+export async function fetchCMS<T>(path: string) {
   try {
     const apiPath = `/api${path}`
     const requestUrl = `${getStrapiURL(apiPath)}`

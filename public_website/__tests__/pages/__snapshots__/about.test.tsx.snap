@@ -3,7 +3,7 @@
 exports[`About page > should render the page 1`] = `
 <div>
   <div
-    class="sc-gtsqUy qFqbA"
+    class="sc-gtsqUy dWOEAx"
   >
     <main
       class="sc-bdnyFh cOrhoO"
@@ -45,7 +45,7 @@ exports[`About page > should render the page 1`] = `
 exports[`About page > should render the page with restaurants 1`] = `
 <div>
   <div
-    class="sc-gtsqUy qFqbA"
+    class="sc-gtsqUy dWOEAx"
   >
     <main
       class="sc-bdnyFh cOrhoO"

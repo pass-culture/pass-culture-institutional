@@ -5,7 +5,7 @@ import { PageContainer } from '@/ui/components/containers/PageContainer'
 import { InternalLink } from '@/ui/components/links/InternalLink'
 import { CodeTag } from '@/ui/components/tags/CodeTag'
 import { Typo } from '@/ui/components/typographies'
-import { fetchAPI } from '@/utils/fetchAPI'
+import { fetchCMS } from '@/utils/fetchCMS'
 
 export type RestaurantData = {
   attributes: {
@@ -49,7 +49,7 @@ export default function About({ restaurants }: Readonly<Props>) {
 }
 
 export async function getStaticProps() {
-  const response = await fetchAPI<RestaurantData[]>('/restaurants')
+  const response = await fetchCMS<RestaurantData[]>('/restaurants')
   return {
     props: {
       restaurants: response.data,
