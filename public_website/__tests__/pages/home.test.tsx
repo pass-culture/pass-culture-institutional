@@ -10,7 +10,6 @@ describe('Home page', () => {
     process.env = {
       ...process.env,
       ID_TOKEN: 'dummy_token',
-      INSTITUTIONAL_API_KEY: 'dummy_key',
       BACKEND_API_URL: 'http://dummy_localhost:5001/',
     }
   })

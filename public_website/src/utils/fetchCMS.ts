@@ -10,7 +10,11 @@ export async function fetchCMS<T>(path: string) {
     const requestUrl = `${getStrapiURL(apiPath)}`
     const token = process.env['ID_TOKEN']
 
-    if (!requestUrl.includes('localhost') && !token) {
+    if (
+      !requestUrl.includes('localhost') &&
+      !requestUrl.includes('testing') &&
+      !token
+    ) {
       throw new Error('Environnement variable ID_TOKEN not found')
     }
 
@@ -32,7 +36,6 @@ export async function fetchCMS<T>(path: string) {
       const data: HttpResponse<T> = await response.json()
       return data
     } else {
-      // Handle non-JSON responses (e.g., display an error message)
       throw new Error(
         `Unexpected response. Content type received: ${contentType}`
       )

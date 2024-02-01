@@ -24,49 +24,33 @@ const respondWith = async (
 describe('fetchBackend', () => {
   const OLD_ENV = { ...process.env }
 
-  it('should fail when no key is found', async () => {
+  beforeAll(() => {
     process.env = {
       ...OLD_ENV,
       BACKEND_API_URL: 'http://dummy_localhost:5001/',
     }
+  })
+
+  it('should pass', async () => {
+    const response = await fetchBackend(
+      'institutional/playlist/Bons_plans_du_moment'
+    )
+
+    expect(response).toMatchObject(playlistOffersFixtures)
+  })
+
+  it('should fail if response is not ok', async () => {
+    const statusCode = 500
+    const responseResolver: HttpHandler = http.get(
+      'http://dummy_localhost:5001/institutional/playlist/Bons_plans_du_moment',
+      () => respondWith({}, statusCode)
+    )
+    server.use(responseResolver)
 
     await expect(
       fetchBackend('institutional/playlist/Bons_plans_du_moment')
     ).rejects.toThrow(
-      'Please check if the backend is running and you set all the required tokens. Error: Environnement variable INSTITUTIONAL_API_KEY not found, http://dummy_localhost:5001/institutional/playlist/Bons_plans_du_moment'
+      `Please check if the backend is running and you set all the required tokens. Error: Server returned a non-OK status: ${statusCode}`
     )
-  })
-
-  describe('when key exists', () => {
-    beforeAll(() => {
-      process.env = {
-        ...OLD_ENV,
-        BACKEND_API_URL: 'http://dummy_localhost:5001/',
-        INSTITUTIONAL_API_KEY: 'dummy_key',
-      }
-    })
-
-    it('should pass', async () => {
-      const response = await fetchBackend(
-        'institutional/playlist/Bons_plans_du_moment'
-      )
-
-      expect(response).toMatchObject(playlistOffersFixtures)
-    })
-
-    it('should fail if response is not ok', async () => {
-      const statusCode = 500
-      const responseResolver: HttpHandler = http.get(
-        'http://dummy_localhost:5001/institutional/playlist/Bons_plans_du_moment',
-        () => respondWith({}, statusCode)
-      )
-      server.use(responseResolver)
-
-      await expect(
-        fetchBackend('institutional/playlist/Bons_plans_du_moment')
-      ).rejects.toThrow(
-        `Please check if the backend is running and you set all the required tokens. Error: Server returned a non-OK status: ${statusCode}`
-      )
-    })
   })
 })
