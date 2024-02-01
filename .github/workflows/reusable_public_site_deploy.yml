@@ -14,6 +14,10 @@ on:
         type: string
         description: URL where Strapi is available to generate the static website
         required: true
+      backend_url:
+        type: string
+        description: Pass culture backend URL to fetch playlists from
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -71,6 +75,7 @@ jobs:
         working-directory: public_website
         env:
           STRAPI_API_URL: ${{ inputs.cms_url }}
+          BACKEND_API_URL: ${{ inputs.backend_url }}
           ID_TOKEN: ${{ steps.auth.outputs.id_token }}
         run: |
           yarn install
