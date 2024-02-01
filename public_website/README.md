@@ -4,13 +4,11 @@
 
 You will find a template for the environnement variables under `public_website/.env.example`. Duplicate and rename the file `.env`. For running in a local development environnement, you should set `STRAPI_API_URL` to the port Strapi is running on, for example: `http://localhost:1337`.
 
-At the moment, it is not possible to create a build for the website with a non-local instance of the Content Management System. To build locally you must have the CMS running on your own machine.
-
-If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the testing version: `https://siteinstit-cms.testing.passculture.team`), the token the Public Website needs to access the CMS (Google IAP protected) that is usually provided by the CI will not be found by Next.
+If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the staging version: `https://siteinstit-cms.staging.passculture.team`), the token the Public Website needs to access the CMS (Google IAP protected) that is usually provided by the CI will not be found by Next. To facilitate development, the token is not required in the testing environnement of the CMS. If you set `STRAPI_API_URL` to `https://siteinstit-cms.staging.passculture.team` you don't have to set `ID_TOKEN`.
 
 > Usually, to access environment variables in the browser, they have to be prefixed by `NEXT_PUBLIC_`. In our case, we only need `STRAPI_API_URL` to be available in the Node.js environment.
 
-There are also 2 environment variables that are used to build the playlists. Since `INSTITUTIONAL_API_KEY` is only available in our CI for security reasons. In consequence, it is not possible locally to get the playlists from our backend. We have included dummy playlist data directly in Next for local development.
+There is also an environment variable that is used to build the playlists. Set `BACKEND_API_URL` to `https://backend.testing.passculture.team/`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
 
 ## Start the Public Website
 
@@ -27,7 +25,7 @@ yarn dev
 By default, Next.js will take into account any file ending with tsx, ts, jsx or js under the pages folder for the purpose of building pages/API routes and routing.
 
 We follow Jest's convention by adding tests to the **tests** folder in the project's root directory.
-It is not possible to have the test files along side the page files or the build will fail.
+We have not found an easy way to have the test files along side the page files (the build will fails if tests are included in the `src`).
 
 ## Project Scripts
 

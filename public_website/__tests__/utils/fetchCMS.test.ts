@@ -23,10 +23,10 @@ const respondWith = async (
 const OLD_ENV = { ...process.env }
 
 describe('fetchCMS', () => {
-  it('should fail when not in localhost and no token is found', async () => {
+  it('should fail when not in localhost/testing and no token is found', async () => {
     process.env = {
       ...OLD_ENV,
-      STRAPI_API_URL: 'https://siteinstit-cms.testing.passculture.team',
+      STRAPI_API_URL: 'https://siteinstit-cms.staging.passculture.team',
     }
 
     await expect(fetchCMS('/test')).rejects.toThrow(

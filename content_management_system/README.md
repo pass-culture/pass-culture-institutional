@@ -1,5 +1,7 @@
 # pass Culture Institutional content management system
 
+You can run Strapi locally, or simply use the instance of Strapi on our testing server (cf [setting environment variables for Next](../public_website/README.md#configure-environment-variables)).
+
 ## Install and configure Postgres
 
 There is a Docker file `docker-compose.yaml` at the root of the project that will create a container for the CMS and another container for Postgres.

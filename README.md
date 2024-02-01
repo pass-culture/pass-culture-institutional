@@ -55,8 +55,8 @@ The project includes several scripts to simplify development and setup:
 - `yarn audit:all`: Test all the vulnerabilities packages.
 - `yarn test:deadcode`: Test both public_website and content_management_system dead code.
 - `yarn test:deadcode:update`: Update the public_website and content_management_system dead code snapshots.
-- `yarn test:lint:` Test both public_website and content_management_system linting.
-- `yarn test:types:` Test both public_website and content_management_system typing.
+- `yarn test:lint`: Test both public_website and content_management_system linting.
+- `yarn test:types`: Test both public_website and content_management_system typing.
 
 ## Testing
 

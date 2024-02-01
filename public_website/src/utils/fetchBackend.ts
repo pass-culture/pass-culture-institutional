@@ -1,17 +1,10 @@
 export async function fetchBackend(path: string) {
   try {
     const requestUrl = `${process.env['BACKEND_API_URL']}${path}`
-    const key = process.env['INSTITUTIONAL_API_KEY']
-    if (!key) {
-      throw new Error(
-        `Environnement variable INSTITUTIONAL_API_KEY not found, ${requestUrl}`
-      )
-    }
 
     const mergedOptions = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`,
       },
     }
 
