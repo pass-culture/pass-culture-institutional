@@ -135,12 +135,14 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --fs-14: 0.875rem;
     --fs-15: 0.9375rem;
+
+    --c-hard-blue: #320096;
   }
 
 
   /* Custom */
   body {
-    line-height: 1.5rem;;
+    line-height: 1.5rem;
   }
 
   a {

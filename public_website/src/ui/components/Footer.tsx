@@ -77,15 +77,14 @@ const LegalLinks = [
 
 export const Footer = () => {
   return (
-    <StyledFooter className="footer">
+    <StyledFooter>
       <div className="content">
         <div className="top">
           <div className="logos">
+            {/* TODO: replace with real images */}
             <img src="#" alt="pouet" />
-            {/* <Image src="#" width="50" alt="Pass Culture"></Image> */}
             <img src="#" alt="pouet" />
             <img src="#" alt="pouet" className="download" />
-            {/* <Image src="#" width="50" alt="Gouvernement"></Image> */}
           </div>
           <div className="lists">
             {FooterListContent.map((list, i) => (
@@ -176,6 +175,7 @@ const StyledFooter = styled.footer`
     justify-content: center;
     flex-wrap: wrap;
     font-size: var(--fs-14);
+    font-weight: 600;
 
     a:hover {
       text-decoration: underline;
@@ -199,40 +199,41 @@ type ListProps = {
 
 const FooterList = ({ title, listItems }: ListProps) => {
   return (
-    <div>
-      <StyledListHeading>{title}</StyledListHeading>
+    <StyledFooterList>
+      <h3>{title}</h3>
       <ul>
         {listItems.map((el, i) => {
           return (
-            <StyledListItem key={i}>
+            <li key={i}>
               <a href={el.href}>{el.label}</a>
-            </StyledListItem>
+            </li>
           )
         })}
       </ul>
-    </div>
+    </StyledFooterList>
   )
 }
 
-const StyledListItem = styled.li`
-  color: #000000;
-  font-size: 1rem;
-  font-family: sans-serif;
-
-  &:not(:last-child) {
+const StyledFooterList = styled.div`
+  h3 {
+    color: var(--c-hard-blue);
+    text-transform: uppercase;
+    font-size: 0.875rem;
     margin-bottom: 1rem;
+    font-weight: 700;
   }
 
-  a:hover {
-    text-decoration: underline;
+  li {
+    color: #000000;
+    font-size: 1rem;
+    font-weight: 600;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 `
-
-const StyledListHeading = styled.h3({
-  fontFamily: 'sans-serif',
-  color: '#320096',
-  textTransform: 'uppercase',
-  fontSize: '0.875rem',
-  marginBottom: '1rem',
-  fontWeight: 'bold',
-})
