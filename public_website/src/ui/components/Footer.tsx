@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
+import accordionChevron from '../../../public/images/accordion-chevron.svg'
 import downloadBanner from '../../../public/images/download-banner.svg'
 import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
 import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
@@ -86,26 +87,29 @@ export const Footer = () => {
       <div className="content">
         <div className="top">
           <div className="logos">
-            {/* TODO: replace with real images */}
+            {/* TODO: use real svg */}
             <Image src={logoPassCulture} alt="Pass Culture" />
             <Image
               src={logoGouvernement}
               alt="Gouvernement Français"
               className="governement"
             />
-            <Image
-              src={downloadBanner}
-              alt="Télécharger l'application sur les stores"
-              className="download"
-            />
+            <Link href="#" className="download">
+              <Image
+                src={downloadBanner}
+                alt="Télécharger l'application sur les stores"
+              />
+            </Link>
           </div>
           <div className="lists">
             {FooterListContent.map((list, i) => (
-              <FooterList
-                key={i}
-                title={list.title}
-                listItems={list.listItems}
-              />
+              <React.Fragment key={i}>
+                <FooterList title={list.title} listItems={list.listItems} />
+                <MobileFooterList
+                  title={list.title}
+                  listItems={list.listItems}
+                />
+              </React.Fragment>
             ))}
           </div>
         </div>
@@ -139,16 +143,13 @@ const StyledFooter = styled.footer`
   .top {
     display: grid;
     grid-template-columns: 25rem 1fr;
+    align-items: start;
     gap: 6.25rem;
     margin-bottom: 5rem;
 
-    @media (max-width: 62.5rem) {
-      grid-template-columns: 15rem 1fr;
-      gap: 2rem;
-    }
-
     @media (max-width: 50rem) {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
   }
 
@@ -176,15 +177,11 @@ const StyledFooter = styled.footer`
 
   .lists {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     gap: 4rem;
 
-    @media (max-width: 62.5rem) {
-      gap: 2rem;
-      grid-template-columns: 1fr 1fr;
-    }
-
     @media (max-width: 50rem) {
+      gap: 0;
       grid-template-columns: 1fr;
     }
   }
@@ -204,11 +201,13 @@ const StyledFooter = styled.footer`
     }
 
     @media (max-width: 50rem) {
+      --legal-links-gap: 0.5rem;
+
       justify-content: initial;
-      gap: 0;
+      gap: var(--legal-links-gap);
 
       li {
-        flex-basis: 50%;
+        flex-basis: calc(50% - (var(--legal-links-gap) / 2));
       }
     }
   }
@@ -236,6 +235,26 @@ const FooterList = ({ title, listItems }: ListProps) => {
   )
 }
 
+const MobileFooterList = ({ title, listItems }: ListProps) => {
+  return (
+    <StyledMobileFooterList>
+      <summary>
+        <h3>{title}</h3>
+        <Image src={accordionChevron} alt="" />
+      </summary>
+      <ul>
+        {listItems.map((el, i) => {
+          return (
+            <li key={i}>
+              <a href={el.href}>{el.label}</a>
+            </li>
+          )
+        })}
+      </ul>
+    </StyledMobileFooterList>
+  )
+}
+
 const StyledFooterList = styled.div`
   h3 {
     color: var(--c-hard-blue);
@@ -258,5 +277,52 @@ const StyledFooterList = styled.div`
     a:hover {
       text-decoration: underline;
     }
+  }
+
+  @media (max-width: 50rem) {
+    display: none;
+  }
+`
+
+const StyledMobileFooterList = styled.details`
+  display: none;
+
+  summary {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  h3 {
+    color: #000000;
+    font-size: var(--fs-14);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 1rem 0;
+  }
+
+  summary img {
+    transform: rotate(180deg);
+  }
+
+  &[open] summary img {
+    transform: none;
+  }
+
+  li {
+    color: #000000;
+    opacity: 0.7;
+    font-size: var(--fs-15);
+    font-weight: 600;
+    margin-bottom: 0.875rem;
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 50rem) {
+    display: initial;
   }
 `
