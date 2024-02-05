@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_block_headers",
+  "info": {
+    "displayName": "Header",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "text"
+    },
+    "Surtitle": {
+      "type": "string"
+    }
+  }
+}

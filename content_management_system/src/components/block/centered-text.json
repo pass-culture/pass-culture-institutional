@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_block_centered_texts",
+  "info": {
+    "displayName": "Centered Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Text": {
+      "type": "text"
+    }
+  }
+}
