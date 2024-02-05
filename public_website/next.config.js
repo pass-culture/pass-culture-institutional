@@ -5,7 +5,8 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
     // Remove `data-text*` attributes from production build
-    reactRemoveProperties: true,
+    // Not supported by Turbopack :(
+    // reactRemoveProperties: true,
   },
   images: { unoptimized: true },
 }
