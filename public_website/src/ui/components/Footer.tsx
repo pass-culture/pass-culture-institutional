@@ -1,6 +1,11 @@
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
+
+import downloadBanner from '../../../public/images/download-banner.svg'
+import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
+import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
 
 const FooterListContent = [
   {
@@ -82,9 +87,17 @@ export const Footer = () => {
         <div className="top">
           <div className="logos">
             {/* TODO: replace with real images */}
-            <img src="#" alt="pouet" />
-            <img src="#" alt="pouet" />
-            <img src="#" alt="pouet" className="download" />
+            <Image src={logoPassCulture} alt="Pass Culture" />
+            <Image
+              src={logoGouvernement}
+              alt="Gouvernement Français"
+              className="governement"
+            />
+            <Image
+              src={downloadBanner}
+              alt="Télécharger l'application sur les stores"
+              className="download"
+            />
           </div>
           <div className="lists">
             {FooterListContent.map((list, i) => (
@@ -142,15 +155,22 @@ const StyledFooter = styled.footer`
   .logos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 3.75rem 7.5rem;
+    grid-template-rows: auto auto;
+    align-content: start;
     gap: 3.125rem 3.75rem;
 
     img {
       border: 1px solid;
+      max-width: 100%;
+    }
+
+    .governement {
+      mix-blend-mode: multiply;
     }
 
     .download {
       grid-column: 1 / -1;
+      width: 100%;
     }
   }
 
@@ -176,6 +196,8 @@ const StyledFooter = styled.footer`
     flex-wrap: wrap;
     font-size: var(--fs-14);
     font-weight: 600;
+    color: #000000;
+    opacity: 0.7;
 
     a:hover {
       text-decoration: underline;
@@ -225,6 +247,7 @@ const StyledFooterList = styled.div`
 
   li {
     color: #000000;
+    opacity: 0.7;
     font-size: 1rem;
     font-weight: 600;
 
