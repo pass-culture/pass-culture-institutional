@@ -24,10 +24,6 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
-      <p>Hello world</p>
-      {/* <pre>
-        <code>{JSON.stringify(props.data, null, 2)}</code>
-      </pre> */}
       {props.data.attributes.Blocks.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
