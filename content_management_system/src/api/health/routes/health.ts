@@ -3,7 +3,7 @@ module.exports = {
     {
       method: "GET",
       path: "/health",
-      handler: async (ctx, next) => {
+      handler: async (ctx) => {
         const user = await strapi.query("admin::user").findOne();
 
         ctx.body = `API: OK, Database: ${!!user ? "OK" : "NOT OK"}`;
