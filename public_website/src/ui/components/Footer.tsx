@@ -320,6 +320,10 @@ const StyledMobileFooterList = styled.details`
     display: inline-flex;
     align-items: center;
     gap: 1rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
   }
 
   h3 {
