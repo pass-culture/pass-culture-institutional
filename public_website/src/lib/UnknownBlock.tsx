@@ -10,7 +10,7 @@ export default function UnkwnownBlock(props: { block: Block }) {
   }
 
   return (
-    <UnkownBlockContainer>
+    <UnkownBlockContainer data-testid="unknown-block">
       <p>
         Unknown block <code>{props.block.__component}</code>
       </p>
