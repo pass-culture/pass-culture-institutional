@@ -64,7 +64,11 @@ export interface FooterList extends Schema.Component {
   };
   attributes: {
     Title: Attribute.String & Attribute.Required;
+<<<<<<< HEAD
     Links: Attribute.Component<'common.link', true>;
+=======
+    Link: Attribute.Component<'common.link', true>;
+>>>>>>> e9c54c8 (add footer content on strapi)
   };
 }
 
