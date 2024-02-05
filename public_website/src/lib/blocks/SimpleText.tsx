@@ -7,7 +7,7 @@ interface SimpleTextProps {
 
 export default function SimpleText(props: SimpleTextProps) {
   return (
-    <div>
+    <div data-testid="simple-text">
       SimpleText
       <pre>
         <code>{JSON.stringify(props, null, 2)}</code>

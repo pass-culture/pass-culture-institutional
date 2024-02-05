@@ -4,6 +4,8 @@ const nextConfig = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
+    // Remove `data-text*` attributes from production build
+    reactRemoveProperties: true,
   },
   images: { unoptimized: true },
 }

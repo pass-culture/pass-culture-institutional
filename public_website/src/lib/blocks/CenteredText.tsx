@@ -7,7 +7,7 @@ interface CenteredTextProps {
 
 export default function CenteredText(props: CenteredTextProps) {
   return (
-    <div>
+    <div data-testid="centered-text">
       Centered Text
       <pre>
         <code>{JSON.stringify(props, null, 2)}</code>
