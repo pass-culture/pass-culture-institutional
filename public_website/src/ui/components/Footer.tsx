@@ -4,7 +4,6 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 import accordionChevron from '../../../public/images/accordion-chevron.svg'
-import downloadBanner from '../../../public/images/download-banner.svg'
 import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
 import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
 
@@ -87,20 +86,23 @@ export const Footer = () => {
       <div className="content">
         <div className="top">
           <div className="logos">
-            {/* TODO: use real svg */}
-            <Image src={logoPassCulture} alt="Pass Culture" />
-            <Image
-              src={logoGouvernement}
-              alt="Gouvernement Français"
-              className="governement"
-            />
-            <Link href="#" className="download">
+            {/* TODO: get real svg files */}
+            <Link href="https://pass.culture.fr/">
+              <Image src={logoPassCulture} alt="Site du Pass Culture" />
+            </Link>
+            <Link href="https://www.gouvernement.fr">
               <Image
-                src={downloadBanner}
-                alt="Télécharger l'application sur les stores"
+                src={logoGouvernement}
+                alt="Site du Gouvernement Français"
+                className="governement"
               />
             </Link>
+            {/* TODO: compute store URL */}
+            <Link href="#" target="_blank" className="download">
+              <p>Télécharger l’application sur les stores</p>
+            </Link>
           </div>
+
           <div className="lists">
             {FooterListContent.map((list, i) => (
               <React.Fragment key={i}>
@@ -113,6 +115,7 @@ export const Footer = () => {
             ))}
           </div>
         </div>
+
         <ul className="legal-links">
           {LegalLinks.map((link, i) => {
             return (
@@ -157,7 +160,8 @@ const StyledFooter = styled.footer`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    align-content: start;
+    align-items: center;
+    justify-items: start;
     gap: 3.125rem 3.75rem;
 
     img {
@@ -171,7 +175,31 @@ const StyledFooter = styled.footer`
 
     .download {
       grid-column: 1 / -1;
-      width: 100%;
+      justify-self: stretch;
+      padding: 1.5rem 2rem;
+      border-radius: 0.625rem;
+      background: url('/images/banner-phone.svg'),
+        linear-gradient(138.16deg, #610286 10%, var(--c-pink-one) 100%);
+      background-position: bottom right;
+      background-size:
+        auto 80%,
+        cover;
+      background-repeat: no-repeat;
+      aspect-ratio: 3.1;
+      display: flex;
+      align-items: center;
+
+      p {
+        color: #ffffff;
+        font-size: var(--fs-14);
+        font-weight: 700;
+        text-transform: uppercase;
+        max-width: 50%;
+      }
+    }
+
+    @media (max-width: 50rem) {
+      gap: 2rem;
     }
   }
 

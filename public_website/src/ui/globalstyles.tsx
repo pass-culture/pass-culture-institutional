@@ -137,8 +137,8 @@ const GlobalStyles = createGlobalStyle`
     --fs-15: 0.9375rem;
 
     --c-hard-blue: #320096;
+    --c-pink-one: #cc0261;
   }
-
 
   /* Custom */
   body {
