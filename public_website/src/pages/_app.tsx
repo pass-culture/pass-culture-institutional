@@ -13,7 +13,8 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {/* FIXME: apply font with className instead */}
+      {/* Import font globally */}
+      {/* eslint-disable-next-line react/no-unknown-property */}
       <style jsx global>{`
         html {
           font-family: ${montSerrat.style.fontFamily} !important;
