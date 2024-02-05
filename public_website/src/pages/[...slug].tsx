@@ -1,6 +1,7 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 
+import BlockRenderer from '@/lib/BlockRenderer'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface BlockData {
@@ -21,13 +22,15 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
-  console.log('🚀 ~ CustomPage ~ props:', props)
   return (
     <React.Fragment>
       <p>Hello world</p>
-      <pre>
+      {/* <pre>
         <code>{JSON.stringify(props.data, null, 2)}</code>
-      </pre>
+      </pre> */}
+      {props.data.attributes.Blocks.map((block) => (
+        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
+      ))}
     </React.Fragment>
   )
 }
