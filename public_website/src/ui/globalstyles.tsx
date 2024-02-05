@@ -131,7 +131,18 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
 
-  /* Custom */ 
+  /* Global variables */
+  :root {
+    --fs-14: 0.875rem;
+    --fs-15: 0.9375rem;
+  }
+
+
+  /* Custom */
+  body {
+    line-height: 1.5rem;;
+  }
+
   a {
     color: inherit;
     text-decoration: none;
