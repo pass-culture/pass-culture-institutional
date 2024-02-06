@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 interface SimpleTextProps {
   Title: string
@@ -7,11 +8,32 @@ interface SimpleTextProps {
 
 export default function SimpleText(props: SimpleTextProps) {
   return (
-    <div data-testid="simple-text">
-      SimpleText
-      <pre>
-        <code>{JSON.stringify(props, null, 2)}</code>
-      </pre>
-    </div>
+    <Root data-testid="simple-text">
+      <h2>{props.Title}</h2>
+      {/* TODO: 2 columns variant */}
+      <p>{props.Text}</p>
+    </Root>
   )
 }
+
+const Root = styled.div`
+  width: 100%;
+  max-width: 75rem;
+  margin: 5rem auto;
+
+  h2 {
+    /* TODO: variabilize ? */
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    /* TODO: use CSS var */
+    color: #320096;
+  }
+
+  p {
+    line-height: 1.5;
+    font-weight: 500;
+    padding-left: 7.1875rem;
+  }
+
+  /* TODO: mobile style */
+`

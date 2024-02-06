@@ -19,10 +19,11 @@ export default function CenteredText(props: CenteredTextProps) {
 const Root = styled.div`
   text-align: center;
   max-width: 52.5rem;
-  margin: auto;
+  margin: 5rem auto;
 
   h2 {
     font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 1.5rem;
     /* TODO: use CSS var */
     color: #320096;
@@ -30,5 +31,9 @@ const Root = styled.div`
 
   p {
     font-size: 1.625rem;
+    font-weight: 600;
+    line-height: 1.7;
   }
+
+  /* TODO: mobile style */
 `
