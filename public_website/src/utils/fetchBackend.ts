@@ -2,13 +2,8 @@ export async function fetchBackend(path: string) {
   try {
     const requestUrl = `${process.env['BACKEND_API_URL']}${path}`
 
-    const mergedOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
+    const response = await fetch(requestUrl)
 
-    const response = await fetch(requestUrl, mergedOptions)
     if (!response.ok) {
       throw new Error(`Server returned a non-OK status: ${response.status}`)
     }
