@@ -54,7 +54,7 @@ async function createSeedActivePlaylistTag(strapi) {
     "api::active-playlist-tag.active-playlist-tag",
     {
       filters: {
-        name: "Bons_plans_du_moment",
+        name: "home_site_instit",
       },
     }
   );
@@ -68,13 +68,13 @@ async function createSeedActivePlaylistTag(strapi) {
   }
 
   // eslint-disable-next-line no-console
-  console.log(`Creating Seed Active Playlist Tag "Bons_plans_du_moment"`);
+  console.log(`Creating Seed Active Playlist Tag "home_site_instit"`);
 
   await strapi.entityService.create(
     "api::active-playlist-tag.active-playlist-tag",
     {
       data: {
-        name: "Bons_plans_du_moment",
+        name: "home_site_instit",
         publishedAt: new Date(),
       },
     }
