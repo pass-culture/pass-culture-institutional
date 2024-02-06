@@ -25,6 +25,7 @@ jobs:
       environment: staging
       workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
       cms_url: https://siteinstit-cms.staging.passculture.team
+      backend_url: https://backend.staging.passculture.team/
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
