@@ -7,8 +7,8 @@ export interface BlockCenteredText extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text & Attribute.Required;
   };
 }
 
