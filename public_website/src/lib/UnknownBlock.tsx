@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import type { Block } from './BlockRenderer'
 
-export default function UnkwnownBlock(props: { block: Block }) {
+export function UnkwnownBlock(props: { block: Block }) {
   // Doesnt render anything in production, just in case...
   if (process.env.NODE_ENV === 'production') {
     return null

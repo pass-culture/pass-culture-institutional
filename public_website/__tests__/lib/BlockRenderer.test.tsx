@@ -2,7 +2,7 @@ import React from 'react'
 import { describe, expect, it } from 'vitest'
 
 import { render, screen } from '..'
-import BlockRenderer from '@/lib/BlockRenderer'
+import { BlockRenderer } from '@/lib/BlockRenderer'
 
 describe('BlockRenderer', () => {
   it('should render the correct block', () => {

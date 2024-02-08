@@ -1,7 +1,7 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 
-import BlockRenderer from '@/lib/BlockRenderer'
+import { BlockRenderer } from '@/lib/BlockRenderer'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface BlockData {
