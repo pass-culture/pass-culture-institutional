@@ -1,8 +1,7 @@
 import React from 'react'
-import { it } from 'vitest'
-import { describe } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
-import { render } from '..'
+import { render, screen } from '..'
 import BlockRenderer from '@/lib/BlockRenderer'
 
 describe('BlockRenderer', () => {
@@ -13,16 +12,16 @@ describe('BlockRenderer', () => {
       Text: 'Some longer text',
     }
 
-    const { getByTestId } = render(<BlockRenderer block={block} />)
+    render(<BlockRenderer block={block} />)
 
-    getByTestId('header')
+    expect(screen.getByTestId('header')).toBeTruthy()
   })
 
   it('should render the unknown block', () => {
     const block = { __component: 'some.unkwnown.block', foo: 'bar' }
 
-    const { getByTestId } = render(<BlockRenderer block={block} />)
+    render(<BlockRenderer block={block} />)
 
-    getByTestId('unknown-block')
+    expect(screen.getByTestId('unknown-block')).toBeTruthy()
   })
 })
