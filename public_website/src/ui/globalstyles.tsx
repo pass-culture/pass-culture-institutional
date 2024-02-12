@@ -131,15 +131,6 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
 
-  /* Global variables */
-  :root {
-    --fs-14: 0.875rem;
-    --fs-15: 0.9375rem;
-
-    --c-hard-blue: #320096;
-    --c-pink-one: #cc0261;
-  }
-
   /* Custom */
   body {
     line-height: 1.5rem;

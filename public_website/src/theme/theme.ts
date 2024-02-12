@@ -1,10 +1,23 @@
 import { Colors } from './colors'
+import { FontSizes, FontWeights } from './fonts'
 
 export const theme = {
   colors: {
-    primary: Colors.PRIMARY,
-    secondary: Colors.SECONDARY,
     black: Colors.BLACK,
+    white: Colors.WHITE,
+    hardBlue: Colors.HARD_BLUE,
+    pinkOne: Colors.PINK_ONE,
+  },
+  fonts: {
+    sizes: {
+      14: FontSizes.XS,
+      15: FontSizes.S,
+      16: FontSizes.M,
+    },
+    weights: {
+      semiBold: FontWeights.SEMI_BOLD,
+      bold: FontWeights.BOLD,
+    },
   },
   typography: {
     title1: {

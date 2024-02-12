@@ -1,5 +1,6 @@
 export enum Colors {
-  BLACK = '#161617',
-  PRIMARY = '#eb0055',
-  SECONDARY = '#320096',
+  BLACK = '#000000',
+  WHITE = '#FFFFFF',
+  HARD_BLUE = '#320096',
+  PINK_ONE = '#cc0261',
 }
