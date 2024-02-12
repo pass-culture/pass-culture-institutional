@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
 import { LoginDropdown } from './LoginDropdown'
 import { MegaMenu } from './MegaMenu'
+import { MobileMenu } from './MobileMenu'
 
 // TODO: put data in Strapi
 const navTargetElements = [
@@ -168,6 +169,15 @@ export function Header() {
     }
   }
 
+  // Toggle mobile menu + disable scroll on body
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  function toggleMobileMenu() {
+    setShowMobileMenu(!showMobileMenu)
+    showMobileMenu
+      ? document.body.removeAttribute('style')
+      : document.body.setAttribute('style', 'overflow: hidden')
+  }
+
   return (
     <StyledHeader>
       <StyledNavigation>
@@ -234,14 +244,26 @@ export function Header() {
           </li>
 
           <li>
-            <StyledBurgerMenu aria-label="Ouvrir le menu">
-              <span />
-              <span />
-              <span />
-            </StyledBurgerMenu>
+            <StyledMobileMenuButton
+              onClick={toggleMobileMenu}
+              aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}>
+              {showMobileMenu ? (
+                <StyledCrossMenu>
+                  <span />
+                  <span />
+                </StyledCrossMenu>
+              ) : (
+                <StyledBurgerMenu>
+                  <span />
+                  <span />
+                  <span />
+                </StyledBurgerMenu>
+              )}
+            </StyledMobileMenuButton>
           </li>
         </ul>
       </StyledNavigation>
+      {showMobileMenu && <MobileMenu />}
     </StyledHeader>
   )
 }
@@ -253,18 +275,27 @@ const StyledHeader = styled.header`
 `
 
 const StyledNavigation = styled.nav`
-  > ul {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 2rem 1rem;
-    height: 4rem;
+  ${({ theme }) => css`
+    > ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      height: 4rem;
 
-    @media (max-width: 62.5rem) {
-      justify-content: space-between;
-      padding: 1.5rem 1rem;
+      @media (width < ${theme.mediaQueries.tablet}) {
+        justify-content: space-between;
+        padding: 1.5rem;
+      }
+
+      /* Only show logo + burger menu on mobile */
+      li:not(:first-child, :last-child) {
+        @media (width < ${theme.mediaQueries.tablet}) {
+          display: none;
+        }
+      }
     }
-  }
+  `}
 `
 
 const StyledNavigationItem = styled.li`
@@ -302,14 +333,8 @@ const StyledNavigationItem = styled.li`
 
     button {
       font-size: ${theme.fonts.sizes.xs};
-      font-weight: 500;
+      font-weight: ${theme.fonts.weights.medium};
       padding: 0.5rem;
-    }
-
-    &:not(:first-child, :last-child) {
-      @media (max-width: 62.5rem) {
-        display: none;
-      }
     }
   `}
 `
@@ -321,25 +346,54 @@ const StyledLoginItem = styled.li`
 
     button {
       font-size: ${theme.fonts.sizes.xs};
-      font-weight: 500;
+      font-weight: ${theme.fonts.weights.medium};
       padding: 0.5rem;
     }
   `}
 `
+const StyledMobileMenuButton = styled.button`
+  ${({ theme }) => css`
+    display: none;
+    height: 1.5rem;
+    width: 1.75rem;
 
-const StyledBurgerMenu = styled.button`
-  display: none;
+    @media (width < ${theme.mediaQueries.tablet}) {
+      display: flex;
+    }
+  `}
+`
+
+const StyledBurgerMenu = styled.div`
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 0;
+  width: 100%;
 
   span {
     background-color: #94008c;
     height: 0.1rem;
-    width: 1.75rem;
+    width: 100%;
   }
+`
 
-  @media (max-width: 62.5rem) {
-    display: flex;
+const StyledCrossMenu = styled.div`
+  position: relative;
+  width: 100%;
+
+  span {
+    background-color: #94008c;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 0.1rem;
+    width: 100%;
+    transform: translateX(-50%) rotate(-45deg);
+    transform-origin: center;
+
+    &:last-child {
+      transform: translateX(-50%) rotate(45deg);
+    }
   }
 `

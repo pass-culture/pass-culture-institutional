@@ -55,6 +55,7 @@ export const theme = {
   },
   mediaQueries: {
     mobile: '50rem', // 800px
+    tablet: '62.5rem', // 1000px
   },
 } as const
 
