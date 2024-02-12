@@ -837,6 +837,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+<<<<<<< HEAD
 export interface ApiFooterFooter extends Schema.SingleType {
   collectionName: 'footers';
   info: {
@@ -844,11 +845,20 @@ export interface ApiFooterFooter extends Schema.SingleType {
     pluralName: 'footers';
     displayName: 'Footer';
     description: '';
+=======
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+>>>>>>> bef7d46 (create about section)
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+<<<<<<< HEAD
     PlayStoreUrl: Attribute.String & Attribute.Required;
     AppStoreUrl: Attribute.String & Attribute.Required;
     Lists: Attribute.Component<'footer.list', true>;
@@ -868,6 +878,16 @@ export interface ApiFooterFooter extends Schema.SingleType {
       'oneToOne',
       'admin::user'
     > &
+=======
+    AboutSection: Attribute.Component<'block.centered-text'> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+>>>>>>> bef7d46 (create about section)
       Attribute.Private;
   };
 }
@@ -991,8 +1011,15 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
+<<<<<<< HEAD
       'api::footer.footer': ApiFooterFooter;
+<<<<<<< HEAD
       'api::header.header': ApiHeaderHeader;
+=======
+=======
+      'api::home.home': ApiHomeHome;
+>>>>>>> bef7d46 (create about section)
+>>>>>>> 38539af (create about section)
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

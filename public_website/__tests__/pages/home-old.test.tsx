@@ -2,7 +2,7 @@ import React from 'react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import Home, { getStaticProps } from '../../src/pages'
+import Home, { getStaticProps } from '../../src/pages/index-old'
 import { act, render, screen } from '..'
 
 describe('Home page', () => {
