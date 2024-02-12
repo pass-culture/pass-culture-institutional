@@ -25,18 +25,18 @@ export function FooterList({ title, listItems }: FooterListProps) {
 
 const StyledFooterList = styled.div`
   h3 {
-    color: ${(props) => props.theme.colors.hardBlue};
+    color: ${({ theme }) => theme.colors.hardBlue};
     text-transform: uppercase;
-    font-size: ${(props) => props.theme.fonts.sizes.xs};
+    font-size: ${({ theme }) => theme.fonts.sizes.xs};
     margin-bottom: 1rem;
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
   }
 
   li {
-    color: ${(props) => props.theme.colors.black};
+    color: ${({ theme }) => theme.colors.black};
     opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes.m};
-    font-weight: ${(props) => props.theme.fonts.weights.semiBold};
+    font-size: ${({ theme }) => theme.fonts.sizes.m};
+    font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
 
     &:not(:last-child) {
       margin-bottom: 1rem;

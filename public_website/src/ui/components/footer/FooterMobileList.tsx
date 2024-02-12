@@ -40,9 +40,9 @@ const StyledMobileFooterList = styled.details`
   }
 
   h3 {
-    color: ${(props) => props.theme.colors.black};
-    font-size: ${(props) => props.theme.fonts.sizes.xs};
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
+    color: ${({ theme }) => theme.colors.black};
+    font-size: ${({ theme }) => theme.fonts.sizes.xs};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
     text-transform: uppercase;
     padding: 1rem 0;
   }
@@ -56,10 +56,10 @@ const StyledMobileFooterList = styled.details`
   }
 
   li {
-    color: ${(props) => props.theme.colors.black};
+    color: ${({ theme }) => theme.colors.black};
     opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes.s};
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
+    font-size: ${({ theme }) => theme.fonts.sizes.s};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
     margin-bottom: 0.875rem;
 
     a:hover {

@@ -93,9 +93,9 @@ export function Footer() {
 
   return (
     <StyledFooter>
-      <div className="content">
-        <div className="top">
-          <div className="logos">
+      <StyledContentContainer>
+        <StyledTopSection>
+          <StyledLogos>
             {/* TODO: get real svg files */}
             <Link href="https://pass.culture.fr/">
               <Image src={logoPassCulture} alt="Site du Pass Culture" />
@@ -104,15 +104,14 @@ export function Footer() {
               <Image
                 src={logoGouvernement}
                 alt="Site du Gouvernement Français"
-                className="governement"
               />
             </Link>
-            <Link href={storeUrl} target="_blank" className="download">
+            <StyledDownloadBanner href={storeUrl} target="_blank">
               <p>Télécharger l’application sur les stores</p>
-            </Link>
-          </div>
+            </StyledDownloadBanner>
+          </StyledLogos>
 
-          <div className="lists">
+          <StyledLists>
             {FooterListContent.map((list, i) => (
               <React.Fragment key={i}>
                 <FooterList title={list.title} listItems={list.listItems} />
@@ -122,10 +121,10 @@ export function Footer() {
                 />
               </React.Fragment>
             ))}
-          </div>
-        </div>
+          </StyledLists>
+        </StyledTopSection>
 
-        <ul className="legal-links">
+        <StyledLegalLinks>
           {LegalLinks.map((link, i) => {
             return (
               <li key={i}>
@@ -133,123 +132,123 @@ export function Footer() {
               </li>
             )
           })}
-        </ul>
-      </div>
+        </StyledLegalLinks>
+      </StyledContentContainer>
     </StyledFooter>
   )
 }
 
 const StyledFooter = styled.footer`
   background-color: #faf8fe;
+`
 
-  .content {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 5rem 1rem;
+const StyledContentContainer = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 5rem 1rem;
 
-    @media (max-width: 50rem) {
-      padding: 2rem 1rem;
-    }
+  @media (max-width: 50rem) {
+    padding: 2rem 1rem;
+  }
+`
+
+const StyledTopSection = styled.div`
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+  align-items: start;
+  gap: 6.25rem;
+  margin-bottom: 5rem;
+
+  @media (max-width: 50rem) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`
+
+const StyledLogos = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-items: start;
+  gap: 3.125rem 3.75rem;
+
+  img {
+    border: 1px solid;
+    max-width: 100%;
   }
 
-  .top {
-    display: grid;
-    grid-template-columns: 25rem 1fr;
-    align-items: start;
-    gap: 6.25rem;
-    margin-bottom: 5rem;
-
-    @media (max-width: 50rem) {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
+  a:nth-child(2) img {
+    mix-blend-mode: multiply;
   }
 
-  .logos {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    align-items: center;
-    justify-items: start;
-    gap: 3.125rem 3.75rem;
+  @media (max-width: 50rem) {
+    gap: 2rem;
+  }
+`
 
-    img {
-      border: 1px solid;
-      max-width: 100%;
-    }
+const StyledDownloadBanner = styled(Link)`
+  grid-column: 1 / -1;
+  justify-self: stretch;
+  padding: 1.5rem 2rem;
+  border-radius: 0.625rem;
+  background: url('/images/banner-phone.svg'),
+    linear-gradient(
+      138.16deg,
+      #610286 10%,
+      ${({ theme }) => theme.colors.pinkOne} 100%
+    );
+  background-position: bottom right;
+  background-size:
+    auto 80%,
+    cover;
+  background-repeat: no-repeat;
+  aspect-ratio: 3.1;
+  display: flex;
+  align-items: center;
 
-    .governement {
-      mix-blend-mode: multiply;
-    }
+  p {
+    color: ${({ theme }) => theme.colors.white};
+    font-size: ${({ theme }) => theme.fonts.sizes.xs};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
+    text-transform: uppercase;
+    max-width: 50%;
+  }
+`
 
-    .download {
-      grid-column: 1 / -1;
-      justify-self: stretch;
-      padding: 1.5rem 2rem;
-      border-radius: 0.625rem;
-      background: url('/images/banner-phone.svg'),
-        linear-gradient(
-          138.16deg,
-          #610286 10%,
-          ${(props) => props.theme.colors.pinkOne} 100%
-        );
-      background-position: bottom right;
-      background-size:
-        auto 80%,
-        cover;
-      background-repeat: no-repeat;
-      aspect-ratio: 3.1;
-      display: flex;
-      align-items: center;
+const StyledLists = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 4rem;
 
-      p {
-        color: ${(props) => props.theme.colors.white};
-        font-size: ${(props) => props.theme.fonts.sizes.xs};
-        font-weight: ${(props) => props.theme.fonts.weights.bold};
-        text-transform: uppercase;
-        max-width: 50%;
-      }
-    }
+  @media (max-width: 50rem) {
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+`
 
-    @media (max-width: 50rem) {
-      gap: 2rem;
-    }
+const StyledLegalLinks = styled.ul`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: ${({ theme }) => theme.fonts.sizes.xs};
+  font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
+  color: ${({ theme }) => theme.colors.black};
+  opacity: 0.7;
+
+  a:hover {
+    text-decoration: underline;
   }
 
-  .lists {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-    gap: 4rem;
+  @media (max-width: 50rem) {
+    --legal-links-gap: 0.5rem;
 
-    @media (max-width: 50rem) {
-      gap: 0;
-      grid-template-columns: 1fr;
-    }
-  }
+    justify-content: initial;
+    gap: var(--legal-links-gap);
 
-  .legal-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    font-size: ${(props) => props.theme.fonts.sizes.xs};
-    font-weight: ${(props) => props.theme.fonts.weights.semiBold};
-    color: ${(props) => props.theme.colors.black};
-    opacity: 0.7;
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 50rem) {
-      --legal-links-gap: 0.5rem;
-
-      justify-content: initial;
-      gap: var(--legal-links-gap);
-
-      li {
-        flex-basis: calc(50% - (var(--legal-links-gap) / 2));
-      }
+    li {
+      flex-basis: calc(50% - (var(--legal-links-gap) / 2));
     }
   }
 `
