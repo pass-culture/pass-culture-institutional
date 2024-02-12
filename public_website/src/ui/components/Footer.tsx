@@ -7,6 +7,7 @@ import accordionChevron from '../../../public/images/accordion-chevron.svg'
 import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
 import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
 
+// TODO: use content from Strapi
 const FooterListContent = [
   {
     title: 'Jeunes',
@@ -80,7 +81,7 @@ const LegalLinks = [
   { label: 'Plan du site', href: '#' },
 ]
 
-export const Footer = () => {
+export function Footer() {
   return (
     <StyledFooter>
       <div className="content">
@@ -179,7 +180,11 @@ const StyledFooter = styled.footer`
       padding: 1.5rem 2rem;
       border-radius: 0.625rem;
       background: url('/images/banner-phone.svg'),
-        linear-gradient(138.16deg, #610286 10%, var(--c-pink-one) 100%);
+        linear-gradient(
+          138.16deg,
+          #610286 10%,
+          ${(props) => props.theme.colors.pinkOne} 100%
+        );
       background-position: bottom right;
       background-size:
         auto 80%,
@@ -190,9 +195,9 @@ const StyledFooter = styled.footer`
       align-items: center;
 
       p {
-        color: #ffffff;
-        font-size: var(--fs-14);
-        font-weight: 700;
+        color: ${(props) => props.theme.colors.white};
+        font-size: ${(props) => props.theme.fonts.sizes[14]};
+        font-weight: ${(props) => props.theme.fonts.weights.bold};
         text-transform: uppercase;
         max-width: 50%;
       }
@@ -219,9 +224,9 @@ const StyledFooter = styled.footer`
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    font-size: var(--fs-14);
-    font-weight: 600;
-    color: #000000;
+    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    font-weight: ${(props) => props.theme.fonts.weights.semiBold};
+    color: ${(props) => props.theme.colors.black};
     opacity: 0.7;
 
     a:hover {
@@ -263,6 +268,35 @@ const FooterList = ({ title, listItems }: ListProps) => {
   )
 }
 
+const StyledFooterList = styled.div`
+  h3 {
+    color: ${(props) => props.theme.colors.hardBlue};
+    text-transform: uppercase;
+    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    margin-bottom: 1rem;
+    font-weight: ${(props) => props.theme.fonts.weights.bold};
+  }
+
+  li {
+    color: ${(props) => props.theme.colors.black};
+    opacity: 0.7;
+    font-size: ${(props) => props.theme.fonts.sizes[16]};
+    font-weight: ${(props) => props.theme.fonts.weights.semiBold};
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 50rem) {
+    display: none;
+  }
+`
+
 const MobileFooterList = ({ title, listItems }: ListProps) => {
   return (
     <StyledMobileFooterList>
@@ -283,35 +317,6 @@ const MobileFooterList = ({ title, listItems }: ListProps) => {
   )
 }
 
-const StyledFooterList = styled.div`
-  h3 {
-    color: var(--c-hard-blue);
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-
-  li {
-    color: #000000;
-    opacity: 0.7;
-    font-size: 1rem;
-    font-weight: 600;
-
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 50rem) {
-    display: none;
-  }
-`
-
 const StyledMobileFooterList = styled.details`
   display: none;
 
@@ -327,9 +332,9 @@ const StyledMobileFooterList = styled.details`
   }
 
   h3 {
-    color: #000000;
-    font-size: var(--fs-14);
-    font-weight: 700;
+    color: ${(props) => props.theme.colors.black};
+    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    font-weight: ${(props) => props.theme.fonts.weights.bold};
     text-transform: uppercase;
     padding: 1rem 0;
   }
@@ -343,10 +348,10 @@ const StyledMobileFooterList = styled.details`
   }
 
   li {
-    color: #000000;
+    color: ${(props) => props.theme.colors.black};
     opacity: 0.7;
-    font-size: var(--fs-15);
-    font-weight: 600;
+    font-size: ${(props) => props.theme.fonts.sizes[15]};
+    font-weight: ${(props) => props.theme.fonts.weights.bold};
     margin-bottom: 0.875rem;
 
     a:hover {

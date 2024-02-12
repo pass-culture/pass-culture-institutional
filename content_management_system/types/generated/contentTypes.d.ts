@@ -851,11 +851,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
   attributes: {
     PlayStoreUrl: Attribute.String & Attribute.Required;
     AppStoreUrl: Attribute.String & Attribute.Required;
-<<<<<<< HEAD
     Lists: Attribute.Component<'footer.list', true>;
-=======
-    List: Attribute.Component<'footer.list', true>;
->>>>>>> e9c54c8 (add footer content on strapi)
     BannerText: Attribute.String;
     LegalLinks: Attribute.Component<'common.link', true>;
     createdAt: Attribute.DateTime;
