@@ -4,6 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
+    // Remove `data-text*` attributes from production build
+    // Not supported by Turbopack :(
+    // reactRemoveProperties: true,
   },
   images: { unoptimized: true },
 }
