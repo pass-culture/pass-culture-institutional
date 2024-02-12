@@ -15,8 +15,8 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
       <ul>
         {listItems.map((anchor) => {
           return (
-            <li key={anchor.label}>
-              <a href={anchor.href}>{anchor.label}</a>
+            <li key={anchor.Label}>
+              <a href={anchor.URL}>{anchor.Label}</a>
             </li>
           )
         })}

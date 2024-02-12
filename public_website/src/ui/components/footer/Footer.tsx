@@ -9,94 +9,34 @@ import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
 
-// TODO: use content from Strapi
-const FooterListContent = [
-  {
-    title: 'Jeunes',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      {
-        label: 'Le pass Culture, c’est quoi ? bla bla bla bla bla bla',
-        href: '#',
-      },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-  {
-    title: 'Acteurs culturels',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-  {
-    title: 'Enseignants',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-  {
-    title: 'Enseignants',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-  {
-    title: 'Enseignants',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-  {
-    title: 'Enseignants',
-    listItems: [
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-      { label: 'Le pass Culture, c’est quoi ?', href: '#' },
-    ],
-  },
-]
+export type FooterProps = {
+  PlayStoreUrl: string
+  AppStoreUrl: string
+  BannerText: string
+  LegalLinks: { Label: string; URL: string; id: number }[]
+  Lists: {
+    id: number
+    Title: string
+    Links: { Label: string; URL: string }[]
+  }[]
+}
 
-const LegalLinks = [
-  { label: 'Accessibilité', href: '#' },
-  { label: 'Services Publics +', href: '#' },
-  { label: 'Informations légales', href: '#' },
-  { label: 'Plan du site', href: '#' },
-]
-
-const appStoreUrl = 'https://apps.apple.com/fr/app/pass-culture/id1557887412'
-const playStoreUrl =
-  'https://play.google.com/store/apps/details?id=app.passculture.webapp&hl=fr&gl=US'
-
-export function Footer() {
+export function Footer({
+  PlayStoreUrl,
+  AppStoreUrl,
+  BannerText,
+  LegalLinks,
+  Lists,
+}: FooterProps) {
   const isAndroid = useIsAndroid()
-  const storeUrl = isAndroid ? playStoreUrl : appStoreUrl
+  const storeUrl = isAndroid ? PlayStoreUrl : AppStoreUrl
 
   return (
     <StyledFooter>
       <StyledContentContainer>
         <StyledTopSection>
           <StyledLogos>
-            {/* TODO: get real svg files */}
+            {/* TODO: get real svg files and create SVGR files */}
             <Link href="https://pass.culture.fr/">
               <Image src={logoPassCulture} alt="Site du Pass Culture" />
             </Link>
@@ -107,28 +47,25 @@ export function Footer() {
               />
             </Link>
             <StyledDownloadBanner href={storeUrl} target="_blank">
-              <p>Télécharger l’application sur les stores</p>
+              <p>{BannerText}</p>
             </StyledDownloadBanner>
           </StyledLogos>
 
           <StyledLists>
-            {FooterListContent.map((list, i) => (
-              <React.Fragment key={i}>
-                <FooterList title={list.title} listItems={list.listItems} />
-                <FooterMobileList
-                  title={list.title}
-                  listItems={list.listItems}
-                />
+            {Lists.map((list) => (
+              <React.Fragment key={list.id}>
+                <FooterList title={list.Title} listItems={list.Links} />
+                <FooterMobileList title={list.Title} listItems={list.Links} />
               </React.Fragment>
             ))}
           </StyledLists>
         </StyledTopSection>
 
         <StyledLegalLinks>
-          {LegalLinks.map((link, i) => {
+          {LegalLinks.map((link) => {
             return (
-              <li key={i}>
-                <Link href={link.href}>{link.label}</Link>
+              <li key={link.id}>
+                <Link href={link.URL}>{link.Label}</Link>
               </li>
             )
           })}

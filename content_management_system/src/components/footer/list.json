@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "Link": {
+    "Links": {
       "displayName": "Link",
       "type": "component",
       "repeatable": true,

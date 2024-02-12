@@ -20,7 +20,7 @@
       "type": "string",
       "required": true
     },
-    "List": {
+    "Lists": {
       "displayName": "List",
       "type": "component",
       "repeatable": true,

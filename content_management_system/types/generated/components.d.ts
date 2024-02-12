@@ -64,7 +64,7 @@ export interface FooterList extends Schema.Component {
   };
   attributes: {
     Title: Attribute.String & Attribute.Required;
-    Link: Attribute.Component<'common.link', true>;
+    Links: Attribute.Component<'common.link', true>;
   };
 }
 

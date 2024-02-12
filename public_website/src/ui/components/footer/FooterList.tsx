@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 export type FooterListProps = {
   title: string
-  listItems: { label: string; href: string }[]
+  listItems: { Label: string; URL: string }[]
 }
 
 export function FooterList({ title, listItems }: FooterListProps) {
@@ -13,8 +13,8 @@ export function FooterList({ title, listItems }: FooterListProps) {
       <ul>
         {listItems.map((anchor) => {
           return (
-            <li key={anchor.label}>
-              <a href={anchor.href}>{anchor.label}</a>
+            <li key={anchor.Label}>
+              <a href={anchor.URL}>{anchor.Label}</a>
             </li>
           )
         })}

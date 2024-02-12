@@ -1,15 +1,23 @@
 import React from 'react'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
+import App from 'next/app'
 import { Montserrat } from 'next/font/google'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
-import { Footer } from '@/ui/components/footer/Footer'
+import { Footer, FooterProps } from '@/ui/components/footer/Footer'
 import GlobalStyles from '@/ui/globalstyles'
+import { fetchCMS } from '@/utils/fetchCMS'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })
 
-export default function App({ Component, pageProps }: AppProps) {
+type MyAppProps = AppProps & { footerData: FooterProps }
+
+export default function MyApp({
+  Component,
+  pageProps,
+  footerData,
+}: MyAppProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -23,7 +31,21 @@ export default function App({ Component, pageProps }: AppProps) {
       <main>
         <Component {...pageProps} />
       </main>
-      <Footer />
+      <Footer {...footerData} />
     </ThemeProvider>
   )
+}
+
+type FooterData = {
+  id: number
+  attributes: FooterProps
+}
+
+MyApp.getInitialProps = async (context: AppContext) => {
+  const footerData = await fetchCMS<FooterData>(
+    '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'
+  )
+  const ctx = await App.getInitialProps(context)
+
+  return { ...ctx, footerData: footerData.data.attributes }
 }

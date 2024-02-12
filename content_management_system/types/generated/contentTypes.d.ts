@@ -851,7 +851,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
   attributes: {
     PlayStoreUrl: Attribute.String & Attribute.Required;
     AppStoreUrl: Attribute.String & Attribute.Required;
-    List: Attribute.Component<'footer.list', true>;
+    Lists: Attribute.Component<'footer.list', true>;
     BannerText: Attribute.String;
     LegalLinks: Attribute.Component<'common.link', true>;
     createdAt: Attribute.DateTime;
