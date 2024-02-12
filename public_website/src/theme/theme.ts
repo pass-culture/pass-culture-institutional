@@ -42,7 +42,7 @@ export const theme = {
     },
   },
   mediaQueries: {
-    mobile: '50rem',
+    mobile: '50rem', // 800px
   },
 } as const
 
