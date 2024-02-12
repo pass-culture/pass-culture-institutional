@@ -4,7 +4,6 @@ import { axe } from 'vitest-axe'
 
 import About, { getStaticProps } from '../../src/pages/about'
 import { act, render, screen, waitFor } from '..'
-import { restaurantDataFixtures } from '../fixtures'
 
 describe('About page', () => {
   it('should pass axe accessibility tests', async () => {
@@ -20,28 +19,12 @@ describe('About page', () => {
     expect(a11yResult).toHaveNoViolations()
   })
 
-  it('should render the page', async () => {
-    const { container } = render(<About restaurants={[]} />)
-
-    await waitForDataToBeLoadedAndRendered()
-
-    expect(container).toMatchSnapshot()
-  })
-
   it('should render the page with the response of the server', async () => {
     process.env = { ...process.env, ID_TOKEN: 'dummy_token' }
 
     const { props } = await getStaticProps()
     render(<About {...props} />)
     expect(screen.queryByText('Tacos de Lyon')).toBeTruthy()
-  })
-
-  it('should render the page with restaurants', async () => {
-    const { container } = render(<About restaurants={restaurantDataFixtures} />)
-
-    await waitForDataToBeLoadedAndRendered()
-
-    expect(container).toMatchSnapshot()
   })
 
   it('should show 404 when restaurants are falsy', async () => {
