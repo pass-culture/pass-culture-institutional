@@ -253,7 +253,7 @@ const StyledHeader = styled.header`
 `
 
 const StyledNavigation = styled.nav`
-  ul {
+  > ul {
     display: flex;
     align-items: center;
     gap: 1.5rem;
