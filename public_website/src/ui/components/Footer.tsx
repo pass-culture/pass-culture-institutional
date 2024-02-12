@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
@@ -81,7 +81,21 @@ const LegalLinks = [
   { label: 'Plan du site', href: '#' },
 ]
 
+const appStoreUrl = 'https://apps.apple.com/fr/app/pass-culture/id1557887412'
+const playStoreUrl =
+  'https://play.google.com/store/apps/details?id=app.passculture.webapp&hl=fr&gl=US'
+
 export function Footer() {
+  const isAndroid = useRef(false)
+  const storeUrl = isAndroid.current ? playStoreUrl : appStoreUrl
+
+  useEffect(() => {
+    // Detect if user is on an Android device
+    if (/android/i.test(navigator.userAgent)) {
+      isAndroid.current = true
+    }
+  })
+
   return (
     <StyledFooter>
       <div className="content">
@@ -98,8 +112,7 @@ export function Footer() {
                 className="governement"
               />
             </Link>
-            {/* TODO: compute store URL */}
-            <Link href="#" target="_blank" className="download">
+            <Link href={storeUrl} target="_blank" className="download">
               <p>Télécharger l’application sur les stores</p>
             </Link>
           </div>
