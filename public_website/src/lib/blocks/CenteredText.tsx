@@ -11,7 +11,7 @@ export function CenteredText(props: CenteredTextProps) {
     <Root data-testid="centered-text">
       {/* TODO: determine heading level */}
       <h2>{props.Title}</h2>
-      <p>{props.Text}</p>
+      <p dangerouslySetInnerHTML={{ __html: props.Text }} />
     </Root>
   )
 }
@@ -33,6 +33,28 @@ const Root = styled.div`
     font-size: 1.625rem;
     font-weight: 600;
     line-height: 1.7;
+  }
+
+  mark {
+    background: none;
+    color: inherit;
+
+    position: relative;
+    margin-left: 0.5ch;
+    margin-right: 0.5ch;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      bottom: 0;
+      left: -0.5ch;
+      right: -0.5ch;
+      z-index: -1;
+
+      border-radius: 8px;
+      background-color: #27dca8;
+    }
   }
 
   /* TODO: mobile style */
