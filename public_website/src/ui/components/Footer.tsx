@@ -264,7 +264,7 @@ type ListProps = {
   listItems: { label: string; href: string }[]
 }
 
-const FooterList = ({ title, listItems }: ListProps) => {
+function FooterList({ title, listItems }: ListProps) {
   return (
     <StyledFooterList>
       <h3>{title}</h3>
@@ -310,7 +310,7 @@ const StyledFooterList = styled.div`
   }
 `
 
-const MobileFooterList = ({ title, listItems }: ListProps) => {
+function MobileFooterList({ title, listItems }: ListProps) {
   return (
     <StyledMobileFooterList>
       <summary>
