@@ -6,7 +6,7 @@ interface HeaderProps {
   Surtitle?: string
 }
 
-export default function Header(props: HeaderProps) {
+export function Header(props: HeaderProps) {
   return (
     <div data-testid="header">
       Header

@@ -6,7 +6,7 @@ interface SimpleTextProps {
   Text: string
 }
 
-export default function SimpleText(props: SimpleTextProps) {
+export function SimpleText(props: SimpleTextProps) {
   return (
     <Root data-testid="simple-text">
       <h2>{props.Title}</h2>

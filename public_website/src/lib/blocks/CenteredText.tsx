@@ -6,7 +6,7 @@ interface CenteredTextProps {
   Text: string
 }
 
-export default function CenteredText(props: CenteredTextProps) {
+export function CenteredText(props: CenteredTextProps) {
   return (
     <Root data-testid="centered-text">
       {/* TODO: determine heading level */}
