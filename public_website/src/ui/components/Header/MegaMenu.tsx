@@ -5,7 +5,7 @@ import styled from 'styled-components'
 type MegaMenuProps = {
   onBlur: () => void
   onKeyDown: (e: KeyboardEvent | React.KeyboardEvent) => void
-  openButtonElement: HTMLButtonElement | null
+  getOpenButtonEl: () => HTMLButtonElement | null
   id: string
   labelId: string
   data: {
@@ -19,10 +19,10 @@ type MegaMenuProps = {
   }
 }
 
-export default function MegaMenu({
+export function MegaMenu({
   onBlur,
   onKeyDown,
-  openButtonElement,
+  getOpenButtonEl,
   id,
   labelId,
   data,
@@ -31,7 +31,8 @@ export default function MegaMenu({
 
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
-      if (openButtonElement.current !== (e.target as HTMLElement)) {
+      const openButtonElement = getOpenButtonEl()
+      if (openButtonElement !== (e.target as HTMLElement)) {
         onBlur()
       }
     } else {
@@ -111,7 +112,7 @@ const StyledMegaMenu = styled.section`
 
   .heading {
     p {
-      color: var(--c-hard-blue);
+      color: ${(props) => props.theme.colors.hardBlue};
       font-size: var(--fs-40);
       font-weight: 700;
       line-height: 1.25;
@@ -140,31 +141,31 @@ const StyledMegaMenu = styled.section`
     }
 
     a {
-      font-size: var(--fs-17);
-      font-weight: 600;
-      color: #000000;
+      font-size: ${(props) => props.theme.fonts.sizes[17]};
+      font-weight: ${(props) => props.theme.fonts.weights.semiBold};
+      color: ${(props) => props.theme.colors.black};
       opacity: 0.9;
     }
   }
 
   .card {
-    background-color: var(--c-hard-blue);
+    background-color: ${(props) => props.theme.colors.hardBlue};
     border-radius: 0.5rem;
     padding: 7.5rem 3.5rem 4.5rem;
     text-align: center;
 
     p:first-child {
-      color: var(--c-hard-blue);
+      color: ${(props) => props.theme.colors.hardBlue};
       -webkit-text-stroke: 1px white;
       font-size: var(--fs-35);
-      font-weight: 900;
+      font-weight: ${(props) => props.theme.fonts.weights.black};
       margin-bottom: 4.5rem;
     }
 
     p:nth-child(2) {
-      color: #ffffff;
-      font-size: var(--fs-18);
-      font-weight: 500;
+      color: ${(props) => props.theme.colors.white};
+      font-size: ${(props) => props.theme.fonts.sizes[18]};
+      font-weight: ${(props) => props.theme.fonts.weights.medium};
       margin-bottom: 3.75rem;
     }
   }

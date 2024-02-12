@@ -1,11 +1,11 @@
-import React, { createRef, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
 import { LoginDropdown } from './LoginDropdown'
-import MegaMenu from './MegaMenu'
+import { MegaMenu } from './MegaMenu'
 
 // TODO: put data in Strapi
 const navTargetElements = [
@@ -124,14 +124,10 @@ const navElements = [...navTargetElements, ...navAllTargetsElements]
 const loginLabel = 'Connexion'
 const signUpLabel = 'Inscription'
 
-export default function Header() {
+export function Header() {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
 
-  // FIXME: type this array of refs
-  const megaMenuButtonRefs = useRef<HTMLButtonElement[]>([])
-  megaMenuButtonRefs.current = navElements.map(
-    (_, i) => megaMenuButtonRefs.current[i] ?? createRef()
-  )
+  const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
@@ -145,7 +141,7 @@ export default function Header() {
   ) {
     if (e.key === 'Escape') {
       setActiveMegaMenuId(null)
-      megaMenuButtonRefs.current[i]?.current.focus()
+      megaMenuButtonRefs.current[i]?.focus()
     }
   }
 
@@ -187,7 +183,7 @@ export default function Header() {
               <React.Fragment key={i}>
                 <li>
                   <button
-                    ref={megaMenuButtonRefs.current[i]}
+                    ref={(el) => (megaMenuButtonRefs.current[i] = el)}
                     id={`mega-menu-button-${i}`}
                     aria-controls={`mega-menu-${i}`}
                     aria-expanded={i === activeMegaMenuId}
@@ -198,7 +194,9 @@ export default function Header() {
                   </button>
                   {i === activeMegaMenuId && (
                     <MegaMenu
-                      openButtonElement={megaMenuButtonRefs.current[i]}
+                      getOpenButtonEl={() =>
+                        megaMenuButtonRefs.current[i] ?? null
+                      }
                       labelId={`mega-menu-button-${i}`}
                       id={`mega-menu-${i}`}
                       data={el.megaMenu}
@@ -276,7 +274,7 @@ const StyledHeader = styled.header`
       }
 
       &[aria-hidden] {
-        background-color: #000000;
+        background-color: ${(props) => props.theme.colors.black};
         opacity: 0.2;
         height: 1.25rem;
         width: 1px;
@@ -300,7 +298,7 @@ const StyledHeader = styled.header`
       button {
         background: none;
         border: none;
-        font-size: var(--fs-14);
+        font-size: ${(props) => props.theme.fonts.sizes[14]};
         font-weight: 500;
         padding: 0.5rem;
 

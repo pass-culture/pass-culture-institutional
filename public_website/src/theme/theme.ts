@@ -13,10 +13,14 @@ export const theme = {
       xs: FontSizes.XS,
       s: FontSizes.S,
       m: FontSizes.M,
+      l: FontSizes.L,
+      xl: FontSizes.XL,
     },
     weights: {
+      medium: FontWeights.MEDIUM,
       semiBold: FontWeights.SEMI_BOLD,
       bold: FontWeights.BOLD,
+      black: FontWeights.BLACK,
     },
   },
   typography: {

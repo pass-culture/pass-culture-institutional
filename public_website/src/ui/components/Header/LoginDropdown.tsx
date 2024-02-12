@@ -26,11 +26,11 @@ type LoginDropdownProps = {
   onBlur: () => void
 }
 
-export const LoginDropdown = ({
+export function LoginDropdown({
   openButtonElement,
   onKeyDown,
   onBlur,
-}: LoginDropdownProps) => {
+}: LoginDropdownProps) {
   const loginDropdownRef = useRef<HTMLDivElement>(null)
 
   function onEscape(e: KeyboardEvent) {
