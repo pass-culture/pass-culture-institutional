@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import accordionChevron from '../../../public/images/accordion-chevron.svg'
 import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
 import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
+import { useIsAndroid } from '@/hooks/useIsAndroid'
 
 // TODO: use content from Strapi
 const FooterListContent = [
@@ -86,15 +87,8 @@ const playStoreUrl =
   'https://play.google.com/store/apps/details?id=app.passculture.webapp&hl=fr&gl=US'
 
 export function Footer() {
-  const isAndroid = useRef(false)
-  const storeUrl = isAndroid.current ? playStoreUrl : appStoreUrl
-
-  useEffect(() => {
-    // Detect if user is on an Android device
-    if (/android/i.test(navigator.userAgent)) {
-      isAndroid.current = true
-    }
-  })
+  const isAndroid = useIsAndroid()
+  const storeUrl = isAndroid ? playStoreUrl : appStoreUrl
 
   return (
     <StyledFooter>
