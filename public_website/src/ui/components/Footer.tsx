@@ -209,7 +209,7 @@ const StyledFooter = styled.footer`
 
       p {
         color: ${(props) => props.theme.colors.white};
-        font-size: ${(props) => props.theme.fonts.sizes[14]};
+        font-size: ${(props) => props.theme.fonts.sizes.xs};
         font-weight: ${(props) => props.theme.fonts.weights.bold};
         text-transform: uppercase;
         max-width: 50%;
@@ -237,7 +237,7 @@ const StyledFooter = styled.footer`
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
-    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    font-size: ${(props) => props.theme.fonts.sizes.xs};
     font-weight: ${(props) => props.theme.fonts.weights.semiBold};
     color: ${(props) => props.theme.colors.black};
     opacity: 0.7;
@@ -285,7 +285,7 @@ const StyledFooterList = styled.div`
   h3 {
     color: ${(props) => props.theme.colors.hardBlue};
     text-transform: uppercase;
-    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    font-size: ${(props) => props.theme.fonts.sizes.xs};
     margin-bottom: 1rem;
     font-weight: ${(props) => props.theme.fonts.weights.bold};
   }
@@ -293,7 +293,7 @@ const StyledFooterList = styled.div`
   li {
     color: ${(props) => props.theme.colors.black};
     opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes[16]};
+    font-size: ${(props) => props.theme.fonts.sizes.m};
     font-weight: ${(props) => props.theme.fonts.weights.semiBold};
 
     &:not(:last-child) {
@@ -346,7 +346,7 @@ const StyledMobileFooterList = styled.details`
 
   h3 {
     color: ${(props) => props.theme.colors.black};
-    font-size: ${(props) => props.theme.fonts.sizes[14]};
+    font-size: ${(props) => props.theme.fonts.sizes.xs};
     font-weight: ${(props) => props.theme.fonts.weights.bold};
     text-transform: uppercase;
     padding: 1rem 0;
@@ -363,7 +363,7 @@ const StyledMobileFooterList = styled.details`
   li {
     color: ${(props) => props.theme.colors.black};
     opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes[15]};
+    font-size: ${(props) => props.theme.fonts.sizes.s};
     font-weight: ${(props) => props.theme.fonts.weights.bold};
     margin-bottom: 0.875rem;
 
