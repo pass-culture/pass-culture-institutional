@@ -4,7 +4,7 @@ import { Montserrat } from 'next/font/google'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
-import { Footer } from '@/ui/components/Footer'
+import { Footer } from '@/ui/components/footer/Footer'
 import GlobalStyles from '@/ui/globalstyles'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })

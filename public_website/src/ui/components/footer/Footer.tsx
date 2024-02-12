@@ -3,9 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-import accordionChevron from '../../../public/images/accordion-chevron.svg'
-import logoGouvernement from '../../../public/images/logo-gouvernement.svg'
-import logoPassCulture from '../../../public/images/logo-pass-culture.svg'
+import logoGouvernement from '../../../../public/images/logo-gouvernement.svg'
+import logoPassCulture from '../../../../public/images/logo-pass-culture.svg'
+import { FooterList } from './FooterList'
+import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
 
 // TODO: use content from Strapi
@@ -115,7 +116,7 @@ export function Footer() {
             {FooterListContent.map((list, i) => (
               <React.Fragment key={i}>
                 <FooterList title={list.title} listItems={list.listItems} />
-                <MobileFooterList
+                <FooterMobileList
                   title={list.title}
                   listItems={list.listItems}
                 />
@@ -250,123 +251,5 @@ const StyledFooter = styled.footer`
         flex-basis: calc(50% - (var(--legal-links-gap) / 2));
       }
     }
-  }
-`
-
-type ListProps = {
-  title: string
-  listItems: { label: string; href: string }[]
-}
-
-function FooterList({ title, listItems }: ListProps) {
-  return (
-    <StyledFooterList>
-      <h3>{title}</h3>
-      <ul>
-        {listItems.map((el, i) => {
-          return (
-            <li key={i}>
-              <a href={el.href}>{el.label}</a>
-            </li>
-          )
-        })}
-      </ul>
-    </StyledFooterList>
-  )
-}
-
-const StyledFooterList = styled.div`
-  h3 {
-    color: ${(props) => props.theme.colors.hardBlue};
-    text-transform: uppercase;
-    font-size: ${(props) => props.theme.fonts.sizes.xs};
-    margin-bottom: 1rem;
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
-  }
-
-  li {
-    color: ${(props) => props.theme.colors.black};
-    opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes.m};
-    font-weight: ${(props) => props.theme.fonts.weights.semiBold};
-
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 50rem) {
-    display: none;
-  }
-`
-
-function MobileFooterList({ title, listItems }: ListProps) {
-  return (
-    <StyledMobileFooterList>
-      <summary>
-        <h3>{title}</h3>
-        <Image src={accordionChevron} alt="" />
-      </summary>
-      <ul>
-        {listItems.map((el, i) => {
-          return (
-            <li key={i}>
-              <a href={el.href}>{el.label}</a>
-            </li>
-          )
-        })}
-      </ul>
-    </StyledMobileFooterList>
-  )
-}
-
-const StyledMobileFooterList = styled.details`
-  display: none;
-
-  summary {
-    list-style: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-  }
-
-  h3 {
-    color: ${(props) => props.theme.colors.black};
-    font-size: ${(props) => props.theme.fonts.sizes.xs};
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
-    text-transform: uppercase;
-    padding: 1rem 0;
-  }
-
-  summary img {
-    transform: rotate(180deg);
-  }
-
-  &[open] summary img {
-    transform: none;
-  }
-
-  li {
-    color: ${(props) => props.theme.colors.black};
-    opacity: 0.7;
-    font-size: ${(props) => props.theme.fonts.sizes.s};
-    font-weight: ${(props) => props.theme.fonts.weights.bold};
-    margin-bottom: 0.875rem;
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media (max-width: 50rem) {
-    display: initial;
   }
 `
