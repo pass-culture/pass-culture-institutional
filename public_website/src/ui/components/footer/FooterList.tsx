@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export type FooterListProps = {
   title: string
@@ -24,30 +24,32 @@ export function FooterList({ title, listItems }: FooterListProps) {
 }
 
 const StyledFooterList = styled.div`
-  h3 {
-    color: ${({ theme }) => theme.colors.secondary};
-    text-transform: uppercase;
-    font-size: ${({ theme }) => theme.fonts.sizes.xs};
-    margin-bottom: 1rem;
-    font-weight: ${({ theme }) => theme.fonts.weights.bold};
-  }
-
-  li {
-    color: ${({ theme }) => theme.colors.black};
-    opacity: 0.7;
-    font-size: ${({ theme }) => theme.fonts.sizes.m};
-    font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
-
-    &:not(:last-child) {
+  ${({ theme }) => css`
+    h3 {
+      color: ${theme.colors.secondary};
+      text-transform: uppercase;
+      font-size: ${theme.fonts.sizes.xs};
       margin-bottom: 1rem;
+      font-weight: ${theme.fonts.weights.bold};
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-  }
+    li {
+      color: ${theme.colors.black};
+      opacity: 0.7;
+      font-size: ${theme.fonts.sizes.m};
+      font-weight: ${theme.fonts.weights.semiBold};
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    display: none;
-  }
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
+  `}
 `

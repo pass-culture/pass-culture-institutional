@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import accordionChevron from '../../../../public/images/accordion-chevron.svg'
 import { FooterListProps } from './FooterList'
@@ -26,48 +26,50 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
 }
 
 const StyledMobileFooterList = styled.details`
-  display: none;
+  ${({ theme }) => css`
+    display: none;
 
-  summary {
-    list-style: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
+    summary {
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
 
-    &::-webkit-details-marker {
-      display: none;
+      &::-webkit-details-marker {
+        display: none;
+      }
     }
-  }
 
-  h3 {
-    color: ${({ theme }) => theme.colors.black};
-    font-size: ${({ theme }) => theme.fonts.sizes.xs};
-    font-weight: ${({ theme }) => theme.fonts.weights.bold};
-    text-transform: uppercase;
-    padding: 1rem 0;
-  }
-
-  summary img {
-    transform: rotate(180deg);
-  }
-
-  &[open] summary img {
-    transform: none;
-  }
-
-  li {
-    color: ${({ theme }) => theme.colors.black};
-    opacity: 0.7;
-    font-size: ${({ theme }) => theme.fonts.sizes.s};
-    font-weight: ${({ theme }) => theme.fonts.weights.bold};
-    margin-bottom: 0.875rem;
-
-    a:hover {
-      text-decoration: underline;
+    h3 {
+      color: ${theme.colors.black};
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: ${theme.fonts.weights.bold};
+      text-transform: uppercase;
+      padding: 1rem 0;
     }
-  }
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    display: initial;
-  }
+    summary img {
+      transform: rotate(180deg);
+    }
+
+    &[open] summary img {
+      transform: none;
+    }
+
+    li {
+      color: ${theme.colors.black};
+      opacity: 0.7;
+      font-size: ${theme.fonts.sizes.s};
+      font-weight: ${theme.fonts.weights.bold};
+      margin-bottom: 0.875rem;
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: initial;
+    }
+  `}
 `

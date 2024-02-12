@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import logoGouvernement from '../../../../public/images/logo-gouvernement.svg'
 import logoPassCulture from '../../../../public/images/logo-pass-culture.svg'
@@ -143,108 +143,120 @@ const StyledFooter = styled.footer`
 `
 
 const StyledContentContainer = styled.div`
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 5rem 1rem;
+  ${({ theme }) => css`
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 5rem 1rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    padding: 2rem 1rem;
-  }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: 2rem 1rem;
+    }
+  `}
 `
 
 const StyledTopSection = styled.div`
-  display: grid;
-  grid-template-columns: 25rem 1fr;
-  align-items: start;
-  gap: 6.25rem;
-  margin-bottom: 5rem;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 25rem 1fr;
+    align-items: start;
+    gap: 6.25rem;
+    margin-bottom: 5rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  `}
 `
 
 const StyledLogos = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  align-items: center;
-  justify-items: start;
-  gap: 3.125rem 3.75rem;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    align-items: center;
+    justify-items: start;
+    gap: 3.125rem 3.75rem;
 
-  img {
-    border: 1px solid;
-    max-width: 100%;
-  }
+    img {
+      border: 1px solid;
+      max-width: 100%;
+    }
 
-  a:nth-child(2) img {
-    mix-blend-mode: multiply;
-  }
+    a:nth-child(2) img {
+      mix-blend-mode: multiply;
+    }
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    gap: 2rem;
-  }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      gap: 2rem;
+    }
+  `}
 `
 
 const StyledDownloadBanner = styled(Link)`
-  grid-column: 1 / -1;
-  justify-self: stretch;
-  padding: 1.5rem 2rem;
-  border-radius: 0.625rem;
-  background: url('/images/banner-phone.svg'),
-    linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
-  background-position: bottom right;
-  background-size:
-    auto 80%,
-    cover;
-  background-repeat: no-repeat;
-  aspect-ratio: 3.1;
-  display: flex;
-  align-items: center;
+  ${({ theme }) => css`
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    padding: 1.5rem 2rem;
+    border-radius: 0.625rem;
+    background: url('/images/banner-phone.svg'),
+      linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
+    background-position: bottom right;
+    background-size:
+      auto 80%,
+      cover;
+    background-repeat: no-repeat;
+    aspect-ratio: 3.1;
+    display: flex;
+    align-items: center;
 
-  p {
-    color: ${({ theme }) => theme.colors.white};
-    font-size: ${({ theme }) => theme.fonts.sizes.xs};
-    font-weight: ${({ theme }) => theme.fonts.weights.bold};
-    text-transform: uppercase;
-    max-width: 50%;
-  }
+    p {
+      color: ${theme.colors.white};
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: ${theme.fonts.weights.bold};
+      text-transform: uppercase;
+      max-width: 50%;
+    }
+  `}
 `
 
 const StyledLists = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
-  gap: 4rem;
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    gap: 4rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    gap: 0;
-    grid-template-columns: 1fr;
-  }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      gap: 0;
+      grid-template-columns: 1fr;
+    }
+  `}
 `
 
 const StyledLegalLinks = styled.ul`
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: ${({ theme }) => theme.fonts.sizes.xs};
-  font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
-  color: ${({ theme }) => theme.colors.black};
-  opacity: 0.7;
+  ${({ theme }) => css`
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: ${theme.fonts.sizes.xs};
+    font-weight: ${theme.fonts.weights.semiBold};
+    color: ${theme.colors.black};
+    opacity: 0.7;
 
-  a:hover {
-    text-decoration: underline;
-  }
-
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    --legal-links-gap: 0.5rem;
-
-    justify-content: initial;
-    gap: var(--legal-links-gap);
-
-    li {
-      flex-basis: calc(50% - (var(--legal-links-gap) / 2));
+    a:hover {
+      text-decoration: underline;
     }
-  }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      --legal-links-gap: 0.5rem;
+
+      justify-content: initial;
+      gap: var(--legal-links-gap);
+
+      li {
+        flex-basis: calc(50% - (var(--legal-links-gap) / 2));
+      }
+    }
+  `}
 `
