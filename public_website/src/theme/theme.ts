@@ -5,6 +5,7 @@ export const theme = {
   colors: {
     black: Colors.BLACK,
     white: Colors.WHITE,
+    primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
   },
   fonts: {
