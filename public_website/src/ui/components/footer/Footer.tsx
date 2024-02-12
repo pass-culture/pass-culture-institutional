@@ -115,11 +115,6 @@ const StyledLogos = styled.div`
     justify-items: start;
     gap: 3.125rem 3.75rem;
 
-    img {
-      border: 1px solid;
-      max-width: 100%;
-    }
-
     a:nth-child(2) img {
       mix-blend-mode: multiply;
     }
