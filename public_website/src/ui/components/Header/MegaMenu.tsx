@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -100,73 +100,75 @@ export function MegaMenu({
 }
 
 const StyledMegaMenu = styled.section`
-  background-color: #f5f2fa;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(4rem + 4rem);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6.5rem;
-  padding: 6.25rem 2.5rem 8.125rem;
+  ${({ theme }) => css`
+    background-color: #f5f2fa;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(4rem + 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6.5rem;
+    padding: 6.25rem 2.5rem 8.125rem;
 
-  .heading {
-    p {
-      color: ${(props) => props.theme.colors.hardBlue};
-      font-size: var(--fs-40);
-      font-weight: 700;
-      line-height: 1.25;
-      margin-bottom: 1.25rem;
-    }
-  }
-
-  .list {
-    position: relative;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 3.75rem;
-
-      &::after {
-        content: '';
-        height: 100%;
-        width: 1px;
-        background: #3a116d;
-        opacity: 0.1;
-        position: absolute;
-        left: -4rem;
+    .heading {
+      p {
+        color: ${theme.colors.secondary};
+        font-size: ${theme.fonts.sizes['6xl']};
+        font-weight: ${theme.fonts.weights.bold};
+        line-height: 1.25;
+        margin-bottom: 1.25rem;
       }
     }
 
-    a {
-      font-size: ${(props) => props.theme.fonts.sizes[17]};
-      font-weight: ${(props) => props.theme.fonts.weights.semiBold};
-      color: ${(props) => props.theme.colors.black};
-      opacity: 0.9;
-    }
-  }
+    .list {
+      position: relative;
 
-  .card {
-    background-color: ${(props) => props.theme.colors.hardBlue};
-    border-radius: 0.5rem;
-    padding: 7.5rem 3.5rem 4.5rem;
-    text-align: center;
+      ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 3.75rem;
 
-    p:first-child {
-      color: ${(props) => props.theme.colors.hardBlue};
-      -webkit-text-stroke: 1px white;
-      font-size: var(--fs-35);
-      font-weight: ${(props) => props.theme.fonts.weights.black};
-      margin-bottom: 4.5rem;
+        &::after {
+          content: '';
+          height: 100%;
+          width: 1px;
+          background: #3a116d;
+          opacity: 0.1;
+          position: absolute;
+          left: -4rem;
+        }
+      }
+
+      a {
+        font-size: ${theme.fonts.sizes.l};
+        font-weight: ${theme.fonts.weights.semiBold};
+        color: ${theme.colors.black};
+        opacity: 0.9;
+      }
     }
 
-    p:nth-child(2) {
-      color: ${(props) => props.theme.colors.white};
-      font-size: ${(props) => props.theme.fonts.sizes[18]};
-      font-weight: ${(props) => props.theme.fonts.weights.medium};
-      margin-bottom: 3.75rem;
+    .card {
+      background-color: ${theme.colors.secondary};
+      border-radius: 0.5rem;
+      padding: 7.5rem 3.5rem 4.5rem;
+      text-align: center;
+
+      p:first-child {
+        color: ${theme.colors.secondary};
+        -webkit-text-stroke: 1px white;
+        font-size: ${theme.fonts.sizes['5xl']};
+        font-weight: ${theme.fonts.weights.black};
+        margin-bottom: 4.5rem;
+      }
+
+      p:nth-child(2) {
+        color: ${theme.colors.white};
+        font-size: ${theme.fonts.sizes.xl};
+        font-weight: ${theme.fonts.weights.medium};
+        margin-bottom: 3.75rem;
+      }
     }
-  }
+  `}
 `

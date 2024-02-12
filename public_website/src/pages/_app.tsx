@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { Footer, FooterProps } from '@/ui/components/footer/Footer'
-import { Header } from '@/ui/components/Header/Header'
+import { Header } from '@/ui/components/header/Header'
 import GlobalStyles from '@/ui/globalstyles'
 import { fetchCMS } from '@/utils/fetchCMS'
 

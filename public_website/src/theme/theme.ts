@@ -10,11 +10,18 @@ export const theme = {
   },
   fonts: {
     sizes: {
+      '2xs': FontSizes['2XS'],
       xs: FontSizes.XS,
       s: FontSizes.S,
       m: FontSizes.M,
       l: FontSizes.L,
       xl: FontSizes.XL,
+      '3xl': FontSizes['3XL'],
+      '4xl': FontSizes['4XL'],
+      '5xl': FontSizes['3XL'],
+      '6xl': FontSizes['6XL'],
+      '7xl': FontSizes['7XL'],
+      '8xl': FontSizes['8XL'],
     },
     weights: {
       medium: FontWeights.MEDIUM,

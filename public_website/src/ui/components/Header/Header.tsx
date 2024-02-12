@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
 import { LoginDropdown } from './LoginDropdown'
@@ -170,9 +170,9 @@ export function Header() {
 
   return (
     <StyledHeader>
-      <nav>
-        <ul className="main-nav">
-          <li className="logo">
+      <StyledNavigation>
+        <ul>
+          <li>
             <Link href="/">
               <Image src={LogoPassCulture} alt="Page d'accueil" width="150" />
             </Link>
@@ -181,7 +181,7 @@ export function Header() {
           {navElements.map((el, i) => {
             return (
               <React.Fragment key={i}>
-                <li>
+                <StyledNavigationItem>
                   <button
                     ref={(el) => (megaMenuButtonRefs.current[i] = el)}
                     id={`mega-menu-button-${i}`}
@@ -204,15 +204,15 @@ export function Header() {
                       onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
                     />
                   )}
-                </li>
+                </StyledNavigationItem>
                 {i === navTargetElements.length - 1 && (
-                  <li aria-hidden="true" />
+                  <StyledNavigationItem aria-hidden="true" />
                 )}
               </React.Fragment>
             )
           })}
 
-          <li className="login">
+          <StyledLoginItem>
             <button
               ref={loginButtonRef}
               id="login-dropdown"
@@ -228,20 +228,20 @@ export function Header() {
                 onBlur={onLoginDropdownBlur}
               />
             )}
-          </li>
+          </StyledLoginItem>
           <li>
             <Link href="#">{signUpLabel}</Link>
           </li>
 
           <li>
-            <button className="burger" aria-label="Ouvrir le menu">
+            <StyledBurgerMenu aria-label="Ouvrir le menu">
               <span />
               <span />
               <span />
-            </button>
+            </StyledBurgerMenu>
           </li>
         </ul>
-      </nav>
+      </StyledNavigation>
     </StyledHeader>
   )
 }
@@ -250,86 +250,96 @@ const StyledHeader = styled.header`
   max-width: 1440px;
   margin: 0 auto;
   position: relative;
+`
 
-  .main-nav {
+const StyledNavigation = styled.nav`
+  ul {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     padding: 2rem 1rem;
     height: 4rem;
 
-    > li {
-      .logo {
-        margin-right: 1rem;
-
-        img {
-          display: block;
-          width: 9.375rem;
-        }
-      }
-
-      &.login {
-        margin-left: auto;
-        position: relative;
-      }
-
-      &[aria-hidden] {
-        background-color: ${(props) => props.theme.colors.black};
-        opacity: 0.2;
-        height: 1.25rem;
-        width: 1px;
-      }
-
-      .mega-menu-active {
-        color: #94008c;
-        position: relative;
-
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0.5rem;
-          right: 0.5rem;
-          bottom: 0;
-          background: #94008c;
-          height: 1px;
-        }
-      }
-
-      button {
-        background: none;
-        border: none;
-        font-size: ${(props) => props.theme.fonts.sizes[14]};
-        font-weight: 500;
-        padding: 0.5rem;
-
-        &.burger {
-          display: none;
-          flex-direction: column;
-          gap: 0.5rem;
-          padding: 0;
-
-          span {
-            background-color: #94008c;
-            height: 0.1rem;
-            width: 1.75rem;
-          }
-
-          @media (max-width: 62.5rem) {
-            display: flex;
-          }
-        }
-      }
-
-      &:not(:first-child, :last-child) {
-        @media (max-width: 62.5rem) {
-          display: none;
-        }
-      }
-    }
-
     @media (max-width: 62.5rem) {
       justify-content: space-between;
       padding: 1.5rem 1rem;
     }
+  }
+`
+
+const StyledNavigationItem = styled.li`
+  ${({ theme }) => css`
+    &:first-child {
+      margin-right: 1rem;
+
+      img {
+        display: block;
+        width: 9.375rem;
+      }
+    }
+
+    &[aria-hidden] {
+      background-color: ${theme.colors.black};
+      opacity: 0.2;
+      height: 1.25rem;
+      width: 1px;
+    }
+
+    .mega-menu-active {
+      color: #94008c;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0.5rem;
+        right: 0.5rem;
+        bottom: 0;
+        background: #94008c;
+        height: 1px;
+      }
+    }
+
+    button {
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: 500;
+      padding: 0.5rem;
+    }
+
+    &:not(:first-child, :last-child) {
+      @media (max-width: 62.5rem) {
+        display: none;
+      }
+    }
+  `}
+`
+
+const StyledLoginItem = styled.li`
+  ${({ theme }) => css`
+    margin-left: auto;
+    position: relative;
+
+    button {
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: 500;
+      padding: 0.5rem;
+    }
+  `}
+`
+
+const StyledBurgerMenu = styled.button`
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+
+  span {
+    background-color: #94008c;
+    height: 0.1rem;
+    width: 1.75rem;
+  }
+
+  @media (max-width: 62.5rem) {
+    display: flex;
   }
 `

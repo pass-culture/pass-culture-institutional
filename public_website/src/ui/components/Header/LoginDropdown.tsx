@@ -1,7 +1,7 @@
 import React, { Ref, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import ArrowRight from '../../../../public/images/arrow-right.svg'
 
@@ -70,13 +70,10 @@ export function LoginDropdown({
 
   return (
     <StyledLoginDropdown ref={loginDropdownRef}>
-      <ul
-        className="login-list"
-        aria-labelledby="login-dropdown"
-        id="login-menu">
+      <ul aria-labelledby="login-dropdown" id="login-menu">
         {loginItems.map((item, i) => (
           <React.Fragment key={i}>
-            <li>
+            <StyledLoginDropdownItem>
               <Link href={item.url}>
                 {/* @ts-expect-error: FIXME: allow setting inline CSS properties */}
                 <span style={{ '--login-item-color': item.color }}>
@@ -85,7 +82,7 @@ export function LoginDropdown({
                 <p>{item.label}</p>
                 <Image src={ArrowRight} alt="" />
               </Link>
-            </li>
+            </StyledLoginDropdownItem>
             {i !== loginItems.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>
         ))}
@@ -95,38 +92,42 @@ export function LoginDropdown({
 }
 
 const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
-  position: absolute;
-  top: calc(100% + 2rem);
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
+  ${({ theme }) => css`
+    position: absolute;
+    top: calc(100% + 2rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
 
-  .login-list {
-    background: #ffffff;
-    box-shadow: -4px 8px 14px 0px #9f9f9f26;
-    border-radius: 1rem;
-    padding: 2rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    ul {
+      background: ${theme.colors.white};
+      box-shadow: -4px 8px 14px 0px #9f9f9f26;
+      border-radius: 1rem;
+      padding: 2rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
 
-    &::after {
-      content: '';
-      width: 2rem;
-      height: 2rem;
-      background: #ffffff;
-      border-radius: 5px;
-      position: absolute;
-      top: -0.5rem;
-      left: calc(50%);
-      transform: translateX(-50%) rotate(45deg);
+      &::after {
+        content: '';
+        width: 2rem;
+        height: 2rem;
+        background: ${theme.colors.white};
+        border-radius: 0.25rem;
+        position: absolute;
+        top: -0.5rem;
+        left: calc(50%);
+        transform: translateX(-50%) rotate(45deg);
+      }
     }
-  }
+  `}
+`
 
-  li {
+const StyledLoginDropdownItem = styled.li`
+  ${({ theme }) => css`
     &[aria-hidden] {
-      background-color: #000000;
+      background-color: ${theme.colors.black};
       opacity: 0.2;
       height: 1px;
       width: 100%;
@@ -148,16 +149,16 @@ const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
         justify-content: center;
 
         span {
-          font-size: var(--fs-24);
+          font-size: ${theme.fonts.sizes['3xl']};
         }
       }
 
       p {
-        font-weight: 600;
-        font-size: var(--fs-18);
+        font-weight: ${theme.fonts.weights.semiBold};
+        font-size: ${theme.fonts.sizes.xl};
         flex-shrink: 0;
         max-width: 16ch;
       }
     }
-  }
+  `}
 `

@@ -59,7 +59,7 @@ export interface FooterLegalLinks extends Schema.Component {
 export interface FooterList extends Schema.Component {
   collectionName: 'components_footer_lists';
   info: {
-    displayName: 'List';
+    displayName: 'Lists';
     description: '';
   };
   attributes: {

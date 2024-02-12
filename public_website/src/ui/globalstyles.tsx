@@ -140,6 +140,13 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  button {
+    background: none;
+    border: none;
+    font: inherit;
+    padding: 0;
+  }
 `
 
 export default GlobalStyles
