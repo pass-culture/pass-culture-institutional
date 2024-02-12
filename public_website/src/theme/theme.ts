@@ -41,6 +41,9 @@ export const theme = {
       color: Colors.BLACK,
     },
   },
+  mediaQueries: {
+    mobile: '50rem',
+  },
 } as const
 
 export type AppTheme = typeof theme

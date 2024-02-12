@@ -47,7 +47,7 @@ const StyledFooterList = styled.div`
     }
   }
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: none;
   }
 `

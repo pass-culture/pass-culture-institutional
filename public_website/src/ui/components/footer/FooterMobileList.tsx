@@ -67,7 +67,7 @@ const StyledMobileFooterList = styled.details`
     }
   }
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: initial;
   }
 `

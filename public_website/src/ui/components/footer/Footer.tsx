@@ -147,7 +147,7 @@ const StyledContentContainer = styled.div`
   margin: 0 auto;
   padding: 5rem 1rem;
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 2rem 1rem;
   }
 `
@@ -159,7 +159,7 @@ const StyledTopSection = styled.div`
   gap: 6.25rem;
   margin-bottom: 5rem;
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -182,7 +182,7 @@ const StyledLogos = styled.div`
     mix-blend-mode: multiply;
   }
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     gap: 2rem;
   }
 `
@@ -217,7 +217,7 @@ const StyledLists = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   gap: 4rem;
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     gap: 0;
     grid-template-columns: 1fr;
   }
@@ -237,7 +237,7 @@ const StyledLegalLinks = styled.ul`
     text-decoration: underline;
   }
 
-  @media (max-width: 50rem) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     --legal-links-gap: 0.5rem;
 
     justify-content: initial;
