@@ -5,8 +5,7 @@ export const theme = {
   colors: {
     black: Colors.BLACK,
     white: Colors.WHITE,
-    hardBlue: Colors.HARD_BLUE,
-    pinkOne: Colors.PINK_ONE,
+    secondary: Colors.SECONDARY,
   },
   fonts: {
     sizes: {

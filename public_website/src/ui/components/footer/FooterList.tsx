@@ -25,7 +25,7 @@ export function FooterList({ title, listItems }: FooterListProps) {
 
 const StyledFooterList = styled.div`
   h3 {
-    color: ${({ theme }) => theme.colors.hardBlue};
+    color: ${({ theme }) => theme.colors.secondary};
     text-transform: uppercase;
     font-size: ${({ theme }) => theme.fonts.sizes.xs};
     margin-bottom: 1rem;

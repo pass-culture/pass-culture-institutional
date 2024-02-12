@@ -193,11 +193,7 @@ const StyledDownloadBanner = styled(Link)`
   padding: 1.5rem 2rem;
   border-radius: 0.625rem;
   background: url('/images/banner-phone.svg'),
-    linear-gradient(
-      138.16deg,
-      #610286 10%,
-      ${({ theme }) => theme.colors.pinkOne} 100%
-    );
+    linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
   background-position: bottom right;
   background-size:
     auto 80%,
