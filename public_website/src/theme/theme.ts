@@ -10,9 +10,9 @@ export const theme = {
   },
   fonts: {
     sizes: {
-      14: FontSizes.XS,
-      15: FontSizes.S,
-      16: FontSizes.M,
+      xs: FontSizes.XS,
+      s: FontSizes.S,
+      m: FontSizes.M,
     },
     weights: {
       semiBold: FontWeights.SEMI_BOLD,
