@@ -11,10 +11,10 @@ export function FooterList({ title, listItems }: FooterListProps) {
     <StyledFooterList>
       <h3>{title}</h3>
       <ul>
-        {listItems.map((el, i) => {
+        {listItems.map((anchor) => {
           return (
-            <li key={i}>
-              <a href={el.href}>{el.label}</a>
+            <li key={anchor.label}>
+              <a href={anchor.href}>{anchor.label}</a>
             </li>
           )
         })}

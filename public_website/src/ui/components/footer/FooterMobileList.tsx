@@ -13,10 +13,10 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
         <Image src={accordionChevron} alt="" />
       </summary>
       <ul>
-        {listItems.map((el, i) => {
+        {listItems.map((anchor) => {
           return (
-            <li key={i}>
-              <a href={el.href}>{el.label}</a>
+            <li key={anchor.label}>
+              <a href={anchor.href}>{anchor.label}</a>
             </li>
           )
         })}
