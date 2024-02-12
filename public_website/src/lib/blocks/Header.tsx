@@ -9,10 +9,9 @@ interface HeaderProps {
 export function Header(props: HeaderProps) {
   return (
     <div data-testid="header">
-      Header
-      <pre>
-        <code>{JSON.stringify(props, null, 2)}</code>
-      </pre>
+      Header Title: {props.Title}
+      Text: {props.Text}
+      Surtitle: {props.Surtitle}
     </div>
   )
 }
