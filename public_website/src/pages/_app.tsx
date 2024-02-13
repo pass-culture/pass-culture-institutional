@@ -23,7 +23,6 @@ export default function MyApp({
       <GlobalStyles />
       {/* eslint-disable-next-line react/no-unknown-property */}
       <style jsx global>{`
-        // NOSONAR(typescript:S6747) exceptionally allow global JSX attributes for global font import
         html {
           font-family: ${montSerrat.style.fontFamily} !important;
         }
