@@ -21,9 +21,9 @@ export default function MyApp({
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {/* Import font globally */}
       {/* eslint-disable-next-line react/no-unknown-property */}
       <style jsx global>{`
+        // NOSONAR(typescript:S6747) exceptionally allow global JSX attributes for global font import
         html {
           font-family: ${montSerrat.style.fontFamily} !important;
         }
