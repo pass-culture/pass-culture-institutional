@@ -21,7 +21,8 @@
     "CTASection": {
       "type": "component",
       "repeatable": false,
-      "component": "block.push-cta"
+      "component": "block.push-cta",
+      "required": true
     }
   }
 }

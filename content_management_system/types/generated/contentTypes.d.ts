@@ -885,7 +885,7 @@ export interface ApiHomeHome extends Schema.SingleType {
 =======
     AboutSection: Attribute.Component<'block.centered-text'> &
       Attribute.Required;
-    CTASection: Attribute.Component<'block.push-cta'>;
+    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
