@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
+import { Button } from '../button/Button'
 import {
   LoginDropdown as LoginDropdownComponent,
   LoginDropdownItemProps,
@@ -157,7 +158,9 @@ export function Header({
             )}
           </StyledLoginItem>
           <li>
-            <Link href="#">{SignUpLabel}</Link>
+            <Button href="#" target="_blank">
+              {SignUpLabel}
+            </Button>
           </li>
 
           <li>

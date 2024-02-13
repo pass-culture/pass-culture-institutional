@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { Button } from '../button/Button'
+
 type MegaMenuProps = {
   onBlur: () => void
   onKeyDown: (e: KeyboardEvent | React.KeyboardEvent) => void
@@ -66,7 +68,7 @@ export function MegaMenu({
     <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
       <StyledMegaMenuHeading>
         <p>{data.Title}</p>
-        <Link href={data.Cta.URL}>{data.Cta.Label}</Link>
+        <Button href={data.Cta.URL}>{data.Cta.Label}</Button>
       </StyledMegaMenuHeading>
 
       <StyledMegaMenuLists>
@@ -118,7 +120,7 @@ const StyledMegaMenuHeading = styled.div`
       font-size: ${theme.fonts.sizes['6xl']};
       font-weight: ${theme.fonts.weights.bold};
       line-height: 1.25;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
   `}
 `
