@@ -244,7 +244,7 @@ const StyledNavigationItem = styled.li`
     }
 
     .mega-menu-active {
-      color: #94008c;
+      color: ${theme.colors.primary};
       position: relative;
 
       &::after {
@@ -253,7 +253,7 @@ const StyledNavigationItem = styled.li`
         left: 0.5rem;
         right: 0.5rem;
         bottom: 0;
-        background: #94008c;
+        background: ${theme.colors.primary};
         height: 1px;
       }
     }
@@ -291,36 +291,40 @@ const StyledMobileMenuButton = styled.button`
 `
 
 const StyledBurgerMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0;
-  width: 100%;
-
-  span {
-    background-color: #94008c;
-    height: 0.1rem;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0;
     width: 100%;
-  }
+
+    span {
+      background-color: ${theme.colors.primary};
+      height: 0.1rem;
+      width: 100%;
+    }
+  `}
 `
 
 const StyledCrossMenu = styled.div`
-  position: relative;
-  width: 100%;
-
-  span {
-    background-color: #94008c;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 0.1rem;
+  ${({ theme }) => css`
+    position: relative;
     width: 100%;
-    transform: translateX(-50%) rotate(-45deg);
-    transform-origin: center;
 
-    &:last-child {
-      transform: translateX(-50%) rotate(45deg);
+    span {
+      background-color: ${theme.colors.primary};
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 0.1rem;
+      width: 100%;
+      transform: translateX(-50%) rotate(-45deg);
+      transform-origin: center;
+
+      &:last-child {
+        transform: translateX(-50%) rotate(45deg);
+      }
     }
-  }
+  `}
 `

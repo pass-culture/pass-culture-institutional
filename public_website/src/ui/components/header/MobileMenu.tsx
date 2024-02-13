@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { HeaderProps } from './Header'
+import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
+import { MobileMenuLoginSubPanel } from './MobileMenuLoginSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
 
 export function MobileMenu({
@@ -34,20 +36,39 @@ export function MobileMenu({
   }
 
   function getMobileMenuSubPanelContent() {
-    if (subPanelType === 'login') {
-      // mettre le if dans le MobileMenuSubPanel
-      return (
-        <MobileMenuSubPanel onClose={closeSubPanel} title="Login">
-          <p>Login</p>
-        </MobileMenuSubPanel>
-      )
-    } else {
-      return (
-        <MobileMenuSubPanel onClose={closeSubPanel} title="Liste">
-          <p>List: {subPanelListIndex}</p>
-        </MobileMenuSubPanel>
-      )
-    }
+    const isLoginPanel = subPanelType === 'login'
+
+    return (
+      <MobileMenuSubPanel
+        onClose={closeSubPanel}
+        // TODO: fix types
+        title={
+          isLoginPanel
+            ? 'Login'
+            : typeof subPanelListIndex === 'number'
+            ? navItems[subPanelListIndex]?.Label
+            : 'pouet'
+        }>
+        {isLoginPanel ? (
+          <MobileMenuLoginSubPanel />
+        ) : typeof subPanelListIndex === 'number' ? (
+          <MobileMenuListSubPanel
+            {...navItems[subPanelListIndex]?.MegaMenu}
+            PrimaryList={navItems[subPanelListIndex]?.MegaMenu.PrimaryListItems}
+            SecondaryList={
+              navItems[subPanelListIndex]?.MegaMenu.SecondaryListItems
+            }
+            CardTitle={navItems[subPanelListIndex]?.MegaMenu.CardTitle}
+            CardDescription={
+              navItems[subPanelListIndex]?.MegaMenu.CardDescription
+            }
+            CardLink={navItems[subPanelListIndex]?.MegaMenu.CardLink}
+          />
+        ) : (
+          'pouet'
+        )}
+      </MobileMenuSubPanel>
+    )
   }
 
   return (
@@ -133,7 +154,7 @@ const StyledMobileMenuListItem = styled.li`
         width: 0.625rem;
         height: 2px;
         border-radius: 1px;
-        background-color: #94008c;
+        background-color: ${theme.colors.primary};
         transform-origin: right;
       }
 
