@@ -9,16 +9,14 @@ function useFocusTrap() {
       'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
     )
 
-    if (!focusableElements) return
+    if (!focusableElements || e.key !== 'Tab') {
+      return
+    }
 
     const firstFocusableElement = focusableElements[0] as HTMLElement
     const lastFocusableElement = focusableElements[
       focusableElements.length - 1
     ] as HTMLElement
-
-    if (e.key !== 'Tab') {
-      return
-    }
 
     // SHIFT + TAB
     if (e.shiftKey) {

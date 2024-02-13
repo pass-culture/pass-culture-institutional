@@ -91,6 +91,10 @@ export function Header({
     showMobileMenu
       ? document.body.removeAttribute('style')
       : document.body.setAttribute('style', 'overflow: hidden')
+
+    setTimeout(() => {
+      mobileMenuButtonRef.current?.focus()
+    }, 1)
   }
 
   // Close mobile menu + focus burger button on "Escape"
@@ -103,8 +107,10 @@ export function Header({
     }
   }
 
+  const Wrapper = showMobileMenu ? FocusTrap : React.Fragment
+
   return (
-    <FocusTrap>
+    <Wrapper>
       <StyledHeader>
         <StyledNavigation>
           <ul>
@@ -207,7 +213,7 @@ export function Header({
           )}
         </StyledNavigation>
       </StyledHeader>
-    </FocusTrap>
+    </Wrapper>
   )
 }
 
