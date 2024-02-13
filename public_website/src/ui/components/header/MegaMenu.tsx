@@ -6,7 +6,7 @@ import { Button } from '../button/Button'
 
 type MegaMenuProps = {
   onBlur: () => void
-  onKeyDown: (e: KeyboardEvent | React.KeyboardEvent) => void
+  onKeyDown: (e: KeyboardEvent) => void
   getOpenButtonEl: () => HTMLButtonElement | null
   id: string
   labelId: string

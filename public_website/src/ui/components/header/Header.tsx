@@ -92,6 +92,16 @@ export function Header({
       : document.body.setAttribute('style', 'overflow: hidden')
   }
 
+  // Close mobile menu + focus burger button on "Escape"
+  const mobileMenuButtonRef = useRef(null)
+
+  function onMobileMenuKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      setShowMobileMenu(false)
+      mobileMenuButtonRef.current?.focus()
+    }
+  }
+
   return (
     <StyledHeader>
       <StyledNavigation>
@@ -162,6 +172,7 @@ export function Header({
 
           <li>
             <StyledMobileMenuButton
+              ref={mobileMenuButtonRef}
               onClick={toggleMobileMenu}
               aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}
               aria-expanded={showMobileMenu}
@@ -187,6 +198,7 @@ export function Header({
             AboutItems={AboutItems}
             Login={Login}
             SignUp={SignUp}
+            onKeyDown={(e) => onMobileMenuKeyDown(e)}
           />
         )}
       </StyledNavigation>

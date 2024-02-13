@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../../button/Button'
@@ -7,12 +7,17 @@ import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
 import { MobileMenuLoginSubPanel } from './MobileMenuLoginSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
 
+type MobileMenuProps = HeaderProps & {
+  onKeyDown: (e: KeyboardEvent) => void
+}
+
 export function MobileMenu({
+  onKeyDown,
   TargetItems,
   AboutItems,
   Login,
   SignUp,
-}: HeaderProps) {
+}: MobileMenuProps) {
   const navItems = [...TargetItems, ...AboutItems]
 
   const [subPanelType, setSubPanelType] = useState<'login' | 'list' | null>(
@@ -77,8 +82,22 @@ export function MobileMenu({
     )
   }
 
+  const mobileMenuRef = useRef(null)
+  useEffect(() => {
+    const mobileMenuElement = mobileMenuRef.current
+    mobileMenuElement?.addEventListener('keydown', (e: KeyboardEvent) =>
+      onKeyDown(e)
+    )
+
+    return () => {
+      mobileMenuElement?.removeEventListener('keydown', (e: KeyboardEvent) =>
+        onKeyDown(e)
+      )
+    }
+  })
+
   return (
-    <StyledMobileMenuWrapper>
+    <StyledMobileMenuWrapper ref={mobileMenuRef}>
       {subPanelType ? (
         getMobileMenuSubPanelContent()
       ) : (
