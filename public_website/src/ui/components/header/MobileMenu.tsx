@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { HeaderProps } from './Header'
+import { MobileMenuSubPanel } from './MobileMenuSubPanel'
 
 export function MobileMenu({
   TargetItems,
@@ -12,32 +13,79 @@ export function MobileMenu({
 }: HeaderProps) {
   const navItems = [...TargetItems, ...AboutItems]
 
+  const [subPanelType, setSubPanelType] = useState<'login' | 'list' | null>(
+    null
+  )
+  const [subPanelListIndex, setSubPanelListIndex] = useState<number | null>(
+    null
+  )
+
+  function openSubPanel(type: 'login' | 'list', index?: number) {
+    setSubPanelType(type)
+
+    if (typeof index === 'number') {
+      setSubPanelListIndex(index)
+    }
+  }
+
+  function closeSubPanel() {
+    setSubPanelType(null)
+    setSubPanelListIndex(null)
+  }
+
+  function getMobileMenuSubPanelContent() {
+    if (subPanelType === 'login') {
+      // mettre le if dans le MobileMenuSubPanel
+      return (
+        <MobileMenuSubPanel onClose={closeSubPanel} title="Login">
+          <p>Login</p>
+        </MobileMenuSubPanel>
+      )
+    } else {
+      return (
+        <MobileMenuSubPanel onClose={closeSubPanel} title="Liste">
+          <p>List: {subPanelListIndex}</p>
+        </MobileMenuSubPanel>
+      )
+    }
+  }
+
   return (
     <StyledMobileMenuWrapper>
-      <StyledMobileMenuList>
-        {navItems.map((item, i) => {
-          return (
-            <React.Fragment key={item.Label}>
-              <StyledMobileMenuListItem>
-                <button>{item.Label}</button>
-              </StyledMobileMenuListItem>
-              {i === TargetItems.length - 1 && (
-                <StyledMobileMenuListItem aria-hidden="true" />
-              )}
-            </React.Fragment>
-          )
-        })}
-      </StyledMobileMenuList>
-      <StyledMobileMenuFooter>
-        <li>
-          <button>{LoginDropdown.ButtonLabel}</button>
-        </li>
-        <li>
-          <Button href={SignUp.URL} target="_blank">
-            {SignUp.Label}
-          </Button>
-        </li>
-      </StyledMobileMenuFooter>
+      {subPanelType ? (
+        getMobileMenuSubPanelContent()
+      ) : (
+        <React.Fragment>
+          <StyledMobileMenuList>
+            {navItems.map((item, i) => {
+              return (
+                <React.Fragment key={item.Label}>
+                  <StyledMobileMenuListItem>
+                    <button onClick={() => openSubPanel('list', i)}>
+                      {item.Label}
+                    </button>
+                  </StyledMobileMenuListItem>
+                  {i === TargetItems.length - 1 && (
+                    <StyledMobileMenuListItem aria-hidden="true" />
+                  )}
+                </React.Fragment>
+              )
+            })}
+          </StyledMobileMenuList>
+          <StyledMobileMenuFooter>
+            <li>
+              <button onClick={() => openSubPanel('login')}>
+                {LoginDropdown.ButtonLabel}
+              </button>
+            </li>
+            <li>
+              <Button href={SignUp.URL} target="_blank">
+                {SignUp.Label}
+              </Button>
+            </li>
+          </StyledMobileMenuFooter>
+        </React.Fragment>
+      )}
     </StyledMobileMenuWrapper>
   )
 }

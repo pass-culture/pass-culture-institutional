@@ -87,7 +87,7 @@ export function Header({
   }
 
   // Toggle mobile menu + disable scroll on body
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(true)
   function toggleMobileMenu() {
     setShowMobileMenu(!showMobileMenu)
     showMobileMenu
