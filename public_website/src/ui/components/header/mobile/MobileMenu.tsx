@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../../button/Button'
@@ -30,9 +30,16 @@ export function MobileMenu({
     }
   }
 
+  const mainNavigationRef = useRef(null)
+
   function closeSubPanel() {
     setSubPanelType(null)
     setSubPanelListIndex(null)
+
+    setTimeout(() => {
+      // TODO: fix type
+      mainNavigationRef.current?.focus()
+    }, 1)
   }
 
   function getMobileMenuSubPanelContent() {
@@ -53,7 +60,6 @@ export function MobileMenu({
           <MobileMenuLoginSubPanel LoginItems={Login.Items} />
         ) : typeof subPanelListIndex === 'number' ? (
           <MobileMenuListSubPanel
-            {...navItems[subPanelListIndex]?.MegaMenu}
             PrimaryList={navItems[subPanelListIndex]?.MegaMenu.PrimaryListItems}
             SecondaryList={
               navItems[subPanelListIndex]?.MegaMenu.SecondaryListItems
@@ -77,7 +83,11 @@ export function MobileMenu({
         getMobileMenuSubPanelContent()
       ) : (
         <React.Fragment>
-          <StyledMobileMenuList>
+          <StyledMobileMenuList
+            ref={mainNavigationRef}
+            tabIndex={0}
+            aria-label="Menu principal"
+            id="mobile-menu-main-navigation">
             {navItems.map((item, i) => {
               return (
                 <React.Fragment key={item.Label}>
@@ -125,7 +135,7 @@ const StyledMobileMenuWrapper = styled.div`
   `}
 `
 
-const StyledMobileMenuList = styled.ul`
+const StyledMobileMenuList = styled.ul<{ tabIndex: number }>`
   display: flex;
   flex-direction: column;
   gap: 2rem;

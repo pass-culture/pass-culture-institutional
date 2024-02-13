@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
@@ -17,9 +17,19 @@ export function MobileMenuListSubPanel({
   CardDescription,
   CardLink,
 }: MobileMenuListSubPanelProps) {
+  const listRef = useRef(null)
+
+  useEffect(() => {
+    // FIXME: fix type
+    listRef.current?.focus()
+  })
+
   return (
     <div>
-      <StyledSubPanelList>
+      <StyledSubPanelList
+        ref={listRef}
+        tabIndex={0}
+        aria-labelledby="sub-panel-title">
         {PrimaryList.map((item, i) => {
           return (
             <li key={i}>
@@ -46,7 +56,7 @@ export function MobileMenuListSubPanel({
   )
 }
 
-const StyledSubPanelList = styled.ul`
+const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;

@@ -22,7 +22,7 @@ export function MobileMenuSubPanel({
         Retour <span className="visually-hidden">au menu principal</span>
       </button>
 
-      <p>{title}</p>
+      <p id="sub-panel-title">{title}</p>
       <span aria-hidden="true" />
 
       {children}

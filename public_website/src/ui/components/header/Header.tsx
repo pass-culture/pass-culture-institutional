@@ -84,7 +84,7 @@ export function Header({
   }
 
   // Toggle mobile menu + disable scroll on body
-  const [showMobileMenu, setShowMobileMenu] = useState(true)
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   function toggleMobileMenu() {
     setShowMobileMenu(!showMobileMenu)
     showMobileMenu
@@ -163,7 +163,9 @@ export function Header({
           <li>
             <StyledMobileMenuButton
               onClick={toggleMobileMenu}
-              aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}>
+              aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}
+              aria-expanded={showMobileMenu}
+              aria-controls="mobile-menu-main-navigation">
               {showMobileMenu ? (
                 <StyledCrossMenu>
                   <span />
@@ -179,15 +181,15 @@ export function Header({
             </StyledMobileMenuButton>
           </li>
         </ul>
+        {showMobileMenu && (
+          <MobileMenu
+            TargetItems={TargetItems}
+            AboutItems={AboutItems}
+            Login={Login}
+            SignUp={SignUp}
+          />
+        )}
       </StyledNavigation>
-      {showMobileMenu && (
-        <MobileMenu
-          TargetItems={TargetItems}
-          AboutItems={AboutItems}
-          Login={Login}
-          SignUp={SignUp}
-        />
-      )}
     </StyledHeader>
   )
 }
