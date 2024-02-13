@@ -191,7 +191,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
             },
           ],
         },
-        SignUpLabel: 'Inscription',
+        SignUp: { Label: 'Inscription', URL: '#' },
       },
     },
   }

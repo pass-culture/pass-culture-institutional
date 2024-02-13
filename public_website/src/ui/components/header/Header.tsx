@@ -19,7 +19,7 @@ export type HeaderProps = {
     ButtonLabel: string
     Items: LoginDropdownItemProps[]
   }
-  SignUpLabel: string
+  SignUp: { Label: string; URL: string }
 }
 
 export type HeaderNavigationItem = {
@@ -39,7 +39,7 @@ export function Header({
   TargetItems,
   AboutItems,
   LoginDropdown,
-  SignUpLabel,
+  SignUp,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
 
@@ -158,8 +158,8 @@ export function Header({
             )}
           </StyledLoginItem>
           <li>
-            <Button href="#" target="_blank">
-              {SignUpLabel}
+            <Button href={SignUp.URL} target="_blank">
+              {SignUp.Label}
             </Button>
           </li>
 
@@ -183,7 +183,14 @@ export function Header({
           </li>
         </ul>
       </StyledNavigation>
-      {showMobileMenu && <MobileMenu />}
+      {showMobileMenu && (
+        <MobileMenu
+          TargetItems={TargetItems}
+          AboutItems={AboutItems}
+          LoginDropdown={LoginDropdown}
+          SignUp={SignUp}
+        />
+      )}
     </StyledHeader>
   )
 }
