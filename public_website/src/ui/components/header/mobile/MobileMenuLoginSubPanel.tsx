@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { LoginItemProps } from '../LoginDropdown'
@@ -11,8 +11,18 @@ type MobileMenuLoginSubPanelProps = {
 export function MobileMenuLoginSubPanel({
   LoginItems,
 }: MobileMenuLoginSubPanelProps) {
+  // Focus list on mount
+  const loginListRef = useRef<HTMLUListElement>(null)
+
+  useEffect(() => {
+    loginListRef.current?.focus()
+  })
+
   return (
-    <StyledSubPanelLoginItems>
+    <StyledSubPanelLoginItems
+      ref={loginListRef}
+      tabIndex={0}
+      aria-labelledby="sub-panel-title">
       {LoginItems.map((item, i) => {
         return <LoginItem key={i} {...item} />
       })}
