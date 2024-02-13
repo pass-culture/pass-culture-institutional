@@ -22,7 +22,8 @@
       "components": [
         "block.centered-text",
         "block.header",
-        "block.simple-text"
+        "block.simple-text",
+        "block.push-cta"
       ]
     }
   }

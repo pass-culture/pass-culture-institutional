@@ -852,7 +852,11 @@ export interface ApiHomeHome extends Schema.SingleType {
     singularName: 'home';
     pluralName: 'homes';
     displayName: 'Home';
+<<<<<<< HEAD
 >>>>>>> bef7d46 (create about section)
+=======
+    description: '';
+>>>>>>> d630add (make some fields in strapi)
   };
   options: {
     draftAndPublish: true;
@@ -881,6 +885,7 @@ export interface ApiHomeHome extends Schema.SingleType {
 =======
     AboutSection: Attribute.Component<'block.centered-text'> &
       Attribute.Required;
+    CTASection: Attribute.Component<'block.push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -942,7 +947,12 @@ export interface ApiPagePage extends Schema.CollectionType {
   attributes: {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
-      ['block.centered-text', 'block.header', 'block.simple-text']
+      [
+        'block.centered-text',
+        'block.header',
+        'block.simple-text',
+        'block.push-cta'
+      ]
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

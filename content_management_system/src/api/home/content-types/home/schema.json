@@ -4,7 +4,8 @@
   "info": {
     "singularName": "home",
     "pluralName": "homes",
-    "displayName": "Home"
+    "displayName": "Home",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,11 @@
       "repeatable": false,
       "component": "block.centered-text",
       "required": true
+    },
+    "CTASection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.push-cta"
     }
   }
 }

@@ -1,5 +1,7 @@
 import React from 'react'
+import type { Attribute } from '@strapi/types'
 import type { GetStaticProps } from 'next'
+import { stringify } from 'qs'
 
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { PushCTA } from '@/lib/blocks/PushCTA'
@@ -10,6 +12,11 @@ interface HomeData {
     AboutSection: {
       Title: string
       Text: string
+    }
+    CTASection: {
+      Title: string
+      Text: string
+      Image: Attribute.Media<'images', false>
     }
   }
 }
@@ -26,7 +33,10 @@ export default function Home(props: HomeProps) {
         Text={props.data.attributes.AboutSection.Text}
       />
 
-      <PushCTA />
+      <PushCTA
+        Title={props.data.attributes.CTASection.Title}
+        Text={props.data.attributes.CTASection.Text}
+      />
 
       <p>
         Amet consectetur pariatur incididunt veniam. Aliquip irure culpa
@@ -40,7 +50,10 @@ export default function Home(props: HomeProps) {
 }
 
 export const getStaticProps = (async () => {
-  const { data } = await fetchCMS<HomeData>('/home?populate=*')
+  const query = stringify({
+    populate: ['AboutSection', 'CTASection.Image'],
+  })
+  const { data } = await fetchCMS<HomeData>(`/home?${query}`)
   return {
     props: {
       data,

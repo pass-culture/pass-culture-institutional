@@ -2,7 +2,12 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled from 'styled-components'
 
-export function PushCTA() {
+interface PushCTAProps {
+  Title: string
+  Text?: string
+}
+
+export function PushCTA(props: PushCTAProps) {
   const qrCodeUrl = 'https://example.com'
 
   const { SVG: QrCode } = useQRCode()
@@ -20,11 +25,8 @@ export function PushCTA() {
         </QRCodeCard>
       </ImageContainer>
       <RightSide>
-        <h2>Explore la culture en un clic</h2>
-        <p>
-          Télécharge l’app pass Culture et découvre les bons plans culture près
-          de chez toi
-        </p>
+        <h2>{props.Title}</h2>
+        {props.Text && <p>{props.Text}</p>}
         <CtaLink href="https://example.com">Télécharger l’application</CtaLink>
       </RightSide>
     </Root>

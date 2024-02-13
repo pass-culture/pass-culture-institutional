@@ -25,6 +25,19 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockPushCta extends Schema.Component {
+  collectionName: 'components_block_push_ctas';
+  info: {
+    displayName: 'PushCTA';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text;
+    Image: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
@@ -141,6 +154,7 @@ declare module '@strapi/types' {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
       'common.link': CommonLink;
       'footer.legal-links': FooterLegalLinks;
