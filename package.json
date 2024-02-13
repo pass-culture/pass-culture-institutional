@@ -16,7 +16,8 @@
     "test:deadcode": "scripts/check_dead_code.sh",
     "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt",
     "test:lint": "concurrently \"cd public_website && yarn test:lint\" \"cd content_management_system && yarn test:lint\"",
-    "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_management_system && yarn test:types\""
+    "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_management_system && yarn test:types\"",
+    "copytypes": "node copyTypes.js"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
