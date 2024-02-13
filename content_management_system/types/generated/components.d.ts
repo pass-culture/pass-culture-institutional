@@ -37,12 +37,46 @@ export interface BlockSimpleText extends Schema.Component {
   };
 }
 
+export interface CommonLink extends Schema.Component {
+  collectionName: 'components_common_links';
+  info: {
+    displayName: 'Link';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
+}
+
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'List';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
       'block.simple-text': BlockSimpleText;
+      'common.link': CommonLink;
+      'footer.legal-links': FooterLegalLinks;
+      'footer.list': FooterList;
     }
   }
 }

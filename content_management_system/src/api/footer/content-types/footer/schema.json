@@ -1,0 +1,38 @@
+{
+  "kind": "singleType",
+  "collectionName": "footers",
+  "info": {
+    "singularName": "footer",
+    "pluralName": "footers",
+    "displayName": "Footer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "PlayStoreUrl": {
+      "type": "string",
+      "required": true
+    },
+    "AppStoreUrl": {
+      "type": "string",
+      "required": true
+    },
+    "Lists": {
+      "displayName": "List",
+      "type": "component",
+      "repeatable": true,
+      "component": "footer.list"
+    },
+    "BannerText": {
+      "type": "string"
+    },
+    "LegalLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link"
+    }
+  }
+}

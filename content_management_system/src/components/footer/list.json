@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_footer_lists",
+  "info": {
+    "displayName": "List",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Links": {
+      "displayName": "Link",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link"
+    }
+  }
+}

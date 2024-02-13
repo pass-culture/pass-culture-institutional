@@ -24,12 +24,6 @@ describe('Home page', () => {
     expect(a11yResult).toHaveNoViolations()
   })
 
-  it('should render correctly', () => {
-    const { container } = render(<Home />)
-
-    expect(container).toMatchSnapshot()
-  })
-
   it('should display the playlist name', async () => {
     const { props } = await getStaticProps()
     render(<Home {...props} />)

@@ -131,7 +131,11 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
 
-  /* Custom */ 
+  /* Custom */
+  body {
+    line-height: 1.5rem;
+  }
+
   a {
     color: inherit;
     text-decoration: none;

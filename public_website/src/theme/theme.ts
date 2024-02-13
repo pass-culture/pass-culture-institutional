@@ -1,10 +1,23 @@
 import { Colors } from './colors'
+import { FontSizes, FontWeights } from './fonts'
 
 export const theme = {
   colors: {
+    black: Colors.BLACK,
+    white: Colors.WHITE,
     primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
-    black: Colors.BLACK,
+  },
+  fonts: {
+    sizes: {
+      xs: FontSizes.XS,
+      s: FontSizes.S,
+      m: FontSizes.M,
+    },
+    weights: {
+      semiBold: FontWeights.SEMI_BOLD,
+      bold: FontWeights.BOLD,
+    },
   },
   typography: {
     title1: {
@@ -28,6 +41,9 @@ export const theme = {
       fontSize: '1.25rem',
       color: Colors.BLACK,
     },
+  },
+  mediaQueries: {
+    mobile: '50rem', // 800px
   },
 } as const
 
