@@ -26,7 +26,7 @@ export function LoginItem({ Color, URL, Emoji, Label }: LoginItemProps) {
   )
 }
 
-export const StyledLoginItem = styled.li<{ $color: string }>`
+const StyledLoginItem = styled.li<{ $color: string }>`
   ${({ theme, $color }) => css`
     &[aria-hidden] {
       background-color: ${theme.colors.black};

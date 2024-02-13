@@ -20,7 +20,7 @@ export type HeaderProps = {
   SignUp: { Label: string; URL: string }
 }
 
-export type HeaderNavigationItemProps = {
+type HeaderNavigationItemProps = {
   Label: string
   MegaMenu: {
     Title: string
