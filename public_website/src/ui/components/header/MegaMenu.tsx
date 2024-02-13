@@ -9,13 +9,13 @@ type MegaMenuProps = {
   id: string
   labelId: string
   data: {
-    heading: string
-    cta: { label: string; url: string }
-    mainList: { label: string; url: string }[]
-    secondaryList: { label: string; url: string }[]
-    cardTitle: string
-    cardDescription: string
-    cardLink: { label: string; url: string }
+    Title: string
+    Cta: { Label: string; URL: string }
+    PrimaryListItems: { Label: string; URL: string }[]
+    SecondaryListItems: { Label: string; URL: string }[]
+    CardTitle: string
+    CardDescription: string
+    CardLink: { Label: string; URL: string }
   }
 }
 
@@ -65,25 +65,25 @@ export function MegaMenu({
   return (
     <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
       <StyledMegaMenuHeading>
-        <p>{data.heading}</p>
-        <Link href={data.cta.url}>{data.cta.label}</Link>
+        <p>{data.Title}</p>
+        <Link href={data.Cta.URL}>{data.Cta.Label}</Link>
       </StyledMegaMenuHeading>
 
       <StyledMegaMenuLists>
         <ul>
-          {data.mainList.map((item, i) => {
+          {data.PrimaryListItems.map((item, i) => {
             return (
               <li key={i}>
-                <Link href={item.url}>{item.label}</Link>
+                <Link href={item.URL}>{item.Label}</Link>
               </li>
             )
           })}
         </ul>
         <ul>
-          {data.secondaryList.map((item, i) => {
+          {data.SecondaryListItems.map((item, i) => {
             return (
               <li key={i}>
-                <Link href={item.url}>{item.label}</Link>
+                <Link href={item.URL}>{item.Label}</Link>
               </li>
             )
           })}
@@ -91,9 +91,9 @@ export function MegaMenu({
       </StyledMegaMenuLists>
 
       <StyledMegaMenuCard>
-        <p>{data.cardTitle}</p>
-        <p>{data.cardDescription}</p>
-        <Link href={data.cardLink.url}>{data.cardLink.label}</Link>
+        <p>{data.CardTitle}</p>
+        <p>{data.CardDescription}</p>
+        <Link href={data.CardLink.URL}>{data.CardLink.Label}</Link>
       </StyledMegaMenuCard>
     </StyledMegaMenu>
   )

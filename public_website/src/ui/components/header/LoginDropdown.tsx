@@ -5,28 +5,22 @@ import styled, { css } from 'styled-components'
 
 import ArrowRight from '../../../../public/images/arrow-right.svg'
 
-const loginItems = [
-  {
-    emoji: '👩‍🎓',
-    label: 'Je suis un jeune entre 15 et 18 ans',
-    url: '#',
-    color: '#94008C',
-  },
-  {
-    emoji: '🎭',
-    label: 'Je suis un acteur du secteur culturel',
-    url: '#',
-    color: '#36106A',
-  },
-]
+export type LoginDropdownItemProps = {
+  Label: string
+  URL: string
+  Color: string
+  Emoji: string
+}
 
 type LoginDropdownProps = {
+  items: LoginDropdownItemProps[]
   openButtonElement: HTMLButtonElement | null
   onKeyDown: () => void
   onBlur: () => void
 }
 
 export function LoginDropdown({
+  items,
   openButtonElement,
   onKeyDown,
   onBlur,
@@ -71,19 +65,19 @@ export function LoginDropdown({
   return (
     <StyledLoginDropdown ref={loginDropdownRef}>
       <ul aria-labelledby="login-dropdown" id="login-menu">
-        {loginItems.map((item, i) => (
+        {items.map((item, i) => (
           <React.Fragment key={i}>
             <StyledLoginDropdownItem>
-              <Link href={item.url}>
+              <Link href={item.URL}>
                 {/* @ts-expect-error: FIXME: allow setting inline CSS properties */}
-                <span style={{ '--login-item-color': item.color }}>
-                  <span>{item.emoji}</span>
+                <span style={{ '--login-item-color': item.Color }}>
+                  <span>{item.Emoji}</span>
                 </span>
-                <p>{item.label}</p>
+                <p>{item.Label}</p>
                 <Image src={ArrowRight} alt="" />
               </Link>
             </StyledLoginDropdownItem>
-            {i !== loginItems.length - 1 && <li aria-hidden="true"></li>}
+            {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>
         ))}
       </ul>

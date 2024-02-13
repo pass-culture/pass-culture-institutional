@@ -4,131 +4,47 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
-import { LoginDropdown } from './LoginDropdown'
+import {
+  LoginDropdown as LoginDropdownComponent,
+  LoginDropdownItemProps,
+} from './LoginDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './MobileMenu'
 
-// TODO: put data in Strapi
-const navTargetElements = [
-  {
-    label: 'Jeunes et parents',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-  {
-    label: 'Acteurs culturels',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-  {
-    label: 'Enseignants',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-  {
-    label: 'Partenaires',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-]
-const navAllTargetsElements = [
-  {
-    label: 'Nous connaître',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-  {
-    label: 'Newsroom',
-    megaMenu: {
-      heading: 'Faites découvrir vos offres culturelles aux jeunes',
-      cta: { label: 'S’inscrire en tant qu’acteur culturel', url: '#' },
-      mainList: [
-        { label: 'L’essentiel du pass Culture', url: '#' },
-        { label: 'Comment proposer des offres ?', url: '#' },
-        { label: 'Le programme Ambassadeurs', url: '#' },
-        { label: 'Actualités et prochains rendez-vous', url: '#' },
-      ],
-      secondaryList: [{ label: 'Aide et support', url: '#' }],
-      cardTitle: 'Webinaire',
-      cardDescription:
-        'Participez au prochain webinaire à destination des acteurs culturels',
-      cardLink: { label: 'S’inscrire', url: '#' },
-    },
-  },
-]
-const navElements = [...navTargetElements, ...navAllTargetsElements]
-const loginLabel = 'Connexion'
-const signUpLabel = 'Inscription'
+export type HeaderProps = {
+  TargetItems: HeaderNavigationItem[]
+  AboutItems: HeaderNavigationItem[]
+  LoginDropdown: {
+    ButtonLabel: string
+    Items: LoginDropdownItemProps[]
+  }
+  SignUpLabel: string
+}
 
-export function Header() {
+export type HeaderNavigationItem = {
+  Label: string
+  MegaMenu: {
+    Title: string
+    Cta: { Label: string; URL: string }
+    PrimaryListItems: { Label: string; URL: string }[]
+    SecondaryListItems: { Label: string; URL: string }[]
+    CardTitle: string
+    CardDescription: string
+    CardLink: { Label: string; URL: string }
+  }
+}
+
+export function Header({
+  TargetItems,
+  AboutItems,
+  LoginDropdown,
+  SignUpLabel,
+}: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
 
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  const navItems = [...TargetItems, ...AboutItems]
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
@@ -153,10 +69,10 @@ export function Header() {
     }
   }
 
+  // Close login dropdown + focus open button on "Escape"
   const [loginDropdownOpen, setLoginDropdownOpen] = useState(false)
   const loginButtonRef = useRef<HTMLButtonElement>(null)
 
-  // Close login dropdown + focus open button on "Escape"
   function onLoginDropdownKeyDown() {
     setLoginDropdownOpen(false)
     loginButtonRef.current?.focus()
@@ -188,7 +104,7 @@ export function Header() {
             </Link>
           </li>
 
-          {navElements.map((el, i) => {
+          {navItems.map((el, i) => {
             return (
               <React.Fragment key={i}>
                 <StyledNavigationItem>
@@ -200,7 +116,7 @@ export function Header() {
                     className={i === activeMegaMenuId ? 'mega-menu-active' : ''}
                     onClick={() => toggleMegaMenu(i)}
                     onKeyDown={(e) => onMegaMenuKeyDown(e, i)}>
-                    {el.label}
+                    {el.Label}
                   </button>
                   {i === activeMegaMenuId && (
                     <MegaMenu
@@ -209,13 +125,13 @@ export function Header() {
                       }
                       labelId={`mega-menu-button-${i}`}
                       id={`mega-menu-${i}`}
-                      data={el.megaMenu}
+                      data={el.MegaMenu}
                       onBlur={onMegaMenuBlur}
                       onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
                     />
                   )}
                 </StyledNavigationItem>
-                {i === navTargetElements.length - 1 && (
+                {i === TargetItems.length - 1 && (
                   <StyledNavigationItem aria-hidden="true" />
                 )}
               </React.Fragment>
@@ -229,10 +145,11 @@ export function Header() {
               aria-controls="login-menu"
               aria-expanded={loginDropdownOpen}
               onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
-              {loginLabel}
+              {LoginDropdown.ButtonLabel}
             </button>
             {loginDropdownOpen && (
-              <LoginDropdown
+              <LoginDropdownComponent
+                items={LoginDropdown.Items}
                 openButtonElement={loginButtonRef.current}
                 onKeyDown={onLoginDropdownKeyDown}
                 onBlur={onLoginDropdownBlur}
@@ -240,7 +157,7 @@ export function Header() {
             )}
           </StyledLoginItem>
           <li>
-            <Link href="#">{signUpLabel}</Link>
+            <Link href="#">{SignUpLabel}</Link>
           </li>
 
           <li>
