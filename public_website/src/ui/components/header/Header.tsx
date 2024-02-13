@@ -4,6 +4,7 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
+import { FocusTrap } from '../../../hooks/useFocusTrap'
 import { Button } from '../button/Button'
 import { LoginDropdown, LoginItemProps } from './LoginDropdown'
 import { MegaMenu } from './MegaMenu'
@@ -103,106 +104,110 @@ export function Header({
   }
 
   return (
-    <StyledHeader>
-      <StyledNavigation>
-        <ul>
-          <li>
-            <Link href="/">
-              <Image src={LogoPassCulture} alt="Page d'accueil" width="150" />
-            </Link>
-          </li>
+    <FocusTrap>
+      <StyledHeader>
+        <StyledNavigation>
+          <ul>
+            <li>
+              <Link href="/">
+                <Image src={LogoPassCulture} alt="Page d'accueil" width="150" />
+              </Link>
+            </li>
 
-          {navItems.map((el, i) => {
-            return (
-              <React.Fragment key={i}>
-                <StyledNavigationItem>
-                  <button
-                    ref={(el) => (megaMenuButtonRefs.current[i] = el)}
-                    id={`mega-menu-button-${i}`}
-                    aria-controls={`mega-menu-${i}`}
-                    aria-expanded={i === activeMegaMenuId}
-                    className={i === activeMegaMenuId ? 'mega-menu-active' : ''}
-                    onClick={() => toggleMegaMenu(i)}
-                    onKeyDown={(e) => onMegaMenuKeyDown(e, i)}>
-                    {el.Label}
-                  </button>
-                  {i === activeMegaMenuId && (
-                    <MegaMenu
-                      getOpenButtonEl={() =>
-                        megaMenuButtonRefs.current[i] ?? null
+            {navItems.map((el, i) => {
+              return (
+                <React.Fragment key={i}>
+                  <StyledNavigationItem>
+                    <button
+                      ref={(el) => (megaMenuButtonRefs.current[i] = el)}
+                      id={`mega-menu-button-${i}`}
+                      aria-controls={`mega-menu-${i}`}
+                      aria-expanded={i === activeMegaMenuId}
+                      className={
+                        i === activeMegaMenuId ? 'mega-menu-active' : ''
                       }
-                      labelId={`mega-menu-button-${i}`}
-                      id={`mega-menu-${i}`}
-                      data={el.MegaMenu}
-                      onBlur={onMegaMenuBlur}
-                      onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
-                    />
+                      onClick={() => toggleMegaMenu(i)}
+                      onKeyDown={(e) => onMegaMenuKeyDown(e, i)}>
+                      {el.Label}
+                    </button>
+                    {i === activeMegaMenuId && (
+                      <MegaMenu
+                        getOpenButtonEl={() =>
+                          megaMenuButtonRefs.current[i] ?? null
+                        }
+                        labelId={`mega-menu-button-${i}`}
+                        id={`mega-menu-${i}`}
+                        data={el.MegaMenu}
+                        onBlur={onMegaMenuBlur}
+                        onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
+                      />
+                    )}
+                  </StyledNavigationItem>
+                  {i === TargetItems.length - 1 && (
+                    <StyledNavigationItem aria-hidden="true" />
                   )}
-                </StyledNavigationItem>
-                {i === TargetItems.length - 1 && (
-                  <StyledNavigationItem aria-hidden="true" />
-                )}
-              </React.Fragment>
-            )
-          })}
+                </React.Fragment>
+              )
+            })}
 
-          <StyledLoginItem>
-            <button
-              ref={loginButtonRef}
-              id="login-dropdown"
-              aria-controls="login-menu"
-              aria-expanded={loginDropdownOpen}
-              onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
-              {Login.ButtonLabel}
-            </button>
-            {loginDropdownOpen && (
-              <LoginDropdown
-                items={Login.LoginItems}
-                openButtonElement={loginButtonRef.current}
-                onKeyDown={onLoginDropdownKeyDown}
-                onBlur={onLoginDropdownBlur}
-              />
-            )}
-          </StyledLoginItem>
-          <li>
-            <Button href={SignUp.URL} target="_blank">
-              {SignUp.Label}
-            </Button>
-          </li>
-
-          <li>
-            <StyledMobileMenuButton
-              ref={mobileMenuButtonRef}
-              onClick={toggleMobileMenu}
-              aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}
-              aria-expanded={showMobileMenu}
-              aria-controls="mobile-menu-main-navigation">
-              {showMobileMenu ? (
-                <StyledCrossMenu>
-                  <span />
-                  <span />
-                </StyledCrossMenu>
-              ) : (
-                <StyledBurgerMenu>
-                  <span />
-                  <span />
-                  <span />
-                </StyledBurgerMenu>
+            <StyledLoginItem>
+              <button
+                ref={loginButtonRef}
+                id="login-dropdown"
+                aria-controls="login-menu"
+                aria-expanded={loginDropdownOpen}
+                onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
+                {Login.ButtonLabel}
+              </button>
+              {loginDropdownOpen && (
+                <LoginDropdown
+                  items={Login.LoginItems}
+                  openButtonElement={loginButtonRef.current}
+                  onKeyDown={onLoginDropdownKeyDown}
+                  onBlur={onLoginDropdownBlur}
+                />
               )}
-            </StyledMobileMenuButton>
-          </li>
-        </ul>
-        {showMobileMenu && (
-          <MobileMenu
-            TargetItems={TargetItems}
-            AboutItems={AboutItems}
-            Login={Login}
-            SignUp={SignUp}
-            onKeyDown={(e) => onMobileMenuKeyDown(e)}
-          />
-        )}
-      </StyledNavigation>
-    </StyledHeader>
+            </StyledLoginItem>
+            <li>
+              <Button href={SignUp.URL} target="_blank">
+                {SignUp.Label}
+              </Button>
+            </li>
+
+            <li>
+              <StyledMobileMenuButton
+                ref={mobileMenuButtonRef}
+                onClick={toggleMobileMenu}
+                aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}
+                aria-expanded={showMobileMenu}
+                aria-controls="mobile-menu-main-navigation">
+                {showMobileMenu ? (
+                  <StyledCrossMenu>
+                    <span />
+                    <span />
+                  </StyledCrossMenu>
+                ) : (
+                  <StyledBurgerMenu>
+                    <span />
+                    <span />
+                    <span />
+                  </StyledBurgerMenu>
+                )}
+              </StyledMobileMenuButton>
+            </li>
+          </ul>
+          {showMobileMenu && (
+            <MobileMenu
+              TargetItems={TargetItems}
+              AboutItems={AboutItems}
+              Login={Login}
+              SignUp={SignUp}
+              onKeyDown={(e) => onMobileMenuKeyDown(e)}
+            />
+          )}
+        </StyledNavigation>
+      </StyledHeader>
+    </FocusTrap>
   )
 }
 
