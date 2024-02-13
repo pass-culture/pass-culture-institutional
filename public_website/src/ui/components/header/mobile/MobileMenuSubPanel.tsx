@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import ArrowRight from '../../../../public/images/arrow-right.svg'
+import ArrowRight from '../../../../../public/images/arrow-right.svg'
 
 type MobileMenuSubPanelProps = {
   onClose: () => void

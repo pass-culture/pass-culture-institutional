@@ -174,7 +174,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
             },
           },
         ],
-        LoginDropdown: {
+        Login: {
           ButtonLabel: 'Connexion',
           Items: [
             {

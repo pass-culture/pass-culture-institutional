@@ -1,11 +1,9 @@
 import React, { Ref, useEffect, useRef } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import ArrowRight from '../../../../public/images/arrow-right.svg'
+import { LoginItem } from './LoginItem'
 
-export type LoginDropdownItemProps = {
+export type LoginItemProps = {
   Label: string
   URL: string
   Color: string
@@ -13,7 +11,7 @@ export type LoginDropdownItemProps = {
 }
 
 type LoginDropdownProps = {
-  items: LoginDropdownItemProps[]
+  items: LoginItemProps[]
   openButtonElement: HTMLButtonElement | null
   onKeyDown: () => void
   onBlur: () => void
@@ -67,16 +65,7 @@ export function LoginDropdown({
       <ul aria-labelledby="login-dropdown" id="login-menu">
         {items.map((item, i) => (
           <React.Fragment key={i}>
-            <StyledLoginDropdownItem>
-              <Link href={item.URL}>
-                {/* @ts-expect-error: FIXME: allow setting inline CSS properties */}
-                <span style={{ '--login-item-color': item.Color }}>
-                  <span>{item.Emoji}</span>
-                </span>
-                <p>{item.Label}</p>
-                <Image src={ArrowRight} alt="" />
-              </Link>
-            </StyledLoginDropdownItem>
+            <LoginItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>
         ))}
@@ -113,45 +102,6 @@ const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
         top: -0.5rem;
         left: calc(50%);
         transform: translateX(-50%) rotate(45deg);
-      }
-    }
-  `}
-`
-
-const StyledLoginDropdownItem = styled.li`
-  ${({ theme }) => css`
-    &[aria-hidden] {
-      background-color: ${theme.colors.black};
-      opacity: 0.2;
-      height: 1px;
-      width: 100%;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.875rem;
-
-      > span {
-        background-color: var(--login-item-color);
-        height: 3.5rem;
-        width: 3.5rem;
-        border-radius: 0.625rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        span {
-          font-size: ${theme.fonts.sizes['3xl']};
-        }
-      }
-
-      p {
-        font-weight: ${theme.fonts.weights.semiBold};
-        font-size: ${theme.fonts.sizes.xl};
-        flex-shrink: 0;
-        max-width: 16ch;
       }
     }
   `}

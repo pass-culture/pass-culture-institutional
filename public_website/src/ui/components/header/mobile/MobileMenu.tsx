@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
-import { HeaderProps } from './Header'
+import { Button } from '../../button/Button'
+import { HeaderProps } from '../Header'
 import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
 import { MobileMenuLoginSubPanel } from './MobileMenuLoginSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
@@ -10,7 +10,7 @@ import { MobileMenuSubPanel } from './MobileMenuSubPanel'
 export function MobileMenu({
   TargetItems,
   AboutItems,
-  LoginDropdown,
+  Login,
   SignUp,
 }: HeaderProps) {
   const navItems = [...TargetItems, ...AboutItems]
@@ -38,19 +38,19 @@ export function MobileMenu({
   function getMobileMenuSubPanelContent() {
     const isLoginPanel = subPanelType === 'login'
 
+    // TODO: fix types
     return (
       <MobileMenuSubPanel
         onClose={closeSubPanel}
-        // TODO: fix types
         title={
           isLoginPanel
-            ? 'Login'
+            ? Login.ButtonLabel
             : typeof subPanelListIndex === 'number'
             ? navItems[subPanelListIndex]?.Label
             : 'pouet'
         }>
         {isLoginPanel ? (
-          <MobileMenuLoginSubPanel />
+          <MobileMenuLoginSubPanel LoginItems={Login.Items} />
         ) : typeof subPanelListIndex === 'number' ? (
           <MobileMenuListSubPanel
             {...navItems[subPanelListIndex]?.MegaMenu}
@@ -96,7 +96,7 @@ export function MobileMenu({
           <StyledMobileMenuFooter>
             <li>
               <button onClick={() => openSubPanel('login')}>
-                {LoginDropdown.ButtonLabel}
+                {Login.ButtonLabel}
               </button>
             </li>
             <li>
@@ -120,6 +120,8 @@ const StyledMobileMenuWrapper = styled.div`
     left: 0;
     right: 0;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
   `}
 `
 
@@ -177,6 +179,7 @@ const StyledMobileMenuFooter = styled.ul`
     gap: 2.25rem;
     padding: 1rem 2rem;
     border-top: 1px solid rgb(0 0 0 / 0.12);
+    margin-top: auto;
 
     li:first-child button {
       font-size: ${theme.fonts.sizes.xl};

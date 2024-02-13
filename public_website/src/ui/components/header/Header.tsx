@@ -5,19 +5,16 @@ import styled, { css } from 'styled-components'
 
 import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
 import { Button } from '../button/Button'
-import {
-  LoginDropdown as LoginDropdownComponent,
-  LoginDropdownItemProps,
-} from './LoginDropdown'
+import { LoginDropdown, LoginItemProps } from './LoginDropdown'
 import { MegaMenu } from './MegaMenu'
-import { MobileMenu } from './MobileMenu'
+import { MobileMenu } from './mobile/MobileMenu'
 
 export type HeaderProps = {
   TargetItems: HeaderNavigationItem[]
   AboutItems: HeaderNavigationItem[]
-  LoginDropdown: {
+  Login: {
     ButtonLabel: string
-    Items: LoginDropdownItemProps[]
+    Items: LoginItemProps[]
   }
   SignUp: { Label: string; URL: string }
 }
@@ -38,7 +35,7 @@ export type HeaderNavigationItem = {
 export function Header({
   TargetItems,
   AboutItems,
-  LoginDropdown,
+  Login,
   SignUp,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
@@ -146,11 +143,11 @@ export function Header({
               aria-controls="login-menu"
               aria-expanded={loginDropdownOpen}
               onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
-              {LoginDropdown.ButtonLabel}
+              {Login.ButtonLabel}
             </button>
             {loginDropdownOpen && (
-              <LoginDropdownComponent
-                items={LoginDropdown.Items}
+              <LoginDropdown
+                items={Login.Items}
                 openButtonElement={loginButtonRef.current}
                 onKeyDown={onLoginDropdownKeyDown}
                 onBlur={onLoginDropdownBlur}
@@ -187,7 +184,7 @@ export function Header({
         <MobileMenu
           TargetItems={TargetItems}
           AboutItems={AboutItems}
-          LoginDropdown={LoginDropdown}
+          Login={Login}
           SignUp={SignUp}
         />
       )}
