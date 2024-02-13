@@ -14,7 +14,7 @@ export type HeaderProps = {
   AboutItems: HeaderNavigationItem[]
   Login: {
     ButtonLabel: string
-    Items: LoginItemProps[]
+    LoginItems: LoginItemProps[]
   }
   SignUp: { Label: string; URL: string }
 }
@@ -93,7 +93,7 @@ export function Header({
   }
 
   // Close mobile menu + focus burger button on "Escape"
-  const mobileMenuButtonRef = useRef(null)
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null)
 
   function onMobileMenuKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -157,7 +157,7 @@ export function Header({
             </button>
             {loginDropdownOpen && (
               <LoginDropdown
-                items={Login.Items}
+                items={Login.LoginItems}
                 openButtonElement={loginButtonRef.current}
                 onKeyDown={onLoginDropdownKeyDown}
                 onBlur={onLoginDropdownBlur}

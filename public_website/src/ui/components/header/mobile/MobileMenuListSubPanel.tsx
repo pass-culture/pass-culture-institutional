@@ -17,10 +17,10 @@ export function MobileMenuListSubPanel({
   CardDescription,
   CardLink,
 }: MobileMenuListSubPanelProps) {
-  const listRef = useRef(null)
+  // Focus list on mount
+  const listRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
-    // FIXME: fix type
     listRef.current?.focus()
   })
 

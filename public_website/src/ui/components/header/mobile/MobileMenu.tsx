@@ -35,54 +35,47 @@ export function MobileMenu({
     }
   }
 
-  const mainNavigationRef = useRef(null)
+  // Close sub panel and focus main navigation list
+  const mainNavigationRef = useRef<HTMLUListElement>(null)
 
   function closeSubPanel() {
     setSubPanelType(null)
     setSubPanelListIndex(null)
 
     setTimeout(() => {
-      // TODO: fix type
       mainNavigationRef.current?.focus()
     }, 1)
   }
 
+  // Either display login or list sub panel mobile menu
   function getMobileMenuSubPanelContent() {
     const isLoginPanel = subPanelType === 'login'
 
-    // TODO: fix types
+    const navItem = navItems[subPanelListIndex!]
+
     return (
-      <MobileMenuSubPanel
-        onClose={closeSubPanel}
-        title={
-          isLoginPanel
-            ? Login.ButtonLabel
-            : typeof subPanelListIndex === 'number'
-            ? navItems[subPanelListIndex]?.Label
-            : 'pouet'
-        }>
-        {isLoginPanel ? (
-          <MobileMenuLoginSubPanel LoginItems={Login.Items} />
-        ) : typeof subPanelListIndex === 'number' ? (
-          <MobileMenuListSubPanel
-            PrimaryList={navItems[subPanelListIndex]?.MegaMenu.PrimaryListItems}
-            SecondaryList={
-              navItems[subPanelListIndex]?.MegaMenu.SecondaryListItems
-            }
-            CardTitle={navItems[subPanelListIndex]?.MegaMenu.CardTitle}
-            CardDescription={
-              navItems[subPanelListIndex]?.MegaMenu.CardDescription
-            }
-            CardLink={navItems[subPanelListIndex]?.MegaMenu.CardLink}
-          />
-        ) : (
-          'pouet'
-        )}
-      </MobileMenuSubPanel>
+      navItem && (
+        <MobileMenuSubPanel
+          onClose={closeSubPanel}
+          title={isLoginPanel ? Login.ButtonLabel : navItem.Label}>
+          {isLoginPanel ? (
+            <MobileMenuLoginSubPanel LoginItems={Login.LoginItems} />
+          ) : (
+            <MobileMenuListSubPanel
+              PrimaryList={navItem.MegaMenu.PrimaryListItems}
+              SecondaryList={navItem.MegaMenu.SecondaryListItems}
+              CardTitle={navItem.MegaMenu.CardTitle}
+              CardDescription={navItem.MegaMenu.CardDescription}
+              CardLink={navItem.MegaMenu.CardLink}
+            />
+          )}
+        </MobileMenuSubPanel>
+      )
     )
   }
 
-  const mobileMenuRef = useRef(null)
+  // Handle escape keydown
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const mobileMenuElement = mobileMenuRef.current
     mobileMenuElement?.addEventListener('keydown', (e: KeyboardEvent) =>

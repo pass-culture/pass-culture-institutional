@@ -176,7 +176,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
         ],
         Login: {
           ButtonLabel: 'Connexion',
-          Items: [
+          LoginItems: [
             {
               Label: 'Je suis un jeune entre 15 et 18 ans',
               URL: '#',
