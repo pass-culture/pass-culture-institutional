@@ -4,25 +4,29 @@ import styled, { css } from 'styled-components'
 
 type ButtonProps = {
   children: React.ReactNode
+  secondary?: boolean
   href: string
   target?: '_blank'
 }
 
-export function Button({ children, href, target }: ButtonProps) {
+export function Button({ children, secondary, href, target }: ButtonProps) {
   return (
-    <StyledButton href={href} target={target}>
+    <StyledButton $secondary={secondary} href={href} target={target}>
       {children}
     </StyledButton>
   )
 }
 
-const StyledButton = styled(Link)`
-  ${({ theme }) => css`
-    background: linear-gradient(
+const StyledButton = styled(Link)<{ $secondary?: boolean }>`
+  ${({ theme, $secondary }) => css`
+    background: ${$secondary
+      ? 'transparent'
+      : `linear-gradient(
       90deg,
       ${theme.colors.primary} -11.18%,
       ${theme.colors.secondary} 64.8%
-    );
+    )`};
+    ${$secondary && `border: 1px solid ${theme.colors.white};`}
     border-radius: 2rem;
     color: ${theme.colors.white};
     display: inline-block;

@@ -95,7 +95,9 @@ export function MegaMenu({
       <StyledMegaMenuCard>
         <p>{data.CardTitle}</p>
         <p>{data.CardDescription}</p>
-        <Link href={data.CardLink.URL}>{data.CardLink.Label}</Link>
+        <Button href={data.CardLink.URL} secondary>
+          {data.CardLink.Label}
+        </Button>
       </StyledMegaMenuCard>
     </StyledMegaMenu>
   )
