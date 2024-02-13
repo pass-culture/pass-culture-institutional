@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_header_mega_menus",
+  "info": {
+    "displayName": "MegaMenu"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "PrimaryListItems": {
+      "displayName": "PrimaryListItems",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link",
+      "required": true
+    },
+    "SecondaryListItems": {
+      "displayName": "SecondaryListItems",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link",
+      "required": true
+    },
+    "Cta": {
+      "displayName": "Cta",
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "CardTitle": {
+      "type": "string",
+      "required": true
+    },
+    "CardDescription": {
+      "type": "string",
+      "required": true
+    },
+    "CardLink": {
+      "displayName": "CardLink",
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    }
+  }
+}

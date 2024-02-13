@@ -10,8 +10,8 @@ import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 
 export type HeaderProps = {
-  TargetItems: HeaderNavigationItem[]
-  AboutItems: HeaderNavigationItem[]
+  TargetItems: HeaderNavigationItemProps[]
+  AboutItems: HeaderNavigationItemProps[]
   Login: {
     ButtonLabel: string
     LoginItems: LoginItemProps[]
@@ -19,7 +19,7 @@ export type HeaderProps = {
   SignUp: { Label: string; URL: string }
 }
 
-export type HeaderNavigationItem = {
+export type HeaderNavigationItemProps = {
   Label: string
   MegaMenu: {
     Title: string

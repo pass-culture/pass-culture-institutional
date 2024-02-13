@@ -68,6 +68,70 @@ export interface FooterList extends Schema.Component {
   };
 }
 
+export interface HeaderHeader extends Schema.Component {
+  collectionName: 'components_header_headers';
+  info: {
+    displayName: 'Header';
+  };
+  attributes: {};
+}
+
+export interface HeaderLoginItems extends Schema.Component {
+  collectionName: 'components_header_login_items';
+  info: {
+    displayName: 'LoginItems';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    Color: Attribute.String & Attribute.Required;
+    Emoji: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HeaderLogin extends Schema.Component {
+  collectionName: 'components_header_logins';
+  info: {
+    displayName: 'Login';
+  };
+  attributes: {
+    ButtonLabel: Attribute.String & Attribute.Required;
+    LoginItems: Attribute.Component<'header.login-items', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
+  };
+}
+
+export interface HeaderMegaMenu extends Schema.Component {
+  collectionName: 'components_header_mega_menus';
+  info: {
+    displayName: 'MegaMenu';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    PrimaryListItems: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    SecondaryListItems: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    Cta: Attribute.Component<'common.link'> & Attribute.Required;
+    CardTitle: Attribute.String & Attribute.Required;
+    CardDescription: Attribute.String & Attribute.Required;
+    CardLink: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface HeaderNavigationItems extends Schema.Component {
+  collectionName: 'components_header_navigation_items';
+  info: {
+    displayName: 'NavigationItems';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    MegaMenu: Attribute.Component<'header.mega-menu'>;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -77,6 +141,11 @@ declare module '@strapi/types' {
       'common.link': CommonLink;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
+      'header.header': HeaderHeader;
+      'header.login-items': HeaderLoginItems;
+      'header.login': HeaderLogin;
+      'header.mega-menu': HeaderMegaMenu;
+      'header.navigation-items': HeaderNavigationItems;
     }
   }
 }

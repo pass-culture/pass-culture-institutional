@@ -1,10 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { LoginItemProps } from '../LoginDropdown'
 import { LoginItem } from '../LoginItem'
 
 type MobileMenuLoginSubPanelProps = {
-  LoginItems: { Label: string; URL: string; Color: string; Emoji: string }[]
+  LoginItems: LoginItemProps[]
 }
 
 export function MobileMenuLoginSubPanel({

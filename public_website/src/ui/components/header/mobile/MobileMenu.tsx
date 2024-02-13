@@ -53,22 +53,22 @@ export function MobileMenu({
 
     const navItem = navItems[subPanelListIndex!]
 
-    return (
+    return isLoginPanel ? (
+      <MobileMenuSubPanel onClose={closeSubPanel} title={Login.ButtonLabel}>
+        <MobileMenuLoginSubPanel LoginItems={Login.LoginItems} />
+      </MobileMenuSubPanel>
+    ) : (
       navItem && (
         <MobileMenuSubPanel
           onClose={closeSubPanel}
           title={isLoginPanel ? Login.ButtonLabel : navItem.Label}>
-          {isLoginPanel ? (
-            <MobileMenuLoginSubPanel LoginItems={Login.LoginItems} />
-          ) : (
-            <MobileMenuListSubPanel
-              PrimaryList={navItem.MegaMenu.PrimaryListItems}
-              SecondaryList={navItem.MegaMenu.SecondaryListItems}
-              CardTitle={navItem.MegaMenu.CardTitle}
-              CardDescription={navItem.MegaMenu.CardDescription}
-              CardLink={navItem.MegaMenu.CardLink}
-            />
-          )}
+          <MobileMenuListSubPanel
+            PrimaryList={navItem.MegaMenu.PrimaryListItems}
+            SecondaryList={navItem.MegaMenu.SecondaryListItems}
+            CardTitle={navItem.MegaMenu.CardTitle}
+            CardDescription={navItem.MegaMenu.CardDescription}
+            CardLink={navItem.MegaMenu.CardLink}
+          />
         </MobileMenuSubPanel>
       )
     )

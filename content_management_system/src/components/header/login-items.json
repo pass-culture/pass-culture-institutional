@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_header_login_items",
+  "info": {
+    "displayName": "LoginItems"
+  },
+  "options": {},
+  "attributes": {
+    "Label": {
+      "type": "string",
+      "required": true
+    },
+    "Color": {
+      "type": "string",
+      "required": true
+    },
+    "Emoji": {
+      "type": "string",
+      "required": true
+    },
+    "URL": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -872,6 +872,42 @@ export interface ApiFooterFooter extends Schema.SingleType {
   };
 }
 
+export interface ApiHeaderHeader extends Schema.SingleType {
+  collectionName: 'headers';
+  info: {
+    singularName: 'header';
+    pluralName: 'headers';
+    displayName: 'Header';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    TargetItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    AboutItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    SignUp: Attribute.Component<'common.link'> & Attribute.Required;
+    Login: Attribute.Component<'header.login'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::header.header',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::header.header',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -956,6 +992,7 @@ declare module '@strapi/types' {
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
+      'api::header.header': ApiHeaderHeader;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

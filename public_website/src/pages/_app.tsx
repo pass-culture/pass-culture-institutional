@@ -42,10 +42,10 @@ export default function MyApp({
   )
 }
 
-// type HeaderData = {
-//   id: number
-//   attributes: HeaderProps
-// }
+type HeaderData = {
+  id: number
+  attributes: HeaderProps
+}
 
 type FooterData = {
   id: number
@@ -53,148 +53,13 @@ type FooterData = {
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
+  const headerData = await fetchCMS<HeaderData>(
+    '/header?populate[0]=TargetItems.MegaMenu.PrimaryListItems&populate[1]=TargetItems.MegaMenu.SecondaryListItems&populate[2]=TargetItems.MegaMenu.Cta&populate[3]=TargetItems.MegaMenu.CardLink&populate[4]=AboutItems.MegaMenu.PrimaryListItems&populate[5]=AboutItems.MegaMenu.SecondaryListItems&populate[6]=AboutItems.MegaMenu.Cta&populate[7]=AboutItems.MegaMenu.CardLink&populate[8]=Login.LoginItems&populate[9]=SignUp'
+  )
   const footerData = await fetchCMS<FooterData>(
     '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'
   )
   const ctx = await App.getInitialProps(context)
-
-  // TODO: fetch data from Strapi
-  const headerData = {
-    data: {
-      attributes: {
-        TargetItems: [
-          {
-            Label: 'Jeunes et parents',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-          {
-            Label: 'Acteurs culturels',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-          {
-            Label: 'Enseignants',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-          {
-            Label: 'Partenaires',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-        ],
-        AboutItems: [
-          {
-            Label: 'Nous connaître',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-          {
-            Label: 'Newsroom',
-            MegaMenu: {
-              Title: 'Faites découvrir vos offres culturelles aux jeunes',
-              Cta: { Label: 'S’inscrire en tant qu’acteur culturel', URL: '#' },
-              PrimaryListItems: [
-                { Label: 'L’essentiel du pass Culture', URL: '#' },
-                { Label: 'Comment proposer des offres ?', URL: '#' },
-                { Label: 'Le programme Ambassadeurs', URL: '#' },
-                { Label: 'Actualités et prochains rendez-vous', URL: '#' },
-              ],
-              SecondaryListItems: [{ Label: 'Aide et support', URL: '#' }],
-              CardTitle: 'Webinaire',
-              CardDescription:
-                'Participez au prochain webinaire à destination des acteurs culturels',
-              CardLink: { Label: 'S’inscrire', URL: '#' },
-            },
-          },
-        ],
-        Login: {
-          ButtonLabel: 'Connexion',
-          LoginItems: [
-            {
-              Label: 'Je suis un jeune entre 15 et 18 ans',
-              URL: '#',
-              Color: '#94008C',
-              Emoji: '👩‍🎓',
-            },
-            {
-              Label: 'Je suis un acteur du secteur culturel',
-              URL: '#',
-              Color: '#36106A',
-              Emoji: '🎭',
-            },
-          ],
-        },
-        SignUp: { Label: 'Inscription', URL: '#' },
-      },
-    },
-  }
 
   return {
     ...ctx,
