@@ -297,6 +297,8 @@ const StyledMobileMenuButton = styled.button`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       display: flex;
+      align-items: center;
+      justify-content: center;
     }
   `}
 `
