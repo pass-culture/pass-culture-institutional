@@ -1,7 +1,86 @@
 import { RestaurantData } from '@/pages/about'
 import { Offer, Tag } from '@/types/playlist'
+import { HeaderProps } from '@/ui/components/header/Header'
 
 export const testDataFixtures = { message: 'Hello World!' }
+
+export const headerDataFixtures: HeaderProps = {
+  TargetItems: [
+    {
+      Label: 'Target item 1',
+      MegaMenu: {
+        Title: 'Mega menu 1',
+        CardTitle: 'CardTitle 1',
+        CardDescription: 'CardDescription 1',
+        PrimaryListItems: [
+          {
+            Label: 'PrimaryListItems 1',
+            URL: '#',
+          },
+        ],
+        SecondaryListItems: [
+          {
+            Label: 'SecondaryListItems 1',
+            URL: '#',
+          },
+        ],
+        Cta: {
+          Label: 'Cta 1',
+          URL: '#',
+        },
+        CardLink: {
+          Label: 'CardLink 1',
+          URL: '#',
+        },
+      },
+    },
+  ],
+  AboutItems: [
+    {
+      Label: 'Target item 2',
+      MegaMenu: {
+        Title: 'Mega menu 2',
+        CardTitle: 'CardTitle 2',
+        CardDescription: 'CardDescription 2',
+        PrimaryListItems: [
+          {
+            Label: 'PrimaryListItems 2',
+            URL: '#',
+          },
+        ],
+        SecondaryListItems: [
+          {
+            Label: 'SecondaryListItems 2',
+            URL: '#',
+          },
+        ],
+        Cta: {
+          Label: 'Cta 2',
+          URL: '#',
+        },
+        CardLink: {
+          Label: 'CardLink 2',
+          URL: '#',
+        },
+      },
+    },
+  ],
+  Login: {
+    ButtonLabel: 'Login label',
+    LoginItems: [
+      {
+        Label: 'LoginItem 1',
+        Color: '#ff0000',
+        Emoji: '😇',
+        URL: '#',
+      },
+    ],
+  },
+  SignUp: {
+    Label: 'SignUp',
+    URL: '#',
+  },
+}
 
 export const restaurantDataFixtures: RestaurantData[] = [
   {

@@ -23,7 +23,7 @@ const StyledButton = styled(Link)<{ $secondary?: boolean }>`
       ? 'transparent'
       : `linear-gradient(
       90deg,
-      ${theme.colors.primary} -11.18%,
+      #EB0055 -11.18%,
       ${theme.colors.secondary} 64.8%
     )`};
     ${$secondary && `border: 1px solid ${theme.colors.white};`}
