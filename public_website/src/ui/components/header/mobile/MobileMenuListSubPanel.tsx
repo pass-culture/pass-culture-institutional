@@ -30,18 +30,18 @@ export function MobileMenuListSubPanel({
         ref={listRef}
         tabIndex={0}
         aria-labelledby="sub-panel-title">
-        {PrimaryList.map((item, i) => {
+        {PrimaryList.map((item) => {
           return (
-            <li key={i}>
+            <li key={item.Label}>
               <Link href={item.URL}>{item.Label}</Link>
             </li>
           )
         })}
       </StyledSubPanelList>
       <StyledSubPanelList>
-        {SecondaryList.map((item, i) => {
+        {SecondaryList.map((item) => {
           return (
-            <li key={i}>
+            <li key={item.Label}>
               <Link href={item.URL}>{item.Label}</Link>
             </li>
           )

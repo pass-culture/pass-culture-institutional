@@ -73,18 +73,18 @@ export function MegaMenu({
 
       <StyledMegaMenuLists>
         <ul>
-          {data.PrimaryListItems.map((item, i) => {
+          {data.PrimaryListItems.map((item) => {
             return (
-              <li key={i}>
+              <li key={item.Label}>
                 <Link href={item.URL}>{item.Label}</Link>
               </li>
             )
           })}
         </ul>
         <ul>
-          {data.SecondaryListItems.map((item, i) => {
+          {data.SecondaryListItems.map((item) => {
             return (
-              <li key={i}>
+              <li key={item.Label}>
                 <Link href={item.URL}>{item.Label}</Link>
               </li>
             )

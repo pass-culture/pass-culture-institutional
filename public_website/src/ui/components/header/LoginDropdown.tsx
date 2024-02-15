@@ -64,7 +64,7 @@ export function LoginDropdown({
     <StyledLoginDropdown ref={loginDropdownRef}>
       <ul aria-labelledby="login-dropdown" id="login-menu">
         {items.map((item, i) => (
-          <React.Fragment key={i}>
+          <React.Fragment key={item.Label}>
             <LoginItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>

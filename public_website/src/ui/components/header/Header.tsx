@@ -123,7 +123,7 @@ export function Header({
 
             {navItems.map((el, i) => {
               return (
-                <React.Fragment key={i}>
+                <React.Fragment key={el.Label}>
                   <StyledNavigationItem>
                     <button
                       ref={(el) => (megaMenuButtonRefs.current[i] = el)}

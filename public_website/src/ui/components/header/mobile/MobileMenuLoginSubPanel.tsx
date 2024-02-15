@@ -23,8 +23,8 @@ export function MobileMenuLoginSubPanel({
       ref={loginListRef}
       tabIndex={0}
       aria-labelledby="sub-panel-title">
-      {LoginItems.map((item, i) => {
-        return <LoginItem key={i} {...item} />
+      {LoginItems.map((item) => {
+        return <LoginItem key={item.Label} {...item} />
       })}
     </StyledSubPanelLoginItems>
   )
