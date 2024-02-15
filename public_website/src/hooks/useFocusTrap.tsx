@@ -25,11 +25,9 @@ function useFocusTrap() {
         e.preventDefault()
       }
       // TAB only
-    } else {
-      if (document.activeElement === lastFocusableElement) {
-        firstFocusableElement?.focus()
-        e.preventDefault()
-      }
+    } else if (document.activeElement === lastFocusableElement) {
+      firstFocusableElement?.focus()
+      e.preventDefault()
     }
   }
 

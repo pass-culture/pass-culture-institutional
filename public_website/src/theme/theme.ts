@@ -7,6 +7,7 @@ export const theme = {
     white: Colors.WHITE,
     primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
+    sectionBackground: Colors.SECTION_BACKGROUND,
   },
   fonts: {
     sizes: {

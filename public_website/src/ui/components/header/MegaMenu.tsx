@@ -104,15 +104,17 @@ export function MegaMenu({
 }
 
 const StyledMegaMenu = styled.section`
-  background-color: #f5f2fa;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(4rem + 4rem);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6.5rem;
-  padding: 6.25rem 2.5rem 8.125rem;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.sectionBackground};
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(4rem + 4rem);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6.5rem;
+    padding: 6.25rem 2.5rem 8.125rem;
+  `}
 `
 
 const StyledMegaMenuHeading = styled.div`

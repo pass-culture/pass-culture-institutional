@@ -1,12 +1,10 @@
 import React from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { fireEvent, render } from '..'
-import { screen } from '..'
 import { headerDataFixtures } from '../fixtures'
+import { fireEvent, render, screen } from '../index'
 import { Header } from '@/ui/components/header/Header'
 
-// FIXME: ignore required "width" and "height" ESLint rule on <Image />
 describe('header', () => {
   it('should open mega menu on main navigation item click', async () => {
     render(<Header {...headerDataFixtures} />)
