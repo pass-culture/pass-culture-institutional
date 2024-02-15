@@ -21,11 +21,13 @@ const StyledAppBanner = styled(Link)`
     justify-self: stretch;
     padding: 1.5rem 2rem;
     border-radius: 0.625rem;
-    background: url('/images/banner-phone.svg'),
+    background: url('/images/banner-phone.png'),
       linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
-    background-position: bottom right;
+    background-position:
+      bottom right 1rem,
+      bottom right;
     background-size:
-      auto 80%,
+      auto 100%,
       cover;
     background-repeat: no-repeat;
     aspect-ratio: 3.1;

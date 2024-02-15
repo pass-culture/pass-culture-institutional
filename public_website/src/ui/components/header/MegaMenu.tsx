@@ -129,7 +129,7 @@ const StyledMegaMenu = styled.section`
 
 const StyledMegaMenuHeading = styled.div`
   ${({ theme }) => css`
-    p {
+    > p {
       color: ${theme.colors.secondary};
       font-size: ${theme.fonts.sizes['6xl']};
       font-weight: ${theme.fonts.weights.bold};
