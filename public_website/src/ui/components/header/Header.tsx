@@ -32,6 +32,8 @@ type HeaderNavigationItemProps = {
     CardTitle: string
     CardDescription: string
     CardLink: { Label: string; URL: string }
+    CardFirstEmoji: string
+    CardSecondEmoji: string
   }
 }
 

@@ -120,6 +120,8 @@ export interface HeaderMegaMenu extends Schema.Component {
     CardDescription: Attribute.String & Attribute.Required;
     CardLink: Attribute.Component<'common.link'> & Attribute.Required;
     BannerText: Attribute.String;
+    CardFirstEmoji: Attribute.String & Attribute.Required;
+    CardSecondEmoji: Attribute.String & Attribute.Required;
   };
 }
 

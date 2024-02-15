@@ -48,6 +48,14 @@
     },
     "BannerText": {
       "type": "string"
+    },
+    "CardFirstEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "CardSecondEmoji": {
+      "type": "string",
+      "required": true
     }
   }
 }

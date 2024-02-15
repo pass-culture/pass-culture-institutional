@@ -69,6 +69,8 @@ export function MobileMenu({
             CardTitle={navItem.MegaMenu.CardTitle}
             CardDescription={navItem.MegaMenu.CardDescription}
             CardLink={navItem.MegaMenu.CardLink}
+            CardFirstEmoji={navItem.MegaMenu.CardFirstEmoji}
+            CardSecondEmoji={navItem.MegaMenu.CardSecondEmoji}
           />
         </MobileMenuSubPanel>
       )

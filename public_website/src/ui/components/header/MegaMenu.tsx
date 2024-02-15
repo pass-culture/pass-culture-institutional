@@ -20,6 +20,8 @@ type MegaMenuProps = {
     CardTitle: string
     CardDescription: string
     CardLink: { Label: string; URL: string }
+    CardFirstEmoji: string
+    CardSecondEmoji: string
   }
 }
 
@@ -96,7 +98,12 @@ export function MegaMenu({
       </StyledMegaMenuLists>
 
       <StyledMegaMenuCard>
-        <p>{data.CardTitle}</p>
+        <StyledMegaMenuCardHeading>
+          <p>{data.CardTitle}</p>
+
+          <span>{data.CardFirstEmoji}</span>
+          <span>{data.CardSecondEmoji}</span>
+        </StyledMegaMenuCardHeading>
         <p>{data.CardDescription}</p>
         <Button href={data.CardLink.URL} variant="secondary">
           {data.CardLink.Label}
@@ -175,19 +182,43 @@ const StyledMegaMenuCard = styled.div`
     padding: 7.5rem 3.5rem 4.5rem;
     text-align: center;
 
-    p:first-child {
-      color: ${theme.colors.secondary};
-      -webkit-text-stroke: 1px white;
-      font-size: ${theme.fonts.sizes['5xl']};
-      font-weight: ${theme.fonts.weights.black};
-      margin-bottom: 4.5rem;
-    }
-
-    p:nth-child(2) {
+    > p {
       color: ${theme.colors.white};
       font-size: ${theme.fonts.sizes.xl};
       font-weight: ${theme.fonts.weights.medium};
       margin-bottom: 3.75rem;
+      line-height: 2;
+    }
+  `}
+`
+
+const StyledMegaMenuCardHeading = styled.div`
+  ${({ theme }) => css`
+    display: inline-flex;
+    position: relative;
+    margin-bottom: 4.5rem;
+
+    p {
+      color: ${theme.colors.white};
+      font-size: ${theme.fonts.sizes['5xl']};
+      font-weight: ${theme.fonts.weights.black};
+      z-index: 1;
+    }
+
+    span {
+      font-size: 1.75rem;
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      transform: rotate(-10deg);
+      z-index: 0;
+
+      &:last-child {
+        top: auto;
+        left: auto;
+        bottom: -1rem;
+        right: 1rem;
+      }
     }
   `}
 `

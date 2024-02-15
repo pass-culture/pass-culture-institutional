@@ -8,6 +8,8 @@ type MobileMenuListSubPanelProps = {
   CardTitle: string
   CardDescription: string
   CardLink: { Label: string; URL: string }
+  CardFirstEmoji: string
+  CardSecondEmoji: string
 }
 
 export function MobileMenuListSubPanel({
@@ -16,6 +18,8 @@ export function MobileMenuListSubPanel({
   CardTitle,
   CardDescription,
   CardLink,
+  CardFirstEmoji,
+  CardSecondEmoji,
 }: MobileMenuListSubPanelProps) {
   // Focus list on mount
   const listRef = useRef<HTMLUListElement>(null)
@@ -50,7 +54,8 @@ export function MobileMenuListSubPanel({
       <StyledSubPanelCard href={CardLink.URL}>
         <p>{CardTitle}</p>
         <p>{CardDescription}</p>
-        <span>emoji</span>
+        <span>{CardFirstEmoji}</span>
+        <span>{CardSecondEmoji}</span>
       </StyledSubPanelCard>
     </div>
   )
@@ -73,32 +78,37 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
 const StyledSubPanelCard = styled(Link)`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
-    display: grid;
-    grid-template-columns: 3fr 1.5fr;
-    grid-template-areas:
-      'title emojis'
-      'description emojis';
-    gap: 0.5rem 1rem;
+    display: block;
     padding: 1.5rem;
     border-radius: 0.5rem;
+    color: ${theme.colors.white};
+    padding-right: 30%;
+    position: relative;
 
     p:first-child {
-      color: ${theme.colors.secondary};
-      -webkit-text-stroke: 1px white;
       font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.black};
-      grid-area: title;
+      margin-bottom: 1.5rem;
     }
 
     p:nth-child(2) {
       color: ${theme.colors.white};
       font-size: ${theme.fonts.sizes.m};
       font-weight: ${theme.fonts.weights.semiBold};
-      grid-area: description;
     }
 
     span {
-      grid-area: emojis;
+      font-size: 2.5rem;
+      position: absolute;
+      right: 6rem;
+      top: 40%;
+      transform: rotate(-10deg);
+
+      &:last-child {
+        right: 4rem;
+        top: 45%;
+        transform: rotate(10deg);
+      }
     }
   `}
 `
