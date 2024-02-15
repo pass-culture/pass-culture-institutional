@@ -4,29 +4,36 @@ import styled, { css } from 'styled-components'
 
 type ButtonProps = {
   children: React.ReactNode
-  secondary?: boolean
+  variant?: 'primary' | 'secondary'
   href: string
   target?: '_blank'
 }
 
-export function Button({ children, secondary, href, target }: ButtonProps) {
+export function Button({
+  children,
+  variant = 'primary',
+  href,
+  target,
+}: ButtonProps) {
   return (
-    <StyledButton $secondary={secondary} href={href} target={target}>
+    <StyledButton variant={variant} href={href} target={target}>
       {children}
     </StyledButton>
   )
 }
 
-const StyledButton = styled(Link)<{ $secondary?: boolean }>`
-  ${({ theme, $secondary }) => css`
-    background: ${$secondary
+const StyledButton = styled(Link)<{ variant?: 'primary' | 'secondary' }>`
+  ${({ theme, variant }) => css`
+    background: ${variant === 'secondary'
       ? 'transparent'
       : `linear-gradient(
       90deg,
       #EB0055 -11.18%,
       ${theme.colors.secondary} 64.8%
     )`};
-    ${$secondary && `border: 1px solid ${theme.colors.white};`}
+
+    ${variant === 'secondary' && `border: 1px solid ${theme.colors.white};`}
+
     border-radius: 2rem;
     color: ${theme.colors.white};
     display: inline-block;
