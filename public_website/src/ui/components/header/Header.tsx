@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import LogoPassCulture from '../../../../public/images/logo-pass-culture.svg'
 import { FocusTrap } from '../../../hooks/useFocusTrap'
 import { Button } from '../button/Button'
+import { Burger } from '../icons/Burger'
+import { Close } from '../icons/Close'
+import { PassCulture } from '../icons/PassCulture'
 import { LoginDropdown, LoginItemProps } from './LoginDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
@@ -115,9 +116,9 @@ export function Header({
         <StyledNavigation>
           <ul>
             <li>
-              <Link href="/">
-                <Image src={LogoPassCulture} alt="Page d'accueil" width="150" />
-              </Link>
+              <StyledLogoLink href="/">
+                <PassCulture />
+              </StyledLogoLink>
             </li>
 
             {navItems.map((el, i) => {
@@ -187,18 +188,7 @@ export function Header({
                 aria-label={`${showMobileMenu ? 'Fermer' : 'Ouvrir'} le menu`}
                 aria-expanded={showMobileMenu}
                 aria-controls="mobile-menu-main-navigation">
-                {showMobileMenu ? (
-                  <StyledCrossMenu>
-                    <span />
-                    <span />
-                  </StyledCrossMenu>
-                ) : (
-                  <StyledBurgerMenu>
-                    <span />
-                    <span />
-                    <span />
-                  </StyledBurgerMenu>
-                )}
+                {showMobileMenu ? <Close /> : <Burger />}
               </StyledMobileMenuButton>
             </li>
           </ul>
@@ -245,6 +235,11 @@ const StyledNavigation = styled.nav`
       }
     }
   `}
+`
+
+const StyledLogoLink = styled(Link)`
+  display: block;
+  width: 9.5rem;
 `
 
 const StyledNavigationItem = styled.li`
@@ -310,45 +305,6 @@ const StyledMobileMenuButton = styled.button`
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  `}
-`
-
-const StyledBurgerMenu = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0;
-    width: 100%;
-
-    span {
-      background-color: ${theme.colors.primary};
-      height: 0.1rem;
-      width: 100%;
-    }
-  `}
-`
-
-const StyledCrossMenu = styled.div`
-  ${({ theme }) => css`
-    position: relative;
-    width: 100%;
-
-    span {
-      background-color: ${theme.colors.primary};
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      height: 0.1rem;
-      width: 100%;
-      transform: translateX(-50%) rotate(-45deg);
-      transform-origin: center;
-
-      &:last-child {
-        transform: translateX(-50%) rotate(45deg);
-      }
     }
   `}
 `

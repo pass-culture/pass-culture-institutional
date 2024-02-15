@@ -1,10 +1,9 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import logoGouvernement from '../../../../public/images/logo-gouvernement.svg'
-import logoPassCulture from '../../../../public/images/logo-pass-culture.svg'
+import { Gouvernement } from '../icons/Gouvernement'
+import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
@@ -36,15 +35,11 @@ export function Footer({
       <StyledContentContainer>
         <StyledTopSection>
           <StyledLogos>
-            {/* TODO: get real svg files and create SVGR files */}
             <Link href="https://pass.culture.fr/">
-              <Image src={logoPassCulture} alt="Site du Pass Culture" />
+              <PassCulture />
             </Link>
             <Link href="https://www.gouvernement.fr">
-              <Image
-                src={logoGouvernement}
-                alt="Site du Gouvernement Français"
-              />
+              <Gouvernement />
             </Link>
             <StyledDownloadBanner href={storeUrl} target="_blank">
               <p>{BannerText}</p>

@@ -1,8 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import ArrowRight from '../../../../../public/images/arrow-right.svg'
+import { ArrowRight } from '../../icons/ArrowRight'
 
 type MobileMenuSubPanelProps = {
   onClose: () => void
@@ -18,7 +17,7 @@ export function MobileMenuSubPanel({
   return (
     <StyledMobileMenuSubPanel>
       <button onClick={onClose}>
-        <Image src={ArrowRight} alt="" />
+        <ArrowRight />
         Retour <span className="visually-hidden">au menu principal</span>
       </button>
 
@@ -42,7 +41,7 @@ const StyledMobileMenuSubPanel = styled.div`
       text-decoration: underline;
       margin-bottom: 1.5rem;
 
-      img {
+      svg {
         transform: rotate(180deg);
       }
     }

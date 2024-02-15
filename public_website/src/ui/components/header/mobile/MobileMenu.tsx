@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../../button/Button'
+import { ChevronRight } from '../../icons/ChevronRight'
 import { HeaderProps } from '../Header'
 import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
 import { MobileMenuLoginSubPanel } from './MobileMenuLoginSubPanel'
@@ -106,6 +107,7 @@ export function MobileMenu({
                   <StyledMobileMenuListItem>
                     <button onClick={() => openSubPanel('list', i)}>
                       {item.Label}
+                      <ChevronRight />
                     </button>
                   </StyledMobileMenuListItem>
                   {i === TargetItems.length - 1 && (
@@ -167,28 +169,9 @@ const StyledMobileMenuListItem = styled.li`
     }
 
     button {
-      position: relative;
-
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        right: -1.5rem;
-        top: 50%;
-        width: 0.625rem;
-        height: 2px;
-        border-radius: 1px;
-        background-color: ${theme.colors.primary};
-        transform-origin: right;
-      }
-
-      &::before {
-        transform: rotate(45deg) translateY(1px);
-      }
-
-      &::after {
-        transform: rotate(-45deg) translateY(-1px);
-      }
+      align-items: center;
+      display: flex;
+      gap: 1.5rem;
     }
   `}
 `

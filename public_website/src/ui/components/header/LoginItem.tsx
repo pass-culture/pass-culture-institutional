@@ -1,9 +1,8 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import ArrowRight from '../../../../public/images/arrow-right.svg'
+import { ArrowRight } from '../icons/ArrowRight'
 
 type LoginItemProps = {
   Color: string
@@ -20,7 +19,7 @@ export function LoginItem({ Color, URL, Emoji, Label }: LoginItemProps) {
           <span>{Emoji}</span>
         </span>
         <p>{Label}</p>
-        <Image src={ArrowRight} alt="" />
+        <ArrowRight />
       </Link>
     </StyledLoginItem>
   )
