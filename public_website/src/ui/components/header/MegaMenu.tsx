@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
 
 type MegaMenuProps = {
@@ -13,6 +14,7 @@ type MegaMenuProps = {
   data: {
     Title: string
     Cta: { Label: string; URL: string }
+    BannerText?: string
     PrimaryListItems: { Label: string; URL: string }[]
     SecondaryListItems: { Label: string; URL: string }[]
     CardTitle: string
@@ -69,6 +71,7 @@ export function MegaMenu({
       <StyledMegaMenuHeading>
         <p>{data.Title}</p>
         <Button href={data.Cta.URL}>{data.Cta.Label}</Button>
+        {data.BannerText && <AppBanner title={data.BannerText} url="#" />}
       </StyledMegaMenuHeading>
 
       <StyledMegaMenuLists>
@@ -124,7 +127,10 @@ const StyledMegaMenuHeading = styled.div`
       font-size: ${theme.fonts.sizes['6xl']};
       font-weight: ${theme.fonts.weights.bold};
       line-height: 1.25;
-      margin-bottom: 1.5rem;
+    }
+
+    p + a {
+      margin: 1.5rem 0 3rem;
     }
   `}
 `

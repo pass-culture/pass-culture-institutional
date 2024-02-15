@@ -107,6 +107,7 @@ export interface HeaderMegaMenu extends Schema.Component {
   collectionName: 'components_header_mega_menus';
   info: {
     displayName: 'MegaMenu';
+    description: '';
   };
   attributes: {
     Title: Attribute.String & Attribute.Required;
@@ -118,6 +119,7 @@ export interface HeaderMegaMenu extends Schema.Component {
     CardTitle: Attribute.String & Attribute.Required;
     CardDescription: Attribute.String & Attribute.Required;
     CardLink: Attribute.Component<'common.link'> & Attribute.Required;
+    BannerText: Attribute.String;
   };
 }
 

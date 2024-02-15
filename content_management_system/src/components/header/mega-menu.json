@@ -1,7 +1,8 @@
 {
   "collectionName": "components_header_mega_menus",
   "info": {
-    "displayName": "MegaMenu"
+    "displayName": "MegaMenu",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -44,6 +45,9 @@
       "repeatable": false,
       "component": "common.link",
       "required": true
+    },
+    "BannerText": {
+      "type": "string"
     }
   }
 }

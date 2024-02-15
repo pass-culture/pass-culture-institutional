@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { AppBanner } from '../app-banner/AppBanner'
 import { Gouvernement } from '../icons/Gouvernement'
 import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
@@ -41,9 +42,7 @@ export function Footer({
             <Link href="https://www.gouvernement.fr">
               <Gouvernement />
             </Link>
-            <StyledDownloadBanner href={storeUrl} target="_blank">
-              <p>{BannerText}</p>
-            </StyledDownloadBanner>
+            <AppBanner title={BannerText} url={storeUrl} />
           </StyledLogos>
 
           <StyledLists>
@@ -118,33 +117,6 @@ const StyledLogos = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       gap: 2rem;
-    }
-  `}
-`
-
-const StyledDownloadBanner = styled(Link)`
-  ${({ theme }) => css`
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    padding: 1.5rem 2rem;
-    border-radius: 0.625rem;
-    background: url('/images/banner-phone.svg'),
-      linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
-    background-position: bottom right;
-    background-size:
-      auto 80%,
-      cover;
-    background-repeat: no-repeat;
-    aspect-ratio: 3.1;
-    display: flex;
-    align-items: center;
-
-    p {
-      color: ${theme.colors.white};
-      font-size: ${theme.fonts.sizes.xs};
-      font-weight: ${theme.fonts.weights.bold};
-      text-transform: uppercase;
-      max-width: 50%;
     }
   `}
 `

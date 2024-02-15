@@ -26,6 +26,7 @@ type HeaderNavigationItemProps = {
   MegaMenu: {
     Title: string
     Cta: { Label: string; URL: string }
+    BannerText?: string
     PrimaryListItems: { Label: string; URL: string }[]
     SecondaryListItems: { Label: string; URL: string }[]
     CardTitle: string
