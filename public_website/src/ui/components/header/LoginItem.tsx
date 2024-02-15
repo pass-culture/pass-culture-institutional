@@ -13,11 +13,9 @@ type LoginItemProps = {
 
 export function LoginItem({ Color, URL, Emoji, Label }: LoginItemProps) {
   return (
-    <StyledLoginItem $color={Color}>
+    <StyledLoginItem color={Color}>
       <Link href={URL}>
-        <span>
-          <span>{Emoji}</span>
-        </span>
+        <span>{Emoji}</span>
         <p>{Label}</p>
         <ArrowRight />
       </Link>
@@ -25,8 +23,8 @@ export function LoginItem({ Color, URL, Emoji, Label }: LoginItemProps) {
   )
 }
 
-const StyledLoginItem = styled.li<{ $color: string }>`
-  ${({ theme, $color }) => css`
+const StyledLoginItem = styled.li<{ color: string }>`
+  ${({ theme, color }) => css`
     &[aria-hidden] {
       background-color: ${theme.colors.black};
       opacity: 0.2;
@@ -41,17 +39,14 @@ const StyledLoginItem = styled.li<{ $color: string }>`
       gap: 1.875rem;
 
       > span {
-        background-color: ${$color};
+        background-color: ${color};
         height: 3.5rem;
         width: 3.5rem;
         border-radius: 0.625rem;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        span {
-          font-size: ${theme.fonts.sizes['3xl']};
-        }
+        font-size: ${theme.fonts.sizes['3xl']};
       }
 
       p {

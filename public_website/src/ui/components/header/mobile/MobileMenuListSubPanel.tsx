@@ -22,7 +22,7 @@ export function MobileMenuListSubPanel({
 
   useEffect(() => {
     listRef.current?.focus()
-  })
+  }, [])
 
   return (
     <div>
