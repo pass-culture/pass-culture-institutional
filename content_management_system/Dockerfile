@@ -28,6 +28,8 @@ COPY public /app/public
 COPY config /app/config
 COPY database /app/database
 
+RUN chown -R node:node /app/public
+
 USER node
 
 WORKDIR  /app
