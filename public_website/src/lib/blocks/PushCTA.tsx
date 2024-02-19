@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQRCode } from 'next-qrcode'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -19,7 +19,7 @@ export function PushCTA(props: PushCTAProps) {
   return (
     <Root>
       <ImageContainer
-        $imageUrl={
+        imageUrl={
           props.Image?.data.attributes.url &&
           getStrapiURL(props.Image?.data.attributes.url)
         }>
@@ -32,10 +32,11 @@ export function PushCTA(props: PushCTAProps) {
           <p>Scanne ce QR code pour télécharger l’application</p>
         </QRCodeCard>
       </ImageContainer>
+      <BackgroundLayer />
       <RightSide>
         <h2 dangerouslySetInnerHTML={{ __html: props.Title }} />
         {props.Text && <p dangerouslySetInnerHTML={{ __html: props.Text }} />}
-        <CtaLink href="https://example.com">Télécharger l’application</CtaLink>
+        <CtaLink href="#">Télécharger l’application</CtaLink>
       </RightSide>
     </Root>
   )
@@ -51,38 +52,42 @@ const Root = styled.div`
   margin: 6.25rem auto;
   gap: 5.625rem;
   border-radius: 2.5rem;
-
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
 `
 
-const ImageContainer = styled.div<{ $imageUrl?: string }>`
-  background-color: #eb0055;
-  max-width: 28rem;
-  border-radius: 1rem;
-  margin: -3.125rem 5rem;
-  margin-right: 0;
-  background-image: ${(props) =>
-    props.$imageUrl ? `url(${props.$imageUrl})` : 'none'};
-  background-size: cover;
-  background-position: center 4.5rem;
-  background-repeat: no-repeat;
-
-  display: flex;
-  flex-direction: column-reverse;
-  padding: 2rem;
-
-  position: relative;
-
-  /* FIXME: blue card appears behind Root */
-  &::before {
-    position: absolute;
-    content: '';
-    inset: 0;
-    background-color: #320096;
-    z-index: -1;
-    transform: rotate(7deg);
+const ImageContainer = styled.div<{ imageUrl?: string }>`
+  ${({ imageUrl }) => css`
+    background-color: #eb0055;
+    max-width: 28rem;
     border-radius: 1rem;
-  }
+    margin: -3.125rem 0 -3.125rem 5rem;
+    background-image: ${imageUrl ? `url(${imageUrl})` : 'none'};
+    background-size: cover;
+    background-position: center 4.5rem;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 2rem;
+
+    position: relative;
+    z-index: 1;
+  `}
+`
+
+const BackgroundLayer = styled.div`
+  grid-column: 1 / span 1;
+  margin: -3.125rem 0 -3.125rem 5rem;
+  position: absolute;
+  content: '';
+  inset: 0;
+  background-color: #320096;
+  z-index: -1;
+  transform: rotate(7deg);
+  border-radius: 1rem;
+  z-index: 0;
 `
 
 const QRCodeCard = styled.div`
