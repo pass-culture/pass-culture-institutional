@@ -872,31 +872,6 @@ export interface ApiFooterFooter extends Schema.SingleType {
   };
 }
 
-export interface ApiHomeHome extends Schema.SingleType {
-  collectionName: 'homes';
-  info: {
-    singularName: 'home';
-    pluralName: 'homes';
-    displayName: 'Home';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    AboutSection: Attribute.Component<'block.centered-text'> &
-      Attribute.Required;
-    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiHeaderHeader extends Schema.SingleType {
   collectionName: 'headers';
   info: {
@@ -929,6 +904,31 @@ export interface ApiHeaderHeader extends Schema.SingleType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AboutSection: Attribute.Component<'block.centered-text'> &
+      Attribute.Required;
+    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1022,17 +1022,8 @@ declare module '@strapi/types' {
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
-<<<<<<< HEAD
-<<<<<<< HEAD
       'api::header.header': ApiHeaderHeader;
-=======
-=======
       'api::home.home': ApiHomeHome;
->>>>>>> bef7d46 (create about section)
->>>>>>> 38539af (create about section)
-=======
-      'api::home.home': ApiHomeHome;
->>>>>>> 90d9d9a (add push cta image field)
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

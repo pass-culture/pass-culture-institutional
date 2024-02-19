@@ -72,12 +72,80 @@ export interface FooterLegalLinks extends Schema.Component {
 export interface FooterList extends Schema.Component {
   collectionName: 'components_footer_lists';
   info: {
-    displayName: 'List';
+    displayName: 'Lists';
     description: '';
   };
   attributes: {
     Title: Attribute.String & Attribute.Required;
     Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface HeaderHeader extends Schema.Component {
+  collectionName: 'components_header_headers';
+  info: {
+    displayName: 'header';
+  };
+  attributes: {};
+}
+
+export interface HeaderLoginItems extends Schema.Component {
+  collectionName: 'components_header_login_items';
+  info: {
+    displayName: 'loginItems';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HeaderLogin extends Schema.Component {
+  collectionName: 'components_header_logins';
+  info: {
+    displayName: 'login';
+  };
+  attributes: {
+    buttonLabel: Attribute.String & Attribute.Required;
+    loginItems: Attribute.Component<'header.login-items', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
+  };
+}
+
+export interface HeaderMegaMenu extends Schema.Component {
+  collectionName: 'components_header_mega_menus';
+  info: {
+    displayName: 'megaMenu';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    primaryListItems: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    secondaryListItems: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    cardTitle: Attribute.String & Attribute.Required;
+    cardDescription: Attribute.String & Attribute.Required;
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
+    bannerText: Attribute.String;
+    cardFirstEmoji: Attribute.String & Attribute.Required;
+    cardSecondEmoji: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HeaderNavigationItems extends Schema.Component {
+  collectionName: 'components_header_navigation_items';
+  info: {
+    displayName: 'navigationItems';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    megaMenu: Attribute.Component<'header.mega-menu'>;
   };
 }
 
@@ -91,6 +159,11 @@ declare module '@strapi/types' {
       'common.link': CommonLink;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
+      'header.header': HeaderHeader;
+      'header.login-items': HeaderLoginItems;
+      'header.login': HeaderLogin;
+      'header.mega-menu': HeaderMegaMenu;
+      'header.navigation-items': HeaderNavigationItems;
     }
   }
 }

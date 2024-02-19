@@ -852,7 +852,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     PlayStoreUrl: Attribute.String & Attribute.Required;
     AppStoreUrl: Attribute.String & Attribute.Required;
     Lists: Attribute.Component<'footer.list', true>;
-    BannerText: Attribute.String;
+    bannerText: Attribute.String;
     LegalLinks: Attribute.Component<'common.link', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -865,6 +865,42 @@ export interface ApiFooterFooter extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::footer.footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHeaderHeader extends Schema.SingleType {
+  collectionName: 'headers';
+  info: {
+    singularName: 'header';
+    pluralName: 'headers';
+    displayName: 'Header';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    targetItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    aboutItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    signUp: Attribute.Component<'common.link'> & Attribute.Required;
+    login: Attribute.Component<'header.login'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::header.header',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::header.header',
       'oneToOne',
       'admin::user'
     > &
@@ -986,6 +1022,7 @@ declare module '@strapi/types' {
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
+      'api::header.header': ApiHeaderHeader;
       'api::home.home': ApiHomeHome;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
