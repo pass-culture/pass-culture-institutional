@@ -1,10 +1,10 @@
 import React from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import logoGouvernement from '../../../../public/images/logo-gouvernement.svg'
-import logoPassCulture from '../../../../public/images/logo-pass-culture.svg'
+import { AppBanner } from '../app-banner/AppBanner'
+import { Gouvernement } from '../icons/Gouvernement'
+import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
@@ -12,7 +12,7 @@ import { useIsAndroid } from '@/hooks/useIsAndroid'
 export type FooterProps = {
   PlayStoreUrl: string
   AppStoreUrl: string
-  BannerText: string
+  bannerText: string
   LegalLinks: { Label: string; URL: string; id: number }[]
   Lists: {
     id: number
@@ -24,7 +24,7 @@ export type FooterProps = {
 export function Footer({
   PlayStoreUrl,
   AppStoreUrl,
-  BannerText,
+  bannerText,
   LegalLinks,
   Lists,
 }: FooterProps) {
@@ -36,19 +36,13 @@ export function Footer({
       <StyledContentContainer>
         <StyledTopSection>
           <StyledLogos>
-            {/* TODO: get real svg files and create SVGR files */}
             <Link href="https://pass.culture.fr/">
-              <Image src={logoPassCulture} alt="Site du Pass Culture" />
+              <PassCulture />
             </Link>
             <Link href="https://www.gouvernement.fr">
-              <Image
-                src={logoGouvernement}
-                alt="Site du Gouvernement Français"
-              />
+              <Gouvernement />
             </Link>
-            <StyledDownloadBanner href={storeUrl} target="_blank">
-              <p>{BannerText}</p>
-            </StyledDownloadBanner>
+            <AppBanner title={bannerText} url={storeUrl} />
           </StyledLogos>
 
           <StyledLists>
@@ -76,7 +70,9 @@ export function Footer({
 }
 
 const StyledFooter = styled.footer`
-  background-color: #faf8fe;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.lightBlue};
+  `}
 `
 
 const StyledContentContainer = styled.div`
@@ -115,44 +111,12 @@ const StyledLogos = styled.div`
     justify-items: start;
     gap: 3.125rem 3.75rem;
 
-    img {
-      border: 1px solid;
-      max-width: 100%;
-    }
-
     a:nth-child(2) img {
       mix-blend-mode: multiply;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       gap: 2rem;
-    }
-  `}
-`
-
-const StyledDownloadBanner = styled(Link)`
-  ${({ theme }) => css`
-    grid-column: 1 / -1;
-    justify-self: stretch;
-    padding: 1.5rem 2rem;
-    border-radius: 0.625rem;
-    background: url('/images/banner-phone.svg'),
-      linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
-    background-position: bottom right;
-    background-size:
-      auto 80%,
-      cover;
-    background-repeat: no-repeat;
-    aspect-ratio: 3.1;
-    display: flex;
-    align-items: center;
-
-    p {
-      color: ${theme.colors.white};
-      font-size: ${theme.fonts.sizes.xs};
-      font-weight: ${theme.fonts.weights.bold};
-      text-transform: uppercase;
-      max-width: 50%;
     }
   `}
 `

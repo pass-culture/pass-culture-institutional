@@ -1,8 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import accordionChevron from '../../../../public/images/accordion-chevron.svg'
+import { ChevronDown } from '../icons/ChevronDown'
 import { FooterListProps } from './FooterList'
 
 export function FooterMobileList({ title, listItems }: FooterListProps) {
@@ -10,7 +9,7 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
     <StyledMobileFooterList>
       <summary>
         <h3>{title}</h3>
-        <Image src={accordionChevron} alt="" />
+        <ChevronDown />
       </summary>
       <ul>
         {listItems.map((anchor) => {

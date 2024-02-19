@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_header_navigation_items",
+  "info": {
+    "displayName": "navigationItems"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "megaMenu": {
+      "displayName": "megaMenu",
+      "type": "component",
+      "repeatable": false,
+      "component": "header.mega-menu"
+    }
+  }
+}

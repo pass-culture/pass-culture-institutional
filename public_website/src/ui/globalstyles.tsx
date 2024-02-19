@@ -140,6 +140,24 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  button {
+    background: none;
+    border: none;
+    font: inherit;
+    padding: 0;
+  }
+
+  /* Visually hide content but keep its semantic/content to assistive technologies */
+  .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
 `
 
 export default GlobalStyles
