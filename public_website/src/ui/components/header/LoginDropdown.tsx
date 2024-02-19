@@ -84,7 +84,7 @@ const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
 
     ul {
       background: ${theme.colors.white};
-      box-shadow: -4px 8px 14px 0px #9f9f9f26;
+      box-shadow: ${theme.shadows.popover};
       border-radius: 1rem;
       padding: 2rem;
       position: relative;

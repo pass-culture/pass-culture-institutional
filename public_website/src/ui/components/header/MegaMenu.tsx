@@ -115,7 +115,7 @@ export function MegaMenu({
 
 const StyledMegaMenu = styled.section`
   ${({ theme }) => css`
-    background-color: ${theme.colors.sectionBackground};
+    background-color: ${theme.colors.lightBlue};
     position: absolute;
     left: 0;
     right: 0;

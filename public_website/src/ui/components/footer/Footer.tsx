@@ -71,7 +71,7 @@ export function Footer({
 
 const StyledFooter = styled.footer`
   ${({ theme }) => css`
-    background-color: ${theme.colors.sectionBackground};
+    background-color: ${theme.colors.lightBlue};
   `}
 `
 
