@@ -146,6 +146,17 @@ const StyledMegaMenuLists = styled.div`
   ${({ theme }) => css`
     position: relative;
 
+    &::after {
+      content: '';
+      height: 100%;
+      width: 1px;
+      background-color: ${theme.colors.black};
+      opacity: 0.2;
+      position: absolute;
+      left: -4rem;
+      top: 0;
+    }
+
     ul {
       display: flex;
       flex-direction: column;
@@ -153,16 +164,6 @@ const StyledMegaMenuLists = styled.div`
 
       &:not(:last-child) {
         margin-bottom: 3.75rem;
-      }
-
-      &::after {
-        content: '';
-        height: 100%;
-        width: 1px;
-        background: #3a116d;
-        opacity: 0.1;
-        position: absolute;
-        left: -4rem;
       }
     }
 
