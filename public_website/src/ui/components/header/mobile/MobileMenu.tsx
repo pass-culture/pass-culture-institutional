@@ -148,6 +148,7 @@ const StyledMobileMenuWrapper = styled.div`
     overflow: auto;
     display: flex;
     flex-direction: column;
+    z-index: 2;
   `}
 `
 

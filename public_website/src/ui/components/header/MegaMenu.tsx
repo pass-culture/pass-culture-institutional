@@ -116,7 +116,7 @@ export function MegaMenu({
 const StyledMegaMenu = styled.section`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: calc(4rem + 4rem);
@@ -124,6 +124,7 @@ const StyledMegaMenu = styled.section`
     grid-template-columns: repeat(3, 1fr);
     gap: 6.5rem;
     padding: 6.25rem 2.5rem 8.125rem;
+    z-index: 2;
   `}
 `
 
