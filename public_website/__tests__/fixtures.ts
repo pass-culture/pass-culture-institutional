@@ -12,6 +12,8 @@ export const headerDataFixtures: HeaderProps = {
         Title: 'Mega menu 1',
         CardTitle: 'CardTitle 1',
         CardDescription: 'CardDescription 1',
+        CardFirstEmoji: '🌴',
+        CardSecondEmoji: '🦊',
         PrimaryListItems: [
           {
             Label: 'PrimaryListItems 1',
@@ -42,6 +44,8 @@ export const headerDataFixtures: HeaderProps = {
         Title: 'Mega menu 2',
         CardTitle: 'CardTitle 2',
         CardDescription: 'CardDescription 2',
+        CardFirstEmoji: '🎭',
+        CardSecondEmoji: '☎️',
         PrimaryListItems: [
           {
             Label: 'PrimaryListItems 2',

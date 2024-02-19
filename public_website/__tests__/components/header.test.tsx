@@ -37,7 +37,7 @@ describe('header', () => {
     expect(screen.queryByText('😇')).toBeDefined()
   })
 
-  // FIXME: how to test on small window size?!
+  // Tests for small viewport size
   it.todo('should open mobile menu on burger click')
   it.todo('should open sub panel on first mobile menu item click')
   it.todo('should open sub panel on mobile login item click')
