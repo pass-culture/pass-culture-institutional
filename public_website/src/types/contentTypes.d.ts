@@ -1,4 +1,3 @@
-/* eslint-disable */
 import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface AdminPermission extends Schema.CollectionType {
@@ -838,6 +837,66 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiFooterFooter extends Schema.SingleType {
+  collectionName: 'footers';
+  info: {
+    singularName: 'footer';
+    pluralName: 'footers';
+    displayName: 'Footer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    PlayStoreUrl: Attribute.String & Attribute.Required;
+    AppStoreUrl: Attribute.String & Attribute.Required;
+    Lists: Attribute.Component<'footer.list', true>;
+    BannerText: Attribute.String;
+    LegalLinks: Attribute.Component<'common.link', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::footer.footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::footer.footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    AboutSection: Attribute.Component<'block.centered-text'> &
+      Attribute.Required;
+    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -852,7 +911,12 @@ export interface ApiPagePage extends Schema.CollectionType {
   attributes: {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
-      ['block.centered-text', 'block.header', 'block.simple-text']
+      [
+        'block.centered-text',
+        'block.header',
+        'block.simple-text',
+        'block.push-cta'
+      ]
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -921,6 +985,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
+      'api::footer.footer': ApiFooterFooter;
+      'api::home.home': ApiHomeHome;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

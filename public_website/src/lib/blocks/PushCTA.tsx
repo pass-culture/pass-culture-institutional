@@ -2,9 +2,13 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled from 'styled-components'
 
+import { APIResponse } from '@/types/strapi'
+import { getStrapiURL } from '@/utils/apiHelpers'
+
 interface PushCTAProps {
   Title: string
   Text?: string
+  Image: APIResponse<'plugin::upload.file'> | null
 }
 
 export function PushCTA(props: PushCTAProps) {
@@ -14,7 +18,11 @@ export function PushCTA(props: PushCTAProps) {
 
   return (
     <Root>
-      <ImageContainer>
+      <ImageContainer
+        $imageUrl={
+          props.Image?.data.attributes.url &&
+          getStrapiURL(props.Image?.data.attributes.url)
+        }>
         <QRCodeCard>
           <QrCode
             text={qrCodeUrl}
@@ -25,8 +33,8 @@ export function PushCTA(props: PushCTAProps) {
         </QRCodeCard>
       </ImageContainer>
       <RightSide>
-        <h2>{props.Title}</h2>
-        {props.Text && <p>{props.Text}</p>}
+        <h2 dangerouslySetInnerHTML={{ __html: props.Title }} />
+        {props.Text && <p dangerouslySetInnerHTML={{ __html: props.Text }} />}
         <CtaLink href="https://example.com">Télécharger l’application</CtaLink>
       </RightSide>
     </Root>
@@ -47,13 +55,14 @@ const Root = styled.div`
   display: flex;
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ $imageUrl?: string }>`
   background-color: #eb0055;
   max-width: 28rem;
   border-radius: 1rem;
   margin: -3.125rem 5rem;
   margin-right: 0;
-  background-image: url(https://s3-alpha-sig.figma.com/img/357e/a3b8/3275b2b022f98c6f8da02c37e05d4a18?Expires=1708905600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SmLrgWMhWmxDoYmeU9Eh5Ad5lNTijYvWyep8vdGYQcnOqxFGR1m4RFef5-8oIVAukvhoN2~LPi0hqvN-z3-MOtcSA5TgrWGE3OLAyIxUeZAzxjlnxsEVy~XuFLzytAhfErieLuqSnQ8d85JxPdxlL3j7jWDhx4cqfCEhIg-4QTeMQDPOZ3KTcXtvZG43M4Jf8vmjBgOkWsQaDdgLKKEsYxqnwDkPobjQVYlFv1YGw4D52Y4T0bcurVi--7~xaEzvHELYaUoaWJLGNm73SalOKGxphVtrAZGTwrhTPaBXlRip1tx0JC515e2QWuFUEC5K-0b~RVVgXtuCSZFyZk7~5A__);
+  background-image: ${(props) =>
+    props.$imageUrl ? `url(${props.$imageUrl})` : 'none'};
   background-size: cover;
   background-position: center 4.5rem;
   background-repeat: no-repeat;
@@ -99,6 +108,7 @@ const QRCodeCard = styled.div`
 
 const RightSide = styled.div`
   padding: 6.25rem 0;
+  max-width: 32rem;
 
   h2 {
     font-size: 2.5rem;

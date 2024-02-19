@@ -1,4 +1,3 @@
-/* eslint-disable */
 import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface BlockCenteredText extends Schema.Component {
@@ -26,6 +25,19 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockPushCta extends Schema.Component {
+  collectionName: 'components_block_push_ctas';
+  info: {
+    displayName: 'PushCTA';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text;
+    Image: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
@@ -38,12 +50,47 @@ export interface BlockSimpleText extends Schema.Component {
   };
 }
 
+export interface CommonLink extends Schema.Component {
+  collectionName: 'components_common_links';
+  info: {
+    displayName: 'Link';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
+}
+
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'List';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
+      'common.link': CommonLink;
+      'footer.legal-links': FooterLegalLinks;
+      'footer.list': FooterList;
     }
   }
 }

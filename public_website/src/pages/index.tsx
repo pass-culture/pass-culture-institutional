@@ -12,6 +12,7 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+  // props.data.attributes.CTASection.Image?.data.
   return (
     <main>
       <CenteredText
@@ -22,6 +23,7 @@ export default function Home(props: HomeProps) {
       <PushCTA
         Title={props.data.attributes.CTASection.Title}
         Text={props.data.attributes.CTASection.Text}
+        Image={props.data.attributes.CTASection.Image}
       />
 
       <p>
@@ -37,7 +39,7 @@ export default function Home(props: HomeProps) {
 
 export const getStaticProps = (async () => {
   const query = stringify({
-    populate: ['AboutSection', 'CTASection.Image'],
+    populate: ['AboutSection', 'CTASection', 'CTASection.Image'],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
     `/home?${query}`
