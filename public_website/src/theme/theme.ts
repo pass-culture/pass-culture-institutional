@@ -12,6 +12,7 @@ export const theme = {
   },
   shadows: {
     popover: `-0.25rem 0.5rem 0.875rem 0 ${Colors.LIGHT_GRAY}`,
+    sticker: `-0.25rem 0.5rem 1.5rem 0 ${Colors.LIGHT_GRAY}`,
   },
   fonts: {
     sizes: {
