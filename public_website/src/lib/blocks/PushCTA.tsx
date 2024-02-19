@@ -2,52 +2,54 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
-  Title: string
-  Text?: string
-  Image: APIResponse<'plugin::upload.file'> | null
+  title: string
+  text?: string
+  image: APIResponse<'plugin::upload.file'> | null
+  qrCodeDescription: string
+  ctaLink: { Label: string; URL: string }
+  qrCodeUrl: string
 }
 
 export function PushCTA(props: PushCTAProps) {
-  const qrCodeUrl = 'https://example.com'
-
   const { SVG: QrCode } = useQRCode()
 
   return (
     <Root>
       <ImageContainer
         imageUrl={
-          props.Image?.data.attributes.url &&
-          getStrapiURL(props.Image?.data.attributes.url)
+          props.image?.data.attributes.url &&
+          getStrapiURL(props.image?.data.attributes.url)
         }>
         <QRCodeCard>
           <QrCode
-            text={qrCodeUrl}
-            /* TODO: plug theme color */
-            options={{ width: 100, margin: 2, color: { dark: '#2D0390' } }}
+            text={props.qrCodeUrl}
+            options={{
+              width: 100,
+              margin: 2,
+              color: { dark: theme.colors.secondary },
+            }}
           />
-          <p>Scanne ce QR code pour télécharger l’application</p>
+          <p>{props.qrCodeDescription}</p>
         </QRCodeCard>
       </ImageContainer>
       <BackgroundLayer />
       <RightSide>
-        <h2 dangerouslySetInnerHTML={{ __html: props.Title }} />
-        {props.Text && <p dangerouslySetInnerHTML={{ __html: props.Text }} />}
-        <CtaLink href="#">Télécharger l’application</CtaLink>
+        <h2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
+        <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
       </RightSide>
     </Root>
   )
 }
 
-// TODO: plug theme colors
-// TODO: adjust left card size
-
 const Root = styled.div`
   ${({ theme }) => css`
-    background-color: #f6f4fa;
+    background-color: ${theme.colors.lightBlue};
     max-width: 80rem;
     margin: 6.25rem auto;
     gap: 5.625rem;
@@ -117,7 +119,7 @@ const BackgroundLayer = styled.div`
 
 const QRCodeCard = styled.div`
   ${({ theme }) => css`
-    background-color: #2d0390;
+    background-color: ${theme.colors.secondary};
     color: ${theme.colors.white};
     padding: 1.125rem;
     display: flex;
@@ -128,7 +130,7 @@ const QRCodeCard = styled.div`
     box-shadow: ${theme.shadows.sticker};
 
     p {
-      font-weight: 700;
+      font-weight: ${theme.fonts.weights.bold};
       line-height: 1.3125;
     }
 
@@ -148,9 +150,9 @@ const RightSide = styled.div`
     max-width: 32rem;
 
     h2 {
-      font-size: 2.5rem;
+      font-size: ${theme.fonts.sizes['6xl']};
       line-height: 1.25;
-      font-weight: 700;
+      font-weight: ${theme.fonts.weights.bold};
 
       color: ${theme.colors.secondary};
 
@@ -158,9 +160,9 @@ const RightSide = styled.div`
     }
 
     p {
-      font-size: 1rem;
+      font-size: ${theme.fonts.sizes.m};
       line-height: 2.125rem;
-      font-weight: 500;
+      font-weight: ${theme.fonts.weights.medium};
 
       margin-bottom: 2rem;
     }
@@ -176,8 +178,8 @@ const CtaLink = styled.a`
   ${({ theme }) => css`
     display: inline-block;
 
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: ${theme.fonts.sizes.xs};
+    font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
 
     background: linear-gradient(90deg, #eb0055, ${theme.colors.secondary});

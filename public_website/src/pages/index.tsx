@@ -21,9 +21,12 @@ export default function Home(props: HomeProps) {
       />
 
       <PushCTA
-        Title={props.data.attributes.CTASection.Title}
-        Text={props.data.attributes.CTASection.Text}
-        Image={props.data.attributes.CTASection.Image}
+        title={props.data.attributes.CTASection.Title}
+        text={props.data.attributes.CTASection.Text}
+        image={props.data.attributes.CTASection.Image}
+        ctaLink={props.data.attributes.CTASection.ctaLink}
+        qrCodeDescription={props.data.attributes.CTASection.qrCodeDescription}
+        qrCodeUrl={props.data.attributes.CTASection.qrCodeUrl}
       />
 
       <p>
@@ -39,7 +42,12 @@ export default function Home(props: HomeProps) {
 
 export const getStaticProps = (async () => {
   const query = stringify({
-    populate: ['AboutSection', 'CTASection', 'CTASection.Image'],
+    populate: [
+      'AboutSection',
+      'CTASection',
+      'CTASection.Image',
+      'CTASection.ctaLink',
+    ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
     `/home?${query}`

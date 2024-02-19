@@ -14,11 +14,25 @@
       "type": "text"
     },
     "Image": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "ctaLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "qrCodeDescription": {
+      "type": "string",
+      "required": true
+    },
+    "qrCodeUrl": {
+      "type": "string",
       "required": true
     }
   }

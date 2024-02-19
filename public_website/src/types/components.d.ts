@@ -1,169 +1,172 @@
-import type { Schema, Attribute } from '@strapi/strapi'
+import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface BlockCenteredText extends Schema.Component {
-  collectionName: 'components_block_centered_texts'
+  collectionName: 'components_block_centered_texts';
   info: {
-    displayName: 'Centered Text'
-    description: ''
-  }
+    displayName: 'Centered Text';
+    description: '';
+  };
   attributes: {
-    Title: Attribute.String & Attribute.Required
-    Text: Attribute.Text & Attribute.Required
-  }
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text & Attribute.Required;
+  };
 }
 
 export interface BlockHeader extends Schema.Component {
-  collectionName: 'components_block_headers'
+  collectionName: 'components_block_headers';
   info: {
-    displayName: 'Header'
-    description: ''
-  }
+    displayName: 'Header';
+    description: '';
+  };
   attributes: {
-    Title: Attribute.String
-    Text: Attribute.Text
-    Surtitle: Attribute.String
-  }
+    Title: Attribute.String;
+    Text: Attribute.Text;
+    Surtitle: Attribute.String;
+  };
 }
 
 export interface BlockPushCta extends Schema.Component {
-  collectionName: 'components_block_push_ctas'
+  collectionName: 'components_block_push_ctas';
   info: {
-    displayName: 'PushCTA'
-    description: ''
-  }
+    displayName: 'PushCTA';
+    description: '';
+  };
   attributes: {
-    Title: Attribute.String & Attribute.Required
-    Text: Attribute.Text
-    Image: Attribute.Media & Attribute.Required
-  }
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text;
+    Image: Attribute.Media & Attribute.Required;
+    ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
+    qrCodeDescription: Attribute.String & Attribute.Required;
+    qrCodeUrl: Attribute.String & Attribute.Required;
+  };
 }
 
 export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts'
+  collectionName: 'components_block_simple_texts';
   info: {
-    displayName: 'Simple Text'
-    description: ''
-  }
+    displayName: 'Simple Text';
+    description: '';
+  };
   attributes: {
-    Title: Attribute.String
-    Text: Attribute.Text
-  }
+    Title: Attribute.String;
+    Text: Attribute.Text;
+  };
 }
 
 export interface CommonLink extends Schema.Component {
-  collectionName: 'components_common_links'
+  collectionName: 'components_common_links';
   info: {
-    displayName: 'Link'
-  }
+    displayName: 'Link';
+  };
   attributes: {
-    Label: Attribute.String & Attribute.Required
-    URL: Attribute.String & Attribute.Required
-  }
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+  };
 }
 
 export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links'
+  collectionName: 'components_footer_legal_links';
   info: {
-    displayName: 'LegalLinks'
-  }
-  attributes: {}
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
 }
 
 export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists'
+  collectionName: 'components_footer_lists';
   info: {
-    displayName: 'Lists'
-    description: ''
-  }
+    displayName: 'Lists';
+    description: '';
+  };
   attributes: {
-    Title: Attribute.String & Attribute.Required
-    Links: Attribute.Component<'common.link', true>
-  }
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
 }
 
 export interface HeaderHeader extends Schema.Component {
-  collectionName: 'components_header_headers'
+  collectionName: 'components_header_headers';
   info: {
-    displayName: 'header'
-  }
-  attributes: {}
+    displayName: 'header';
+  };
+  attributes: {};
 }
 
 export interface HeaderLoginItems extends Schema.Component {
-  collectionName: 'components_header_login_items'
+  collectionName: 'components_header_login_items';
   info: {
-    displayName: 'loginItems'
-  }
+    displayName: 'loginItems';
+  };
   attributes: {
-    label: Attribute.String & Attribute.Required
-    color: Attribute.String & Attribute.Required
-    emoji: Attribute.String & Attribute.Required
-    url: Attribute.String & Attribute.Required
-  }
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
 }
 
 export interface HeaderLogin extends Schema.Component {
-  collectionName: 'components_header_logins'
+  collectionName: 'components_header_logins';
   info: {
-    displayName: 'login'
-  }
+    displayName: 'login';
+  };
   attributes: {
-    buttonLabel: Attribute.String & Attribute.Required
+    buttonLabel: Attribute.String & Attribute.Required;
     loginItems: Attribute.Component<'header.login-items', true> &
       Attribute.SetMinMax<{
-        max: 2
-      }>
-  }
+        max: 2;
+      }>;
+  };
 }
 
 export interface HeaderMegaMenu extends Schema.Component {
-  collectionName: 'components_header_mega_menus'
+  collectionName: 'components_header_mega_menus';
   info: {
-    displayName: 'megaMenu'
-    description: ''
-  }
+    displayName: 'megaMenu';
+    description: '';
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required
+    title: Attribute.String & Attribute.Required;
     primaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required
+      Attribute.Required;
     secondaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required
-    cta: Attribute.Component<'common.link'> & Attribute.Required
-    cardTitle: Attribute.String & Attribute.Required
-    cardDescription: Attribute.String & Attribute.Required
-    cardLink: Attribute.Component<'common.link'> & Attribute.Required
-    bannerText: Attribute.String
-    cardFirstEmoji: Attribute.String & Attribute.Required
-    cardSecondEmoji: Attribute.String & Attribute.Required
-  }
+      Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    cardTitle: Attribute.String & Attribute.Required;
+    cardDescription: Attribute.String & Attribute.Required;
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
+    bannerText: Attribute.String;
+    cardFirstEmoji: Attribute.String & Attribute.Required;
+    cardSecondEmoji: Attribute.String & Attribute.Required;
+  };
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
-  collectionName: 'components_header_navigation_items'
+  collectionName: 'components_header_navigation_items';
   info: {
-    displayName: 'navigationItems'
-  }
+    displayName: 'navigationItems';
+  };
   attributes: {
-    label: Attribute.String & Attribute.Required
-    megaMenu: Attribute.Component<'header.mega-menu'>
-  }
+    label: Attribute.String & Attribute.Required;
+    megaMenu: Attribute.Component<'header.mega-menu'>;
+  };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'block.centered-text': BlockCenteredText
-      'block.header': BlockHeader
-      'block.push-cta': BlockPushCta
-      'block.simple-text': BlockSimpleText
-      'common.link': CommonLink
-      'footer.legal-links': FooterLegalLinks
-      'footer.list': FooterList
-      'header.header': HeaderHeader
-      'header.login-items': HeaderLoginItems
-      'header.login': HeaderLogin
-      'header.mega-menu': HeaderMegaMenu
-      'header.navigation-items': HeaderNavigationItems
+      'block.centered-text': BlockCenteredText;
+      'block.header': BlockHeader;
+      'block.push-cta': BlockPushCta;
+      'block.simple-text': BlockSimpleText;
+      'common.link': CommonLink;
+      'footer.legal-links': FooterLegalLinks;
+      'footer.list': FooterList;
+      'header.header': HeaderHeader;
+      'header.login-items': HeaderLoginItems;
+      'header.login': HeaderLogin;
+      'header.mega-menu': HeaderMegaMenu;
+      'header.navigation-items': HeaderNavigationItems;
     }
   }
 }

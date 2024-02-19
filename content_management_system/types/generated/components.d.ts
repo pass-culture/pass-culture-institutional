@@ -35,6 +35,9 @@ export interface BlockPushCta extends Schema.Component {
     Title: Attribute.String & Attribute.Required;
     Text: Attribute.Text;
     Image: Attribute.Media & Attribute.Required;
+    ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
+    qrCodeDescription: Attribute.String & Attribute.Required;
+    qrCodeUrl: Attribute.String & Attribute.Required;
   };
 }
 
