@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { SVGProps } from 'react'
 
-type IconProps = {
+interface IconProps extends SVGProps<SVGSVGElement> {
   label?: string
   children: React.ReactNode
 }
