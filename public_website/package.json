@@ -49,6 +49,9 @@
     "vitest-axe": "^0.1.0",
     "vitest-canvas-mock": "^0.3.3"
   },
+  "resolutions": {
+    "vitest/vite": "^5.1.3"
+  },
   "engines": {
     "node": ">=18.17.0 <=20.x.x",
     "npm": "please-use-yarn",
