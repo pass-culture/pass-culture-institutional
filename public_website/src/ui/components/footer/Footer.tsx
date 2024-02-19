@@ -12,7 +12,7 @@ import { useIsAndroid } from '@/hooks/useIsAndroid'
 export type FooterProps = {
   PlayStoreUrl: string
   AppStoreUrl: string
-  BannerText: string
+  bannerText: string
   LegalLinks: { Label: string; URL: string; id: number }[]
   Lists: {
     id: number
@@ -24,7 +24,7 @@ export type FooterProps = {
 export function Footer({
   PlayStoreUrl,
   AppStoreUrl,
-  BannerText,
+  bannerText,
   LegalLinks,
   Lists,
 }: FooterProps) {
@@ -42,7 +42,7 @@ export function Footer({
             <Link href="https://www.gouvernement.fr">
               <Gouvernement />
             </Link>
-            <AppBanner title={BannerText} url={storeUrl} />
+            <AppBanner title={bannerText} url={storeUrl} />
           </StyledLogos>
 
           <StyledLists>

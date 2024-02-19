@@ -1,16 +1,16 @@
 {
   "collectionName": "components_header_navigation_items",
   "info": {
-    "displayName": "NavigationItems"
+    "displayName": "navigationItems"
   },
   "options": {},
   "attributes": {
-    "Label": {
+    "label": {
       "type": "string",
       "required": true
     },
-    "MegaMenu": {
-      "displayName": "MegaMenu",
+    "megaMenu": {
+      "displayName": "megaMenu",
       "type": "component",
       "repeatable": false,
       "component": "header.mega-menu"

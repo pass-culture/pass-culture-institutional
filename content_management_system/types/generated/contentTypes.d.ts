@@ -852,7 +852,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     PlayStoreUrl: Attribute.String & Attribute.Required;
     AppStoreUrl: Attribute.String & Attribute.Required;
     Lists: Attribute.Component<'footer.list', true>;
-    BannerText: Attribute.String;
+    bannerText: Attribute.String;
     LegalLinks: Attribute.Component<'common.link', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -884,12 +884,12 @@ export interface ApiHeaderHeader extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    TargetItems: Attribute.Component<'header.navigation-items', true> &
+    targetItems: Attribute.Component<'header.navigation-items', true> &
       Attribute.Required;
-    AboutItems: Attribute.Component<'header.navigation-items', true> &
+    aboutItems: Attribute.Component<'header.navigation-items', true> &
       Attribute.Required;
-    SignUp: Attribute.Component<'common.link'> & Attribute.Required;
-    Login: Attribute.Component<'header.login'> & Attribute.Required;
+    signUp: Attribute.Component<'common.link'> & Attribute.Required;
+    login: Attribute.Component<'header.login'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

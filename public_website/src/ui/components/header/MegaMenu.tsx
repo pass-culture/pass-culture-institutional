@@ -12,16 +12,16 @@ type MegaMenuProps = {
   id: string
   labelId: string
   data: {
-    Title: string
-    Cta: { Label: string; URL: string }
-    BannerText?: string
-    PrimaryListItems: { Label: string; URL: string }[]
-    SecondaryListItems: { Label: string; URL: string }[]
-    CardTitle: string
-    CardDescription: string
-    CardLink: { Label: string; URL: string }
-    CardFirstEmoji: string
-    CardSecondEmoji: string
+    title: string
+    cta: { Label: string; URL: string }
+    bannerText?: string
+    primaryListItems: { Label: string; URL: string }[]
+    secondaryListItems: { Label: string; URL: string }[]
+    cardTitle: string
+    cardDescription: string
+    cardLink: { Label: string; URL: string }
+    cardFirstEmoji: string
+    cardSecondEmoji: string
   }
 }
 
@@ -71,14 +71,14 @@ export function MegaMenu({
   return (
     <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
       <StyledMegaMenuHeading>
-        <p>{data.Title}</p>
-        <Button href={data.Cta.URL}>{data.Cta.Label}</Button>
-        {data.BannerText && <AppBanner title={data.BannerText} url="#" />}
+        <p>{data.title}</p>
+        <Button href={data.cta.URL}>{data.cta.Label}</Button>
+        {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
       </StyledMegaMenuHeading>
 
       <StyledMegaMenuLists>
         <ul>
-          {data.PrimaryListItems.map((item) => {
+          {data.primaryListItems.map((item) => {
             return (
               <li key={item.Label}>
                 <Link href={item.URL}>{item.Label}</Link>
@@ -87,7 +87,7 @@ export function MegaMenu({
           })}
         </ul>
         <ul>
-          {data.SecondaryListItems.map((item) => {
+          {data.secondaryListItems.map((item) => {
             return (
               <li key={item.Label}>
                 <Link href={item.URL}>{item.Label}</Link>
@@ -99,14 +99,14 @@ export function MegaMenu({
 
       <StyledMegaMenuCard>
         <StyledMegaMenuCardHeading>
-          <p>{data.CardTitle}</p>
+          <p>{data.cardTitle}</p>
 
-          <span>{data.CardFirstEmoji}</span>
-          <span>{data.CardSecondEmoji}</span>
+          <span>{data.cardFirstEmoji}</span>
+          <span>{data.cardSecondEmoji}</span>
         </StyledMegaMenuCardHeading>
-        <p>{data.CardDescription}</p>
-        <Button href={data.CardLink.URL} variant="secondary">
-          {data.CardLink.Label}
+        <p>{data.cardDescription}</p>
+        <Button href={data.cardLink.URL} variant="secondary">
+          {data.cardLink.Label}
         </Button>
       </StyledMegaMenuCard>
     </StyledMegaMenu>

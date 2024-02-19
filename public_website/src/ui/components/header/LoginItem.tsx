@@ -5,18 +5,18 @@ import styled, { css } from 'styled-components'
 import { ArrowRight } from '../icons/ArrowRight'
 
 type LoginItemProps = {
-  Color: string
-  URL: string
-  Emoji: string
-  Label: string
+  color: string
+  url: string
+  emoji: string
+  label: string
 }
 
-export function LoginItem({ Color, URL, Emoji, Label }: LoginItemProps) {
+export function LoginItem({ color, url, emoji, label }: LoginItemProps) {
   return (
-    <StyledLoginItem color={Color}>
-      <Link href={URL}>
-        <span>{Emoji}</span>
-        <p>{Label}</p>
+    <StyledLoginItem color={color}>
+      <Link href={url}>
+        <span>{emoji}</span>
+        <p>{label}</p>
         <ArrowRight />
       </Link>
     </StyledLoginItem>

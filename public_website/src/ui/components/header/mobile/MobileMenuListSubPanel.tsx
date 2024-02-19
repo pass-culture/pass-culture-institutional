@@ -3,23 +3,23 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 type MobileMenuListSubPanelProps = {
-  PrimaryList: { Label: string; URL: string }[]
-  SecondaryList: { Label: string; URL: string }[]
-  CardTitle: string
-  CardDescription: string
-  CardLink: { Label: string; URL: string }
-  CardFirstEmoji: string
-  CardSecondEmoji: string
+  primaryList: { Label: string; URL: string }[]
+  secondaryList: { Label: string; URL: string }[]
+  cardTitle: string
+  cardDescription: string
+  cardLink: { Label: string; URL: string }
+  cardFirstEmoji: string
+  cardSecondEmoji: string
 }
 
 export function MobileMenuListSubPanel({
-  PrimaryList,
-  SecondaryList,
-  CardTitle,
-  CardDescription,
-  CardLink,
-  CardFirstEmoji,
-  CardSecondEmoji,
+  primaryList,
+  secondaryList,
+  cardTitle,
+  cardDescription,
+  cardLink,
+  cardFirstEmoji,
+  cardSecondEmoji,
 }: MobileMenuListSubPanelProps) {
   // Focus list on mount
   const listRef = useRef<HTMLUListElement>(null)
@@ -34,7 +34,7 @@ export function MobileMenuListSubPanel({
         ref={listRef}
         tabIndex={0}
         aria-labelledby="sub-panel-title">
-        {PrimaryList.map((item) => {
+        {primaryList.map((item) => {
           return (
             <li key={item.Label}>
               <Link href={item.URL}>{item.Label}</Link>
@@ -43,7 +43,7 @@ export function MobileMenuListSubPanel({
         })}
       </StyledSubPanelList>
       <StyledSubPanelList>
-        {SecondaryList.map((item) => {
+        {secondaryList.map((item) => {
           return (
             <li key={item.Label}>
               <Link href={item.URL}>{item.Label}</Link>
@@ -51,11 +51,11 @@ export function MobileMenuListSubPanel({
           )
         })}
       </StyledSubPanelList>
-      <StyledSubPanelCard href={CardLink.URL}>
-        <p>{CardTitle}</p>
-        <p>{CardDescription}</p>
-        <span>{CardFirstEmoji}</span>
-        <span>{CardSecondEmoji}</span>
+      <StyledSubPanelCard href={cardLink.URL}>
+        <p>{cardTitle}</p>
+        <p>{cardDescription}</p>
+        <span>{cardFirstEmoji}</span>
+        <span>{cardSecondEmoji}</span>
       </StyledSubPanelCard>
     </div>
   )

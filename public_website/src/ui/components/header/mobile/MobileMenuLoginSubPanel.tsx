@@ -5,11 +5,11 @@ import { LoginItemProps } from '../LoginDropdown'
 import { LoginItem } from '../LoginItem'
 
 type MobileMenuLoginSubPanelProps = {
-  LoginItems: LoginItemProps[]
+  loginItems: LoginItemProps[]
 }
 
 export function MobileMenuLoginSubPanel({
-  LoginItems,
+  loginItems,
 }: MobileMenuLoginSubPanelProps) {
   // Focus list on mount
   const loginListRef = useRef<HTMLUListElement>(null)
@@ -23,8 +23,8 @@ export function MobileMenuLoginSubPanel({
       ref={loginListRef}
       tabIndex={0}
       aria-labelledby="sub-panel-title">
-      {LoginItems.map((item) => {
-        return <LoginItem key={item.Label} {...item} />
+      {loginItems.map((item) => {
+        return <LoginItem key={item.label} {...item} />
       })}
     </StyledSubPanelLoginItems>
   )

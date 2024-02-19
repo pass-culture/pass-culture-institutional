@@ -1,59 +1,59 @@
 {
   "collectionName": "components_header_mega_menus",
   "info": {
-    "displayName": "MegaMenu",
+    "displayName": "megaMenu",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "PrimaryListItems": {
-      "displayName": "PrimaryListItems",
+    "primaryListItems": {
+      "displayName": "primaryListItems",
       "type": "component",
       "repeatable": true,
       "component": "common.link",
       "required": true
     },
-    "SecondaryListItems": {
-      "displayName": "SecondaryListItems",
+    "secondaryListItems": {
+      "displayName": "secondaryListItems",
       "type": "component",
       "repeatable": true,
       "component": "common.link",
       "required": true
     },
-    "Cta": {
-      "displayName": "Cta",
+    "cta": {
+      "displayName": "cta",
       "type": "component",
       "repeatable": false,
       "component": "common.link",
       "required": true
     },
-    "CardTitle": {
+    "cardTitle": {
       "type": "string",
       "required": true
     },
-    "CardDescription": {
+    "cardDescription": {
       "type": "string",
       "required": true
     },
-    "CardLink": {
-      "displayName": "CardLink",
+    "cardLink": {
+      "displayName": "cardLink",
       "type": "component",
       "repeatable": false,
       "component": "common.link",
       "required": true
     },
-    "BannerText": {
+    "bannerText": {
       "type": "string"
     },
-    "CardFirstEmoji": {
+    "cardFirstEmoji": {
       "type": "string",
       "required": true
     },
-    "CardSecondEmoji": {
+    "cardSecondEmoji": {
       "type": "string",
       "required": true
     }

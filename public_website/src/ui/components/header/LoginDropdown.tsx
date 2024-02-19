@@ -4,10 +4,10 @@ import styled, { css } from 'styled-components'
 import { LoginItem } from './LoginItem'
 
 export type LoginItemProps = {
-  Label: string
-  URL: string
-  Color: string
-  Emoji: string
+  label: string
+  url: string
+  color: string
+  emoji: string
 }
 
 type LoginDropdownProps = {
@@ -64,7 +64,7 @@ export function LoginDropdown({
     <StyledLoginDropdown ref={loginDropdownRef}>
       <ul aria-labelledby="login-dropdown" id="login-menu">
         {items.map((item, i) => (
-          <React.Fragment key={item.Label}>
+          <React.Fragment key={item.label}>
             <LoginItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>

@@ -53,7 +53,7 @@ type FooterData = {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   const headerData = await fetchCMS<HeaderData>(
-    '/header?populate[0]=TargetItems.MegaMenu.PrimaryListItems&populate[1]=TargetItems.MegaMenu.SecondaryListItems&populate[2]=TargetItems.MegaMenu.Cta&populate[3]=TargetItems.MegaMenu.CardLink&populate[4]=AboutItems.MegaMenu.PrimaryListItems&populate[5]=AboutItems.MegaMenu.SecondaryListItems&populate[6]=AboutItems.MegaMenu.Cta&populate[7]=AboutItems.MegaMenu.CardLink&populate[8]=Login.LoginItems&populate[9]=SignUp'
+    '/header?populate[0]=targetItems.megaMenu.primaryListItems&populate[1]=targetItems.megaMenu.secondaryListItems&populate[2]=targetItems.megaMenu.cta&populate[3]=targetItems.megaMenu.cardLink&populate[4]=aboutItems.megaMenu.primaryListItems&populate[5]=aboutItems.megaMenu.secondaryListItems&populate[6]=aboutItems.megaMenu.cta&populate[7]=aboutItems.megaMenu.cardLink&populate[8]=login.loginItems&populate[9]=signUp'
   )
   const footerData = await fetchCMS<FooterData>(
     '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'

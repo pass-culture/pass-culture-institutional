@@ -12,27 +12,27 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "TargetItems": {
+    "targetItems": {
       "displayName": "NavigationItems",
       "type": "component",
       "repeatable": true,
       "component": "header.navigation-items",
       "required": true
     },
-    "AboutItems": {
+    "aboutItems": {
       "type": "component",
       "repeatable": true,
       "component": "header.navigation-items",
       "required": true
     },
-    "SignUp": {
+    "signUp": {
       "type": "component",
       "repeatable": false,
       "component": "common.link",
       "required": true
     },
-    "Login": {
-      "displayName": "Login",
+    "login": {
+      "displayName": "login",
       "type": "component",
       "repeatable": false,
       "component": "header.login",

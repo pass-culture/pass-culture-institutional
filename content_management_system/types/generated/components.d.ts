@@ -71,7 +71,7 @@ export interface FooterList extends Schema.Component {
 export interface HeaderHeader extends Schema.Component {
   collectionName: 'components_header_headers';
   info: {
-    displayName: 'Header';
+    displayName: 'header';
   };
   attributes: {};
 }
@@ -79,24 +79,24 @@ export interface HeaderHeader extends Schema.Component {
 export interface HeaderLoginItems extends Schema.Component {
   collectionName: 'components_header_login_items';
   info: {
-    displayName: 'LoginItems';
+    displayName: 'loginItems';
   };
   attributes: {
-    Label: Attribute.String & Attribute.Required;
-    Color: Attribute.String & Attribute.Required;
-    Emoji: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
   };
 }
 
 export interface HeaderLogin extends Schema.Component {
   collectionName: 'components_header_logins';
   info: {
-    displayName: 'Login';
+    displayName: 'login';
   };
   attributes: {
-    ButtonLabel: Attribute.String & Attribute.Required;
-    LoginItems: Attribute.Component<'header.login-items', true> &
+    buttonLabel: Attribute.String & Attribute.Required;
+    loginItems: Attribute.Component<'header.login-items', true> &
       Attribute.SetMinMax<{
         max: 2;
       }>;
@@ -106,33 +106,33 @@ export interface HeaderLogin extends Schema.Component {
 export interface HeaderMegaMenu extends Schema.Component {
   collectionName: 'components_header_mega_menus';
   info: {
-    displayName: 'MegaMenu';
+    displayName: 'megaMenu';
     description: '';
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    PrimaryListItems: Attribute.Component<'common.link', true> &
+    title: Attribute.String & Attribute.Required;
+    primaryListItems: Attribute.Component<'common.link', true> &
       Attribute.Required;
-    SecondaryListItems: Attribute.Component<'common.link', true> &
+    secondaryListItems: Attribute.Component<'common.link', true> &
       Attribute.Required;
-    Cta: Attribute.Component<'common.link'> & Attribute.Required;
-    CardTitle: Attribute.String & Attribute.Required;
-    CardDescription: Attribute.String & Attribute.Required;
-    CardLink: Attribute.Component<'common.link'> & Attribute.Required;
-    BannerText: Attribute.String;
-    CardFirstEmoji: Attribute.String & Attribute.Required;
-    CardSecondEmoji: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    cardTitle: Attribute.String & Attribute.Required;
+    cardDescription: Attribute.String & Attribute.Required;
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
+    bannerText: Attribute.String;
+    cardFirstEmoji: Attribute.String & Attribute.Required;
+    cardSecondEmoji: Attribute.String & Attribute.Required;
   };
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
   collectionName: 'components_header_navigation_items';
   info: {
-    displayName: 'NavigationItems';
+    displayName: 'navigationItems';
   };
   attributes: {
-    Label: Attribute.String & Attribute.Required;
-    MegaMenu: Attribute.Component<'header.mega-menu'>;
+    label: Attribute.String & Attribute.Required;
+    megaMenu: Attribute.Component<'header.mega-menu'>;
   };
 }
 

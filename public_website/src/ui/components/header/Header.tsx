@@ -12,42 +12,42 @@ import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 
 export type HeaderProps = {
-  TargetItems: HeaderNavigationItemProps[]
-  AboutItems: HeaderNavigationItemProps[]
-  Login: {
-    ButtonLabel: string
-    LoginItems: LoginItemProps[]
+  targetItems: HeaderNavigationItemProps[]
+  aboutItems: HeaderNavigationItemProps[]
+  login: {
+    buttonLabel: string
+    loginItems: LoginItemProps[]
   }
-  SignUp: { Label: string; URL: string }
+  signUp: { Label: string; URL: string }
 }
 
 type HeaderNavigationItemProps = {
-  Label: string
-  MegaMenu: {
-    Title: string
-    Cta: { Label: string; URL: string }
-    BannerText?: string
-    PrimaryListItems: { Label: string; URL: string }[]
-    SecondaryListItems: { Label: string; URL: string }[]
-    CardTitle: string
-    CardDescription: string
-    CardLink: { Label: string; URL: string }
-    CardFirstEmoji: string
-    CardSecondEmoji: string
+  label: string
+  megaMenu: {
+    title: string
+    cta: { Label: string; URL: string }
+    bannerText?: string
+    primaryListItems: { Label: string; URL: string }[]
+    secondaryListItems: { Label: string; URL: string }[]
+    cardTitle: string
+    cardDescription: string
+    cardLink: { Label: string; URL: string }
+    cardFirstEmoji: string
+    cardSecondEmoji: string
   }
 }
 
 export function Header({
-  TargetItems,
-  AboutItems,
-  Login,
-  SignUp,
+  targetItems,
+  aboutItems,
+  login,
+  signUp,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
 
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
-  const navItems = [...TargetItems, ...AboutItems]
+  const navItems = [...targetItems, ...aboutItems]
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
@@ -126,7 +126,7 @@ export function Header({
 
             {navItems.map((el, i) => {
               return (
-                <React.Fragment key={el.Label}>
+                <React.Fragment key={el.label}>
                   <StyledNavigationItem>
                     <button
                       ref={(el) => (megaMenuButtonRefs.current[i] = el)}
@@ -138,7 +138,7 @@ export function Header({
                       }
                       onClick={() => toggleMegaMenu(i)}
                       onKeyDown={(e) => onMegaMenuKeyDown(e, i)}>
-                      {el.Label}
+                      {el.label}
                     </button>
                     {i === activeMegaMenuId && (
                       <MegaMenu
@@ -147,13 +147,13 @@ export function Header({
                         }
                         labelId={`mega-menu-button-${i}`}
                         id={`mega-menu-${i}`}
-                        data={el.MegaMenu}
+                        data={el.megaMenu}
                         onBlur={onMegaMenuBlur}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
                       />
                     )}
                   </StyledNavigationItem>
-                  {i === TargetItems.length - 1 && (
+                  {i === targetItems.length - 1 && (
                     <StyledNavigationItem aria-hidden="true" />
                   )}
                 </React.Fragment>
@@ -167,11 +167,11 @@ export function Header({
                 aria-controls="login-menu"
                 aria-expanded={loginDropdownOpen}
                 onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
-                {Login.ButtonLabel}
+                {login.buttonLabel}
               </button>
               {loginDropdownOpen && (
                 <LoginDropdown
-                  items={Login.LoginItems}
+                  items={login.loginItems}
                   openButtonElement={loginButtonRef.current}
                   onKeyDown={onLoginDropdownKeyDown}
                   onBlur={onLoginDropdownBlur}
@@ -179,8 +179,8 @@ export function Header({
               )}
             </StyledLoginItem>
             <li>
-              <Button href={SignUp.URL} target="_blank">
-                {SignUp.Label}
+              <Button href={signUp.URL} target="_blank">
+                {signUp.Label}
               </Button>
             </li>
 
@@ -197,10 +197,10 @@ export function Header({
           </ul>
           {showMobileMenu && (
             <MobileMenu
-              TargetItems={TargetItems}
-              AboutItems={AboutItems}
-              Login={Login}
-              SignUp={SignUp}
+              targetItems={targetItems}
+              aboutItems={aboutItems}
+              login={login}
+              signUp={signUp}
               onKeyDown={(e) => onMobileMenuKeyDown(e)}
             />
           )}

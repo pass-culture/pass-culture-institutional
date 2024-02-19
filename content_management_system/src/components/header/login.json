@@ -1,16 +1,16 @@
 {
   "collectionName": "components_header_logins",
   "info": {
-    "displayName": "Login"
+    "displayName": "login"
   },
   "options": {},
   "attributes": {
-    "ButtonLabel": {
+    "buttonLabel": {
       "type": "string",
       "required": true
     },
-    "LoginItems": {
-      "displayName": "LoginItems",
+    "loginItems": {
+      "displayName": "loginItems",
       "type": "component",
       "repeatable": true,
       "component": "header.login-items",
