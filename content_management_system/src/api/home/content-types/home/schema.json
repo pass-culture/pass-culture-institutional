@@ -23,6 +23,12 @@
       "repeatable": false,
       "component": "block.push-cta",
       "required": true
+    },
+    "SocialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media",
+      "required": true
     }
   }
 }

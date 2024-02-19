@@ -25,6 +25,29 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockLink extends Schema.Component {
+  collectionName: 'components_block_links';
+  info: {
+    displayName: 'socialMediaLink';
+    description: '';
+  };
+  attributes: {
+    name: Attribute.Enumeration<
+      [
+        'x',
+        'instagram',
+        'tiktok',
+        'youtube',
+        'facebook',
+        'snapchat',
+        'linkedin'
+      ]
+    > &
+      Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
@@ -50,6 +73,19 @@ export interface BlockSimpleText extends Schema.Component {
   attributes: {
     Title: Attribute.String;
     Text: Attribute.Text;
+  };
+}
+
+export interface BlockSocialMedia extends Schema.Component {
+  collectionName: 'components_block_social_medias';
+  info: {
+    displayName: 'socialMedia';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    socialMediaLink: Attribute.Component<'block.link', true> &
+      Attribute.Required;
   };
 }
 
@@ -157,8 +193,10 @@ declare module '@strapi/types' {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.link': BlockLink;
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
+      'block.social-media': BlockSocialMedia;
       'common.link': CommonLink;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

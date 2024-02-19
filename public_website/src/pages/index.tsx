@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { PushCTA } from '@/lib/blocks/PushCTA'
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -12,7 +13,6 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  // props.data.attributes.CTASection.Image?.data.
   return (
     <main>
       <CenteredText
@@ -29,13 +29,10 @@ export default function Home(props: HomeProps) {
         qrCodeUrl={props.data.attributes.CTASection.qrCodeUrl}
       />
 
-      <p>
-        Amet consectetur pariatur incididunt veniam. Aliquip irure culpa
-        consectetur ut quis ullamco sit do anim velit dolor veniam ut
-        consectetur. Esse id et adipisicing eiusmod quis ex et in ex veniam
-        deserunt excepteur ipsum id. Ad do ipsum labore aute enim pariatur ex.
-        Culpa fugiat deserunt pariatur eiusmod. Nostrud sunt magna esse culpa.
-      </p>
+      <SocialMedia
+        title={props.data.attributes.SocialMediaSection.title}
+        links={props.data.attributes.SocialMediaSection.socialMediaLink}
+      />
     </main>
   )
 }
@@ -47,6 +44,8 @@ export const getStaticProps = (async () => {
       'CTASection',
       'CTASection.Image',
       'CTASection.ctaLink',
+      'SocialMediaSection',
+      'SocialMediaSection.socialMediaLink',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

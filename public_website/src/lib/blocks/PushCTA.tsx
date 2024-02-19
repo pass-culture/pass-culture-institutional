@@ -21,7 +21,7 @@ export function PushCTA(props: PushCTAProps) {
   return (
     <Root>
       <ImageContainer
-        imageUrl={
+        $imageUrl={
           props.image?.data.attributes.url &&
           getStrapiURL(props.image?.data.attributes.url)
         }>
@@ -67,13 +67,13 @@ const Root = styled.div`
   `}
 `
 
-const ImageContainer = styled.div<{ imageUrl?: string }>`
-  ${({ imageUrl, theme }) => css`
+const ImageContainer = styled.div<{ $imageUrl?: string }>`
+  ${({ $imageUrl, theme }) => css`
     background-color: #eb0055;
     max-width: 28rem;
     border-radius: 1rem;
     margin: -3.125rem 0 -3.125rem 5rem;
-    background-image: ${imageUrl ? `url(${imageUrl})` : 'none'};
+    background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-position: center 4.5rem;
     background-repeat: no-repeat;

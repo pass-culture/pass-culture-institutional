@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_block_links",
+  "info": {
+    "displayName": "socialMediaLink",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "enumeration",
+      "enum": [
+        "x",
+        "instagram",
+        "tiktok",
+        "youtube",
+        "facebook",
+        "snapchat",
+        "linkedin"
+      ],
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

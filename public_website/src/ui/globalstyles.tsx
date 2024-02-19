@@ -133,7 +133,11 @@ const GlobalStyles = createGlobalStyle`
 
   /* Custom */
   body {
-    line-height: 1.5rem;
+    line-height: 1.5;
+  }
+
+  h1, h2 {
+    line-height: 1.2;
   }
 
   a {
