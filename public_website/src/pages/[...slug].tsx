@@ -2,29 +2,18 @@ import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
-interface BlockData {
-  id: number
-  __component: string
-}
-
-interface CustomPageData {
-  id: number
-  attributes: {
-    Path: string
-    Blocks: BlockData[]
-  }
-}
-
 interface CustomPageProps {
-  data: CustomPageData
+  data: APIResponseData<'api::page.page'>
 }
 
 export default function CustomPage(props: CustomPageProps) {
   return (
+    /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
-      {props.data.attributes.Blocks.map((block) => (
+      {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
     </React.Fragment>
@@ -33,7 +22,7 @@ export default function CustomPage(props: CustomPageProps) {
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = '/' + (params?.['slug'] as string[]).join('/')
-  const response = await fetchCMS<CustomPageData[]>(
+  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>(
     `/pages?populate=*&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
   )
 
@@ -49,7 +38,7 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
-  const response = await fetchCMS<CustomPageData[]>('/pages')
+  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>('/pages')
 
   const result = {
     paths: response.data.map((page) => ({
