@@ -1,6 +1,5 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
-import { Shadows } from './shadows'
 
 export const theme = {
   colors: {
@@ -12,7 +11,7 @@ export const theme = {
     lightGray: Colors.LIGHT_GRAY,
   },
   shadows: {
-    popover: Shadows.POPOVER,
+    popover: `-0.25rem 0.5rem 0.875rem 0 ${Colors.LIGHT_GRAY}`,
   },
   fonts: {
     sizes: {
