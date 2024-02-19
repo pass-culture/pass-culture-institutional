@@ -10,7 +10,7 @@ export function Icon({ label, children, ...props }: IconProps) {
     <svg
       aria-hidden={!label}
       aria-label={label}
-      role={label ? 'img' : undefined}
+      role={label ? 'img' : undefined} //NOSONAR (typescript:typescript:S6819) `role="img"` is valid on `<svg>` element
       {...props}>
       {children}
     </svg>
