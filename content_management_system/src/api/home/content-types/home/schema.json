@@ -24,7 +24,7 @@
       "component": "block.push-cta",
       "required": true
     },
-    "SocialMediaSection": {
+    "socialMediaSection": {
       "type": "component",
       "repeatable": false,
       "component": "block.social-media",

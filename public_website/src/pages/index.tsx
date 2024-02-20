@@ -49,8 +49,8 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
       />
 
       <SocialMedia
-        title={homeData.attributes.SocialMediaSection.title}
-        links={homeData.attributes.SocialMediaSection.socialMediaLink}
+        title={homeData.attributes.socialMediaSection.title}
+        links={homeData.attributes.socialMediaSection.socialMediaLink}
       />
     </main>
   )
@@ -69,8 +69,8 @@ export const getStaticProps = (async () => {
       'CTASection.ctaLink',
       'latestStudies',
       'latestStudies.cta',
-      'SocialMediaSection',
-      'SocialMediaSection.socialMediaLink',
+      'socialMediaSection',
+      'socialMediaSection.socialMediaLink',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

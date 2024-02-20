@@ -923,7 +923,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     AboutSection: Attribute.Component<'block.centered-text'> &
       Attribute.Required;
     CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
-    SocialMediaSection: Attribute.Component<'block.social-media'> &
+    socialMediaSection: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &
       Attribute.Required;
