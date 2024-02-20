@@ -33,7 +33,7 @@ export function Hero({
         <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
         <StyledCta href={cta.URL}>{cta.Label}</StyledCta>
 
-        <StyledCircle $index={1} aria-hidden="true">
+        <StyledCircle $index={1} $width="40rem" aria-hidden="true">
           <StyledFirstEmoji>{firstEmoji}</StyledFirstEmoji>
           <StyledSecondEmoji>{secondEmoji}</StyledSecondEmoji>
           {images && (
@@ -47,7 +47,7 @@ export function Hero({
           )}
         </StyledCircle>
 
-        <StyledCircle $index={2} aria-hidden="true">
+        <StyledCircle $index={2} $width="64rem" aria-hidden="true">
           <StyledThirdEmoji>{thirdEmoji}</StyledThirdEmoji>
           {images && (
             <StyledImageWrapper $rotation="-12deg" $bottom="12rem" $left="2rem">
@@ -60,7 +60,7 @@ export function Hero({
           )}
         </StyledCircle>
 
-        <StyledCircle $index={3} aria-hidden="true">
+        <StyledCircle $index={3} $width="80rem" aria-hidden="true">
           <StyledFourthEmoji>{fourthEmoji}</StyledFourthEmoji>
           {images && (
             <React.Fragment>
@@ -138,14 +138,14 @@ const StyledCta = styled(Button)`
   outline: 5px solid blue !important;
 `
 
-const StyledCircle = styled.div<{ $index: number }>`
-  ${({ theme, $index }) => css`
+const StyledCircle = styled.div<{ $index: number; $width: string }>`
+  ${({ theme, $index, $width }) => css`
     background-image: url('/images/home-circle-${$index}.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
-    width: ${$index === 1 ? '40rem' : $index === 2 ? '64rem' : '80rem'};
+    width: ${$width};
     aspect-ratio: 1 / 1;
     position: absolute;
     top: 50%;

@@ -17,23 +17,22 @@ export function LatestNews({ title, news, cta }: LatestNewsProps) {
     <Root>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
       <StyledList>
-        {news &&
-          news.map((newsItem) => {
-            return (
-              <li key={newsItem.attributes.slug}>
-                <NewsCard
-                  title={newsItem.attributes.title}
-                  category={newsItem.attributes.category}
-                  date={newsItem.attributes.date}
-                  imageUrl={
-                    newsItem.attributes.image &&
-                    getStrapiURL(newsItem.attributes.image?.data.attributes.url)
-                  }
-                  slug={newsItem.attributes.slug}
-                />
-              </li>
-            )
-          })}
+        {news?.map((newsItem) => {
+          return (
+            <li key={newsItem.attributes.slug}>
+              <NewsCard
+                title={newsItem.attributes.title}
+                category={newsItem.attributes.category}
+                date={newsItem.attributes.date}
+                imageUrl={
+                  newsItem.attributes.image &&
+                  getStrapiURL(newsItem.attributes.image?.data.attributes.url)
+                }
+                slug={newsItem.attributes.slug}
+              />
+            </li>
+          )
+        })}
       </StyledList>
       <Button href={cta.URL}>{cta.Label}</Button>
     </Root>
