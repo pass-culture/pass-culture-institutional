@@ -24,6 +24,7 @@ export function Button({
   return (
     <StyledButton
       className={className}
+      as={href ? Link : 'button'}
       variant={variant}
       href={href}
       target={target}>
@@ -47,7 +48,7 @@ function getVariantButtonBackground(variant?: ButtonVariants) {
   }
 }
 
-const StyledButton = styled(Link)<{ variant?: ButtonVariants }>`
+const StyledButton = styled.button<{ variant?: ButtonVariants }>`
   ${({ theme, variant }) => css`
     background: ${variant
       ? getVariantButtonBackground(variant)

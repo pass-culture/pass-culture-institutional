@@ -53,8 +53,8 @@ const Circle = styled.span<{ $isActive?: boolean }>`
   &::before {
     position: absolute;
     content: '';
-    inset: ${({ $isActive }) => ($isActive ? '2px' : '0')};
-    border-width: ${({ $isActive }) => ($isActive ? '4px' : '6px')};
+    inset: ${({ $isActive }) => ($isActive ? '2px' : '-1px')};
+    border-width: ${({ $isActive }) => ($isActive ? '4px' : '7px')};
     border-style: solid;
     border-color: ${({ theme }) => theme.colors.white};
     border-radius: 50%;

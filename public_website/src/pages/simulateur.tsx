@@ -18,12 +18,17 @@ export default function SimulatorPage(/* props: SimulatorProps */) {
 
       <div>BREADCRUMB ICI</div>
 
-      <Simulator />
+      <StyledSimulator />
     </Root>
   )
 }
 
 const Root = styled.div`
-  h1 {
-  }
+  max-width: calc(1200px + 2rem);
+  margin: auto;
+  padding: 2rem;
+`
+
+const StyledSimulator = styled(Simulator)`
+  margin-top: 7rem;
 `
