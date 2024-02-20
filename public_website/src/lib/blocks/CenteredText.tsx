@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { Typo } from '@/ui/components/typographies'
+
 interface CenteredTextProps {
   Title: string
   Text: string
@@ -9,7 +11,7 @@ interface CenteredTextProps {
 export function CenteredText(props: CenteredTextProps) {
   return (
     <Root data-testid="centered-text">
-      <h2>{props.Title}</h2>
+      <Typo.Heading2>{props.Title}</Typo.Heading2>
       <p dangerouslySetInnerHTML={{ __html: props.Text }} />
     </Root>
   )
@@ -23,14 +25,7 @@ const Root = styled.div`
     padding: 1.5rem;
 
     h2 {
-      font-size: ${theme.fonts.sizes['6xl']};
-      font-weight: ${theme.fonts.weights.bold};
       margin-bottom: 1.5rem;
-      color: ${theme.colors.secondary};
-
-      @media (width < ${theme.mediaQueries.mobile}) {
-        font-size: ${theme.fonts.sizes['3xl']};
-      }
     }
 
     p {

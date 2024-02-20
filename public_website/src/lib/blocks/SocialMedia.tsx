@@ -9,6 +9,7 @@ import { SnapChat } from '@/ui/components/icons/social-media/snapchat'
 import { TikTok } from '@/ui/components/icons/social-media/tiktok'
 import { X } from '@/ui/components/icons/social-media/x'
 import { YouTube } from '@/ui/components/icons/social-media/youtube'
+import { Typo } from '@/ui/components/typographies'
 
 type SocialMediaProps = {
   title: string
@@ -47,12 +48,13 @@ const StyledRoot = styled.div`
   text-align: center;
 `
 
-const StyledHeading = styled.h2`
+const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary};
-    font-size: ${theme.fonts.sizes['6xl']};
-    font-weight: ${theme.fonts.weights.bold};
     margin-bottom: 2rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-bottom: 1.5rem;
+    }
   `}
 `
 

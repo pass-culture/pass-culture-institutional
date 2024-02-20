@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -72,7 +73,7 @@ export function MegaMenu({
     <StyledMegaMenuWrapper>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <p>{data.title}</p>
+          <Typo.Heading1 as={'p'}>{data.title}</Typo.Heading1>
           <Button href={data.cta.URL}>{data.cta.Label}</Button>
           {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
         </StyledMegaMenuHeading>
@@ -100,10 +101,10 @@ export function MegaMenu({
 
         <StyledMegaMenuCard>
           <StyledMegaMenuCardHeading>
-            <p>{data.cardTitle}</p>
+            <Typo.BorderedText>{data.cardTitle}</Typo.BorderedText>
 
-            <span>{data.cardFirstEmoji}</span>
-            <span>{data.cardSecondEmoji}</span>
+            <Typo.Emoji aria-hidden="true">{data.cardFirstEmoji}</Typo.Emoji>
+            <Typo.Emoji aria-hidden="true">{data.cardSecondEmoji}</Typo.Emoji>
           </StyledMegaMenuCardHeading>
           <p>{data.cardDescription}</p>
           <Button href={data.cardLink.URL} variant="secondary">
@@ -136,18 +137,9 @@ const StyledMegaMenu = styled.div`
 `
 
 const StyledMegaMenuHeading = styled.div`
-  ${({ theme }) => css`
-    > p {
-      color: ${theme.colors.secondary};
-      font-size: ${theme.fonts.sizes['6xl']};
-      font-weight: ${theme.fonts.weights.bold};
-      line-height: 1.25;
-    }
-
-    p + a {
-      margin: 1.5rem 0 3rem;
-    }
-  `}
+  p + a {
+    margin: 1.5rem 0 3rem;
+  }
 `
 
 const StyledMegaMenuLists = styled.div`
@@ -208,19 +200,15 @@ const StyledMegaMenuCardHeading = styled.div`
     margin-bottom: 4.5rem;
 
     p {
-      color: ${theme.colors.white};
-      font-size: ${theme.fonts.sizes['5xl']};
-      font-weight: ${theme.fonts.weights.black};
       z-index: 1;
     }
 
     span {
-      font-size: 1.75rem;
+      font-size: ${theme.fonts.sizes['6xl']};
       position: absolute;
       top: -1rem;
       left: 1rem;
       transform: rotate(-10deg);
-      z-index: 0;
 
       &:last-child {
         top: auto;

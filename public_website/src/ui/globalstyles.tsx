@@ -138,10 +138,6 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
   }
 
-  h1, h2 {
-    line-height: 1.2;
-  }
-
   a {
     color: inherit;
     text-decoration: none;

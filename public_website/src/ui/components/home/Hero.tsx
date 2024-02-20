@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 import { APIResponseCollection } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -129,11 +130,8 @@ const StyledSubTitle = styled.p`
   `}
 `
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary};
-    font-size: ${theme.fonts.sizes['8xl']};
-    font-weight: ${theme.fonts.weights.bold};
     max-width: 44rem;
     margin: 0 auto 2rem;
 
@@ -144,7 +142,11 @@ const StyledHeading = styled.h1`
 `
 
 const StyledCta = styled(Button)`
-  outline: 5px solid blue !important;
+  ${({ theme }) => css`
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
+  `}
 `
 
 const StyledCircle = styled.div<{ $index: number; $width: string }>`
@@ -161,8 +163,11 @@ const StyledCircle = styled.div<{ $index: number; $width: string }>`
     left: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
-    font-size: ${theme.fonts.sizes['7xl']};
     z-index: -1;
+
+    span {
+      font-size: ${theme.fonts.sizes['7xl']};
+    }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
@@ -170,27 +175,27 @@ const StyledCircle = styled.div<{ $index: number; $width: string }>`
   `}
 `
 
-const StyledFirstEmoji = styled.span`
+const StyledFirstEmoji = styled(Typo.Emoji)`
   position: absolute;
   left: 4rem;
   top: 4rem;
   transform: rotate(-6deg);
 `
-const StyledSecondEmoji = styled.span`
+const StyledSecondEmoji = styled(Typo.Emoji)`
   position: absolute;
   left: 8rem;
   bottom: 1rem;
   transform: rotate(6deg);
 `
 
-const StyledThirdEmoji = styled.span`
+const StyledThirdEmoji = styled(Typo.Emoji)`
   position: absolute;
   right: -0.5rem;
   top: 35%;
   transform: rotate(6deg);
 `
 
-const StyledFourthEmoji = styled.span`
+const StyledFourthEmoji = styled(Typo.Emoji)`
   position: absolute;
   right: -1rem;
   top: 55%;

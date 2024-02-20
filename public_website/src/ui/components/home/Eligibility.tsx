@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 
 type EligibilityProps = {
   title: string
@@ -43,7 +44,7 @@ export function Eligibility({
           {items.map((item) => {
             return (
               <StyledListItem key={item.emoji}>
-                <span aria-hidden="true">{item.emoji}</span>
+                <Typo.Emoji aria-hidden="true">{item.emoji}</Typo.Emoji>
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </StyledListItem>
@@ -99,17 +100,8 @@ const StyledCard = styled.div`
   `}
 `
 
-const StyledCardHeading = styled.p`
-  ${({ theme }) => css`
-    color: ${theme.colors.white};
-    font-weight: ${theme.fonts.weights.bold};
-    font-size: ${theme.fonts.sizes['6xl']};
-    transform: rotate(-2deg);
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      font-size: ${theme.fonts.sizes['4xl']};
-    }
-  `}
+const StyledCardHeading = styled(Typo.BorderedText)`
+  transform: rotate(-2deg);
 `
 
 const StyledCardDescription = styled.p`
@@ -120,12 +112,11 @@ const StyledCardDescription = styled.p`
   `}
 `
 
-const StyledCardFirstEmoji = styled.span`
+const StyledCardFirstEmoji = styled(Typo.Emoji)`
   ${({ theme }) => css`
     position: absolute;
     top: 0;
     right: 2rem;
-    font-size: ${theme.fonts.sizes['8xl']};
     transform: rotate(10deg);
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -134,14 +125,11 @@ const StyledCardFirstEmoji = styled.span`
   `}
 `
 
-const StyledCardSecondEmoji = styled.span`
-  ${({ theme }) => css`
-    position: absolute;
-    bottom: 2rem;
-    left: -0.8rem;
-    font-size: ${theme.fonts.sizes['8xl']};
-    transform: rotate(-50deg);
-  `}
+const StyledCardSecondEmoji = styled(Typo.Emoji)`
+  position: absolute;
+  bottom: 2rem;
+  left: -0.8rem;
+  transform: rotate(-50deg);
 `
 
 const StyledListContainer = styled.div`
@@ -156,13 +144,12 @@ const StyledListContainer = styled.div`
   `}
 `
 
-const StyledListHeading = styled.h2`
+const StyledListHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary};
-    font-size: ${theme.fonts.sizes['4xl']};
-    font-weight: ${theme.fonts.weights.bold};
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
+    && {
+      font-size: ${theme.fonts.sizes['4xl']};
+      margin-bottom: 1.5rem;
+    }
   `}
 `
 

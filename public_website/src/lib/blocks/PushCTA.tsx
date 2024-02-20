@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
@@ -41,7 +42,7 @@ export function PushCTA(props: PushCTAProps) {
         <BackgroundLayer />
       </CardContainer>
       <RightSide>
-        <h2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
         {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
         <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
       </RightSide>
@@ -158,12 +159,6 @@ const RightSide = styled.div`
     max-width: 32rem;
 
     h2 {
-      font-size: ${theme.fonts.sizes['6xl']};
-      line-height: 1.25;
-      font-weight: ${theme.fonts.weights.bold};
-
-      color: ${theme.colors.secondary};
-
       margin-bottom: 1.25rem;
     }
 

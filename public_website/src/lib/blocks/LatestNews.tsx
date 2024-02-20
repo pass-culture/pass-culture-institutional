@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { APIResponseData } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
@@ -51,13 +52,13 @@ const Root = styled.div`
   }
 `
 
-const StyledHeading = styled.h2`
+const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary};
-    font-size: ${theme.fonts.sizes['6xl']};
-    font-weight: ${theme.fonts.weights.bold};
     margin-bottom: 3.5rem;
-    max-width: 25rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-bottom: 1.75rem;
+    }
   `}
 `
 

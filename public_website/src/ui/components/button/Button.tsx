@@ -11,6 +11,7 @@ type ButtonProps = {
   variant?: ButtonVariants
   href: string
   target?: '_blank'
+  className?: string
 }
 
 export function Button({
@@ -18,9 +19,14 @@ export function Button({
   variant = 'primary',
   href,
   target,
+  className,
 }: ButtonProps) {
   return (
-    <StyledButton variant={variant} href={href} target={target}>
+    <StyledButton
+      className={className}
+      variant={variant}
+      href={href}
+      target={target}>
       {children}
     </StyledButton>
   )

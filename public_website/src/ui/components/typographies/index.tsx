@@ -1,19 +1,37 @@
 import styled from 'styled-components'
 
-const Title1 = styled.h1(({ theme }) => ({
-  ...theme.typography.title1,
+const Heading1 = styled.h1(({ theme }) => ({
+  ...theme.typography.heading1.desktop,
+  [`@media(width < ${theme.mediaQueries.mobile})`]: {
+    ...theme.typography.heading1.mobile,
+  },
 }))
 
-const Body = styled.p(({ theme }) => ({
-  ...theme.typography.body,
-}))
+const Heading2 = styled.h2(({ theme }) => {
+  return {
+    ...theme.typography.heading2.desktop,
+    [`@media(width < ${theme.mediaQueries.mobile})`]: {
+      ...theme.typography.heading2.mobile,
+    },
+  }
+})
 
-const ButtonText = styled.a(({ theme }) => ({
-  ...theme.typography.buttonText,
+const BorderedText = styled.p(({ theme }) => {
+  return {
+    ...theme.typography.borderedText.desktop,
+    [`@media(width < ${theme.mediaQueries.mobile})`]: {
+      ...theme.typography.borderedText.mobile,
+    },
+  }
+})
+
+const Emoji = styled.span(({ theme }) => ({
+  ...theme.typography.emoji,
 }))
 
 export const Typo = {
-  Title1,
-  Body,
-  ButtonText,
+  Heading1,
+  Heading2,
+  BorderedText,
+  Emoji,
 }

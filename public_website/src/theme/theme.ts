@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
+import { Shadows } from './shadows'
 
 export const theme = {
   colors: {
@@ -13,8 +14,8 @@ export const theme = {
     purple: Colors.PURPLE,
   },
   shadows: {
-    popover: `-0.25rem 0.5rem 0.875rem 0 ${Colors.LIGHT_GRAY}`,
-    sticker: `-0.25rem 0.5rem 1.5rem 0 ${Colors.LIGHT_GRAY}`,
+    popover: Shadows.POPOVER,
+    sticker: Shadows.STICKER,
   },
   fonts: {
     sizes: {
@@ -40,26 +41,55 @@ export const theme = {
     },
   },
   typography: {
-    title1: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '1.15',
-      fontSize: '4rem',
-      color: Colors.BLACK,
+    heading1: {
+      desktop: {
+        lineHeight: '1.3',
+        fontSize: FontSizes['8XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.SECONDARY,
+      },
+      mobile: {
+        fontSize: FontSizes['5XL'],
+      },
+    },
+    heading2: {
+      desktop: {
+        lineHeight: '1.25',
+        fontSize: FontSizes['6XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.SECONDARY,
+      },
+      mobile: {
+        fontSize: FontSizes['3XL'],
+      },
+    },
+    borderedText: {
+      desktop: {
+        lineHeight: '1',
+        fontSize: FontSizes['5XL'],
+        fontWeight: FontWeights.BLACK,
+        color: Colors.WHITE,
+      },
+      mobile: {
+        fontSize: FontSizes['4XL'],
+      },
+    },
+    emoji: {
+      lineHeight: '1',
+      fontSize: FontSizes['8XL'],
+      fontWeight: FontWeights.BOLD,
+      boxShadow: Shadows.STICKER,
     },
     body: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '1.5',
-      fontSize: '1.5rem',
-      color: Colors.BLACK,
-    },
-    buttonText: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '0.75',
-      fontSize: '1.25rem',
-      color: Colors.BLACK,
+      desktop: {
+        lineHeight: '2',
+        fontSize: FontSizes.L,
+        fontWeight: FontWeights.MEDIUM,
+        color: Colors.BLACK,
+      },
+      mobile: {
+        fontSize: FontSizes.S,
+      },
     },
   },
   mediaQueries: {
