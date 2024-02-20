@@ -108,7 +108,6 @@ const BackgroundLayer = styled.div`
     z-index: 0;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 100%;
       margin: 0;
       aspect-ratio: 0.8;
       inset: 1rem;
