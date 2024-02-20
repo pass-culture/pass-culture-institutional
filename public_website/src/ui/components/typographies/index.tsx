@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+/**
+ * Use these components to apply typography styles.
+ *
+ * - To override the tag name, use `as` prop: https://styled-components.com/docs/api#as-polymorphic-prop
+ * - To override CSS properties when using them, use the double ampersand (&&) operator: https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
+ */
+
 const Heading1 = styled.h1(({ theme }) => ({
   ...theme.typography.heading1.desktop,
   [`@media(width < ${theme.mediaQueries.mobile})`]: {
