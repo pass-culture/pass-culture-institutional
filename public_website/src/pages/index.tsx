@@ -1,6 +1,7 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
+import styled, { css } from 'styled-components'
 
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
@@ -27,6 +28,9 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         secondEmoji={homeData.attributes.heroSection.secondEmoji}
         thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
         fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+        // FIXME:
+        // @ts-expect-error fix type
+        images={homeData.attributes.heroSection.images}
       />
 
       <CenteredText
@@ -44,25 +48,31 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         cardSecondEmoji={homeData.attributes.eligibilitySection.secondEmoji}
       />
 
-      <PushCTA
-        title={homeData.attributes.CTASection.Title}
-        text={homeData.attributes.CTASection.Text}
-        image={homeData.attributes.CTASection.Image}
-        ctaLink={homeData.attributes.CTASection.ctaLink}
-        qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
-        qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
-      />
+      <StyledPushCTAWrapper>
+        <PushCTA
+          title={homeData.attributes.CTASection.Title}
+          text={homeData.attributes.CTASection.Text}
+          image={homeData.attributes.CTASection.Image}
+          ctaLink={homeData.attributes.CTASection.ctaLink}
+          qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
+          qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
+        />
+      </StyledPushCTAWrapper>
 
-      <LatestNews
-        news={latestStudies}
-        title={homeData.attributes.latestStudies.title}
-        cta={homeData.attributes.latestStudies.cta}
-      />
+      <StyledLatestNewsWrapper>
+        <LatestNews
+          news={latestStudies}
+          title={homeData.attributes.latestStudies.title}
+          cta={homeData.attributes.latestStudies.cta}
+        />
+      </StyledLatestNewsWrapper>
 
-      <SocialMedia
-        title={homeData.attributes.socialMediaSection.title}
-        links={homeData.attributes.socialMediaSection.socialMediaLink}
-      />
+      <StyledSocialMediaWrapper>
+        <SocialMedia
+          title={homeData.attributes.socialMediaSection.title}
+          links={homeData.attributes.socialMediaSection.socialMediaLink}
+        />
+      </StyledSocialMediaWrapper>
     </React.Fragment>
   )
 }
@@ -115,3 +125,36 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<HomeProps>
+
+const StyledPushCTAWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: 12.5rem;
+    margin-bottom: 10rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 4.5rem 0;
+    }
+  `}
+`
+
+const StyledLatestNewsWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 3.5rem 0 5rem;
+    }
+  `}
+`
+
+const StyledSocialMediaWrapper = styled.div`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 5rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 5rem 0 6.25rem;
+    }
+  `}
+`

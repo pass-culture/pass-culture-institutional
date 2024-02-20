@@ -2,6 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { APIResponseCollection } from '@/types/strapi'
+import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
   title: string
@@ -11,6 +13,7 @@ type HeroProps = {
   secondEmoji: string
   thirdEmoji: string
   fourthEmoji: string
+  images: APIResponseCollection<'plugin::upload.file'> | null
 }
 
 export function Hero({
@@ -21,6 +24,7 @@ export function Hero({
   secondEmoji,
   thirdEmoji,
   fourthEmoji,
+  images,
 }: HeroProps) {
   return (
     <Root>
@@ -32,14 +36,50 @@ export function Hero({
         <StyledCircle $index={1} aria-hidden="true">
           <StyledFirstEmoji>{firstEmoji}</StyledFirstEmoji>
           <StyledSecondEmoji>{secondEmoji}</StyledSecondEmoji>
+          {images && (
+            <StyledImageWrapper $rotation="-10deg" $bottom="3rem" $right="3rem">
+              <StyledImageLayer />
+              <StyledImage
+                $imageUrl={getStrapiURL(
+                  images.data[0]?.attributes.url
+                )}></StyledImage>
+            </StyledImageWrapper>
+          )}
         </StyledCircle>
 
         <StyledCircle $index={2} aria-hidden="true">
           <StyledThirdEmoji>{thirdEmoji}</StyledThirdEmoji>
+          {images && (
+            <StyledImageWrapper $rotation="-12deg" $bottom="12rem" $left="2rem">
+              <StyledImageLayer />
+              <StyledImage
+                $imageUrl={getStrapiURL(
+                  images.data[1]?.attributes.url
+                )}></StyledImage>
+            </StyledImageWrapper>
+          )}
         </StyledCircle>
 
         <StyledCircle $index={3} aria-hidden="true">
           <StyledFourthEmoji>{fourthEmoji}</StyledFourthEmoji>
+          {images && (
+            <React.Fragment>
+              <StyledImageWrapper $rotation="6deg" $top="40%" $left="-1.5rem">
+                <StyledImageLayer />
+                <StyledImage
+                  $imageUrl={getStrapiURL(
+                    images.data[2]?.attributes.url
+                  )}></StyledImage>
+              </StyledImageWrapper>
+              <StyledImageWrapper $rotation="9deg" $top="30%" $right="0">
+                <StyledImageLayer />
+                <StyledImage
+                  $imageUrl={getStrapiURL(
+                    images.data[3]?.attributes.url
+                  )}></StyledImage>
+              </StyledImageWrapper>
+            </React.Fragment>
+          )}
         </StyledCircle>
       </StyledContentWrapper>
     </Root>
@@ -54,6 +94,7 @@ const Root = styled.div`
       ${theme.colors.white} 100%
     );
     transform: translateY(-8rem);
+    overflow: hidden;
   `}
 `
 
@@ -97,8 +138,8 @@ const StyledCta = styled(Button)`
   outline: 5px solid blue !important;
 `
 
-const StyledCircle = styled.div<{ $index: 1 | 2 | 3 }>`
-  ${({ $index }) => css`
+const StyledCircle = styled.div<{ $index: number }>`
+  ${({ theme, $index }) => css`
     background-image: url('/images/home-circle-${$index}.svg');
     background-size: contain;
     background-repeat: no-repeat;
@@ -111,44 +152,80 @@ const StyledCircle = styled.div<{ $index: 1 | 2 | 3 }>`
     left: 50%;
     transform: translate(-50%, -50%);
     user-select: none;
-    z-index: -${$index};
+    font-size: ${theme.fonts.sizes['7xl']};
+    z-index: -1;
   `}
 `
 
 const StyledFirstEmoji = styled.span`
-  ${({ theme }) => css`
-    position: absolute;
-    left: 4rem;
-    top: 4rem;
-    font-size: ${theme.fonts.sizes['7xl']};
-    transform: rotate(-6deg);
-  `}
+  position: absolute;
+  left: 4rem;
+  top: 4rem;
+  transform: rotate(-6deg);
 `
 const StyledSecondEmoji = styled.span`
-  ${({ theme }) => css`
-    position: absolute;
-    left: 8rem;
-    bottom: 1rem;
-    font-size: ${theme.fonts.sizes['7xl']};
-    transform: rotate(6deg);
-  `}
+  position: absolute;
+  left: 8rem;
+  bottom: 1rem;
+  transform: rotate(6deg);
 `
 
 const StyledThirdEmoji = styled.span`
-  ${({ theme }) => css`
-    position: absolute;
-    right: -0.5rem;
-    top: 35%;
-    font-size: ${theme.fonts.sizes['7xl']};
-    transform: rotate(6deg);
-  `}
+  position: absolute;
+  right: -0.5rem;
+  top: 35%;
+  transform: rotate(6deg);
 `
 
 const StyledFourthEmoji = styled.span`
+  position: absolute;
+  right: -1rem;
+  top: 55%;
+  transform: rotate(-10deg);
+`
+
+const StyledImageWrapper = styled.div<{
+  $rotation: string
+  $top?: string
+  $bottom?: string
+  $right?: string
+  $left?: string
+}>`
+  ${({ theme, $rotation, $top, $bottom, $left, $right }) => css`
+    height: 6.25rem;
+    width: 4rem;
+    position: absolute;
+    top: ${$top};
+    bottom: ${$bottom};
+    left: ${$left};
+    right: ${$right};
+    transform: rotate(${$rotation});
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
+  `}
+`
+
+const StyledImage = styled.div<{
+  $imageUrl: string
+}>`
+  ${({ $imageUrl }) => css`
+    background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    position: absolute;
+    inset: 0;
+  `}
+`
+
+const StyledImageLayer = styled.div`
   ${({ theme }) => css`
     position: absolute;
-    right: -1rem;
-    top: 55%;
-    font-size: ${theme.fonts.sizes['7xl']};
+    inset: 0;
+    border-radius: 1rem;
+    background: ${theme.colors.purple};
+    transform: rotate(6deg);
   `}
 `

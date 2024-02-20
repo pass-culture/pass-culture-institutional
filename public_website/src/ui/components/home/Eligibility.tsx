@@ -40,9 +40,9 @@ export function Eligibility({
       <StyledListContainer>
         <StyledListHeading>{title}</StyledListHeading>
         <StyledList>
-          {items.map((item, i) => {
+          {items.map((item) => {
             return (
-              <StyledListItem key={i}>
+              <StyledListItem key={item.emoji}>
                 <span aria-hidden="true">{item.emoji}</span>
                 <p>{item.title}</p>
                 <p>{item.description}</p>
@@ -58,7 +58,7 @@ export function Eligibility({
 const Root = styled.div`
   ${({ theme }) => css`
     max-width: 80rem;
-    margin: 0 auto;
+    margin: 18rem auto 12.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     gap: 1.5rem;
@@ -66,6 +66,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
+      margin: 3rem auto 4.5rem;
     }
   `}
 `

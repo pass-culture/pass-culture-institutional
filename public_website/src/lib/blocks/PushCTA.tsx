@@ -20,24 +20,26 @@ export function PushCTA(props: PushCTAProps) {
 
   return (
     <Root>
-      <ImageContainer
-        $imageUrl={
-          props.image?.data.attributes.url &&
-          getStrapiURL(props.image?.data.attributes.url)
-        }>
-        <QRCodeCard>
-          <QrCode
-            text={props.qrCodeUrl}
-            options={{
-              width: 100,
-              margin: 2,
-              color: { dark: theme.colors.secondary },
-            }}
-          />
-          <p>{props.qrCodeDescription}</p>
-        </QRCodeCard>
-      </ImageContainer>
-      <BackgroundLayer />
+      <CardContainer>
+        <Card
+          $imageUrl={
+            props.image?.data.attributes.url &&
+            getStrapiURL(props.image?.data.attributes.url)
+          }>
+          <QRCodeCard>
+            <QrCode
+              text={props.qrCodeUrl}
+              options={{
+                width: 100,
+                margin: 2,
+                color: { dark: theme.colors.secondary },
+              }}
+            />
+            <p>{props.qrCodeDescription}</p>
+          </QRCodeCard>
+        </Card>
+        <BackgroundLayer />
+      </CardContainer>
       <RightSide>
         <h2 dangerouslySetInnerHTML={{ __html: props.title }} />
         {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
@@ -51,7 +53,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
     max-width: 80rem;
-    margin: 6.25rem auto;
+    margin: 0 auto;
     gap: 5.625rem;
     border-radius: 2.5rem;
     display: grid;
@@ -60,19 +62,27 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;
-      grid-template-columns: 1fr;
-      gap: 3.75rem;
-      padding: 1rem;
+      padding: 1.5rem;
+      display: block;
     }
   `}
 `
 
-const ImageContainer = styled.div<{ $imageUrl?: string }>`
+const CardContainer = styled.div`
+  position: relative;
+  z-index: 1;
+  margin: -3.125rem 0 -3.125rem 5rem;
+  max-width: 28rem;
+
+  @media (width < ${theme.mediaQueries.tablet}) {
+    margin: 0 auto;
+  }
+`
+
+const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
     background-color: #eb0055;
-    max-width: 28rem;
     border-radius: 1rem;
-    margin: -3.125rem 0 -3.125rem 5rem;
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-position: center 4.5rem;
@@ -81,13 +91,12 @@ const ImageContainer = styled.div<{ $imageUrl?: string }>`
     display: flex;
     flex-direction: column-reverse;
     padding: 2rem;
-
-    position: relative;
-    z-index: 1;
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 100%;
-      margin: 0;
+      max-width: 80%;
+      margin: 0 auto 3.75rem;
       aspect-ratio: 0.8;
       padding: 0;
     }
@@ -96,21 +105,21 @@ const ImageContainer = styled.div<{ $imageUrl?: string }>`
 
 const BackgroundLayer = styled.div`
   ${({ theme }) => css`
-    grid-column: 1 / span 1;
-    margin: -3.125rem 0 -3.125rem 5rem;
     position: absolute;
     content: '';
-    inset: 1rem;
+    inset: 0;
     background-color: ${theme.colors.secondary};
-    z-index: -1;
-    transform: rotate(10deg);
+    transform: rotate(7deg);
     border-radius: 1.5rem;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      margin: 0;
+      max-width: 80%;
+      margin: 0 auto;
       aspect-ratio: 0.8;
-      inset: 1rem;
+      inset: 0;
       transform: rotate(5deg);
     }
   `}

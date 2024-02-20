@@ -43,7 +43,7 @@ export function Header({
   login,
   signUp,
 }: HeaderProps) {
-  const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>()
+  const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
 
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 

@@ -46,6 +46,8 @@ const StyledImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   object-fit: cover;
+  aspect-ratio: 1.2;
+  height: auto;
   min-width: 100%;
 `
 
