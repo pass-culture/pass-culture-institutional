@@ -46,12 +46,21 @@ const Form = styled.form`
   justify-content: center;
   align-items: stretch;
   padding: 4rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding: 0 2rem;
+    gap: 1.5rem;
+  }
 `
 
 const Field = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    gap: 1.5rem;
+  }
 `
 
 const Label = styled.label`
@@ -60,7 +69,11 @@ const Label = styled.label`
   font-weight: 700;
 
   border-bottom: 1px solid #94008c33;
-  padding: 2.5rem 0;
+  padding-bottom: 2.5rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding-bottom: 1.5rem;
+  }
 `
 
 const SubmitContainer = styled.div`

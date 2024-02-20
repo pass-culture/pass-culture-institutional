@@ -24,9 +24,9 @@ export default function SimulatorPage(/* props: SimulatorProps */) {
 }
 
 const Root = styled.div`
-  max-width: calc(1200px + 2rem);
+  max-width: calc(1200px + 1rem);
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
 `
 
 const StyledSimulator = styled(Simulator)`

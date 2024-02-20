@@ -51,17 +51,28 @@ const Inner = styled.div`
 
   display: grid;
   grid-template-columns: auto 1fr;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: block;
+  }
 `
 
 const Steps = styled.ol`
   padding: 6.25rem 4rem;
   border-right: 1px solid #dedede99;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    flex-direction: row;
+    padding: 2rem 1.5rem;
+  }
 `
 
 const StepSeparator = styled.li`
   height: 2.25rem;
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
   position: relative;
 
   &::after {
@@ -72,5 +83,17 @@ const StepSeparator = styled.li`
     width: 0.125rem;
     background-color: #cacbd2;
     border-radius: 0.0625rem;
+  }
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    height: 0;
+    width: 2.25rem;
+
+    &::after {
+      left: 0;
+      top: 1.4375rem;
+      height: 0.125rem;
+      width: unset;
+    }
   }
 `
