@@ -33,7 +33,7 @@ export function MegaMenu({
   labelId,
   data,
 }: MegaMenuProps) {
-  const megaMenuRef = useRef<HTMLElement>(null)
+  const megaMenuRef = useRef<HTMLDivElement>(null)
 
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
@@ -69,63 +69,70 @@ export function MegaMenu({
   })
 
   return (
-    <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
-      <StyledMegaMenuHeading>
-        <p>{data.title}</p>
-        <Button href={data.cta.URL}>{data.cta.Label}</Button>
-        {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
-      </StyledMegaMenuHeading>
+    <StyledMegaMenuWrapper>
+      <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
+        <StyledMegaMenuHeading>
+          <p>{data.title}</p>
+          <Button href={data.cta.URL}>{data.cta.Label}</Button>
+          {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
+        </StyledMegaMenuHeading>
 
-      <StyledMegaMenuLists>
-        <ul>
-          {data.primaryListItems.map((item) => {
-            return (
-              <li key={item.Label}>
-                <Link href={item.URL}>{item.Label}</Link>
-              </li>
-            )
-          })}
-        </ul>
-        <ul>
-          {data.secondaryListItems.map((item) => {
-            return (
-              <li key={item.Label}>
-                <Link href={item.URL}>{item.Label}</Link>
-              </li>
-            )
-          })}
-        </ul>
-      </StyledMegaMenuLists>
+        <StyledMegaMenuLists>
+          <ul>
+            {data.primaryListItems.map((item) => {
+              return (
+                <li key={item.Label}>
+                  <Link href={item.URL}>{item.Label}</Link>
+                </li>
+              )
+            })}
+          </ul>
+          <ul>
+            {data.secondaryListItems.map((item) => {
+              return (
+                <li key={item.Label}>
+                  <Link href={item.URL}>{item.Label}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </StyledMegaMenuLists>
 
-      <StyledMegaMenuCard>
-        <StyledMegaMenuCardHeading>
-          <p>{data.cardTitle}</p>
+        <StyledMegaMenuCard>
+          <StyledMegaMenuCardHeading>
+            <p>{data.cardTitle}</p>
 
-          <span>{data.cardFirstEmoji}</span>
-          <span>{data.cardSecondEmoji}</span>
-        </StyledMegaMenuCardHeading>
-        <p>{data.cardDescription}</p>
-        <Button href={data.cardLink.URL} variant="secondary">
-          {data.cardLink.Label}
-        </Button>
-      </StyledMegaMenuCard>
-    </StyledMegaMenu>
+            <span>{data.cardFirstEmoji}</span>
+            <span>{data.cardSecondEmoji}</span>
+          </StyledMegaMenuCardHeading>
+          <p>{data.cardDescription}</p>
+          <Button href={data.cardLink.URL} variant="secondary">
+            {data.cardLink.Label}
+          </Button>
+        </StyledMegaMenuCard>
+      </StyledMegaMenu>
+    </StyledMegaMenuWrapper>
   )
 }
 
-const StyledMegaMenu = styled.section`
+const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     top: calc(4rem + 4rem);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6.5rem;
-    padding: 6.25rem 2.5rem 8.125rem;
     z-index: 2;
   `}
+`
+
+const StyledMegaMenu = styled.div`
+  max-width: 90rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6.5rem;
+  padding: 6.25rem 2.5rem 8.125rem;
 `
 
 const StyledMegaMenuHeading = styled.div`
