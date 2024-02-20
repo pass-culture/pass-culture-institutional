@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { formatDate } from '@/utils/formatDate'
 
-export type NewsCardProps = {
+type NewsCardProps = {
   title: string
   category: string
   date: Date | string
