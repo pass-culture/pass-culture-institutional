@@ -25,6 +25,18 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockLatestNews extends Schema.Component {
+  collectionName: 'components_block_latest_news';
+  info: {
+    displayName: 'latestNews';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.Text & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
 export interface BlockLink extends Schema.Component {
   collectionName: 'components_block_links';
   info: {
@@ -201,19 +213,12 @@ export interface HomeEligibilityItems extends Schema.Component {
   };
 }
 
-export interface HomeLatestStudies extends Schema.Component {
-  collectionName: 'components_home_latest_studies';
-  info: {
-    displayName: 'latestStudies';
-  };
-  attributes: {};
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
@@ -227,7 +232,6 @@ declare module '@strapi/types' {
       'header.mega-menu': HeaderMegaMenu;
       'header.navigation-items': HeaderNavigationItems;
       'home.eligibility-items': HomeEligibilityItems;
-      'home.latest-studies': HomeLatestStudies;
     }
   }
 }

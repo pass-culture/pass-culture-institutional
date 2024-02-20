@@ -62,6 +62,12 @@
     "eligibilitySecondEmoji": {
       "type": "string",
       "required": true
+    },
+    "latestStudies": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.latest-news",
+      "required": true
     }
   }
 }
