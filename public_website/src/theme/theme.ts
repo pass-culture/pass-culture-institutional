@@ -23,6 +23,7 @@ export const theme = {
       m: FontSizes.M,
       l: FontSizes.L,
       xl: FontSizes.XL,
+      '2xl': FontSizes['2XL'],
       '3xl': FontSizes['3XL'],
       '4xl': FontSizes['4XL'],
       '5xl': FontSizes['5XL'],

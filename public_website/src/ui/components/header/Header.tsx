@@ -67,7 +67,7 @@ export function Header({
 
   // Close mega menu on click outside of it or on links inside
   function onMegaMenuBlur() {
-    if (activeMegaMenuId) {
+    if (activeMegaMenuId !== null) {
       setActiveMegaMenuId(null)
     }
   }
@@ -117,7 +117,9 @@ export function Header({
     <Wrapper>
       <StyledHeader>
         <StyledHeaderContent>
-          <StyledNavigation>
+          <StyledNavigation
+            $showMobileMenu={showMobileMenu}
+            $showMegaMenu={activeMegaMenuId !== null}>
             <ul>
               <li>
                 <StyledLogoLink href="/">
@@ -214,16 +216,23 @@ export function Header({
 
 const StyledHeader = styled.header`
   position: relative;
+  z-index: 1;
 `
 
 const StyledHeaderContent = styled.div`
-  max-width: 1440px;
+  max-width: 90rem;
   margin: 0 auto;
 `
 
-const StyledNavigation = styled.nav`
-  ${({ theme }) => css`
+const StyledNavigation = styled.nav<{
+  $showMobileMenu: boolean
+  $showMegaMenu: boolean
+}>`
+  ${({ theme, $showMobileMenu, $showMegaMenu }) => css`
+    background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+
     > ul {
+      background: ${$showMobileMenu ? theme.colors.white : 'none'};
       display: flex;
       align-items: center;
       gap: 1.5rem;

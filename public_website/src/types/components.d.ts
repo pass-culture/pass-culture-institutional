@@ -231,6 +231,24 @@ export interface HomeEligibilitySection extends Schema.Component {
   };
 }
 
+export interface HomeHeroSection extends Schema.Component {
+  collectionName: 'components_home_hero_sections';
+  info: {
+    displayName: 'heroSection';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.Text & Attribute.Required;
+    subTitle: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    firstEmoji: Attribute.String & Attribute.Required;
+    secondEmoji: Attribute.String & Attribute.Required;
+    thirdEmoji: Attribute.String & Attribute.Required;
+    fourthEmoji: Attribute.String & Attribute.Required;
+    images: Attribute.Media & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -251,6 +269,7 @@ declare module '@strapi/types' {
       'header.navigation-items': HeaderNavigationItems;
       'home.eligibility-items': HomeEligibilityItems;
       'home.eligibility-section': HomeEligibilitySection;
+      'home.hero-section': HomeHeroSection;
     }
   }
 }

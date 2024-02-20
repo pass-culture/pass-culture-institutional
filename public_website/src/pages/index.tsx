@@ -8,6 +8,7 @@ import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
+import { Hero } from '@/ui/components/home/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
@@ -17,7 +18,17 @@ interface HomeProps {
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
   return (
-    <main>
+    <React.Fragment>
+      <Hero
+        title={homeData.attributes.heroSection.title}
+        subTitle={homeData.attributes.heroSection.subTitle}
+        cta={homeData.attributes.heroSection.cta}
+        firstEmoji={homeData.attributes.heroSection.firstEmoji}
+        secondEmoji={homeData.attributes.heroSection.secondEmoji}
+        thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
+        fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+      />
+
       <CenteredText
         Title={homeData.attributes.AboutSection.Title}
         Text={homeData.attributes.AboutSection.Text}
@@ -52,7 +63,7 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         title={homeData.attributes.socialMediaSection.title}
         links={homeData.attributes.socialMediaSection.socialMediaLink}
       />
-    </main>
+    </React.Fragment>
   )
 }
 
@@ -60,6 +71,9 @@ export const getStaticProps = (async () => {
   // Fetch home data
   const query = stringify({
     populate: [
+      'heroSection',
+      'heroSection.cta',
+      'heroSection.images',
       'AboutSection',
       'eligibilitySection',
       'eligibilitySection.items',

@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_home_hero_sections",
+  "info": {
+    "displayName": "heroSection",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text",
+      "required": true
+    },
+    "subTitle": {
+      "type": "string",
+      "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "firstEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "secondEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "thirdEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "fourthEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

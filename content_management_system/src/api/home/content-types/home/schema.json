@@ -42,6 +42,13 @@
       "repeatable": false,
       "component": "home.eligibility-section",
       "required": true
+    },
+    "heroSection": {
+      "displayName": "heroSection",
+      "type": "component",
+      "repeatable": false,
+      "component": "home.hero-section",
+      "required": true
     }
   }
 }
