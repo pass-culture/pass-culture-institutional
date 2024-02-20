@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import { theme } from '@/theme/theme'
+
 const GlobalStyles = createGlobalStyle`
   /* ResetCSS from http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
@@ -161,6 +163,29 @@ const GlobalStyles = createGlobalStyle`
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  /* Highlighted text inside sections title */
+  mark {
+    background: none;
+    color: inherit;
+
+    position: relative;
+    /* margin-left: 0.5ch;
+    margin-right: 0.5ch; */
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 60%;
+      height: 0.4em;
+      left: -0.25ch;
+      right: -0.25ch;
+      z-index: -1;
+
+      border-radius: 0.5rem;
+      background-color: ${theme.colors.flashGreen};
+    }
   }
 `
 

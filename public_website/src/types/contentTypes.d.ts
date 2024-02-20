@@ -925,15 +925,9 @@ export interface ApiHomeHome extends Schema.SingleType {
     CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
     SocialMediaSection: Attribute.Component<'block.social-media'> &
       Attribute.Required;
-    eligibilityTitle: Attribute.String & Attribute.Required;
-    eligibilityItems: Attribute.Component<'home.eligibility-items', true> &
-      Attribute.Required;
-    eligibilityCardTitle: Attribute.Text & Attribute.Required;
-    eligibilityCardDescription: Attribute.String & Attribute.Required;
-    eligibilityCardCta: Attribute.Component<'common.link'> & Attribute.Required;
-    eligibilityFirstEmoji: Attribute.String & Attribute.Required;
-    eligibilitySecondEmoji: Attribute.String & Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &
+      Attribute.Required;
+    eligibilitySection: Attribute.Component<'home.eligibility-section'> &
       Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

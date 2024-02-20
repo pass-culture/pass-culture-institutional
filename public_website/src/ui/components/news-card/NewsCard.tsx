@@ -45,9 +45,8 @@ const Root = styled.article`
 const StyledImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
-  /* object-fit: cover;
-  max-width: 100%; */
-  /* aspect-ratio: 0.8; */
+  object-fit: cover;
+  min-width: 100%;
 `
 
 const StyledMeta = styled.p`

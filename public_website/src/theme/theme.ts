@@ -9,6 +9,7 @@ export const theme = {
     secondary: Colors.SECONDARY,
     lightBlue: Colors.LIGHT_BLUE,
     lightGray: Colors.LIGHT_GRAY,
+    flashGreen: Colors.FLASH_GREEN,
   },
   shadows: {
     popover: `-0.25rem 0.5rem 0.875rem 0 ${Colors.LIGHT_GRAY}`,
