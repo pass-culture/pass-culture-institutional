@@ -29,6 +29,39 @@
       "repeatable": false,
       "component": "block.social-media",
       "required": true
+    },
+    "eligibilityTitle": {
+      "type": "string",
+      "required": true
+    },
+    "eligibilityItems": {
+      "displayName": "eligibilityItems",
+      "type": "component",
+      "repeatable": true,
+      "component": "home.eligibility-items",
+      "required": true
+    },
+    "eligibilityCardTitle": {
+      "type": "text",
+      "required": true
+    },
+    "eligibilityCardDescription": {
+      "type": "string",
+      "required": true
+    },
+    "eligibilityCardCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "eligibilityFirstEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "eligibilitySecondEmoji": {
+      "type": "string",
+      "required": true
     }
   }
 }

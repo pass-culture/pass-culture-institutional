@@ -6,6 +6,7 @@ import { CenteredText } from '@/lib/blocks/CenteredText'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { EligibilitySection } from '@/ui/components/home/EligibilitySection'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
@@ -18,6 +19,16 @@ export default function Home(props: HomeProps) {
       <CenteredText
         Title={props.data.attributes.AboutSection.Title}
         Text={props.data.attributes.AboutSection.Text}
+      />
+
+      <EligibilitySection
+        title={props.data.attributes.eligibilityTitle}
+        items={props.data.attributes.eligibilityItems}
+        cardTitle={props.data.attributes.eligibilityCardTitle}
+        cardDescription={props.data.attributes.eligibilityCardDescription}
+        cardCta={props.data.attributes.eligibilityCardCta}
+        cardFirstEmoji={props.data.attributes.eligibilityFirstEmoji}
+        cardSecondEmoji={props.data.attributes.eligibilitySecondEmoji}
       />
 
       <PushCTA
@@ -41,6 +52,8 @@ export const getStaticProps = (async () => {
   const query = stringify({
     populate: [
       'AboutSection',
+      'eligibilityItems',
+      'eligibilityCardCta',
       'CTASection',
       'CTASection.Image',
       'CTASection.ctaLink',

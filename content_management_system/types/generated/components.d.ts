@@ -93,6 +93,7 @@ export interface CommonLink extends Schema.Component {
   collectionName: 'components_common_links';
   info: {
     displayName: 'Link';
+    description: '';
   };
   attributes: {
     Label: Attribute.String & Attribute.Required;
@@ -188,6 +189,26 @@ export interface HeaderNavigationItems extends Schema.Component {
   };
 }
 
+export interface HomeEligibilityItems extends Schema.Component {
+  collectionName: 'components_home_eligibility_items';
+  info: {
+    displayName: 'eligibilityItems';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HomeLatestStudies extends Schema.Component {
+  collectionName: 'components_home_latest_studies';
+  info: {
+    displayName: 'latestStudies';
+  };
+  attributes: {};
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -205,6 +226,8 @@ declare module '@strapi/types' {
       'header.login': HeaderLogin;
       'header.mega-menu': HeaderMegaMenu;
       'header.navigation-items': HeaderNavigationItems;
+      'home.eligibility-items': HomeEligibilityItems;
+      'home.latest-studies': HomeLatestStudies;
     }
   }
 }
