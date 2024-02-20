@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_home_eligibility_sections",
+  "info": {
+    "displayName": "eligibilitySection",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "home.eligibility-items",
+      "required": true
+    },
+    "cardTitle": {
+      "type": "text",
+      "required": true
+    },
+    "cardDescription": {
+      "type": "string",
+      "required": true
+    },
+    "cardCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "firstEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "secondEmoji": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 
-type EligibilitySectionProps = {
+type EligibilityProps = {
   title: string
   items: { title: string; description: string; emoji: string }[]
   cardTitle: string
@@ -13,7 +13,7 @@ type EligibilitySectionProps = {
   cardSecondEmoji: string
 }
 
-export function EligibilitySection({
+export function Eligibility({
   title,
   items,
   cardTitle,
@@ -21,7 +21,7 @@ export function EligibilitySection({
   cardCta,
   cardFirstEmoji,
   cardSecondEmoji,
-}: EligibilitySectionProps) {
+}: EligibilityProps) {
   return (
     <Root>
       <StyledCard>
