@@ -95,15 +95,25 @@ const Root = styled.div`
     );
     transform: translateY(-8rem);
     overflow: hidden;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      transform: translateY(-7rem);
+    }
   `}
 `
 
 const StyledContentWrapper = styled.div`
-  max-width: 90rem;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  padding: calc(8rem + 10rem) 1.5rem 12.5rem;
+  ${({ theme }) => css`
+    max-width: 90rem;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    padding: calc(8rem + 10rem) 1.5rem 12.5rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: calc(7rem + 10rem) 1.5rem 7rem;
+    }
+  `}
 `
 
 const StyledSubTitle = styled.p`
@@ -129,7 +139,6 @@ const StyledHeading = styled.h1`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
-      margin-bottom: 0;
     }
   `}
 `
@@ -154,6 +163,10 @@ const StyledCircle = styled.div<{ $index: number; $width: string }>`
     user-select: none;
     font-size: ${theme.fonts.sizes['7xl']};
     z-index: -1;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
   `}
 `
 
