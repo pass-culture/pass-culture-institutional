@@ -164,24 +164,11 @@ const GlobalStyles = createGlobalStyle`
   /* Highlighted text inside sections title */
   mark {
     background: none;
+    background-image: linear-gradient(to right, ${theme.colors.flashGreen} 50%, ${theme.colors.flashGreen} 50%);
+    background-size: 200% 0.4em;
+    background-position: 100% 90%;
+    background-repeat: no-repeat;
     color: inherit;
-
-    position: relative;
-    /* margin-left: 0.5ch;
-    margin-right: 0.5ch; */
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 60%;
-      height: 0.4em;
-      left: -0.25ch;
-      right: -0.25ch;
-      z-index: -1;
-
-      border-radius: 0.5rem;
-      background-color: ${theme.colors.flashGreen};
-    }
   }
 `
 
