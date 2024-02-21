@@ -76,7 +76,7 @@ const StyledCard = styled.div`
   ${({ theme }) => css`
     background: linear-gradient(
       180deg,
-      #eb0055 0%,
+      ${theme.colors.tertiary} 0%,
       ${theme.colors.secondary} 100%
     );
     border-radius: 2.5rem;

@@ -41,7 +41,7 @@ function getVariantButtonBackground(variant?: ButtonVariants) {
     default:
       return `linear-gradient(
         90deg,
-        #EB0055 -11.18%,
+        ${theme.colors.tertiary} -11.18%,
         ${theme.colors.secondary} 64.8%
       )`
   }
@@ -51,7 +51,7 @@ const StyledButton = styled(Link)<{ variant?: ButtonVariants }>`
   ${({ theme, variant }) => css`
     background: ${variant
       ? getVariantButtonBackground(variant)
-      : `linear-gradient(90deg, #eb0055 -11.18%, ${theme.colors.secondary} 64.8%)`};
+      : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
 
     ${variant &&
     variant !== 'primary' &&

@@ -82,7 +82,7 @@ const CardContainer = styled.div`
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    background-color: #eb0055;
+    background-color: ${theme.colors.tertiary};
     border-radius: 1rem;
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
@@ -185,7 +185,11 @@ const CtaLink = styled.a`
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
 
-    background: linear-gradient(90deg, #eb0055, ${theme.colors.secondary});
+    background: linear-gradient(
+      90deg,
+      ${theme.colors.tertiary},
+      ${theme.colors.secondary}
+    );
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;

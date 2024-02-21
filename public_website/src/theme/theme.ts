@@ -8,6 +8,7 @@ export const theme = {
     white: Colors.WHITE,
     primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
+    tertiary: Colors.TERTIARY,
     lightBlue: Colors.LIGHT_BLUE,
     lightGray: Colors.LIGHT_GRAY,
     flashGreen: Colors.FLASH_GREEN,
