@@ -14,8 +14,8 @@ export const theme = {
     purple: Colors.PURPLE,
   },
   shadows: {
-    popover: Shadows.POPOVER,
-    sticker: Shadows.STICKER,
+    popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
+    sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
   },
   fonts: {
     sizes: {
@@ -78,7 +78,7 @@ export const theme = {
       lineHeight: '1',
       fontSize: FontSizes['8XL'],
       fontWeight: FontWeights.BOLD,
-      boxShadow: Shadows.STICKER,
+      boxShadow: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
     },
     body: {
       desktop: {
