@@ -32,10 +32,10 @@ export default function Home({ playlistName, playlist }: Readonly<Props>) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main>
-        <Typo.Title1>
+        <Typo.Heading1>
           Welcome to{' '}
           <ExternalLink href="https://nextjs.org">Next.js!</ExternalLink>
-        </Typo.Title1>
+        </Typo.Heading1>
         <Typo.Body>
           Get started by editing
           <CodeTag>pages/index.tsx</CodeTag>
@@ -45,7 +45,7 @@ export default function Home({ playlistName, playlist }: Readonly<Props>) {
         <InternalLink href="/about" name="About &rarr;" />
         <Spacer.Vertical spaces={2} />
 
-        {!!playlistName && <Typo.Title1>{playlistName}</Typo.Title1>}
+        {!!playlistName && <Typo.Heading1>{playlistName}</Typo.Heading1>}
 
         {playlist && playlist.length > 0 ? (
           <ul>

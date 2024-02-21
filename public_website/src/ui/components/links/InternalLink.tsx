@@ -11,7 +11,7 @@ export const InternalLink = ({ href, name }: Props) => (
   <FlexContainer>
     <Card>
       <Link href={href} passHref legacyBehavior>
-        <StyledA>{name}</StyledA>
+        {name}
       </Link>
     </Card>
   </FlexContainer>
@@ -39,9 +39,4 @@ const Card = styled.div(({ theme }) => ({
     color: theme.colors.primary,
     borderColor: theme.colors.primary,
   },
-}))
-
-const StyledA = styled.a(({ theme }) => ({
-  ...theme.typography.buttonText,
-  color: 'inherit',
 }))

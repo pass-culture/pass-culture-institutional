@@ -28,7 +28,7 @@ export default function About({ restaurants }: Readonly<Props>) {
   return (
     <PageContainer>
       <Main>
-        <Typo.Title1>About Page</Typo.Title1>
+        <Typo.Heading1>About Page</Typo.Heading1>
 
         <Typo.Body>
           Get started by editing
@@ -37,7 +37,7 @@ export default function About({ restaurants }: Readonly<Props>) {
 
         {restaurants.map((restaurant: RestaurantData) => (
           <React.Fragment key={restaurant.id}>
-            <Typo.Title1>{restaurant.attributes.name}</Typo.Title1>
+            <Typo.Heading1>{restaurant.attributes.name}</Typo.Heading1>
             <Typo.Body>{restaurant.attributes.description}</Typo.Body>
           </React.Fragment>
         ))}

@@ -23,6 +23,15 @@ const Heading2 = styled.h2(({ theme }) => {
   }
 })
 
+const Body = styled.h2(({ theme }) => {
+  return {
+    ...theme.typography.body.desktop,
+    [`@media(width < ${theme.mediaQueries.mobile})`]: {
+      ...theme.typography.body.mobile,
+    },
+  }
+})
+
 const BorderedText = styled.p(({ theme }) => {
   return {
     ...theme.typography.borderedText.desktop,
@@ -39,6 +48,7 @@ const Emoji = styled.span(({ theme }) => ({
 export const Typo = {
   Heading1,
   Heading2,
+  Body,
   BorderedText,
   Emoji,
 }
