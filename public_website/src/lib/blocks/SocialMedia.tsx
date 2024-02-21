@@ -91,7 +91,7 @@ const StyledListItem = styled.li`
     }
 
     &:nth-child(even) a {
-      background: #ec3478;
+      background: ${theme.colors.tertiary};
       transform: rotate(-4deg);
     }
 
