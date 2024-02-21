@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
-import { APIResponseCollection } from '@/types/strapi'
+import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
@@ -14,7 +14,7 @@ type HeroProps = {
   secondEmoji: string
   thirdEmoji: string
   fourthEmoji: string
-  images: APIResponseCollection<'plugin::upload.file'> | null
+  images: APIResponseData<'plugin::upload.file'>[] | null
 }
 
 export function Hero({
@@ -42,7 +42,7 @@ export function Hero({
               <StyledImageLayer />
               <StyledImage
                 $imageUrl={getStrapiURL(
-                  images.data[0]?.attributes.url
+                  images[0]?.attributes.url
                 )}></StyledImage>
             </StyledImageWrapper>
           )}
@@ -55,7 +55,7 @@ export function Hero({
               <StyledImageLayer />
               <StyledImage
                 $imageUrl={getStrapiURL(
-                  images.data[1]?.attributes.url
+                  images[1]?.attributes.url
                 )}></StyledImage>
             </StyledImageWrapper>
           )}
@@ -69,14 +69,14 @@ export function Hero({
                 <StyledImageLayer />
                 <StyledImage
                   $imageUrl={getStrapiURL(
-                    images.data[2]?.attributes.url
+                    images[2]?.attributes.url
                   )}></StyledImage>
               </StyledImageWrapper>
               <StyledImageWrapper $rotation="9deg" $top="30%" $right="0">
                 <StyledImageLayer />
                 <StyledImage
                   $imageUrl={getStrapiURL(
-                    images.data[3]?.attributes.url
+                    images[3]?.attributes.url
                   )}></StyledImage>
               </StyledImageWrapper>
             </React.Fragment>

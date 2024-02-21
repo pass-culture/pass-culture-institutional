@@ -28,9 +28,12 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         secondEmoji={homeData.attributes.heroSection.secondEmoji}
         thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
         fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
-        // FIXME:
-        // @ts-expect-error fix type
-        images={homeData.attributes.heroSection.images}
+        images={
+          // There seem to be a bug with the `strapi.ts` helper file.
+          // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
+          homeData.attributes.heroSection.images
+            ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
+        }
       />
 
       <CenteredText
