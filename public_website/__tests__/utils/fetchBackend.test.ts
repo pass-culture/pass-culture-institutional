@@ -27,7 +27,7 @@ describe('fetchBackend', () => {
   beforeAll(() => {
     process.env = {
       ...OLD_ENV,
-      BACKEND_API_URL: 'http://dummy_localhost:5001/',
+      BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
   })
 

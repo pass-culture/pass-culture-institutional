@@ -1,6 +1,6 @@
 export async function fetchBackend(path: string) {
   try {
-    const requestUrl = `${process.env['BACKEND_API_URL']}${path}`
+    const requestUrl = `${process.env['BACKEND_API_URL']}/${path}`
 
     const response = await fetch(requestUrl)
 
