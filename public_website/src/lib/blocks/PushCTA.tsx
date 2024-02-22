@@ -9,7 +9,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
   title: string
-  text?: string
+  description?: string
   image: APIResponse<'plugin::upload.file'> | null
   qrCodeDescription: string
   ctaLink: { Label: string; URL: string }
@@ -43,7 +43,9 @@ export function PushCTA(props: PushCTAProps) {
       </CardContainer>
       <RightSide>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
-        {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
+        {props.description && (
+          <p dangerouslySetInnerHTML={{ __html: props.description }} />
+        )}
         <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
       </RightSide>
     </Root>

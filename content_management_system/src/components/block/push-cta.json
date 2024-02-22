@@ -1,25 +1,23 @@
 {
   "collectionName": "components_block_push_ctas",
   "info": {
-    "displayName": "PushCTA",
+    "displayName": "pushCTA",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "Text": {
+    "description": {
       "type": "text"
     },
-    "Image": {
+    "image": {
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "ctaLink": {
       "type": "component",

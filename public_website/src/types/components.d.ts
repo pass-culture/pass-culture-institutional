@@ -7,8 +7,8 @@ export interface BlockCenteredText extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Text: Attribute.Text & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
   };
 }
 
@@ -63,13 +63,13 @@ export interface BlockLink extends Schema.Component {
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
-    displayName: 'PushCTA';
+    displayName: 'pushCTA';
     description: '';
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Text: Attribute.Text;
-    Image: Attribute.Media & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    image: Attribute.Media & Attribute.Required;
     ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
     qrCodeDescription: Attribute.String & Attribute.Required;
     qrCodeUrl: Attribute.String & Attribute.Required;

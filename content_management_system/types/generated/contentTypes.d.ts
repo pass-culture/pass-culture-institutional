@@ -920,7 +920,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    AboutSection: Attribute.Component<'block.centered-text'> &
+    aboutSection: Attribute.Component<'block.centered-text'> &
       Attribute.Required;
     CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
     socialMediaSection: Attribute.Component<'block.social-media'> &

@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "AboutSection": {
+    "aboutSection": {
       "type": "component",
       "repeatable": false,
       "component": "block.centered-text",

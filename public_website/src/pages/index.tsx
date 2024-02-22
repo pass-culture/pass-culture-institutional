@@ -37,8 +37,8 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
       />
 
       <CenteredText
-        Title={homeData.attributes.AboutSection.Title}
-        Text={homeData.attributes.AboutSection.Text}
+        title={homeData.attributes.aboutSection.title}
+        description={homeData.attributes.aboutSection.description}
       />
 
       <Eligibility
@@ -53,9 +53,9 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
 
       <StyledPushCTAWrapper>
         <PushCTA
-          title={homeData.attributes.CTASection.Title}
-          text={homeData.attributes.CTASection.Text}
-          image={homeData.attributes.CTASection.Image}
+          title={homeData.attributes.CTASection.title}
+          description={homeData.attributes.CTASection.description}
+          image={homeData.attributes.CTASection.image}
           ctaLink={homeData.attributes.CTASection.ctaLink}
           qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
           qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
@@ -87,12 +87,12 @@ export const getStaticProps = (async () => {
       'heroSection',
       'heroSection.cta',
       'heroSection.images',
-      'AboutSection',
+      'aboutSection',
       'eligibilitySection',
       'eligibilitySection.items',
       'eligibilitySection.cardCta',
       'CTASection',
-      'CTASection.Image',
+      'CTASection.image',
       'CTASection.ctaLink',
       'latestStudies',
       'latestStudies.cta',
