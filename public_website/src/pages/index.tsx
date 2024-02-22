@@ -100,7 +100,7 @@ export const getStaticProps = (async () => {
 
   // Fetch 3 latest studies
   const latestStudiesQuery = stringify({
-    sort: ['date:asc'],
+    sort: ['date:desc'],
     populate: ['image'],
     pagination: {
       limit: 3,
