@@ -51,31 +51,25 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         cardSecondEmoji={homeData.attributes.eligibilitySection.secondEmoji}
       />
 
-      <StyledPushCTAWrapper>
-        <PushCTA
-          title={homeData.attributes.CTASection.title}
-          description={homeData.attributes.CTASection.description}
-          image={homeData.attributes.CTASection.image}
-          ctaLink={homeData.attributes.CTASection.ctaLink}
-          qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
-          qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
-        />
-      </StyledPushCTAWrapper>
+      <StyledPushCTA
+        title={homeData.attributes.CTASection.title}
+        description={homeData.attributes.CTASection.description}
+        image={homeData.attributes.CTASection.image}
+        ctaLink={homeData.attributes.CTASection.ctaLink}
+        qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
+        qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
+      />
 
-      <StyledLatestNewsWrapper>
-        <LatestNews
-          news={latestStudies}
-          title={homeData.attributes.latestStudies.title}
-          cta={homeData.attributes.latestStudies.cta}
-        />
-      </StyledLatestNewsWrapper>
+      <StyledLatestNews
+        news={latestStudies}
+        title={homeData.attributes.latestStudies.title}
+        cta={homeData.attributes.latestStudies.cta}
+      />
 
-      <StyledSocialMediaWrapper>
-        <SocialMedia
-          title={homeData.attributes.socialMediaSection.title}
-          links={homeData.attributes.socialMediaSection.socialMediaLink}
-        />
-      </StyledSocialMediaWrapper>
+      <StyledSocialMedia
+        title={homeData.attributes.socialMediaSection.title}
+        links={homeData.attributes.socialMediaSection.socialMediaLink}
+      />
     </React.Fragment>
   )
 }
@@ -129,7 +123,7 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<HomeProps>
 
-const StyledPushCTAWrapper = styled.div`
+const StyledPushCTA = styled(PushCTA)`
   ${({ theme }) => css`
     margin-top: 12.5rem;
     margin-bottom: 10rem;
@@ -140,7 +134,7 @@ const StyledPushCTAWrapper = styled.div`
   `}
 `
 
-const StyledLatestNewsWrapper = styled.div`
+const StyledLatestNews = styled(LatestNews)`
   ${({ theme }) => css`
     margin-top: 6rem;
     margin-bottom: 6rem;
@@ -151,7 +145,7 @@ const StyledLatestNewsWrapper = styled.div`
   `}
 `
 
-const StyledSocialMediaWrapper = styled.div`
+const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
     margin-top: 6rem;
     margin-bottom: 5rem;

@@ -14,13 +14,14 @@ interface PushCTAProps {
   qrCodeDescription: string
   ctaLink: { Label: string; URL: string }
   qrCodeUrl: string
+  className?: string
 }
 
 export function PushCTA(props: PushCTAProps) {
   const { SVG: QrCode } = useQRCode()
 
   return (
-    <Root>
+    <Root className={props.className}>
       <CardContainer>
         <Card
           $imageUrl={

@@ -11,11 +11,12 @@ type LatestNewsProps = {
   title: string
   news: APIResponseData<'api::news.news'>[]
   cta: { Label: string; URL: string }
+  className?: string
 }
 
-export function LatestNews({ title, news, cta }: LatestNewsProps) {
+export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
   return (
-    <Root>
+    <Root className={className}>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
       <StyledList>
         {news?.map((newsItem) => {
