@@ -23,7 +23,7 @@ export const handlers = [
     return jsonResponseOf(activePlaylistTagsFixtures)
   }),
   http.get(`${CMS_BASE_URL}/api/home`, () => {
-    return jsonResponseOf(homePageFixtures.homePageData)
+    return jsonResponseOf(homePageFixtures.homeData)
   }),
   http.get(`${CMS_BASE_URL}/api/news-list`, () => {
     return jsonResponseOf(homePageFixtures.latestStudies)
