@@ -2,6 +2,7 @@ import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
 import { Header } from './blocks/Header'
+import { PushCTA } from './blocks/PushCTA'
 import { SimpleText } from './blocks/SimpleText'
 import { UnkwnownBlock } from './UnknownBlock'
 
@@ -21,6 +22,7 @@ const COMPONENTS: Record<
   'block.header': Header,
   'block.centered-text': CenteredText,
   'block.simple-text': SimpleText,
+  'block.push-cta': PushCTA,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

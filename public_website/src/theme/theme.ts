@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
+import { Shadows } from './shadows'
 
 export const theme = {
   colors: {
@@ -7,11 +8,15 @@ export const theme = {
     white: Colors.WHITE,
     primary: Colors.PRIMARY,
     secondary: Colors.SECONDARY,
+    tertiary: Colors.TERTIARY,
     lightBlue: Colors.LIGHT_BLUE,
     lightGray: Colors.LIGHT_GRAY,
+    flashGreen: Colors.FLASH_GREEN,
+    purple: Colors.PURPLE,
   },
   shadows: {
-    popover: `-0.25rem 0.5rem 0.875rem 0 ${Colors.LIGHT_GRAY}`,
+    popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
+    sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
   },
   fonts: {
     sizes: {
@@ -21,9 +26,10 @@ export const theme = {
       m: FontSizes.M,
       l: FontSizes.L,
       xl: FontSizes.XL,
+      '2xl': FontSizes['2XL'],
       '3xl': FontSizes['3XL'],
       '4xl': FontSizes['4XL'],
-      '5xl': FontSizes['3XL'],
+      '5xl': FontSizes['5XL'],
       '6xl': FontSizes['6XL'],
       '7xl': FontSizes['7XL'],
       '8xl': FontSizes['8XL'],
@@ -36,26 +42,55 @@ export const theme = {
     },
   },
   typography: {
-    title1: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '1.15',
-      fontSize: '4rem',
-      color: Colors.BLACK,
+    heading1: {
+      desktop: {
+        lineHeight: '1.3',
+        fontSize: FontSizes['8XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.SECONDARY,
+      },
+      mobile: {
+        fontSize: FontSizes['5XL'],
+      },
+    },
+    heading2: {
+      desktop: {
+        lineHeight: '1.25',
+        fontSize: FontSizes['6XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.SECONDARY,
+      },
+      mobile: {
+        fontSize: FontSizes['3XL'],
+      },
+    },
+    borderedText: {
+      desktop: {
+        lineHeight: '1',
+        fontSize: FontSizes['5XL'],
+        fontWeight: FontWeights.BLACK,
+        color: Colors.WHITE,
+      },
+      mobile: {
+        fontSize: FontSizes['4XL'],
+      },
+    },
+    emoji: {
+      lineHeight: '1',
+      fontSize: FontSizes['8XL'],
+      fontWeight: FontWeights.BOLD,
+      boxShadow: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
     },
     body: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '1.5',
-      fontSize: '1.5rem',
-      color: Colors.BLACK,
-    },
-    buttonText: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
-      lineHeight: '0.75',
-      fontSize: '1.25rem',
-      color: Colors.BLACK,
+      desktop: {
+        lineHeight: '2',
+        fontSize: FontSizes.L,
+        fontWeight: FontWeights.MEDIUM,
+        color: Colors.BLACK,
+      },
+      mobile: {
+        fontSize: FontSizes.S,
+      },
     },
   },
   mediaQueries: {

@@ -5,6 +5,7 @@ import { Icon } from './Icon'
 export function Gouvernement() {
   return (
     <Icon
+      label="Site du Gouvernement"
       width="100%"
       height="100%"
       viewBox="0 0 312 187"

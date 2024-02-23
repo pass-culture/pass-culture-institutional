@@ -1,4 +1,3 @@
-/* eslint-disable */
 import type { Schema, Attribute } from '@strapi/strapi';
 
 export interface AdminPermission extends Schema.CollectionType {
@@ -838,6 +837,137 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiFooterFooter extends Schema.SingleType {
+  collectionName: 'footers';
+  info: {
+    singularName: 'footer';
+    pluralName: 'footers';
+    displayName: 'Footer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    PlayStoreUrl: Attribute.String & Attribute.Required;
+    AppStoreUrl: Attribute.String & Attribute.Required;
+    Lists: Attribute.Component<'footer.list', true>;
+    bannerText: Attribute.String;
+    LegalLinks: Attribute.Component<'common.link', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::footer.footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::footer.footer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHeaderHeader extends Schema.SingleType {
+  collectionName: 'headers';
+  info: {
+    singularName: 'header';
+    pluralName: 'headers';
+    displayName: 'Header';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    targetItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    aboutItems: Attribute.Component<'header.navigation-items', true> &
+      Attribute.Required;
+    signUp: Attribute.Component<'common.link'> & Attribute.Required;
+    login: Attribute.Component<'header.login'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::header.header',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::header.header',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aboutSection: Attribute.Component<'block.centered-text'> &
+      Attribute.Required;
+    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
+    socialMediaSection: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
+    latestStudies: Attribute.Component<'block.latest-news'> &
+      Attribute.Required;
+    eligibilitySection: Attribute.Component<'home.eligibility-section'> &
+      Attribute.Required;
+    heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNewsNews extends Schema.CollectionType {
+  collectionName: 'news_list';
+  info: {
+    singularName: 'news';
+    pluralName: 'news-list';
+    displayName: 'News';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    category: Attribute.Enumeration<['\u00C9tude', 'Article']> &
+      Attribute.Required;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -852,7 +982,13 @@ export interface ApiPagePage extends Schema.CollectionType {
   attributes: {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
-      ['block.centered-text', 'block.header', 'block.simple-text']
+      [
+        'block.centered-text',
+        'block.header',
+        'block.simple-text',
+        'block.push-cta',
+        'block.social-media'
+      ]
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -921,6 +1057,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::category.category': ApiCategoryCategory;
+      'api::footer.footer': ApiFooterFooter;
+      'api::header.header': ApiHeaderHeader;
+      'api::home.home': ApiHomeHome;
+      'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

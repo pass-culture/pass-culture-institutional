@@ -1,39 +1,41 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+import { Typo } from '@/ui/components/typographies'
 
 interface CenteredTextProps {
-  Title: string
-  Text: string
+  title: string
+  description: string
 }
 
 export function CenteredText(props: CenteredTextProps) {
   return (
     <Root data-testid="centered-text">
-      {/* TODO: determine heading level */}
-      <h2>{props.Title}</h2>
-      <p>{props.Text}</p>
+      <Typo.Heading2>{props.title}</Typo.Heading2>
+      <p dangerouslySetInnerHTML={{ __html: props.description }} />
     </Root>
   )
 }
 
 const Root = styled.div`
-  text-align: center;
-  max-width: 52.5rem;
-  margin: 5rem auto;
+  ${({ theme }) => css`
+    text-align: center;
+    max-width: 52.5rem;
+    margin: 0 auto;
+    padding: 1.5rem;
 
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    /* TODO: use CSS var */
-    color: #320096;
-  }
+    h2 {
+      margin-bottom: 1.5rem;
+    }
 
-  p {
-    font-size: 1.625rem;
-    font-weight: 600;
-    line-height: 1.7;
-  }
+    p {
+      font-size: ${theme.fonts.sizes['4xl']};
+      font-weight: ${theme.fonts.weights.semiBold};
+      line-height: 1.7;
 
-  /* TODO: mobile style */
+      @media (width < ${theme.mediaQueries.mobile}) {
+        font-size: ${theme.fonts.sizes.xl};
+      }
+    }
+  `}
 `

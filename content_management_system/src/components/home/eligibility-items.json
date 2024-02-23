@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_home_eligibility_items",
+  "info": {
+    "displayName": "eligibilityItems"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "emoji": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

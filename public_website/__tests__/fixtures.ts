@@ -1,4 +1,3 @@
-import { RestaurantData } from '@/pages/about'
 import { Offer, Tag } from '@/types/playlist'
 import { HeaderProps } from '@/ui/components/header/Header'
 
@@ -84,6 +83,17 @@ export const headerDataFixtures: HeaderProps = {
     Label: 'signUp',
     URL: '#',
   },
+}
+
+type RestaurantData = {
+  attributes: {
+    description: string
+    name: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+  }
+  id: number
 }
 
 export const restaurantDataFixtures: RestaurantData[] = [

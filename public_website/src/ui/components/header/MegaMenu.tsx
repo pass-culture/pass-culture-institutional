@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -33,7 +34,7 @@ export function MegaMenu({
   labelId,
   data,
 }: MegaMenuProps) {
-  const megaMenuRef = useRef<HTMLElement>(null)
+  const megaMenuRef = useRef<HTMLDivElement>(null)
 
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
@@ -69,77 +70,76 @@ export function MegaMenu({
   })
 
   return (
-    <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
-      <StyledMegaMenuHeading>
-        <p>{data.title}</p>
-        <Button href={data.cta.URL}>{data.cta.Label}</Button>
-        {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
-      </StyledMegaMenuHeading>
+    <StyledMegaMenuWrapper>
+      <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
+        <StyledMegaMenuHeading>
+          <Typo.Heading1 as={'p'}>{data.title}</Typo.Heading1>
+          <Button href={data.cta.URL}>{data.cta.Label}</Button>
+          {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
+        </StyledMegaMenuHeading>
 
-      <StyledMegaMenuLists>
-        <ul>
-          {data.primaryListItems.map((item) => {
-            return (
-              <li key={item.Label}>
-                <Link href={item.URL}>{item.Label}</Link>
-              </li>
-            )
-          })}
-        </ul>
-        <ul>
-          {data.secondaryListItems.map((item) => {
-            return (
-              <li key={item.Label}>
-                <Link href={item.URL}>{item.Label}</Link>
-              </li>
-            )
-          })}
-        </ul>
-      </StyledMegaMenuLists>
+        <StyledMegaMenuLists>
+          <ul>
+            {data.primaryListItems.map((item) => {
+              return (
+                <li key={item.Label}>
+                  <Link href={item.URL}>{item.Label}</Link>
+                </li>
+              )
+            })}
+          </ul>
+          <ul>
+            {data.secondaryListItems.map((item) => {
+              return (
+                <li key={item.Label}>
+                  <Link href={item.URL}>{item.Label}</Link>
+                </li>
+              )
+            })}
+          </ul>
+        </StyledMegaMenuLists>
 
-      <StyledMegaMenuCard>
-        <StyledMegaMenuCardHeading>
-          <p>{data.cardTitle}</p>
+        <StyledMegaMenuCard>
+          <StyledMegaMenuCardHeading>
+            <Typo.BorderedText>{data.cardTitle}</Typo.BorderedText>
 
-          <span>{data.cardFirstEmoji}</span>
-          <span>{data.cardSecondEmoji}</span>
-        </StyledMegaMenuCardHeading>
-        <p>{data.cardDescription}</p>
-        <Button href={data.cardLink.URL} variant="secondary">
-          {data.cardLink.Label}
-        </Button>
-      </StyledMegaMenuCard>
-    </StyledMegaMenu>
+            <Typo.Emoji aria-hidden="true">{data.cardFirstEmoji}</Typo.Emoji>
+            <Typo.Emoji aria-hidden="true">{data.cardSecondEmoji}</Typo.Emoji>
+          </StyledMegaMenuCardHeading>
+          <p>{data.cardDescription}</p>
+          <Button href={data.cardLink.URL} variant="secondary">
+            {data.cardLink.Label}
+          </Button>
+        </StyledMegaMenuCard>
+      </StyledMegaMenu>
+    </StyledMegaMenuWrapper>
   )
 }
 
-const StyledMegaMenu = styled.section`
+const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
     position: absolute;
     left: 0;
     right: 0;
     top: calc(4rem + 4rem);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6.5rem;
-    padding: 6.25rem 2.5rem 8.125rem;
+    z-index: 2;
   `}
 `
 
-const StyledMegaMenuHeading = styled.div`
-  ${({ theme }) => css`
-    > p {
-      color: ${theme.colors.secondary};
-      font-size: ${theme.fonts.sizes['6xl']};
-      font-weight: ${theme.fonts.weights.bold};
-      line-height: 1.25;
-    }
+const StyledMegaMenu = styled.div`
+  max-width: 90rem;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6.5rem;
+  padding: 6.25rem 2.5rem 8.125rem;
+`
 
-    p + a {
-      margin: 1.5rem 0 3rem;
-    }
-  `}
+const StyledMegaMenuHeading = styled.div`
+  p + a {
+    margin: 1.5rem 0 3rem;
+  }
 `
 
 const StyledMegaMenuLists = styled.div`
@@ -200,19 +200,15 @@ const StyledMegaMenuCardHeading = styled.div`
     margin-bottom: 4.5rem;
 
     p {
-      color: ${theme.colors.white};
-      font-size: ${theme.fonts.sizes['5xl']};
-      font-weight: ${theme.fonts.weights.black};
       z-index: 1;
     }
 
     span {
-      font-size: 1.75rem;
+      font-size: ${theme.fonts.sizes['6xl']};
       position: absolute;
       top: -1rem;
       left: 1rem;
       transform: rotate(-10deg);
-      z-index: 0;
 
       &:last-child {
         top: auto;

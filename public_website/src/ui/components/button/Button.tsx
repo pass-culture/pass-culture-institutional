@@ -2,11 +2,16 @@ import React from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
+
+type ButtonVariants = 'primary' | 'secondary' | 'tertiary'
+
 type ButtonProps = {
   children: React.ReactNode
-  variant?: 'primary' | 'secondary'
+  variant?: ButtonVariants
   href: string
   target?: '_blank'
+  className?: string
 }
 
 export function Button({
@@ -14,32 +19,53 @@ export function Button({
   variant = 'primary',
   href,
   target,
+  className,
 }: ButtonProps) {
   return (
-    <StyledButton variant={variant} href={href} target={target}>
+    <StyledButton
+      className={className}
+      variant={variant}
+      href={href}
+      target={target}>
       {children}
     </StyledButton>
   )
 }
 
-const StyledButton = styled(Link)<{ variant?: 'primary' | 'secondary' }>`
-  ${({ theme, variant }) => css`
-    background: ${variant === 'secondary'
-      ? 'transparent'
-      : `linear-gradient(
-      90deg,
-      #EB0055 -11.18%,
-      ${theme.colors.secondary} 64.8%
-    )`};
+function getVariantButtonBackground(variant?: ButtonVariants) {
+  switch (variant) {
+    case 'secondary':
+      return 'transparent'
+    case 'tertiary':
+      return theme.colors.white
+    default:
+      return `linear-gradient(
+        90deg,
+        ${theme.colors.tertiary} -11.18%,
+        ${theme.colors.secondary} 64.8%
+      )`
+  }
+}
 
-    ${variant === 'secondary' && `border: 1px solid ${theme.colors.white};`}
+const StyledButton = styled(Link)<{ variant?: ButtonVariants }>`
+  ${({ theme, variant }) => css`
+    background: ${variant
+      ? getVariantButtonBackground(variant)
+      : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
+
+    ${variant &&
+    variant !== 'primary' &&
+    `border: 1px solid ${theme.colors.white};`}
 
     border-radius: 2rem;
-    color: ${theme.colors.white};
+    color: ${variant === 'tertiary'
+      ? theme.colors.secondary
+      : theme.colors.white};
     display: inline-block;
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     padding: 1rem 2rem;
     text-align: center;
+    width: max-content;
   `}
 `

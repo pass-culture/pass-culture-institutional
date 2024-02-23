@@ -1,0 +1,54 @@
+{
+  "kind": "singleType",
+  "collectionName": "homes",
+  "info": {
+    "singularName": "home",
+    "pluralName": "homes",
+    "displayName": "Home",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "aboutSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.centered-text",
+      "required": true
+    },
+    "CTASection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.push-cta",
+      "required": true
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media",
+      "required": true
+    },
+    "latestStudies": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.latest-news",
+      "required": true
+    },
+    "eligibilitySection": {
+      "displayName": "eligibilitySection",
+      "type": "component",
+      "repeatable": false,
+      "component": "home.eligibility-section",
+      "required": true
+    },
+    "heroSection": {
+      "displayName": "heroSection",
+      "type": "component",
+      "repeatable": false,
+      "component": "home.hero-section",
+      "required": true
+    }
+  }
+}

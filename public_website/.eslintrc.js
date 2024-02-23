@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ['node_modules'],
+  ignorePatterns: ['node_modules', 'src/types/*.d.ts'],
   plugins: [
     'react',
     '@typescript-eslint',

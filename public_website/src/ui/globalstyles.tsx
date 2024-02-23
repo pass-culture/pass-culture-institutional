@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import { theme } from '@/theme/theme'
+
 const GlobalStyles = createGlobalStyle`
   /* ResetCSS from http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126
@@ -133,7 +135,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Custom */
   body {
-    line-height: 1.5rem;
+    line-height: 1.5;
   }
 
   a {
@@ -157,6 +159,16 @@ const GlobalStyles = createGlobalStyle`
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  /* Highlighted text inside sections title */
+  mark {
+    background: none;
+    background-image: linear-gradient(to right, ${theme.colors.flashGreen} 50%, ${theme.colors.flashGreen} 50%);
+    background-size: 200% 0.4em;
+    background-position: 100% 90%;
+    background-repeat: no-repeat;
+    color: inherit;
   }
 `
 

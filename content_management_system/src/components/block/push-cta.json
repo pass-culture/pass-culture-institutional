@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_block_push_ctas",
+  "info": {
+    "displayName": "pushCTA",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "ctaLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "qrCodeDescription": {
+      "type": "string",
+      "required": true
+    },
+    "qrCodeUrl": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

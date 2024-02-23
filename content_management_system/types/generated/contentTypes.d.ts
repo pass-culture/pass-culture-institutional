@@ -908,6 +908,66 @@ export interface ApiHeaderHeader extends Schema.SingleType {
   };
 }
 
+export interface ApiHomeHome extends Schema.SingleType {
+  collectionName: 'homes';
+  info: {
+    singularName: 'home';
+    pluralName: 'homes';
+    displayName: 'Home';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aboutSection: Attribute.Component<'block.centered-text'> &
+      Attribute.Required;
+    CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
+    socialMediaSection: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
+    latestStudies: Attribute.Component<'block.latest-news'> &
+      Attribute.Required;
+    eligibilitySection: Attribute.Component<'home.eligibility-section'> &
+      Attribute.Required;
+    heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::home.home', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNewsNews extends Schema.CollectionType {
+  collectionName: 'news_list';
+  info: {
+    singularName: 'news';
+    pluralName: 'news-list';
+    displayName: 'News';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    category: Attribute.Enumeration<['\u00C9tude', 'Article']> &
+      Attribute.Required;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -922,7 +982,13 @@ export interface ApiPagePage extends Schema.CollectionType {
   attributes: {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
-      ['block.centered-text', 'block.header', 'block.simple-text']
+      [
+        'block.centered-text',
+        'block.header',
+        'block.simple-text',
+        'block.push-cta',
+        'block.social-media'
+      ]
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -993,6 +1059,8 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
+      'api::home.home': ApiHomeHome;
+      'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
     }

@@ -1,93 +1,157 @@
 import React from 'react'
-import Head from 'next/head'
-import Image from 'next/image'
-import styled from 'styled-components'
+import type { GetStaticProps } from 'next'
+import { stringify } from 'qs'
+import styled, { css } from 'styled-components'
 
-import { playlistOffersFixtures } from '../../__tests__/fixtures'
-import { Offer, Tag } from '@/types/playlist'
-import { Main } from '@/ui/components/containers/Main'
-import { PageContainer } from '@/ui/components/containers/PageContainer'
-import { ExternalLink } from '@/ui/components/links/ExternalLink'
-import { InternalLink } from '@/ui/components/links/InternalLink'
-import { Spacer } from '@/ui/components/Spacer'
-import { CodeTag } from '@/ui/components/tags/CodeTag'
-import { Typo } from '@/ui/components/typographies'
-import { fetchBackend } from '@/utils/fetchBackend'
+import { CenteredText } from '@/lib/blocks/CenteredText'
+import { LatestNews } from '@/lib/blocks/LatestNews'
+import { PushCTA } from '@/lib/blocks/PushCTA'
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { APIResponseData } from '@/types/strapi'
+import { Eligibility } from '@/ui/components/home/Eligibility'
+import { Hero } from '@/ui/components/home/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
-type Props = {
-  playlistName?: string
-  playlist?: Offer[]
+interface HomeProps {
+  homeData: APIResponseData<'api::home.home'>
+  latestStudies: APIResponseData<'api::news.news'>[]
 }
 
-export default function Home({ playlistName, playlist }: Readonly<Props>) {
+export default function Home({ homeData, latestStudies }: HomeProps) {
   return (
-    <PageContainer>
-      <Head>
-        <title>pass Culture</title>
-        <meta
-          name="pass Culture"
-          content="Site institutionnel du pass Culture"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Main>
-        <Typo.Title1>
-          Welcome to{' '}
-          <ExternalLink href="https://nextjs.org">Next.js!</ExternalLink>
-        </Typo.Title1>
-        <Typo.Body>
-          Get started by editing
-          <CodeTag>pages/index.tsx</CodeTag>
-        </Typo.Body>
-        <Spacer.Vertical spaces={2} />
+    <React.Fragment>
+      <Hero
+        title={homeData.attributes.heroSection.title}
+        subTitle={homeData.attributes.heroSection.subTitle}
+        cta={homeData.attributes.heroSection.cta}
+        firstEmoji={homeData.attributes.heroSection.firstEmoji}
+        secondEmoji={homeData.attributes.heroSection.secondEmoji}
+        thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
+        fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+        images={
+          // There seem to be a bug with the `strapi.ts` helper file.
+          // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
+          homeData.attributes.heroSection.images
+            ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
+        }
+      />
 
-        <InternalLink href="/about" name="About &rarr;" />
-        <Spacer.Vertical spaces={2} />
+      <CenteredText
+        title={homeData.attributes.aboutSection.title}
+        description={homeData.attributes.aboutSection.description}
+      />
 
-        {!!playlistName && <Typo.Title1>{playlistName}</Typo.Title1>}
+      <Eligibility
+        title={homeData.attributes.eligibilitySection.title}
+        items={homeData.attributes.eligibilitySection.items}
+        cardTitle={homeData.attributes.eligibilitySection.cardTitle}
+        cardDescription={homeData.attributes.eligibilitySection.cardDescription}
+        cardCta={homeData.attributes.eligibilitySection.cardCta}
+        cardFirstEmoji={homeData.attributes.eligibilitySection.firstEmoji}
+        cardSecondEmoji={homeData.attributes.eligibilitySection.secondEmoji}
+      />
 
-        {playlist && playlist.length > 0 ? (
-          <ul>
-            {playlist.map((offer: Offer) => (
-              <Li key={offer.id}>
-                <Typo.Body>{offer.name}</Typo.Body>
-                <Typo.Body>{offer.stocks[0]?.price} €</Typo.Body>
-                {offer.image?.url ? (
-                  <Image
-                    src={offer.image?.url}
-                    alt=""
-                    width={300}
-                    height={400}
-                  />
-                ) : null}
-              </Li>
-            ))}
-          </ul>
-        ) : null}
-      </Main>
-    </PageContainer>
+      <StyledPushCTA
+        title={homeData.attributes.CTASection.title}
+        description={homeData.attributes.CTASection.description}
+        image={homeData.attributes.CTASection.image}
+        ctaLink={homeData.attributes.CTASection.ctaLink}
+        qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
+        qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
+      />
+
+      <StyledLatestNews
+        news={latestStudies}
+        title={homeData.attributes.latestStudies.title}
+        cta={homeData.attributes.latestStudies.cta}
+      />
+
+      <StyledSocialMedia
+        title={homeData.attributes.socialMediaSection.title}
+        links={homeData.attributes.socialMediaSection.socialMediaLink}
+      />
+    </React.Fragment>
   )
 }
 
-export async function getStaticProps() {
-  const tagsResponse = await fetchCMS<Tag[]>('/active-playlist-tags')
-  const tags = tagsResponse.data
-  const firstTag = tags[0]
-  const playlistResponse =
-    process.env['NODE_ENV'] === 'development'
-      ? playlistOffersFixtures
-      : await fetchBackend(`institutional/playlist/${firstTag?.attributes.tag}`)
+export const getStaticProps = (async () => {
+  // Fetch home data
+  const query = stringify({
+    populate: [
+      'heroSection',
+      'heroSection.cta',
+      'heroSection.images',
+      'aboutSection',
+      'eligibilitySection',
+      'eligibilitySection.items',
+      'eligibilitySection.cardCta',
+      'CTASection',
+      'CTASection.image',
+      'CTASection.ctaLink',
+      'latestStudies',
+      'latestStudies.cta',
+      'socialMediaSection',
+      'socialMediaSection.socialMediaLink',
+    ],
+  })
+  const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
+    `/home?${query}`
+  )
+
+  // Fetch 3 latest studies
+  const latestStudiesQuery = stringify({
+    sort: ['date:desc'],
+    populate: ['image'],
+    pagination: {
+      limit: 3,
+    },
+    filters: {
+      category: {
+        $eq: 'Étude',
+      },
+    },
+  })
+  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+    `/news-list?${latestStudiesQuery}`
+  )
 
   return {
     props: {
-      playlistName: firstTag?.attributes.displayName,
-      playlist: playlistResponse,
+      homeData: data,
+      latestStudies: latestStudies.data,
     },
   }
-}
+}) satisfies GetStaticProps<HomeProps>
 
-const Li = styled.li({
-  display: 'inline-block',
-  margin: '5px',
-})
+const StyledPushCTA = styled(PushCTA)`
+  ${({ theme }) => css`
+    margin-top: 12.5rem;
+    margin-bottom: 10rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 4.5rem 0;
+    }
+  `}
+`
+
+const StyledLatestNews = styled(LatestNews)`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 3.5rem 0 5rem;
+    }
+  `}
+`
+
+const StyledSocialMedia = styled(SocialMedia)`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 5rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 5rem 0 6.25rem;
+    }
+  `}
+`
