@@ -6,6 +6,7 @@ import {
   restaurantDataFixtures,
   testDataFixtures,
 } from './fixtures'
+import { homePageFixtures } from './fixtures/home'
 
 const CMS_BASE_URL = 'http://localhost:1337'
 const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
@@ -20,6 +21,12 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/active-playlist-tags`, () => {
     return jsonResponseOf(activePlaylistTagsFixtures)
+  }),
+  http.get(`${CMS_BASE_URL}/api/home`, () => {
+    return jsonResponseOf(homePageFixtures.homePageData)
+  }),
+  http.get(`${CMS_BASE_URL}/api/news-list`, () => {
+    return jsonResponseOf(homePageFixtures.latestStudies)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,

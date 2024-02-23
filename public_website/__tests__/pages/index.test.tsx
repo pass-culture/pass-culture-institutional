@@ -16,9 +16,7 @@ describe('Home page', () => {
 
   it('should pass accessibility tests', async () => {
     const { props } = await getStaticProps()
-    const { container } = render(
-      <Home homeData={props.homeData} latestStudies={props.latestStudies} />
-    )
+    const { container } = render(<Home {...props} />)
 
     let a11yResult
     await act(async () => {
