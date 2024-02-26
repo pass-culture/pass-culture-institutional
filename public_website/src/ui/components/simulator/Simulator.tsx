@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import type { SimulatorQuestion } from './data'
 import { Question } from './Question'
 import { Step } from './Step'
 
@@ -9,6 +10,28 @@ interface SimulatorProps {
 }
 
 export function Simulator(props: SimulatorProps) {
+  const question: SimulatorQuestion = {
+    title: 'Depuis combien de temps résides-tu en France ?',
+    type: 'radio',
+    answers: [
+      {
+        title: 'Depuis plus d’une année',
+        next: {
+          title: 'C’est noté ! Voici maintenant les étapes à suivre',
+          next: null,
+        },
+      },
+      {
+        title: 'Depuis moins d’une année',
+        next: {
+          title:
+            'Malheureusement, tu n’es pour le momentpas éligible au pass...',
+          next: null,
+        },
+      },
+    ],
+  }
+
   return (
     <Root className={props.className}>
       <Inner>
@@ -22,7 +45,7 @@ export function Simulator(props: SimulatorProps) {
             isActive
           />
         </Steps>
-        <Question onSubmit={(r) => console.log(r)} />
+        <Question question={question} onSubmit={(r) => console.log(r)} />
       </Inner>
     </Root>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ButtonHTMLAttributes } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
@@ -12,18 +12,18 @@ type ButtonProps = {
   href: string
   target?: '_blank'
   className?: string
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 export function Button({
   children,
   variant = 'primary',
   href,
   target,
-  className,
+  ...other
 }: ButtonProps) {
   return (
     <StyledButton
-      className={className}
+      {...other}
       as={href ? Link : 'button'}
       variant={variant}
       href={href}

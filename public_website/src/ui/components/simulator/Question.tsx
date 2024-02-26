@@ -2,38 +2,54 @@ import React, { FormEvent, useState } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../button/Button'
+import { SimulatorQuestion } from './data'
+import { Label } from './Label'
+import { RadioField } from './RadioField'
 
 interface QuestionProps {
+  question: SimulatorQuestion
   onSubmit: (response: number) => void
 }
 
 export function Question(props: QuestionProps) {
-  const [response, setResponse] = useState(0)
+  const [answer, setAnswer] = useState<number>()
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    props.onSubmit(response)
+
+    if (answer) {
+      props.onSubmit(answer)
+    }
   }
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field>
-        <Label htmlFor="age-field">Quel âge as-tu ?</Label>
-        {/* TODO: slider https://slider-react-component.vercel.app/demo/marks */}
-        <select
-          id="age-field"
-          value={response}
-          onChange={(e) => setResponse(Number(e.target.value))}>
-          <option value={0}>- de 15 ans</option>
-          <option value={1}>15 ans</option>
-          <option value={2}>16 ans</option>
-          <option value={3}>17 ans</option>
-          <option value={4}>18 ans</option>
-          <option value={5}>+ de 18 ans</option>
-        </select>
-      </Field>
+      {props.question.type === 'slider' ? (
+        <Field>
+          <Label htmlFor="question-field">{props.question.title}</Label>
+          {/* TODO: slider https://slider-react-component.vercel.app/demo/marks */}
+          <select
+            id="question-field"
+            value={answer}
+            onChange={(e) => setAnswer(Number(e.target.value))}>
+            {props.question.answers.map((a, i) => (
+              <option value={i} key={a.title}>
+                {a.title}
+              </option>
+            ))}
+          </select>
+        </Field>
+      ) : (
+        <RadioField
+          question={props.question}
+          answer={answer}
+          onChange={setAnswer}
+        />
+      )}
       <SubmitContainer>
-        <Button>Suivant</Button>
+        <Button type="submit" disabled={!answer}>
+          Suivant
+        </Button>
       </SubmitContainer>
     </Form>
   )
@@ -60,19 +76,6 @@ const Field = styled.div`
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     gap: 1.5rem;
-  }
-`
-
-const Label = styled.label`
-  display: block;
-  font-size: 26px;
-  font-weight: 700;
-
-  border-bottom: 1px solid #94008c33;
-  padding-bottom: 2.5rem;
-
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    padding-bottom: 1.5rem;
   }
 `
 
