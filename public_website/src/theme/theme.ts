@@ -64,6 +64,17 @@ export const theme = {
         fontSize: FontSizes['3XL'],
       },
     },
+    heading3: {
+      desktop: {
+        lineHeight: '1.4',
+        fontSize: FontSizes['4XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.BLACK,
+      },
+      mobile: {
+        fontSize: FontSizes['2XL'],
+      },
+    },
     borderedText: {
       desktop: {
         lineHeight: '1',
