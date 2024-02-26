@@ -88,19 +88,7 @@ export function Hero({
 }
 
 const Root = styled.div`
-  ${({ theme }) => css`
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.lightBlue} 0%,
-      ${theme.colors.white} 100%
-    );
-    transform: translateY(-8rem);
-    overflow: hidden;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      transform: translateY(-7rem);
-    }
-  `}
+  overflow: hidden;
 `
 
 const StyledContentWrapper = styled.div`
@@ -112,7 +100,7 @@ const StyledContentWrapper = styled.div`
     padding: calc(8rem + 10rem) 1.5rem 12.5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding: calc(7rem + 10rem) 1.5rem 7rem;
+      padding: calc(7rem + 10rem) 1.5rem 5rem;
     }
   `}
 `

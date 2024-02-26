@@ -59,7 +59,7 @@ export function Eligibility({
 const Root = styled.div`
   ${({ theme }) => css`
     max-width: 80rem;
-    margin: 18rem auto 12.5rem;
+    margin: 0 auto 12.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     gap: 1.5rem;
