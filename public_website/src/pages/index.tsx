@@ -107,7 +107,7 @@ export const getStaticProps = (async () => {
     },
     filters: {
       category: {
-        $eq: 'Étude',
+        $eqi: 'Étude',
       },
     },
   })
