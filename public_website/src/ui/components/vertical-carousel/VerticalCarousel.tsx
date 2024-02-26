@@ -49,7 +49,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
       : 4
 
   return (
-    <Root
+    <CarouselProvider
       naturalSlideWidth={60}
       naturalSlideHeight={75}
       totalSlides={items.length}
@@ -98,21 +98,9 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
           )
         })}
       </StyledDots>
-    </Root>
+    </CarouselProvider>
   )
 }
-
-const Root = styled(CarouselProvider)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
-    padding: 7rem 0 5rem 7rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      background-color: transparent;
-      padding: 4rem 1.5rem;
-    }
-  `}
-`
 
 const StyledHeading = styled.div`
   ${({ theme }) => css`

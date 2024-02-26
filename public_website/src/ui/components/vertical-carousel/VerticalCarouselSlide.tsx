@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Slide } from 'pure-react-carousel'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Typo } from '../typographies'
+import { APIResponse } from '@/types/strapi'
+import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type VerticalCarouselSlideProps = {
   slideIndex: number
-  imageUrl: string
+  image: APIResponse<'plugin::upload.file'> | null
   title: string
   description: string
   url: string
@@ -16,32 +18,29 @@ export type VerticalCarouselSlideProps = {
 
 export function VerticalCarouselSlide({
   slideIndex,
-  imageUrl,
+  image,
   title,
   description,
   url,
 }: VerticalCarouselSlideProps) {
-  const [a11yProps, setA11yProps] = useState({})
-
-  useEffect(() => {
-    setA11yProps({
-      role: undefined,
-      ariaSelected: undefined,
-    })
-  }, [])
-
   return (
     <Root
       index={slideIndex}
       key={title}
       aria-label={`${title} ${description}`}
-      innerClassName="inner"
-      aria-selected={undefined}
-      role={undefined}
-      data-pouet={'pouet'}
-      {...a11yProps}>
+      innerClassName="inner">
       <StyledLink href={url}>
-        <StyledImage src={imageUrl} alt="" width={300} height={400} />
+        {image && (
+          <StyledImage
+            src={
+              image.data.attributes.url &&
+              getStrapiURL(image.data.attributes.url)
+            }
+            alt=""
+            width={300}
+            height={400}
+          />
+        )}
         <StyledTitle>{title}</StyledTitle>
         <Typo.Body>{description}</Typo.Body>
       </StyledLink>
@@ -50,9 +49,15 @@ export function VerticalCarouselSlide({
 }
 
 const Root = styled(Slide)`
-  .inner {
-    margin-right: 1rem;
-  }
+  ${({ theme }) => css`
+    .inner {
+      margin-right: 1rem;
+
+      @media (width < ${theme.mediaQueries.mobile}) {
+        margin-right: 0;
+      }
+    }
+  `}
 `
 
 const StyledImage = styled(Image)`

@@ -10,70 +10,13 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
-import { VerticalCarousel } from '@/ui/components/vertical-carousel/VerticalCarousel'
+import { Recommendations } from '@/ui/components/home/Recommendations'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
   latestStudies: APIResponseData<'api::news.news'>[]
 }
-
-const carouselItems = [
-  // {
-  //   title: 'Madonna',
-  //   description: 'Accor Arena Réduction 50%',
-  //   imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-  //   url: '#',
-  // },
-  {
-    title: 'Lumières',
-    description: 'Bassins des Lumières, Bordeaux Entrée gratuite grâce au pass',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Dali',
-    description: 'Accor Arena Réduction 50%',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Madonna2',
-    description: 'Accor Arena Réduction 50%',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Lumières2',
-    description: 'Bassins des Lumières, Bordeaux Entrée gratuite grâce au pass',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Dali2',
-    description: 'Accor Arena Réduction 50%',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Madonna3',
-    description: 'Accor Arena Réduction 50%',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Lumières3',
-    description: 'Bassins des Lumières, Bordeaux Entrée gratuite grâce au pass',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-  {
-    title: 'Dali3',
-    description: 'Accor Arena Réduction 50%',
-    imageUrl: 'https://picsum.photos/seed/picsum/300/400',
-    url: '#',
-  },
-]
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
   return (
@@ -118,9 +61,12 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
       />
 
-      <VerticalCarousel
-        title={'Les bons plans<br/> du moment'}
-        items={carouselItems}
+      <Recommendations
+        title={homeData.attributes.recommendationsSection.recommendations.title}
+        recommendations={
+          homeData.attributes.recommendationsSection.recommendations.items
+        }
+        cta={homeData.attributes.recommendationsSection.cta}
       />
 
       <StyledLatestNews
@@ -151,6 +97,9 @@ export const getStaticProps = (async () => {
       'CTASection',
       'CTASection.image',
       'CTASection.ctaLink',
+      'recommendationsSection.cta',
+      'recommendationsSection.recommendations.items',
+      'recommendationsSection.recommendations.items.image',
       'latestStudies',
       'latestStudies.cta',
       'socialMediaSection',

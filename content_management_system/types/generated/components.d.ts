@@ -101,6 +101,19 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
+export interface BlockVerticalCarousel extends Schema.Component {
+  collectionName: 'components_block_vertical_carousels';
+  info: {
+    displayName: 'VerticalCarousel';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.Text & Attribute.Required;
+    items: Attribute.Component<'common.vertical-carousel-item', true> &
+      Attribute.Required;
+  };
+}
+
 export interface CommonLink extends Schema.Component {
   collectionName: 'components_common_links';
   info: {
@@ -110,6 +123,20 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonVerticalCarouselItem extends Schema.Component {
+  collectionName: 'components_common_vertical_carousel_items';
+  info: {
+    displayName: 'verticalCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
   };
 }
 
@@ -249,6 +276,18 @@ export interface HomeHeroSection extends Schema.Component {
   };
 }
 
+export interface HomeRecommendationsSection extends Schema.Component {
+  collectionName: 'components_home_recommendations_sections';
+  info: {
+    displayName: 'recommendationsSection';
+  };
+  attributes: {
+    recommendations: Attribute.Component<'block.vertical-carousel'> &
+      Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -259,7 +298,9 @@ declare module '@strapi/types' {
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+      'block.vertical-carousel': BlockVerticalCarousel;
       'common.link': CommonLink;
+      'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
       'header.header': HeaderHeader;
@@ -270,6 +311,7 @@ declare module '@strapi/types' {
       'home.eligibility-items': HomeEligibilityItems;
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
+      'home.recommendations-section': HomeRecommendationsSection;
     }
   }
 }
