@@ -1,0 +1,60 @@
+{
+  "kind": "singleType",
+  "collectionName": "simulators",
+  "info": {
+    "singularName": "simulator",
+    "pluralName": "simulators",
+    "displayName": "Simulator",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "ageQuestion": {
+      "displayName": "AgeQuestion",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.age-question",
+      "required": true
+    },
+    "nationnalityQuestion": {
+      "displayName": "RadioQuestion",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.radio-question",
+      "required": true
+    },
+    "residencyQuestion": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.radio-question",
+      "required": true
+    },
+    "steps": {
+      "displayName": "Step",
+      "type": "component",
+      "repeatable": true,
+      "component": "simulator.step",
+      "required": true,
+      "max": 3,
+      "min": 3
+    },
+    "successScreen": {
+      "displayName": "Success Screen",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.success-screen",
+      "required": true
+    }
+  }
+}

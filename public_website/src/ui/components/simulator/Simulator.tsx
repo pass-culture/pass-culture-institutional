@@ -1,40 +1,49 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import type { SimulatorQuestion } from './data'
 import { Question } from './Question'
+import { ResultScreen } from './ResultScreen'
 import { Step } from './Step'
+import { APIResponseData } from '@/types/strapi'
 
 interface SimulatorProps {
   className?: string
+
+  ageQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['ageQuestion']
+  nationnalityQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['nationnalityQuestion']
+  residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
 }
 
 export function Simulator(props: SimulatorProps) {
-  const question: SimulatorQuestion = {
-    title: 'Depuis combien de temps résides-tu en France ?',
-    type: 'radio',
-    answers: [
-      {
-        title: 'Depuis plus d’une année',
-        next: {
-          title: 'C’est noté ! Voici maintenant les étapes à suivre',
-          next: null,
-        },
-      },
-      {
-        title: 'Depuis moins d’une année',
-        next: {
-          title:
-            'Malheureusement, tu n’es pour le momentpas éligible au pass...',
-          next: null,
-        },
-      },
-    ],
-  }
+  // const question: SimulatorQuestion = {
+  //   title: 'Depuis combien de temps résides-tu en France ?',
+  //   type: 'radio',
+  //   answers: [
+  //     {
+  //       title: 'Depuis plus d’une année',
+  //       next: {
+  //         title: 'C’est noté ! Voici maintenant les étapes à suivre',
+  //         next: null,
+  //       },
+  //     },
+  //     {
+  //       title: 'Depuis moins d’une année',
+  //       next: {
+  //         title:
+  //           'Malheureusement, tu n’es pour le momentpas éligible au pass...',
+  //         next: null,
+  //       },
+  //     },
+  //   ],
+  // }
+
+  const question = props.ageQuestion
+
+  const isShowingResult = true
 
   return (
     <Root className={props.className}>
-      <Inner>
+      <Inner $showingResult={isShowingResult}>
         <Steps>
           <Step circleText="01" surtitle="ÉTAPE 1" title="Ton âge" />
           <StepSeparator aria-hidden="true" />
@@ -45,7 +54,21 @@ export function Simulator(props: SimulatorProps) {
             isActive
           />
         </Steps>
-        <Question question={question} onSubmit={(r) => console.log(r)} />
+
+        <BackContainer>
+          <button>Retour</button>
+        </BackContainer>
+
+        {!isShowingResult && (
+          <Question
+            onSubmit={(r) => console.log(r)}
+            title={question.title}
+            answers={question.answers.map((a) => a.answer)}
+            type="slider"
+          />
+        )}
+
+        {isShowingResult && <ResultScreen />}
       </Inner>
     </Root>
   )
@@ -64,9 +87,10 @@ const Root = styled.div`
   }
 `
 
-const Inner = styled.div`
+const Inner = styled.div<{ $showingResult: boolean }>`
   box-shadow: -4px 8px 24px 0px #7d7d7d40;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme, $showingResult }) =>
+    $showingResult ? '#F7F5FB' : theme.colors.white};
   position: relative;
   z-index: 1;
   border-radius: 1.875rem;
@@ -74,6 +98,7 @@ const Inner = styled.div`
 
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: block;
@@ -81,6 +106,8 @@ const Inner = styled.div`
 `
 
 const Steps = styled.ol`
+  grid-row: 1 / -1;
+
   padding: 6.25rem 4rem;
   border-right: 1px solid #dedede99;
 
@@ -119,4 +146,9 @@ const StepSeparator = styled.li`
       width: unset;
     }
   }
+`
+
+const BackContainer = styled.div`
+  margin-top: 4rem;
+  padding: 0 4rem;
 `

@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { SimulatorQuestion } from './data'
 import { Label } from './Label'
 
 interface RadioFieldProps {
-  question: SimulatorQuestion
+  title: string
+  answers: string[]
+
   answer?: number
   onChange: (answer: number) => void
 }
@@ -13,11 +14,11 @@ interface RadioFieldProps {
 export function RadioField(props: RadioFieldProps) {
   return (
     <Fieldset>
-      <Label as="legend">{props.question.title}</Label>
+      <Label as="legend">{props.title}</Label>
 
       <Choices>
-        {props.question.answers.map((a, i) => (
-          <Choice key={a.title}>
+        {props.answers.map((answer, i) => (
+          <Choice key={answer}>
             <input
               className="visually-hidden"
               type="radio"
@@ -30,7 +31,7 @@ export function RadioField(props: RadioFieldProps) {
             <RadioLabel htmlFor={'answer-' + i}>
               {/* TODO: add outline */}
               <EmojiContainer>🇫🇷</EmojiContainer>
-              {a.title}
+              {answer}
             </RadioLabel>
           </Choice>
         ))}

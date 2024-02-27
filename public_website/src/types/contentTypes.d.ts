@@ -1039,6 +1039,44 @@ export interface ApiRestaurantRestaurant extends Schema.CollectionType {
   };
 }
 
+export interface ApiSimulatorSimulator extends Schema.SingleType {
+  collectionName: 'simulators';
+  info: {
+    singularName: 'simulator';
+    pluralName: 'simulators';
+    displayName: 'Simulator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    ageQuestion: Attribute.Component<'simulator.age-question'> &
+      Attribute.Required;
+    nationnalityQuestion: Attribute.Component<'simulator.radio-question'> &
+      Attribute.Required;
+    residencyQuestion: Attribute.Component<'simulator.radio-question'> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::simulator.simulator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::simulator.simulator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1065,6 +1103,7 @@ declare module '@strapi/types' {
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::simulator.simulator': ApiSimulatorSimulator;
     }
   }
 }

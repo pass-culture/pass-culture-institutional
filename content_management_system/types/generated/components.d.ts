@@ -293,6 +293,74 @@ export interface HomeRecommendationsSection extends Schema.Component {
   };
 }
 
+export interface SimulatorAgeQuestion extends Schema.Component {
+  collectionName: 'components_simulator_age_questions';
+  info: {
+    displayName: 'AgeQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 6;
+        max: 6;
+      }>;
+  };
+}
+
+export interface SimulatorAnswer extends Schema.Component {
+  collectionName: 'components_simulator_answers';
+  info: {
+    displayName: 'Answer';
+  };
+  attributes: {
+    answer: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SimulatorRadioQuestion extends Schema.Component {
+  collectionName: 'components_simulator_radio_questions';
+  info: {
+    displayName: 'RadioQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+        max: 2;
+      }>;
+  };
+}
+
+export interface SimulatorStep extends Schema.Component {
+  collectionName: 'components_simulator_steps';
+  info: {
+    displayName: 'Step';
+  };
+  attributes: {
+    step: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SimulatorSuccessScreen extends Schema.Component {
+  collectionName: 'components_simulator_success_screens';
+  info: {
+    displayName: 'Success Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    needSupport: Attribute.String & Attribute.Required;
+    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -317,6 +385,11 @@ declare module '@strapi/types' {
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
       'home.recommendations-section': HomeRecommendationsSection;
+      'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.answer': SimulatorAnswer;
+      'simulator.radio-question': SimulatorRadioQuestion;
+      'simulator.step': SimulatorStep;
+      'simulator.success-screen': SimulatorSuccessScreen;
     }
   }
 }

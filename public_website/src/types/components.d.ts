@@ -231,6 +231,7 @@ export interface HeaderNavigationItems extends Schema.Component {
   };
 }
 
+<<<<<<< HEAD
 export interface HomeEligibilityItems extends Schema.Component {
   collectionName: 'components_home_eligibility_items';
   info: {
@@ -247,10 +248,17 @@ export interface HomeEligibilitySection extends Schema.Component {
   collectionName: 'components_home_eligibility_sections';
   info: {
     displayName: 'eligibilitySection';
+=======
+export interface SimulatorAgeQuestion extends Schema.Component {
+  collectionName: 'components_simulator_age_questions';
+  info: {
+    displayName: 'AgeQuestion';
+>>>>>>> ca5251b (add some data to strapi, add result screen)
     description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
+<<<<<<< HEAD
     items: Attribute.Component<'home.eligibility-items', true> &
       Attribute.Required;
     cardTitle: Attribute.Text & Attribute.Required;
@@ -290,6 +298,41 @@ export interface HomeRecommendationsSection extends Schema.Component {
     recommendations: Attribute.Component<'block.vertical-carousel'> &
       Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
+=======
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 6;
+        max: 6;
+      }>;
+  };
+}
+
+export interface SimulatorAnswer extends Schema.Component {
+  collectionName: 'components_simulator_answers';
+  info: {
+    displayName: 'Answer';
+  };
+  attributes: {
+    answer: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SimulatorRadioQuestion extends Schema.Component {
+  collectionName: 'components_simulator_radio_questions';
+  info: {
+    displayName: 'RadioQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+        max: 2;
+      }>;
+>>>>>>> ca5251b (add some data to strapi, add result screen)
   };
 }
 
@@ -313,10 +356,16 @@ declare module '@strapi/types' {
       'header.login': HeaderLogin;
       'header.mega-menu': HeaderMegaMenu;
       'header.navigation-items': HeaderNavigationItems;
+<<<<<<< HEAD
       'home.eligibility-items': HomeEligibilityItems;
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
       'home.recommendations-section': HomeRecommendationsSection;
+=======
+      'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.answer': SimulatorAnswer;
+      'simulator.radio-question': SimulatorRadioQuestion;
+>>>>>>> ca5251b (add some data to strapi, add result screen)
     }
   }
 }

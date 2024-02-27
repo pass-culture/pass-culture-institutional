@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_simulator_age_questions",
+  "info": {
+    "displayName": "AgeQuestion",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "answers": {
+      "displayName": "Answer",
+      "type": "component",
+      "repeatable": true,
+      "component": "simulator.answer",
+      "min": 6,
+      "max": 6,
+      "required": true
+    }
+  }
+}
