@@ -73,7 +73,7 @@ export function MegaMenu({
     <StyledMegaMenuWrapper>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <Typo.Heading1 as={'p'}>{data.title}</Typo.Heading1>
+          <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
           <Button href={data.cta.URL}>{data.cta.Label}</Button>
           {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
         </StyledMegaMenuHeading>

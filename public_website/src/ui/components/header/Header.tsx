@@ -187,7 +187,7 @@ export function Header({
                 </Button>
               </li>
 
-              <li>
+              <StyledMobileMenuListItem>
                 <StyledMobileMenuButton
                   ref={mobileMenuButtonRef}
                   onClick={toggleMobileMenu}
@@ -196,7 +196,7 @@ export function Header({
                   aria-controls="mobile-menu-main-navigation">
                   {showMobileMenu ? <Close /> : <Burger />}
                 </StyledMobileMenuButton>
-              </li>
+              </StyledMobileMenuListItem>
             </ul>
             {showMobileMenu && (
               <MobileMenu
@@ -279,6 +279,7 @@ const StyledNavigationItem = styled.li`
 
     .mega-menu-active {
       color: ${theme.colors.primary};
+      font-weight: ${theme.fonts.weights.bold};
       position: relative;
 
       &::after {
@@ -312,16 +313,20 @@ const StyledLoginItem = styled.li`
     }
   `}
 `
-const StyledMobileMenuButton = styled.button`
+const StyledMobileMenuListItem = styled.li`
   ${({ theme }) => css`
     display: none;
-    height: 1.5rem;
-    width: 1.75rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
     }
   `}
+`
+
+const StyledMobileMenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.75rem;
 `
