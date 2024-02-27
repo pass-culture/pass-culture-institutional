@@ -27,7 +27,6 @@ export function VerticalCarouselSlide({
     <Root
       index={slideIndex}
       key={title}
-      aria-label={`${title} ${description}`}
       innerClassName="inner"
       role="group"
       aria-roledescription="diapositive">

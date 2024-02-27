@@ -7,19 +7,31 @@ import { Button } from '../button/Button'
 
 type RecommendationsProps = {
   title: string
+  controlsLabel: string
+  nextButtonLabel: string
+  previousButtonLabel: string
   recommendations: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
   cta: { Label: string; URL: string }
 }
 
 export function Recommendations({
   title,
+  controlsLabel,
+  nextButtonLabel,
+  previousButtonLabel,
   recommendations,
   cta,
 }: RecommendationsProps) {
   return (
     <Root>
       <StyledCarouselWrapper>
-        <VerticalCarousel title={title} items={recommendations} />
+        <VerticalCarousel
+          title={title}
+          controlsLabel={controlsLabel}
+          nextButtonLabel={nextButtonLabel}
+          previousButtonLabel={previousButtonLabel}
+          items={recommendations}
+        />
       </StyledCarouselWrapper>
       <StyledCtaWrapper>
         <Button href={cta.URL}>{cta.Label}</Button>

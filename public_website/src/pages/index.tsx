@@ -63,6 +63,18 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
 
       <Recommendations
         title={homeData.attributes.recommendationsSection.recommendations.title}
+        controlsLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .controlsLabel
+        }
+        previousButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .previousButtonLabel
+        }
+        nextButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .nextButtonLabel
+        }
         recommendations={
           homeData.attributes.recommendationsSection.recommendations.items
         }

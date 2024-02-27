@@ -111,6 +111,9 @@ export interface BlockVerticalCarousel extends Schema.Component {
     title: Attribute.Text & Attribute.Required;
     items: Attribute.Component<'common.vertical-carousel-item', true> &
       Attribute.Required;
+    previousButtonLabel: Attribute.String & Attribute.Required;
+    nextButtonLabel: Attribute.String & Attribute.Required;
+    controlsLabel: Attribute.String & Attribute.Required;
   };
 }
 

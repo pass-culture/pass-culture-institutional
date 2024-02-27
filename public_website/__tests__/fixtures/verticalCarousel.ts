@@ -2,6 +2,8 @@ import { VerticalCarouselProps } from '@/lib/blocks/verticalCarousel/VerticalCar
 
 export const verticalCarouselFixtures: VerticalCarouselProps = {
   title: 'Les bons plans du moment',
+  previousButtonLabel: 'Offre précédente',
+  nextButtonLabel: 'Offre suivante',
   items: [
     {
       title: 'Slide 1',
