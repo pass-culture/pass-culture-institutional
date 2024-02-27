@@ -1,4 +1,4 @@
-import { verticalCarouselFixtures } from './vertical-carousel'
+import { verticalCarouselFixtures } from './verticalCarousel'
 
 export const homePageFixtures = {
   homeData: {

@@ -1,9 +1,9 @@
 import React from 'react'
 import { describe, expect, it } from 'vitest'
 
-import { verticalCarouselFixtures } from '../fixtures/vertical-carousel'
+import { verticalCarouselFixtures } from '../fixtures/verticalCarousel'
 import { render, screen } from '../index'
-import { VerticalCarousel } from '@/ui/components/vertical-carousel/VerticalCarousel'
+import { VerticalCarousel } from '@/ui/components/verticalCarousel/VerticalCarousel'
 
 describe('header', () => {
   it('should display carousel title', async () => {

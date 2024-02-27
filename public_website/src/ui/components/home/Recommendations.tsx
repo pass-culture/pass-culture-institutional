@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
-import { VerticalCarousel } from '../vertical-carousel/VerticalCarousel'
-import { VerticalCarouselSlideProps } from '../vertical-carousel/VerticalCarouselSlide'
+import { VerticalCarousel } from '../verticalCarousel/VerticalCarousel'
+import { VerticalCarouselSlideProps } from '../verticalCarousel/VerticalCarouselSlide'
 
 type RecommendationsProps = {
   title: string

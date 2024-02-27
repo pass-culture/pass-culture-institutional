@@ -27,7 +27,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
-  const SLIDES_SELECTOR = '[aria-roledescription="slide"]'
+  const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
 
   // Computed the number of visible slides depending on screen width
   const [screenWidth, setScreenWidth] = useState<number>()
@@ -101,14 +101,16 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons role="group" aria-label="Contrôles du slider">
+        <StyledNavigationButtons
+          role="group"
+          aria-label="Contrôles du carrousel">
           <ButtonBack
-            aria-label="Slide précédente"
+            aria-label="Disapositive précédente"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label="Slide suivante"
+            aria-label="Disapositive suivante"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
@@ -130,14 +132,14 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label="Contrôles du slider">
+      <StyledDots role="group" aria-label="Contrôles du carrousel">
         {items.map((item, index) => {
           return (
             <StyledDot
               onClick={handleNavigationButtonClick}
               key={item.title}
               slide={index}
-              aria-label={`Afficher la slide ${index + 1} sur ${
+              aria-label={`Afficher la diapositive ${index + 1} sur ${
                 items.length
               } : ${item.title}`}
             />

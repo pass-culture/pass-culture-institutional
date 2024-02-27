@@ -30,7 +30,7 @@ export function VerticalCarouselSlide({
       aria-label={`${title} ${description}`}
       innerClassName="inner"
       role="group"
-      aria-roledescription="slide">
+      aria-roledescription="diapositive">
       <StyledLink href={url}>
         {image && (
           <StyledImage
