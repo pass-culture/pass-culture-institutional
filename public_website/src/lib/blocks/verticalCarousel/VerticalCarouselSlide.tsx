@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../typographies'
+import { Typo } from '../../../ui/components/typographies'
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 

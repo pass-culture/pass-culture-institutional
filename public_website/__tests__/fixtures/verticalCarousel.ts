@@ -1,4 +1,4 @@
-import { VerticalCarouselProps } from '@/ui/components/verticalCarousel/VerticalCarousel'
+import { VerticalCarouselProps } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
 
 export const verticalCarouselFixtures: VerticalCarouselProps = {
   title: 'Les bons plans du moment',

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 
 import { verticalCarouselFixtures } from '../fixtures/verticalCarousel'
 import { render, screen } from '../index'
-import { VerticalCarousel } from '@/ui/components/verticalCarousel/VerticalCarousel'
+import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
 
 describe('header', () => {
   it('should display carousel title', async () => {

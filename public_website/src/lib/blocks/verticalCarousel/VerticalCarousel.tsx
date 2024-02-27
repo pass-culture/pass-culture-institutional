@@ -8,8 +8,8 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../icons/ArrowRight'
-import { Typo } from '../typographies'
+import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
+import { Typo } from '../../../ui/components/typographies'
 import {
   VerticalCarouselSlide,
   VerticalCarouselSlideProps,
