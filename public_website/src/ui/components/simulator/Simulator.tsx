@@ -12,6 +12,8 @@ interface SimulatorProps {
   ageQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['ageQuestion']
   nationnalityQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['nationnalityQuestion']
   residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
+
+  successScreen: APIResponseData<'api::simulator.simulator'>['attributes']['successScreen']
 }
 
 export function Simulator(props: SimulatorProps) {
@@ -56,7 +58,22 @@ export function Simulator(props: SimulatorProps) {
         </Steps>
 
         <BackContainer>
-          <button>Retour</button>
+          <button>
+            <svg
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7 1L2 6L6.5 10.5"
+                stroke="black"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+            Retour
+          </button>
         </BackContainer>
 
         {!isShowingResult && (
@@ -68,7 +85,15 @@ export function Simulator(props: SimulatorProps) {
           />
         )}
 
-        {isShowingResult && <ResultScreen />}
+        {isShowingResult && (
+          <ResultScreen
+            title={props.successScreen.title}
+            steps={props.successScreen.steps.map((s) => s.step)}
+            ctaLink={props.successScreen.cta}
+            helpText={props.successScreen.needSupport}
+            supportLink={props.successScreen.supportLink}
+          />
+        )}
       </Inner>
     </Root>
   )
@@ -151,4 +176,8 @@ const StepSeparator = styled.li`
 const BackContainer = styled.div`
   margin-top: 4rem;
   padding: 0 4rem;
+
+  button > svg {
+    margin-right: 0.625rem;
+  }
 `

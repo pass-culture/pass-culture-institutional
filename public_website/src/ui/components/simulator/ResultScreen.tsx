@@ -3,24 +3,21 @@ import styled from 'styled-components'
 
 import { Button } from '../button/Button'
 
-interface ResultScreenProps {}
+interface ResultScreenProps {
+  title: string
+  steps: string[]
+  ctaLink: { Label: string; URL: string }
+  helpText: string
+  supportLink: { Label: string; URL: string }
+}
 
 export function ResultScreen(props: ResultScreenProps) {
-  const steps = [
-    'Crée ton profil',
-    'Valide ton identité via tes codes Educonnect ou ta carte nationale d’identité valide',
-    'Confirme ton e-mail et ton profil.',
-  ]
   return (
     <Root>
-      <Title>
-        C’est noté !<br />
-        Voici maintenant les étapes à suivre
-      </Title>
+      <Title dangerouslySetInnerHTML={{ __html: props.title }} />
 
       <Steps>
-        <li></li>
-        {steps.map((step, i) => (
+        {props.steps.map((step, i) => (
           <li key={step}>
             <Circle>{(i + 1).toString().padStart(2, '0')}</Circle>
             {step}
@@ -28,11 +25,11 @@ export function ResultScreen(props: ResultScreenProps) {
         ))}
       </Steps>
 
-      <Button href="https://example.com">Explore le catalogue</Button>
+      <Button href={props.ctaLink.URL}>{props.ctaLink.Label}</Button>
 
       <HelpText>
-        BESOIN D&apos;AIDE ?{' '}
-        <a href="https://example.com">Contacte le support</a>
+        {props.helpText}
+        <a href={props.ctaLink.URL}>{props.supportLink.Label}</a>
       </HelpText>
     </Root>
   )

@@ -26,6 +26,7 @@ export default function SimulatorPage(props: SimulatorProps) {
         ageQuestion={props.data.attributes.ageQuestion}
         nationnalityQuestion={props.data.attributes.nationnalityQuestion}
         residencyQuestion={props.data.attributes.residencyQuestion}
+        successScreen={props.data.attributes.successScreen}
       />
     </Root>
   )
@@ -48,6 +49,9 @@ export const getStaticProps = (async () => {
         'ageQuestion.answers',
         'nationnalityQuestion.answers',
         'residencyQuestion.answers',
+        'successScreen.steps',
+        'successScreen.cta',
+        'successScreen.supportLink',
       ],
     },
     { encodeValuesOnly: true }

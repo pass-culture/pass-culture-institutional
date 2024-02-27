@@ -1059,6 +1059,14 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     residencyQuestion: Attribute.Component<'simulator.radio-question'> &
       Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 3;
+        max: 3;
+      }>;
+    successScreen: Attribute.Component<'simulator.success-screen'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
