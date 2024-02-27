@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import slugify from '@sindresorhus/slugify'
 import {
   ButtonBack,
   ButtonNext,
@@ -17,14 +16,12 @@ import {
 } from './VerticalCarouselSlide'
 import { theme } from '@/theme/theme'
 
-type VerticalCarouselProps = {
+export type VerticalCarouselProps = {
   title: string
   items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
 }
 
 export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
-  const accessibleId = slugify(`${title} carousel`)
-
   const [screenWidth, setScreenWidth] = useState<number>()
 
   // Computed the number of visible slides depending on screen width
@@ -59,10 +56,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
       dragEnabled={false}
       step={1}>
       <StyledHeading>
-        <Typo.Heading2
-          id={accessibleId}
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
+        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons role="group" aria-label="Contrôles du slider">
           <ButtonBack aria-label="Slide précédente">
@@ -73,7 +67,18 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
           </ButtonNext>
         </StyledNavigationButtons>
       </StyledHeading>
-      <StyledSlider aria-labelledby={accessibleId}>
+
+      {/*
+       * TODO: remove attributes on slider:
+       * - tabindex
+       * - aria-live
+       */}
+      <StyledSlider
+        role="region"
+        aria-label={title}
+        aria-roledescription="carrousel"
+        aria-live="off"
+        tabIndex={-1}>
         {items.map((item, index) => {
           return (
             <VerticalCarouselSlide
