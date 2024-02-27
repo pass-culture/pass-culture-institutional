@@ -23,11 +23,6 @@ export function VerticalCarouselSlide({
   description,
   url,
 }: VerticalCarouselSlideProps) {
-  /**
-   * TODO: remove attributes on slide:
-   * - tabindex
-   * - aria-selected
-   */
   return (
     <Root
       index={slideIndex}
@@ -35,9 +30,7 @@ export function VerticalCarouselSlide({
       aria-label={`${title} ${description}`}
       innerClassName="inner"
       role="group"
-      aria-roledescription="slide"
-      tabIndex={-1}
-      aria-selected={undefined}>
+      aria-roledescription="slide">
       <StyledLink href={url}>
         {image && (
           <StyledImage

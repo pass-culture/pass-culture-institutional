@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
+import { MediaQueries } from './media-queries'
 import { Shadows } from './shadows'
 
 export const theme = {
@@ -105,8 +106,8 @@ export const theme = {
     },
   },
   mediaQueries: {
-    mobile: '50rem', // 800px
-    tablet: '62.5rem', // 1000px
+    mobile: MediaQueries.MOBILE,
+    tablet: MediaQueries.TABLET,
   },
 } as const
 

@@ -14,7 +14,9 @@ import {
   VerticalCarouselSlide,
   VerticalCarouselSlideProps,
 } from './VerticalCarouselSlide'
-import { theme } from '@/theme/theme'
+import { MediaQueries } from '@/theme/media-queries'
+import { getMediaQuery } from '@/utils/getMediaQuery'
+import { stripTags } from '@/utils/stripTags'
 
 export type VerticalCarouselProps = {
   title: string
@@ -22,16 +24,20 @@ export type VerticalCarouselProps = {
 }
 
 export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
-  const [screenWidth, setScreenWidth] = useState<number>()
+  const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+    title
+  )}"]`
+  const SLIDES_SELECTOR = '[aria-roledescription="slide"]'
 
   // Computed the number of visible slides depending on screen width
+  const [screenWidth, setScreenWidth] = useState<number>()
+
   useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth)
-    }
+    const handleResize = () => setScreenWidth(window.innerWidth)
+
+    handleResize()
 
     window.addEventListener('resize', handleResize)
-    handleResize()
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -40,10 +46,47 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 
   // Get the MQ in rem and convert it in pixels
   const visibleSlides =
-    screenWidth &&
-    screenWidth < Number(theme.mediaQueries.mobile.split('rem')[0]) * 16
-      ? 1
-      : 4
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
+
+  /**
+   * Remove unnecessary HTML attributes for a11y.
+   * PR #469 will improve that: https://github.com/express-labs/pure-react-carousel/pull/469
+   *
+   * "pure-react-carousel" does not permit using `ref` on components to allow changing attributes
+   */
+  useEffect(() => {
+    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+
+    if (carouselEl && carouselSlidesEl) {
+      cleanSlideAttributes(carouselEl, carouselSlidesEl)
+    }
+  }, [CAROUSEL_SELECTOR])
+
+  function cleanSlideAttributes(
+    carouselEl: Element,
+    slidesEl: NodeListOf<Element>
+  ) {
+    carouselEl?.removeAttribute('tabindex')
+    carouselEl?.removeAttribute('aria-live')
+
+    slidesEl.forEach((slideEl) => {
+      slideEl.removeAttribute('tabindex')
+      slideEl.removeAttribute('aria-selected')
+    })
+  }
+
+  // Remove attributes when clicking "previous", "next" and dots buttons
+  function handleNavigationButtonClick() {
+    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+
+    if (carouselEl && carouselSlidesEl) {
+      setTimeout(() => {
+        cleanSlideAttributes(carouselEl, carouselSlidesEl)
+      }, 1)
+    }
+  }
 
   return (
     <CarouselProvider
@@ -59,26 +102,23 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons role="group" aria-label="Contrôles du slider">
-          <ButtonBack aria-label="Slide précédente">
+          <ButtonBack
+            aria-label="Slide précédente"
+            onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
-          <ButtonNext aria-label="Slide suivante">
+          <ButtonNext
+            aria-label="Slide suivante"
+            onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
       </StyledHeading>
 
-      {/*
-       * TODO: remove attributes on slider:
-       * - tabindex
-       * - aria-live
-       */}
       <StyledSlider
         role="region"
-        aria-label={title}
-        aria-roledescription="carrousel"
-        aria-live="off"
-        tabIndex={-1}>
+        aria-label={stripTags(title)}
+        aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
             <VerticalCarouselSlide
@@ -94,6 +134,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
         {items.map((item, index) => {
           return (
             <StyledDot
+              onClick={handleNavigationButtonClick}
               key={item.title}
               slide={index}
               aria-label={`Afficher la slide ${index + 1} sur ${
