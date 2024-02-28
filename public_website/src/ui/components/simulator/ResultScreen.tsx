@@ -36,7 +36,7 @@ export function ResultScreen(props: ResultScreenProps) {
 }
 
 const Root = styled.div`
-  padding: 3rem 4rem;
+  padding: 6rem 3rem 0 4rem;
 `
 
 const Title = styled.p`

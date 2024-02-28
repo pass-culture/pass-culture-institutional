@@ -320,6 +320,19 @@ export interface SimulatorAnswer extends Schema.Component {
   };
 }
 
+export interface SimulatorFailureScreen extends Schema.Component {
+  collectionName: 'components_simulator_failure_screens';
+  info: {
+    displayName: 'Failure Screen';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
 export interface SimulatorRadioQuestion extends Schema.Component {
   collectionName: 'components_simulator_radio_questions';
   info: {
@@ -387,6 +400,7 @@ declare module '@strapi/types' {
       'home.recommendations-section': HomeRecommendationsSection;
       'simulator.age-question': SimulatorAgeQuestion;
       'simulator.answer': SimulatorAnswer;
+      'simulator.failure-screen': SimulatorFailureScreen;
       'simulator.radio-question': SimulatorRadioQuestion;
       'simulator.step': SimulatorStep;
       'simulator.success-screen': SimulatorSuccessScreen;

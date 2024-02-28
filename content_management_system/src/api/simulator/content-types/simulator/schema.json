@@ -55,6 +55,19 @@
       "repeatable": false,
       "component": "simulator.success-screen",
       "required": true
+    },
+    "failureScreen": {
+      "displayName": "Failure Screen",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
+    },
+    "tooYoungScreen": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
     }
   }
 }

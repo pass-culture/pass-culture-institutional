@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
 import { Step } from './Step'
@@ -14,6 +15,8 @@ interface SimulatorProps {
   residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
 
   successScreen: APIResponseData<'api::simulator.simulator'>['attributes']['successScreen']
+  failureScreen: APIResponseData<'api::simulator.simulator'>['attributes']['failureScreen']
+  tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
 }
 
 export function Simulator(props: SimulatorProps) {
@@ -41,11 +44,13 @@ export function Simulator(props: SimulatorProps) {
 
   const question = props.ageQuestion
 
-  const isShowingResult = true
+  // const isShowingResult = true
+
+  const currentStep = 'tooYoung' as string
 
   return (
     <Root className={props.className}>
-      <Inner $showingResult={isShowingResult}>
+      <Inner $showingResult={currentStep !== 'question'}>
         <Steps>
           <Step circleText="01" surtitle="ÉTAPE 1" title="Ton âge" />
           <StepSeparator aria-hidden="true" />
@@ -76,7 +81,7 @@ export function Simulator(props: SimulatorProps) {
           </button>
         </BackContainer>
 
-        {!isShowingResult && (
+        {currentStep === 'question' && (
           <Question
             onSubmit={(r) => console.log(r)}
             title={question.title}
@@ -85,13 +90,29 @@ export function Simulator(props: SimulatorProps) {
           />
         )}
 
-        {isShowingResult && (
+        {currentStep === 'success' && (
           <ResultScreen
             title={props.successScreen.title}
             steps={props.successScreen.steps.map((s) => s.step)}
             ctaLink={props.successScreen.cta}
             helpText={props.successScreen.needSupport}
             supportLink={props.successScreen.supportLink}
+          />
+        )}
+
+        {currentStep === 'failure' && (
+          <FailureScreen
+            title={props.failureScreen.title}
+            text={props.failureScreen.text}
+            ctaLink={props.failureScreen.cta}
+          />
+        )}
+
+        {currentStep === 'tooYoung' && (
+          <FailureScreen
+            title={props.tooYoungScreen.title}
+            text={props.tooYoungScreen.text}
+            ctaLink={props.tooYoungScreen.cta}
           />
         )}
       </Inner>
