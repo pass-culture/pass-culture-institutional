@@ -15,8 +15,10 @@ export default function SimulatorPage(props: SimulatorProps) {
   console.log(props.data)
   return (
     <Root>
-      <h1 dangerouslySetInnerHTML={{ __html: props.data.attributes.title }} />
-      <p
+      <Title
+        dangerouslySetInnerHTML={{ __html: props.data.attributes.title }}
+      />
+      <Description
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
 
@@ -38,6 +40,21 @@ const Root = styled.div`
   max-width: calc(1200px + 1rem);
   margin: auto;
   padding: 1rem;
+`
+
+const Title = styled.h1`
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: ${({ theme }) => theme.colors.secondary};
+
+  margin-bottom: 1.75rem;
+`
+
+const Description = styled.p`
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 2;
 `
 
 const StyledSimulator = styled(Simulator)`
