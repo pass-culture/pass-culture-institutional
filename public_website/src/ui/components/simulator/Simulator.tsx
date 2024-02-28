@@ -46,7 +46,7 @@ export function Simulator(props: SimulatorProps) {
 
   // const isShowingResult = true
 
-  const currentStep = 'tooYoung' as string
+  const currentStep = 'question' as string
 
   return (
     <Root className={props.className}>

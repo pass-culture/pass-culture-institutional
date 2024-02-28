@@ -2,8 +2,8 @@ import React, { FormEvent, useState } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../button/Button'
-import { Label } from './Label'
 import { RadioField } from './RadioField'
+import { SliderField } from './SliderField'
 
 interface QuestionProps {
   title: string
@@ -26,21 +26,14 @@ export function Question(props: QuestionProps) {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {answer}
       {props.type === 'slider' ? (
-        <Field>
-          <Label htmlFor="question-field">{props.title}</Label>
-          {/* TODO: slider https://slider-react-component.vercel.app/demo/marks */}
-          <select
-            id="question-field"
-            value={answer}
-            onChange={(e) => setAnswer(Number(e.target.value))}>
-            {props.answers.map((answer, i) => (
-              <option value={i} key={answer}>
-                {answer}
-              </option>
-            ))}
-          </select>
-        </Field>
+        <SliderField
+          title={props.title}
+          answers={props.answers}
+          answer={answer}
+          onChange={setAnswer}
+        />
       ) : (
         <RadioField
           title={props.title}
@@ -68,16 +61,6 @@ const Form = styled.form`
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0 2rem;
-    gap: 1.5rem;
-  }
-`
-
-const Field = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     gap: 1.5rem;
   }
 `
