@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
+import { MediaQueries } from './media-queries'
 import { Shadows } from './shadows'
 
 export const theme = {
@@ -64,6 +65,17 @@ export const theme = {
         fontSize: FontSizes['3XL'],
       },
     },
+    heading3: {
+      desktop: {
+        lineHeight: '1.4',
+        fontSize: FontSizes['4XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.BLACK,
+      },
+      mobile: {
+        fontSize: FontSizes['2XL'],
+      },
+    },
     borderedText: {
       desktop: {
         lineHeight: '1',
@@ -94,8 +106,8 @@ export const theme = {
     },
   },
   mediaQueries: {
-    mobile: '50rem', // 800px
-    tablet: '62.5rem', // 1000px
+    mobile: MediaQueries.MOBILE,
+    tablet: MediaQueries.TABLET,
   },
 } as const
 

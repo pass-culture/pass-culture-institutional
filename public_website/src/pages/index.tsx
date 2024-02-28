@@ -10,6 +10,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
+import { Recommendations } from '@/ui/components/home/Recommendations'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
@@ -60,6 +61,26 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
       />
 
+      <Recommendations
+        title={homeData.attributes.recommendationsSection.recommendations.title}
+        controlsLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .controlsLabel
+        }
+        previousButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .previousButtonLabel
+        }
+        nextButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .nextButtonLabel
+        }
+        recommendations={
+          homeData.attributes.recommendationsSection.recommendations.items
+        }
+        cta={homeData.attributes.recommendationsSection.cta}
+      />
+
       <StyledLatestNews
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
@@ -88,6 +109,9 @@ export const getStaticProps = (async () => {
       'CTASection',
       'CTASection.image',
       'CTASection.ctaLink',
+      'recommendationsSection.cta',
+      'recommendationsSection.recommendations.items',
+      'recommendationsSection.recommendations.items.image',
       'latestStudies',
       'latestStudies.cta',
       'socialMediaSection',

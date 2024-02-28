@@ -23,7 +23,16 @@ const Heading2 = styled.h2(({ theme }) => {
   }
 })
 
-const Body = styled.h2(({ theme }) => {
+const Heading3 = styled.h3(({ theme }) => {
+  return {
+    ...theme.typography.heading3.desktop,
+    [`@media(width < ${theme.mediaQueries.mobile})`]: {
+      ...theme.typography.heading3.mobile,
+    },
+  }
+})
+
+const Body = styled.p(({ theme }) => {
   return {
     ...theme.typography.body.desktop,
     [`@media(width < ${theme.mediaQueries.mobile})`]: {
@@ -48,6 +57,7 @@ const Emoji = styled.span(({ theme }) => ({
 export const Typo = {
   Heading1,
   Heading2,
+  Heading3,
   Body,
   BorderedText,
   Emoji,
