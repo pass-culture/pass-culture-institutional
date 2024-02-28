@@ -1,34 +1,18 @@
 {
-  "collectionName": "components_block_headers",
+  "collectionName": "components_block_simple_push_ctas",
   "info": {
-    "displayName": "Header",
+    "displayName": "SimplePushCTA",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
-      "type": "string",
-      "required": true
-    },
-    "Text": {
-      "type": "text",
-      "required": true
-    },
-    "Surtitle": {
+    "title": {
       "type": "string"
     },
-    "Image": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "surtititle": {
+      "type": "string"
     },
-    "Icon": {
+    "image": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -38,6 +22,22 @@
         "videos",
         "audios"
       ]
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
     }
   }
 }

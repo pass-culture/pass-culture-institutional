@@ -6,8 +6,11 @@ type HttpResponse<T> = {
 
 export async function fetchCMS<T>(path: string) {
   try {
+    console.log('fetchCMS', path)
     const apiPath = `/api${path}`
     const requestUrl = `${getStrapiURL(apiPath)}`
+
+    console.log('requestUrl', requestUrl)
     const token = process.env['ID_TOKEN']
 
     if (

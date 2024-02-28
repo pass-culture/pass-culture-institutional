@@ -12,6 +12,22 @@ export interface BlockCenteredText extends Schema.Component {
   };
 }
 
+export interface BlockDoublePushCta extends Schema.Component {
+  collectionName: 'components_block_double_push_ctas';
+  info: {
+    displayName: 'DoublePushCTA';
+    description: '';
+  };
+  attributes: {
+    image: Attribute.Media & Attribute.Required;
+    title: Attribute.String;
+    text: Attribute.Text;
+    firstCta: Attribute.Component<'common.link'>;
+    secondCta: Attribute.Component<'common.link'>;
+    icon: Attribute.Media;
+  };
+}
+
 export interface BlockHeader extends Schema.Component {
   collectionName: 'components_block_headers';
   info: {
@@ -19,9 +35,11 @@ export interface BlockHeader extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text & Attribute.Required;
     Surtitle: Attribute.String;
+    Image: Attribute.Media & Attribute.Required;
+    Icon: Attribute.Media;
   };
 }
 
@@ -73,6 +91,21 @@ export interface BlockPushCta extends Schema.Component {
     ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
     qrCodeDescription: Attribute.String & Attribute.Required;
     qrCodeUrl: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockSimplePushCta extends Schema.Component {
+  collectionName: 'components_block_simple_push_ctas';
+  info: {
+    displayName: 'SimplePushCTA';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    surtititle: Attribute.String;
+    image: Attribute.Media;
+    icon: Attribute.Media;
+    cta: Attribute.Component<'common.link'>;
   };
 }
 
@@ -253,10 +286,12 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
+      'block.double-push-cta': BlockDoublePushCta;
       'block.header': BlockHeader;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.push-cta': BlockPushCta;
+      'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'common.link': CommonLink;
