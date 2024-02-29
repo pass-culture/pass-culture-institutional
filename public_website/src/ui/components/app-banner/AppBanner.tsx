@@ -30,6 +30,7 @@ const StyledAppBanner = styled(Link)`
       auto 100%,
       cover;
     background-repeat: no-repeat;
+    box-shadow: ${theme.shadows.banner};
     aspect-ratio: 3.1;
     display: flex;
     align-items: center;

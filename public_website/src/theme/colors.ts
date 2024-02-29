@@ -6,6 +6,7 @@ export enum Colors {
   TERTIARY = '#eb0055',
   LIGHT_BLUE = '#F5F2FA',
   LIGHT_GRAY = '#9f9f9f26',
+  LIGHT_BLACK = '#0000002e',
   FLASH_GREEN = '#27dca8',
   PURPLE = '#4F0095',
 }

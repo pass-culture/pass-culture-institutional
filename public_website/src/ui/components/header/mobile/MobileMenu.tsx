@@ -190,7 +190,7 @@ const StyledMobileMenuFooter = styled.ul`
     margin-top: auto;
 
     li:first-child button {
-      font-size: ${theme.fonts.sizes.xl};
+      font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};
     }
   `}

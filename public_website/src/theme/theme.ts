@@ -18,6 +18,7 @@ export const theme = {
   shadows: {
     popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
     sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
+    banner: `${Shadows.STICKER} ${Colors.LIGHT_BLACK}`,
   },
   fonts: {
     sizes: {

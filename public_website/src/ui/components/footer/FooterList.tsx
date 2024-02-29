@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 export type FooterListProps = {
@@ -14,7 +15,10 @@ export function FooterList({ title, listItems }: FooterListProps) {
         {listItems.map((anchor) => {
           return (
             <li key={anchor.Label}>
-              <a href={anchor.URL}>{anchor.Label}</a>
+              <Link
+                href={anchor.URL}
+                dangerouslySetInnerHTML={{ __html: anchor.Label }}
+              />
             </li>
           )
         })}
