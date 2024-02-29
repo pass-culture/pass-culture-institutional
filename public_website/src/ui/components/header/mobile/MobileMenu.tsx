@@ -189,6 +189,10 @@ const StyledMobileMenuFooter = styled.ul`
     border-top: 1px solid rgb(0 0 0 / 0.12);
     margin-top: auto;
 
+    button {
+      color: ${theme.colors.black};
+    }
+
     li:first-child button {
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};

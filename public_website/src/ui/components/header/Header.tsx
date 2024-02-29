@@ -293,6 +293,7 @@ const StyledNavigationItem = styled.li`
     }
 
     button {
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
       padding: 0.5rem;
@@ -306,6 +307,7 @@ const StyledLoginItem = styled.li`
     position: relative;
 
     button {
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
       padding: 0.5rem;
