@@ -276,6 +276,8 @@ export interface HomeHeroSection extends Schema.Component {
     thirdEmoji: Attribute.String & Attribute.Required;
     fourthEmoji: Attribute.String & Attribute.Required;
     images: Attribute.Media & Attribute.Required;
+    fifthEmoji: Attribute.String & Attribute.Required;
+    sixthEmoji: Attribute.String & Attribute.Required;
   };
 }
 

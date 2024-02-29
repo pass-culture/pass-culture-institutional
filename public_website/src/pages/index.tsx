@@ -21,26 +21,30 @@ interface HomeProps {
 export default function Home({ homeData, latestStudies }: HomeProps) {
   return (
     <React.Fragment>
-      <Hero
-        title={homeData.attributes.heroSection.title}
-        subTitle={homeData.attributes.heroSection.subTitle}
-        cta={homeData.attributes.heroSection.cta}
-        firstEmoji={homeData.attributes.heroSection.firstEmoji}
-        secondEmoji={homeData.attributes.heroSection.secondEmoji}
-        thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
-        fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
-        images={
-          // There seem to be a bug with the `strapi.ts` helper file.
-          // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
-          homeData.attributes.heroSection.images
-            ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
-        }
-      />
+      <StyledHomeGradient>
+        <Hero
+          title={homeData.attributes.heroSection.title}
+          subTitle={homeData.attributes.heroSection.subTitle}
+          cta={homeData.attributes.heroSection.cta}
+          firstEmoji={homeData.attributes.heroSection.firstEmoji}
+          secondEmoji={homeData.attributes.heroSection.secondEmoji}
+          thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
+          fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+          fifthEmoji={homeData.attributes.heroSection.fifthEmoji}
+          sixthEmoji={homeData.attributes.heroSection.sixthEmoji}
+          images={
+            // There seem to be a bug with the `strapi.ts` helper file.
+            // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
+            homeData.attributes.heroSection.images
+              ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
+          }
+        />
 
-      <CenteredText
-        title={homeData.attributes.aboutSection.title}
-        description={homeData.attributes.aboutSection.description}
-      />
+        <CenteredText
+          title={homeData.attributes.aboutSection.title}
+          description={homeData.attributes.aboutSection.description}
+        />
+      </StyledHomeGradient>
 
       <Eligibility
         title={homeData.attributes.eligibilitySection.title}
@@ -146,6 +150,24 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<HomeProps>
+
+const StyledHomeGradient = styled.div`
+  ${({ theme }) => css`
+    background: linear-gradient(
+      180deg,
+      rgba(233 223 238 / 1) 0%,
+      rgba(233 223 238 / 0) 100%
+    );
+    padding: 8rem 0;
+    overflow: hidden;
+    transform: translateY(-8rem);
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: 8rem 0 0;
+      transform: translateY(-7rem);
+    }
+  `}
+`
 
 const StyledPushCTA = styled(PushCTA)`
   ${({ theme }) => css`
