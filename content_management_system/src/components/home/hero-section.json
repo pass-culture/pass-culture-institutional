@@ -41,6 +41,14 @@
       "multiple": true,
       "required": true,
       "allowedTypes": ["images"]
+    },
+    "fifthEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "sixthEmoji": {
+      "type": "string",
+      "required": true
     }
   }
 }

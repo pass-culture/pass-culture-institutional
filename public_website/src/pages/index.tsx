@@ -30,6 +30,8 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
           secondEmoji={homeData.attributes.heroSection.secondEmoji}
           thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
           fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+          fifthEmoji={homeData.attributes.heroSection.fifthEmoji}
+          sixthEmoji={homeData.attributes.heroSection.sixthEmoji}
           images={
             // There seem to be a bug with the `strapi.ts` helper file.
             // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
@@ -157,6 +159,7 @@ const StyledHomeGradient = styled.div`
       rgba(233 223 238 / 0) 100%
     );
     padding: 8rem 0;
+    overflow: hidden;
     transform: translateY(-8rem);
 
     @media (width < ${theme.mediaQueries.mobile}) {
