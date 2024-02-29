@@ -279,7 +279,6 @@ const StyledNavigationItem = styled.li`
 
     .mega-menu-active {
       color: ${theme.colors.primary};
-      font-weight: ${theme.fonts.weights.bold};
       position: relative;
 
       &::after {
