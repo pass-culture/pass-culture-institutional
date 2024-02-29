@@ -14,6 +14,7 @@ export const theme = {
     lightGray: Colors.LIGHT_GRAY,
     flashGreen: Colors.FLASH_GREEN,
     purple: Colors.PURPLE,
+    backgroundGray: Colors.BACKGROUND_GRAY,
   },
   shadows: {
     popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,

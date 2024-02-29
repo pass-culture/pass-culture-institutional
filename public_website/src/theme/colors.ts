@@ -8,4 +8,5 @@ export enum Colors {
   LIGHT_GRAY = '#9f9f9f26',
   FLASH_GREEN = '#27dca8',
   PURPLE = '#4F0095',
+  BACKGROUND_GRAY = '#F7F5FB',
 }

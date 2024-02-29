@@ -28,7 +28,7 @@ export function ResultScreen(props: ResultScreenProps) {
       <Button href={props.ctaLink.URL}>{props.ctaLink.Label}</Button>
 
       <HelpText>
-        {props.helpText}
+        <span dangerouslySetInnerHTML={{ __html: props.helpText }} />
         <a href={props.ctaLink.URL}>{props.supportLink.Label}</a>
       </HelpText>
     </Root>

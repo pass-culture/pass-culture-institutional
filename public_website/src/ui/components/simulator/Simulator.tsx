@@ -46,7 +46,7 @@ export function Simulator(props: SimulatorProps) {
 
   // const isShowingResult = true
 
-  const currentStep = 'question' as string
+  const currentStep = 'success' as string
 
   return (
     <Root className={props.className}>
@@ -136,7 +136,7 @@ const Root = styled.div`
 const Inner = styled.div<{ $showingResult: boolean }>`
   box-shadow: -4px 8px 24px 0px #7d7d7d40;
   background-color: ${({ theme, $showingResult }) =>
-    $showingResult ? '#F7F5FB' : theme.colors.white};
+    $showingResult ? theme.colors.backgroundGray : theme.colors.white};
   position: relative;
   z-index: 1;
   border-radius: 1.875rem;

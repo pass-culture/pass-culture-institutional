@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import 'rc-slider/assets/index.css'
 import { Label } from './Label'
+import selectArrow from './select-arrow.svg'
 
 interface SliderFieldProps {
   title: string
@@ -71,6 +72,13 @@ export function SliderField({
       />
 
       {/* TODO: switch to select input on mobile */}
+      <Select value={answer} onChange={(e) => onChange(Number(e.target.value))}>
+        {answers.map((a, i) => (
+          <option key={a} value={i}>
+            {answers[i]}
+          </option>
+        ))}
+      </Select>
     </Field>
   )
 }
@@ -93,4 +101,30 @@ const Slider = styled(BaseSlider)`
   }
 
   /* TODO: adjust slider styles */
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: none;
+  }
+`
+
+const Select = styled.select`
+  padding: 1.25rem 1.875rem;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 30px;
+
+  appearance: none;
+  border: none;
+  border-radius: 1.25rem;
+  background-color: ${({ theme }) => theme.colors.backgroundGray};
+  background-image: url(${selectArrow.src});
+  background-repeat: no-repeat;
+  background-position: right 2rem center;
+
+  display: none;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: initial;
+  }
 `

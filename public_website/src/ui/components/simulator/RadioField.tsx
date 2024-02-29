@@ -76,7 +76,7 @@ const RadioLabel = styled.label`
   gap: 1.5rem;
   padding: 1.625rem 1.25rem;
   border-radius: 1.25rem;
-  background: #f7f5fb;
+  background: ${({ theme }) => theme.colors.backgroundGray};
   border: 1px solid transparent;
 
   input:checked + & {
