@@ -69,6 +69,7 @@ const StyledContentWrapper = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
+      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
     }
   `}
 `

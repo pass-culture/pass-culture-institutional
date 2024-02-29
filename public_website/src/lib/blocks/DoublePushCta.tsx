@@ -57,9 +57,15 @@ const Root = styled.div`
     position: relative;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      background: none;
+      // background: red;
       padding: 1.5rem;
       display: block;
+
+      border-radius: 0;
+
+      position: relative;
+      padding-top: 7.125rem;
+      margin-top: 13.125rem;
     }
   `}
 `
@@ -72,6 +78,13 @@ const CardContainer = styled.div`
 
   @media (width < ${theme.mediaQueries.tablet}) {
     margin: 0 auto;
+    position: absolute;
+
+    min-width: 90%;
+    min-height: 40%;
+
+    top: -8rem;
+    left: 1.8rem;
   }
 `
 
@@ -91,9 +104,13 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      width: 100%;
-      margin-bottom: 3.75rem;
-      aspect-ratio: 0.8;
+      // width: 100%;
+      // margin-bottom: 3.75rem;
+      // aspect-ratio: 0.8;
+      // padding: 0;
+
+      width: 95%;
+      aspect-ratio: 1.5;
       padding: 0;
     }
   `}

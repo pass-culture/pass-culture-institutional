@@ -140,6 +140,7 @@ const StyledPushCTA = styled(DoublePushCTA)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 4.5rem 0;
+      margin-top: 13.125rem;
     }
   `}
 `
@@ -184,6 +185,8 @@ const StyledSimplePushCTA = styled(SimplePushCta)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 4.5rem 0;
+
+      margin-top: 13.125rem;
     }
   `}
 `

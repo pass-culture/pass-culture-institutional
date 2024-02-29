@@ -54,10 +54,11 @@ const Root = styled.div`
     position: relative;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      background: none;
       padding: 1.5rem;
       display: block;
-      color: ${theme.colors.black};
+      border-radius: 0;
+      text-align: center;
+      padding-top: 10.125rem;
     }
   `}
 `
@@ -70,6 +71,12 @@ const CardContainer = styled.div`
 
   @media (width < ${theme.mediaQueries.tablet}) {
     margin: 0 auto;
+    position: absolute;
+
+    top: -6rem;
+
+    min-width: 90%;
+    min-height: 40%;
   }
 `
 
@@ -89,9 +96,13 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      width: 100%;
-      margin-bottom: 3.75rem;
-      aspect-ratio: 0.8;
+      //   width: 100%;
+      //   margin-bottom: 3.75rem;
+      //   aspect-ratio: 0.8;
+      //   padding: 0;
+
+      width: 95%;
+      aspect-ratio: 1.5;
       padding: 0;
     }
   `}
@@ -145,6 +156,7 @@ const CtaLink = styled.a`
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
       margin-bottom: 1.5rem;
+      font-size: ${theme.fonts.sizes['2xs']};
     }
   `}
 `
