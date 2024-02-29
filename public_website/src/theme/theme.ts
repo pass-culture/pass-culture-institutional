@@ -91,7 +91,6 @@ export const theme = {
       lineHeight: '1',
       fontSize: FontSizes['8XL'],
       fontWeight: FontWeights.BOLD,
-      // boxShadow: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
     },
     body: {
       desktop: {
