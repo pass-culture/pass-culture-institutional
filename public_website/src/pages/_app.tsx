@@ -33,10 +33,10 @@ export default function MyApp({
           font-family: ${montSerrat.style.fontFamily} !important;
         }
       `}</style>
-      <SkipLink label="Aller au contenu principal" href="#contenu-principal" />
-      <SkipLink label="Aller au pied de page" href="#pied-de-page" />
+      <SkipLink label="Aller au contenu principal" href="#main-content" />
+      <SkipLink label="Aller au pied de page" href="#footer" />
       <Header {...headerData} />
-      <main id="contenu-principal">
+      <main id="main-content">
         <Component {...pageProps} />
       </main>
       <Footer {...footerData} />
