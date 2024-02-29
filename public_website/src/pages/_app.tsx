@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 import { theme } from '@/theme/theme'
 import { Footer, FooterProps } from '@/ui/components/footer/Footer'
 import { Header, HeaderProps } from '@/ui/components/header/Header'
+import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -32,8 +33,10 @@ export default function MyApp({
           font-family: ${montSerrat.style.fontFamily} !important;
         }
       `}</style>
+      <SkipLink label="Aller au contenu principal" href="#main-content" />
+      <SkipLink label="Aller au pied de page" href="#footer" />
       <Header {...headerData} />
-      <main>
+      <main id="main-content">
         <Component {...pageProps} />
       </main>
       <Footer {...footerData} />

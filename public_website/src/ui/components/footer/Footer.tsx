@@ -32,7 +32,7 @@ export function Footer({
   const storeUrl = isAndroid ? PlayStoreUrl : AppStoreUrl
 
   return (
-    <StyledFooter>
+    <StyledFooter id="footer">
       <StyledContentContainer>
         <StyledTopSection>
           <StyledLogos>
