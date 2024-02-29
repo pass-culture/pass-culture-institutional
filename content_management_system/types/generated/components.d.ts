@@ -163,6 +163,32 @@ export interface FooterList extends Schema.Component {
   };
 }
 
+export interface HeaderAccountDropdown extends Schema.Component {
+  collectionName: 'components_header_account_dropdowns';
+  info: {
+    displayName: 'accountDropdown';
+  };
+  attributes: {
+    buttonLabel: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'header.account-item', true> &
+      Attribute.Required;
+  };
+}
+
+export interface HeaderAccountItem extends Schema.Component {
+  collectionName: 'components_header_account_item';
+  info: {
+    displayName: 'accountItem';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface HeaderHeader extends Schema.Component {
   collectionName: 'components_header_headers';
   info: {
@@ -308,6 +334,8 @@ declare module '@strapi/types' {
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
+      'header.account-dropdown': HeaderAccountDropdown;
+      'header.account-item': HeaderAccountItem;
       'header.header': HeaderHeader;
       'header.login-items': HeaderLoginItems;
       'header.login': HeaderLogin;

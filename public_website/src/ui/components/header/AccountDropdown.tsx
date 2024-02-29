@@ -1,29 +1,31 @@
 import React, { Ref, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
-import { LoginItem } from './LoginItem'
+import { AccountItem } from './AccountItem'
 
-export type LoginItemProps = {
+export type AccountItemProps = {
   label: string
   url: string
   color: string
   emoji: string
 }
 
-type LoginDropdownProps = {
-  items: LoginItemProps[]
+type AccountDropdownProps = {
+  items: AccountItemProps[]
   openButtonElement: HTMLButtonElement | null
+  labelId: string
   onKeyDown: () => void
   onBlur: () => void
 }
 
-export function LoginDropdown({
+export function AccountDropdown({
   items,
   openButtonElement,
+  labelId,
   onKeyDown,
   onBlur,
-}: LoginDropdownProps) {
-  const loginDropdownRef = useRef<HTMLDivElement>(null)
+}: AccountDropdownProps) {
+  const accountDropdownRef = useRef<HTMLDivElement>(null)
 
   function onEscape(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -32,7 +34,7 @@ export function LoginDropdown({
   }
 
   function onClickOutside(e: MouseEvent) {
-    if (!loginDropdownRef.current?.contains(e.target as HTMLElement)) {
+    if (!accountDropdownRef.current?.contains(e.target as HTMLElement)) {
       if (openButtonElement !== (e.target as HTMLElement)) {
         onBlur()
       }
@@ -49,32 +51,32 @@ export function LoginDropdown({
   }
 
   useEffect(() => {
-    const loginDropdownElement = loginDropdownRef.current
+    const accountDropdownElement = accountDropdownRef.current
 
-    loginDropdownElement?.addEventListener('keydown', onEscape)
+    accountDropdownElement?.addEventListener('keydown', onEscape)
     window?.addEventListener('click', onClickOutside)
 
     return () => {
-      loginDropdownElement?.removeEventListener('keydown', onEscape)
+      accountDropdownElement?.removeEventListener('keydown', onEscape)
       window?.removeEventListener('click', onClickOutside)
     }
   })
 
   return (
-    <StyledLoginDropdown ref={loginDropdownRef}>
-      <ul aria-labelledby="login-dropdown" id="login-menu">
+    <StyledAccountDropdown ref={accountDropdownRef}>
+      <ul aria-labelledby={labelId} id="account-menu">
         {items.map((item, i) => (
           <React.Fragment key={item.label}>
-            <LoginItem {...item} />
+            <AccountItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>
         ))}
       </ul>
-    </StyledLoginDropdown>
+    </StyledAccountDropdown>
   )
 }
 
-const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
+const StyledAccountDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
   ${({ theme }) => css`
     position: absolute;
     top: calc(100% + 2rem);

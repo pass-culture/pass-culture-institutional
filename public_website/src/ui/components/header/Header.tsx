@@ -3,11 +3,10 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
-import { Button } from '../button/Button'
 import { Burger } from '../icons/Burger'
 import { Close } from '../icons/Close'
 import { PassCulture } from '../icons/PassCulture'
-import { LoginDropdown, LoginItemProps } from './LoginDropdown'
+import { AccountDropdown, AccountItemProps } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 
@@ -16,9 +15,12 @@ export type HeaderProps = {
   aboutItems: HeaderNavigationItemProps[]
   login: {
     buttonLabel: string
-    loginItems: LoginItemProps[]
+    items: AccountItemProps[]
   }
-  signUp: { Label: string; URL: string }
+  signup: {
+    buttonLabel: string
+    items: AccountItemProps[]
+  }
 }
 
 type HeaderNavigationItemProps = {
@@ -41,7 +43,7 @@ export function Header({
   targetItems,
   aboutItems,
   login,
-  signUp,
+  signup,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
 
@@ -85,6 +87,22 @@ export function Header({
   function onLoginDropdownBlur() {
     if (loginDropdownOpen) {
       setLoginDropdownOpen(false)
+    }
+  }
+
+  // Close login dropdown + focus open button on "Escape"
+  const [signupDropdownOpen, setSignupDropdownOpen] = useState(false)
+  const signupButtonRef = useRef<HTMLButtonElement>(null)
+
+  function onSignupDropdownKeyDown() {
+    setSignupDropdownOpen(false)
+    loginButtonRef.current?.focus()
+  }
+
+  // Close login dropdown on click outside of it or on links inside
+  function onSignupDropdownBlur() {
+    if (signupDropdownOpen) {
+      setSignupDropdownOpen(false)
     }
   }
 
@@ -167,25 +185,46 @@ export function Header({
                 <button
                   ref={loginButtonRef}
                   id="login-dropdown"
-                  aria-controls="login-menu"
+                  aria-controls="account-menu"
                   aria-expanded={loginDropdownOpen}
                   onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
                   {login.buttonLabel}
                 </button>
                 {loginDropdownOpen && (
-                  <LoginDropdown
-                    items={login.loginItems}
+                  <AccountDropdown
+                    items={login.items}
                     openButtonElement={loginButtonRef.current}
+                    labelId="login-dropdown"
                     onKeyDown={onLoginDropdownKeyDown}
                     onBlur={onLoginDropdownBlur}
                   />
                 )}
               </StyledLoginItem>
-              <li>
+
+              <StyledLoginItem>
+                <button
+                  ref={signupButtonRef}
+                  id="signup-dropdown"
+                  aria-controls="account-menu"
+                  aria-expanded={signupDropdownOpen}
+                  onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}>
+                  {signup.buttonLabel}
+                </button>
+                {signupDropdownOpen && (
+                  <AccountDropdown
+                    items={signup.items}
+                    openButtonElement={signupButtonRef.current}
+                    labelId="signup-dropdown"
+                    onKeyDown={onSignupDropdownKeyDown}
+                    onBlur={onSignupDropdownBlur}
+                  />
+                )}
+              </StyledLoginItem>
+              {/* <li>
                 <Button href={signUp.URL} target="_blank">
                   {signUp.Label}
                 </Button>
-              </li>
+              </li> */}
 
               <StyledMobileMenuListItem>
                 <StyledMobileMenuButton
@@ -203,7 +242,7 @@ export function Header({
                 targetItems={targetItems}
                 aboutItems={aboutItems}
                 login={login}
-                signUp={signUp}
+                signup={signup}
                 onKeyDown={(e) => onMobileMenuKeyDown(e)}
               />
             )}
