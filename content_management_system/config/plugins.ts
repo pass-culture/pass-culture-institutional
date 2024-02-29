@@ -11,16 +11,11 @@ export default ({ env }) => ({
   },
   'upload': {
     config: {
-      provider: 'aws-s3',
+      provider: '@strapi-community/strapi-provider-upload-google-cloud-storage',
       providerOptions: {
-        accessKeyId: env('S3_ACCESS_ID'),
-        secretAccessKey: env('S3_SECRET_ID'),
-        endpoint: `https://${env('S3_ENDPOINT_URL')}`,
-        region: "auto",
-        signatureVersion: "v4",
-        params: {
-          Bucket: env('S3_BUCKET_NAME'),
-        },
+          bucketName: env('GCS_BUCKET_NAME'),
+          publicFiles: false,
+          uniform: true,
       },
     },
   },
