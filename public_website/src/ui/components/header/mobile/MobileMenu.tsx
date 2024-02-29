@@ -130,7 +130,7 @@ export function MobileMenu({
               </button>
             </li>
             <li>
-              {/* TODO: use <Button /> as <button> */}
+              {/* TODO: use a <Button /> */}
               <button onClick={() => openSubPanel('signup')}>
                 {signup.buttonLabel}
               </button>

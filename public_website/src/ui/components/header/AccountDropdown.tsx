@@ -14,6 +14,7 @@ type AccountDropdownProps = {
   items: AccountItemProps[]
   openButtonElement: HTMLButtonElement | null
   labelId: string
+  align?: 'left' | 'right'
   onKeyDown: () => void
   onBlur: () => void
 }
@@ -22,6 +23,7 @@ export function AccountDropdown({
   items,
   openButtonElement,
   labelId,
+  align,
   onKeyDown,
   onBlur,
 }: AccountDropdownProps) {
@@ -63,7 +65,7 @@ export function AccountDropdown({
   })
 
   return (
-    <StyledAccountDropdown ref={accountDropdownRef}>
+    <StyledAccountDropdown ref={accountDropdownRef} $align={align}>
       <ul aria-labelledby={labelId} id="account-menu">
         {items.map((item, i) => (
           <React.Fragment key={item.label}>
@@ -76,13 +78,29 @@ export function AccountDropdown({
   )
 }
 
-const StyledAccountDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
-  ${({ theme }) => css`
+const StyledAccountDropdown = styled.div<{
+  ref: Ref<HTMLDivElement>
+  $align?: 'left' | 'right'
+}>`
+  ${({ theme, $align }) => css`
     position: absolute;
     top: calc(100% + 2rem);
     left: 50%;
     transform: translateX(-50%);
     width: max-content;
+
+    ${$align === 'right' &&
+    `
+      right: 0;
+      left: auto;
+      transform: none;
+    `}
+
+    ${$align === 'left' &&
+    `
+      left: 0;
+      transform: none;
+    `}
 
     ul {
       background: ${theme.colors.white};
@@ -104,6 +122,19 @@ const StyledAccountDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
         top: -0.5rem;
         left: calc(50%);
         transform: translateX(-50%) rotate(45deg);
+
+        ${$align === 'right' &&
+        `
+          right: 2rem;
+          left: auto;
+          transform: rotate(45deg);
+        `}
+
+        ${$align === 'left' &&
+        `
+          left: 2rem;
+          transform: rotate(45deg);
+        `}
       }
     }
   `}

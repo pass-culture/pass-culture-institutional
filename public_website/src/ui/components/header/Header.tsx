@@ -201,6 +201,7 @@ export function Header({
                 )}
               </StyledLoginItem>
 
+              {/* TODO: use a <Button /> */}
               <StyledLoginItem>
                 <button
                   ref={signupButtonRef}
@@ -215,16 +216,12 @@ export function Header({
                     items={signup.items}
                     openButtonElement={signupButtonRef.current}
                     labelId="signup-dropdown"
+                    align="right"
                     onKeyDown={onSignupDropdownKeyDown}
                     onBlur={onSignupDropdownBlur}
                   />
                 )}
               </StyledLoginItem>
-              {/* <li>
-                <Button href={signUp.URL} target="_blank">
-                  {signUp.Label}
-                </Button>
-              </li> */}
 
               <StyledMobileMenuListItem>
                 <StyledMobileMenuButton
