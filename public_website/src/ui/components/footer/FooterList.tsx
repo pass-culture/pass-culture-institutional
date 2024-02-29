@@ -40,7 +40,7 @@ const StyledFooterList = styled.div`
     li {
       color: ${theme.colors.black};
       opacity: 0.7;
-      font-size: ${theme.fonts.sizes.m};
+      font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};
 
       &:not(:last-child) {

@@ -118,7 +118,11 @@ export function MegaMenu({
 
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background: linear-gradient(
+      to bottom,
+      ${theme.colors.lightBlue},
+      ${theme.colors.white}
+    );
     position: absolute;
     left: 0;
     right: 0;

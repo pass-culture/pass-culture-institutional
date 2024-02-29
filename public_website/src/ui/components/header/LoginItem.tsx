@@ -55,6 +55,10 @@ const StyledLoginItem = styled.li<{ color: string }>`
         flex-shrink: 0;
         max-width: 16ch;
       }
+
+      @media (width < ${theme.mediaQueries.tablet}) {
+        justify-content: start;
+      }
     }
   `}
 `

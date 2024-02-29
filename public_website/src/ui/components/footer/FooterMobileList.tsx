@@ -58,8 +58,8 @@ const StyledMobileFooterList = styled.details`
     li {
       color: ${theme.colors.black};
       opacity: 0.7;
-      font-size: ${theme.fonts.sizes.s};
-      font-weight: ${theme.fonts.weights.bold};
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: ${theme.fonts.weights.semiBold};
       margin-bottom: 0.875rem;
 
       a:hover {
