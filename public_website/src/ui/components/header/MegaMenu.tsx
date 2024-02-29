@@ -135,7 +135,7 @@ const StyledMegaMenu = styled.div`
   max-width: 90rem;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); // Allow exact same width
   gap: 6.5rem;
   padding: 6.25rem 2.5rem 8.125rem;
 `
