@@ -4,26 +4,26 @@ import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../icons/ArrowRight'
 
-type LoginItemProps = {
+type AccountItemProps = {
   color: string
   url: string
   emoji: string
   label: string
 }
 
-export function LoginItem({ color, url, emoji, label }: LoginItemProps) {
+export function AccountItem({ color, url, emoji, label }: AccountItemProps) {
   return (
-    <StyledLoginItem color={color}>
+    <StyledAccountItem color={color}>
       <Link href={url}>
         <span>{emoji}</span>
         <p>{label}</p>
         <ArrowRight />
       </Link>
-    </StyledLoginItem>
+    </StyledAccountItem>
   )
 }
 
-const StyledLoginItem = styled.li<{ color: string }>`
+const StyledAccountItem = styled.li<{ color: string }>`
   ${({ theme, color }) => css`
     &[aria-hidden] {
       background-color: ${theme.colors.black};
@@ -54,6 +54,10 @@ const StyledLoginItem = styled.li<{ color: string }>`
         font-size: ${theme.fonts.sizes.xl};
         flex-shrink: 0;
         max-width: 16ch;
+      }
+
+      @media (width < ${theme.mediaQueries.tablet}) {
+        justify-content: start;
       }
     }
   `}

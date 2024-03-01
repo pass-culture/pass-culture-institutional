@@ -53,17 +53,16 @@ export function Footer({
               </React.Fragment>
             ))}
           </StyledLists>
+          <StyledLegalLinks>
+            {LegalLinks.map((link) => {
+              return (
+                <li key={link.id}>
+                  <Link href={link.URL}>{link.Label}</Link>
+                </li>
+              )
+            })}
+          </StyledLegalLinks>
         </StyledTopSection>
-
-        <StyledLegalLinks>
-          {LegalLinks.map((link) => {
-            return (
-              <li key={link.id}>
-                <Link href={link.URL}>{link.Label}</Link>
-              </li>
-            )
-          })}
-        </StyledLegalLinks>
       </StyledContentContainer>
     </StyledFooter>
   )
@@ -138,7 +137,7 @@ const StyledLegalLinks = styled.ul`
   ${({ theme }) => css`
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    grid-column: 2 / span 1;
     flex-wrap: wrap;
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
@@ -152,7 +151,7 @@ const StyledLegalLinks = styled.ul`
     @media (width < ${theme.mediaQueries.mobile}) {
       --legal-links-gap: 0.5rem;
 
-      justify-content: initial;
+      grid-column: auto;
       gap: var(--legal-links-gap);
 
       li {

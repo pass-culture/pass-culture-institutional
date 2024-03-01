@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_header_account_dropdowns",
+  "info": {
+    "displayName": "accountDropdown"
+  },
+  "options": {},
+  "attributes": {
+    "buttonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "header.account-item",
+      "required": true
+    }
+  }
+}

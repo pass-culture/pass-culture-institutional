@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components'
 import { Button } from '../../button/Button'
 import { ChevronRight } from '../../icons/ChevronRight'
 import { HeaderProps } from '../Header'
+import { MobileMenuAccountSubPanel } from './MobileMenuAccountSubPanel'
 import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
-import { MobileMenuLoginSubPanel } from './MobileMenuLoginSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
 
 type MobileMenuProps = HeaderProps & {
@@ -17,18 +17,18 @@ export function MobileMenu({
   targetItems,
   aboutItems,
   login,
-  signUp,
+  signup,
 }: MobileMenuProps) {
   const navItems = [...targetItems, ...aboutItems]
 
-  const [subPanelType, setSubPanelType] = useState<'login' | 'list' | null>(
-    null
-  )
+  const [subPanelType, setSubPanelType] = useState<
+    'login' | 'signup' | 'list' | null
+  >(null)
   const [subPanelListIndex, setSubPanelListIndex] = useState<number | null>(
     null
   )
 
-  function openSubPanel(type: 'login' | 'list', index?: number) {
+  function openSubPanel(type: 'login' | 'signup' | 'list', index?: number) {
     setSubPanelType(type)
 
     if (typeof index === 'number') {
@@ -51,12 +51,17 @@ export function MobileMenu({
   // Either display login or list sub panel mobile menu
   function getMobileMenuSubPanelContent() {
     const isLoginPanel = subPanelType === 'login'
+    const isSignupPanel = subPanelType === 'signup'
 
     const navItem = navItems[subPanelListIndex!]
 
-    return isLoginPanel ? (
-      <MobileMenuSubPanel onClose={closeSubPanel} title={login.buttonLabel}>
-        <MobileMenuLoginSubPanel loginItems={login.loginItems} />
+    return isLoginPanel || isSignupPanel ? (
+      <MobileMenuSubPanel
+        onClose={closeSubPanel}
+        title={isLoginPanel ? login.buttonLabel : signup.buttonLabel}>
+        <MobileMenuAccountSubPanel
+          items={isLoginPanel ? login.items : signup.items}
+        />
       </MobileMenuSubPanel>
     ) : (
       navItem && (
@@ -126,8 +131,8 @@ export function MobileMenu({
               </button>
             </li>
             <li>
-              <Button href={signUp.URL} target="_blank">
-                {signUp.Label}
+              <Button onClick={() => openSubPanel('signup')}>
+                {signup.buttonLabel}
               </Button>
             </li>
           </StyledMobileMenuFooter>
@@ -190,7 +195,8 @@ const StyledMobileMenuFooter = styled.ul`
     margin-top: auto;
 
     li:first-child button {
-      font-size: ${theme.fonts.sizes.xl};
+      color: ${theme.colors.black};
+      font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};
     }
   `}

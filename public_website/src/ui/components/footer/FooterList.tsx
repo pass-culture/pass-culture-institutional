@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 export type FooterListProps = {
@@ -14,7 +15,10 @@ export function FooterList({ title, listItems }: FooterListProps) {
         {listItems.map((anchor) => {
           return (
             <li key={anchor.Label}>
-              <a href={anchor.URL}>{anchor.Label}</a>
+              <Link
+                href={anchor.URL}
+                dangerouslySetInnerHTML={{ __html: anchor.Label }}
+              />
             </li>
           )
         })}
@@ -36,7 +40,7 @@ const StyledFooterList = styled.div`
     li {
       color: ${theme.colors.black};
       opacity: 0.7;
-      font-size: ${theme.fonts.sizes.m};
+      font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};
 
       &:not(:last-child) {

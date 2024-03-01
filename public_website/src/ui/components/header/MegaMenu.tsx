@@ -73,7 +73,7 @@ export function MegaMenu({
     <StyledMegaMenuWrapper>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <Typo.Heading1 as={'p'}>{data.title}</Typo.Heading1>
+          <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
           <Button href={data.cta.URL}>{data.cta.Label}</Button>
           {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
         </StyledMegaMenuHeading>
@@ -118,7 +118,11 @@ export function MegaMenu({
 
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background: linear-gradient(
+      to bottom,
+      ${theme.colors.lightBlue},
+      ${theme.colors.white}
+    );
     position: absolute;
     left: 0;
     right: 0;
@@ -131,7 +135,7 @@ const StyledMegaMenu = styled.div`
   max-width: 90rem;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); // Allow exact same width
   gap: 6.5rem;
   padding: 6.25rem 2.5rem 8.125rem;
 `
