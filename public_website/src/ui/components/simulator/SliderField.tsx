@@ -50,10 +50,13 @@ export function SliderField({
 
   return (
     <Field>
-      <Label htmlFor="question-field">{title}</Label>
+      <Label id="question-field-label" htmlFor="question-field">
+        {title}
+      </Label>
 
       {/* TODO: make sure this is accessible */}
       <Slider
+        ariaLabelledByForHandle="question-field-label"
         min={14}
         max={19}
         step={1}
@@ -72,7 +75,10 @@ export function SliderField({
       />
 
       {/* TODO: switch to select input on mobile */}
-      <Select value={answer} onChange={(e) => onChange(Number(e.target.value))}>
+      <Select
+        id="question-field"
+        value={answer}
+        onChange={(e) => onChange(Number(e.target.value))}>
         {answers.map((a, i) => (
           <option key={a} value={i}>
             {answers[i]}
@@ -94,16 +100,82 @@ const Field = styled.div`
 `
 
 const Slider = styled(BaseSlider)`
-  /* rc-slider styles overrides */
-  .rc-slider-mark-text:last-of-type {
-    width: max-content;
-    transform: translateX(-100%) !important;
-  }
-
-  /* TODO: adjust slider styles */
+  padding-bottom: 4rem;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: none;
+  }
+
+  /* rc-slider styles overrides */
+
+  .rc-slider-mark {
+    top: 2.5rem;
+  }
+
+  .rc-slider-mark-text {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.29333359003067017px;
+    color: ${({ theme }) => theme.colors.black};
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 50%;
+      transform: translateY(-1rem);
+
+      height: 1rem;
+      width: 1px;
+
+      background-color: #dad1ec;
+    }
+
+    &:last-of-type {
+      width: max-content;
+      transform: translateX(-100%) !important;
+
+      &::before {
+        left: initial;
+        right: 0;
+      }
+    }
+
+    &:first-of-type {
+      width: max-content;
+      transform: translateX(0) !important;
+
+      &::before {
+        left: 0;
+      }
+    }
+  }
+
+  .rc-slider-dot {
+    opacity: 0;
+  }
+
+  .rc-slider-rail {
+    background-color: ${({ theme }) => theme.colors.primary};
+    height: 0.5rem;
+  }
+
+  .rc-slider-handle {
+    background-color: ${({ theme }) => theme.colors.primary};
+    width: 2rem;
+    height: 2rem;
+    margin-top: -0.6875rem;
+    border: 0.25rem solid ${({ theme }) => theme.colors.white};
+    opacity: 1;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary}88;
+    }
+
+    &.rc-slider-handle-dragging {
+      box-shadow: 0 0 0 5px ${({ theme }) => theme.colors.primary}88;
+      border-color: ${({ theme }) => theme.colors.white};
+    }
   }
 `
 
