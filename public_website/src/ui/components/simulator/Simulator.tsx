@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 import { AmountScreen } from './AmountScreen'
+import { BackButton } from './BackButton'
 import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
@@ -177,22 +178,7 @@ export function Simulator(props: SimulatorProps) {
         </Steps>
 
         <BackContainer>
-          <button onClick={handleBackClick}>
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M7 1L2 6L6.5 10.5"
-                stroke="black"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-            Retour
-          </button>
+          <BackButton onClick={handleBackClick} />
         </BackContainer>
 
         {currentStepElement}
@@ -282,9 +268,5 @@ const BackContainer = styled.div`
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0 1.5rem;
     margin-top: 0;
-  }
-
-  button > svg {
-    margin-right: 0.625rem;
   }
 `
