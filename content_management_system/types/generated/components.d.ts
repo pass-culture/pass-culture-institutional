@@ -118,6 +118,11 @@ export interface BlockSimpleText extends Schema.Component {
   attributes: {
     Title: Attribute.String;
     Text: Attribute.Text;
+    IsNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
+    FirstSubTitle: Attribute.Text;
+    SecondSubTitle: Attribute.Text;
+    FirstText: Attribute.Text;
+    SecondText: Attribute.Text;
   };
 }
 

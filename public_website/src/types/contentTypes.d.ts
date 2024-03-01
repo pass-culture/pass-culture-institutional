@@ -966,6 +966,38 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
+export interface ApiMasterMaster extends Schema.SingleType {
+  collectionName: 'masters';
+  info: {
+    singularName: 'master';
+    pluralName: 'masters';
+    displayName: 'Master';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    SimpleText: Attribute.Component<'block.simple-text'>;
+    SimpleTextTwo: Attribute.Component<'block.simple-text'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::master.master',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::master.master',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNewsNews extends Schema.CollectionType {
   collectionName: 'news_list';
   info: {
@@ -1087,6 +1119,7 @@ declare module '@strapi/types' {
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
+      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;

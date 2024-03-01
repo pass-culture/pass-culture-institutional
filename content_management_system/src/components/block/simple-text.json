@@ -11,6 +11,22 @@
     },
     "Text": {
       "type": "text"
+    },
+    "IsNormal": {
+      "type": "boolean",
+      "default": true
+    },
+    "FirstSubTitle": {
+      "type": "text"
+    },
+    "SecondSubTitle": {
+      "type": "text"
+    },
+    "FirstText": {
+      "type": "text"
+    },
+    "SecondText": {
+      "type": "text"
     }
   }
 }

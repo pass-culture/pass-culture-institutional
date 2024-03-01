@@ -21,7 +21,6 @@ interface HomeProps {
 }
 
 export default function Help({ homeData, latestStudies, helpData }: HomeProps) {
-  console.log(helpData)
   return (
     <React.Fragment>
       <Hero
@@ -123,7 +122,6 @@ export const getStaticProps = (async () => {
     `/help?${helpQuery}`
   )
 
-  console.log(help.data)
   return {
     props: {
       homeData: data,

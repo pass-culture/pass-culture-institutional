@@ -65,7 +65,6 @@ const Root = styled.div`
 
       position: relative;
       padding-top: 7.125rem;
-      margin-top: 13.125rem;
     }
   `}
 `

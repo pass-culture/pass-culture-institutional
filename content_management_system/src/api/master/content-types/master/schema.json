@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "masters",
+  "info": {
+    "singularName": "master",
+    "pluralName": "masters",
+    "displayName": "Master",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "SimpleText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-text"
+    },
+    "SimpleTextTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-text"
+    }
+  }
+}
