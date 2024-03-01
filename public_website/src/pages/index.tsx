@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
@@ -19,6 +20,10 @@ interface HomeProps {
 }
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
+  useEffect(() => {
+    analyticsProvider.init()
+  }, [])
+
   return (
     <React.Fragment>
       <StyledHomeGradient>
