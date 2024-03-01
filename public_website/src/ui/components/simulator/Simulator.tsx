@@ -74,9 +74,12 @@ export function Simulator(props: SimulatorProps) {
       )
     } else {
       // 15, 16, 17, or 18 yo
-      const screen = props[
-        `amountScreen${answers[0] + 14}` as keyof SimulatorProps
-      ] as AmountScreen
+      const screen = {
+        1: props.amountScreen15,
+        2: props.amountScreen16,
+        3: props.amountScreen17,
+        4: props.amountScreen18,
+      }[answers[0]] as AmountScreen
       const ageAnswer = answers[0]
       currentStepElement = (
         <AmountScreen
