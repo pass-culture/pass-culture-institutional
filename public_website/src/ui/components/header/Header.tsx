@@ -91,16 +91,16 @@ export function Header({
     }
   }
 
-  // Close login dropdown + focus open button on "Escape"
+  // Close signup dropdown + focus open button on "Escape"
   const [signupDropdownOpen, setSignupDropdownOpen] = useState(false)
   const signupButtonRef = useRef<HTMLButtonElement>(null)
 
   function onSignupDropdownKeyDown() {
     setSignupDropdownOpen(false)
-    loginButtonRef.current?.focus()
+    signupButtonRef.current?.focus()
   }
 
-  // Close login dropdown on click outside of it or on links inside
+  // Close signup dropdown on click outside of it or on links inside
   function onSignupDropdownBlur() {
     if (signupDropdownOpen) {
       setSignupDropdownOpen(false)
