@@ -1071,6 +1071,16 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     tooYoungScreen: Attribute.Component<'simulator.failure-screen'> &
       Attribute.Required;
+    tooOldScreen: Attribute.Component<'simulator.failure-screen'> &
+      Attribute.Required;
+    amountScreen_15: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_16: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_17: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_18: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -68,6 +68,36 @@
       "repeatable": false,
       "component": "simulator.failure-screen",
       "required": true
+    },
+    "tooOldScreen": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
+    },
+    "amountScreen_15": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_16": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_17": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_18": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
     }
   }
 }

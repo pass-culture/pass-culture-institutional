@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
+import { AmountScreen } from './AmountScreen'
 import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
@@ -14,56 +16,165 @@ interface SimulatorProps {
   nationnalityQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['nationnalityQuestion']
   residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
 
+  amountScreen15: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_15']
+  amountScreen16: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_16']
+  amountScreen17: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_17']
+  amountScreen18: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_18']
+
   successScreen: APIResponseData<'api::simulator.simulator'>['attributes']['successScreen']
   failureScreen: APIResponseData<'api::simulator.simulator'>['attributes']['failureScreen']
   tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
+  tooOldScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooOldScreen']
+  steps: string[]
 }
 
+type AmountScreen =
+  | SimulatorProps['amountScreen15']
+  | SimulatorProps['amountScreen16']
+  | SimulatorProps['amountScreen17']
+  | SimulatorProps['amountScreen18']
+
 export function Simulator(props: SimulatorProps) {
-  // const question: SimulatorQuestion = {
-  //   title: 'Depuis combien de temps résides-tu en France ?',
-  //   type: 'radio',
-  //   answers: [
-  //     {
-  //       title: 'Depuis plus d’une année',
-  //       next: {
-  //         title: 'C’est noté ! Voici maintenant les étapes à suivre',
-  //         next: null,
-  //       },
-  //     },
-  //     {
-  //       title: 'Depuis moins d’une année',
-  //       next: {
-  //         title:
-  //           'Malheureusement, tu n’es pour le momentpas éligible au pass...',
-  //         next: null,
-  //       },
-  //     },
-  //   ],
-  // }
+  const currentStep = 'amount' as string
 
-  const question = props.ageQuestion
+  // Each number in the array represents an answer or validated step
+  const [answers, setAnswers] = useState<number[]>([])
 
-  // const isShowingResult = true
+  let currentStepElement: ReactNode = null
 
-  const currentStep = 'success' as string
+  if (answers.length === 0) {
+    // Age question
+    currentStepElement = (
+      <Question
+        onSubmit={(r) => setAnswers([r])}
+        title={props.ageQuestion.title}
+        answers={props.ageQuestion.answers.map((a) => a.answer)}
+        type="slider"
+      />
+    )
+  } else if (answers.length === 1 && typeof answers[0] === 'number') {
+    // Amount screens or failures
+    if (answers[0] === 0) {
+      // Less than 15 yo
+      currentStepElement = (
+        <FailureScreen
+          title={props.tooYoungScreen.title}
+          text={props.tooYoungScreen.text}
+          ctaLink={props.tooYoungScreen.cta}
+        />
+      )
+    } else if (answers[0] === 5) {
+      // More than 18 yo
+      currentStepElement = (
+        <FailureScreen
+          title={props.tooOldScreen.title}
+          text={props.tooOldScreen.text}
+          ctaLink={props.tooOldScreen.cta}
+        />
+      )
+    } else {
+      // 15, 16, 17, or 18 yo
+      const screen = props[
+        `amountScreen${answers[0] + 14}` as keyof SimulatorProps
+      ] as AmountScreen
+      const ageAnswer = answers[0]
+      currentStepElement = (
+        <AmountScreen
+          text={screen.text}
+          title={screen.title}
+          onNext={() => setAnswers([ageAnswer, 0])}
+        />
+      )
+    }
+  } else if (answers.length === 2) {
+    // Nationnality question
+    const previousAnswers = answers.slice(0, 2)
+    currentStepElement = (
+      <Question
+        onSubmit={(r) => setAnswers([...previousAnswers, r])}
+        title={props.nationnalityQuestion.title}
+        answers={props.nationnalityQuestion.answers.map((a) => a.answer)}
+        type="radio"
+      />
+    )
+  } else if (answers.length === 3) {
+    if (answers[2] === 0) {
+      // Success screen
+      currentStepElement = (
+        <ResultScreen
+          title={props.successScreen.title}
+          steps={props.successScreen.steps.map((s) => s.step)}
+          ctaLink={props.successScreen.cta}
+          helpText={props.successScreen.needSupport}
+          supportLink={props.successScreen.supportLink}
+        />
+      )
+    } else {
+      // Residency time question
+      const previousAnswers = answers.slice(0, 3)
+      currentStepElement = (
+        <Question
+          onSubmit={(r) => setAnswers([...previousAnswers, r])}
+          title={props.residencyQuestion.title}
+          answers={props.residencyQuestion.answers.map((a) => a.answer)}
+          type="radio"
+        />
+      )
+    }
+  } else if (answers.length === 4) {
+    if (answers[3] === 0) {
+      // More than a year, success
+      currentStepElement = (
+        <ResultScreen
+          title={props.successScreen.title}
+          steps={props.successScreen.steps.map((s) => s.step)}
+          ctaLink={props.successScreen.cta}
+          helpText={props.successScreen.needSupport}
+          supportLink={props.successScreen.supportLink}
+        />
+      )
+    } else {
+      // Failure
+      currentStepElement = (
+        <FailureScreen
+          title={props.failureScreen.title}
+          text={props.failureScreen.text}
+          ctaLink={props.failureScreen.cta}
+        />
+      )
+    }
+  }
+
+  let displayedSteps = props.steps.slice(0, 1)
+  if (answers.length === 2) {
+    displayedSteps = props.steps.slice(0, 2)
+  } else if (answers.length >= 3) {
+    displayedSteps = props.steps.slice(0, 3)
+  }
+
+  const handleBackClick = function () {
+    setAnswers(answers.slice(0, -1))
+  }
 
   return (
     <Root className={props.className}>
       <Inner $showingResult={currentStep !== 'question'}>
         <Steps>
-          <Step circleText="01" surtitle="ÉTAPE 1" title="Ton âge" />
-          <StepSeparator aria-hidden="true" />
-          <Step
-            circleText="02"
-            surtitle="ÉTAPE 2"
-            title="Ta nationalité"
-            isActive
-          />
+          {displayedSteps.map((step, i) => (
+            <React.Fragment key={step}>
+              {i !== 0 && <StepSeparator aria-hidden="true" />}
+              <Step
+                circleText={(i + 1).toString().padStart(2, '0')}
+                surtitle={`ÉTAPE ${i + 1}`}
+                title={step}
+                isActive={i + 1 === displayedSteps.length}
+              />
+            </React.Fragment>
+          ))}
         </Steps>
 
         <BackContainer>
-          <button>
+          <button onClick={handleBackClick}>
             <svg
               width="8"
               height="12"
@@ -81,40 +192,7 @@ export function Simulator(props: SimulatorProps) {
           </button>
         </BackContainer>
 
-        {currentStep === 'question' && (
-          <Question
-            onSubmit={(r) => console.log(r)}
-            title={question.title}
-            answers={question.answers.map((a) => a.answer)}
-            type="slider"
-          />
-        )}
-
-        {currentStep === 'success' && (
-          <ResultScreen
-            title={props.successScreen.title}
-            steps={props.successScreen.steps.map((s) => s.step)}
-            ctaLink={props.successScreen.cta}
-            helpText={props.successScreen.needSupport}
-            supportLink={props.successScreen.supportLink}
-          />
-        )}
-
-        {currentStep === 'failure' && (
-          <FailureScreen
-            title={props.failureScreen.title}
-            text={props.failureScreen.text}
-            ctaLink={props.failureScreen.cta}
-          />
-        )}
-
-        {currentStep === 'tooYoung' && (
-          <FailureScreen
-            title={props.tooYoungScreen.title}
-            text={props.tooYoungScreen.text}
-            ctaLink={props.tooYoungScreen.cta}
-          />
-        )}
+        {currentStepElement}
       </Inner>
     </Root>
   )
@@ -197,6 +275,11 @@ const StepSeparator = styled.li`
 const BackContainer = styled.div`
   margin-top: 4rem;
   padding: 0 4rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding: 0 1.5rem;
+    margin-top: 0;
+  }
 
   button > svg {
     margin-right: 0.625rem;

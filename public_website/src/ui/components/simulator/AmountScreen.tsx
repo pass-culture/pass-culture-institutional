@@ -3,18 +3,19 @@ import styled from 'styled-components'
 
 import { Button } from '../button/Button'
 
-interface FailureScreenProps {
+interface AmountScreenProps {
   title: string
   text: string
-  ctaLink: { Label: string; URL: string }
+
+  onNext: () => void
 }
 
-export function FailureScreen(props: FailureScreenProps) {
+export function AmountScreen(props: AmountScreenProps) {
   return (
     <Root>
       <Title dangerouslySetInnerHTML={{ __html: props.title }} />
       <Text dangerouslySetInnerHTML={{ __html: props.text }} />
-      <Button href={props.ctaLink.URL}>{props.ctaLink.Label}</Button>
+      <Button onClick={props.onNext}>Suivant</Button>
     </Root>
   )
 }

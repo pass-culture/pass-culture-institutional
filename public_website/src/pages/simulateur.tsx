@@ -31,6 +31,12 @@ export default function SimulatorPage(props: SimulatorProps) {
         successScreen={props.data.attributes.successScreen}
         failureScreen={props.data.attributes.failureScreen}
         tooYoungScreen={props.data.attributes.tooYoungScreen}
+        steps={props.data.attributes.steps.map((s) => s.step)}
+        amountScreen15={props.data.attributes.amountScreen_15}
+        amountScreen16={props.data.attributes.amountScreen_16}
+        amountScreen17={props.data.attributes.amountScreen_17}
+        amountScreen18={props.data.attributes.amountScreen_18}
+        tooOldScreen={props.data.attributes.tooOldScreen}
       />
     </Root>
   )
@@ -73,6 +79,12 @@ export const getStaticProps = (async () => {
         'successScreen.supportLink',
         'failureScreen.cta',
         'tooYoungScreen.cta',
+        'tooOldScreen.cta',
+        'steps',
+        'amountScreen_15',
+        'amountScreen_16',
+        'amountScreen_17',
+        'amountScreen_18',
       ],
     },
     { encodeValuesOnly: true }

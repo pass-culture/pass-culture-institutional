@@ -42,6 +42,7 @@ export function RadioField(props: RadioFieldProps) {
 
 const Fieldset = styled.fieldset`
   ${Label} {
+    width: 100%;
     margin-bottom: 2.5rem;
 
     @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {

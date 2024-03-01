@@ -14,19 +14,15 @@ interface QuestionProps {
 }
 
 export function Question(props: QuestionProps) {
-  const [answer, setAnswer] = useState<number>()
+  const [answer, setAnswer] = useState<number>(0)
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    if (answer) {
-      props.onSubmit(answer)
-    }
+    props.onSubmit(answer)
   }
 
   return (
     <Form onSubmit={handleSubmit}>
-      {answer}
       {props.type === 'slider' ? (
         <SliderField
           title={props.title}
@@ -43,9 +39,7 @@ export function Question(props: QuestionProps) {
         />
       )}
       <SubmitContainer>
-        <Button type="submit" disabled={!answer}>
-          Suivant
-        </Button>
+        <Button type="submit">Suivant</Button>
       </SubmitContainer>
     </Form>
   )
@@ -60,7 +54,7 @@ const Form = styled.form`
   padding-top: 6.5rem;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     gap: 1.5rem;
   }
 `

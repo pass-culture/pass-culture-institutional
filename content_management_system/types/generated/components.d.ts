@@ -310,6 +310,17 @@ export interface SimulatorAgeQuestion extends Schema.Component {
   };
 }
 
+export interface SimulatorAmountScreen extends Schema.Component {
+  collectionName: 'components_simulator_amount_screens';
+  info: {
+    displayName: 'Amount Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.RichText & Attribute.Required;
+  };
+}
+
 export interface SimulatorAnswer extends Schema.Component {
   collectionName: 'components_simulator_answers';
   info: {
@@ -399,6 +410,7 @@ declare module '@strapi/types' {
       'home.hero-section': HomeHeroSection;
       'home.recommendations-section': HomeRecommendationsSection;
       'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.answer': SimulatorAnswer;
       'simulator.failure-screen': SimulatorFailureScreen;
       'simulator.radio-question': SimulatorRadioQuestion;
