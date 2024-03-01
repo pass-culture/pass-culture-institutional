@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
+import { Button } from '../button/Button'
 import { Burger } from '../icons/Burger'
 import { Close } from '../icons/Close'
 import { PassCulture } from '../icons/PassCulture'
@@ -201,16 +202,15 @@ export function Header({
                 )}
               </StyledLoginItem>
 
-              {/* TODO: use a <Button /> */}
-              <StyledLoginItem>
-                <button
+              <StyledSignupItem>
+                <Button
                   ref={signupButtonRef}
                   id="signup-dropdown"
                   aria-controls="account-menu"
                   aria-expanded={signupDropdownOpen}
                   onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}>
                   {signup.buttonLabel}
-                </button>
+                </Button>
                 {signupDropdownOpen && (
                   <AccountDropdown
                     items={signup.items}
@@ -221,7 +221,7 @@ export function Header({
                     onBlur={onSignupDropdownBlur}
                   />
                 )}
-              </StyledLoginItem>
+              </StyledSignupItem>
 
               <StyledMobileMenuListItem>
                 <StyledMobileMenuButton
@@ -346,10 +346,15 @@ const StyledLoginItem = styled.li`
       color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
-      padding: 0.5rem;
+      padding: 1rem 0.5rem;
     }
   `}
 `
+
+const StyledSignupItem = styled.li`
+  position: relative;
+`
+
 const StyledMobileMenuListItem = styled.li`
   ${({ theme }) => css`
     display: none;

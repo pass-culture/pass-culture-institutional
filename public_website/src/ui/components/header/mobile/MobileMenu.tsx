@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import { Button } from '../../button/Button'
 import { ChevronRight } from '../../icons/ChevronRight'
 import { HeaderProps } from '../Header'
 import { MobileMenuAccountSubPanel } from './MobileMenuAccountSubPanel'
@@ -130,10 +131,9 @@ export function MobileMenu({
               </button>
             </li>
             <li>
-              {/* TODO: use a <Button /> */}
-              <button onClick={() => openSubPanel('signup')}>
+              <Button onClick={() => openSubPanel('signup')}>
                 {signup.buttonLabel}
-              </button>
+              </Button>
             </li>
           </StyledMobileMenuFooter>
         </React.Fragment>
@@ -194,11 +194,8 @@ const StyledMobileMenuFooter = styled.ul`
     border-top: 1px solid rgb(0 0 0 / 0.12);
     margin-top: auto;
 
-    button {
-      color: ${theme.colors.black};
-    }
-
     li:first-child button {
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};
     }
