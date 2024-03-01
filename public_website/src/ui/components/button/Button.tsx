@@ -10,6 +10,7 @@ type ButtonProps = {
   children: React.ReactNode
   variant?: ButtonVariants
   href?: string
+  onClick?: () => void
   target?: '_blank'
   className?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -19,6 +20,7 @@ export const Button = forwardRef(function Button(
     children,
     variant = 'primary',
     href,
+    onClick,
     target,
     className,
     ...other
@@ -33,6 +35,7 @@ export const Button = forwardRef(function Button(
       className={className}
       $variant={variant}
       href={href}
+      onClick={onClick}
       target={target}>
       {children}
     </StyledButton>
