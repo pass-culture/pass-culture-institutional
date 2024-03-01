@@ -21,6 +21,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.simple-text"
+    },
+    "Image": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.image"
     }
   }
 }

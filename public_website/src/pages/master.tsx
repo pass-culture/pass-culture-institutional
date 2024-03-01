@@ -12,6 +12,7 @@ import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 import { SimpleText } from '@/lib/blocks/SimpleText'
+import { Image } from '@/lib/blocks/Image'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
@@ -33,15 +34,19 @@ export default function Master({ homeData, latestStudies, master }: HomeProps) {
         Text={master.attributes.SimpleText.Text}
         IsNormal={master.attributes.SimpleText.IsNormal}
       />
-
       <SimpleText
-        Title={master.attributes.SimpleTextTwo.Title}
-        Text={master.attributes.SimpleTextTwo.Text}
-        IsNormal={master.attributes.SimpleTextTwo.IsNormal}
-        FirstSubTitle={master.attributes.SimpleTextTwo.FirstSubTitle}
-        SecondSubTitle={master.attributes.SimpleTextTwo.SecondSubTitle}
-        FirstText={master.attributes.SimpleTextTwo.FirstText}
-        SecondText={master.attributes.SimpleTextTwo.SecondText}
+        Title={master.attributes.SimpleTextTwo?.Title}
+        Text={master.attributes.SimpleTextTwo?.Text}
+        IsNormal={master.attributes.SimpleTextTwo?.IsNormal}
+        FirstSubTitle={master.attributes.SimpleTextTwo?.FirstSubTitle}
+        SecondSubTitle={master.attributes.SimpleTextTwo?.SecondSubTitle}
+        FirstText={master.attributes.SimpleTextTwo?.FirstText}
+        SecondText={master.attributes.SimpleTextTwo?.SecondText}
+      />
+
+      <Image
+        description={master.attributes.Image?.Description}
+        image={master.attributes.Image?.Image}
       />
     </>
   )
@@ -90,7 +95,7 @@ export const getStaticProps = (async () => {
 
   // Master help data
   const masterQuery = stringify({
-    populate: ['SimpleText', 'SimpleTextTwo'],
+    populate: ['SimpleText', 'SimpleTextTwo', 'Image', 'Image.Image'],
   })
 
   const master = await fetchCMS<APIResponseData<'api::master.master'>>(
