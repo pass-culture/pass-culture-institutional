@@ -1081,6 +1081,8 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     amountScreen_18: Attribute.Component<'simulator.amount-screen'> &
       Attribute.Required;
+    topEmoji: Attribute.String & Attribute.Required;
+    bottomEmoji: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

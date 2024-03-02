@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 
+import { OutlinedText } from '../OutlinedText'
 import { AmountScreen } from './AmountScreen'
 import { BackButton } from './BackButton'
 import { FailureScreen } from './FailureScreen'
@@ -27,6 +28,8 @@ interface SimulatorProps {
   tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
   tooOldScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooOldScreen']
   steps: string[]
+  topEmoji: string
+  bottomEmoji: string
 }
 
 type AmountScreen =
@@ -183,6 +186,9 @@ export function Simulator(props: SimulatorProps) {
 
         {currentStepElement}
       </Inner>
+
+      <TopEmoji shadow>{props.topEmoji}</TopEmoji>
+      <BottomEmoji shadow>{props.bottomEmoji}</BottomEmoji>
     </Root>
   )
 }
@@ -197,6 +203,32 @@ const Root = styled.div`
     border-radius: 1.875rem;
     background-color: ${({ theme }) => theme.colors.secondary};
     transform: rotate(2.1deg);
+  }
+`
+
+const TopEmoji = styled(OutlinedText)`
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  font-size: 5rem;
+  z-index: 1;
+  transform: translateY(-50%) rotate(-16.81deg);
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: none;
+  }
+`
+
+const BottomEmoji = styled(OutlinedText)`
+  position: absolute;
+  bottom: 0;
+  left: 10rem;
+  font-size: 5rem;
+  z-index: 1;
+  transform: translateY(50%) rotate(8.56deg);
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: none;
   }
 `
 

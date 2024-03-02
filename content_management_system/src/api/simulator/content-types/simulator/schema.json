@@ -98,6 +98,14 @@
       "repeatable": false,
       "component": "simulator.amount-screen",
       "required": true
+    },
+    "topEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "bottomEmoji": {
+      "type": "string",
+      "required": true
     }
   }
 }

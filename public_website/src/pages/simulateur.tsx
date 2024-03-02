@@ -37,6 +37,8 @@ export default function SimulatorPage(props: SimulatorProps) {
         amountScreen17={props.data.attributes.amountScreen_17}
         amountScreen18={props.data.attributes.amountScreen_18}
         tooOldScreen={props.data.attributes.tooOldScreen}
+        topEmoji={props.data.attributes.topEmoji}
+        bottomEmoji={props.data.attributes.bottomEmoji}
       />
     </Root>
   )
