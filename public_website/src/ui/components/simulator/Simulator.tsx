@@ -39,12 +39,11 @@ type AmountScreen =
   | SimulatorProps['amountScreen18']
 
 export function Simulator(props: SimulatorProps) {
-  const currentStep = 'amount' as string
-
   // Each number in the array represents an answer or validated step
   const [answers, setAnswers] = useState<number[]>([])
 
   let currentStepElement: ReactNode = null
+  let isResultScreen = false
 
   if (answers.length === 0) {
     // Age question
@@ -67,6 +66,7 @@ export function Simulator(props: SimulatorProps) {
           ctaLink={props.tooYoungScreen.cta}
         />
       )
+      isResultScreen = true
     } else if (answers[0] === 5) {
       // More than 18 yo
       currentStepElement = (
@@ -76,6 +76,7 @@ export function Simulator(props: SimulatorProps) {
           ctaLink={props.tooOldScreen.cta}
         />
       )
+      isResultScreen = true
     } else {
       // 15, 16, 17, or 18 yo
       const screen = {
@@ -92,6 +93,7 @@ export function Simulator(props: SimulatorProps) {
           onNext={() => setAnswers([ageAnswer, 0])}
         />
       )
+      isResultScreen = true
     }
   } else if (answers.length === 2) {
     // Nationnality question
@@ -116,6 +118,7 @@ export function Simulator(props: SimulatorProps) {
           supportLink={props.successScreen.supportLink}
         />
       )
+      isResultScreen = true
     } else {
       // Residency time question
       const previousAnswers = answers.slice(0, 3)
@@ -140,6 +143,7 @@ export function Simulator(props: SimulatorProps) {
           supportLink={props.successScreen.supportLink}
         />
       )
+      isResultScreen = true
     } else {
       // Failure
       currentStepElement = (
@@ -149,6 +153,7 @@ export function Simulator(props: SimulatorProps) {
           ctaLink={props.failureScreen.cta}
         />
       )
+      isResultScreen = true
     }
   }
 
@@ -165,7 +170,7 @@ export function Simulator(props: SimulatorProps) {
 
   return (
     <Root className={props.className}>
-      <Inner $showingResult={currentStep !== 'question'}>
+      <Inner $showingResult={isResultScreen}>
         <Steps>
           {displayedSteps.map((step, i) => (
             <React.Fragment key={step}>

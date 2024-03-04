@@ -13,7 +13,6 @@ interface SimulatorProps {
 }
 
 export default function SimulatorPage(props: SimulatorProps) {
-  console.log(props.data.attributes.socialMedias)
   return (
     <Root>
       <Title
@@ -23,7 +22,7 @@ export default function SimulatorPage(props: SimulatorProps) {
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
 
-      <div>BREADCRUMB ICI</div>
+      {/* TODO: add breadcrumb here */}
 
       <StyledSimulator
         ageQuestion={props.data.attributes.ageQuestion}
@@ -41,6 +40,8 @@ export default function SimulatorPage(props: SimulatorProps) {
         topEmoji={props.data.attributes.topEmoji}
         bottomEmoji={props.data.attributes.bottomEmoji}
       />
+
+      {/* TODO: add SimplePushCTA here */}
 
       <SocialMedia
         title={props.data.attributes.socialMedias.title}
