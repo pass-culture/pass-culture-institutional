@@ -888,8 +888,8 @@ export interface ApiHeaderHeader extends Schema.SingleType {
       Attribute.Required;
     aboutItems: Attribute.Component<'header.navigation-items', true> &
       Attribute.Required;
-    signUp: Attribute.Component<'common.link'> & Attribute.Required;
-    login: Attribute.Component<'header.login'> & Attribute.Required;
+    login: Attribute.Component<'header.account-dropdown'> & Attribute.Required;
+    signup: Attribute.Component<'header.account-dropdown'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

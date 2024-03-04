@@ -19,6 +19,7 @@ export const theme = {
   shadows: {
     popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
     sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
+    banner: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
   },
   fonts: {
     sizes: {
@@ -75,17 +76,6 @@ export const theme = {
       },
       mobile: {
         fontSize: FontSizes['2XL'],
-      },
-    },
-    borderedText: {
-      desktop: {
-        lineHeight: '1',
-        fontSize: FontSizes['5XL'],
-        fontWeight: FontWeights.BLACK,
-        color: Colors.WHITE,
-      },
-      mobile: {
-        fontSize: FontSizes['4XL'],
       },
     },
     emoji: {

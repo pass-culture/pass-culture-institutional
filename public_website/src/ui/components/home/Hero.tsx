@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -34,12 +35,24 @@ export function Hero({
   return (
     <Root>
       <StyledHeroBackground>
-        <StyledFirstEmoji>{firstEmoji}</StyledFirstEmoji>
-        <StyledSecondEmoji>{secondEmoji}</StyledSecondEmoji>
-        <StyledThirdEmoji>{thirdEmoji}</StyledThirdEmoji>
-        <StyledFourthEmoji>{fourthEmoji}</StyledFourthEmoji>
-        <StyledFifthEmoji>{fifthEmoji}</StyledFifthEmoji>
-        <StyledSixthEmoji>{sixthEmoji}</StyledSixthEmoji>
+        <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {firstEmoji}
+        </StyledFirstEmoji>
+        <StyledSecondEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {secondEmoji}
+        </StyledSecondEmoji>
+        <StyledThirdEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {thirdEmoji}
+        </StyledThirdEmoji>
+        <StyledFourthEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {fourthEmoji}
+        </StyledFourthEmoji>
+        <StyledFifthEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {fifthEmoji}
+        </StyledFifthEmoji>
+        <StyledSixthEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {sixthEmoji}
+        </StyledSixthEmoji>
       </StyledHeroBackground>
 
       <StyledSubTitle>{subTitle}</StyledSubTitle>
@@ -47,8 +60,12 @@ export function Hero({
       <StyledCta href={cta.URL}>{cta.Label}</StyledCta>
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
-        <StyledFirstEmoji>{firstEmoji}</StyledFirstEmoji>
-        <StyledSecondEmoji>{secondEmoji}</StyledSecondEmoji>
+        <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {firstEmoji}
+        </StyledFirstEmoji>
+        <StyledSecondEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {secondEmoji}
+        </StyledSecondEmoji>
         {images && (
           <StyledImageWrapper $rotation="-10deg" $bottom="3rem" $right="3rem">
             <StyledImageLayer />
@@ -59,7 +76,9 @@ export function Hero({
       </StyledCircle>
 
       <StyledCircle $index={2} $width="64rem" aria-hidden="true">
-        <StyledThirdEmoji>{thirdEmoji}</StyledThirdEmoji>
+        <StyledThirdEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {thirdEmoji}
+        </StyledThirdEmoji>
         {images && (
           <StyledImageWrapper $rotation="-12deg" $bottom="12rem" $left="2rem">
             <StyledImageLayer />
@@ -70,7 +89,9 @@ export function Hero({
       </StyledCircle>
 
       <StyledCircle $index={3} $width="80rem" aria-hidden="true">
-        <StyledFourthEmoji>{fourthEmoji}</StyledFourthEmoji>
+        <StyledFourthEmoji as={OutlinedText} dilationRadius={1} shadow>
+          {fourthEmoji}
+        </StyledFourthEmoji>
         {images && (
           <React.Fragment>
             <StyledImageWrapper $rotation="6deg" $top="40%" $left="-1.5rem">

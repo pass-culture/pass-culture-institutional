@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react'
+import React, { ButtonHTMLAttributes, forwardRef, Ref } from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
@@ -9,29 +9,36 @@ type ButtonVariants = 'primary' | 'secondary' | 'tertiary'
 type ButtonProps = {
   children: React.ReactNode
   variant?: ButtonVariants
-  href: string
+  href?: string
   target?: '_blank'
   className?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-export function Button({
-  children,
-  variant = 'primary',
-  href,
-  target,
-  ...other
-}: ButtonProps) {
+
+export const Button = forwardRef(function Button(
+  {
+    children,
+    variant = 'primary',
+    href,
+    target,
+    className,
+    ...other
+  }: ButtonProps,
+  ref: Ref<HTMLButtonElement>
+) {
   return (
     <StyledButton
       {...other}
+      ref={ref}
       as={href ? Link : 'button'}
-      variant={variant}
+      className={className}
+      $variant={variant}
       href={href}
       target={target}>
       {children}
     </StyledButton>
   )
-}
+})
 
 function getVariantButtonBackground(variant?: ButtonVariants) {
   switch (variant) {
@@ -48,18 +55,19 @@ function getVariantButtonBackground(variant?: ButtonVariants) {
   }
 }
 
-const StyledButton = styled.button<{ variant?: ButtonVariants }>`
-  ${({ theme, variant }) => css`
-    background: ${variant
-      ? getVariantButtonBackground(variant)
+
+const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
+  ${({ theme, $variant }) => css`
+    background: ${$variant
+      ? getVariantButtonBackground($variant)
       : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
 
-    ${variant &&
-    variant !== 'primary' &&
+    ${$variant &&
+    $variant !== 'primary' &&
     `border: 1px solid ${theme.colors.white};`}
 
     border-radius: 2rem;
-    color: ${variant === 'tertiary'
+    color: ${$variant === 'tertiary'
       ? theme.colors.secondary
       : theme.colors.white};
     display: inline-block;
@@ -68,5 +76,8 @@ const StyledButton = styled.button<{ variant?: ButtonVariants }>`
     padding: 1rem 2rem;
     text-align: center;
     width: max-content;
+
+    ${($variant === 'secondary' || $variant === 'tertiary') &&
+    `--outline-color: ${theme.colors.white};`}
   `}
 `

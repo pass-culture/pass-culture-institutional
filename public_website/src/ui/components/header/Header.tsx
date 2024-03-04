@@ -7,7 +7,7 @@ import { Button } from '../button/Button'
 import { Burger } from '../icons/Burger'
 import { Close } from '../icons/Close'
 import { PassCulture } from '../icons/PassCulture'
-import { LoginDropdown, LoginItemProps } from './LoginDropdown'
+import { AccountDropdown, AccountItemProps } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 
@@ -16,9 +16,12 @@ export type HeaderProps = {
   aboutItems: HeaderNavigationItemProps[]
   login: {
     buttonLabel: string
-    loginItems: LoginItemProps[]
+    items: AccountItemProps[]
   }
-  signUp: { Label: string; URL: string }
+  signup: {
+    buttonLabel: string
+    items: AccountItemProps[]
+  }
 }
 
 type HeaderNavigationItemProps = {
@@ -41,7 +44,7 @@ export function Header({
   targetItems,
   aboutItems,
   login,
-  signUp,
+  signup,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
 
@@ -85,6 +88,22 @@ export function Header({
   function onLoginDropdownBlur() {
     if (loginDropdownOpen) {
       setLoginDropdownOpen(false)
+    }
+  }
+
+  // Close signup dropdown + focus open button on "Escape"
+  const [signupDropdownOpen, setSignupDropdownOpen] = useState(false)
+  const signupButtonRef = useRef<HTMLButtonElement>(null)
+
+  function onSignupDropdownKeyDown() {
+    setSignupDropdownOpen(false)
+    signupButtonRef.current?.focus()
+  }
+
+  // Close signup dropdown on click outside of it or on links inside
+  function onSignupDropdownBlur() {
+    if (signupDropdownOpen) {
+      setSignupDropdownOpen(false)
     }
   }
 
@@ -167,27 +186,44 @@ export function Header({
                 <button
                   ref={loginButtonRef}
                   id="login-dropdown"
-                  aria-controls="login-menu"
+                  aria-controls="account-menu"
                   aria-expanded={loginDropdownOpen}
                   onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
                   {login.buttonLabel}
                 </button>
                 {loginDropdownOpen && (
-                  <LoginDropdown
-                    items={login.loginItems}
+                  <AccountDropdown
+                    items={login.items}
                     openButtonElement={loginButtonRef.current}
+                    labelId="login-dropdown"
                     onKeyDown={onLoginDropdownKeyDown}
                     onBlur={onLoginDropdownBlur}
                   />
                 )}
               </StyledLoginItem>
-              <li>
-                <Button href={signUp.URL} target="_blank">
-                  {signUp.Label}
-                </Button>
-              </li>
 
-              <li>
+              <StyledSignupItem>
+                <Button
+                  ref={signupButtonRef}
+                  id="signup-dropdown"
+                  aria-controls="account-menu"
+                  aria-expanded={signupDropdownOpen}
+                  onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}>
+                  {signup.buttonLabel}
+                </Button>
+                {signupDropdownOpen && (
+                  <AccountDropdown
+                    items={signup.items}
+                    openButtonElement={signupButtonRef.current}
+                    labelId="signup-dropdown"
+                    align="right"
+                    onKeyDown={onSignupDropdownKeyDown}
+                    onBlur={onSignupDropdownBlur}
+                  />
+                )}
+              </StyledSignupItem>
+
+              <StyledMobileMenuListItem>
                 <StyledMobileMenuButton
                   ref={mobileMenuButtonRef}
                   onClick={toggleMobileMenu}
@@ -196,14 +232,14 @@ export function Header({
                   aria-controls="mobile-menu-main-navigation">
                   {showMobileMenu ? <Close /> : <Burger />}
                 </StyledMobileMenuButton>
-              </li>
+              </StyledMobileMenuListItem>
             </ul>
             {showMobileMenu && (
               <MobileMenu
                 targetItems={targetItems}
                 aboutItems={aboutItems}
                 login={login}
-                signUp={signUp}
+                signup={signup}
                 onKeyDown={(e) => onMobileMenuKeyDown(e)}
               />
             )}
@@ -293,6 +329,7 @@ const StyledNavigationItem = styled.li`
     }
 
     button {
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
       padding: 0.5rem;
@@ -306,22 +343,32 @@ const StyledLoginItem = styled.li`
     position: relative;
 
     button {
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
-      padding: 0.5rem;
+      padding: 1rem 0.5rem;
     }
   `}
 `
-const StyledMobileMenuButton = styled.button`
+
+const StyledSignupItem = styled.li`
+  position: relative;
+`
+
+const StyledMobileMenuListItem = styled.li`
   ${({ theme }) => css`
     display: none;
-    height: 1.5rem;
-    width: 1.75rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
     }
   `}
+`
+
+const StyledMobileMenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.75rem;
 `
