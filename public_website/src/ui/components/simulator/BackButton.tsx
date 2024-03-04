@@ -23,7 +23,7 @@ export function BackButton(props: { onClick: () => void }) {
 }
 
 const StyledButton = styled.button`
-  button > svg {
+  svg {
     margin-right: 0.625rem;
   }
 `

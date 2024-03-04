@@ -106,6 +106,12 @@
     "bottomEmoji": {
       "type": "string",
       "required": true
+    },
+    "socialMedias": {
+      "type": "component",
+      "repeatable": false,
+      "required": true,
+      "component": "block.social-media"
     }
   }
 }

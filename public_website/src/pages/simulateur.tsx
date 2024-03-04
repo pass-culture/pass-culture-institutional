@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled from 'styled-components'
 
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -12,7 +13,7 @@ interface SimulatorProps {
 }
 
 export default function SimulatorPage(props: SimulatorProps) {
-  console.log(props.data)
+  console.log(props.data.attributes.socialMedias)
   return (
     <Root>
       <Title
@@ -39,6 +40,11 @@ export default function SimulatorPage(props: SimulatorProps) {
         tooOldScreen={props.data.attributes.tooOldScreen}
         topEmoji={props.data.attributes.topEmoji}
         bottomEmoji={props.data.attributes.bottomEmoji}
+      />
+
+      <SocialMedia
+        title={props.data.attributes.socialMedias.title}
+        links={props.data.attributes.socialMedias.socialMediaLink}
       />
     </Root>
   )
@@ -67,6 +73,7 @@ const Description = styled.p`
 
 const StyledSimulator = styled(Simulator)`
   margin-top: 7rem;
+  margin-bottom: 11rem;
 `
 
 export const getStaticProps = (async () => {
@@ -87,6 +94,7 @@ export const getStaticProps = (async () => {
         'amountScreen_16',
         'amountScreen_17',
         'amountScreen_18',
+        'socialMedias.socialMediaLink',
       ],
     },
     { encodeValuesOnly: true }

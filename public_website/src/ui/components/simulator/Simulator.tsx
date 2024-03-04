@@ -181,7 +181,7 @@ export function Simulator(props: SimulatorProps) {
         </Steps>
 
         <BackContainer>
-          <BackButton onClick={handleBackClick} />
+          {answers.length > 0 && <BackButton onClick={handleBackClick} />}
         </BackContainer>
 
         {currentStepElement}
@@ -246,7 +246,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
   min-height: 42rem;
 
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 21rem 1fr;
   grid-template-rows: auto 1fr;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
