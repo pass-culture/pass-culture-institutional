@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_block_image_texts",
+  "info": {
+    "displayName": "ImageText"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "isImageRight": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

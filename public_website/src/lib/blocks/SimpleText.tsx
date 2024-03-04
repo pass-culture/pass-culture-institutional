@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 import { Typo } from '@/ui/components/typographies'
 
 interface SimpleTextProps {
-  Title: string
-  Text: string
-  IsNormal: boolean
+  Title?: string
+  Text?: string
+  IsNormal?: boolean
   FirstSubTitle?: string
   SecondSubTitle?: string
 

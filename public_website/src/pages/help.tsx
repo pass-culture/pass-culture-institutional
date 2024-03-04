@@ -3,24 +3,19 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { CenteredText } from '@/lib/blocks/CenteredText'
-import { LatestNews } from '@/lib/blocks/LatestNews'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/help/Hero'
 import { Faq } from '@/ui/components/help/Faq'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-interface HomeProps {
-  homeData: APIResponseData<'api::home.home'>
-  latestStudies: APIResponseData<'api::news.news'>[]
+interface HelpProps {
   helpData: APIResponseData<'api::help.help'>
 }
 
-export default function Help({ homeData, latestStudies, helpData }: HomeProps) {
+export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
       <Hero
@@ -60,46 +55,6 @@ export default function Help({ homeData, latestStudies, helpData }: HomeProps) {
 }
 
 export const getStaticProps = (async () => {
-  // Fetch home data
-  const query = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.cta',
-      'heroSection.images',
-      'aboutSection',
-      'eligibilitySection',
-      'eligibilitySection.items',
-      'eligibilitySection.cardCta',
-      'CTASection',
-      'CTASection.image',
-      'CTASection.ctaLink',
-      'latestStudies',
-      'latestStudies.cta',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-    ],
-  })
-  const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
-    `/home?${query}`
-  )
-
-  // Fetch 3 latest studies
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eq: 'Étude',
-      },
-    },
-  })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
-
   // Fetch help data
   const helpQuery = stringify({
     populate: [
@@ -124,12 +79,10 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      homeData: data,
-      latestStudies: latestStudies.data,
       helpData: help.data,
     },
   }
-}) satisfies GetStaticProps<HomeProps>
+}) satisfies GetStaticProps<HelpProps>
 
 const StyledPushCTA = styled(DoublePushCTA)`
   ${({ theme }) => css`
@@ -143,17 +96,6 @@ const StyledPushCTA = styled(DoublePushCTA)`
   `}
 `
 
-const StyledLatestNews = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
-    }
-  `}
-`
-
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
     margin-top: 6rem;
@@ -161,17 +103,6 @@ const StyledSocialMedia = styled(SocialMedia)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
-    }
-  `}
-`
-
-const StyledFaq = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
     }
   `}
 `

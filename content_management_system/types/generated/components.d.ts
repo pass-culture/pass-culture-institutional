@@ -43,6 +43,20 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockImageText extends Schema.Component {
+  collectionName: 'components_block_image_texts';
+  info: {
+    displayName: 'ImageText';
+  };
+  attributes: {
+    Title: Attribute.String;
+    Description: Attribute.Text;
+    Image: Attribute.Media;
+    Icon: Attribute.Media;
+    isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlockImage extends Schema.Component {
   collectionName: 'components_block_images';
   info: {
@@ -304,6 +318,7 @@ declare module '@strapi/types' {
       'block.centered-text': BlockCenteredText;
       'block.double-push-cta': BlockDoublePushCta;
       'block.header': BlockHeader;
+      'block.image-text': BlockImageText;
       'block.image': BlockImage;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;

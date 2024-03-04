@@ -8,19 +8,17 @@ import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Eligibility } from '@/ui/components/home/Eligibility'
-import { Hero } from '@/ui/components/home/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 import { SimpleText } from '@/lib/blocks/SimpleText'
 import { Image } from '@/lib/blocks/Image'
+import { ImageText } from '@/lib/blocks/ImageText'
 
-interface HomeProps {
+interface MasterProps {
   homeData: APIResponseData<'api::home.home'>
-  latestStudies: APIResponseData<'api::news.news'>[]
   master: APIResponseData<'api::master.master'>
 }
 
-export default function Master({ homeData, latestStudies, master }: HomeProps) {
+export default function Master({ homeData, master }: MasterProps) {
   console.log(master.attributes)
   return (
     <>
@@ -47,6 +45,22 @@ export default function Master({ homeData, latestStudies, master }: HomeProps) {
       <Image
         description={master.attributes.Image?.Description}
         image={master.attributes.Image?.Image}
+      />
+
+      <ImageText
+        title={master.attributes.ImageTextRight?.Title}
+        description={master.attributes.ImageTextRight?.Description}
+        image={master.attributes.ImageTextRight?.Image?.data}
+        icon={master.attributes.ImageTextRight?.Icon?.data}
+        isImageRight={master.attributes.ImageTextRight?.isImageRight}
+      />
+
+      <ImageText
+        title={master.attributes.ImageTextLeft?.Title}
+        description={master.attributes.ImageTextLeft?.Description}
+        image={master.attributes.ImageTextLeft?.Image?.data}
+        icon={master.attributes.ImageTextLeft?.Icon?.data}
+        isImageRight={master.attributes.ImageTextLeft?.isImageRight}
       />
     </>
   )
@@ -76,26 +90,20 @@ export const getStaticProps = (async () => {
     `/home?${query}`
   )
 
-  // Fetch 3 latest studies
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eq: 'Étude',
-      },
-    },
-  })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
-
   // Master help data
   const masterQuery = stringify({
-    populate: ['SimpleText', 'SimpleTextTwo', 'Image', 'Image.Image'],
+    populate: [
+      'SimpleText',
+      'SimpleTextTwo',
+      'Image',
+      'Image.Image',
+      'ImageTextRight',
+      'ImageTextRight.Image',
+      'ImageTextRight.Icon',
+      'ImageTextLeft',
+      'ImageTextLeft.Image',
+      'ImageTextLeft.Icon',
+    ],
   })
 
   const master = await fetchCMS<APIResponseData<'api::master.master'>>(
@@ -105,11 +113,10 @@ export const getStaticProps = (async () => {
   return {
     props: {
       homeData: data,
-      latestStudies: latestStudies.data,
       master: master.data,
     },
   }
-}) satisfies GetStaticProps<HomeProps>
+}) satisfies GetStaticProps<MasterProps>
 
 const StyledPushCTA = styled(PushCTA)`
   ${({ theme }) => css`

@@ -10,13 +10,7 @@ type HeroProps = {
   title: string
   text: string
   image: APIResponseData<'plugin::upload.file'> | null
-  //   subTitle: string
-  //   cta: { Label: string; URL: string }
-  //   firstEmoji: string
-  //   secondEmoji: string
-  //   thirdEmoji: string
-  //   fourthEmoji: string
-  //   images: APIResponseData<'plugin::upload.file'>[] | null
+
 }
 
 export function Hero({ title, text, image }: HeroProps) {

@@ -26,6 +26,16 @@
       "type": "component",
       "repeatable": false,
       "component": "block.image"
+    },
+    "ImageTextRight": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.image-text"
+    },
+    "ImageTextLeft": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.image-text"
     }
   }
 }

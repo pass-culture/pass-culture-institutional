@@ -981,6 +981,8 @@ export interface ApiMasterMaster extends Schema.SingleType {
     SimpleText: Attribute.Component<'block.simple-text'>;
     SimpleTextTwo: Attribute.Component<'block.simple-text'>;
     Image: Attribute.Component<'block.image'>;
+    ImageTextRight: Attribute.Component<'block.image-text'>;
+    ImageTextLeft: Attribute.Component<'block.image-text'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
