@@ -103,6 +103,25 @@ export interface BlockLink extends Schema.Component {
   };
 }
 
+export interface BlockLittleList extends Schema.Component {
+  collectionName: 'components_block_little_lists';
+  info: {
+    displayName: 'LittleList';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String;
+    Description: Attribute.Text;
+    Content: Attribute.Component<'common.little-list-component', true> &
+      Attribute.SetMinMax<{
+        max: 4;
+      }>;
+    WithDescritpion: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
@@ -173,6 +192,20 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonLittleListComponent extends Schema.Component {
+  collectionName: 'components_common_little_list_components';
+  info: {
+    displayName: 'LittleListComponent';
+    description: '';
+  };
+  attributes: {
+    Simple: Attribute.Text & Attribute.Required;
+    Description: Attribute.Text;
+    FirstEmoji: Attribute.String;
+    SecondEmoji: Attribute.String;
   };
 }
 
@@ -322,11 +355,13 @@ declare module '@strapi/types' {
       'block.image': BlockImage;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
+      'block.little-list': BlockLittleList;
       'block.push-cta': BlockPushCta;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'common.link': CommonLink;
+      'common.little-list-component': CommonLittleListComponent;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
       'header.header': HeaderHeader;

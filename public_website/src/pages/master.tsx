@@ -12,6 +12,7 @@ import { fetchCMS } from '@/utils/fetchCMS'
 import { SimpleText } from '@/lib/blocks/SimpleText'
 import { Image } from '@/lib/blocks/Image'
 import { ImageText } from '@/lib/blocks/ImageText'
+import { LittleList } from '@/lib/blocks/LittleList'
 
 interface MasterProps {
   homeData: APIResponseData<'api::home.home'>
@@ -19,7 +20,7 @@ interface MasterProps {
 }
 
 export default function Master({ homeData, master }: MasterProps) {
-  console.log(master.attributes)
+  console.log(master.attributes.LittleList)
   return (
     <>
       <CenteredText
@@ -62,6 +63,22 @@ export default function Master({ homeData, master }: MasterProps) {
         icon={master.attributes.ImageTextLeft?.Icon?.data}
         isImageRight={master.attributes.ImageTextLeft?.isImageRight}
       />
+
+      <LittleList
+        title={master.attributes.LittleList?.Title}
+        description={master.attributes.LittleList?.Description}
+        content={master.attributes.LittleList?.Content}
+        withDescription={master.attributes.LittleList?.WithDescritpion}
+      />
+
+      <LittleList
+        title={master.attributes.LittleListdescription?.Title}
+        description={master.attributes.LittleListdescription?.Description}
+        content={master.attributes.LittleListdescription?.Content}
+        withDescription={
+          master.attributes.LittleListdescription?.WithDescritpion
+        }
+      />
     </>
   )
 }
@@ -103,6 +120,10 @@ export const getStaticProps = (async () => {
       'ImageTextLeft',
       'ImageTextLeft.Image',
       'ImageTextLeft.Icon',
+      'LittleList',
+      'LittleList.Content',
+      'LittleListdescription',
+      'LittleListdescription.Content',
     ],
   })
 

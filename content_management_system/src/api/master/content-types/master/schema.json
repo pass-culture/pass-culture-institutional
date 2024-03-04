@@ -36,6 +36,16 @@
       "type": "component",
       "repeatable": false,
       "component": "block.image-text"
+    },
+    "LittleList": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.little-list"
+    },
+    "LittleListdescription": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.little-list"
     }
   }
 }
