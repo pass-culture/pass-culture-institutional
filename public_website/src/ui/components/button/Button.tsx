@@ -74,5 +74,8 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     padding: 1rem 2rem;
     text-align: center;
     width: max-content;
+
+    ${($variant === 'secondary' || $variant === 'tertiary') &&
+    `--outline-color: ${theme.colors.white};`}
   `}
 `
