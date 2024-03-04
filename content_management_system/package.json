@@ -22,6 +22,7 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^5.2.0",
     "strapi-plugin-update-static-content": "https://github.com/pass-culture/strapi-plugin-update-static-content#main",
+    "@strapi-community/strapi-provider-upload-google-cloud-storage": "https://github.com/pass-culture/strapi-provider-upload-google-cloud-storage#master",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
