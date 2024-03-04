@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { OutlinedText } from '../OutlinedText'
 import { Label } from './Label'
 
 interface RadioFieldProps {
   title: string
-  answers: string[]
+  // answers: string[]
+  answers: { answer: string; emoji?: string }[]
 
   answer?: number
   onChange: (answer: number) => void
@@ -17,7 +19,7 @@ export function RadioField(props: RadioFieldProps) {
       <Label as="legend">{props.title}</Label>
 
       <Choices>
-        {props.answers.map((answer, i) => (
+        {props.answers.map(({ answer, emoji }, i) => (
           <Choice key={answer}>
             <input
               className="visually-hidden"
@@ -29,8 +31,14 @@ export function RadioField(props: RadioFieldProps) {
               onChange={(e) => props.onChange(Number(e.target.value))}
             />
             <RadioLabel htmlFor={'answer-' + i}>
-              {/* TODO: add outline */}
-              <EmojiContainer>🇫🇷</EmojiContainer>
+              <EmojiContainer>
+                <OutlinedText
+                  aria-hidden="true"
+                  dilationRadius={0}
+                  blurDeviation={1.5}>
+                  {emoji}
+                </OutlinedText>
+              </EmojiContainer>
               {answer}
             </RadioLabel>
           </Choice>

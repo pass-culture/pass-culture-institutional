@@ -8,7 +8,7 @@ import { SliderField } from './SliderField'
 interface QuestionProps {
   title: string
   type: 'slider' | 'radio'
-  answers: string[]
+  answers: { answer: string; emoji?: string }[]
 
   onSubmit: (response: number) => void
 }
@@ -26,7 +26,7 @@ export function Question(props: QuestionProps) {
       {props.type === 'slider' ? (
         <SliderField
           title={props.title}
-          answers={props.answers}
+          answers={props.answers.map((a) => a.answer)}
           answer={answer}
           onChange={setAnswer}
         />

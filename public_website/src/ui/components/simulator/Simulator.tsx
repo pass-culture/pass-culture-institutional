@@ -51,7 +51,7 @@ export function Simulator(props: SimulatorProps) {
       <Question
         onSubmit={(r) => setAnswers([r])}
         title={props.ageQuestion.title}
-        answers={props.ageQuestion.answers.map((a) => a.answer)}
+        answers={props.ageQuestion.answers}
         type="slider"
       />
     )
@@ -102,7 +102,7 @@ export function Simulator(props: SimulatorProps) {
       <Question
         onSubmit={(r) => setAnswers([...previousAnswers, r])}
         title={props.nationnalityQuestion.title}
-        answers={props.nationnalityQuestion.answers.map((a) => a.answer)}
+        answers={props.nationnalityQuestion.answers}
         type="radio"
       />
     )
@@ -126,7 +126,7 @@ export function Simulator(props: SimulatorProps) {
         <Question
           onSubmit={(r) => setAnswers([...previousAnswers, r])}
           title={props.residencyQuestion.title}
-          answers={props.residencyQuestion.answers.map((a) => a.answer)}
+          answers={props.residencyQuestion.answers}
           type="radio"
         />
       )

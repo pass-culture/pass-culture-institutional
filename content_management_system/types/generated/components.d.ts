@@ -325,9 +325,11 @@ export interface SimulatorAnswer extends Schema.Component {
   collectionName: 'components_simulator_answers';
   info: {
     displayName: 'Answer';
+    description: '';
   };
   attributes: {
     answer: Attribute.String & Attribute.Required;
+    emoji: Attribute.String;
   };
 }
 

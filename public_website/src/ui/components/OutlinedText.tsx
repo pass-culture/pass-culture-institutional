@@ -20,7 +20,7 @@ interface OutlinedTextProps {
   blurDeviation?: number
   /**
    * Value of the `radius` attribute for the `<feMorphology operator="dilate">` element.
-   * @default 2
+   * @default 5
    */
   dilationRadius?: number
 
