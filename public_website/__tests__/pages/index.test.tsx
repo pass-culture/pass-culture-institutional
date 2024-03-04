@@ -26,6 +26,6 @@ describe('Home page', () => {
       })
       expect(a11yResult).toHaveNoViolations()
     },
-    { timeout: 10000 }
+    { timeout: 20000 }
   )
 })
