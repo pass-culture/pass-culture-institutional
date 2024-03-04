@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 
 interface ResultScreenProps {
   title: string
@@ -14,7 +15,7 @@ interface ResultScreenProps {
 export function ResultScreen(props: ResultScreenProps) {
   return (
     <Root>
-      <Title dangerouslySetInnerHTML={{ __html: props.title }} />
+      <Title as="p" dangerouslySetInnerHTML={{ __html: props.title }} />
 
       <Steps>
         {props.steps.map((step, i) => (
@@ -43,20 +44,16 @@ const Root = styled.div`
   }
 `
 
-const Title = styled.p`
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 37px;
-
+const Title = styled(Typo.Heading3)`
   margin-bottom: 2rem;
 `
 
 const Circle = styled.span`
   grid-area: circle;
 
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: -0.29333359003067017px;
+  letter-spacing: -0.01833334938rem;
   color: ${({ theme }) => theme.colors.secondary};
 
   width: 2rem;
@@ -80,17 +77,17 @@ const Steps = styled.ul`
 `
 
 const HelpText = styled.p`
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
-  line-height: 12px;
-  letter-spacing: -0.12380921095609665px;
+  line-height: 1.2;
+  letter-spacing: -0.007738075685rem;
 
   margin-top: 2rem;
 
   a {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
-    line-height: 15px;
+    line-height: 1.25;
     color: #94008c;
     text-decoration: underline;
     margin-left: 1rem;

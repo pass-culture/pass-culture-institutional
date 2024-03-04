@@ -20,17 +20,15 @@ export function Step(props: StepProps) {
   )
 }
 
-// TODO: rem-ise everything
-
 const Surtitle = styled.span`
   grid-area: surtitle;
   align-self: flex-end;
   height: min-content;
   line-height: 1.5;
 
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: -0.12380921095609665px;
+  letter-spacing: -0.007738075685rem;
 `
 
 const Title = styled.span`
@@ -39,9 +37,9 @@ const Title = styled.span`
   height: min-content;
   line-height: 1;
 
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 `
 
 const Root = styled.li`
@@ -66,7 +64,7 @@ const Root = styled.li`
 const Circle = styled.span<{ $isActive?: boolean }>`
   grid-area: circle;
 
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.secondary};

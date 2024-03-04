@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../button/Button'
+import { Typo } from '../typographies'
 
 interface AmountScreenProps {
   title: string
@@ -13,7 +14,7 @@ interface AmountScreenProps {
 export function AmountScreen(props: AmountScreenProps) {
   return (
     <Root>
-      <Title dangerouslySetInnerHTML={{ __html: props.title }} />
+      <Title as="p" dangerouslySetInnerHTML={{ __html: props.title }} />
       <Text dangerouslySetInnerHTML={{ __html: props.text }} />
       <Button onClick={props.onNext}>Suivant</Button>
     </Root>
@@ -28,19 +29,15 @@ const Root = styled.div`
   }
 `
 
-const Title = styled.p`
-  font-size: 26px;
-  font-weight: 700;
-  line-height: 37px;
-
+const Title = styled(Typo.Heading3)`
   margin-bottom: 1.25rem;
 `
 
 const Text = styled.p`
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
-  line-height: 33px;
-  letter-spacing: -0.29333359003067017px;
+  line-height: 2;
+  letter-spacing: -0.0183333125rem;
 
   margin-bottom: 1.5rem;
 `

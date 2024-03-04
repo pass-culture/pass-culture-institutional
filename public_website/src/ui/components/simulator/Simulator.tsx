@@ -242,7 +242,7 @@ const BottomEmoji = styled(OutlinedText)`
 `
 
 const Inner = styled.div<{ $showingResult: boolean }>`
-  box-shadow: -4px 8px 24px 0px #7d7d7d40;
+  box-shadow: -0.25rem 0.5rem 1.5rem 0 #7d7d7d40;
   background-color: ${({ theme, $showingResult }) =>
     $showingResult ? theme.colors.backgroundGray : theme.colors.white};
   position: relative;

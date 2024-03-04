@@ -74,7 +74,6 @@ export function SliderField({
         onChange={handleChange}
       />
 
-      {/* TODO: switch to select input on mobile */}
       <Select
         id="question-field"
         value={answer}
@@ -113,9 +112,9 @@ const Slider = styled(BaseSlider)`
   }
 
   .rc-slider-mark-text {
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
-    letter-spacing: -0.29333359003067017px;
+    letter-spacing: -0.01833334938rem;
     color: ${({ theme }) => theme.colors.black};
 
     &::before {
@@ -169,11 +168,11 @@ const Slider = styled(BaseSlider)`
     opacity: 1;
 
     &:focus-visible {
-      box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.primary}88;
+      box-shadow: 0 0 0 0.1875rem ${({ theme }) => theme.colors.primary}88;
     }
 
     &.rc-slider-handle-dragging {
-      box-shadow: 0 0 0 5px ${({ theme }) => theme.colors.primary}88;
+      box-shadow: 0 0 0 0.3125rem ${({ theme }) => theme.colors.primary}88;
       border-color: ${({ theme }) => theme.colors.white};
     }
   }
@@ -182,9 +181,9 @@ const Slider = styled(BaseSlider)`
 const Select = styled.select`
   padding: 1.25rem 1.875rem;
 
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 2;
 
   appearance: none;
   border: none;
