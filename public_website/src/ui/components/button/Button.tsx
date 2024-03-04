@@ -14,7 +14,6 @@ type ButtonProps = {
   className?: string
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
-
 export const Button = forwardRef(function Button(
   {
     children,
@@ -54,7 +53,6 @@ function getVariantButtonBackground(variant?: ButtonVariants) {
       )`
   }
 }
-
 
 const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
   ${({ theme, $variant }) => css`
