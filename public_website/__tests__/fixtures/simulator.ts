@@ -6,7 +6,7 @@ export const simulatorPageFixtures = {
       description:
         "Tu veux savoir si tu peux bénéficier du pass Culture, à combien tu as droit<br />\net comment débloquer ton crédit ? C'est par ici !",
       createdAt: '2024-02-26T14:20:21.352Z',
-      updatedAt: '2024-03-04T14:30:35.866Z',
+      updatedAt: '2024-03-04T16:20:25.096Z',
       publishedAt: '2024-02-26T14:20:25.234Z',
       topEmoji: '✌️',
       bottomEmoji: '📱',
@@ -14,28 +14,68 @@ export const simulatorPageFixtures = {
         id: 1,
         title: 'Quel âge as-tu ?',
         answers: [
-          { id: 7, answer: '-15 ans' },
-          { id: 8, answer: '15 ans' },
-          { id: 9, answer: '16 ans' },
-          { id: 10, answer: '17 ans' },
-          { id: 11, answer: '18 ans' },
-          { id: 12, answer: '+18 ans' },
+          {
+            id: 7,
+            answer: '-15 ans',
+            emoji: null,
+          },
+          {
+            id: 8,
+            answer: '15 ans',
+            emoji: null,
+          },
+          {
+            id: 9,
+            answer: '16 ans',
+            emoji: null,
+          },
+          {
+            id: 10,
+            answer: '17 ans',
+            emoji: null,
+          },
+          {
+            id: 11,
+            answer: '18 ans',
+            emoji: null,
+          },
+          {
+            id: 12,
+            answer: '+18 ans',
+            emoji: null,
+          },
         ],
       },
       nationnalityQuestion: {
         id: 1,
         title: 'Quelle est ta nationalité ?',
         answers: [
-          { id: 13, answer: 'Française' },
-          { id: 14, answer: 'Autre nationalité' },
+          {
+            id: 13,
+            answer: 'Française',
+            emoji: '🇫🇷',
+          },
+          {
+            id: 14,
+            answer: 'Autre nationalité',
+            emoji: '🌍',
+          },
         ],
       },
       residencyQuestion: {
         id: 2,
         title: 'Depuis combien de temps résides-tu en France ?',
         answers: [
-          { id: 16, answer: 'Depuis plus d’une année' },
-          { id: 15, answer: 'Depuis moins d’une année' },
+          {
+            id: 16,
+            answer: 'Depuis plus d’une année',
+            emoji: '🌍',
+          },
+          {
+            id: 15,
+            answer: 'Depuis moins d’une année',
+            emoji: '🌍',
+          },
         ],
       },
       successScreen: {
@@ -53,12 +93,18 @@ export const simulatorPageFixtures = {
           URL: 'https://example.com',
         },
         steps: [
-          { id: 6, step: 'Créer ton profil' },
+          {
+            id: 6,
+            step: 'Créer ton profil',
+          },
           {
             id: 5,
             step: 'Valider ton identité via tes codes Educonnect ou ta Carte Nationale d’Identité valide',
           },
-          { id: 4, step: 'Confirme ton e-mail et ton profil.' },
+          {
+            id: 4,
+            step: 'Confirme ton e-mail et ton profil.',
+          },
         ],
       },
       failureScreen: {
@@ -93,9 +139,18 @@ export const simulatorPageFixtures = {
         },
       },
       steps: [
-        { id: 3, step: 'Ton âge' },
-        { id: 2, step: 'Ta nationalité' },
-        { id: 1, step: 'Plus d’informations' },
+        {
+          id: 3,
+          step: 'Ton âge',
+        },
+        {
+          id: 2,
+          step: 'Ta nationalité',
+        },
+        {
+          id: 1,
+          step: 'Plus d’informations',
+        },
       ],
       amountScreen_15: {
         id: 1,
@@ -121,9 +176,21 @@ export const simulatorPageFixtures = {
         id: 1,
         title: 'On reste connectés',
         socialMediaLink: [
-          { id: 3, name: 'instagram', url: 'https://example.com/instagram' },
-          { id: 1, name: 'tiktok', url: 'https://example.com/tiktok' },
-          { id: 2, name: 'youtube', url: 'https://example.com/youtube' },
+          {
+            id: 3,
+            name: 'instagram',
+            url: 'https://example.com/instagram',
+          },
+          {
+            id: 1,
+            name: 'tiktok',
+            url: 'https://example.com/tiktok',
+          },
+          {
+            id: 2,
+            name: 'youtube',
+            url: 'https://example.com/youtube',
+          },
         ],
       },
     },
