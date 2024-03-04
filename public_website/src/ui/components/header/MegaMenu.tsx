@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 
 type MegaMenuProps = {
@@ -101,11 +102,16 @@ export function MegaMenu({
 
         <StyledMegaMenuCard>
           <StyledMegaMenuCardHeading>
-            <Typo.BorderedText>{data.cardTitle}</Typo.BorderedText>
+            <OutlinedText innerAs={'p'}>{data.cardTitle}</OutlinedText>
 
-            <Typo.Emoji aria-hidden="true">{data.cardFirstEmoji}</Typo.Emoji>
-            <Typo.Emoji aria-hidden="true">{data.cardSecondEmoji}</Typo.Emoji>
+            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+              {data.cardFirstEmoji}
+            </OutlinedText>
+            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+              {data.cardSecondEmoji}
+            </OutlinedText>
           </StyledMegaMenuCardHeading>
+
           <p>{data.cardDescription}</p>
           <Button href={data.cardLink.URL} variant="secondary">
             {data.cardLink.Label}
@@ -204,21 +210,31 @@ const StyledMegaMenuCardHeading = styled.div`
     margin-bottom: 4.5rem;
 
     p {
+      line-height: 1;
+      font-size: ${theme.fonts.sizes['5xl']};
+      font-weight: ${theme.fonts.weights.black};
+      color: ${theme.colors.secondary};
+      transform: rotate(-2deg);
       z-index: 1;
     }
 
     span {
       font-size: ${theme.fonts.sizes['6xl']};
       position: absolute;
-      top: -1rem;
+      top: -3rem;
       left: 1rem;
       transform: rotate(-10deg);
 
       &:last-child {
         top: auto;
         left: auto;
-        bottom: -1rem;
+        bottom: -3.3rem;
         right: 1rem;
+        z-index: 2;
+      }
+
+      @media (width < ${theme.mediaQueries.mobile}) {
+        font-size: ${theme.fonts.sizes['4xl']};
       }
     }
   `}

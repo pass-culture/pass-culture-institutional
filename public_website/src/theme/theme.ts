@@ -77,17 +77,6 @@ export const theme = {
         fontSize: FontSizes['2XL'],
       },
     },
-    borderedText: {
-      desktop: {
-        lineHeight: '1',
-        fontSize: FontSizes['5XL'],
-        fontWeight: FontWeights.BLACK,
-        color: Colors.WHITE,
-      },
-      mobile: {
-        fontSize: FontSizes['4XL'],
-      },
-    },
     emoji: {
       lineHeight: '1',
       fontSize: FontSizes['8XL'],
