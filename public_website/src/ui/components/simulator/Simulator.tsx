@@ -187,8 +187,12 @@ export function Simulator(props: SimulatorProps) {
         {currentStepElement}
       </Inner>
 
-      <TopEmoji shadow>{props.topEmoji}</TopEmoji>
-      <BottomEmoji shadow>{props.bottomEmoji}</BottomEmoji>
+      <TopEmoji shadow aria-hidden="true">
+        {props.topEmoji}
+      </TopEmoji>
+      <BottomEmoji shadow aria-hidden="true">
+        {props.bottomEmoji}
+      </BottomEmoji>
     </Root>
   )
 }
