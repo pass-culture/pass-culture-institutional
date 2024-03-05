@@ -53,7 +53,6 @@ export function SliderField({
       <Label id="question-field-label" htmlFor="question-field">
         {title}
       </Label>
-      {/* TODO: make sure this is accessible */}
       <Slider
         ariaLabelledByForHandle="question-field-label"
         min={14}
@@ -114,7 +113,6 @@ const Slider = styled(BaseSlider)`
   .rc-slider-mark-text {
     font-size: 1rem;
     font-weight: 500;
-    letter-spacing: -0.01833334938rem;
     color: ${({ theme }) => theme.colors.black};
 
     &::before {

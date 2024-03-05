@@ -6,7 +6,6 @@ import { Label } from './Label'
 
 interface RadioFieldProps {
   title: string
-  // answers: string[]
   answers: { answer: string; emoji?: string }[]
 
   answer?: number

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { OutlinedText } from '../OutlinedText'

@@ -57,7 +57,6 @@ const Circle = styled.span`
 
   font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: -0.01833334938rem;
   color: ${({ theme }) => theme.colors.secondary};
 
   width: 2rem;
@@ -84,7 +83,6 @@ const HelpText = styled.p`
   font-size: 0.625rem;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.007738075685rem;
 
   margin-top: 2rem;
 

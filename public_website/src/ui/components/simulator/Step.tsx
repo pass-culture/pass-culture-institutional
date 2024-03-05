@@ -28,7 +28,6 @@ const Surtitle = styled.span`
 
   font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: -0.007738075685rem;
 `
 
 const Title = styled.span`
@@ -39,7 +38,6 @@ const Title = styled.span`
 
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0;
 `
 
 const Root = styled.li`

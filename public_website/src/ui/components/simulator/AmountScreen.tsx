@@ -37,7 +37,6 @@ const Text = styled.p`
   font-size: 1rem;
   font-weight: 500;
   line-height: 2;
-  letter-spacing: -0.0183333125rem;
 
   margin-bottom: 1.5rem;
 `
