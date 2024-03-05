@@ -12,40 +12,45 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "SimpleText": {
+    "simpleText": {
       "type": "component",
       "repeatable": false,
       "component": "block.simple-text"
     },
-    "SimpleTextTwo": {
+    "simpleTextTwo": {
       "type": "component",
       "repeatable": false,
       "component": "block.simple-text"
     },
-    "Image": {
+    "image": {
       "type": "component",
       "repeatable": false,
       "component": "block.image"
     },
-    "ImageTextRight": {
+    "imageTextRight": {
       "type": "component",
       "repeatable": false,
       "component": "block.image-text"
     },
-    "ImageTextLeft": {
+    "imageTextLeft": {
       "type": "component",
       "repeatable": false,
       "component": "block.image-text"
     },
-    "LittleList": {
+    "littleList": {
       "type": "component",
       "repeatable": false,
       "component": "block.little-list"
     },
-    "LittleListdescription": {
+    "littleListdescription": {
       "type": "component",
       "repeatable": false,
       "component": "block.little-list"
+    },
+    "space": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.space"
     }
   }
 }

@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import Help, { getStaticProps } from '@/pages'
+import Master, { getStaticProps } from '@/pages'
 
-describe('Help page', () => {
+describe('Master page', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
@@ -16,7 +16,7 @@ describe('Help page', () => {
 
   it('should pass accessibility tests', async () => {
     const { props } = await getStaticProps()
-    const { container } = render(<Help {...props} />)
+    const { container } = render(<Master {...props} />)
 
     let a11yResult
     await act(async () => {

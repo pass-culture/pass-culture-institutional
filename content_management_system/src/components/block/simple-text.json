@@ -1,31 +1,31 @@
 {
   "collectionName": "components_block_simple_texts",
   "info": {
-    "displayName": "Simple Text",
+    "displayName": "SimpleText",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Text": {
+    "text": {
       "type": "text"
     },
-    "IsNormal": {
+    "isNormal": {
       "type": "boolean",
       "default": true
     },
-    "FirstSubTitle": {
+    "firstSubTitle": {
       "type": "text"
     },
-    "SecondSubTitle": {
+    "secondSubTitle": {
       "type": "text"
     },
-    "FirstText": {
+    "firstText": {
       "type": "text"
     },
-    "SecondText": {
+    "secondText": {
       "type": "text"
     }
   }

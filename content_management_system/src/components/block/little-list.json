@@ -6,19 +6,19 @@
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "text"
     },
-    "Content": {
+    "content": {
       "type": "component",
       "repeatable": true,
       "component": "common.little-list-component",
       "max": 4
     },
-    "WithDescritpion": {
+    "withDescritpion": {
       "type": "boolean",
       "default": false,
       "required": true

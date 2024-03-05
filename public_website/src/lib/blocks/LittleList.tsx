@@ -31,12 +31,12 @@ export function LittleList(props: LittleListProps) {
             {props.content?.map((item) => (
               <ColumnContent key={item.id}>
                 <ColumnEmoji>
-                  <span>{item.FirstEmoji}</span>
-                  <span>{item.SecondEmoji}</span>
+                  <span>{item.firstEmoji}</span>
+                  <span>{item.secondEmoji}</span>
                 </ColumnEmoji>
                 <ColumnText>
-                  <p>{item.Simple}</p>
-                  {props.withDescription && <p>{item.Description}</p>}
+                  <p>{item.simple}</p>
+                  {props.withDescription && <p>{item.description}</p>}
                 </ColumnText>
               </ColumnContent>
             ))}

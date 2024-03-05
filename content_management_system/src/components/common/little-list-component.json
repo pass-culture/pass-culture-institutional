@@ -6,17 +6,17 @@
   },
   "options": {},
   "attributes": {
-    "Simple": {
+    "simple": {
       "type": "text",
       "required": true
     },
-    "Description": {
+    "description": {
       "type": "text"
     },
-    "FirstEmoji": {
+    "firstEmoji": {
       "type": "string"
     },
-    "SecondEmoji": {
+    "secondEmoji": {
       "type": "string"
     }
   }

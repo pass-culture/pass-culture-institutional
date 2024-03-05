@@ -1,21 +1,23 @@
 {
   "collectionName": "components_block_images",
   "info": {
-    "displayName": "Image"
+    "displayName": "Image",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Image": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
-    "Description": {
+    "description": {
       "type": "text"
     }
   }

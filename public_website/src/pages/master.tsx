@@ -13,6 +13,7 @@ import { SimpleText } from '@/lib/blocks/SimpleText'
 import { Image } from '@/lib/blocks/Image'
 import { ImageText } from '@/lib/blocks/ImageText'
 import { LittleList } from '@/lib/blocks/LittleList'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 
 interface MasterProps {
   homeData: APIResponseData<'api::home.home'>
@@ -20,7 +21,7 @@ interface MasterProps {
 }
 
 export default function Master({ homeData, master }: MasterProps) {
-  console.log(master.attributes.LittleList)
+  console.log(master.attributes)
   return (
     <>
       <CenteredText
@@ -29,56 +30,58 @@ export default function Master({ homeData, master }: MasterProps) {
       />
 
       <SimpleText
-        Title={master.attributes.SimpleText.Title}
-        Text={master.attributes.SimpleText.Text}
-        IsNormal={master.attributes.SimpleText.IsNormal}
+        Title={master.attributes.simpleText?.title}
+        Text={master.attributes.simpleText?.text}
+        IsNormal={master.attributes.simpleText?.isNormal}
       />
       <SimpleText
-        Title={master.attributes.SimpleTextTwo?.Title}
-        Text={master.attributes.SimpleTextTwo?.Text}
-        IsNormal={master.attributes.SimpleTextTwo?.IsNormal}
-        FirstSubTitle={master.attributes.SimpleTextTwo?.FirstSubTitle}
-        SecondSubTitle={master.attributes.SimpleTextTwo?.SecondSubTitle}
-        FirstText={master.attributes.SimpleTextTwo?.FirstText}
-        SecondText={master.attributes.SimpleTextTwo?.SecondText}
+        Title={master.attributes.simpleTextTwo?.title}
+        Text={master.attributes.simpleTextTwo?.text}
+        IsNormal={master.attributes.simpleTextTwo?.isNormal}
+        FirstSubTitle={master.attributes.simpleTextTwo?.firstSubTitle}
+        SecondSubTitle={master.attributes.simpleTextTwo?.secondSubTitle}
+        FirstText={master.attributes.simpleTextTwo?.firstText}
+        SecondText={master.attributes.simpleTextTwo?.secondText}
       />
 
       <Image
-        description={master.attributes.Image?.Description}
-        image={master.attributes.Image?.Image}
+        description={master.attributes.image?.description}
+        image={master.attributes.image?.image}
       />
 
       <ImageText
-        title={master.attributes.ImageTextRight?.Title}
-        description={master.attributes.ImageTextRight?.Description}
-        image={master.attributes.ImageTextRight?.Image?.data}
-        icon={master.attributes.ImageTextRight?.Icon?.data}
-        isImageRight={master.attributes.ImageTextRight?.isImageRight}
+        title={master.attributes.imageTextRight?.title}
+        description={master.attributes.imageTextRight?.description}
+        image={master.attributes.imageTextRight?.image?.data}
+        icon={master.attributes.imageTextRight?.icon?.data}
+        isImageRight={master.attributes.imageTextRight?.isImageRight}
       />
 
       <ImageText
-        title={master.attributes.ImageTextLeft?.Title}
-        description={master.attributes.ImageTextLeft?.Description}
-        image={master.attributes.ImageTextLeft?.Image?.data}
-        icon={master.attributes.ImageTextLeft?.Icon?.data}
-        isImageRight={master.attributes.ImageTextLeft?.isImageRight}
+        title={master.attributes.imageTextLeft?.title}
+        description={master.attributes.imageTextLeft?.description}
+        image={master.attributes.imageTextLeft?.image?.data}
+        icon={master.attributes.imageTextLeft?.icon?.data}
+        isImageRight={master.attributes.imageTextLeft?.isImageRight}
       />
 
       <LittleList
-        title={master.attributes.LittleList?.Title}
-        description={master.attributes.LittleList?.Description}
-        content={master.attributes.LittleList?.Content}
-        withDescription={master.attributes.LittleList?.WithDescritpion}
+        title={master.attributes.littleList?.title}
+        description={master.attributes.littleList?.description}
+        content={master.attributes.littleList?.content}
+        withDescription={master.attributes.littleList?.withDescritpion}
       />
 
       <LittleList
-        title={master.attributes.LittleListdescription?.Title}
-        description={master.attributes.LittleListdescription?.Description}
-        content={master.attributes.LittleListdescription?.Content}
+        title={master.attributes.littleListdescription?.title}
+        description={master.attributes.littleListdescription?.description}
+        content={master.attributes.littleListdescription?.content}
         withDescription={
-          master.attributes.LittleListdescription?.WithDescritpion
+          master.attributes.littleListdescription?.withDescritpion
         }
       />
+
+      <WhiteSpace space={master.attributes.space?.space} />
     </>
   )
 }
@@ -110,20 +113,21 @@ export const getStaticProps = (async () => {
   // Master help data
   const masterQuery = stringify({
     populate: [
-      'SimpleText',
-      'SimpleTextTwo',
-      'Image',
-      'Image.Image',
-      'ImageTextRight',
-      'ImageTextRight.Image',
-      'ImageTextRight.Icon',
-      'ImageTextLeft',
-      'ImageTextLeft.Image',
-      'ImageTextLeft.Icon',
-      'LittleList',
-      'LittleList.Content',
-      'LittleListdescription',
-      'LittleListdescription.Content',
+      'simpleText',
+      'simpleTextTwo',
+      'image',
+      'image.image',
+      'imageTextRight',
+      'imageTextRight.image',
+      'imageTextRight.icon',
+      'imageTextLeft',
+      'imageTextLeft.image',
+      'imageTextLeft.icon',
+      'littleList',
+      'littleList.content',
+      'littleListdescription',
+      'littleListdescription.content',
+      'space',
     ],
   })
 

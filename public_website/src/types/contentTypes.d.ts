@@ -978,13 +978,14 @@ export interface ApiMasterMaster extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    SimpleText: Attribute.Component<'block.simple-text'>;
-    SimpleTextTwo: Attribute.Component<'block.simple-text'>;
-    Image: Attribute.Component<'block.image'>;
-    ImageTextRight: Attribute.Component<'block.image-text'>;
-    ImageTextLeft: Attribute.Component<'block.image-text'>;
-    LittleList: Attribute.Component<'block.little-list'>;
-    LittleListdescription: Attribute.Component<'block.little-list'>;
+    simpleText: Attribute.Component<'block.simple-text'>;
+    simpleTextTwo: Attribute.Component<'block.simple-text'>;
+    image: Attribute.Component<'block.image'>;
+    imageTextRight: Attribute.Component<'block.image-text'>;
+    imageTextLeft: Attribute.Component<'block.image-text'>;
+    littleList: Attribute.Component<'block.little-list'>;
+    littleListdescription: Attribute.Component<'block.little-list'>;
+    space: Attribute.Component<'block.space'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

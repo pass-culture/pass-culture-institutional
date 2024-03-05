@@ -47,12 +47,13 @@ export interface BlockImageText extends Schema.Component {
   collectionName: 'components_block_image_texts';
   info: {
     displayName: 'ImageText';
+    description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Description: Attribute.Text;
-    Image: Attribute.Media;
-    Icon: Attribute.Media;
+    title: Attribute.String;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    icon: Attribute.Media;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
@@ -61,10 +62,11 @@ export interface BlockImage extends Schema.Component {
   collectionName: 'components_block_images';
   info: {
     displayName: 'Image';
+    description: '';
   };
   attributes: {
-    Image: Attribute.Media;
-    Description: Attribute.Text;
+    image: Attribute.Media;
+    description: Attribute.Text;
   };
 }
 
@@ -110,13 +112,13 @@ export interface BlockLittleList extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Description: Attribute.Text;
-    Content: Attribute.Component<'common.little-list-component', true> &
+    title: Attribute.String;
+    description: Attribute.Text;
+    content: Attribute.Component<'common.little-list-component', true> &
       Attribute.SetMinMax<{
         max: 4;
       }>;
-    WithDescritpion: Attribute.Boolean &
+    withDescritpion: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
   };
@@ -156,17 +158,17 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
-    displayName: 'Simple Text';
+    displayName: 'SimpleText';
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
-    IsNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
-    FirstSubTitle: Attribute.Text;
-    SecondSubTitle: Attribute.Text;
-    FirstText: Attribute.Text;
-    SecondText: Attribute.Text;
+    title: Attribute.String;
+    text: Attribute.Text;
+    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
+    firstSubTitle: Attribute.Text;
+    secondSubTitle: Attribute.Text;
+    firstText: Attribute.Text;
+    secondText: Attribute.Text;
   };
 }
 
@@ -180,6 +182,17 @@ export interface BlockSocialMedia extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     socialMediaLink: Attribute.Component<'block.link', true> &
       Attribute.Required;
+  };
+}
+
+export interface BlockSpace extends Schema.Component {
+  collectionName: 'components_block_spaces';
+  info: {
+    displayName: 'Space';
+    description: '';
+  };
+  attributes: {
+    space: Attribute.Integer;
   };
 }
 
@@ -202,10 +215,10 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: '';
   };
   attributes: {
-    Simple: Attribute.Text & Attribute.Required;
-    Description: Attribute.Text;
-    FirstEmoji: Attribute.String;
-    SecondEmoji: Attribute.String;
+    simple: Attribute.Text & Attribute.Required;
+    description: Attribute.Text;
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
   };
 }
 
@@ -360,6 +373,7 @@ declare module '@strapi/types' {
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+      'block.space': BlockSpace;
       'common.link': CommonLink;
       'common.little-list-component': CommonLittleListComponent;
       'footer.legal-links': FooterLegalLinks;
