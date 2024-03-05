@@ -27,7 +27,6 @@
   "devDependencies": {
     "@strapi/strapi": "^4.20.0",
     "@testing-library/react": "^14.0.0",
-    "@types/marked": "^6.0.0",
     "@types/node": "^20.11.0",
     "@types/qrcode": "^1.5.5",
     "@types/qs": "^6.9.11",
