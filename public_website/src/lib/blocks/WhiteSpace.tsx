@@ -13,7 +13,6 @@ interface WhiteSpaceProps {
 }
 
 export function WhiteSpace(props: WhiteSpaceProps) {
-  console.log(props.space)
   return <Root $height={props.space}></Root>
 }
 
