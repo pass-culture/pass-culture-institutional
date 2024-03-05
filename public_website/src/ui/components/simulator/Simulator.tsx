@@ -38,6 +38,25 @@ type AmountScreen =
   | SimulatorProps['amountScreen17']
   | SimulatorProps['amountScreen18']
 
+enum AgeAnswer {
+  IS_LESS_THAN_15 = 0,
+  IS_15 = 1,
+  IS_16 = 2,
+  IS_17 = 3,
+  IS_18 = 4,
+  IS_MORE_THAN_18 = 5,
+}
+
+enum NationalityAnswer {
+  FRANCE = 0,
+  OTHER = 1,
+}
+
+enum ResidencyAnswer {
+  MORE_THAN_A_YEAR = 0,
+  LESS_THAN_A_YEAR = 1,
+}
+
 export function Simulator(props: SimulatorProps) {
   // Each number in the array represents an answer or validated step
   const [answers, setAnswers] = useState<number[]>([])
@@ -73,7 +92,7 @@ export function Simulator(props: SimulatorProps) {
     stepContainerAriaLabel = props.ageQuestion.title
   } else if (answers.length === 1 && typeof answers[0] === 'number') {
     // Amount screens or failures
-    if (answers[0] === 0) {
+    if (answers[0] === AgeAnswer.IS_LESS_THAN_15) {
       // Less than 15 yo
       currentStepElement = (
         <FailureScreen
@@ -84,7 +103,7 @@ export function Simulator(props: SimulatorProps) {
       )
       isResultScreen = true
       stepContainerAriaLabel = props.tooYoungScreen.title
-    } else if (answers[0] === 5) {
+    } else if (answers[0] === AgeAnswer.IS_MORE_THAN_18) {
       // More than 18 yo
       currentStepElement = (
         <FailureScreen
@@ -98,10 +117,10 @@ export function Simulator(props: SimulatorProps) {
     } else {
       // 15, 16, 17, or 18 yo
       const screen = {
-        1: props.amountScreen15,
-        2: props.amountScreen16,
-        3: props.amountScreen17,
-        4: props.amountScreen18,
+        [AgeAnswer.IS_15]: props.amountScreen15,
+        [AgeAnswer.IS_16]: props.amountScreen16,
+        [AgeAnswer.IS_17]: props.amountScreen17,
+        [AgeAnswer.IS_18]: props.amountScreen18,
       }[answers[0]] as AmountScreen
       const ageAnswer = answers[0]
       currentStepElement = (
@@ -115,7 +134,7 @@ export function Simulator(props: SimulatorProps) {
       stepContainerAriaLabel = screen.title
     }
   } else if (answers.length === 2) {
-    // Nationnality question
+    // Nationality question
     const previousAnswers = answers.slice(0, 2)
     currentStepElement = (
       <Question
@@ -127,7 +146,7 @@ export function Simulator(props: SimulatorProps) {
     )
     stepContainerAriaLabel = props.nationnalityQuestion.title
   } else if (answers.length === 3) {
-    if (answers[2] === 0) {
+    if (answers[2] === NationalityAnswer.FRANCE) {
       // Success screen
       currentStepElement = (
         <ResultScreen
@@ -154,7 +173,7 @@ export function Simulator(props: SimulatorProps) {
       stepContainerAriaLabel = props.residencyQuestion.title
     }
   } else if (answers.length === 4) {
-    if (answers[3] === 0) {
+    if (answers[3] === ResidencyAnswer.MORE_THAN_A_YEAR) {
       // More than a year, success
       currentStepElement = (
         <ResultScreen
