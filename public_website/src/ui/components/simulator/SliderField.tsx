@@ -165,6 +165,7 @@ const Slider = styled(BaseSlider)`
     margin-top: -0.6875rem;
     border: 0.25rem solid ${({ theme }) => theme.colors.white};
     opacity: 1;
+    z-index: unset;
 
     &:focus-visible {
       box-shadow: 0 0 0 0.1875rem ${({ theme }) => theme.colors.primary}88;

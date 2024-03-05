@@ -241,6 +241,7 @@ const Root = styled.div`
     border-radius: 1.875rem;
     background-color: ${({ theme }) => theme.colors.secondary};
     transform: rotate(2.1deg);
+    z-index: -1;
   }
 `
 
@@ -275,7 +276,6 @@ const Inner = styled.div<{ $showingResult: boolean }>`
   background-color: ${({ theme, $showingResult }) =>
     $showingResult ? theme.colors.lightGray : theme.colors.white};
   position: relative;
-  z-index: 1;
   border-radius: 1.875rem;
   min-height: 42rem;
 
