@@ -76,11 +76,7 @@ export function SliderField({
         value={answer}
         onChange={(e) => onChange(Number(e.target.value))}>
         {answers.map((a, i) => (
-          <option
-            key={a}
-            value={i}
-            dangerouslySetInnerHTML={{ __html: answers[5]! }}
-          />
+          <option key={a} value={i} dangerouslySetInnerHTML={{ __html: a! }} />
         ))}
       </Select>
     </Field>
