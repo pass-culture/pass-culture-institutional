@@ -4,8 +4,8 @@ import type { AriaValueFormat } from 'rc-slider/lib/interface'
 import styled from 'styled-components'
 
 import 'rc-slider/assets/index.css'
+import { ChevronDown } from '../icons/ChevronDown'
 import { Label } from './Label'
-import selectArrow from './select-arrow.svg'
 
 interface SliderFieldProps {
   title: string
@@ -71,14 +71,21 @@ export function SliderField({
         value={(answer ?? 0) + 14}
         onChange={handleChange}
       />
-      <Select
-        id="question-field"
-        value={answer}
-        onChange={(e) => onChange(Number(e.target.value))}>
-        {answers.map((a, i) => (
-          <option key={a} value={i} dangerouslySetInnerHTML={{ __html: a! }} />
-        ))}
-      </Select>
+      <SelectWrapper>
+        <Select
+          id="question-field"
+          value={answer}
+          onChange={(e) => onChange(Number(e.target.value))}>
+          {answers.map((a, i) => (
+            <option
+              key={a}
+              value={i}
+              dangerouslySetInnerHTML={{ __html: a! }}
+            />
+          ))}
+        </Select>
+        <SelectIcon />
+      </SelectWrapper>
     </Field>
   )
 }
@@ -174,6 +181,10 @@ const Slider = styled(BaseSlider)`
   }
 `
 
+const SelectWrapper = styled.div`
+  position: relative;
+`
+
 const Select = styled.select`
   padding: 1.25rem 1.875rem;
 
@@ -185,13 +196,18 @@ const Select = styled.select`
   border: none;
   border-radius: 1.25rem;
   background-color: ${({ theme }) => theme.colors.lightGray};
-  background-image: url(${selectArrow.src});
-  background-repeat: no-repeat;
-  background-position: right 2rem center;
+  width: 100%;
 
   display: none;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: initial;
   }
+`
+
+const SelectIcon = styled(ChevronDown)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
 `

@@ -1,14 +1,16 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Label = styled.label`
-  display: block;
-  font-size: ${({ theme }) => theme.fonts.sizes['4xl']};
-  font-weight: ${({ theme }) => theme.fonts.weights.bold};
+  ${({ theme }) => css`
+    display: block;
+    font-size: ${theme.fonts.sizes['4xl']};
+    font-weight: ${theme.fonts.weights.bold};
 
-  border-bottom: 1px solid ${({ theme }) => theme.colors.primary}33; // 20% opacity
-  padding-bottom: 2.5rem;
+    border-bottom: 1px solid ${theme.colors.primary}33; // 20% opacity
+    padding-bottom: 2.5rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    padding-bottom: 1.5rem;
-  }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding-bottom: 1.5rem;
+    }
+  `}
 `
