@@ -14,14 +14,11 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-interface HomeProps {
-  homeData: APIResponseData<'api::home.home'>
-  latestStudies: APIResponseData<'api::news.news'>[]
+interface HelpProps {
   helpData: APIResponseData<'api::help.help'>
 }
 
-export default function Help({ homeData, latestStudies, helpData }: HomeProps) {
-  console.log(helpData)
+export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
       <Hero
@@ -61,46 +58,6 @@ export default function Help({ homeData, latestStudies, helpData }: HomeProps) {
 }
 
 export const getStaticProps = (async () => {
-  // Fetch home data
-  const query = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.cta',
-      'heroSection.images',
-      'aboutSection',
-      'eligibilitySection',
-      'eligibilitySection.items',
-      'eligibilitySection.cardCta',
-      'CTASection',
-      'CTASection.image',
-      'CTASection.ctaLink',
-      'latestStudies',
-      'latestStudies.cta',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-    ],
-  })
-  const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
-    `/home?${query}`
-  )
-
-  // Fetch 3 latest studies
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eq: 'Étude',
-      },
-    },
-  })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
-
   // Fetch help data
   const helpQuery = stringify({
     populate: [
@@ -123,15 +80,12 @@ export const getStaticProps = (async () => {
     `/help?${helpQuery}`
   )
 
-  console.log(help.data)
   return {
     props: {
-      homeData: data,
-      latestStudies: latestStudies.data,
       helpData: help.data,
     },
   }
-}) satisfies GetStaticProps<HomeProps>
+}) satisfies GetStaticProps<HelpProps>
 
 const StyledPushCTA = styled(DoublePushCTA)`
   ${({ theme }) => css`

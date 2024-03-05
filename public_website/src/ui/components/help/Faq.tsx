@@ -8,6 +8,8 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { LinkFaq } from './Link'
 
+import arrow from '../../image/arrowd.svg'
+
 type FaqProps = {
   title: string
   //   subTitle: string
@@ -22,6 +24,8 @@ type FaqProps = {
 }
 
 export function Faq({ title, cta, link }: FaqProps) {
+  const detailTitle =
+    'Je ne suis pas né en France, comment faire pour m’inscrire ?'
   const defaultContent =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
   return (
@@ -33,45 +37,22 @@ export function Faq({ title, cta, link }: FaqProps) {
         </StyledContentTextWrapper>
         <StyledFaqtWrapper>
           <StyledAccordion>
-            <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="4" aria-label="Accordion 3" title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="5" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="6" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="7" aria-label="Accordion 3" title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="8" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="9" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem
-              key="10"
-              aria-label="Accordion 3"
-              title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
+          </StyledAccordion>
+          <StyledAccordion>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
+          </StyledAccordion>
+          <StyledAccordion>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
           </StyledAccordion>
         </StyledFaqtWrapper>
       </StyledContentWrapper>
@@ -136,15 +117,67 @@ const StyledContentTextWrapper = styled.div`
 const StyledFaqtWrapper = styled.div`
   ${({ theme }) => css`
     // padding-left: 2rem;
+    margin-top: 2rem;
   `}
 `
 
-const StyledAccordion = styled(Accordion)`
+// const StyledAccordion = styled(Accordion)`
+//   ${({ theme }) => css`
+//     h2 {
+//       margin: 2rem 0;
+//       font-size: ${theme.fonts.sizes['xl']};
+//       font-weight: ${theme.fonts.weights.bold};
+//     }
+//     button {
+//       display: flex;
+//       width: 100%;
+//       justify-content: space-between;
+//       &:focus-visible {
+//         outline: 0px auto -webkit-focus-ring-color !important;
+//       }
+//     }
+
+//     svg {
+//       transform: rotateZ(270deg);
+//     }
+
+//     section {
+//       margin-bottom: 2rem;
+//     }
+
+//     @media (width < ${theme.mediaQueries.mobile}) {
+//       text-align: left;
+//     }
+//   `}
+// `
+
+const StyledAccordion = styled.details`
   ${({ theme }) => css`
-    h2 {
-      margin: 2rem 0;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+
+    border-bottom: solid 1px #00000020;
+    summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
+
+      // list-style-type: '⬇ ';
+    }
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    summary::after {
+      content: url('../../image/arrowd.svg');
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    p {
+      margin-top: 1rem;
     }
     button {
       display: flex;
