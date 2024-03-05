@@ -56,7 +56,7 @@ const Circle = styled.span`
   grid-area: circle;
 
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fonts.weights.medium};
   color: ${({ theme }) => theme.colors.secondary};
 
   width: 2rem;
@@ -66,7 +66,7 @@ const Circle = styled.span`
   align-items: center;
   border-radius: 50%;
 
-  border: 1px solid #320096;
+  border: 1px solid ${({ theme }) => theme.colors.secondary};
 
   margin-right: 1.25rem;
 `
@@ -81,16 +81,16 @@ const Steps = styled.ul`
 
 const HelpText = styled.p`
   font-size: 0.625rem;
-  font-weight: 600;
+  font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
   line-height: 1.2;
 
   margin-top: 2rem;
 
   a {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: ${({ theme }) => theme.fonts.sizes['2xs']};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
     line-height: 1.25;
-    color: #94008c;
+    color: ${({ theme }) => theme.colors.primary};
     text-decoration: underline;
     margin-left: 1rem;
   }

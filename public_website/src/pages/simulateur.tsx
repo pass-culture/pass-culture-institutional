@@ -59,7 +59,7 @@ const Root = styled.div`
 
 const Title = styled.h1`
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.secondary};
 
@@ -67,8 +67,8 @@ const Title = styled.h1`
 `
 
 const Description = styled.p`
-  font-size: 1rem;
-  font-weight: 500;
+  font-weight: ${({ theme }) => theme.fonts.sizes.m};
+  font-weight: ${({ theme }) => theme.fonts.weights.medium};
   line-height: 2;
 `
 

@@ -11,15 +11,17 @@ export const theme = {
     secondary: Colors.SECONDARY,
     tertiary: Colors.TERTIARY,
     lightBlue: Colors.LIGHT_BLUE,
-    lightGray: Colors.LIGHT_GRAY,
+    gray: Colors.GRAY,
+    darkGray: Colors.DARK_GRAY,
     flashGreen: Colors.FLASH_GREEN,
     purple: Colors.PURPLE,
-    backgroundGray: Colors.BACKGROUND_GRAY,
+    lightGray: Colors.LIGHT_GRAY,
   },
   shadows: {
-    popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
-    sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
-    banner: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
+    popover: `${Shadows.POPOVER} ${Colors.GRAY}`,
+    sticker: `${Shadows.STICKER} ${Colors.GRAY}`,
+    banner: `${Shadows.STICKER} ${Colors.GRAY}`,
+    contai: `${Shadows.STICKER} ${Colors.GRAY}`,
   },
   fonts: {
     sizes: {

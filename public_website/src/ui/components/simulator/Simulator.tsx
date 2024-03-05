@@ -271,9 +271,9 @@ const BottomEmoji = styled(OutlinedText)`
 `
 
 const Inner = styled.div<{ $showingResult: boolean }>`
-  box-shadow: -0.25rem 0.5rem 1.5rem 0 #7d7d7d40;
+  box-shadow: ${({ theme }) => theme.shadows.sticker};
   background-color: ${({ theme, $showingResult }) =>
-    $showingResult ? theme.colors.backgroundGray : theme.colors.white};
+    $showingResult ? theme.colors.lightGray : theme.colors.white};
   position: relative;
   z-index: 1;
   border-radius: 1.875rem;
@@ -292,7 +292,7 @@ const Steps = styled.ol`
   grid-row: 1 / -1;
 
   padding: 6.25rem 4rem;
-  border-right: 1px solid #dedede99;
+  border-right: 1px solid ${({ theme }) => theme.colors.gray};
 
   display: flex;
   flex-direction: column;
@@ -314,7 +314,7 @@ const StepSeparator = styled.li`
     inset: 0;
     left: 1.4375rem;
     width: 0.125rem;
-    background-color: #cacbd2;
+    background-color: ${({ theme }) => theme.colors.darkGray};
     border-radius: 0.0625rem;
   }
 

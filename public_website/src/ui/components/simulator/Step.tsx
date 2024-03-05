@@ -27,7 +27,7 @@ const Surtitle = styled.span`
   line-height: 1.5;
 
   font-size: 0.625rem;
-  font-weight: 600;
+  font-weight: ${({ theme }) => theme.fonts.weights.semiBold};
 `
 
 const Title = styled.span`
@@ -36,8 +36,8 @@ const Title = styled.span`
   height: min-content;
   line-height: 1;
 
-  font-size: 1rem;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.sizes.m};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
 `
 
 const Root = styled.li`
@@ -62,8 +62,8 @@ const Root = styled.li`
 const Circle = styled.span<{ $isActive?: boolean }>`
   grid-area: circle;
 
-  font-size: 1rem;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.sizes.m};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.secondary};
 

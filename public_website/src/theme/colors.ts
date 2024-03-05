@@ -5,8 +5,9 @@ export enum Colors {
   SECONDARY = '#320096',
   TERTIARY = '#eb0055',
   LIGHT_BLUE = '#F5F2FA',
-  LIGHT_GRAY = '#9f9f9f26',
+  LIGHT_GRAY = '#F7F5FB',
+  GRAY = '#9f9f9f26',
+  DARK_GRAY = '#CACBD2',
   FLASH_GREEN = '#27dca8',
   PURPLE = '#4F0095',
-  BACKGROUND_GRAY = '#F7F5FB',
 }

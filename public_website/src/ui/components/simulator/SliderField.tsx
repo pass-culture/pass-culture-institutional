@@ -111,8 +111,8 @@ const Slider = styled(BaseSlider)`
   }
 
   .rc-slider-mark-text {
-    font-size: 1rem;
-    font-weight: 500;
+    font-weight: ${({ theme }) => theme.fonts.sizes.m};
+    font-weight: ${({ theme }) => theme.fonts.weights.medium};
     color: ${({ theme }) => theme.colors.black};
 
     &::before {
@@ -125,7 +125,8 @@ const Slider = styled(BaseSlider)`
       height: 1rem;
       width: 1px;
 
-      background-color: #dad1ec;
+      background-color: ${({ theme }) => theme.colors.primary};
+      opacity: 0.1;
     }
 
     &:last-of-type {
@@ -179,14 +180,14 @@ const Slider = styled(BaseSlider)`
 const Select = styled.select`
   padding: 1.25rem 1.875rem;
 
-  font-size: 0.9375rem;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fonts.sizes.s};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
   line-height: 2;
 
   appearance: none;
   border: none;
   border-radius: 1.25rem;
-  background-color: ${({ theme }) => theme.colors.backgroundGray};
+  background-color: ${({ theme }) => theme.colors.lightGray};
   background-image: url(${selectArrow.src});
   background-repeat: no-repeat;
   background-position: right 2rem center;

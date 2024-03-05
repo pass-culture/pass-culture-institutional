@@ -32,10 +32,6 @@ const Title = styled(Typo.Heading3)`
   margin-bottom: 1.25rem;
 `
 
-const Text = styled.p`
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 2;
-
+const Text = styled(Typo.Body)`
   margin-bottom: 1.5rem;
 `

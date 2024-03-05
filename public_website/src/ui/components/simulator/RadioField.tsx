@@ -19,7 +19,7 @@ export function RadioField(props: RadioFieldProps) {
 
       <Choices>
         {props.answers.map(({ answer, emoji }, i) => (
-          <Choice key={answer}>
+          <div key={answer}>
             <input
               className="visually-hidden"
               type="radio"
@@ -40,7 +40,7 @@ export function RadioField(props: RadioFieldProps) {
               </EmojiContainer>
               {answer}
             </RadioLabel>
-          </Choice>
+          </div>
         ))}
       </Choices>
     </Fieldset>
@@ -72,19 +72,19 @@ const EmojiContainer = styled.span`
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background-color: #dbd6e9;
+  background-color: ${({ theme }) => theme.colors.secondary}1A; // 10% opacity
 `
 
 const RadioLabel = styled.label`
-  font-size: 1rem;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.sizes.m};
+  font-weight: ${({ theme }) => theme.fonts.weights.bold};
 
   display: flex;
   align-items: center;
   gap: 1.5rem;
   padding: 1.625rem 1.25rem;
   border-radius: 1.25rem;
-  background: ${({ theme }) => theme.colors.backgroundGray};
+  background: ${({ theme }) => theme.colors.lightGray};
   border: 1px solid transparent;
 
   input:checked + & {
@@ -96,6 +96,10 @@ const RadioLabel = styled.label`
       background-color: ${({ theme }) => theme.colors.primary};
     }
   }
-`
 
-const Choice = styled.div``
+  input:focus-visible + & {
+    outline: 2px solid
+      var(--outline-color, ${({ theme }) => theme.colors.primary});
+    outline-offset: 2px;
+  }
+`
