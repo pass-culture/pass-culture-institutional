@@ -5,7 +5,9 @@ import styled from 'styled-components'
 
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
+import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface SimulatorProps {
@@ -22,7 +24,7 @@ export default function SimulatorPage(props: SimulatorProps) {
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
 
-      {/* TODO: add breadcrumb here */}
+      <Breadcrumb links={props.data.attributes.breadcrumbLinks} />
 
       <StyledSimulator
         ageQuestion={props.data.attributes.ageQuestion}
@@ -66,10 +68,8 @@ const Title = styled.h1`
   margin-bottom: 1.75rem;
 `
 
-const Description = styled.p`
-  font-weight: ${({ theme }) => theme.fonts.sizes.m};
-  font-weight: ${({ theme }) => theme.fonts.weights.medium};
-  line-height: 2;
+const Description = styled(Typo.Body)`
+  margin-bottom: 2rem;
 `
 
 const StyledSimulator = styled(Simulator)`
@@ -81,6 +81,7 @@ export const getStaticProps = (async () => {
   const query = stringify(
     {
       populate: [
+        'breadcrumbLinks',
         'ageQuestion.answers',
         'nationnalityQuestion.answers',
         'residencyQuestion.answers',

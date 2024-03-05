@@ -112,6 +112,12 @@
       "repeatable": false,
       "required": true,
       "component": "block.social-media"
+    },
+    "breadcrumbLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link",
+      "required": true
     }
   }
 }
