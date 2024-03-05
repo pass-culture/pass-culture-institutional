@@ -54,22 +54,25 @@ export default function SimulatorPage(props: SimulatorProps) {
 }
 
 const Root = styled.div`
-  max-width: calc(1200px + 1rem);
+  max-width: calc(75rem + 1rem);
   margin: auto;
   padding: 1rem;
 `
 
-const Title = styled.h1`
-  font-size: 3.5rem;
-  font-weight: ${({ theme }) => theme.fonts.weights.bold};
-  line-height: 1.3;
-  color: ${({ theme }) => theme.colors.secondary};
-
+const Title = styled(Typo.Heading1)`
   margin-bottom: 1.75rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+    text-align: center;
+  }
 `
 
 const Description = styled(Typo.Body)`
   margin-bottom: 2rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+    text-align: center;
+  }
 `
 
 const StyledSimulator = styled(Simulator)`
