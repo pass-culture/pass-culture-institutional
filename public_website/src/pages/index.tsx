@@ -12,6 +12,7 @@ import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
 import { Recommendations } from '@/ui/components/home/Recommendations'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { Testimonies } from '@/lib/blocks/Testimonies'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
@@ -66,6 +67,26 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
       />
 
       <Recommendations
+        title={homeData.attributes.recommendationsSection.recommendations.title}
+        controlsLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .controlsLabel
+        }
+        previousButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .previousButtonLabel
+        }
+        nextButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .nextButtonLabel
+        }
+        recommendations={
+          homeData.attributes.recommendationsSection.recommendations.items
+        }
+        cta={homeData.attributes.recommendationsSection.cta}
+      />
+
+      <Testimonies
         title={homeData.attributes.recommendationsSection.recommendations.title}
         controlsLabel={
           homeData.attributes.recommendationsSection.recommendations
