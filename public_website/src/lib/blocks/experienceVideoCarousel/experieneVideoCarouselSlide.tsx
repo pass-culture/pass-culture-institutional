@@ -10,7 +10,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 import { useRef } from 'react'
 import { Pause } from '@/ui/components/icons/Pause'
 
-export type TestimonyCarouselSlideProps = {
+export type ExperienceVideoCarouselSlideProps = {
   slideIndex: number
   image: APIResponse<'plugin::upload.file'> | null
   title: string
@@ -18,13 +18,13 @@ export type TestimonyCarouselSlideProps = {
   url: string
 }
 
-export function TestimonyCarouselSlide({
+export function ExperienceVideoCarouselSlide({
   slideIndex,
   image,
   title,
   description,
   url,
-}: TestimonyCarouselSlideProps) {
+}: ExperienceVideoCarouselSlideProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState<Boolean>(false)
   const playVideo = () => {
@@ -38,6 +38,7 @@ export function TestimonyCarouselSlide({
       }
     }
   }
+  const handleEnter = () => {}
   return (
     <Root
       index={slideIndex}
@@ -52,7 +53,6 @@ export function TestimonyCarouselSlide({
 
         {image && (
           <StyledVideo
-            controls
             ref={videoRef}
             poster={
               image.data.attributes.url &&
@@ -93,7 +93,7 @@ const StyledVideo = styled.video`
   width: 100%;
   height: auto;
 
-  aspect-ratio: 0.7;
+  aspect-ratio: 1.5;
 `
 const StyledTitle = styled(Typo.Heading3)`
   margin: 1.5rem 0 0.25rem;

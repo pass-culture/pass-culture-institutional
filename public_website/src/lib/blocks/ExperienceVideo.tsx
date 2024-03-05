@@ -4,27 +4,29 @@ import styled, { css } from 'styled-components'
 import { TestimonyCarouselSlideProps } from './testimonyCaousel/testimonyCarouselSlide'
 import { TestimonyCarousel } from './testimonyCaousel/testimonyCarousel'
 
-type TestimoniesProps = {
+import { ExperienceVideoCarouselSlideProps } from './experienceVideoCarousel/experieneVideoCarouselSlide'
+import { ExperienceVideoCarousel } from './experienceVideoCarousel/experienceVideoCarousel'
+type ExperienceVideoProps = {
   title: string
   controlsLabel: string
   nextButtonLabel: string
   previousButtonLabel: string
-  recommendations: Omit<TestimonyCarouselSlideProps, 'slideIndex'>[]
+  recommendations: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
   cta: { Label: string; URL: string }
 }
 
-export function Testimonies({
+export function ExperienceVideo({
   title,
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
   recommendations,
   cta,
-}: TestimoniesProps) {
+}: ExperienceVideoProps) {
   return (
     <Root>
       <StyledCarouselWrapper>
-        <TestimonyCarousel
+        <ExperienceVideoCarousel
           title={title}
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
@@ -32,9 +34,6 @@ export function Testimonies({
           items={recommendations}
         />
       </StyledCarouselWrapper>
-      {/* <StyledCtaWrapper>
-        <Button href={cta.URL}>{cta.Label}</Button>
-      </StyledCtaWrapper> */}
     </Root>
   )
 }
