@@ -15,7 +15,11 @@ interface ResultScreenProps {
 export function ResultScreen(props: ResultScreenProps) {
   return (
     <Root>
-      <Title as="p" dangerouslySetInnerHTML={{ __html: props.title }} />
+      <Title
+        as="p"
+        id="simulator-step-title"
+        dangerouslySetInnerHTML={{ __html: props.title }}
+      />
 
       <Steps>
         {props.steps.map((step, i) => (

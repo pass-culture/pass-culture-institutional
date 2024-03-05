@@ -53,7 +53,6 @@ export function SliderField({
       <Label id="question-field-label" htmlFor="question-field">
         {title}
       </Label>
-
       {/* TODO: make sure this is accessible */}
       <Slider
         ariaLabelledByForHandle="question-field-label"
@@ -61,27 +60,28 @@ export function SliderField({
         max={19}
         step={1}
         marks={{
-          '14': answers[0],
-          '15': answers[1],
-          '16': answers[2],
-          '17': answers[3],
-          '18': answers[4],
-          '19': answers[5],
+          '14': <span dangerouslySetInnerHTML={{ __html: answers[0]! }} />,
+          '15': <span dangerouslySetInnerHTML={{ __html: answers[1]! }} />,
+          '16': <span dangerouslySetInnerHTML={{ __html: answers[2]! }} />,
+          '17': <span dangerouslySetInnerHTML={{ __html: answers[3]! }} />,
+          '18': <span dangerouslySetInnerHTML={{ __html: answers[4]! }} />,
+          '19': <span dangerouslySetInnerHTML={{ __html: answers[5]! }} />,
         }}
         included={false}
         ariaValueTextFormatterForHandle={valueTextFormatter}
         value={(answer ?? 0) + 14}
         onChange={handleChange}
       />
-
       <Select
         id="question-field"
         value={answer}
         onChange={(e) => onChange(Number(e.target.value))}>
         {answers.map((a, i) => (
-          <option key={a} value={i}>
-            {answers[i]}
-          </option>
+          <option
+            key={a}
+            value={i}
+            dangerouslySetInnerHTML={{ __html: answers[5]! }}
+          />
         ))}
       </Select>
     </Field>

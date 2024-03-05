@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 
@@ -10,6 +10,7 @@ import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
 import { Step } from './Step'
 import { APIResponseData } from '@/types/strapi'
+import { stripTags } from '@/utils/stripTags'
 
 interface SimulatorProps {
   className?: string
@@ -41,20 +42,36 @@ type AmountScreen =
 export function Simulator(props: SimulatorProps) {
   // Each number in the array represents an answer or validated step
   const [answers, setAnswers] = useState<number[]>([])
+  const [isPristine, setIsPristine] = useState(true)
+
+  function onAnswerSubmit(newAnswers: number[]) {
+    setAnswers(newAnswers)
+    setIsPristine(false)
+  }
+
+  // Reset the focus at the start of the current step whenever it changes
+  const stepContainerRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (answers.length !== 0 || !isPristine) {
+      stepContainerRef.current?.focus()
+    }
+  }, [answers, isPristine])
 
   let currentStepElement: ReactNode = null
   let isResultScreen = false
+  let stepContainerAriaLabel = ''
 
   if (answers.length === 0) {
     // Age question
     currentStepElement = (
       <Question
-        onSubmit={(r) => setAnswers([r])}
+        onSubmit={(r) => onAnswerSubmit([r])}
         title={props.ageQuestion.title}
         answers={props.ageQuestion.answers}
         type="slider"
       />
     )
+    stepContainerAriaLabel = props.ageQuestion.title
   } else if (answers.length === 1 && typeof answers[0] === 'number') {
     // Amount screens or failures
     if (answers[0] === 0) {
@@ -67,6 +84,7 @@ export function Simulator(props: SimulatorProps) {
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = props.tooYoungScreen.title
     } else if (answers[0] === 5) {
       // More than 18 yo
       currentStepElement = (
@@ -77,6 +95,7 @@ export function Simulator(props: SimulatorProps) {
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = props.tooOldScreen.title
     } else {
       // 15, 16, 17, or 18 yo
       const screen = {
@@ -90,22 +109,24 @@ export function Simulator(props: SimulatorProps) {
         <AmountScreen
           text={screen.text}
           title={screen.title}
-          onNext={() => setAnswers([ageAnswer, 0])}
+          onNext={() => onAnswerSubmit([ageAnswer, 0])}
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = screen.title
     }
   } else if (answers.length === 2) {
     // Nationnality question
     const previousAnswers = answers.slice(0, 2)
     currentStepElement = (
       <Question
-        onSubmit={(r) => setAnswers([...previousAnswers, r])}
+        onSubmit={(r) => onAnswerSubmit([...previousAnswers, r])}
         title={props.nationnalityQuestion.title}
         answers={props.nationnalityQuestion.answers}
         type="radio"
       />
     )
+    stepContainerAriaLabel = props.nationnalityQuestion.title
   } else if (answers.length === 3) {
     if (answers[2] === 0) {
       // Success screen
@@ -119,6 +140,7 @@ export function Simulator(props: SimulatorProps) {
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = props.successScreen.title
     } else {
       // Residency time question
       const previousAnswers = answers.slice(0, 3)
@@ -130,6 +152,7 @@ export function Simulator(props: SimulatorProps) {
           type="radio"
         />
       )
+      stepContainerAriaLabel = props.residencyQuestion.title
     }
   } else if (answers.length === 4) {
     if (answers[3] === 0) {
@@ -144,6 +167,7 @@ export function Simulator(props: SimulatorProps) {
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = props.successScreen.title
     } else {
       // Failure
       currentStepElement = (
@@ -154,6 +178,7 @@ export function Simulator(props: SimulatorProps) {
         />
       )
       isResultScreen = true
+      stepContainerAriaLabel = props.failureScreen.title
     }
   }
 
@@ -189,7 +214,12 @@ export function Simulator(props: SimulatorProps) {
           {answers.length > 0 && <BackButton onClick={handleBackClick} />}
         </BackContainer>
 
-        {currentStepElement}
+        <StepContainer
+          tabIndex={-1}
+          aria-label={stripTags(stepContainerAriaLabel)}
+          ref={stepContainerRef}>
+          {currentStepElement}
+        </StepContainer>
       </Inner>
 
       <TopEmoji shadow aria-hidden="true">
@@ -299,6 +329,12 @@ const StepSeparator = styled.li`
       height: 0.125rem;
       width: unset;
     }
+  }
+`
+
+const StepContainer = styled.div`
+  &:focus {
+    outline: none;
   }
 `
 
