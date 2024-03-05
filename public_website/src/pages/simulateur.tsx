@@ -62,7 +62,7 @@ const Root = styled.div`
 const Title = styled(Typo.Heading1)`
   margin-bottom: 1.75rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     text-align: center;
   }
 `
@@ -70,7 +70,7 @@ const Title = styled(Typo.Heading1)`
 const Description = styled(Typo.Body)`
   margin-bottom: 2rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     text-align: center;
   }
 `
