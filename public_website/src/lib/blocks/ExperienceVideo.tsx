@@ -8,8 +8,7 @@ type ExperienceVideoProps = {
   controlsLabel: string
   nextButtonLabel: string
   previousButtonLabel: string
-  recommendations: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
-  cta: { Label: string; URL: string }
+  videos: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
 }
 
 export function ExperienceVideo({
@@ -17,8 +16,7 @@ export function ExperienceVideo({
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
-  recommendations,
-  cta,
+  videos,
 }: ExperienceVideoProps) {
   return (
     <Root>
@@ -28,7 +26,7 @@ export function ExperienceVideo({
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
           previousButtonLabel={previousButtonLabel}
-          items={recommendations}
+          items={videos}
         />
       </StyledCarouselWrapper>
     </Root>
@@ -49,7 +47,7 @@ const Root = styled.div`
 
 const StyledCarouselWrapper = styled.div`
   ${({ theme }) => css`
-    padding: 0 0 0 7rem;
+    padding: 0 7rem 0 7rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: 4rem 1.5rem 2rem;

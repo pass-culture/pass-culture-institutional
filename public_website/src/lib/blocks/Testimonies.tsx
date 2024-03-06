@@ -9,8 +9,7 @@ type TestimoniesProps = {
   controlsLabel: string
   nextButtonLabel: string
   previousButtonLabel: string
-  recommendations: Omit<TestimonyCarouselSlideProps, 'slideIndex'>[]
-  cta: { Label: string; URL: string }
+  testimonies: Omit<TestimonyCarouselSlideProps, 'slideIndex'>[]
 }
 
 export function Testimonies({
@@ -18,8 +17,7 @@ export function Testimonies({
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
-  recommendations,
-  cta,
+  testimonies,
 }: TestimoniesProps) {
   return (
     <Root>
@@ -29,12 +27,9 @@ export function Testimonies({
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
           previousButtonLabel={previousButtonLabel}
-          items={recommendations}
+          items={testimonies}
         />
       </StyledCarouselWrapper>
-      {/* <StyledCtaWrapper>
-        <Button href={cta.URL}>{cta.Label}</Button>
-      </StyledCtaWrapper> */}
     </Root>
   )
 }
@@ -53,7 +48,7 @@ const Root = styled.div`
 
 const StyledCarouselWrapper = styled.div`
   ${({ theme }) => css`
-    padding: 0 0 0 7rem;
+    padding: 0 7rem 0 7rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: 4rem 1.5rem 2rem;

@@ -22,7 +22,6 @@ interface HomeProps {
 }
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
-  console.log(homeData.attributes)
   return (
     <React.Fragment>
       <StyledHomeGradient>
@@ -89,53 +88,6 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         cta={homeData.attributes.recommendationsSection.cta}
       />
 
-      <Testimonies
-        title={homeData.attributes.recommendationsSection.recommendations.title}
-        controlsLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .controlsLabel
-        }
-        previousButtonLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .previousButtonLabel
-        }
-        nextButtonLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .nextButtonLabel
-        }
-        recommendations={
-          homeData.attributes.recommendationsSection.recommendations.items
-        }
-        cta={homeData.attributes.recommendationsSection.cta}
-      />
-
-      <ExperienceVideo
-        title={homeData.attributes.recommendationsSection.recommendations.title}
-        controlsLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .controlsLabel
-        }
-        previousButtonLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .previousButtonLabel
-        }
-        nextButtonLabel={
-          homeData.attributes.recommendationsSection.recommendations
-            .nextButtonLabel
-        }
-        recommendations={
-          homeData.attributes.recommendationsSection.recommendations.items
-        }
-        cta={homeData.attributes.recommendationsSection.cta}
-      />
-
-      <Logos
-        previousButtonLabel={homeData.attributes.logos?.previousButtonLabel}
-        controlsLabel={homeData.attributes.logos?.controlsLabel}
-        nextButtonLabel={homeData.attributes.logos?.nextButtonLabel}
-        images={homeData.attributes.logos?.logo}
-      />
-
       <StyledLatestNews
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
@@ -171,9 +123,6 @@ export const getStaticProps = (async () => {
       'latestStudies.cta',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
-      'logos',
-      'logos.logo',
-      'logos.logo.logo',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

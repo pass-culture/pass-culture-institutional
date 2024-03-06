@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_block_testimony_carousels",
+  "info": {
+    "displayName": "TestimonyCarouselItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "videoUrl": {
+      "type": "text"
+    }
+  }
+}

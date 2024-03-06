@@ -120,7 +120,6 @@ export function LogoCarousel({
         aria-label={stripTags('title')}
         aria-roledescription="carrousel">
         {items?.map((item, index) => {
-          console.log(item)
           return (
             <LogoCarouselSlide
               key={item.logo?.data.attributes.alternativeText}

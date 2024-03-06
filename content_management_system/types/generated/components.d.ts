@@ -97,8 +97,7 @@ export interface BlockSimpleText extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
+    title: Attribute.String;
   };
 }
 
@@ -112,6 +111,21 @@ export interface BlockSocialMedia extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     socialMediaLink: Attribute.Component<'block.link', true> &
       Attribute.Required;
+  };
+}
+
+export interface BlockTestimonies extends Schema.Component {
+  collectionName: 'components_block_testimonies';
+  info: {
+    displayName: 'TestimoniesCarousel';
+    description: '';
+  };
+  attributes: {
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlsLabel: Attribute.String;
+    title: Attribute.String;
+    items: Attribute.Component<'common.testimony-carousel', true>;
   };
 }
 
@@ -153,6 +167,19 @@ export interface CommonLogo extends Schema.Component {
   };
 }
 
+export interface CommonTestimonyCarousel extends Schema.Component {
+  collectionName: 'components_block_testimony_carousels';
+  info: {
+    displayName: 'TestimonyCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    videoUrl: Attribute.Text;
+  };
+}
+
 export interface CommonVerticalCarouselItem extends Schema.Component {
   collectionName: 'components_common_vertical_carousel_items';
   info: {
@@ -162,8 +189,8 @@ export interface CommonVerticalCarouselItem extends Schema.Component {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    image: Attribute.Media;
   };
 }
 
@@ -354,9 +381,11 @@ declare module '@strapi/types' {
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+      'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'common.link': CommonLink;
       'common.logo': CommonLogo;
+      'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

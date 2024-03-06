@@ -20,7 +20,6 @@ export function Logos({
   previousButtonLabel,
   images,
 }: LogoProps) {
-  console.log(images)
   return (
     <Root>
       <StyledCarouselWrapper>

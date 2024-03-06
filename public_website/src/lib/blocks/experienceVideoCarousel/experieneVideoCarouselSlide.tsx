@@ -58,7 +58,7 @@ export function ExperienceVideoCarouselSlide({
               image.data.attributes.url &&
               getStrapiURL(image.data.attributes.url)
             }>
-            <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/d/db/Fractal-zoom-1-15-rupture.ogv/Fractal-zoom-1-15-rupture.ogv.240p.vp9.webm" />
+            <source src={url} />
           </StyledVideo>
         )}
         <StyledTitle>{title}</StyledTitle>

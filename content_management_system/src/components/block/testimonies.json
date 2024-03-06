@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_block_testimonies",
+  "info": {
+    "displayName": "TestimoniesCarousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "previousButtonLabel": {
+      "type": "string"
+    },
+    "nextButtonLabel": {
+      "type": "string"
+    },
+    "controlsLabel": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.testimony-carousel"
+    }
+  }
+}

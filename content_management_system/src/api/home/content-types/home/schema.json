@@ -61,6 +61,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.logos"
+    },
+    "testimoniesSection": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.testimonies"
     }
   }
 }
