@@ -2,6 +2,10 @@ export const simulatorPageFixtures = {
   data: {
     id: 1,
     attributes: {
+      breadcrumbLinks: [
+        { Label: 'Accueil', URL: '#' },
+        { Label: 'Simulateur', URL: '#' },
+      ],
       title: '<mark>Simulateur</mark> d&apos;éligibilité',
       description:
         "Tu veux savoir si tu peux bénéficier du pass Culture, à combien tu as droit<br />\net comment débloquer ton crédit ? C'est par ici !",
