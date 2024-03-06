@@ -304,6 +304,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: block;
+    min-height: 30rem;
   }
 `
 

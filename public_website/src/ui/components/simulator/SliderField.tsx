@@ -114,7 +114,7 @@ const Slider = styled(BaseSlider)`
   }
 
   .rc-slider-mark-text {
-    font-weight: ${({ theme }) => theme.fonts.sizes.m};
+    font-size: ${({ theme }) => theme.fonts.sizes.m};
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
     color: ${({ theme }) => theme.colors.black};
 
@@ -183,6 +183,11 @@ const Slider = styled(BaseSlider)`
 
 const SelectWrapper = styled.div`
   position: relative;
+  display: none;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    display: initial;
+  }
 `
 
 const Select = styled.select`
@@ -197,12 +202,6 @@ const Select = styled.select`
   border-radius: 1.25rem;
   background-color: ${({ theme }) => theme.colors.lightGray};
   width: 100%;
-
-  display: none;
-
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    display: initial;
-  }
 `
 
 const SelectIcon = styled(ChevronDown)`
