@@ -1039,6 +1039,72 @@ export interface ApiRestaurantRestaurant extends Schema.CollectionType {
   };
 }
 
+export interface ApiSimulatorSimulator extends Schema.SingleType {
+  collectionName: 'simulators';
+  info: {
+    singularName: 'simulator';
+    pluralName: 'simulators';
+    displayName: 'Simulator';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    ageQuestion: Attribute.Component<'simulator.age-question'> &
+      Attribute.Required;
+    nationnalityQuestion: Attribute.Component<'simulator.radio-question'> &
+      Attribute.Required;
+    residencyQuestion: Attribute.Component<'simulator.radio-question'> &
+      Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 3;
+        max: 3;
+      }>;
+    successScreen: Attribute.Component<'simulator.success-screen'> &
+      Attribute.Required;
+    failureScreen: Attribute.Component<'simulator.failure-screen'> &
+      Attribute.Required;
+    tooYoungScreen: Attribute.Component<'simulator.failure-screen'> &
+      Attribute.Required;
+    tooOldScreen: Attribute.Component<'simulator.failure-screen'> &
+      Attribute.Required;
+    amountScreen_15: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_16: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_17: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    amountScreen_18: Attribute.Component<'simulator.amount-screen'> &
+      Attribute.Required;
+    topEmoji: Attribute.String & Attribute.Required;
+    bottomEmoji: Attribute.String & Attribute.Required;
+    socialMedias: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
+    breadcrumbLinks: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::simulator.simulator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::simulator.simulator',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1065,6 +1131,7 @@ declare module '@strapi/types' {
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
+      'api::simulator.simulator': ApiSimulatorSimulator;
     }
   }
 }

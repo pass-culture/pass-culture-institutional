@@ -20,7 +20,7 @@ interface OutlinedTextProps {
   blurDeviation?: number
   /**
    * Value of the `radius` attribute for the `<feMorphology operator="dilate">` element.
-   * @default 2
+   * @default 5
    */
   dilationRadius?: number
 
@@ -42,6 +42,10 @@ export function OutlinedText(props: OutlinedTextProps) {
     blurDeviation = 2,
     dilationRadius = 5,
     shadow,
+    innerAs,
+    className,
+    children,
+    ...other
   } = props
 
   const svgElement = (
@@ -94,8 +98,8 @@ export function OutlinedText(props: OutlinedTextProps) {
 
   return (
     <React.Fragment>
-      <Root as={props.innerAs} className={props.className} $filterId={filterId}>
-        {props.children}
+      <Root as={innerAs} className={className} $filterId={filterId} {...other}>
+        {children}
       </Root>
       {mounted ? createPortal(svgElement, document.body) : null}
     </React.Fragment>

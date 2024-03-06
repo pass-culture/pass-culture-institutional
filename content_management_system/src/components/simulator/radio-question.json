@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_simulator_radio_questions",
+  "info": {
+    "displayName": "RadioQuestion",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "answers": {
+      "type": "component",
+      "repeatable": true,
+      "component": "simulator.answer",
+      "required": true,
+      "max": 2,
+      "min": 2
+    }
+  }
+}

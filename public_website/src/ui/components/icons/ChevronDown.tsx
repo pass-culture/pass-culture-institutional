@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { HTMLAttributes } from 'react'
 
 import { Icon } from './Icon'
 
-export function ChevronDown() {
+export function ChevronDown(props: HTMLAttributes<SVGElement>) {
   return (
     <Icon
+      {...props}
       width="16"
       height="9"
       viewBox="0 0 16 9"
