@@ -343,7 +343,7 @@ export interface SimulatorAmountScreen extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    text: Attribute.RichText & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
   };
 }
 
