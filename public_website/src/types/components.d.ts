@@ -60,6 +60,20 @@ export interface BlockLink extends Schema.Component {
   };
 }
 
+export interface BlockLogos extends Schema.Component {
+  collectionName: 'components_block_logos';
+  info: {
+    displayName: 'Logos';
+    description: '';
+  };
+  attributes: {
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlsLabel: Attribute.String;
+    logo: Attribute.Component<'common.logo', true>;
+  };
+}
+
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
@@ -126,6 +140,16 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonLogo extends Schema.Component {
+  collectionName: 'components_common_logos';
+  info: {
+    displayName: 'Logo';
+  };
+  attributes: {
+    logo: Attribute.Media;
   };
 }
 
@@ -326,11 +350,13 @@ declare module '@strapi/types' {
       'block.header': BlockHeader;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
+      'block.logos': BlockLogos;
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.vertical-carousel': BlockVerticalCarousel;
       'common.link': CommonLink;
+      'common.logo': CommonLogo;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

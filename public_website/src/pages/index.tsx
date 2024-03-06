@@ -14,6 +14,7 @@ import { Recommendations } from '@/ui/components/home/Recommendations'
 import { fetchCMS } from '@/utils/fetchCMS'
 import { Testimonies } from '@/lib/blocks/Testimonies'
 import { ExperienceVideo } from '@/lib/blocks/ExperienceVideo'
+import { Logos } from '@/lib/blocks/Logos'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
@@ -21,6 +22,7 @@ interface HomeProps {
 }
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
+  console.log(homeData.attributes)
   return (
     <React.Fragment>
       <StyledHomeGradient>
@@ -127,6 +129,13 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         cta={homeData.attributes.recommendationsSection.cta}
       />
 
+      <Logos
+        previousButtonLabel={homeData.attributes.logos?.previousButtonLabel}
+        controlsLabel={homeData.attributes.logos?.controlsLabel}
+        nextButtonLabel={homeData.attributes.logos?.nextButtonLabel}
+        images={homeData.attributes.logos?.logo}
+      />
+
       <StyledLatestNews
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
@@ -162,6 +171,9 @@ export const getStaticProps = (async () => {
       'latestStudies.cta',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
+      'logos',
+      'logos.logo',
+      'logos.logo.logo',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

@@ -1,34 +1,34 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { ExperienceVideoCarouselSlideProps } from './experienceVideoCarousel/experieneVideoCarouselSlide'
-import { ExperienceVideoCarousel } from './experienceVideoCarousel/experienceVideoCarousel'
-type ExperienceVideoProps = {
-  title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
-  recommendations: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
-  cta: { Label: string; URL: string }
+import { LogoCarousel } from './logoCarousel/logoCarousel'
+import { LogoCarouselSlideProps } from './logoCarousel/logoCarouselSlide'
+import { APIResponse } from '@/types/strapi'
+
+type LogoProps = {
+  controlsLabel?: string
+  nextButtonLabel?: string
+  previousButtonLabel?: string
+  images?:
+    | ({ logo?: APIResponse<'plugin::upload.file'> | null | undefined } & {})[]
+    | undefined
 }
 
-export function ExperienceVideo({
-  title,
+export function Logos({
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
-  recommendations,
-  cta,
-}: ExperienceVideoProps) {
+  images,
+}: LogoProps) {
+  console.log(images)
   return (
     <Root>
       <StyledCarouselWrapper>
-        <ExperienceVideoCarousel
-          title={title}
+        <LogoCarousel
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
           previousButtonLabel={previousButtonLabel}
-          items={recommendations}
+          items={images}
         />
       </StyledCarouselWrapper>
     </Root>
@@ -37,7 +37,6 @@ export function ExperienceVideo({
 
 const Root = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
     padding: 6.25rem 0 5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {

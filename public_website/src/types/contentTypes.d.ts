@@ -932,6 +932,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
+    logos: Attribute.Component<'block.logos'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
