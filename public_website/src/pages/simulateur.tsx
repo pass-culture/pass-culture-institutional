@@ -69,6 +69,7 @@ const Title = styled(Typo.Heading1)`
 
 const Description = styled(Typo.Body)`
   margin-bottom: 2rem;
+  max-width: 38rem;
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     text-align: center;
