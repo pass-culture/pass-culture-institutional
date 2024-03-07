@@ -17,25 +17,26 @@ interface HomeProps {
 }
 
 export default function ListeJeune({ newsData, listJeune }: HomeProps) {
-  const [category, setCategory] = useState<string[]>([
-    Array.from(new Set(newsData.map((item) => item.attributes.category))),
-  ])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([
-    Array.from(new Set(newsData.map((item) => item.attributes.category))),
-  ])
-  const [localisation, setLocalisation] = useState<string[]>([
-    Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
-  ])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([
-    Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
-  ])
+  const cat = Array.from(
+    new Set(newsData.map((item) => item.attributes.category))
+  )
+
+  const loc = Array.from(
+    new Set(newsData.map((item) => item.attributes.localisation))
+  )
+  const [category, setCategory] = useState<string[]>([])
+  const [originalCategory, setOriginalCategory] = useState<string[]>([])
+  const [localisation, setLocalisation] = useState<string[]>([])
+  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
-    setOriginalCategory(category)
-    setOriginalLocalisation(localisation)
+    setCategory(cat)
+    setLocalisation(loc)
+    setOriginalCategory(cat)
+    setOriginalLocalisation(loc)
 
     setData(newsData)
     let uniqueCategories = []

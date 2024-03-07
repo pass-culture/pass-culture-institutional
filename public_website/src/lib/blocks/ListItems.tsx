@@ -15,7 +15,7 @@ type LatestNewsProps = {
 export function ListItems({ news, className, buttonText }: LatestNewsProps) {
   const [visibleItems, setVisibleItems] = useState(9)
 
-  const loadMore = (e) => {
+  const loadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setVisibleItems((prevVisibleItems) =>
       Math.min(prevVisibleItems + 9, news.length)

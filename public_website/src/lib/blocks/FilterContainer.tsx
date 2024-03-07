@@ -12,7 +12,7 @@ export type Filter = {
   value: string[]
 }
 
-export type FilterChangeHandler = (name: string, value: string[]) => void
+type FilterChangeHandler = (name: string, value: string[]) => void
 
 type FiltersProps = {
   className?: string
