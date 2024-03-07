@@ -17,18 +17,9 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
   ],
   rules: {
-    'import/no-duplicates': ['error', { considerQueryString: true }],
-    'react/jsx-fragments': ['error', 'element'],
-    'react/jsx-no-useless-fragment': 'error',
-    'react/no-unstable-nested-components': 'error',
-    'react/no-unused-prop-types': 'warn',
-    'simple-import-sort/exports': 'error',
-    'simple-import-sort/imports': ['error', { groups: [['^react', '^@?\\w']] }],
-    'no-console': ['error', { allow: ['warn', 'error'] }],
-    'no-return-await': 'error',
     'array-callback-return': 'error',
-    'unused-imports/no-unused-imports': 'error',
-    'unused-imports/no-unused-vars': 'error',
+    'import/no-duplicates': ['error', { considerQueryString: true }],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-imports': [
       'error',
       {
@@ -37,6 +28,15 @@ module.exports = {
         ],
       },
     ],
+    'no-return-await': 'error',
+    'react/jsx-fragments': ['error', 'element'],
+    'react/jsx-no-useless-fragment': 'error',
+    'react/no-unstable-nested-components': 'error',
+    'react/no-unused-prop-types': 'warn',
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': ['error', { groups: [['^react', '^@?\\w']] }],
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': 'error',
   },
   overrides: [
     {
