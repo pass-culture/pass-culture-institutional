@@ -315,6 +315,7 @@ export interface HomeRecommendationsSection extends Schema.Component {
   attributes: {
     recommendations: Attribute.Component<'block.vertical-carousel'> &
       Attribute.Required;
+    recommendationsBackendTag: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }

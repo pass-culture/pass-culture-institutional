@@ -11,6 +11,10 @@
       "component": "block.vertical-carousel",
       "required": true
     },
+    "recommendationsBackendTag": {
+      "type": "string",
+      "required": true
+    },
     "cta": {
       "type": "component",
       "repeatable": false,

@@ -2,15 +2,16 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { VerticalCarousel } from '../../../lib/blocks/verticalCarousel/VerticalCarousel'
-import { VerticalCarouselSlideProps } from '../../../lib/blocks/verticalCarousel/VerticalCarouselSlide'
 import { Button } from '../button/Button'
+import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
+import { Offer } from '@/types/playlist'
 
 type RecommendationsProps = {
   title: string
   controlsLabel: string
   nextButtonLabel: string
   previousButtonLabel: string
-  recommendations: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
+  recommendations: Offer[]
   cta: { Label: string; URL: string }
 }
 
@@ -22,6 +23,15 @@ export function Recommendations({
   recommendations,
   cta,
 }: RecommendationsProps) {
+  const verticalCarouselItems: Omit<
+    VerticalCarouselSlideProps,
+    'slideIndex'
+  >[] = recommendations.map((r) => ({
+    description: r.venue.commonName,
+    image: r.image?.url ?? null,
+    title: r.name,
+    url: '#yen-a-pas',
+  }))
   return (
     <Root>
       <StyledCarouselWrapper>
@@ -30,7 +40,7 @@ export function Recommendations({
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
           previousButtonLabel={previousButtonLabel}
-          items={recommendations}
+          items={verticalCarouselItems}
         />
       </StyledCarouselWrapper>
       <StyledCtaWrapper>
