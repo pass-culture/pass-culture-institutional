@@ -5,6 +5,7 @@ import { VerticalCarousel } from '../../../lib/blocks/verticalCarousel/VerticalC
 import { Button } from '../button/Button'
 import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
 import { Offer } from '@/types/playlist'
+import { getOfferUrl } from '@/utils/apiHelpers'
 
 type RecommendationsProps = {
   title: string
@@ -30,8 +31,9 @@ export function Recommendations({
     description: r.venue.commonName,
     image: r.image?.url ?? null,
     title: r.name,
-    url: '#yen-a-pas',
+    url: getOfferUrl(r.id),
   }))
+
   return (
     <Root>
       <StyledCarouselWrapper>

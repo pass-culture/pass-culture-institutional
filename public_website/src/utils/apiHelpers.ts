@@ -4,3 +4,9 @@ export function getStrapiURL(path = '') {
   }
   return path
 }
+
+export function getOfferUrl(id: number) {
+  return `${
+    process.env['APP_URL'] || 'https://app.testing.passculture.team'
+  }/offre/${id}`
+}
