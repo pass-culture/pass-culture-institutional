@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_common_filtres",
+  "info": {
+    "displayName": "Filtre"
+  },
+  "options": {},
+  "attributes": {
+    "filtre": {
+      "type": "string"
+    }
+  }
+}

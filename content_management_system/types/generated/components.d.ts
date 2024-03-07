@@ -76,6 +76,19 @@ export interface BlockPushCta extends Schema.Component {
   };
 }
 
+export interface BlockSeparator extends Schema.Component {
+  collectionName: 'components_block_separators';
+  info: {
+    displayName: 'Separator';
+    description: '';
+  };
+  attributes: {
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
@@ -114,6 +127,16 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonFiltre extends Schema.Component {
+  collectionName: 'components_common_filtres';
+  info: {
+    displayName: 'Filtre';
+  };
+  attributes: {
+    filtre: Attribute.String;
   };
 }
 
@@ -421,9 +444,11 @@ declare module '@strapi/types' {
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.push-cta': BlockPushCta;
+      'block.separator': BlockSeparator;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.vertical-carousel': BlockVerticalCarousel;
+      'common.filtre': CommonFiltre;
       'common.link': CommonLink;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
