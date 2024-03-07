@@ -135,6 +135,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Custom */
   body {
+    color: ${theme.colors.black};
     line-height: 1.5;
   }
 
