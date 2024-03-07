@@ -10,13 +10,12 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-interface HomeProps {
-  listJeune: APIResponseData<'api::list-jeune.list-jeune'>[]
-
+interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
+  listJeune: APIResponseData<'api::list-jeune.list-jeune'>[]
 }
 
-export default function ListeJeune({ newsData, listJeune }: HomeProps) {
+export default function ListeJeune({ newsData, listJeune }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -84,8 +83,6 @@ export default function ListeJeune({ newsData, listJeune }: HomeProps) {
     const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
       `/news-list?${newsQuery}`
     )
-    // setFilters([...listJeune.attributes.filtres])
-    // setNewsData(news.data)
 
     setData(news.data)
   }
@@ -171,7 +168,7 @@ export const getStaticProps = (async () => {
       listJeune: data,
     },
   }
-}) satisfies GetStaticProps<HomeProps>
+}) satisfies GetStaticProps<ListProps>
 
 const StyledTitle = styled.div`
   ${({ theme }) => css`
