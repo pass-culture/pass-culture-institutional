@@ -10,7 +10,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type VerticalCarouselSlideProps = {
   slideIndex: number
-  image: APIResponse<'plugin::upload.file'> | null
+  image: string | APIResponse<'plugin::upload.file'> | null
   title: string
   description: string
   url: string
@@ -23,6 +23,9 @@ export function VerticalCarouselSlide({
   description,
   url,
 }: VerticalCarouselSlideProps) {
+  const imageUrl =
+    typeof image === 'string' ? image : image?.data.attributes.url
+
   return (
     <Root
       index={slideIndex}
@@ -31,12 +34,9 @@ export function VerticalCarouselSlide({
       role="group"
       aria-roledescription="diapositive">
       <StyledLink href={url}>
-        {image && (
+        {imageUrl && (
           <StyledImage
-            src={
-              image.data.attributes.url &&
-              getStrapiURL(image.data.attributes.url)
-            }
+            src={getStrapiURL(imageUrl)}
             alt=""
             width={300}
             height={400}

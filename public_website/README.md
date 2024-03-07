@@ -10,6 +10,8 @@ If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the 
 
 There is also an environment variable that is used to build the playlists. Set `BACKEND_API_URL` to `https://backend.testing.passculture.team`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
 
+Set `APP_URL` to `https://app.testing.passculture.team` to build offers' URLs.
+
 ## Start the Public Website
 
 Navigate to the project directory and install the dependencies by running the following commands:
