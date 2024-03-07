@@ -6,9 +6,6 @@ import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-import { is } from '@react-three/fiber/dist/declarations/src/core/utils'
-import { Button } from '@/ui/components/button/Button'
-
 interface PushCTAProps {
   title: string
   description?: string

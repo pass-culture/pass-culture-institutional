@@ -3,22 +3,14 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
-import { APIResponseData } from '@/types/strapi'
-import { getStrapiURL } from '@/utils/apiHelpers'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { LinkFaq } from './Link'
 
 type FaqProps = {
   title: string
-  //   subTitle: string
-  //   cta: { Label: string; URL: string }
+
   cta: string
   link: string
-  //   firstEmoji: string
-  //   secondEmoji: string
-  //   thirdEmoji: string
-  //   fourthEmoji: string
-  //   images: APIResponseData<'plugin::upload.file'>[] | null
 }
 
 export function Faq({ title, cta, link }: FaqProps) {
@@ -133,11 +125,7 @@ const StyledContentTextWrapper = styled.div`
   `}
 `
 
-const StyledFaqtWrapper = styled.div`
-  ${({ theme }) => css`
-    // padding-left: 2rem;
-  `}
-`
+const StyledFaqtWrapper = styled.div``
 
 const StyledAccordion = styled(Accordion)`
   ${({ theme }) => css`

@@ -15,7 +15,7 @@ interface SimpleTextProps {
 
 export function SimpleText(props: SimpleTextProps) {
   return (
-    <>
+    <React.Fragment>
       <Root data-testid="simple-text">
         <Typo.Heading2>{props.Title}</Typo.Heading2>
         {/* TODO: 2 columns variant */}
@@ -38,7 +38,7 @@ export function SimpleText(props: SimpleTextProps) {
           </Columns>
         )}
       </Root>
-    </>
+      <React.Fragment/>
   )
 }
 

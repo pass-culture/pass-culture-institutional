@@ -171,18 +171,14 @@ const StyledText = styled.p`
 `
 
 const StyledImage = styled.img`
-  ${({ theme }) => css`
-    max-width: 100%;
-    height: auto;
-    transform: rotate(2deg);
-  `}
+  max-width: 100%;
+  height: auto;
+  transform: rotate(2deg);
 `
 
 const StyledIcon = styled.img`
-  ${({ theme }) => css`
-    max-width: 5rem;
-    height: auto;
-    transform: rotate(2deg);
-    position: absolute;
-  `}
+  max-width: 5rem;
+  height: auto;
+  transform: rotate(2deg);
+  position: absolute;
 `

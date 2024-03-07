@@ -2,8 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
-import { theme } from '@/theme/theme'
-
 type ButtonProps = {
   href: string
   target?: '_blank'

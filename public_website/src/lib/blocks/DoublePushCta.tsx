@@ -1,12 +1,9 @@
 import React from 'react'
-import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
-
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-import { is } from '@react-three/fiber/dist/declarations/src/core/utils'
 import { Button } from '@/ui/components/button/Button'
 
 interface PushCTAProps {
@@ -14,14 +11,11 @@ interface PushCTAProps {
   description?: string
   image: APIResponse<'plugin::upload.file'> | null
   ctaLink: { Label: string; URL: string }
-
   sctaLink: { Label: string; URL: string }
   className?: string
 }
 
 export function DoublePushCTA(props: PushCTAProps) {
-  const { SVG: QrCode } = useQRCode()
-
   return (
     <Root className={props.className}>
       <CardContainer>
@@ -111,55 +105,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
       width: 95%;
       aspect-ratio: 1.5;
       padding: 0;
-    }
-  `}
-`
-
-const BackgroundLayer = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    content: '';
-    inset: 0;
-    background-color: ${theme.colors.secondary};
-    transform: rotate(7deg);
-    border-radius: 1.5rem;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 80%;
-      margin: 0 auto;
-      aspect-ratio: 0.8;
-      inset: 0;
-      transform: rotate(5deg);
-    }
-  `}
-`
-
-const QRCodeCard = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.secondary};
-    color: ${theme.colors.white};
-    padding: 1.125rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    border-radius: 1rem;
-
-    box-shadow: ${theme.shadows.sticker};
-
-    p {
-      font-weight: ${theme.fonts.weights.bold};
-      line-height: 1.3125;
-    }
-
-    svg {
-      border-radius: 0.625rem;
-    }
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      display: none;
     }
   `}
 `
