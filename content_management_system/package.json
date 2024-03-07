@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@strapi-community/strapi-provider-upload-google-cloud-storage": "https://github.com/pass-culture/strapi-provider-upload-google-cloud-storage#master",
-    "@strapi/plugin-i18n": "4.17.0",
+    "@strapi/plugin-i18n": "4.20.4",
     "@strapi/plugin-users-permissions": "4.17.0",
     "@strapi/strapi": "4.17.1",
     "pg": "8.11.3",
