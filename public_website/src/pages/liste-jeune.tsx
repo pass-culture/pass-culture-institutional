@@ -3,8 +3,7 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { FilterContainer } from '@/lib/blocks/FilterContainer'
-import { Filter } from '@/lib/blocks/FilterContainer'
+import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
@@ -24,18 +23,20 @@ export default function ListeJeune({ newsData, listJeune }: HomeProps) {
   const [originalCategory, setOriginalCategory] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.category))),
   ])
-  setOriginalCategory(originalCategory)
   const [localisation, setLocalisation] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
   ])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
   ])
-  setOriginalLocalisation(originalLocalisation)
+
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
+    setOriginalCategory(category)
+    setOriginalLocalisation(localisation)
+
     setData(newsData)
     let uniqueCategories = []
     let uniqueLocalisations = []

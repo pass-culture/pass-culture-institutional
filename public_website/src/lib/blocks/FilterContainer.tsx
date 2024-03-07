@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '@/ui/components/button/Button'
@@ -80,10 +79,10 @@ export function FilterContainer({
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else {
         // If value is not present i add it
-        if (filterState) {
-          if (filterState[0] !== '') {
+       
+          if (filterState && filterState[0] !== '') {
             newFilterValues[name] = [...filterState, value]
-          } else {
+          } else if(filterState && filterState[0] === '' ) {
             //remove the empty value
             newFilterValues[name] = [value]
           }
