@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { APIResponseData } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
-import { NewsCard } from '@/ui/components/news-card/NewsCard'
-import { Typo } from '@/ui/components/typographies'
-import { getStrapiURL } from '@/utils/apiHelpers'
-import { on } from 'events'
-import { useState } from 'react'
-import { Plus } from '@/ui/components/icons/Plus'
-import { is } from '@react-three/fiber/dist/declarations/src/core/utils'
 import { ArrowDown } from '@/ui/components/icons/ArrowDown'
-import { Tick } from '@/ui/components/icons/Tick'
-import { Close } from '@/ui/components/icons/Close'
 import { Cross } from '@/ui/components/icons/Cross'
+import { Plus } from '@/ui/components/icons/Plus'
+import { Tick } from '@/ui/components/icons/Tick'
 
 export type Filter = {
   filtre: string
@@ -35,15 +28,7 @@ export function FilterContainer({
   filtres,
   onFilterChange,
 }: FiltersProps) {
-  const [selectedFilters, setSelectedFilters] = useState<{
-    [key: string]: string
-  }>({})
-
   const [isVisible, setIsVisible] = useState<boolean>(false)
-
-  const [clickedButtons, setClickedButtons] = useState<{
-    [key: string]: string
-  }>({})
 
   const [numberOfFilters, setNumberOfFilters] = useState<number>(0)
 
@@ -71,15 +56,15 @@ export function FilterContainer({
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
 
-    checkValue(name, value, true)
+    checkValue(name, value)
   }
   //UPDATE THE SELECTED FILTERS
   const handleDetailChange = (filter: string, value: string) => {
-    checkValue(filter, value, false)
+    checkValue(filter, value)
   }
 
   //CHECK IF THE VALUE IS ALREADY IN THE ARRAY
-  const checkValue = (name: string, value: string, isDesktop: boolean) => {
+  const checkValue = (name: string, value: string) => {
     // Dynamically access the state variable based on the filter name
     const filterState = filterValues[name]
     const newFilterValues = { ...filterValues }
@@ -236,18 +221,7 @@ const Root = styled.div`
     }
   `}
 `
-const LabelDiv = styled.div`
-  ${({ theme }) => css`
-    padding: 0 4rem 0 1rem;
 
-    min-height: 50px;
-
-    display: flex;
-    align-items: center;
-
-    // border-right: solid 1px #00000020;
-  `}
-`
 const StyledSelect = styled.select`
   ${({ theme }) => css`
     padding: 0 2rem 0 2rem;
@@ -321,26 +295,24 @@ const StyledMobileContainer = styled.div`
   `}
 `
 const StyledMobileSelectHeader = styled.div`
-  ${({ theme }) => css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.625rem 0.625rem 0 0;
+  border-bottom: solid 1px #00000020;
+  min-height: 80px;
+  padding: 0 2rem;
+
+  svg {
+    transform: rotate(45deg);
+  }
+
+  div {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    border-radius: 0.625rem 0.625rem 0 0;
-    border-bottom: solid 1px #00000020;
-    min-height: 80px;
-    padding: 0 2rem;
-
-    svg {
-      transform: rotate(45deg);
-    }
-
-    div {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-  `}
+    justify-content: center;
+    border-radius: 50%;
+  }
 `
 const StyleSelectContent = styled.div`
   ${({ theme }) => css`

@@ -3,16 +3,14 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { ListItems } from '@/lib/blocks/ListItems'
-import { APIResponseData } from '@/types/strapi'
-
-import { Typo } from '@/ui/components/typographies'
-
-import { fetchCMS } from '@/utils/fetchCMS'
 import { FilterContainer } from '@/lib/blocks/FilterContainer'
 import { Filter } from '@/lib/blocks/FilterContainer'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { APIResponseData } from '@/types/strapi'
+import { Typo } from '@/ui/components/typographies'
+import { fetchCMS } from '@/utils/fetchCMS'
 interface HomeProps {
   listJeune: APIResponseData<'api::list-jeune.list-jeune'>[]
 
@@ -20,31 +18,31 @@ interface HomeProps {
 }
 
 export default function ListeJeune({ newsData, listJeune }: HomeProps) {
-  const [queryParams, setQueryParams] = useState<{
-    [key: string]: string | string[]
-  }>({})
-
   const [category, setCategory] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.category))),
   ])
   const [originalCategory, setOriginalCategory] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.category))),
   ])
+  setOriginalCategory(originalCategory)
   const [localisation, setLocalisation] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
   ])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([
     Array.from(new Set(newsData.map((item) => item.attributes.localisation))),
   ])
+  setOriginalLocalisation(originalLocalisation)
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
     setData(newsData)
+    let uniqueCategories = []
+    let uniqueLocalisations = []
     const filtres = listJeune.attributes.filtres.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
-          const uniqueCategories = Array.from(
+          uniqueCategories = Array.from(
             new Set(newsData.map((item) => item.attributes.category))
           )
           return {
@@ -52,7 +50,7 @@ export default function ListeJeune({ newsData, listJeune }: HomeProps) {
             value: uniqueCategories,
           }
         case 'Localisation':
-          const uniqueLocalisations = Array.from(
+          uniqueLocalisations = Array.from(
             new Set(newsData.map((item) => item.attributes.localisation))
           )
           return {

@@ -13,14 +13,14 @@ export function Plus() {
       <path
         d="M1 10.25H19.5"
         stroke="#94008C"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M10.25 19.5L10.25 1"
         stroke="#94008C"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </Icon>
   )

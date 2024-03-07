@@ -1,17 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '@/ui/components/typographies'
-
 interface SeparatorTextProps {
   isActive: boolean
 }
 
 export function Separator(props: SeparatorTextProps) {
   return (
-    <Root data-testid="centered-text">
-      <div></div>
-    </Root>
+    <Root data-testid="centered-text">{props.isActive && <div></div>}</Root>
   )
 }
 

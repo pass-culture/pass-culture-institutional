@@ -13,9 +13,9 @@ export function Tick() {
       <path
         d="M1 7L5.5 11.5L14 1"
         stroke="#320096"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Icon>
   )

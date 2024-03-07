@@ -13,9 +13,9 @@ export function ArrowDown() {
       <path
         d="M2 7L8.46386 1.43055L14.76 7"
         stroke="#EB0055"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Icon>
   )

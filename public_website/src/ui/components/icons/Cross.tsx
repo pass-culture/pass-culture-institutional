@@ -13,14 +13,14 @@ export function Cross() {
       <path
         d="M4.90381 4.59619L14.0962 13.7886"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
       <path
         d="M4.90381 13.7886L14.0962 4.59619"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
       />
     </Icon>
   )
