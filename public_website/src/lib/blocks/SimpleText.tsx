@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+
 import { Typo } from '@/ui/components/typographies'
 
 interface SimpleTextProps {
@@ -15,30 +16,28 @@ interface SimpleTextProps {
 
 export function SimpleText(props: SimpleTextProps) {
   return (
-    <React.Fragment>
-      <Root data-testid="simple-text">
-        <Typo.Heading2>{props.Title}</Typo.Heading2>
-        {/* TODO: 2 columns variant */}
-        <p>{props.Text}</p>
-        {!props.IsNormal && (
-          <Columns>
-            <Column>
-              <ul>
-                <li>{props.FirstSubTitle}</li>
-              </ul>
-              <p>{props.FirstText}</p>
-            </Column>
+    <Root data-testid="simple-text">
+      <Typo.Heading2>{props.Title}</Typo.Heading2>
+      {/* TODO: 2 columns variant */}
+      <p>{props.Text}</p>
+      {!props.IsNormal && (
+        <Columns>
+          <Column>
+            <ul>
+              <li>{props.FirstSubTitle}</li>
+            </ul>
+            <p>{props.FirstText}</p>
+          </Column>
 
-            <Column>
-              <ul>
-                <li>{props.SecondSubTitle}</li>
-              </ul>
-              <p>{props.SecondText}</p>
-            </Column>
-          </Columns>
-        )}
-      </Root>
-      <React.Fragment/>
+          <Column>
+            <ul>
+              <li>{props.SecondSubTitle}</li>
+            </ul>
+            <p>{props.SecondText}</p>
+          </Column>
+        </Columns>
+      )}
+    </Root>
   )
 }
 

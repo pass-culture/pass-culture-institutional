@@ -1,19 +1,23 @@
 import React from 'react'
+import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
-import { getStrapiURL } from '@/utils/apiHelpers'
-
-interface ImageProps {
+interface VideoProps {
   description?: string
-  image: APIResponse<'plugin::upload.file'> | null
+  url?: string
 }
 
-export function Image(props: ImageProps) {
+export function Image(props: VideoProps) {
   return (
     <Root>
-      {/* <CardContainer> */}
-      <img src={getStrapiURL(props.image?.data.attributes.url)} alt="" />
+      <StyledVideo
+        url={props.url}
+        light
+        width="100%"
+        // playIcon={<Play />}
+        controls={true}
+        height="100%"
+      />
       <p>{props.description}</p>
     </Root>
   )
@@ -54,6 +58,12 @@ const Root = styled.div`
       p {
         width: 100%;
       }
+    }
+  `}
+`
+const StyledVideo = styled(ReactPlayer)`
+  ${({ theme }) => css`
+    @media (width < ${theme.mediaQueries.tablet}) {
     }
   `}
 `

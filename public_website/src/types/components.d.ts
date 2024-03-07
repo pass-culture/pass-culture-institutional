@@ -185,7 +185,6 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
-
 export interface BlockSpace extends Schema.Component {
   collectionName: 'components_block_spaces';
   info: {
@@ -196,6 +195,7 @@ export interface BlockSpace extends Schema.Component {
     space: Attribute.Integer;
   };
 }
+
 export interface BlockVerticalCarousel extends Schema.Component {
   collectionName: 'components_block_vertical_carousels';
   info: {
@@ -209,7 +209,17 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
 
+export interface BlockVideo extends Schema.Component {
+  collectionName: 'components_block_videos';
+  info: {
+    displayName: 'Video';
+  };
+  attributes: {
+    url: Attribute.Text;
+    description: Attribute.Text;
   };
 }
 
@@ -225,7 +235,6 @@ export interface CommonLink extends Schema.Component {
   };
 }
 
-
 export interface CommonLittleListComponent extends Schema.Component {
   collectionName: 'components_common_little_list_components';
   info: {
@@ -239,6 +248,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     secondEmoji: Attribute.String;
   };
 }
+
 export interface CommonVerticalCarouselItem extends Schema.Component {
   collectionName: 'components_common_vertical_carousel_items';
   info: {
@@ -250,7 +260,6 @@ export interface CommonVerticalCarouselItem extends Schema.Component {
     description: Attribute.String & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
     url: Attribute.String & Attribute.Required;
-
   };
 }
 
@@ -541,10 +550,10 @@ declare module '@strapi/types' {
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
+      'block.vertical-carousel': BlockVerticalCarousel;
+      'block.video': BlockVideo;
       'common.link': CommonLink;
       'common.little-list-component': CommonLittleListComponent;
-      'block.vertical-carousel': BlockVerticalCarousel;
-      'common.link': CommonLink;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

@@ -56,6 +56,11 @@
       "repeatable": false,
       "component": "home.recommendations-section",
       "required": true
+    },
+    "videoSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.video"
     }
   }
 }
