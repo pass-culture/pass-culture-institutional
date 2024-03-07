@@ -30,7 +30,7 @@ export function Hero({ title, text, image }: HeroProps) {
         <StyledContentImagetWrapper>
           <StyledImage
             src={getStrapiURL(image?.attributes.url)}
-            alt={image?.attributes.alternativeText}
+            alt={image?.attributes.alternativeText || ''}
           />
         </StyledContentImagetWrapper>
       </StyledContentWrapper>

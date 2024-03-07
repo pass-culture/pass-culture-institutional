@@ -13,6 +13,9 @@ type ButtonProps = {
 export function LinkFaq({ href, target, text }: ButtonProps) {
   return (
     <StyledButton href={href} target={target}>
+      {target === '_blank' && (
+        <span className="visually-hidden">Publié le</span>
+      )}
       {text}
     </StyledButton>
   )
