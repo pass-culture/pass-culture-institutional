@@ -40,9 +40,15 @@
       "type": "media",
       "multiple": true,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
+    },
+    "fifthEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "sixthEmoji": {
+      "type": "string",
+      "required": true
     }
   }
 }

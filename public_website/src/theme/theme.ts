@@ -1,5 +1,6 @@
 import { Colors } from './colors'
 import { FontSizes, FontWeights } from './fonts'
+import { MediaQueries } from './media-queries'
 import { Shadows } from './shadows'
 
 export const theme = {
@@ -10,13 +11,17 @@ export const theme = {
     secondary: Colors.SECONDARY,
     tertiary: Colors.TERTIARY,
     lightBlue: Colors.LIGHT_BLUE,
-    lightGray: Colors.LIGHT_GRAY,
+    gray: Colors.GRAY,
+    darkGray: Colors.DARK_GRAY,
     flashGreen: Colors.FLASH_GREEN,
     purple: Colors.PURPLE,
+    lightGray: Colors.LIGHT_GRAY,
   },
   shadows: {
-    popover: `${Shadows.POPOVER} ${Colors.LIGHT_GRAY}`,
-    sticker: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
+    popover: `${Shadows.POPOVER} ${Colors.GRAY}`,
+    sticker: `${Shadows.STICKER} ${Colors.GRAY}`,
+    banner: `${Shadows.STICKER} ${Colors.GRAY}`,
+    contai: `${Shadows.STICKER} ${Colors.GRAY}`,
   },
   fonts: {
     sizes: {
@@ -64,22 +69,21 @@ export const theme = {
         fontSize: FontSizes['3XL'],
       },
     },
-    borderedText: {
+    heading3: {
       desktop: {
-        lineHeight: '1',
-        fontSize: FontSizes['5XL'],
-        fontWeight: FontWeights.BLACK,
-        color: Colors.WHITE,
+        lineHeight: '1.4',
+        fontSize: FontSizes['4XL'],
+        fontWeight: FontWeights.BOLD,
+        color: Colors.BLACK,
       },
       mobile: {
-        fontSize: FontSizes['4XL'],
+        fontSize: FontSizes['2XL'],
       },
     },
     emoji: {
       lineHeight: '1',
       fontSize: FontSizes['8XL'],
       fontWeight: FontWeights.BOLD,
-      boxShadow: `${Shadows.STICKER} ${Colors.LIGHT_GRAY}`,
     },
     body: {
       desktop: {
@@ -94,8 +98,8 @@ export const theme = {
     },
   },
   mediaQueries: {
-    mobile: '50rem', // 800px
-    tablet: '62.5rem', // 1000px
+    mobile: MediaQueries.MOBILE,
+    tablet: MediaQueries.TABLET,
   },
 } as const
 

@@ -58,7 +58,7 @@ const Root = styled.div`
 
     p {
       line-height: 1.5;
-      font-weight: 500;
+      font-weight: ${({ theme }) => theme.fonts.weights.medium};
       padding-left: 7.1875rem;
     }
 

@@ -2,8 +2,11 @@ import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
 import { Header } from './blocks/Header'
+import { LatestNews } from './blocks/LatestNews'
 import { PushCTA } from './blocks/PushCTA'
 import { SimpleText } from './blocks/SimpleText'
+import { SocialMedia } from './blocks/SocialMedia'
+import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { UnkwnownBlock } from './UnknownBlock'
 
 export interface Block {
@@ -23,6 +26,9 @@ const COMPONENTS: Record<
   'block.centered-text': CenteredText,
   'block.simple-text': SimpleText,
   'block.push-cta': PushCTA,
+  'block.social-media': SocialMedia,
+  'block.latest-news': LatestNews,
+  'block.vertical-carousel': VerticalCarousel,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

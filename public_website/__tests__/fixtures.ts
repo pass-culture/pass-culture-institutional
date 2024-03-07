@@ -70,7 +70,7 @@ export const headerDataFixtures: HeaderProps = {
   ],
   login: {
     buttonLabel: 'Login label',
-    loginItems: [
+    items: [
       {
         label: 'LoginItem 1',
         color: '#ff0000',
@@ -79,9 +79,16 @@ export const headerDataFixtures: HeaderProps = {
       },
     ],
   },
-  signUp: {
-    Label: 'signUp',
-    URL: '#',
+  signup: {
+    buttonLabel: 'Signup label',
+    items: [
+      {
+        label: 'LoginItem 1',
+        color: '#ff0000',
+        emoji: '😇',
+        url: '#',
+      },
+    ],
   },
 }
 

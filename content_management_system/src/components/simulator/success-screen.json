@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_simulator_success_screens",
+  "info": {
+    "displayName": "Success Screen"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "steps": {
+      "type": "component",
+      "repeatable": true,
+      "component": "simulator.step",
+      "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "required": true,
+      "component": "common.link"
+    },
+    "needSupport": {
+      "type": "string",
+      "required": true
+    },
+    "supportLink": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    }
+  }
+}

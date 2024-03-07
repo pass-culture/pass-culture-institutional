@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 
 type EligibilityProps = {
@@ -26,15 +27,25 @@ export function Eligibility({
   return (
     <Root>
       <StyledCard>
-        <StyledCardHeading dangerouslySetInnerHTML={{ __html: cardTitle }} />
+        <StyledCardHeading>
+          <span dangerouslySetInnerHTML={{ __html: cardTitle }} />
+        </StyledCardHeading>
         <StyledCardDescription>{cardDescription}</StyledCardDescription>
         <Button variant="tertiary" href={cardCta.URL}>
           {cardCta.Label}
         </Button>
-        <StyledCardFirstEmoji aria-hidden="true">
+        <StyledCardFirstEmoji
+          as={OutlinedText}
+          dilationRadius={1}
+          shadow
+          aria-hidden="true">
           {cardFirstEmoji}
         </StyledCardFirstEmoji>
-        <StyledCardSecondEmoji aria-hidden="true">
+        <StyledCardSecondEmoji
+          as={OutlinedText}
+          dilationRadius={1}
+          shadow
+          aria-hidden="true">
           {cardSecondEmoji}
         </StyledCardSecondEmoji>
       </StyledCard>
@@ -44,7 +55,9 @@ export function Eligibility({
           {items.map((item) => {
             return (
               <StyledListItem key={item.emoji}>
-                <Typo.Emoji aria-hidden="true">{item.emoji}</Typo.Emoji>
+                <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+                  {item.emoji}
+                </OutlinedText>
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </StyledListItem>
@@ -59,7 +72,7 @@ export function Eligibility({
 const Root = styled.div`
   ${({ theme }) => css`
     max-width: 80rem;
-    margin: 18rem auto 12.5rem;
+    margin: 0 auto 12.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     gap: 1.5rem;
@@ -100,8 +113,18 @@ const StyledCard = styled.div`
   `}
 `
 
-const StyledCardHeading = styled(Typo.BorderedText)`
-  transform: rotate(-2deg);
+const StyledCardHeading = styled(OutlinedText)`
+  ${({ theme }) => css`
+    line-height: 1;
+    font-size: ${theme.fonts.sizes['7xl']};
+    font-weight: ${theme.fonts.weights.black};
+    color: ${theme.colors.secondary};
+    transform: rotate(-2deg);
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      font-size: ${theme.fonts.sizes['4xl']};
+    }
+  `}
 `
 
 const StyledCardDescription = styled.p`

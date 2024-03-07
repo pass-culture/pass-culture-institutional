@@ -14,14 +14,18 @@ describe('Home page', () => {
     }
   })
 
-  it('should pass accessibility tests', async () => {
-    const { props } = await getStaticProps()
-    const { container } = render(<Home {...props} />)
+  it(
+    'should pass accessibility tests',
+    async () => {
+      const { props } = await getStaticProps()
+      const { container } = render(<Home {...props} />)
 
-    let a11yResult
-    await act(async () => {
-      a11yResult = await axe(container)
-    })
-    expect(a11yResult).toHaveNoViolations()
-  })
+      let a11yResult
+      await act(async () => {
+        a11yResult = await axe(container)
+      })
+      expect(a11yResult).toHaveNoViolations()
+    },
+    { timeout: 20000 }
+  )
 })

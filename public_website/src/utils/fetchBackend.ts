@@ -5,7 +5,9 @@ export async function fetchBackend(path: string) {
     const response = await fetch(requestUrl)
 
     if (!response.ok) {
-      throw new Error(`Server returned a non-OK status: ${response.status}`)
+      throw new Error(
+        `Backend returned a non-OK status: ${response.status} on ${requestUrl}`
+      )
     }
 
     const data = await response.json()

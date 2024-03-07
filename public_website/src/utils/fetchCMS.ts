@@ -29,8 +29,11 @@ export async function fetchCMS<T>(path: string) {
     }
 
     const response = await fetch(requestUrl, mergedOptions)
+
     if (!response.ok) {
-      throw new Error(`Server returned a non-OK status: ${response.status}`)
+      throw new Error(
+        `CMS returned a non-OK status: ${response.status} on ${requestUrl}`
+      )
     }
 
     const contentType = response.headers.get('Content-Type') || ''
@@ -44,9 +47,8 @@ export async function fetchCMS<T>(path: string) {
       )
     }
   } catch (error) {
-    console.error(error)
     throw new Error(
-      `Please check if your server is running and you set all the required tokens. ${error}`
+      `Please check if your CMS is running and you set all the required tokens. ${error}`
     )
   }
 }

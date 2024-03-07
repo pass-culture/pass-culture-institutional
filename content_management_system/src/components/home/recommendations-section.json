@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_home_recommendations_sections",
+  "info": {
+    "displayName": "recommendationsSection"
+  },
+  "options": {},
+  "attributes": {
+    "recommendations": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.vertical-carousel",
+      "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    }
+  }
+}

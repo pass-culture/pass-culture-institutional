@@ -8,7 +8,7 @@ If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the 
 
 > Usually, to access environment variables in the browser, they have to be prefixed by `NEXT_PUBLIC_`. In our case, we only need `STRAPI_API_URL` to be available in the Node.js environment.
 
-There is also an environment variable that is used to build the playlists. Set `BACKEND_API_URL` to `https://backend.testing.passculture.team/`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
+There is also an environment variable that is used to build the playlists. Set `BACKEND_API_URL` to `https://backend.testing.passculture.team`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
 
 ## Start the Public Website
 

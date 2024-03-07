@@ -41,16 +41,17 @@ describe('fetchBackend', () => {
 
   it('should fail if response is not ok', async () => {
     const statusCode = 500
-    const responseResolver: HttpHandler = http.get(
-      'http://dummy_localhost:5001/institutional/playlist/Bons_plans_du_moment',
-      () => respondWith({}, statusCode)
+    const requestUrl =
+      'http://dummy_localhost:5001/institutional/playlist/Bons_plans_du_moment'
+    const responseResolver: HttpHandler = http.get(requestUrl, () =>
+      respondWith({}, statusCode)
     )
     server.use(responseResolver)
 
     await expect(
       fetchBackend('institutional/playlist/Bons_plans_du_moment')
     ).rejects.toThrow(
-      `Please check if the backend is running and you set all the required tokens. Error: Server returned a non-OK status: ${statusCode}`
+      `Please check if the backend is running and you set all the required tokens. Error: Backend returned a non-OK status: ${statusCode} on ${requestUrl}`
     )
   })
 })
