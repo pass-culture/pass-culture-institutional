@@ -10,6 +10,7 @@ import { Typo } from '../typographies'
 type MegaMenuProps = {
   onBlur: () => void
   onKeyDown: (e: KeyboardEvent) => void
+  onMouseLeave: () => void
   getOpenButtonEl: () => HTMLButtonElement | null
   id: string
   labelId: string
@@ -30,6 +31,7 @@ type MegaMenuProps = {
 export function MegaMenu({
   onBlur,
   onKeyDown,
+  onMouseLeave,
   getOpenButtonEl,
   id,
   labelId,
@@ -71,7 +73,7 @@ export function MegaMenu({
   })
 
   return (
-    <StyledMegaMenuWrapper>
+    <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
           <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
@@ -84,7 +86,10 @@ export function MegaMenu({
             {data.primaryListItems.map((item) => {
               return (
                 <li key={item.Label}>
-                  <Link href={item.URL}>{item.Label}</Link>
+                  <Link
+                    href={item.URL}
+                    dangerouslySetInnerHTML={{ __html: item.Label }}
+                  />
                 </li>
               )
             })}
@@ -93,7 +98,10 @@ export function MegaMenu({
             {data.secondaryListItems.map((item) => {
               return (
                 <li key={item.Label}>
-                  <Link href={item.URL}>{item.Label}</Link>
+                  <Link
+                    href={item.URL}
+                    dangerouslySetInnerHTML={{ __html: item.Label }}
+                  />
                 </li>
               )
             })}
@@ -143,7 +151,7 @@ const StyledMegaMenu = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)); // Allow exact same width
   gap: 6.5rem;
-  padding: 6.25rem 2.5rem 8.125rem;
+  padding: 4.25rem 2.5rem 8.125rem;
 `
 
 const StyledMegaMenuHeading = styled.div`
@@ -170,7 +178,7 @@ const StyledMegaMenuLists = styled.div`
     ul {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
 
       &:not(:last-child) {
         margin-bottom: 3.75rem;
@@ -182,6 +190,10 @@ const StyledMegaMenuLists = styled.div`
       font-weight: ${theme.fonts.weights.semiBold};
       color: ${theme.colors.black};
       opacity: 0.9;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   `}
 `

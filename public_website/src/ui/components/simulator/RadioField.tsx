@@ -62,6 +62,11 @@ const Choices = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 `
 
 const EmojiContainer = styled.span`
@@ -71,6 +76,7 @@ const EmojiContainer = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.secondary}1A; // 10% opacity
 `

@@ -55,6 +55,8 @@ export function Header({
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
     setActiveMegaMenuId(id === activeMegaMenuId ? null : id)
+    setLoginDropdownOpen(false)
+    setSignupDropdownOpen(false)
   }
 
   // Close mega menu + focus open button on "Escape"
@@ -91,6 +93,13 @@ export function Header({
     }
   }
 
+  // On mouse over, close everything except login dropdown
+  function onLoginDropdownMouseEnter() {
+    setLoginDropdownOpen(!loginDropdownOpen)
+    setSignupDropdownOpen(false)
+    setActiveMegaMenuId(null)
+  }
+
   // Close signup dropdown + focus open button on "Escape"
   const [signupDropdownOpen, setSignupDropdownOpen] = useState(false)
   const signupButtonRef = useRef<HTMLButtonElement>(null)
@@ -105,6 +114,13 @@ export function Header({
     if (signupDropdownOpen) {
       setSignupDropdownOpen(false)
     }
+  }
+
+  // On mouse over, close everything except signup dropdown
+  function onSignupDropdownMouseEnter() {
+    setSignupDropdownOpen(!signupDropdownOpen)
+    setLoginDropdownOpen(false)
+    setActiveMegaMenuId(null)
   }
 
   // Toggle mobile menu + disable scroll on body
@@ -159,7 +175,8 @@ export function Header({
                           i === activeMegaMenuId ? 'mega-menu-active' : ''
                         }
                         onClick={() => toggleMegaMenu(i)}
-                        onKeyDown={(e) => onMegaMenuKeyDown(e, i)}>
+                        onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
+                        onMouseEnter={() => toggleMegaMenu(i)}>
                         {el.label}
                       </button>
                       {i === activeMegaMenuId && (
@@ -172,6 +189,7 @@ export function Header({
                           data={el.megaMenu}
                           onBlur={onMegaMenuBlur}
                           onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
+                          onMouseLeave={() => setActiveMegaMenuId(null)}
                         />
                       )}
                     </StyledNavigationItem>
@@ -188,7 +206,8 @@ export function Header({
                   id="login-dropdown"
                   aria-controls="account-menu"
                   aria-expanded={loginDropdownOpen}
-                  onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}>
+                  onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
+                  onMouseEnter={onLoginDropdownMouseEnter}>
                   {login.buttonLabel}
                 </button>
                 {loginDropdownOpen && (
@@ -198,6 +217,9 @@ export function Header({
                     labelId="login-dropdown"
                     onKeyDown={onLoginDropdownKeyDown}
                     onBlur={onLoginDropdownBlur}
+                    onMouseLeave={() =>
+                      setLoginDropdownOpen(!loginDropdownOpen)
+                    }
                   />
                 )}
               </StyledLoginItem>
@@ -208,7 +230,8 @@ export function Header({
                   id="signup-dropdown"
                   aria-controls="account-menu"
                   aria-expanded={signupDropdownOpen}
-                  onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}>
+                  onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}
+                  onMouseEnter={onSignupDropdownMouseEnter}>
                   {signup.buttonLabel}
                 </Button>
                 {signupDropdownOpen && (
@@ -219,6 +242,9 @@ export function Header({
                     align="right"
                     onKeyDown={onSignupDropdownKeyDown}
                     onBlur={onSignupDropdownBlur}
+                    onMouseLeave={() =>
+                      setSignupDropdownOpen(!signupDropdownOpen)
+                    }
                   />
                 )}
               </StyledSignupItem>
@@ -272,7 +298,7 @@ const StyledNavigation = styled.nav<{
       display: flex;
       align-items: center;
       gap: 1.5rem;
-      padding: 2rem 1rem;
+      padding: 2rem 2.5rem;
       height: 4rem;
 
       @media (width < ${theme.mediaQueries.tablet}) {

@@ -422,7 +422,9 @@ export interface HomeRecommendationsSection extends Schema.Component {
   attributes: {
     recommendations: Attribute.Component<"block.vertical-carousel"> &
       Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    recommendationsBackendTag: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+
   };
 }
 
@@ -450,7 +452,7 @@ export interface SimulatorAmountScreen extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    text: Attribute.RichText & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
   };
 }
 
