@@ -11,6 +11,7 @@ export type Filter = {
   filtre: string
   value: string[]
 }
+
 export type FilterChangeHandler = (name: string, value: string[]) => void
 
 type FiltersProps = {
@@ -43,8 +44,8 @@ export function FilterContainer({
   const [clickedFilters, setClickedFilters] =
     useState<FilterClicked>(numberOfFilterss)
 
+  const newFilterValues: FilterValues = {}
   useEffect(() => {
-    const newFilterValues: FilterValues = {}
     filtres?.forEach((filtre) => {
       newFilterValues[filtre.filtre] = ['']
     })
@@ -79,13 +80,12 @@ export function FilterContainer({
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else {
         // If value is not present i add it
-       
-          if (filterState && filterState[0] !== '') {
-            newFilterValues[name] = [...filterState, value]
-          } else if(filterState && filterState[0] === '' ) {
-            //remove the empty value
-            newFilterValues[name] = [value]
-          }
+
+        if (filterState && filterState[0] !== '') {
+          newFilterValues[name] = [...filterState, value]
+        } else if (filterState && filterState[0] === '') {
+          //remove the empty value
+          newFilterValues[name] = [value]
         }
       }
     }
