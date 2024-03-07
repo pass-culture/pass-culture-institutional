@@ -17,6 +17,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
   ],
   rules: {
+    'import/no-duplicates': ['error', { considerQueryString: true }],
     'react/jsx-fragments': ['error', 'element'],
     'react/jsx-no-useless-fragment': 'error',
     'react/no-unstable-nested-components': 'error',
