@@ -7,15 +7,8 @@ import { LinkFaq } from './Link'
 
 type FaqProps = {
   title: string
-  //   subTitle: string
-  //   cta: { Label: string; URL: string }
   cta: string
   link: string
-  //   firstEmoji: string
-  //   secondEmoji: string
-  //   thirdEmoji: string
-  //   fourthEmoji: string
-  //   images: APIResponseData<'plugin::upload.file'>[] | null
 }
 
 export function Faq({ title, cta, link }: FaqProps) {
