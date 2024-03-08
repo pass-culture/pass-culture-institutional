@@ -1040,6 +1040,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Rh\u00F4ne-Alpes'
       ]
     >;
+    heureFin: Attribute.Time;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
