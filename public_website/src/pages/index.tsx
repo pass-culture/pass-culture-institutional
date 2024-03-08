@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { CenteredText } from '@/lib/blocks/CenteredText'
+import { KeyNumber } from '@/lib/blocks/Keynumber'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
@@ -12,9 +13,6 @@ import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
 import { Recommendations } from '@/ui/components/home/Recommendations'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { Testimonies } from '@/lib/blocks/Testimonies'
-import { ExperienceVideo } from '@/lib/blocks/ExperienceVideo'
-import { Logos } from '@/lib/blocks/Logos'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
@@ -22,6 +20,7 @@ interface HomeProps {
 }
 
 export default function Home({ homeData, latestStudies }: HomeProps) {
+  console.log(homeData)
   return (
     <React.Fragment>
       <StyledHomeGradient>
@@ -87,6 +86,17 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         }
         cta={homeData.attributes.recommendationsSection.cta}
       />
+      <KeyNumber
+        title={homeData.attributes.keyNumberSection[0]?.title}
+        controlsLabel={homeData.attributes.keyNumberSection[0]?.controlLabel}
+        nextButtonLabel={
+          homeData.attributes.keyNumberSection[0]?.nextButtonLabel
+        }
+        previousButtonLabel={
+          homeData.attributes.keyNumberSection[0]?.previousButtonLabel
+        }
+        cards={homeData.attributes.keyNumberSection[0]?.items}
+      />
 
       <StyledLatestNews
         news={latestStudies}
@@ -123,6 +133,8 @@ export const getStaticProps = (async () => {
       'latestStudies.cta',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
+      'keyNumberSection',
+      'keyNumberSection.items',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

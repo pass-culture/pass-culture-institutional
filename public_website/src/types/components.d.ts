@@ -25,6 +25,23 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockKeyNumberCarousel extends Schema.Component {
+  collectionName: 'components_block_key_number_carousels';
+  info: {
+    displayName: 'KeyNumberCarousel';
+  };
+  attributes: {
+    title: Attribute.String;
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlLabel: Attribute.String;
+    items: Attribute.Component<'common.key-number-items', true> &
+      Attribute.SetMinMax<{
+        max: 4;
+      }>;
+  };
+}
+
 export interface BlockLatestNews extends Schema.Component {
   collectionName: 'components_block_latest_news';
   info: {
@@ -97,8 +114,7 @@ export interface BlockSimpleText extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
+    title: Attribute.String;
   };
 }
 
@@ -115,6 +131,21 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
+export interface BlockTestimonies extends Schema.Component {
+  collectionName: 'components_block_testimonies';
+  info: {
+    displayName: 'TestimoniesCarousel';
+    description: '';
+  };
+  attributes: {
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlsLabel: Attribute.String;
+    title: Attribute.String;
+    items: Attribute.Component<'common.testimony-carousel', true>;
+  };
+}
+
 export interface BlockVerticalCarousel extends Schema.Component {
   collectionName: 'components_block_vertical_carousels';
   info: {
@@ -128,6 +159,20 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonKeyNumberItems extends Schema.Component {
+  collectionName: 'components_common_key_number_items';
+  info: {
+    displayName: 'KeyNumberItems';
+  };
+  attributes: {
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+    thirdEmoji: Attribute.String;
+    title: Attribute.String;
+    description: Attribute.Text;
   };
 }
 
@@ -153,6 +198,19 @@ export interface CommonLogo extends Schema.Component {
   };
 }
 
+export interface CommonTestimonyCarousel extends Schema.Component {
+  collectionName: 'components_block_testimony_carousels';
+  info: {
+    displayName: 'TestimonyCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    videoUrl: Attribute.Text;
+  };
+}
+
 export interface CommonVerticalCarouselItem extends Schema.Component {
   collectionName: 'components_common_vertical_carousel_items';
   info: {
@@ -162,8 +220,8 @@ export interface CommonVerticalCarouselItem extends Schema.Component {
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    image: Attribute.Media;
   };
 }
 
@@ -348,15 +406,19 @@ declare module '@strapi/types' {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.logos': BlockLogos;
       'block.push-cta': BlockPushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+      'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
+      'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
       'common.logo': CommonLogo;
+      'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

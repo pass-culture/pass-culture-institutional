@@ -933,7 +933,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
     logos: Attribute.Component<'block.logos'>;
-    testimoniesSection: Attribute.Component<'block.testimonies', true>;
+    keyNumberSection: Attribute.Component<'block.key-number-carousel', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -62,10 +62,10 @@
       "repeatable": false,
       "component": "block.logos"
     },
-    "testimoniesSection": {
+    "keyNumberSection": {
       "type": "component",
       "repeatable": true,
-      "component": "block.testimonies"
+      "component": "block.key-number-carousel"
     }
   }
 }

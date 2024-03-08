@@ -25,6 +25,23 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockKeyNumberCarousel extends Schema.Component {
+  collectionName: 'components_block_key_number_carousels';
+  info: {
+    displayName: 'KeyNumberCarousel';
+  };
+  attributes: {
+    title: Attribute.String;
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlLabel: Attribute.String;
+    items: Attribute.Component<'common.key-number-items', true> &
+      Attribute.SetMinMax<{
+        max: 4;
+      }>;
+  };
+}
+
 export interface BlockLatestNews extends Schema.Component {
   collectionName: 'components_block_latest_news';
   info: {
@@ -142,6 +159,20 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonKeyNumberItems extends Schema.Component {
+  collectionName: 'components_common_key_number_items';
+  info: {
+    displayName: 'KeyNumberItems';
+  };
+  attributes: {
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+    thirdEmoji: Attribute.String;
+    title: Attribute.String;
+    description: Attribute.Text;
   };
 }
 
@@ -375,6 +406,7 @@ declare module '@strapi/types' {
     export interface Components {
       'block.centered-text': BlockCenteredText;
       'block.header': BlockHeader;
+      'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.logos': BlockLogos;
@@ -383,6 +415,7 @@ declare module '@strapi/types' {
       'block.social-media': BlockSocialMedia;
       'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
+      'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
       'common.logo': CommonLogo;
       'common.testimony-carousel': CommonTestimonyCarousel;

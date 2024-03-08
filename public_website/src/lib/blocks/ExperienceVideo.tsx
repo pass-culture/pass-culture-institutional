@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { ExperienceVideoCarouselSlideProps } from './experienceVideoCarousel/experieneVideoCarouselSlide'
 import { ExperienceVideoCarousel } from './experienceVideoCarousel/experienceVideoCarousel'
+import { ExperienceVideoCarouselSlideProps } from './experienceVideoCarousel/experieneVideoCarouselSlide'
 type ExperienceVideoProps = {
   title: string
   controlsLabel: string
@@ -53,10 +53,4 @@ const StyledCarouselWrapper = styled.div`
       padding: 4rem 1.5rem 2rem;
     }
   `}
-`
-
-const StyledCtaWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
 `
