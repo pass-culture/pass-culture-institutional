@@ -3,17 +3,13 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { CenteredText } from '@/lib/blocks/CenteredText'
-import { LatestNews } from '@/lib/blocks/LatestNews'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { APIResponseData } from '@/types/strapi'
-import { Eligibility } from '@/ui/components/home/Eligibility'
-import { Hero } from '@/ui/components/help/Hero'
-import { Faq } from '@/ui/components/help/Faq'
-import { fetchCMS } from '@/utils/fetchCMS'
-
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { APIResponseData } from '@/types/strapi'
+import { Faq } from '@/ui/components/help/Faq'
+import { Hero } from '@/ui/components/help/Hero'
+import { fetchCMS } from '@/utils/fetchCMS'
 interface HelpProps {
   helpData: APIResponseData<'api::help.help'>
 }
@@ -99,17 +95,6 @@ const StyledPushCTA = styled(DoublePushCTA)`
   `}
 `
 
-const StyledLatestNews = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
-    }
-  `}
-`
-
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
     margin-top: 6rem;
@@ -117,17 +102,6 @@ const StyledSocialMedia = styled(SocialMedia)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
-    }
-  `}
-`
-
-const StyledFaq = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
     }
   `}
 `

@@ -3,12 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
-import { APIResponseData } from '@/types/strapi'
-import { getStrapiURL } from '@/utils/apiHelpers'
-import { Accordion, AccordionItem } from '@nextui-org/react'
 import { LinkFaq } from './Link'
-
-import arrow from '../../image/arrowd.svg'
 
 type FaqProps = {
   title: string
@@ -115,10 +110,8 @@ const StyledContentTextWrapper = styled.div`
 `
 
 const StyledFaqtWrapper = styled.div`
-  ${({ theme }) => css`
-    // padding-left: 2rem;
-    margin-top: 2rem;
-  `}
+  // padding-left: 2rem;
+  margin-top: 2rem;
 `
 
 // const StyledAccordion = styled(Accordion)`

@@ -17,6 +17,12 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
   ],
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'array-callback-return': 'error',
     'import/no-duplicates': ['error', { considerQueryString: true }],
     'no-console': ['error', { allow: ['warn', 'error'] }],

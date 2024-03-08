@@ -1,11 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
 import { Typo } from '../typographies'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
-
 type HeroProps = {
   title: string
   text: string
@@ -118,8 +116,8 @@ const StyledText = styled.p`
 `
 
 const StyledImage = styled.img`
-  ${({ theme }) => css`
+ ´
     max-width: 100%;
     height: auto;
-  `}
+
 `
