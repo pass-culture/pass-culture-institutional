@@ -47,14 +47,14 @@ describe('fetchCMS', () => {
 
     it('should fail if response is not ok', async () => {
       const statusCode = 500
-      const responseResolver: HttpHandler = http.get(
-        'http://localhost:1337/api/test',
-        () => respondWith({}, statusCode)
+      const requestUrl = 'http://localhost:1337/api/test'
+      const responseResolver: HttpHandler = http.get(requestUrl, () =>
+        respondWith({}, statusCode)
       )
       server.use(responseResolver)
 
       await expect(fetchCMS('/test')).rejects.toThrow(
-        `Server returned a non-OK status: ${statusCode}`
+        `CMS returned a non-OK status: ${statusCode} on ${requestUrl}`
       )
     })
 

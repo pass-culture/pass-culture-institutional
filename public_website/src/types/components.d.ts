@@ -134,6 +134,22 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
+export interface BlockVerticalCarousel extends Schema.Component {
+  collectionName: 'components_block_vertical_carousels';
+  info: {
+    displayName: 'VerticalCarousel';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.Text & Attribute.Required;
+    items: Attribute.Component<'common.vertical-carousel-item', true> &
+      Attribute.Required;
+    previousButtonLabel: Attribute.String & Attribute.Required;
+    nextButtonLabel: Attribute.String & Attribute.Required;
+    controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface CommonLink extends Schema.Component {
   collectionName: 'components_common_links';
   info: {
@@ -143,6 +159,20 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonVerticalCarouselItem extends Schema.Component {
+  collectionName: 'components_common_vertical_carousel_items';
+  info: {
+    displayName: 'verticalCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
   };
 }
 
@@ -163,6 +193,32 @@ export interface FooterList extends Schema.Component {
   attributes: {
     Title: Attribute.String & Attribute.Required;
     Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface HeaderAccountDropdown extends Schema.Component {
+  collectionName: 'components_header_account_dropdowns';
+  info: {
+    displayName: 'accountDropdown';
+  };
+  attributes: {
+    buttonLabel: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'header.account-item', true> &
+      Attribute.Required;
+  };
+}
+
+export interface HeaderAccountItem extends Schema.Component {
+  collectionName: 'components_header_account_item';
+  info: {
+    displayName: 'accountItem';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
   };
 }
 
@@ -279,6 +335,115 @@ export interface HomeHeroSection extends Schema.Component {
     thirdEmoji: Attribute.String & Attribute.Required;
     fourthEmoji: Attribute.String & Attribute.Required;
     images: Attribute.Media & Attribute.Required;
+    fifthEmoji: Attribute.String & Attribute.Required;
+    sixthEmoji: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HomeRecommendationsSection extends Schema.Component {
+  collectionName: 'components_home_recommendations_sections';
+  info: {
+    displayName: 'recommendationsSection';
+  };
+  attributes: {
+    recommendations: Attribute.Component<'block.vertical-carousel'> &
+      Attribute.Required;
+    recommendationsBackendTag: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface SimulatorAgeQuestion extends Schema.Component {
+  collectionName: 'components_simulator_age_questions';
+  info: {
+    displayName: 'AgeQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 6;
+        max: 6;
+      }>;
+  };
+}
+
+export interface SimulatorAmountScreen extends Schema.Component {
+  collectionName: 'components_simulator_amount_screens';
+  info: {
+    displayName: 'Amount Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+  };
+}
+
+export interface SimulatorAnswer extends Schema.Component {
+  collectionName: 'components_simulator_answers';
+  info: {
+    displayName: 'Answer';
+    description: '';
+  };
+  attributes: {
+    answer: Attribute.String & Attribute.Required;
+    emoji: Attribute.String;
+  };
+}
+
+export interface SimulatorFailureScreen extends Schema.Component {
+  collectionName: 'components_simulator_failure_screens';
+  info: {
+    displayName: 'Failure Screen';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface SimulatorRadioQuestion extends Schema.Component {
+  collectionName: 'components_simulator_radio_questions';
+  info: {
+    displayName: 'RadioQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+        max: 2;
+      }>;
+  };
+}
+
+export interface SimulatorStep extends Schema.Component {
+  collectionName: 'components_simulator_steps';
+  info: {
+    displayName: 'Step';
+  };
+  attributes: {
+    step: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SimulatorSuccessScreen extends Schema.Component {
+  collectionName: 'components_simulator_success_screens';
+  info: {
+    displayName: 'Success Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    needSupport: Attribute.String & Attribute.Required;
+    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -294,9 +459,13 @@ declare module '@strapi/types' {
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+      'block.vertical-carousel': BlockVerticalCarousel;
       'common.link': CommonLink;
+      'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
+      'header.account-dropdown': HeaderAccountDropdown;
+      'header.account-item': HeaderAccountItem;
       'header.header': HeaderHeader;
       'header.login-items': HeaderLoginItems;
       'header.login': HeaderLogin;
@@ -305,6 +474,14 @@ declare module '@strapi/types' {
       'home.eligibility-items': HomeEligibilityItems;
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
+      'home.recommendations-section': HomeRecommendationsSection;
+      'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.amount-screen': SimulatorAmountScreen;
+      'simulator.answer': SimulatorAnswer;
+      'simulator.failure-screen': SimulatorFailureScreen;
+      'simulator.radio-question': SimulatorRadioQuestion;
+      'simulator.step': SimulatorStep;
+      'simulator.success-screen': SimulatorSuccessScreen;
     }
   }
 }

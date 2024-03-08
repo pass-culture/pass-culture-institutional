@@ -1,9 +1,13 @@
 import React from 'react'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import { act, render } from '..'
+import { act, fireEvent, render, screen } from '..'
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import Home, { getStaticProps } from '@/pages'
+
+vi.mock('@/lib/analytics/analyticsProvider')
+const mockLogEvent = analyticsProvider.logEvent
 
 describe('Home page', () => {
   beforeEach(() => {
@@ -14,14 +18,31 @@ describe('Home page', () => {
     }
   })
 
-  it('should pass accessibility tests', async () => {
-    const { props } = await getStaticProps()
-    const { container } = render(<Home {...props} />)
+  it(
+    'should pass accessibility tests',
+    async () => {
+      const { props } = await getStaticProps()
+      const { container } = render(<Home {...props} />)
 
-    let a11yResult
-    await act(async () => {
-      a11yResult = await axe(container)
+      let a11yResult
+      await act(async () => {
+        a11yResult = await axe(container)
+      })
+      expect(a11yResult).toHaveNoViolations()
+    },
+    { timeout: 20000 }
+  )
+
+  it('should trigger test event when clicking on the button', async () => {
+    const { props } = await getStaticProps()
+
+    render(<Home {...props} />)
+
+    const button = screen.getByText('Je m’inscris')
+    fireEvent.click(button)
+
+    expect(mockLogEvent).toHaveBeenCalledWith('goToSignup', {
+      origin: 'Home',
     })
-    expect(a11yResult).toHaveNoViolations()
   })
 })

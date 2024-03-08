@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_block_vertical_carousels",
+  "info": {
+    "displayName": "VerticalCarousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "text",
+      "required": true
+    },
+    "items": {
+      "displayName": "verticalCarouselItem",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.vertical-carousel-item",
+      "required": true
+    },
+    "previousButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "nextButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "controlsLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

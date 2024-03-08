@@ -25,17 +25,16 @@
       "component": "header.navigation-items",
       "required": true
     },
-    "signUp": {
+    "login": {
       "type": "component",
       "repeatable": false,
-      "component": "common.link",
+      "component": "header.account-dropdown",
       "required": true
     },
-    "login": {
-      "displayName": "login",
+    "signup": {
       "type": "component",
       "repeatable": false,
-      "component": "header.login",
+      "component": "header.account-dropdown",
       "required": true
     }
   }

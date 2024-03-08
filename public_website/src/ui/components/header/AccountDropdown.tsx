@@ -1,29 +1,35 @@
 import React, { Ref, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
-import { LoginItem } from './LoginItem'
+import { AccountItem } from './AccountItem'
 
-export type LoginItemProps = {
+export type AccountItemProps = {
   label: string
   url: string
   color: string
   emoji: string
 }
 
-type LoginDropdownProps = {
-  items: LoginItemProps[]
+type AccountDropdownProps = {
+  items: AccountItemProps[]
   openButtonElement: HTMLButtonElement | null
+  labelId: string
+  align?: 'left' | 'right'
   onKeyDown: () => void
   onBlur: () => void
+  onMouseLeave: () => void
 }
 
-export function LoginDropdown({
+export function AccountDropdown({
   items,
   openButtonElement,
+  labelId,
+  align,
   onKeyDown,
   onBlur,
-}: LoginDropdownProps) {
-  const loginDropdownRef = useRef<HTMLDivElement>(null)
+  onMouseLeave,
+}: AccountDropdownProps) {
+  const accountDropdownRef = useRef<HTMLDivElement>(null)
 
   function onEscape(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -32,7 +38,7 @@ export function LoginDropdown({
   }
 
   function onClickOutside(e: MouseEvent) {
-    if (!loginDropdownRef.current?.contains(e.target as HTMLElement)) {
+    if (!accountDropdownRef.current?.contains(e.target as HTMLElement)) {
       if (openButtonElement !== (e.target as HTMLElement)) {
         onBlur()
       }
@@ -49,38 +55,57 @@ export function LoginDropdown({
   }
 
   useEffect(() => {
-    const loginDropdownElement = loginDropdownRef.current
+    const accountDropdownElement = accountDropdownRef.current
 
-    loginDropdownElement?.addEventListener('keydown', onEscape)
+    accountDropdownElement?.addEventListener('keydown', onEscape)
     window?.addEventListener('click', onClickOutside)
 
     return () => {
-      loginDropdownElement?.removeEventListener('keydown', onEscape)
+      accountDropdownElement?.removeEventListener('keydown', onEscape)
       window?.removeEventListener('click', onClickOutside)
     }
   })
 
   return (
-    <StyledLoginDropdown ref={loginDropdownRef}>
-      <ul aria-labelledby="login-dropdown" id="login-menu">
+    <StyledAccountDropdown
+      ref={accountDropdownRef}
+      $align={align}
+      onMouseLeave={onMouseLeave}>
+      <ul aria-labelledby={labelId} id="account-menu">
         {items.map((item, i) => (
           <React.Fragment key={item.label}>
-            <LoginItem {...item} />
+            <AccountItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true"></li>}
           </React.Fragment>
         ))}
       </ul>
-    </StyledLoginDropdown>
+    </StyledAccountDropdown>
   )
 }
 
-const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
-  ${({ theme }) => css`
+const StyledAccountDropdown = styled.div<{
+  ref: Ref<HTMLDivElement>
+  $align?: 'left' | 'right'
+}>`
+  ${({ theme, $align }) => css`
     position: absolute;
     top: calc(100% + 2rem);
     left: 50%;
     transform: translateX(-50%);
     width: max-content;
+
+    ${$align === 'right' &&
+    `
+      right: 0;
+      left: auto;
+      transform: none;
+    `}
+
+    ${$align === 'left' &&
+    `
+      left: 0;
+      transform: none;
+    `}
 
     ul {
       background: ${theme.colors.white};
@@ -102,6 +127,19 @@ const StyledLoginDropdown = styled.div<{ ref: Ref<HTMLDivElement> }>`
         top: -0.5rem;
         left: calc(50%);
         transform: translateX(-50%) rotate(45deg);
+
+        ${$align === 'right' &&
+        `
+          right: 2rem;
+          left: auto;
+          transform: rotate(45deg);
+        `}
+
+        ${$align === 'left' &&
+        `
+          left: 2rem;
+          transform: rotate(45deg);
+        `}
       }
     }
   `}

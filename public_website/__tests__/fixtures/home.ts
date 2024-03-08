@@ -1,3 +1,5 @@
+import { verticalCarouselFixtures } from './verticalCarousel'
+
 export const homePageFixtures = {
   homeData: {
     id: 1,
@@ -186,6 +188,15 @@ export const homePageFixtures = {
               updatedAt: '2024-02-19T14:18:04.571Z',
             },
           },
+        },
+      },
+      recommendationsSection: {
+        title: 'Title',
+        recommendations: verticalCarouselFixtures,
+        recommendationsBackendTag: 'Bons_plans_du_moment',
+        cta: {
+          Label: 'Cta label',
+          URL: '#',
         },
       },
       latestStudies: {

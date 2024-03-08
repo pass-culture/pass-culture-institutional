@@ -1,45 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
+import { Recommendations } from '@/ui/components/home/Recommendations'
+import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
+  recommendationItems: Offer[]
   latestStudies: APIResponseData<'api::news.news'>[]
 }
 
-export default function Home({ homeData, latestStudies }: HomeProps) {
+export default function Home({
+  homeData,
+  recommendationItems,
+  latestStudies,
+}: HomeProps) {
+  useEffect(() => {
+    analyticsProvider.init()
+  }, [])
+
   return (
     <React.Fragment>
-      <Hero
-        title={homeData.attributes.heroSection.title}
-        subTitle={homeData.attributes.heroSection.subTitle}
-        cta={homeData.attributes.heroSection.cta}
-        firstEmoji={homeData.attributes.heroSection.firstEmoji}
-        secondEmoji={homeData.attributes.heroSection.secondEmoji}
-        thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
-        fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
-        images={
-          // There seem to be a bug with the `strapi.ts` helper file.
-          // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
-          homeData.attributes.heroSection.images
-            ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
-        }
-      />
+      <StyledHomeGradient>
+        <Hero
+          title={homeData.attributes.heroSection.title}
+          subTitle={homeData.attributes.heroSection.subTitle}
+          cta={homeData.attributes.heroSection.cta}
+          firstEmoji={homeData.attributes.heroSection.firstEmoji}
+          secondEmoji={homeData.attributes.heroSection.secondEmoji}
+          thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
+          fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
+          fifthEmoji={homeData.attributes.heroSection.fifthEmoji}
+          sixthEmoji={homeData.attributes.heroSection.sixthEmoji}
+          images={
+            // There seem to be a bug with the `strapi.ts` helper file.
+            // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
+            homeData.attributes.heroSection.images
+              ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
+          }
+        />
 
-      <CenteredText
-        title={homeData.attributes.aboutSection.title}
-        description={homeData.attributes.aboutSection.description}
-      />
+        <CenteredText
+          title={homeData.attributes.aboutSection.title}
+          description={homeData.attributes.aboutSection.description}
+        />
+      </StyledHomeGradient>
 
       <Eligibility
         title={homeData.attributes.eligibilitySection.title}
@@ -58,6 +75,24 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
         ctaLink={homeData.attributes.CTASection.ctaLink}
         qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
         qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
+      />
+
+      <Recommendations
+        title={homeData.attributes.recommendationsSection.recommendations.title}
+        controlsLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .controlsLabel
+        }
+        previousButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .previousButtonLabel
+        }
+        nextButtonLabel={
+          homeData.attributes.recommendationsSection.recommendations
+            .nextButtonLabel
+        }
+        recommendations={recommendationItems}
+        cta={homeData.attributes.recommendationsSection.cta}
       />
 
       <StyledLatestNews
@@ -88,6 +123,9 @@ export const getStaticProps = (async () => {
       'CTASection',
       'CTASection.image',
       'CTASection.ctaLink',
+      'recommendationsSection.cta',
+      'recommendationsSection.recommendations.items',
+      'recommendationsSection.recommendations.items.image',
       'latestStudies',
       'latestStudies.cta',
       'socialMediaSection',
@@ -107,7 +145,7 @@ export const getStaticProps = (async () => {
     },
     filters: {
       category: {
-        $eq: 'Étude',
+        $eqi: 'Étude',
       },
     },
   })
@@ -115,13 +153,39 @@ export const getStaticProps = (async () => {
     `/news-list?${latestStudiesQuery}`
   )
 
+  // Fetch recommandation items
+  const recommendationTag =
+    data.attributes.recommendationsSection.recommendationsBackendTag
+  const recommendationItems = (await fetchBackend(
+    `institutional/playlist/${recommendationTag}`
+  )) as Offer[]
+
   return {
     props: {
       homeData: data,
+      recommendationItems,
       latestStudies: latestStudies.data,
     },
   }
 }) satisfies GetStaticProps<HomeProps>
+
+const StyledHomeGradient = styled.div`
+  ${({ theme }) => css`
+    background: linear-gradient(
+      180deg,
+      rgba(233 223 238 / 1) 0%,
+      rgba(233 223 238 / 0) 100%
+    );
+    padding: 8rem 0;
+    overflow: hidden;
+    transform: translateY(-8rem);
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: 8rem 0 0;
+      transform: translateY(-7rem);
+    }
+  `}
+`
 
 const StyledPushCTA = styled(PushCTA)`
   ${({ theme }) => css`

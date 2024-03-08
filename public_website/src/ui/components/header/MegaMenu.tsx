@@ -4,11 +4,13 @@ import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 
 type MegaMenuProps = {
   onBlur: () => void
   onKeyDown: (e: KeyboardEvent) => void
+  onMouseLeave: () => void
   getOpenButtonEl: () => HTMLButtonElement | null
   id: string
   labelId: string
@@ -29,6 +31,7 @@ type MegaMenuProps = {
 export function MegaMenu({
   onBlur,
   onKeyDown,
+  onMouseLeave,
   getOpenButtonEl,
   id,
   labelId,
@@ -70,10 +73,10 @@ export function MegaMenu({
   })
 
   return (
-    <StyledMegaMenuWrapper>
+    <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <Typo.Heading1 as={'p'}>{data.title}</Typo.Heading1>
+          <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
           <Button href={data.cta.URL}>{data.cta.Label}</Button>
           {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
         </StyledMegaMenuHeading>
@@ -83,7 +86,10 @@ export function MegaMenu({
             {data.primaryListItems.map((item) => {
               return (
                 <li key={item.Label}>
-                  <Link href={item.URL}>{item.Label}</Link>
+                  <Link
+                    href={item.URL}
+                    dangerouslySetInnerHTML={{ __html: item.Label }}
+                  />
                 </li>
               )
             })}
@@ -92,7 +98,10 @@ export function MegaMenu({
             {data.secondaryListItems.map((item) => {
               return (
                 <li key={item.Label}>
-                  <Link href={item.URL}>{item.Label}</Link>
+                  <Link
+                    href={item.URL}
+                    dangerouslySetInnerHTML={{ __html: item.Label }}
+                  />
                 </li>
               )
             })}
@@ -101,11 +110,16 @@ export function MegaMenu({
 
         <StyledMegaMenuCard>
           <StyledMegaMenuCardHeading>
-            <Typo.BorderedText>{data.cardTitle}</Typo.BorderedText>
+            <OutlinedText innerAs={'p'}>{data.cardTitle}</OutlinedText>
 
-            <Typo.Emoji aria-hidden="true">{data.cardFirstEmoji}</Typo.Emoji>
-            <Typo.Emoji aria-hidden="true">{data.cardSecondEmoji}</Typo.Emoji>
+            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+              {data.cardFirstEmoji}
+            </OutlinedText>
+            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+              {data.cardSecondEmoji}
+            </OutlinedText>
           </StyledMegaMenuCardHeading>
+
           <p>{data.cardDescription}</p>
           <Button href={data.cardLink.URL} variant="secondary">
             {data.cardLink.Label}
@@ -118,7 +132,11 @@ export function MegaMenu({
 
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background: linear-gradient(
+      to bottom,
+      ${theme.colors.lightBlue},
+      ${theme.colors.white}
+    );
     position: absolute;
     left: 0;
     right: 0;
@@ -131,9 +149,9 @@ const StyledMegaMenu = styled.div`
   max-width: 90rem;
   margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr)); // Allow exact same width
   gap: 6.5rem;
-  padding: 6.25rem 2.5rem 8.125rem;
+  padding: 4.25rem 2.5rem 8.125rem;
 `
 
 const StyledMegaMenuHeading = styled.div`
@@ -160,7 +178,7 @@ const StyledMegaMenuLists = styled.div`
     ul {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
 
       &:not(:last-child) {
         margin-bottom: 3.75rem;
@@ -172,6 +190,10 @@ const StyledMegaMenuLists = styled.div`
       font-weight: ${theme.fonts.weights.semiBold};
       color: ${theme.colors.black};
       opacity: 0.9;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   `}
 `
@@ -200,21 +222,31 @@ const StyledMegaMenuCardHeading = styled.div`
     margin-bottom: 4.5rem;
 
     p {
+      line-height: 1;
+      font-size: ${theme.fonts.sizes['5xl']};
+      font-weight: ${theme.fonts.weights.black};
+      color: ${theme.colors.secondary};
+      transform: rotate(-2deg);
       z-index: 1;
     }
 
     span {
       font-size: ${theme.fonts.sizes['6xl']};
       position: absolute;
-      top: -1rem;
+      top: -3rem;
       left: 1rem;
       transform: rotate(-10deg);
 
       &:last-child {
         top: auto;
         left: auto;
-        bottom: -1rem;
+        bottom: -3.3rem;
         right: 1rem;
+        z-index: 2;
+      }
+
+      @media (width < ${theme.mediaQueries.mobile}) {
+        font-size: ${theme.fonts.sizes['4xl']};
       }
     }
   `}

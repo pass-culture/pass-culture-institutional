@@ -49,6 +49,13 @@
       "repeatable": false,
       "component": "home.hero-section",
       "required": true
+    },
+    "recommendationsSection": {
+      "displayName": "recommendationsSection",
+      "type": "component",
+      "repeatable": false,
+      "component": "home.recommendations-section",
+      "required": true
     }
   }
 }

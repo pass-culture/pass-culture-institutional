@@ -135,6 +135,7 @@ const GlobalStyles = createGlobalStyle`
 
   /* Custom */
   body {
+    color: ${theme.colors.black};
     line-height: 1.5;
   }
 
@@ -148,6 +149,12 @@ const GlobalStyles = createGlobalStyle`
     border: none;
     font: inherit;
     padding: 0;
+  }
+
+  /* Focus styles. Define --outline-color on an element to override default color */
+  *:focus-visible {
+    outline: 2px solid var(--outline-color, ${theme.colors.primary});
+    outline-offset: 2px;
   }
 
   /* Visually hide content but keep its semantic/content to assistive technologies */

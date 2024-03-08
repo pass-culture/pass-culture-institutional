@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_simulator_steps",
+  "info": {
+    "displayName": "Step"
+  },
+  "options": {},
+  "attributes": {
+    "step": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
