@@ -31,24 +31,38 @@ export default function Help({ helpData }: HelpProps) {
         link="#"
       />
       <StyledPushCTA
-        title={helpData.attributes.cardText.title}
+        title={helpData.attributes.cardText?.title}
         description={helpData.attributes.cardText?.text}
-        image={helpData.attributes.cardText.image}
-        ctaLink={helpData.attributes.cardText.firstCta}
-        sctaLink={helpData.attributes.cardText.secondCta}
+        image={helpData.attributes.cardText?.image}
+        ctaLink={helpData.attributes.cardText?.firstCta}
+        sctaLink={helpData.attributes.cardText?.secondCta}
       />
 
-      <StyledSimplePushCTA
-        title={helpData.attributes.simplepushcta[0].title}
-        description={helpData.attributes.simplepushcta[0].surtititle}
-        image={helpData.attributes.simplepushcta[0].image}
-        ctaLink={helpData.attributes.simplepushcta[0].cta}
-      />
+      {/* {helpData.attributes?.simplepushcta[0] && (
+        <StyledSimplePushCTA
+          title={helpData.attributes.simplepushcta[0]?.title}
+          description={helpData.attributes.simplepushcta[0]?.surtititle}
+          image={helpData.attributes.simplepushcta[0]?.image}
+          ctaLink={helpData.attributes.simplepushcta[0]?.cta}
+        />
+      )} */}
 
-      <StyledSocialMedia
-        title={helpData.attributes.social[0].title}
-        links={helpData.attributes.social[0].socialMediaLink}
-      />
+      {helpData.attributes?.simplepushcta &&
+        helpData.attributes.simplepushcta[0] && (
+          <StyledSimplePushCTA
+            title={helpData.attributes.simplepushcta[0]?.title}
+            description={helpData.attributes.simplepushcta[0]?.surtititle}
+            image={helpData.attributes.simplepushcta[0]?.image}
+            ctaLink={helpData.attributes.simplepushcta[0]?.cta}
+          />
+        )}
+
+      {helpData.attributes?.social && helpData.attributes.social[0] && (
+        <StyledSocialMedia
+          title={helpData.attributes.social[0].title}
+          links={helpData.attributes.social[0].socialMediaLink}
+        />
+      )}
     </React.Fragment>
   )
 }
@@ -69,6 +83,7 @@ export const getStaticProps = (async () => {
       'simplepushcta',
       'simplepushcta.image',
       'simplepushcta.cta',
+      'simplepushcta.cta[0]',
     ],
   })
 

@@ -8,12 +8,12 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
-  title: string
-  description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  ctaLink: { Label: string; URL: string }
+  title: string | undefined | TrustedHTML
+  description?: string | undefined
+  image: APIResponse<'plugin::upload.file'> | null | undefined
+  ctaLink: { Label: string; URL: string } | undefined
 
-  sctaLink: { Label: string; URL: string }
+  sctaLink: { Label: string; URL: string } | undefined
   className?: string
 }
 
@@ -28,13 +28,16 @@ export function DoublePushCTA(props: PushCTAProps) {
           }></Card>
       </CardContainer>
       <RightSide>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        {props.title && (
+          <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        )}
         {props.description && (
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
-        <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
-        <Button href={props.sctaLink.URL} target="_blank" variant="quaternary">
-          {props.sctaLink.Label}
+
+        <CtaLink href={props.ctaLink?.URL}>{props.ctaLink?.Label}</CtaLink>
+        <Button href={props.sctaLink?.URL} target="_blank" variant="quaternary">
+          {props.sctaLink?.Label}
         </Button>
       </RightSide>
     </Root>
