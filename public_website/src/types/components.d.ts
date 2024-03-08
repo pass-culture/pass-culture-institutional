@@ -101,11 +101,11 @@ export interface BlockSimplePushCta extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    surtititle: Attribute.String;
-    image: Attribute.Media;
+    title: Attribute.String & Attribute.Required;
+    surtititle: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
     icon: Attribute.Media;
-    cta: Attribute.Component<'common.link'>;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 

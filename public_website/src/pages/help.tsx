@@ -31,23 +31,23 @@ export default function Help({ helpData }: HelpProps) {
         link="#"
       />
       <StyledPushCTA
-        title={helpData.attributes.cardText?.title}
+        title={helpData.attributes.cardText.title}
         description={helpData.attributes.cardText?.text}
-        image={helpData.attributes.cardText?.image}
-        ctaLink={helpData.attributes.cardText?.firstCta}
-        sctaLink={helpData.attributes.cardText?.secondCta}
+        image={helpData.attributes.cardText.image}
+        ctaLink={helpData.attributes.cardText.firstCta}
+        sctaLink={helpData.attributes.cardText.secondCta}
       />
 
       <StyledSimplePushCTA
-        title={helpData.attributes.simplepushcta[0]?.title}
-        description={helpData.attributes.simplepushcta[0]?.surtititle}
-        image={helpData.attributes.simplepushcta[0]?.image}
-        ctaLink={helpData.attributes.simplepushcta[0]?.cta}
+        title={helpData.attributes.simplepushcta[0].title}
+        description={helpData.attributes.simplepushcta[0].surtititle}
+        image={helpData.attributes.simplepushcta[0].image}
+        ctaLink={helpData.attributes.simplepushcta[0].cta}
       />
 
       <StyledSocialMedia
-        title={helpData.attributes.social[0]?.title}
-        links={helpData.attributes.social[0]?.socialMediaLink}
+        title={helpData.attributes.social[0].title}
+        links={helpData.attributes.social[0].socialMediaLink}
       />
     </React.Fragment>
   )
