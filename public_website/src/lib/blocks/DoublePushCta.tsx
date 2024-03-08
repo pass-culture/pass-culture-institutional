@@ -9,7 +9,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
   title: string | undefined | TrustedHTML
-  description?: string | undefined
+  description: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   ctaLink: { Label: string; URL: string } | undefined
 
