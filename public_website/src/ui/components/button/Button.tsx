@@ -69,8 +69,8 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     $variant !== 'primary' &&
     `border: 1px solid ${theme.colors.white};`}
 
-    ${variant &&
-    variant === 'quaternary' &&
+    ${$variant &&
+    $variant === 'quaternary' &&
     `border: 1px solid ${theme.colors.primary};`}
 
 
@@ -79,7 +79,9 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
       ? theme.colors.secondary
       : theme.colors.white};
 
-    ${variant && variant === 'quaternary' && `color: ${theme.colors.primary};`}
+    ${$variant &&
+    $variant === 'quaternary' &&
+    `color: ${theme.colors.primary};`}
 
     display: inline-block;
 
