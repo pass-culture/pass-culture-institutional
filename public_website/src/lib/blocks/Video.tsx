@@ -7,7 +7,7 @@ interface VideoProps {
   url?: string
 }
 
-export function Image(props: VideoProps) {
+export function Video(props: VideoProps) {
   return (
     <Root>
       <StyledVideo

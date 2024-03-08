@@ -3,14 +3,13 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { APIResponseData } from '@/types/strapi'
-import { Hero } from '@/ui/components/help/Hero'
-import { Faq } from '@/ui/components/help/Faq'
-import { fetchCMS } from '@/utils/fetchCMS'
-
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { APIResponseData } from '@/types/strapi'
+import { Faq } from '@/ui/components/help/Faq'
+import { Hero } from '@/ui/components/help/Hero'
+import { fetchCMS } from '@/utils/fetchCMS'
 interface HelpProps {
   helpData: APIResponseData<'api::help.help'>
 }
@@ -31,7 +30,7 @@ export default function Help({ helpData }: HelpProps) {
         cta="Voir toute la FAQ"
         link="#"
       />
-      <StyledPushCTA
+      {/* <StyledPushCTA
         title={helpData.attributes.cardText?.title}
         description={helpData.attributes.cardText?.text}
         image={helpData.attributes.cardText?.image}
@@ -49,7 +48,7 @@ export default function Help({ helpData }: HelpProps) {
       <StyledSocialMedia
         title={helpData.attributes.social[0]?.title}
         links={helpData.attributes.social[0]?.socialMediaLink}
-      />
+      /> */}
     </React.Fragment>
   )
 }
