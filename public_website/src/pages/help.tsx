@@ -35,7 +35,7 @@ export default function Help({ helpData }: HelpProps) {
         description={helpData.attributes.cardText?.text}
         image={helpData.attributes.cardText?.image}
         ctaLink={helpData.attributes.cardText?.firstCta}
-        sctaLink={helpData.attributes.cardText?.secondCta}
+        secondctaLink={helpData.attributes.cardText?.secondCta}
       />
 
       {helpData.attributes?.simplepushcta &&

@@ -27,7 +27,6 @@ const StyledButton = styled(Link)`
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     color: ${theme.colors.primary};
-    // padding: 1rem 2rem;
     text-align: center;
     width: max-content;
   `}
