@@ -3,17 +3,17 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
-import { Accordion, AccordionItem } from '@nextui-org/react'
 import { LinkFaq } from './Link'
 
 type FaqProps = {
   title: string
-
   cta: string
   link: string
 }
 
 export function Faq({ title, cta, link }: FaqProps) {
+  const detailTitle =
+    'Je ne suis pas né en France, comment faire pour m’inscrire ?'
   const defaultContent =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
   return (
@@ -25,45 +25,22 @@ export function Faq({ title, cta, link }: FaqProps) {
         </StyledContentTextWrapper>
         <StyledFaqtWrapper>
           <StyledAccordion>
-            <AccordionItem key="1" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="2" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="4" aria-label="Accordion 3" title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="5" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="6" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="7" aria-label="Accordion 3" title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="8" aria-label="Accordion 1" title="Accordion 1">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem key="9" aria-label="Accordion 2" title="Accordion 2">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
-            <AccordionItem
-              key="10"
-              aria-label="Accordion 3"
-              title="Accordion 3">
-              {defaultContent}
-              <LinkFaq href="#" text="Voir le detail" />
-            </AccordionItem>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
+          </StyledAccordion>
+          <StyledAccordion>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
+          </StyledAccordion>
+          <StyledAccordion>
+            <summary
+              dangerouslySetInnerHTML={{ __html: detailTitle }}></summary>
+            <p dangerouslySetInnerHTML={{ __html: defaultContent }}></p>
+            <LinkFaq href="#" text="Voir le detail" />
           </StyledAccordion>
         </StyledFaqtWrapper>
       </StyledContentWrapper>
@@ -73,11 +50,7 @@ export function Faq({ title, cta, link }: FaqProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    // background: linear-gradient(
-    //   180deg,
-    //   ${theme.colors.lightBlue} 0%,
-    //   ${theme.colors.white} 100%
-    // );
+    
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -89,9 +62,7 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
-    // padding: calc(1rem + 5rem) 1.5rem 2.5rem;
     padding: 0rem 1.5rem 2.5rem;
 
     display: grid;
@@ -125,14 +96,36 @@ const StyledContentTextWrapper = styled.div`
   `}
 `
 
-const StyledFaqtWrapper = styled.div``
+const StyledFaqtWrapper = styled.div`
+  margin-top: 2rem;
+`
 
-const StyledAccordion = styled(Accordion)`
+const StyledAccordion = styled.details`
   ${({ theme }) => css`
-    h2 {
-      margin: 2rem 0;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+
+    border-bottom: solid 1px #00000020;
+    summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
+
+    }
+
+    summary {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    summary::after {
+      content: url('../../image/arrowd.svg');
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+
+    p {
+      margin-top: 1rem;
     }
     button {
       display: flex;

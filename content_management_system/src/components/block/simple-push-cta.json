@@ -7,15 +7,17 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "surtititle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -37,7 +39,8 @@
     "cta": {
       "type": "component",
       "repeatable": false,
-      "component": "common.link"
+      "component": "common.link",
+      "required": true
     }
   }
 }

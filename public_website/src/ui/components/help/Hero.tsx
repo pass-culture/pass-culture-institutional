@@ -4,7 +4,6 @@ import styled, { css } from 'styled-components'
 import { Typo } from '../typographies'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
-
 type HeroProps = {
   title: string
   text: string
@@ -22,7 +21,7 @@ export function Hero({ title, text, image }: HeroProps) {
         <StyledContentImagetWrapper>
           <StyledImage
             src={getStrapiURL(image?.attributes.url)}
-            alt={image?.attributes.alternativeText}
+            alt={image?.attributes.alternativeText || ''}
           />
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
@@ -50,7 +49,6 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
     transform: translateY(-8rem);
 
@@ -90,7 +88,6 @@ const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
     max-width: 44rem;
     margin: 0 0 3rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
@@ -102,7 +99,6 @@ const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 34rem;
     margin: 0 0 2rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
     }
@@ -110,6 +106,8 @@ const StyledText = styled.p`
 `
 
 const StyledImage = styled.img`
-  max-width: 100%;
-  height: auto;
+ ´
+    max-width: 100%;
+    height: auto;
+
 `

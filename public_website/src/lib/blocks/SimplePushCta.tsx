@@ -1,31 +1,33 @@
 import React from 'react'
-import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
-import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
 interface PushCTAProps {
-  title: string
-  description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  ctaLink: { Label: string; URL: string }
+  title: string | undefined
+  description: string | undefined
+  image: APIResponse<'plugin::upload.file'> | null | undefined
+  ctaLink: { Label: string; URL: string } | undefined
 
   className?: string
 }
 
 export function SimplePushCta(props: PushCTAProps) {
-  const { SVG: QrCode } = useQRCode()
-
   return (
     <Root className={props.className}>
       <RightSide>
         {props.description && (
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
-        <Title dangerouslySetInnerHTML={{ __html: props.title }} />
-        <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
+
+        {props.title && (
+          <Title dangerouslySetInnerHTML={{ __html: props.title }} />
+        )}
+        {props.ctaLink && (
+          <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
+        )}
       </RightSide>
       <CardContainer>
         <Card

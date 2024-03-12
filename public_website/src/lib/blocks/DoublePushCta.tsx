@@ -7,16 +7,18 @@ import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-interface PushCTAProps {
-  title: string
-  description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  ctaLink: { Label: string; URL: string }
-  sctaLink: { Label: string; URL: string }
+interface DoublePushCTAProps {
+  title: string | undefined | TrustedHTML
+  description: string | undefined
+  image: APIResponse<'plugin::upload.file'> | null | undefined
+  ctaLink: { Label: string; URL: string } | undefined
+
+  secondctaLink: { Label: string; URL: string } | undefined
   className?: string
 }
 
-export function DoublePushCTA(props: PushCTAProps) {
+export function DoublePushCTA(props: DoublePushCTAProps) {
+
   return (
     <Root className={props.className}>
       <CardContainer>
@@ -27,13 +29,19 @@ export function DoublePushCTA(props: PushCTAProps) {
           }></Card>
       </CardContainer>
       <RightSide>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        {props.title && (
+          <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        )}
         {props.description && (
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
-        <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
-        <Button href={props.sctaLink.URL} target="_blank" variant="quaternary">
-          {props.sctaLink.Label}
+
+        <CtaLink href={props.ctaLink?.URL}>{props.ctaLink?.Label}</CtaLink>
+        <Button
+          href={props.secondctaLink?.URL}
+          target="_blank"
+          variant="quaternary">
+          {props.secondctaLink?.Label}
         </Button>
       </RightSide>
     </Root>
@@ -52,7 +60,6 @@ const Root = styled.div`
     position: relative;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      // background: red;
       padding: 1.5rem;
       display: block;
 
@@ -84,11 +91,9 @@ const CardContainer = styled.div`
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    // background-color: ${theme.colors.tertiary};
     border-radius: 1rem;
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
-    // background-position: center 4.5rem;
     background-repeat: no-repeat;
 
     display: flex;
@@ -98,11 +103,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      // width: 100%;
-      // margin-bottom: 3.75rem;
-      // aspect-ratio: 0.8;
-      // padding: 0;
-
       width: 95%;
       aspect-ratio: 1.5;
       padding: 0;
