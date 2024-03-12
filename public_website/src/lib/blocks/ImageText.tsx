@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '@/ui/components/typographies'
 import { APIResponseData } from '@/types/strapi'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+
 import { Typo } from '@/ui/components/typographies'
 
 interface ContentItem {
@@ -18,32 +19,30 @@ interface LittleListProps {
 
 export function LittleList(props: LittleListProps) {
   return (
-    <>
-      <Root data-testid="simple-text">
-        {/* <Typo.Heading2>{props.Title}</Typo.Heading2>   */}
-        <Columns>
-          <Column>
-            <Typo.Heading2>{props.title}</Typo.Heading2>
-            <p>{props.description}</p>
-          </Column>
+    <Root data-testid="simple-text">
+      {/* <Typo.Heading2>{props.Title}</Typo.Heading2>   */}
+      <Columns>
+        <Column>
+          <Typo.Heading2>{props.title}</Typo.Heading2>
+          <p>{props.description}</p>
+        </Column>
 
-          <Column>
-            {props.content?.map((item) => (
-              <ColumnContent key={item.id}>
-                <ColumnEmoji>
-                  <span>{item.firstEmoji}</span>
-                  <span>{item.secondEmoji}</span>
-                </ColumnEmoji>
-                <ColumnText>
-                  <p>{item.simple}</p>
-                  {props.withDescription && <p>{item.description}</p>}
-                </ColumnText>
-              </ColumnContent>
-            ))}
-          </Column>
-        </Columns>
-      </Root>
-    </>
+        <Column>
+          {props.content?.map((item) => (
+            <ColumnContent key={item.id}>
+              <ColumnEmoji>
+                <span>{item.firstEmoji}</span>
+                <span>{item.secondEmoji}</span>
+              </ColumnEmoji>
+              <ColumnText>
+                <p>{item.simple}</p>
+                {props.withDescription && <p>{item.description}</p>}
+              </ColumnText>
+            </ColumnContent>
+          ))}
+        </Column>
+      </Columns>
+    </Root>
   )
 }
 

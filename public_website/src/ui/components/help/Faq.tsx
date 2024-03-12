@@ -50,7 +50,6 @@ export function Faq({ title, cta, link }: FaqProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -109,7 +108,6 @@ const StyledAccordion = styled.details`
     summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
-
     }
 
     summary {

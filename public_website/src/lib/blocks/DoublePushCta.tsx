@@ -18,7 +18,6 @@ interface DoublePushCTAProps {
 }
 
 export function DoublePushCTA(props: DoublePushCTAProps) {
-
   return (
     <Root className={props.className}>
       <CardContainer>
