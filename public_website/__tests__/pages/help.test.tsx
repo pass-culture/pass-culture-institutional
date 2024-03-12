@@ -5,6 +5,9 @@ import { axe } from 'vitest-axe'
 import { act, render } from '..'
 import Help, { getStaticProps } from '@/pages'
 
+// vi.mock('@/lib/analytics/analyticsProvider')
+// const mockLogEvent = analyticsProvider.logEvent
+
 describe('Help page', () => {
   beforeEach(() => {
     process.env = {
