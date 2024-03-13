@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 
-type ButtonVariants = 'primary' | 'secondary' | 'tertiary'
+type ButtonVariants = 'primary' | 'secondary' | 'tertiary' | 'quaternary'
 
 type ButtonProps = {
   children: React.ReactNode
@@ -48,6 +48,8 @@ function getVariantButtonBackground(variant?: ButtonVariants) {
       return 'transparent'
     case 'tertiary':
       return theme.colors.white
+    case 'quaternary':
+      return 'transparent'
     default:
       return `linear-gradient(
         90deg,
@@ -67,11 +69,22 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     $variant !== 'primary' &&
     `border: 1px solid ${theme.colors.white};`}
 
+    ${$variant &&
+    $variant === 'quaternary' &&
+    `border: 1px solid ${theme.colors.primary};`}
+
+
     border-radius: 2rem;
     color: ${$variant === 'tertiary'
       ? theme.colors.secondary
       : theme.colors.white};
+
+    ${$variant &&
+    $variant === 'quaternary' &&
+    `color: ${theme.colors.primary};`}
+
     display: inline-block;
+
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     padding: 1rem 2rem;

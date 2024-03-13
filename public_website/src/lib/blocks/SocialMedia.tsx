@@ -32,7 +32,7 @@ export function SocialMedia({ title, links, className }: SocialMediaProps) {
     <StyledRoot className={className}>
       <StyledHeading>{title}</StyledHeading>
       <StyledList>
-        {links.map((link) => {
+        {links?.map((link) => {
           return (
             <StyledListItem key={link.name}>
               <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
