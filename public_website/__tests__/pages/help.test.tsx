@@ -1,13 +1,13 @@
 import React from 'react'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import Help, { getStaticProps } from '@/pages'
+import Help, { getStaticProps } from '@/pages/help'
 
 // vi.mock('@/lib/analytics/analyticsProvider')
 // const mockLogEvent = analyticsProvider.logEvent
-
+vi.mock('@/lib/analytics/analyticsProvider')
 describe('Help page', () => {
   beforeEach(() => {
     process.env = {
