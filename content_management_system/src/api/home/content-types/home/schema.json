@@ -61,11 +61,6 @@
       "type": "component",
       "repeatable": false,
       "component": "block.logos"
-    },
-    "keyNumberSection": {
-      "type": "component",
-      "repeatable": true,
-      "component": "block.key-number-carousel"
     }
   }
 }
