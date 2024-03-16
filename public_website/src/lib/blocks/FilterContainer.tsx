@@ -152,6 +152,7 @@ export function FilterContainer({
       ))}
 
       <StyledButton
+        aria-label={isVisible ? 'visible' : 'not visible'}
         onClick={() => {
           setIsVisible(!isVisible)
         }}>
