@@ -2,6 +2,7 @@ import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
 import { Header } from './blocks/Header'
+import { KeyNumberCarouselSlide } from './blocks/keyNumberCarousel/keyNumberCarouselSlide'
 import { LatestNews } from './blocks/LatestNews'
 import { PushCTA } from './blocks/PushCTA'
 import { SimpleText } from './blocks/SimpleText'
@@ -29,6 +30,7 @@ const COMPONENTS: Record<
   'block.social-media': SocialMedia,
   'block.latest-news': LatestNews,
   'block.vertical-carousel': VerticalCarousel,
+  'block.key-number-carousel-slide': KeyNumberCarouselSlide,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

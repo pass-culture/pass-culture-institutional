@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 
-export type KeyNumberCarouselSlideProps = {
+type KeyNumberCarouselSlideProps = {
   slideIndex: number
   title: string
   description: string
