@@ -93,14 +93,14 @@ export function FilterContainer({
     // Update the state with the new values
     setFilterValues(newFilterValues)
     if (onFilterChange && newFilterValues) {
-      onFilterChange(name, newFilterValues[name])
+      onFilterChange(name, newFilterValues[name] ?? [])
       const totalLength = Object.values(newFilterValues).reduce((sum, arr) => {
         const nonEmptyValues = arr.filter((value) => value !== '')
         return sum + nonEmptyValues.length
       }, 0)
 
       const updatedClickedFilters = { ...clickedFilters }
-      updatedClickedFilters[name] = newFilterValues[name].filter(
+      updatedClickedFilters[name] = (newFilterValues[name] ?? []).filter(
         (item) => item !== ''
       ).length
       setClickedFilters(updatedClickedFilters)

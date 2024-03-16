@@ -982,8 +982,9 @@ export interface ApiListJeuneListJeune extends Schema.SingleType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     buttonText: Attribute.Text;
-    filtres: Attribute.Component<'common.filtre', true>;
-    socialMediaSection: Attribute.Component<'block.social-media'>;
+    filtres: Attribute.Component<'common.filtre', true> & Attribute.Required;
+    socialMediaSection: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1065,7 +1066,9 @@ export interface ApiNewsNews extends Schema.CollectionType {
         "Provence-Alpes-C\u00F4te d'Azur",
         'Rh\u00F4ne-Alpes'
       ]
-    >;
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'Auvergne'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 interface SeparatorTextProps {
-  isActive: boolean
+  isActive: boolean | undefined
 }
 
 export function Separator(props: SeparatorTextProps) {

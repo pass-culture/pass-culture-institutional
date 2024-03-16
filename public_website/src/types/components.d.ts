@@ -167,9 +167,10 @@ export interface CommonFiltre extends Schema.Component {
   collectionName: 'components_common_filtres';
   info: {
     displayName: 'Filtre';
+    description: '';
   };
   attributes: {
-    filtre: Attribute.String;
+    filtre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -479,6 +480,8 @@ declare module '@strapi/types' {
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.push-cta': BlockPushCta;
+      'block.separator': BlockSeparator;
+      'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.vertical-carousel': BlockVerticalCarousel;

@@ -22,12 +22,14 @@
     "filtres": {
       "type": "component",
       "repeatable": true,
-      "component": "common.filtre"
+      "component": "common.filtre",
+      "required": true
     },
     "socialMediaSection": {
       "type": "component",
       "repeatable": false,
-      "component": "block.social-media"
+      "component": "block.social-media",
+      "required": true
     },
     "separator": {
       "type": "component",

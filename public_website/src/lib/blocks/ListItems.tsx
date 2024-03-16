@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
-import { Button } from '@/ui/components/button/Button'
 import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
   news: APIResponseData<'api::news.news'>[]
   className?: string
-  buttonText: string
+  buttonText?: string
 }
 
 export function ListItems({ news, className, buttonText }: LatestNewsProps) {
@@ -44,7 +43,6 @@ export function ListItems({ news, className, buttonText }: LatestNewsProps) {
       {visibleItems < news.length && (
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
       )}
-      {/* <Button href={cta.URL}>{cta.Label}</Button> */}
     </Root>
   )
 }
@@ -85,7 +83,17 @@ const StyledList = styled.ul`
   `}
 `
 
-const LoadMoreButton = styled(Button)`
+const LoadMoreButton = styled.button`
   margin-top: 1rem;
   margin-inline: auto;
+
+  background: linear-gradient(90deg, #eb0055 -11.18%, #320096 64.8%);
+  border-radius: 2rem;
+  color: #ffffff;
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  text-align: center;
+  width: max-content;
 `

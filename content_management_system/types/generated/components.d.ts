@@ -167,9 +167,10 @@ export interface CommonFiltre extends Schema.Component {
   collectionName: 'components_common_filtres';
   info: {
     displayName: 'Filtre';
+    description: '';
   };
   attributes: {
-    filtre: Attribute.String;
+    filtre: Attribute.String & Attribute.Required;
   };
 }
 

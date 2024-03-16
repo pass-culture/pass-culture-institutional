@@ -12,7 +12,7 @@ import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listJeune: APIResponseData<'api::list-jeune.list-jeune'>[]
+  listJeune: APIResponseData<'api::list-jeune.list-jeune'>
 }
 
 export default function ListeJeune({ newsData, listJeune }: ListProps) {
@@ -40,7 +40,8 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
     setData(newsData)
     let uniqueCategories = []
     let uniqueLocalisations = []
-    const filtres = listJeune.attributes.filtres.map((filtre) => {
+
+    const filtres = listJeune.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -59,9 +60,10 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
             value: uniqueLocalisations,
           }
         default:
-          return filtre
+          return { ...filtre, value: [] }
       }
     })
+
     setFilters(filtres)
   }, [])
 
@@ -123,11 +125,15 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
         buttonText={listJeune.attributes.buttonText}
       />
 
-      <Separator isActive={listJeune.attributes.separator.isActive} />
-      <StyledSocialMedia
-        title={listJeune.attributes.socialMediaSection.title}
-        links={listJeune.attributes.socialMediaSection.socialMediaLink}
-      />
+      <Separator isActive={listJeune.attributes.separator?.isActive} />
+      {listJeune.attributes.socialMediaSection &&
+        listJeune.attributes.socialMediaSection.title &&
+        listJeune.attributes.socialMediaSection.socialMediaLink && (
+          <StyledSocialMedia
+            title={listJeune.attributes.socialMediaSection.title}
+            links={listJeune.attributes.socialMediaSection.socialMediaLink}
+          />
+        )}
     </React.Fragment>
   )
 }
