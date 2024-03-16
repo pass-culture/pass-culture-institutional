@@ -15,15 +15,13 @@ import { APIResponse } from '@/types/strapi'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-export type LogoCarouselProps = {
+type LogoCarouselProps = {
   controlsLabel: string | undefined
   nextButtonLabel: string | undefined
   previousButtonLabel: string | undefined
-  //   items: Omit<LogoCarouselSlideProps, 'slideIndex'>[]
   items?:
     | { logo?: APIResponse<'plugin::upload.file'> | null | undefined }[]
     | undefined
-  //   items: APIResponse<'plugin::upload.file'>[] | undefined | null
 }
 
 export function LogoCarousel({
