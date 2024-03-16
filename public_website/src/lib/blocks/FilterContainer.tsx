@@ -79,7 +79,7 @@ export function FilterContainer({
         //  If value is present i remove it
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else {
-        // If value is not present i add it
+        // if value is not present i add it
 
         if (filterState && filterState[0] !== '') {
           newFilterValues[name] = [...filterState, value]
