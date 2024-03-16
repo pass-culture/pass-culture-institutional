@@ -1,10 +1,7 @@
 import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../../../ui/components/typographies'
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -44,13 +41,6 @@ const Root = styled(Slide)`
   `}
 `
 
-const StyledImage = styled(Image)`
-  border-radius: 0.5rem;
-  object-fit: cover;
-  width: 100%;
-  height: auto;
-`
-
 const StyledLink = styled.div`
   ${({ theme }) => css`
     display: block;
@@ -61,9 +51,7 @@ const StyledLink = styled.div`
 `
 
 const StyledImageSimple = styled.img`
-  ${({ theme }) => css`
-    object-fit: cover;
-    width: auto;
-    height: 6rem;
-  `}
+  object-fit: cover;
+  width: auto;
+  height: 6rem;
 `

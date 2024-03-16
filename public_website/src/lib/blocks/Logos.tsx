@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { LogoCarousel } from './logoCarousel/logoCarousel'
-import { LogoCarouselSlideProps } from './logoCarousel/logoCarouselSlide'
 import { APIResponse } from '@/types/strapi'
 
 type LogoProps = {
@@ -10,7 +9,7 @@ type LogoProps = {
   nextButtonLabel?: string
   previousButtonLabel?: string
   images?:
-    | ({ logo?: APIResponse<'plugin::upload.file'> | null | undefined } & {})[]
+    | { logo?: APIResponse<'plugin::upload.file'> | null | undefined }[]
     | undefined
 }
 
@@ -53,10 +52,4 @@ const StyledCarouselWrapper = styled.div`
       padding: 4rem 1.5rem 2rem;
     }
   `}
-`
-
-const StyledCtaWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
 `

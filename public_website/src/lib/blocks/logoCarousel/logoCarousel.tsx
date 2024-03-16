@@ -6,16 +6,14 @@ import {
   Dot,
   Slider,
 } from 'pure-react-carousel'
-
 import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
-import { Typo } from '../../../ui/components/typographies'
-import { LogoCarouselSlide, LogoCarouselSlideProps } from './logoCarouselSlide'
+import { LogoCarouselSlide } from './logoCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { APIResponse } from '@/types/strapi'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
-import { APIResponse } from '@/types/strapi'
 
 export type LogoCarouselProps = {
   controlsLabel: string | undefined
@@ -23,7 +21,7 @@ export type LogoCarouselProps = {
   previousButtonLabel: string | undefined
   //   items: Omit<LogoCarouselSlideProps, 'slideIndex'>[]
   items?:
-    | ({ logo?: APIResponse<'plugin::upload.file'> | null | undefined } & {})[]
+    | { logo?: APIResponse<'plugin::upload.file'> | null | undefined }[]
     | undefined
   //   items: APIResponse<'plugin::upload.file'>[] | undefined | null
 }

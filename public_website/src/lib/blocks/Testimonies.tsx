@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { TestimonyCarouselSlideProps } from './testimonyCaousel/testimonyCarouselSlide'
 import { TestimonyCarousel } from './testimonyCaousel/testimonyCarousel'
+import { TestimonyCarouselSlideProps } from './testimonyCaousel/testimonyCarouselSlide'
 
 type TestimoniesProps = {
   title: string
@@ -54,10 +54,4 @@ const StyledCarouselWrapper = styled.div`
       padding: 4rem 1.5rem 2rem;
     }
   `}
-`
-
-const StyledCtaWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
 `

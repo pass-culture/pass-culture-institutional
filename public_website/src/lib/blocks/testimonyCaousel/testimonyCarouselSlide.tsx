@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import React, { useRef, useState } from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
-import { Play } from '@/ui/components/icons/Play'
+
 import { Typo } from '../../../ui/components/typographies'
 import { APIResponse } from '@/types/strapi'
-import { getStrapiURL } from '@/utils/apiHelpers'
-import { useRef } from 'react'
 import { Pause } from '@/ui/components/icons/Pause'
+import { Play } from '@/ui/components/icons/Play'
+import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type TestimonyCarouselSlideProps = {
   slideIndex: number
@@ -26,7 +24,7 @@ export function TestimonyCarouselSlide({
   url,
 }: TestimonyCarouselSlideProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState<Boolean>(false)
+  const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const playVideo = () => {
     if (videoRef.current) {
       if (!isPlaying) {
@@ -79,13 +77,6 @@ const Root = styled(Slide)`
   `}
 `
 
-const StyledImage = styled(Image)`
-  border-radius: 0.5rem;
-  object-fit: cover;
-  width: 100%;
-  height: auto;
-`
-
 const StyledVideo = styled.video`
   border-radius: 0.5rem;
   object-fit: cover;
@@ -109,8 +100,3 @@ const StyledWrapper = styled.div`
     z-index: 15;
   }
 `
-
-// const StyledPlay = styled(Play)`
-//   position: absolute;
-//   top: 54rem;
-// `

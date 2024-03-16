@@ -14,14 +14,14 @@ export function Pause() {
       <path
         d="M37 31V56"
         stroke="#320096"
-        stroke-width="5"
-        stroke-linecap="round"
+        strokeWidth="5"
+        strokeLinecap="round"
       />
       <path
         d="M51 31V56"
         stroke="#320096"
-        stroke-width="5"
-        stroke-linecap="round"
+        strokeWidth="5"
+        strokeLinecap="round"
       />
     </Icon>
   )
