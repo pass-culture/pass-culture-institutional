@@ -10,7 +10,7 @@
       "required": true
     },
     "text": {
-      "type": "richtext",
+      "type": "text",
       "required": true
     }
   }

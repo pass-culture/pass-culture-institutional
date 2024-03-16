@@ -138,6 +138,7 @@ export function Simulator(props: SimulatorProps) {
     const previousAnswers = answers.slice(0, 2)
     currentStepElement = (
       <Question
+        key="nat_question"
         onSubmit={(r) => onAnswerSubmit([...previousAnswers, r])}
         title={props.nationnalityQuestion.title}
         answers={props.nationnalityQuestion.answers}
@@ -164,6 +165,7 @@ export function Simulator(props: SimulatorProps) {
       const previousAnswers = answers.slice(0, 3)
       currentStepElement = (
         <Question
+          key="res_question"
           onSubmit={(r) => setAnswers([...previousAnswers, r])}
           title={props.residencyQuestion.title}
           answers={props.residencyQuestion.answers}
@@ -304,6 +306,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     display: block;
+    min-height: 30rem;
   }
 `
 

@@ -1,0 +1,47 @@
+{
+  "collectionName": "components_block_double_push_ctas",
+  "info": {
+    "displayName": "DoublePushCTA",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "firstCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    },
+    "secondCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

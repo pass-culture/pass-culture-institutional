@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Button } from '../button/Button'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -32,6 +33,9 @@ export function Hero({
   sixthEmoji,
   images,
 }: HeroProps) {
+  const onClickCTA = () => {
+    analyticsProvider.logEvent('goToSignup', { origin: 'Home' })
+  }
   return (
     <Root>
       <StyledHeroBackground>
@@ -57,7 +61,9 @@ export function Hero({
 
       <StyledSubTitle>{subTitle}</StyledSubTitle>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-      <StyledCta href={cta.URL}>{cta.Label}</StyledCta>
+      <StyledCta onClick={onClickCTA} href={cta.URL}>
+        {cta.Label}
+      </StyledCta>
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
         <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>

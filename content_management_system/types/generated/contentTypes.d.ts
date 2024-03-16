@@ -908,6 +908,32 @@ export interface ApiHeaderHeader extends Schema.SingleType {
   };
 }
 
+export interface ApiHelpHelp extends Schema.SingleType {
+  collectionName: 'helps';
+  info: {
+    singularName: 'help';
+    pluralName: 'helps';
+    displayName: 'Help';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    heroSection: Attribute.Component<'block.header'> & Attribute.Required;
+    cardText: Attribute.Component<'block.double-push-cta'>;
+    social: Attribute.Component<'block.social-media', true>;
+    simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::help.help', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::help.help', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiHomeHome extends Schema.SingleType {
   collectionName: 'homes';
   info: {
@@ -1207,6 +1233,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
+      'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
       'api::list-jeune.list-jeune': ApiListJeuneListJeune;
       'api::news.news': ApiNewsNews;
