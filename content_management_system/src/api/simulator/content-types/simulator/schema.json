@@ -1,0 +1,123 @@
+{
+  "kind": "singleType",
+  "collectionName": "simulators",
+  "info": {
+    "singularName": "simulator",
+    "pluralName": "simulators",
+    "displayName": "Simulator",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "ageQuestion": {
+      "displayName": "AgeQuestion",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.age-question",
+      "required": true
+    },
+    "nationnalityQuestion": {
+      "displayName": "RadioQuestion",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.radio-question",
+      "required": true
+    },
+    "residencyQuestion": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.radio-question",
+      "required": true
+    },
+    "steps": {
+      "displayName": "Step",
+      "type": "component",
+      "repeatable": true,
+      "component": "simulator.step",
+      "required": true,
+      "max": 3,
+      "min": 3
+    },
+    "successScreen": {
+      "displayName": "Success Screen",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.success-screen",
+      "required": true
+    },
+    "failureScreen": {
+      "displayName": "Failure Screen",
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
+    },
+    "tooYoungScreen": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
+    },
+    "tooOldScreen": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.failure-screen",
+      "required": true
+    },
+    "amountScreen_15": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_16": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_17": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "amountScreen_18": {
+      "type": "component",
+      "repeatable": false,
+      "component": "simulator.amount-screen",
+      "required": true
+    },
+    "topEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "bottomEmoji": {
+      "type": "string",
+      "required": true
+    },
+    "socialMedias": {
+      "type": "component",
+      "repeatable": false,
+      "required": true,
+      "component": "block.social-media"
+    },
+    "breadcrumbLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link",
+      "required": true
+    }
+  }
+}

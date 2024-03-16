@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_simulator_amount_screens",
+  "info": {
+    "displayName": "Amount Screen"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

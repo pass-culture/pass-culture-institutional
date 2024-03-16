@@ -1,26 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { KeyNumber } from '@/lib/blocks/Keynumber'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero } from '@/ui/components/home/Hero'
 import { Recommendations } from '@/ui/components/home/Recommendations'
+import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
+  recommendationItems: Offer[]
   latestStudies: APIResponseData<'api::news.news'>[]
 }
 
-export default function Home({ homeData, latestStudies }: HomeProps) {
-  console.log(homeData)
+export default function Home({
+  homeData,
+  recommendationItems,
+  latestStudies,
+}: HomeProps) {
+  useEffect(() => {
+    analyticsProvider.init()
+  }, [])
+
   return (
     <React.Fragment>
       <StyledHomeGradient>
@@ -81,9 +92,7 @@ export default function Home({ homeData, latestStudies }: HomeProps) {
           homeData.attributes.recommendationsSection.recommendations
             .nextButtonLabel
         }
-        recommendations={
-          homeData.attributes.recommendationsSection.recommendations.items
-        }
+        recommendations={recommendationItems}
         cta={homeData.attributes.recommendationsSection.cta}
       />
       <KeyNumber
@@ -158,9 +167,17 @@ export const getStaticProps = (async () => {
     `/news-list?${latestStudiesQuery}`
   )
 
+  // Fetch recommandation items
+  const recommendationTag =
+    data.attributes.recommendationsSection.recommendationsBackendTag
+  const recommendationItems = (await fetchBackend(
+    `institutional/playlist/${recommendationTag}`
+  )) as Offer[]
+
   return {
     props: {
       homeData: data,
+      recommendationItems,
       latestStudies: latestStudies.data,
     },
   }

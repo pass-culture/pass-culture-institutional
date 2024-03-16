@@ -2,13 +2,15 @@
 
 ## Configure environment variables
 
-You will find a template for the environnement variables under `public_website/.env.example`. Duplicate and rename the file `.env`. For running in a local development environnement, you should set `STRAPI_API_URL` to the port Strapi is running on, for example: `http://localhost:1337`.
+You will find a template for the environnement variables under `public_website/.env.testing`. Duplicate and rename the file `.env`. For running in a local development environnement, you should set `STRAPI_API_URL` to the port Strapi is running on, for example: `http://localhost:1337`.
 
 If you set `STRAPI_API_URL` to a non-local instance of the CMS (for example the staging version: `https://siteinstit-cms.staging.passculture.team`), the token the Public Website needs to access the CMS (Google IAP protected) that is usually provided by the CI will not be found by Next. To facilitate development, the token is not required in the testing environnement of the CMS. If you set `STRAPI_API_URL` to `https://siteinstit-cms.staging.passculture.team` you don't have to set `ID_TOKEN`.
 
 > Usually, to access environment variables in the browser, they have to be prefixed by `NEXT_PUBLIC_`. In our case, we only need `STRAPI_API_URL` to be available in the Node.js environment.
 
 There is also an environment variable that is used to build the playlists. Set `BACKEND_API_URL` to `https://backend.testing.passculture.team`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
+
+Set `APP_URL` to `https://app.testing.passculture.team` to build offers' URLs.
 
 ## Start the Public Website
 

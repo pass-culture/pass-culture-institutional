@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "helps",
+  "info": {
+    "singularName": "help",
+    "pluralName": "helps",
+    "displayName": "Help",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.header",
+      "required": true
+    },
+    "cardText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.double-push-cta"
+    },
+    "social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.social-media"
+    },
+    "simplepushcta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.simple-push-cta"
+    }
+  }
+}

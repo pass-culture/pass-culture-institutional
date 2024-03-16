@@ -17,6 +17,7 @@ type AccountDropdownProps = {
   align?: 'left' | 'right'
   onKeyDown: () => void
   onBlur: () => void
+  onMouseLeave: () => void
 }
 
 export function AccountDropdown({
@@ -26,6 +27,7 @@ export function AccountDropdown({
   align,
   onKeyDown,
   onBlur,
+  onMouseLeave,
 }: AccountDropdownProps) {
   const accountDropdownRef = useRef<HTMLDivElement>(null)
 
@@ -65,7 +67,10 @@ export function AccountDropdown({
   })
 
   return (
-    <StyledAccountDropdown ref={accountDropdownRef} $align={align}>
+    <StyledAccountDropdown
+      ref={accountDropdownRef}
+      $align={align}
+      onMouseLeave={onMouseLeave}>
       <ul aria-labelledby={labelId} id="account-menu">
         {items.map((item, i) => (
           <React.Fragment key={item.label}>

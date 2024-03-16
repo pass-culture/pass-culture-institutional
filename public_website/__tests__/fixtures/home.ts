@@ -193,6 +193,7 @@ export const homePageFixtures = {
       recommendationsSection: {
         title: 'Title',
         recommendations: verticalCarouselFixtures,
+        recommendationsBackendTag: 'Bons_plans_du_moment',
         cta: {
           Label: 'Cta label',
           URL: '#',

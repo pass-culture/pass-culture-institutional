@@ -8,6 +8,7 @@ export async function fetchCMS<T>(path: string) {
   try {
     const apiPath = `/api${path}`
     const requestUrl = `${getStrapiURL(apiPath)}`
+
     const token = process.env['ID_TOKEN']
 
     if (

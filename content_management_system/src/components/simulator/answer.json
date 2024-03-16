@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_simulator_answers",
+  "info": {
+    "displayName": "Answer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "answer": {
+      "type": "string",
+      "required": true
+    },
+    "emoji": {
+      "type": "string"
+    }
+  }
+}

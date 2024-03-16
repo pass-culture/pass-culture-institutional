@@ -12,6 +12,22 @@ export interface BlockCenteredText extends Schema.Component {
   };
 }
 
+export interface BlockDoublePushCta extends Schema.Component {
+  collectionName: 'components_block_double_push_ctas';
+  info: {
+    displayName: 'DoublePushCTA';
+    description: '';
+  };
+  attributes: {
+    image: Attribute.Media & Attribute.Required;
+    title: Attribute.String;
+    text: Attribute.Text;
+    firstCta: Attribute.Component<'common.link'>;
+    secondCta: Attribute.Component<'common.link'>;
+    icon: Attribute.Media;
+  };
+}
+
 export interface BlockHeader extends Schema.Component {
   collectionName: 'components_block_headers';
   info: {
@@ -19,9 +35,11 @@ export interface BlockHeader extends Schema.Component {
     description: '';
   };
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
+    Title: Attribute.String & Attribute.Required;
+    Text: Attribute.Text & Attribute.Required;
     Surtitle: Attribute.String;
+    Image: Attribute.Media & Attribute.Required;
+    Icon: Attribute.Media;
   };
 }
 
@@ -104,6 +122,21 @@ export interface BlockPushCta extends Schema.Component {
     ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
     qrCodeDescription: Attribute.String & Attribute.Required;
     qrCodeUrl: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockSimplePushCta extends Schema.Component {
+  collectionName: 'components_block_simple_push_ctas';
+  info: {
+    displayName: 'SimplePushCTA';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    surtititle: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    icon: Attribute.Media;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -397,7 +430,102 @@ export interface HomeRecommendationsSection extends Schema.Component {
   attributes: {
     recommendations: Attribute.Component<'block.vertical-carousel'> &
       Attribute.Required;
+    recommendationsBackendTag: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface SimulatorAgeQuestion extends Schema.Component {
+  collectionName: 'components_simulator_age_questions';
+  info: {
+    displayName: 'AgeQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 6;
+        max: 6;
+      }>;
+  };
+}
+
+export interface SimulatorAmountScreen extends Schema.Component {
+  collectionName: 'components_simulator_amount_screens';
+  info: {
+    displayName: 'Amount Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+  };
+}
+
+export interface SimulatorAnswer extends Schema.Component {
+  collectionName: 'components_simulator_answers';
+  info: {
+    displayName: 'Answer';
+    description: '';
+  };
+  attributes: {
+    answer: Attribute.String & Attribute.Required;
+    emoji: Attribute.String;
+  };
+}
+
+export interface SimulatorFailureScreen extends Schema.Component {
+  collectionName: 'components_simulator_failure_screens';
+  info: {
+    displayName: 'Failure Screen';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface SimulatorRadioQuestion extends Schema.Component {
+  collectionName: 'components_simulator_radio_questions';
+  info: {
+    displayName: 'RadioQuestion';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    answers: Attribute.Component<'simulator.answer', true> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 2;
+        max: 2;
+      }>;
+  };
+}
+
+export interface SimulatorStep extends Schema.Component {
+  collectionName: 'components_simulator_steps';
+  info: {
+    displayName: 'Step';
+  };
+  attributes: {
+    step: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface SimulatorSuccessScreen extends Schema.Component {
+  collectionName: 'components_simulator_success_screens';
+  info: {
+    displayName: 'Success Screen';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    needSupport: Attribute.String & Attribute.Required;
+    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -405,12 +533,14 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
+      'block.double-push-cta': BlockDoublePushCta;
       'block.header': BlockHeader;
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.logos': BlockLogos;
       'block.push-cta': BlockPushCta;
+      'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.testimonies': BlockTestimonies;
@@ -433,6 +563,13 @@ declare module '@strapi/types' {
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
       'home.recommendations-section': HomeRecommendationsSection;
+      'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.amount-screen': SimulatorAmountScreen;
+      'simulator.answer': SimulatorAnswer;
+      'simulator.failure-screen': SimulatorFailureScreen;
+      'simulator.radio-question': SimulatorRadioQuestion;
+      'simulator.step': SimulatorStep;
+      'simulator.success-screen': SimulatorSuccessScreen;
     }
   }
 }
