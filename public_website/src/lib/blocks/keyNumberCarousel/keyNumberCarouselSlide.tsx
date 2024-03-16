@@ -30,9 +30,9 @@ export function KeyNumberCarouselSlide({
       aria-roledescription="diapositive">
       <StyledWrapper>
         <StyledIconWrapper>
-          <p>{firstEmoji}</p>
-          <p>{secondEmoji}</p>
-          <p>{thirdEmoji}</p>
+          <span aria-hidden="true">{firstEmoji}</span>
+          <span aria-hidden="true">{secondEmoji}</span>
+          <span aria-hidden="true">{thirdEmoji}</span>
         </StyledIconWrapper>
         <StyledTextWrapper>
           <StyledTitle>{title}</StyledTitle>
@@ -74,7 +74,3 @@ const StyledIconWrapper = styled.div`
   position: relative;
   font-size: 5rem;
 `
-// const StyledPlay = styled(Play)`
-//   position: absolute;
-//   top: 54rem;
-// `

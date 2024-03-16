@@ -45,6 +45,9 @@ export function TestimonyCarouselSlide({
       aria-roledescription="diapositive">
       <StyledWrapper>
         <button onMouseDown={playVideo}>
+          <span className="visually-hidden">
+            {isPlaying ? 'Pause' : 'Lecture'}
+          </span>
           {!isPlaying ? <Play /> : <Pause />}
         </button>
 
