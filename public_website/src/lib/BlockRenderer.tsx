@@ -17,6 +17,7 @@ import { Testimonies } from './blocks/Testimonies'
 import { TestimonyCarouselSlide } from './blocks/testimonyCaousel/testimonyCarouselSlide'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { UnkwnownBlock } from './UnknownBlock'
+
 export interface Block {
   __component: string
 }
@@ -46,6 +47,7 @@ const COMPONENTS: Record<
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
   'block.testimony-carousel': TestimonyCarouselSlide,
+  'block.experience-video-carousel-props': ExperienceVideoCarouselP
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

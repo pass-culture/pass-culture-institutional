@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components'
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export type LogoCarouselSlideProps = {
+type LogoCarouselSlideProps = {
   slideIndex: number
   image: APIResponse<'plugin::upload.file'> | undefined | null
 }

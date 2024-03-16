@@ -17,7 +17,7 @@ import { MediaQueries } from '@/theme/media-queries'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-export type KeyNumberCarouselProps = {
+type KeyNumberCarouselProps = {
   title: string
   controlsLabel: string
   nextButtonLabel: string

@@ -18,7 +18,7 @@ import { MediaQueries } from '@/theme/media-queries'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-export type TestimonyCarouselProps = {
+type TestimonyCarouselProps = {
   title: string
   controlsLabel: string
   nextButtonLabel: string
