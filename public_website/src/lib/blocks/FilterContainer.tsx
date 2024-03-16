@@ -69,7 +69,7 @@ export function FilterContainer({
     const filterState = filterValues[name]
     const newFilterValues = { ...filterValues }
 
-    // Check if the value is '', and reset the filter values accordingly
+    // Check if the value is '',  and reset the filter values accordingly
     if (value === '') {
       // Set the filter state to contain only ''
       newFilterValues[name] = ['']
