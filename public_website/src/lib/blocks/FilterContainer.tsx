@@ -116,7 +116,11 @@ export function FilterContainer({
       </StyledMobileFilterLabel>
       {filtres?.map((filtre) => (
         <div key={filtre.filtre}>
+          <label className="visually-hidden" htmlFor={filtre.filtre}>
+            {filtre.filtre}
+          </label>
           <StyledSelect
+            id={filtre.filtre}
             name={filtre.filtre}
             aria-label={filtre.filtre}
             onChange={handleFilterChange}>
@@ -134,6 +138,7 @@ export function FilterContainer({
               return (
                 <StyledSelectButton
                   key={value}
+                  aria-label={value}
                   onClick={() => {
                     handleDetailChange(filtre.filtre, value)
                   }}>
