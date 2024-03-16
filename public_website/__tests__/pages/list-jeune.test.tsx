@@ -1,11 +1,11 @@
 import React from 'react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
 import ListeJeune, { getStaticProps } from '@/pages/liste-jeune'
 
-vi.mock('@/lib/analytics/analyticsProvider')
+// vi.mock('@/lib/analytics/analyticsProvider')
 
 describe('List jeunes', () => {
   beforeEach(() => {
