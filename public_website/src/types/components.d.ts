@@ -1,66 +1,66 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Attribute } from '@strapi/strapi'
 
 export interface BlockCenteredText extends Schema.Component {
-  collectionName: 'components_block_centered_texts';
+  collectionName: 'components_block_centered_texts'
   info: {
-    displayName: 'Centered Text';
-    description: '';
-  };
+    displayName: 'Centered Text'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    description: Attribute.Text & Attribute.Required
+  }
 }
 
 export interface BlockDoublePushCta extends Schema.Component {
-  collectionName: 'components_block_double_push_ctas';
+  collectionName: 'components_block_double_push_ctas'
   info: {
-    displayName: 'DoublePushCTA';
-    description: '';
-  };
+    displayName: 'DoublePushCTA'
+    description: ''
+  }
   attributes: {
-    image: Attribute.Media & Attribute.Required;
-    title: Attribute.String;
-    text: Attribute.Text;
-    firstCta: Attribute.Component<'common.link'>;
-    secondCta: Attribute.Component<'common.link'>;
-    icon: Attribute.Media;
-  };
+    image: Attribute.Media & Attribute.Required
+    title: Attribute.String
+    text: Attribute.Text
+    firstCta: Attribute.Component<'common.link'>
+    secondCta: Attribute.Component<'common.link'>
+    icon: Attribute.Media
+  }
 }
 
 export interface BlockHeader extends Schema.Component {
-  collectionName: 'components_block_headers';
+  collectionName: 'components_block_headers'
   info: {
-    displayName: 'Header';
-    description: '';
-  };
+    displayName: 'Header'
+    description: ''
+  }
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Text: Attribute.Text & Attribute.Required;
-    Surtitle: Attribute.String;
-    Image: Attribute.Media & Attribute.Required;
-    Icon: Attribute.Media;
-  };
+    Title: Attribute.String & Attribute.Required
+    Text: Attribute.Text & Attribute.Required
+    Surtitle: Attribute.String
+    Image: Attribute.Media & Attribute.Required
+    Icon: Attribute.Media
+  }
 }
 
 export interface BlockLatestNews extends Schema.Component {
-  collectionName: 'components_block_latest_news';
+  collectionName: 'components_block_latest_news'
   info: {
-    displayName: 'latestNews';
-    description: '';
-  };
+    displayName: 'latestNews'
+    description: ''
+  }
   attributes: {
-    title: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
+    title: Attribute.Text & Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+  }
 }
 
 export interface BlockLink extends Schema.Component {
-  collectionName: 'components_block_links';
+  collectionName: 'components_block_links'
   info: {
-    displayName: 'socialMediaLink';
-    description: '';
-  };
+    displayName: 'socialMediaLink'
+    description: ''
+  }
   attributes: {
     name: Attribute.Enumeration<
       [
@@ -70,444 +70,439 @@ export interface BlockLink extends Schema.Component {
         'youtube',
         'facebook',
         'snapchat',
-        'linkedin'
+        'linkedin',
       ]
     > &
-      Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
+      Attribute.Required
+    url: Attribute.String & Attribute.Required
+  }
 }
 
 export interface BlockPushCta extends Schema.Component {
-  collectionName: 'components_block_push_ctas';
+  collectionName: 'components_block_push_ctas'
   info: {
-    displayName: 'pushCTA';
-    description: '';
-  };
+    displayName: 'pushCTA'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text;
-    image: Attribute.Media & Attribute.Required;
-    ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
-    qrCodeDescription: Attribute.String & Attribute.Required;
-    qrCodeUrl: Attribute.String & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    description: Attribute.Text
+    image: Attribute.Media & Attribute.Required
+    ctaLink: Attribute.Component<'common.link'> & Attribute.Required
+    qrCodeDescription: Attribute.String & Attribute.Required
+    qrCodeUrl: Attribute.String & Attribute.Required
+  }
 }
 
 export interface BlockSeparator extends Schema.Component {
-  collectionName: 'components_block_separators';
+  collectionName: 'components_block_separators'
   info: {
-    displayName: 'Separator';
-    description: '';
-  };
+    displayName: 'Separator'
+    description: ''
+  }
   attributes: {
-    isActive: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-  };
+    isActive: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>
+  }
 }
 
 export interface BlockSimplePushCta extends Schema.Component {
-  collectionName: 'components_block_simple_push_ctas';
+  collectionName: 'components_block_simple_push_ctas'
   info: {
-    displayName: 'SimplePushCTA';
-    description: '';
-  };
+    displayName: 'SimplePushCTA'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    surtititle: Attribute.String & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
-    icon: Attribute.Media;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    surtititle: Attribute.String & Attribute.Required
+    image: Attribute.Media & Attribute.Required
+    icon: Attribute.Media
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+  }
 }
 
 export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts';
+  collectionName: 'components_block_simple_texts'
   info: {
-    displayName: 'Simple Text';
-    description: '';
-  };
+    displayName: 'Simple Text'
+    description: ''
+  }
   attributes: {
-    Title: Attribute.String;
-    Text: Attribute.Text;
-  };
+    Title: Attribute.String
+    Text: Attribute.Text
+  }
 }
 
 export interface BlockSocialMedia extends Schema.Component {
-  collectionName: 'components_block_social_medias';
+  collectionName: 'components_block_social_medias'
   info: {
-    displayName: 'socialMedia';
-    description: '';
-  };
+    displayName: 'socialMedia'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required
     socialMediaLink: Attribute.Component<'block.link', true> &
-      Attribute.Required;
-  };
+      Attribute.Required
+  }
 }
 
 export interface BlockVerticalCarousel extends Schema.Component {
-  collectionName: 'components_block_vertical_carousels';
+  collectionName: 'components_block_vertical_carousels'
   info: {
-    displayName: 'VerticalCarousel';
-    description: '';
-  };
+    displayName: 'VerticalCarousel'
+    description: ''
+  }
   attributes: {
-    title: Attribute.Text & Attribute.Required;
+    title: Attribute.Text & Attribute.Required
     items: Attribute.Component<'common.vertical-carousel-item', true> &
-      Attribute.Required;
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String & Attribute.Required;
-    controlsLabel: Attribute.String & Attribute.Required;
-  };
+      Attribute.Required
+    previousButtonLabel: Attribute.String & Attribute.Required
+    nextButtonLabel: Attribute.String & Attribute.Required
+    controlsLabel: Attribute.String & Attribute.Required
+  }
 }
-
 export interface CommonFiltre extends Schema.Component {
-  collectionName: 'components_common_filtres';
+  collectionName: 'components_common_filtres'
   info: {
-    displayName: 'Filtre';
-    description: '';
-  };
+    displayName: 'Filtre'
+    description: ''
+  }
   attributes: {
-    filtre: Attribute.String & Attribute.Required;
-  };
+    filtre: Attribute.String & Attribute.Required
+  }
 }
-
 export interface CommonLink extends Schema.Component {
-  collectionName: 'components_common_links';
+  collectionName: 'components_common_links'
   info: {
-    displayName: 'Link';
-    description: '';
-  };
+    displayName: 'Link'
+    description: ''
+  }
   attributes: {
-    Label: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
-  };
+    Label: Attribute.String & Attribute.Required
+    URL: Attribute.String & Attribute.Required
+  }
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
-  collectionName: 'components_common_vertical_carousel_items';
+  collectionName: 'components_common_vertical_carousel_items'
   info: {
-    displayName: 'verticalCarouselItem';
-    description: '';
-  };
+    displayName: 'verticalCarouselItem'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    description: Attribute.String & Attribute.Required
+    image: Attribute.Media & Attribute.Required
+    url: Attribute.String & Attribute.Required
+  }
 }
 
 export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
+  collectionName: 'components_footer_legal_links'
   info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
+    displayName: 'LegalLinks'
+  }
+  attributes: {}
 }
 
 export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
+  collectionName: 'components_footer_lists'
   info: {
-    displayName: 'Lists';
-    description: '';
-  };
+    displayName: 'Lists'
+    description: ''
+  }
   attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
+    Title: Attribute.String & Attribute.Required
+    Links: Attribute.Component<'common.link', true>
+  }
 }
 
 export interface HeaderAccountDropdown extends Schema.Component {
-  collectionName: 'components_header_account_dropdowns';
+  collectionName: 'components_header_account_dropdowns'
   info: {
-    displayName: 'accountDropdown';
-  };
+    displayName: 'accountDropdown'
+  }
   attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'header.account-item', true> &
-      Attribute.Required;
-  };
+    buttonLabel: Attribute.String & Attribute.Required
+    items: Attribute.Component<'header.account-item', true> & Attribute.Required
+  }
 }
 
 export interface HeaderAccountItem extends Schema.Component {
-  collectionName: 'components_header_account_item';
+  collectionName: 'components_header_account_item'
   info: {
-    displayName: 'accountItem';
-    description: '';
-  };
+    displayName: 'accountItem'
+    description: ''
+  }
   attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
+    label: Attribute.String & Attribute.Required
+    color: Attribute.String & Attribute.Required
+    emoji: Attribute.String & Attribute.Required
+    url: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HeaderHeader extends Schema.Component {
-  collectionName: 'components_header_headers';
+  collectionName: 'components_header_headers'
   info: {
-    displayName: 'header';
-  };
-  attributes: {};
+    displayName: 'header'
+  }
+  attributes: {}
 }
 
 export interface HeaderLoginItems extends Schema.Component {
-  collectionName: 'components_header_login_items';
+  collectionName: 'components_header_login_items'
   info: {
-    displayName: 'loginItems';
-  };
+    displayName: 'loginItems'
+  }
   attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
+    label: Attribute.String & Attribute.Required
+    color: Attribute.String & Attribute.Required
+    emoji: Attribute.String & Attribute.Required
+    url: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HeaderLogin extends Schema.Component {
-  collectionName: 'components_header_logins';
+  collectionName: 'components_header_logins'
   info: {
-    displayName: 'login';
-  };
+    displayName: 'login'
+  }
   attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
+    buttonLabel: Attribute.String & Attribute.Required
     loginItems: Attribute.Component<'header.login-items', true> &
       Attribute.SetMinMax<{
-        max: 2;
-      }>;
-  };
+        max: 2
+      }>
+  }
 }
 
 export interface HeaderMegaMenu extends Schema.Component {
-  collectionName: 'components_header_mega_menus';
+  collectionName: 'components_header_mega_menus'
   info: {
-    displayName: 'megaMenu';
-    description: '';
-  };
+    displayName: 'megaMenu'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required
     primaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required;
+      Attribute.Required
     secondaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    cardTitle: Attribute.String & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
-    bannerText: Attribute.String;
-    cardFirstEmoji: Attribute.String & Attribute.Required;
-    cardSecondEmoji: Attribute.String & Attribute.Required;
-  };
+      Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+    cardTitle: Attribute.String & Attribute.Required
+    cardDescription: Attribute.String & Attribute.Required
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required
+    bannerText: Attribute.String
+    cardFirstEmoji: Attribute.String & Attribute.Required
+    cardSecondEmoji: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
-  collectionName: 'components_header_navigation_items';
+  collectionName: 'components_header_navigation_items'
   info: {
-    displayName: 'navigationItems';
-  };
+    displayName: 'navigationItems'
+  }
   attributes: {
-    label: Attribute.String & Attribute.Required;
-    megaMenu: Attribute.Component<'header.mega-menu'>;
-  };
+    label: Attribute.String & Attribute.Required
+    megaMenu: Attribute.Component<'header.mega-menu'>
+  }
 }
 
 export interface HomeEligibilityItems extends Schema.Component {
-  collectionName: 'components_home_eligibility_items';
+  collectionName: 'components_home_eligibility_items'
   info: {
-    displayName: 'eligibilityItems';
-  };
+    displayName: 'eligibilityItems'
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    description: Attribute.String & Attribute.Required
+    emoji: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HomeEligibilitySection extends Schema.Component {
-  collectionName: 'components_home_eligibility_sections';
+  collectionName: 'components_home_eligibility_sections'
   info: {
-    displayName: 'eligibilitySection';
-    description: '';
-  };
+    displayName: 'eligibilitySection'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required
     items: Attribute.Component<'home.eligibility-items', true> &
-      Attribute.Required;
-    cardTitle: Attribute.Text & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardCta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
-  };
+      Attribute.Required
+    cardTitle: Attribute.Text & Attribute.Required
+    cardDescription: Attribute.String & Attribute.Required
+    cardCta: Attribute.Component<'common.link'> & Attribute.Required
+    firstEmoji: Attribute.String & Attribute.Required
+    secondEmoji: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HomeHeroSection extends Schema.Component {
-  collectionName: 'components_home_hero_sections';
+  collectionName: 'components_home_hero_sections'
   info: {
-    displayName: 'heroSection';
-    description: '';
-  };
+    displayName: 'heroSection'
+    description: ''
+  }
   attributes: {
-    title: Attribute.Text & Attribute.Required;
-    subTitle: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
-    thirdEmoji: Attribute.String & Attribute.Required;
-    fourthEmoji: Attribute.String & Attribute.Required;
-    images: Attribute.Media & Attribute.Required;
-    fifthEmoji: Attribute.String & Attribute.Required;
-    sixthEmoji: Attribute.String & Attribute.Required;
-  };
+    title: Attribute.Text & Attribute.Required
+    subTitle: Attribute.String & Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+    firstEmoji: Attribute.String & Attribute.Required
+    secondEmoji: Attribute.String & Attribute.Required
+    thirdEmoji: Attribute.String & Attribute.Required
+    fourthEmoji: Attribute.String & Attribute.Required
+    images: Attribute.Media & Attribute.Required
+    fifthEmoji: Attribute.String & Attribute.Required
+    sixthEmoji: Attribute.String & Attribute.Required
+  }
 }
 
 export interface HomeRecommendationsSection extends Schema.Component {
-  collectionName: 'components_home_recommendations_sections';
+  collectionName: 'components_home_recommendations_sections'
   info: {
-    displayName: 'recommendationsSection';
-  };
+    displayName: 'recommendationsSection'
+  }
   attributes: {
     recommendations: Attribute.Component<'block.vertical-carousel'> &
-      Attribute.Required;
-    recommendationsBackendTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
+      Attribute.Required
+    recommendationsBackendTag: Attribute.String & Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+  }
 }
 
 export interface SimulatorAgeQuestion extends Schema.Component {
-  collectionName: 'components_simulator_age_questions';
+  collectionName: 'components_simulator_age_questions'
   info: {
-    displayName: 'AgeQuestion';
-    description: '';
-  };
+    displayName: 'AgeQuestion'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required
     answers: Attribute.Component<'simulator.answer', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
-        min: 6;
-        max: 6;
-      }>;
-  };
+        min: 6
+        max: 6
+      }>
+  }
 }
 
 export interface SimulatorAmountScreen extends Schema.Component {
-  collectionName: 'components_simulator_amount_screens';
+  collectionName: 'components_simulator_amount_screens'
   info: {
-    displayName: 'Amount Screen';
-  };
+    displayName: 'Amount Screen'
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    text: Attribute.Text & Attribute.Required
+  }
 }
 
 export interface SimulatorAnswer extends Schema.Component {
-  collectionName: 'components_simulator_answers';
+  collectionName: 'components_simulator_answers'
   info: {
-    displayName: 'Answer';
-    description: '';
-  };
+    displayName: 'Answer'
+    description: ''
+  }
   attributes: {
-    answer: Attribute.String & Attribute.Required;
-    emoji: Attribute.String;
-  };
+    answer: Attribute.String & Attribute.Required
+    emoji: Attribute.String
+  }
 }
 
 export interface SimulatorFailureScreen extends Schema.Component {
-  collectionName: 'components_simulator_failure_screens';
+  collectionName: 'components_simulator_failure_screens'
   info: {
-    displayName: 'Failure Screen';
-    description: '';
-  };
+    displayName: 'Failure Screen'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    text: Attribute.Text & Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+  }
 }
 
 export interface SimulatorRadioQuestion extends Schema.Component {
-  collectionName: 'components_simulator_radio_questions';
+  collectionName: 'components_simulator_radio_questions'
   info: {
-    displayName: 'RadioQuestion';
-    description: '';
-  };
+    displayName: 'RadioQuestion'
+    description: ''
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required
     answers: Attribute.Component<'simulator.answer', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
-        min: 2;
-        max: 2;
-      }>;
-  };
+        min: 2
+        max: 2
+      }>
+  }
 }
 
 export interface SimulatorStep extends Schema.Component {
-  collectionName: 'components_simulator_steps';
+  collectionName: 'components_simulator_steps'
   info: {
-    displayName: 'Step';
-  };
+    displayName: 'Step'
+  }
   attributes: {
-    step: Attribute.String & Attribute.Required;
-  };
+    step: Attribute.String & Attribute.Required
+  }
 }
 
 export interface SimulatorSuccessScreen extends Schema.Component {
-  collectionName: 'components_simulator_success_screens';
+  collectionName: 'components_simulator_success_screens'
   info: {
-    displayName: 'Success Screen';
-  };
+    displayName: 'Success Screen'
+  }
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    needSupport: Attribute.String & Attribute.Required;
-    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
-  };
+    title: Attribute.String & Attribute.Required
+    steps: Attribute.Component<'simulator.step', true> & Attribute.Required
+    cta: Attribute.Component<'common.link'> & Attribute.Required
+    needSupport: Attribute.String & Attribute.Required
+    supportLink: Attribute.Component<'common.link'> & Attribute.Required
+  }
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'block.centered-text': BlockCenteredText;
-      'block.double-push-cta': BlockDoublePushCta;
-      'block.header': BlockHeader;
-      'block.latest-news': BlockLatestNews;
-      'block.link': BlockLink;
-      'block.push-cta': BlockPushCta;
-      'block.separator': BlockSeparator;
-      'block.simple-push-cta': BlockSimplePushCta;
-      'block.simple-text': BlockSimpleText;
-      'block.social-media': BlockSocialMedia;
-      'block.vertical-carousel': BlockVerticalCarousel;
-      'common.filtre': CommonFiltre;
-      'common.link': CommonLink;
-      'common.vertical-carousel-item': CommonVerticalCarouselItem;
-      'footer.legal-links': FooterLegalLinks;
-      'footer.list': FooterList;
-      'header.account-dropdown': HeaderAccountDropdown;
-      'header.account-item': HeaderAccountItem;
-      'header.header': HeaderHeader;
-      'header.login-items': HeaderLoginItems;
-      'header.login': HeaderLogin;
-      'header.mega-menu': HeaderMegaMenu;
-      'header.navigation-items': HeaderNavigationItems;
-      'home.eligibility-items': HomeEligibilityItems;
-      'home.eligibility-section': HomeEligibilitySection;
-      'home.hero-section': HomeHeroSection;
-      'home.recommendations-section': HomeRecommendationsSection;
-      'simulator.age-question': SimulatorAgeQuestion;
-      'simulator.amount-screen': SimulatorAmountScreen;
-      'simulator.answer': SimulatorAnswer;
-      'simulator.failure-screen': SimulatorFailureScreen;
-      'simulator.radio-question': SimulatorRadioQuestion;
-      'simulator.step': SimulatorStep;
-      'simulator.success-screen': SimulatorSuccessScreen;
+      'block.centered-text': BlockCenteredText
+      'block.double-push-cta': BlockDoublePushCta
+      'block.header': BlockHeader
+      'block.latest-news': BlockLatestNews
+      'block.link': BlockLink
+      'common.filtre': CommonFiltre
+      'block.push-cta': BlockPushCta
+      'block.simple-push-cta': BlockSimplePushCta
+      'block.simple-text': BlockSimpleText
+      'block.separator': BlockSeparator
+      'block.social-media': BlockSocialMedia
+      'block.vertical-carousel': BlockVerticalCarousel
+      'common.link': CommonLink
+      'common.vertical-carousel-item': CommonVerticalCarouselItem
+      'footer.legal-links': FooterLegalLinks
+      'footer.list': FooterList
+      'header.account-dropdown': HeaderAccountDropdown
+      'header.account-item': HeaderAccountItem
+      'header.header': HeaderHeader
+      'header.login-items': HeaderLoginItems
+      'header.login': HeaderLogin
+      'header.mega-menu': HeaderMegaMenu
+      'header.navigation-items': HeaderNavigationItems
+      'home.eligibility-items': HomeEligibilityItems
+      'home.eligibility-section': HomeEligibilitySection
+      'home.hero-section': HomeHeroSection
+      'home.recommendations-section': HomeRecommendationsSection
+      'simulator.age-question': SimulatorAgeQuestion
+      'simulator.amount-screen': SimulatorAmountScreen
+      'simulator.answer': SimulatorAnswer
+      'simulator.failure-screen': SimulatorFailureScreen
+      'simulator.radio-question': SimulatorRadioQuestion
+      'simulator.step': SimulatorStep
+      'simulator.success-screen': SimulatorSuccessScreen
     }
   }
 }

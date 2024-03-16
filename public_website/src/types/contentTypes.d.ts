@@ -968,41 +968,6 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
-export interface ApiListJeuneListJeune extends Schema.SingleType {
-  collectionName: 'list_jeunes';
-  info: {
-    singularName: 'list-jeune';
-    pluralName: 'list-jeunes';
-    displayName: 'ListJeune';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    buttonText: Attribute.Text;
-    filtres: Attribute.Component<'common.filtre', true> & Attribute.Required;
-    socialMediaSection: Attribute.Component<'block.social-media'>;
-    separator: Attribute.Component<'block.separator'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::list-jeune.list-jeune',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::list-jeune.list-jeune',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiNewsNews extends Schema.CollectionType {
   collectionName: 'news_list';
   info: {
@@ -1237,7 +1202,6 @@ declare module '@strapi/types' {
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
-      'api::list-jeune.list-jeune': ApiListJeuneListJeune;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
