@@ -3,12 +3,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-// import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import ListeJeune, { getStaticProps } from '@/pages/liste-jeune'
 
 vi.mock('@/lib/analytics/analyticsProvider')
-
-// const mockLogEvent = analyticsProvider.logEvent
 
 describe('List jeunes', () => {
   beforeEach(() => {
