@@ -76,7 +76,7 @@ export function FilterContainer({
     } else {
       // Check if the value is already present in the state for the current filter
       if (filterState?.includes(value)) {
-        // If value is present i remove it
+        //  If value is present i remove it
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else {
         // If value is not present i add it
