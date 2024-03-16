@@ -47,7 +47,6 @@ const COMPONENTS: Record<
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
   'block.testimony-carousel': TestimonyCarouselSlide,
-  'block.experience-video-carousel-props': ExperienceVideoCarouselP
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
