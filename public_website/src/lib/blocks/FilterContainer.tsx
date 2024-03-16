@@ -116,7 +116,10 @@ export function FilterContainer({
       </StyledMobileFilterLabel>
       {filtres?.map((filtre) => (
         <div key={filtre.filtre}>
-          <StyledSelect name={filtre.filtre} onChange={handleFilterChange}>
+          <StyledSelect
+            name={filtre.filtre}
+            aria-label={filtre.filtre}
+            onChange={handleFilterChange}>
             <option value="">{filtre.filtre}</option>
             <option value="">Tout</option>
             {filtre.value.map((value) => (
