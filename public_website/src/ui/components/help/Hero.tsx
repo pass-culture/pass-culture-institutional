@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Typo } from '../typographies'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
 type HeroProps = {
   title: string
   text: string
@@ -49,14 +50,13 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
     transform: translateY(-8rem);
-
     padding: calc(18rem + 10rem) 1.5rem 2.5rem;
     display: grid;
     grid-template-columns: 1.25fr 1fr;
     gap: 1.5rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
@@ -89,7 +89,6 @@ const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
     max-width: 44rem;
     margin: 0 0 3rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
@@ -101,7 +100,6 @@ const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 34rem;
     margin: 0 0 2rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
     }

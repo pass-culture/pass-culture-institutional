@@ -49,28 +49,15 @@ export function Faq({ title, cta, link }: FaqProps) {
 }
 
 const Root = styled.div`
-  ${({ theme }) => css`
-    // background: linear-gradient(
-    //   180deg,
-    //   ${theme.colors.lightBlue} 0%,
-    //   ${theme.colors.white} 100%
-    // );
-    overflow: hidden;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  overflow: hidden;
 `
 
 const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
-    // padding: calc(1rem + 5rem) 1.5rem 2.5rem;
     padding: 0rem 1.5rem 2.5rem;
-
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 1.5rem;
@@ -85,8 +72,8 @@ const StyledContentWrapper = styled.div`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
-
     max-width: 20rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.75rem;
     }
@@ -96,6 +83,7 @@ const StyledHeading = styled(Typo.Heading2)`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     padding-left: 2rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -103,54 +91,18 @@ const StyledContentTextWrapper = styled.div`
 `
 
 const StyledFaqtWrapper = styled.div`
-  // padding-left: 2rem;
   margin-top: 2rem;
 `
-
-// const StyledAccordion = styled(Accordion)`
-//   ${({ theme }) => css`
-//     h2 {
-//       margin: 2rem 0;
-//       font-size: ${theme.fonts.sizes['xl']};
-//       font-weight: ${theme.fonts.weights.bold};
-//     }
-//     button {
-//       display: flex;
-//       width: 100%;
-//       justify-content: space-between;
-//       &:focus-visible {
-//         outline: 0px auto -webkit-focus-ring-color !important;
-//       }
-//     }
-
-//     svg {
-//       transform: rotateZ(270deg);
-//     }
-
-//     section {
-//       margin-bottom: 2rem;
-//     }
-
-//     @media (width < ${theme.mediaQueries.mobile}) {
-//       text-align: left;
-//     }
-//   `}
-// `
 
 const StyledAccordion = styled.details`
   ${({ theme }) => css`
     margin-bottom: 3rem;
     padding-bottom: 3rem;
+    border-bottom: solid 1px ${theme.colors.black};
 
-    border-bottom: solid 1px #00000020;
     summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
-
-      // list-style-type: '⬇ ';
-    }
-
-    summary {
       display: flex;
       justify-content: space-between;
     }
@@ -165,10 +117,12 @@ const StyledAccordion = styled.details`
     p {
       margin-top: 1rem;
     }
+
     button {
       display: flex;
       width: 100%;
       justify-content: space-between;
+
       &:focus-visible {
         outline: 0px auto -webkit-focus-ring-color !important;
       }
