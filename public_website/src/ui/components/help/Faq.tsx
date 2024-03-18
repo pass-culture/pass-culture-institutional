@@ -98,7 +98,7 @@ const StyledAccordion = styled.details`
   ${({ theme }) => css`
     margin-bottom: 3rem;
     padding-bottom: 3rem;
-    border-bottom: solid 1px ${theme.colors.black};
+    border-bottom: solid 1px ${theme.colors.black}20;
 
     summary {
       font-size: ${theme.fonts.sizes['xl']};
