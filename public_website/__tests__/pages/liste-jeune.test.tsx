@@ -5,7 +5,7 @@ import { axe } from 'vitest-axe'
 import { act, render } from '..'
 import ListeJeune, { getStaticProps } from '@/pages/liste-jeune'
 
-describe('List jeunes', () => {
+describe('Liste jeunes', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
