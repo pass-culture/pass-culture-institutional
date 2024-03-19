@@ -67,6 +67,8 @@ export function FilterContainer({
     if (value === '') {
       newFilterValues[name] = ['']
     } else {
+      newFilterValues[name] = ['']
+
       if (filterState?.includes(value)) {
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else if (filterState && filterState[0] !== '') {
