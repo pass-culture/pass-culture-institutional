@@ -48,7 +48,7 @@ const Root = styled(Slide)`
     .inner {
       margin-right: 1rem;
       padding: 5rem 2rem;
-      background-color: #32009620;
+      background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
@@ -74,7 +74,3 @@ const StyledIconWrapper = styled.div`
   position: relative;
   font-size: 5rem;
 `
-// const StyledPlay = styled(Play)`
-//   position: absolute;
-//   top: 54rem;
-// `

@@ -26,7 +26,7 @@ const Root = styled.div`
     font-size: 2.5rem;
     margin-bottom: 4rem;
     /* TODO: use CSS var */
-    color: #320096;
+    color: ${({ theme }) => theme.colors.secondary};
   }
 
   p {

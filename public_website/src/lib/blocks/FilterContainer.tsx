@@ -32,7 +32,6 @@ export function FilterContainer({
 
   const [numberOfFilters, setNumberOfFilters] = useState<number>(0)
 
-  //USESTATE FOR EACH FILTER
   const initialState: FilterValues = {}
   const numberOfFilterss: FilterClicked = {}
 
@@ -52,45 +51,33 @@ export function FilterContainer({
     setFilterValues(newFilterValues)
   }, [filtres])
 
-  //UPDATE THE SELECTED FILTERS
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target
 
     checkValue(name, value)
   }
-  //UPDATE THE SELECTED FILTERS
   const handleDetailChange = (filter: string, value: string) => {
     checkValue(filter, value)
   }
 
-  //CHECK IF THE VALUE IS ALREADY IN THE ARRAY
   const checkValue = (name: string, value: string) => {
-    // Dynamically access the state variable based on the filter name
     const filterState = filterValues[name]
     const newFilterValues = { ...filterValues }
 
-    // Check if the value is '',  and reset the filter values accordingly
     if (value === '') {
-      // Set the filter state to contain only ''
       newFilterValues[name] = ['']
     } else {
-      // Check if the value is already present in the state for the current filter
       if (filterState?.includes(value)) {
-        //  If value is present i remove it
         newFilterValues[name] = filterState.filter((item) => item !== value)
       } else {
-        // if value is not present i add it
-
         if (filterState && filterState[0] !== '') {
           newFilterValues[name] = [...filterState, value]
         } else if (filterState && filterState[0] === '') {
-          //remove the empty value
           newFilterValues[name] = [value]
         }
       }
     }
 
-    // Update the state with the new values
     setFilterValues(newFilterValues)
     if (onFilterChange && newFilterValues) {
       onFilterChange(name, newFilterValues[name] ?? [])
@@ -152,7 +139,7 @@ export function FilterContainer({
       ))}
 
       <StyledButton
-        aria-label={isVisible ? 'visible' : 'not visible'}
+        aria-label={isVisible ? 'Afficher les filtres' : 'Cacher les filtres'}
         onClick={() => {
           setIsVisible(!isVisible)
         }}>
@@ -166,6 +153,9 @@ export function FilterContainer({
             <p>Filtres</p>
 
             <StyledButton
+              aria-label={
+                isVisible ? 'Afficher les filtres' : 'Cacher les filtres'
+              }
               onClick={() => {
                 setIsVisible(!isVisible)
               }}>
@@ -241,14 +231,14 @@ const StyledSelect = styled.select`
     align-items: center;
 
     border: none;
-    border-left: solid 1px #00000020;
+    border-left: solid 1px ${theme.colors.black}20;
 
     background-color: transparent;
     font-weight: ${theme.fonts.weights.bold};
     text-transform: uppercase;
 
     &::after {
-      color: red;
+      color: ${theme.colors.tertiary};
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -281,9 +271,8 @@ const StyledMobileSelectWrapper = styled.div`
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #00000080;
+      background-color: ${theme.colors.secondary}80;
       z-index: 10;
-      // display: flex;
       align-items: flex-end;
       display: none;
     }
@@ -303,24 +292,26 @@ const StyledMobileContainer = styled.div`
   `}
 `
 const StyledMobileSelectHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 0.625rem 0.625rem 0 0;
-  border-bottom: solid 1px #00000020;
-  min-height: 80px;
-  padding: 0 2rem;
-
-  svg {
-    transform: rotate(45deg);
-  }
-
-  div {
+  ${({ theme }) => css`
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
+    border-radius: 0.625rem 0.625rem 0 0;
+    border-bottom: solid 1px ${theme.colors.black}20;
+    min-height: 80px;
+    padding: 0 2rem;
+
+    svg {
+      transform: rotate(45deg);
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  `}
 `
 const StyleSelectContent = styled.div`
   ${({ theme }) => css`

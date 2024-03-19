@@ -968,12 +968,12 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
-export interface ApiListJeuneListJeune extends Schema.SingleType {
-  collectionName: 'list_jeunes';
+export interface ApiListeJeuneListeJeune extends Schema.SingleType {
+  collectionName: 'liste_jeunes';
   info: {
-    singularName: 'list-jeune';
-    pluralName: 'list-jeunes';
-    displayName: 'ListJeune';
+    singularName: 'liste-jeune';
+    pluralName: 'liste-jeunes';
+    displayName: 'ListeJeune';
     description: '';
   };
   options: {
@@ -990,13 +990,13 @@ export interface ApiListJeuneListJeune extends Schema.SingleType {
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::list-jeune.list-jeune',
+      'api::liste-jeune.liste-jeune',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::list-jeune.list-jeune',
+      'api::liste-jeune.liste-jeune',
       'oneToOne',
       'admin::user'
     > &
@@ -1067,8 +1067,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Rh\u00F4ne-Alpes'
       ]
     > &
-      Attribute.Required &
-      Attribute.DefaultTo<'Auvergne'>;
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1238,7 +1237,7 @@ declare module '@strapi/types' {
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
-      'api::list-jeune.list-jeune': ApiListJeuneListJeune;
+      'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;

@@ -23,10 +23,5 @@ const Root = styled.div`
       margin: 0 auto;
       width: 100%;
     }
-
-    //   @media (width < ${theme.mediaQueries.mobile}) {
-    //     font-size: ${theme.fonts.sizes.xl};
-
-    // }
   `}
 `

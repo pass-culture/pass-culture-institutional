@@ -12,10 +12,10 @@ import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listJeune: APIResponseData<'api::list-jeune.list-jeune'>
+  listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
 }
 
-export default function ListeJeune({ newsData, listJeune }: ListProps) {
+export default function ListeJeune({ newsData, listejeune }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -41,7 +41,7 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
     let uniqueCategories = []
     let uniqueLocalisations = []
 
-    const filtres = listJeune.attributes?.filtres?.map((filtre) => {
+    const filtres = listejeune.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -113,7 +113,7 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
     <React.Fragment>
       <StyledTitle>
         <Typo.Heading2
-          dangerouslySetInnerHTML={{ __html: listJeune.attributes.title }}
+          dangerouslySetInnerHTML={{ __html: listejeune.attributes.title }}
         />
         <FilterContainer
           filtres={filters}
@@ -122,16 +122,16 @@ export default function ListeJeune({ newsData, listJeune }: ListProps) {
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={listJeune.attributes.buttonText}
+        buttonText={listejeune.attributes.buttonText}
       />
 
-      <Separator isActive={listJeune.attributes.separator?.isActive} />
-      {listJeune.attributes.socialMediaSection &&
-        listJeune.attributes.socialMediaSection.title &&
-        listJeune.attributes.socialMediaSection.socialMediaLink && (
+      <Separator isActive={listejeune.attributes.separator?.isActive} />
+      {listejeune.attributes.socialMediaSection &&
+        listejeune.attributes.socialMediaSection.title &&
+        listejeune.attributes.socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={listJeune.attributes.socialMediaSection.title}
-            links={listJeune.attributes.socialMediaSection.socialMediaLink}
+            title={listejeune.attributes.socialMediaSection.title}
+            links={listejeune.attributes.socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -154,7 +154,7 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  // Fetch home data
+  // Fetch list jeune data
   const query = stringify({
     populate: [
       'title',
@@ -166,12 +166,12 @@ export const getStaticProps = (async () => {
     ],
   })
   const { data } = await fetchCMS<
-    APIResponseData<'api::list-jeune.list-jeune'>
-  >(`/list-jeune?${query}`)
+    APIResponseData<'api::liste-jeune.liste-jeune'>
+  >(`/liste-jeune?${query}`)
   return {
     props: {
       newsData: news.data,
-      listJeune: data,
+      listejeune: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>
@@ -201,7 +201,6 @@ const StyledListItems = styled(ListItems)`
     margin-bottom: 6rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      // margin: 3.5rem 0 5rem;
     }
   `}
 `

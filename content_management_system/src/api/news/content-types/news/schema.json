@@ -80,8 +80,7 @@
         "Provence-Alpes-Côte d'Azur",
         "Rhône-Alpes"
       ],
-      "required": true,
-      "default": "Auvergne"
+      "required": true
     }
   }
 }

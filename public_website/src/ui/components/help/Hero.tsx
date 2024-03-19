@@ -49,7 +49,6 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
     transform: translateY(-8rem);
 
@@ -89,7 +88,6 @@ const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
     max-width: 44rem;
     margin: 0 0 3rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
@@ -101,7 +99,6 @@ const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 34rem;
     margin: 0 0 2rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
     }

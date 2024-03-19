@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "liste_jeunes",
+  "info": {
+    "singularName": "liste-jeune",
+    "pluralName": "liste-jeunes",
+    "displayName": "ListeJeune",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "buttonText": {
+      "type": "text"
+    },
+    "filtres": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.filtre",
+      "required": true
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media",
+      "required": true
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    }
+  }
+}
