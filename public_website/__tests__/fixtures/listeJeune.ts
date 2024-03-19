@@ -1,7 +1,7 @@
 export const listeJeunePageFixtures = {
   listejeune: {
     id: 1,
-    title: 'jgugbiu',
+    title: 'Programmes de sensibilisation à lart dans votre région',
     attributes: {
       buttonText: 'More',
       createdAt: '2024-03-19T10:32:37.437Z',
