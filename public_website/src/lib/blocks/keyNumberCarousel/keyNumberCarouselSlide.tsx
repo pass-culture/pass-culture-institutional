@@ -26,7 +26,6 @@ export function KeyNumberCarouselSlide({
       index={slideIndex}
       key={title}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <StyledWrapper>
         <StyledIconWrapper>
@@ -50,7 +49,7 @@ const Root = styled(Slide)`
       padding: 5rem 2rem;
       background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
-      @media (width < ${theme.mediaQueries.mobile}) {
+      @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }
     }
@@ -65,10 +64,12 @@ const StyledWrapper = styled.div`
   display: block;
   position: relative;
 `
+
 const StyledTextWrapper = styled.div`
   display: block;
   position: relative;
 `
+
 const StyledIconWrapper = styled.div`
   display: flex;
   position: relative;

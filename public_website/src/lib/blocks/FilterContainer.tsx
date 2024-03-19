@@ -69,12 +69,10 @@ export function FilterContainer({
     } else {
       if (filterState?.includes(value)) {
         newFilterValues[name] = filterState.filter((item) => item !== value)
-      } else {
-        if (filterState && filterState[0] !== '') {
-          newFilterValues[name] = [...filterState, value]
-        } else if (filterState && filterState[0] === '') {
-          newFilterValues[name] = [value]
-        }
+      } else if (filterState && filterState[0] !== '') {
+        newFilterValues[name] = [...filterState, value]
+      } else if (filterState && filterState[0] === '') {
+        newFilterValues[name] = [value]
       }
     }
 
