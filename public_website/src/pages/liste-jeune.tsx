@@ -10,6 +10,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>

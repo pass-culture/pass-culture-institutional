@@ -6,9 +6,9 @@ interface SeparatorTextProps {
 }
 
 export function Separator(props: SeparatorTextProps) {
-  return (
-    <Root data-testid="centered-text">{props.isActive && <div></div>}</Root>
-  )
+  return <Root data-testid="separator">
+    {props.isActive && <div></div>}
+    </Root>
 }
 
 const Root = styled.div`

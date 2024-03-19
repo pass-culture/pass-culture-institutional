@@ -224,15 +224,11 @@ const StyledSelect = styled.select`
   ${({ theme }) => css`
     padding: 0 2rem 0 2rem;
     margin-right: 2rem;
-
     min-height: 50px;
-
     display: flex;
     align-items: center;
-
     border: none;
     border-left: solid 1px ${theme.colors.black}20;
-
     background-color: transparent;
     font-weight: ${theme.fonts.weights.bold};
     text-transform: uppercase;
