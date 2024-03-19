@@ -23,7 +23,7 @@ export function ListCard({
   return (
     <Root>
       {imageUrl && (
-        <StyledImage
+        <StyledCardImage
           src={imageUrl}
           alt=""
           width={385}
@@ -35,11 +35,11 @@ export function ListCard({
         {category} - <span className="visually-hidden">Publié le</span>{' '}
         <time>{formatDate(date)}</time>
       </StyledMeta>
-      <StyledTitle>
-        <StyledLink href={slug} aria-describedby={`news-meta-${slug}`}>
+      <StyledCardTitle>
+        <StyledCardLink href={slug} aria-describedby={`news-meta-${slug}`}>
           {title}
-        </StyledLink>
-      </StyledTitle>
+        </StyledCardLink>
+      </StyledCardTitle>
     </Root>
   )
 }
@@ -48,7 +48,7 @@ const Root = styled.article`
   position: relative;
 `
 
-const StyledImage = styled(Image)`
+const StyledCardImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   aspect-ratio: 1.2;
@@ -68,13 +68,13 @@ const StyledMeta = styled.p`
   `}
 `
 
-const StyledTitle = styled.h3`
+const StyledCardTitle = styled.h3`
   ${({ theme }) => css`
     font-weight: ${theme.fonts.weights.semiBold};
   `}
 `
 
-const StyledLink = styled(Link)`
+const StyledCardLink = styled(Link)`
   &::after {
     inset: 0;
     content: '';
