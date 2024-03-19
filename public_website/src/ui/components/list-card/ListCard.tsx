@@ -51,20 +51,20 @@ const Root = styled.article`
 const StyledImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
-  object-fit: cover;
   aspect-ratio: 1.2;
   height: auto;
   min-width: 100%;
+  object-fit: cover;
 `
 
 const StyledMeta = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.black};
     opacity: 0.6;
-    font-size: ${theme.fonts.sizes['2xs']};
-    font-weight: ${theme.fonts.weights.semiBold};
     text-transform: uppercase;
     margin-bottom: 0.5rem;
+    font-size: ${theme.fonts.sizes['2xs']};
+    font-weight: ${theme.fonts.weights.semiBold};
   `}
 `
 
@@ -76,8 +76,8 @@ const StyledTitle = styled.h3`
 
 const StyledLink = styled(Link)`
   &::after {
+    inset: 0;
     content: '';
     position: absolute;
-    inset: 0;
   }
 `
