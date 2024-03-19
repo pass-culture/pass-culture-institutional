@@ -1,7 +1,6 @@
 export const listeJeunePageFixtures = {
   listejeune: {
     id: 1,
-    title: 'Programmes de sensibilisation à lart dans votre région',
     attributes: {
       buttonText: 'More',
       createdAt: '2024-03-19T10:32:37.437Z',
@@ -16,6 +15,7 @@ export const listeJeunePageFixtures = {
         },
       ],
       publishedAt: '2024-03-19T10:32:38.445Z',
+      title: 'Programmes de sensibilisation à lart dans votre région',
     },
     separator: {
       id: 1,

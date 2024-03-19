@@ -17,6 +17,7 @@ interface ListProps {
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
+  console.log('newsData', listejeune)
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
