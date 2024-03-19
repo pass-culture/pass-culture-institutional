@@ -28,7 +28,7 @@ export const handlers = [
     return jsonResponseOf(homePageFixtures.homeData)
   }),
   http.get(`${CMS_BASE_URL}/api/news-list`, () => {
-    return jsonResponseOf(listeJeunePageFixtures.newsData)
+    return jsonResponseOf(homePageFixtures.latestStudies)
   }),
   http.get(`${CMS_BASE_URL}/api/simulator`, () => {
     return jsonResponseOf(simulatorPageFixtures.data)
