@@ -1,6 +1,7 @@
 export const listeJeunePageFixtures = {
   listejeune: {
     id: 1,
+    title: 'jgugbiu',
     attributes: {
       buttonText: 'More',
       createdAt: '2024-03-19T10:32:37.437Z',
@@ -36,7 +37,7 @@ export const listeJeunePageFixtures = {
       ],
       title: 'On reste connectés',
     },
-    title: 'jgugbiu',
+
     updatedAt: '2024-03-19T10:32:38.448Z',
   },
   newsData: [
