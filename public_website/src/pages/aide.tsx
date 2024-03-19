@@ -10,6 +10,7 @@ import { APIResponseData } from '@/types/strapi'
 import { Faq } from '@/ui/components/help/Faq'
 import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
+
 interface HelpProps {
   helpData: APIResponseData<'api::help.help'>
 }
@@ -119,7 +120,6 @@ const StyledSimplePushCTA = styled(SimplePushCta)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 4.5rem 0;
-
       margin-top: 13.125rem;
     }
   `}

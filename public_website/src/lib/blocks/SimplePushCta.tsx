@@ -132,7 +132,6 @@ const CtaLink = styled.a`
     line-height: 1.4;
 
     margin-right: 1.5rem;
-
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
