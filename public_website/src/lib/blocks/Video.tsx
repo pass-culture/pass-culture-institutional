@@ -10,11 +10,10 @@ interface VideoProps {
 export function Video(props: VideoProps) {
   return (
     <Root>
-      <StyledVideo
+      <ReactPlayer
         url={props.url}
         light
         width="100%"
-        // playIcon={<Play />}
         controls={true}
         height="100%"
       />
@@ -58,12 +57,6 @@ const Root = styled.div`
       p {
         width: 100%;
       }
-    }
-  `}
-`
-const StyledVideo = styled(ReactPlayer)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.tablet}) {
     }
   `}
 `

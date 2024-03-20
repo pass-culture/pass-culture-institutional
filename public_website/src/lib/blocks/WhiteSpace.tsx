@@ -6,10 +6,10 @@ interface WhiteSpaceProps {
 }
 
 export function WhiteSpace(props: WhiteSpaceProps) {
-  return <Root $height={props.space}></Root>
+  return <Spacer $height={props.space}></Spacer>
 }
 
-const Root = styled.div<{ $height?: number }>`
+const Spacer = styled.div<{ $height?: number }>`
   ${({ $height }) => css`
     width: 100%;
     max-width: 90rem;

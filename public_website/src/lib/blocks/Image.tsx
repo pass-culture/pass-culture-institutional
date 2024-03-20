@@ -12,7 +12,6 @@ interface ImageProps {
 export function Image(props: ImageProps) {
   return (
     <Root>
-      {/* <CardContainer> */}
       <img src={getStrapiURL(props.image?.data.attributes.url)} alt="" />
       <p>{props.description}</p>
     </Root>
@@ -23,9 +22,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 8rem auto;
-
     padding: 5rem auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;

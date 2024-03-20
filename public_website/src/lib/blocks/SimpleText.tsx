@@ -18,7 +18,6 @@ export function SimpleText(props: SimpleTextProps) {
   return (
     <Root data-testid="simple-text">
       <Typo.Heading2>{props.Title}</Typo.Heading2>
-      {/* TODO: 2 columns variant */}
       <p>{props.Text}</p>
       {!props.IsNormal && (
         <Columns>
@@ -48,11 +47,9 @@ const Root = styled.div`
     margin: 5rem auto;
 
     h2 {
-      /* TODO: variabilize ? */
       font-size: 2.5rem;
       margin-bottom: 4rem;
-      /* TODO: use CSS var */
-      color: #320096;
+      color: ${theme.colors.secondary};
     }
 
     p {
