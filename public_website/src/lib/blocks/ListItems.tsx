@@ -90,7 +90,7 @@ const LoadMoreButton = styled.button`
 
     background: linear-gradient(
       90deg,
-      #eb0055 -11.18%,
+      ${theme.colors.tertiary} -11.18%,
       ${theme.colors.secondary} 64.8%
     );
     border-radius: 2rem;

@@ -103,9 +103,6 @@ const StyledAccordion = styled.details`
     summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
-    }
-
-    summary {
       display: flex;
       justify-content: space-between;
     }
