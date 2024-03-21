@@ -3,8 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import Help, { getStaticProps } from '@/pages/help'
-
+import Help, { getStaticProps } from '@/pages/aide'
 
 vi.mock('@/lib/analytics/analyticsProvider')
 describe('Help page', () => {
