@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { Typo } from '../typographies'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
 type HeroProps = {
   title: string
   text: string
@@ -51,11 +52,11 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-
     padding: calc(18rem + 10rem) 1.5rem 2.5rem;
     display: grid;
     grid-template-columns: 1.25fr 1fr;
     gap: 1.5rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;

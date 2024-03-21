@@ -49,12 +49,7 @@ export function Faq({ title, cta, link }: FaqProps) {
 }
 
 const Root = styled.div`
-  ${({ theme }) => css`
-    overflow: hidden;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  overflow: hidden;
 `
 
 const StyledContentWrapper = styled.div`
@@ -63,7 +58,6 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     padding: 0rem 1.5rem 2.5rem;
-
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 1.5rem;
@@ -78,8 +72,8 @@ const StyledContentWrapper = styled.div`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
-
     max-width: 20rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.75rem;
     }
@@ -89,6 +83,7 @@ const StyledHeading = styled(Typo.Heading2)`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     padding-left: 2rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -103,14 +98,11 @@ const StyledAccordion = styled.details`
   ${({ theme }) => css`
     margin-bottom: 3rem;
     padding-bottom: 3rem;
+    border-bottom: solid 1px ${theme.colors.black}20;
 
-    border-bottom: solid 1px #00000020;
     summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
-    }
-
-    summary {
       display: flex;
       justify-content: space-between;
     }
@@ -125,10 +117,12 @@ const StyledAccordion = styled.details`
     p {
       margin-top: 1rem;
     }
+
     button {
       display: flex;
       width: 100%;
       justify-content: space-between;
+
       &:focus-visible {
         outline: 0px auto -webkit-focus-ring-color !important;
       }
