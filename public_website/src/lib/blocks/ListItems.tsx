@@ -23,7 +23,6 @@ export function ListItems({ news, className, buttonText }: LatestNewsProps) {
 
   return (
     <Root className={className}>
-      {/* <StyledHeading dangerouslySetInnerHTML={{ __html: title }} /> */}
       <StyledList>
         {news.slice(0, visibleItems).map((newsItem) => (
           <li key={newsItem.attributes.slug}>
@@ -54,9 +53,11 @@ const Root = styled.div`
     margin-inline: auto;
     display: flex;
     flex-direction: column;
+
     > a {
       align-self: center;
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       max-width: 80%;
     }
