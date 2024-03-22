@@ -24,7 +24,7 @@ export function ImageText({
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledIcon
-          className={isImageRight ? 'Iright' : 'Ileft'}
+          className={isImageRight ? 'IconRight' : 'IconLeft'}
           src={getStrapiURL(icon?.attributes.url)}
           alt={icon?.attributes.alternativeText}
         />
@@ -57,7 +57,7 @@ const Root = styled.div`
       grid-template-areas: 'first second';
       position: relative;
 
-      .Iright {
+      .IconRight {
         top: 36rem;
         right: -1rem;
         z-index: 2;
@@ -70,7 +70,7 @@ const Root = styled.div`
       position: relative;
       gap: 2.5rem;
 
-      .Ileft {
+      .IconLeft {
         top: 36rem;
         left: 33.5rem;
         z-index: 2;
@@ -86,8 +86,8 @@ const Root = styled.div`
           'second'
           'first';
 
-        .Iright,
-        .Ileft {
+        .IconRight,
+        .IconLeft {
           top: 23rem;
           left: 0;
           z-index: 2;
@@ -103,7 +103,6 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-
     padding: calc(18rem + 10rem) 1.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
