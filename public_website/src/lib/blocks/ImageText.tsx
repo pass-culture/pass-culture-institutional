@@ -101,7 +101,6 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
     transform: translateY(-8rem);
 
@@ -116,6 +115,7 @@ const StyledContentWrapper = styled.div`
     .second {
       grid-area: second;
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: calc(10rem + 10rem) 1.5rem 2.5rem;
     }
@@ -125,10 +125,10 @@ const StyledContentWrapper = styled.div`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     padding-left: 2rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -150,7 +150,6 @@ const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
     max-width: 44rem;
     margin: 0 0 3rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['l']};
@@ -159,15 +158,9 @@ const StyledHeading = styled(Typo.Heading1)`
 `
 
 const StyledText = styled.p`
-  ${({ theme }) => css`
-    max-width: 34rem;
-    margin: 0 0 2rem;
-    // text-align: left;
-    line-height: 2;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  line-height: 2;
 `
 
 const StyledImage = styled.img`
