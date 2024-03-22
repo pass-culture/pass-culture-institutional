@@ -74,6 +74,7 @@ const Root = styled.div`
         margin-bottom: 1.5rem;
         max-width: 80%;
       }
+
       p,
       ul {
         padding-left: 0;

@@ -20,7 +20,6 @@ interface LittleListProps {
 export function LittleList(props: LittleListProps) {
   return (
     <Root data-testid="simple-text">
-      {/* <Typo.Heading2>{props.Title}</Typo.Heading2>   */}
       <Columns>
         <Column>
           <Typo.Heading2>{props.title}</Typo.Heading2>
@@ -143,8 +142,8 @@ const ColumnText = styled.div`
     padding-bottom: 1.5rem;
     min-width: 70%;
     max-width: 70%;
-
     border-bottom: solid 1px ${theme.colors.black}20;
+
     p:nth-child(1) {
       font-weight: ${theme.fonts.weights.bold};
       max-width: 80%;
