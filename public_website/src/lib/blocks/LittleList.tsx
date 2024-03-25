@@ -19,7 +19,7 @@ interface LittleListProps {
 
 export function LittleList(props: LittleListProps) {
   return (
-    <Root data-testid="simple-text">
+    <Root>
       <Columns>
         <Column>
           <Typo.Heading2>{props.title}</Typo.Heading2>
