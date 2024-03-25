@@ -7,13 +7,17 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 interface ImageProps {
   description?: string
   image: APIResponse<'plugin::upload.file'> | null
+  alt?: string
 }
 
 export function Image(props: ImageProps) {
   return (
     <Root>
-      <img src={getStrapiURL(props.image?.data.attributes.url)} alt="" />
-      <p>{props.description}</p>
+      <img
+        src={getStrapiURL(props.image?.data.attributes.url)}
+        alt={props.alt}
+      />
+      <figcaption>{props.description}</figcaption>
     </Root>
   )
 }

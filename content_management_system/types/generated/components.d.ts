@@ -67,6 +67,7 @@ export interface BlockImage extends Schema.Component {
   attributes: {
     image: Attribute.Media;
     description: Attribute.Text;
+    alt: Attribute.String;
   };
 }
 
