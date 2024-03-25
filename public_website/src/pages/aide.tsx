@@ -19,7 +19,7 @@ export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
       <Hero
-        title={helpData.attributes.heroSection.Title}
+        title={helpData.attributes?.heroSection?.Title}
         text={helpData.attributes.heroSection.Text}
         image={
           helpData.attributes.heroSection.Image
