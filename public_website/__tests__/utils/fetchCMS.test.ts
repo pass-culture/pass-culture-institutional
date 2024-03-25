@@ -26,7 +26,8 @@ describe('fetchCMS', () => {
   it('should fail when not in localhost/testing and no token is found', async () => {
     process.env = {
       ...OLD_ENV,
-      STRAPI_API_URL: 'https://siteinstit-cms.staging.passculture.team',
+      NEXT_PUBLIC_STRAPI_API_URL:
+        'https://siteinstit-cms.staging.passculture.team',
     }
 
     await expect(fetchCMS('/test')).rejects.toThrow(

@@ -53,7 +53,7 @@ Go back to the project, and create a `.env` for the content management system.
 
 You will find a template for the environnement variables under `content_management_system/.env.example`. Duplicate and rename the file `.env`.
 
-Specify the `PORT` you want Strapi to run on. You should take note of this value for the `public_website/.env` (more specifically for `STRAPI_API_URL`).
+Specify the `PORT` you want Strapi to run on. You should take note of this value for the `public_website/.env` (more specifically for `NEXT_PUBLIC_STRAPI_API_URL`).
 
 When developing locally, you can put whatever value you want for `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`.
 
