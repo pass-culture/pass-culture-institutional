@@ -225,17 +225,6 @@ export interface BlockVerticalCarousel extends Schema.Component {
   };
 }
 
-export interface CommonFiltre extends Schema.Component {
-  collectionName: 'components_common_filtres';
-  info: {
-    displayName: 'Filtre';
-    description: '';
-  };
-  attributes: {
-    filtre: Attribute.String & Attribute.Required;
-  };
-}
-
 export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {
@@ -244,6 +233,17 @@ export interface BlockVideo extends Schema.Component {
   attributes: {
     url: Attribute.Text;
     description: Attribute.Text;
+  };
+}
+
+export interface CommonFiltre extends Schema.Component {
+  collectionName: 'components_common_filtres';
+  info: {
+    displayName: 'Filtre';
+    description: '';
+  };
+  attributes: {
+    filtre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -576,8 +576,8 @@ declare module '@strapi/types' {
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.vertical-carousel': BlockVerticalCarousel;
-      'common.filtre': CommonFiltre;
       'block.video': BlockVideo;
+      'common.filtre': CommonFiltre;
       'common.link': CommonLink;
       'common.little-list-component': CommonLittleListComponent;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
