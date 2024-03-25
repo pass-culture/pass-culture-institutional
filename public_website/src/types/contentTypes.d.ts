@@ -969,6 +969,42 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
+export interface ApiListeJeuneListeJeune extends Schema.SingleType {
+  collectionName: 'liste_jeunes';
+  info: {
+    singularName: 'liste-jeune';
+    pluralName: 'liste-jeunes';
+    displayName: 'ListeJeune';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    buttonText: Attribute.Text;
+    filtres: Attribute.Component<'common.filtre', true> & Attribute.Required;
+    socialMediaSection: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
+    separator: Attribute.Component<'block.separator'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::liste-jeune.liste-jeune',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::liste-jeune.liste-jeune',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMasterMaster extends Schema.SingleType {
   collectionName: 'masters';
   info: {
@@ -1000,42 +1036,6 @@ export interface ApiMasterMaster extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::master.master',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiListeJeuneListeJeune extends Schema.SingleType {
-  collectionName: 'liste_jeunes';
-  info: {
-    singularName: 'liste-jeune';
-    pluralName: 'liste-jeunes';
-    displayName: 'ListeJeune';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    buttonText: Attribute.Text;
-    filtres: Attribute.Component<'common.filtre', true> & Attribute.Required;
-    socialMediaSection: Attribute.Component<'block.social-media'> &
-      Attribute.Required;
-    separator: Attribute.Component<'block.separator'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::liste-jeune.liste-jeune',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::liste-jeune.liste-jeune',
       'oneToOne',
       'admin::user'
     > &
@@ -1276,8 +1276,8 @@ declare module '@strapi/types' {
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
-      'api::master.master': ApiMasterMaster;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
+      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
