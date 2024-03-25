@@ -26,9 +26,9 @@ export function LittleList(props: LittleListProps) {
           <p>{props.description}</p>
         </Column>
 
-        <Column>
+        <Column as="ul">
           {props.content?.map((item) => (
-            <ColumnContent key={item.id}>
+            <ColumnContent key={item.id} as="li">
               <ColumnEmoji>
                 <span>{item.FirstEmoji}</span>
                 <span>{item.SecondEmoji}</span>
