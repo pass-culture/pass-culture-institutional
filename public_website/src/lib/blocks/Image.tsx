@@ -13,11 +13,13 @@ interface ImageProps {
 export function Image(props: ImageProps) {
   return (
     <Root>
-      <img
-        src={getStrapiURL(props.image?.data.attributes.url)}
-        alt={props.alt}
-      />
-      <figcaption>{props.description}</figcaption>
+      <figure>
+        <img
+          src={getStrapiURL(props.image?.data.attributes.url)}
+          alt={props.alt}
+        />
+        <figcaption>{props.description}</figcaption>
+      </figure>
     </Root>
   )
 }
