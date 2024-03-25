@@ -4,6 +4,7 @@ import { CenteredText } from './blocks/CenteredText'
 import { Header } from './blocks/Header'
 import { Image } from './blocks/Image'
 import { ImageText } from './blocks/ImageText'
+import { KeyNumberCarouselSlide } from './blocks/keyNumberCarousel/keyNumberCarouselSlide'
 import { LatestNews } from './blocks/LatestNews'
 import { LittleList } from './blocks/LittleList'
 import { PushCTA } from './blocks/PushCTA'
@@ -39,6 +40,7 @@ const COMPONENTS: Record<
   'block.little-list': LittleList,
   'block.video': Video,
   'block.white-space': WhiteSpace,
+  'block.key-number-carousel-slide': KeyNumberCarouselSlide,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

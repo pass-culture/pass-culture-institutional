@@ -140,6 +140,19 @@ export interface BlockPushCta extends Schema.Component {
   };
 }
 
+export interface BlockSeparator extends Schema.Component {
+  collectionName: 'components_block_separators';
+  info: {
+    displayName: 'Separator';
+    description: '';
+  };
+  attributes: {
+    isActive: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+  };
+}
+
 export interface BlockSimplePushCta extends Schema.Component {
   collectionName: 'components_block_simple_push_ctas';
   info: {
@@ -209,6 +222,17 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonFiltre extends Schema.Component {
+  collectionName: 'components_common_filtres';
+  info: {
+    displayName: 'Filtre';
+    description: '';
+  };
+  attributes: {
+    filtre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -546,11 +570,13 @@ declare module '@strapi/types' {
       'block.link': BlockLink;
       'block.little-list': BlockLittleList;
       'block.push-cta': BlockPushCta;
+      'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.vertical-carousel': BlockVerticalCarousel;
+      'common.filtre': CommonFiltre;
       'block.video': BlockVideo;
       'common.link': CommonLink;
       'common.little-list-component': CommonLittleListComponent;

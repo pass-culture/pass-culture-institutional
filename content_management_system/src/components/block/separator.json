@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_block_separators",
+  "info": {
+    "displayName": "Separator",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}
