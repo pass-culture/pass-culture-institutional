@@ -20,7 +20,6 @@ interface LittleListProps {
 export function LittleList(props: LittleListProps) {
   return (
     <Root data-testid="simple-text">
-      {/* <Typo.Heading2>{props.Title}</Typo.Heading2>   */}
       <Columns>
         <Column>
           <Typo.Heading2>{props.title}</Typo.Heading2>
@@ -52,14 +51,6 @@ const Root = styled.div`
     max-width: 90rem;
     margin: 5rem auto;
 
-    // h2 {
-    //   /* TODO: variabilize ? */
-    //   font-size: 2.5rem;
-    //   margin-bottom: 4rem;
-    //   /* TODO: use CSS var */
-    //   color: #320096;
-    // }
-
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 90%;
       max-width: 100%;
@@ -80,12 +71,10 @@ const Columns = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
-    // grid-template-columns: 1fr 1fr;
     gap: 4rem;
     margin-top: 5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      //   grid-template-columns: 1fr;
       flex-direction: column;
       margin-top: 2rem;
     }
@@ -101,8 +90,8 @@ const Column = styled.div`
 const ColumnContent = styled.div`
   ${({ theme }) => css`
     display: flex;
-    //   grid-template-columns: 1fr fr;
     width: fit-content;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       flex-direction: column;
     }
@@ -153,8 +142,8 @@ const ColumnText = styled.div`
     padding-bottom: 1.5rem;
     min-width: 70%;
     max-width: 70%;
+    border-bottom: solid 1px ${theme.colors.black}20;
 
-    border-bottom: solid 1px #00000020;
     p:nth-child(1) {
       font-weight: ${theme.fonts.weights.bold};
       max-width: 80%;
@@ -162,7 +151,6 @@ const ColumnText = styled.div`
     }
 
     p:nth-child(2) {
-      //   max-width: 75%;
       line-height: 2;
       font-weight: ${theme.fonts.weights.medium};
     }
@@ -170,6 +158,7 @@ const ColumnText = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       max-width: 100%;
       margin-bottom: 2rem;
+
       p:nth-child(1) {
         max-width: 100%;
       }

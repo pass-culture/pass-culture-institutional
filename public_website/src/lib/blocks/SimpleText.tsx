@@ -9,7 +9,6 @@ interface SimpleTextProps {
   IsNormal?: boolean
   FirstSubTitle?: string
   SecondSubTitle?: string
-
   FirstText?: string
   SecondText?: string
 }
@@ -75,6 +74,7 @@ const Root = styled.div`
         margin-bottom: 1.5rem;
         max-width: 80%;
       }
+
       p,
       ul {
         padding-left: 0;
@@ -93,7 +93,6 @@ const Columns = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
-
       margin-top: 2rem;
     }
   `}

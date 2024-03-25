@@ -24,7 +24,7 @@ export function ImageText({
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledIcon
-          className={isImageRight ? 'Iright' : 'Ileft'}
+          className={isImageRight ? 'IconRight' : 'IconLeft'}
           src={getStrapiURL(icon?.attributes.url)}
           alt={icon?.attributes.alternativeText}
         />
@@ -57,7 +57,7 @@ const Root = styled.div`
       grid-template-areas: 'first second';
       position: relative;
 
-      .Iright {
+      .IconRight {
         top: 36rem;
         right: -1rem;
         z-index: 2;
@@ -70,7 +70,7 @@ const Root = styled.div`
       position: relative;
       gap: 2.5rem;
 
-      .Ileft {
+      .IconLeft {
         top: 36rem;
         left: 33.5rem;
         z-index: 2;
@@ -86,8 +86,8 @@ const Root = styled.div`
           'second'
           'first';
 
-        .Iright,
-        .Ileft {
+        .IconRight,
+        .IconLeft {
           top: 23rem;
           left: 0;
           z-index: 2;
@@ -101,10 +101,8 @@ const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 0 auto;
-    // text-align: center;
     position: relative;
     transform: translateY(-8rem);
-
     padding: calc(18rem + 10rem) 1.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
@@ -116,6 +114,7 @@ const StyledContentWrapper = styled.div`
     .second {
       grid-area: second;
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: calc(10rem + 10rem) 1.5rem 2.5rem;
     }
@@ -125,10 +124,10 @@ const StyledContentWrapper = styled.div`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     padding-left: 2rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -150,7 +149,6 @@ const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
     max-width: 44rem;
     margin: 0 0 3rem;
-    // text-align: left;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['l']};
@@ -159,15 +157,9 @@ const StyledHeading = styled(Typo.Heading1)`
 `
 
 const StyledText = styled.p`
-  ${({ theme }) => css`
-    max-width: 34rem;
-    margin: 0 0 2rem;
-    // text-align: left;
-    line-height: 2;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  max-width: 34rem;
+  margin: 0 0 2rem;
+  line-height: 2;
 `
 
 const StyledImage = styled.img`

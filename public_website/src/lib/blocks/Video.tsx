@@ -26,9 +26,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 8rem auto;
-
     padding: 5rem auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,6 +36,7 @@ const Root = styled.div`
       width: 90%;
       border-radius: 2.5rem;
     }
+
     p {
       width: 90%;
     }
