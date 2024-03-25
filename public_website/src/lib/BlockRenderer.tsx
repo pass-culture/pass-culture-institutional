@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
+import { DoublePushCTA } from './blocks/DoublePushCta'
 import { Header } from './blocks/Header'
 import { Image } from './blocks/Image'
 import { ImageText } from './blocks/ImageText'
@@ -39,12 +40,14 @@ const COMPONENTS: Record<
   'block.image-text': ImageText,
   'block.little-list': LittleList,
   'block.video': Video,
-  'block.white-space': WhiteSpace,
+  'block.space': WhiteSpace,
   'block.key-number-carousel-slide': KeyNumberCarouselSlide,
+  'block.double-push-cta': DoublePushCTA,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
   const BlockComponent = COMPONENTS[props.block.__component]
+  // console.log(props.block, 'hwy', props)
 
   if (!BlockComponent) {
     return <UnkwnownBlock block={props.block} />

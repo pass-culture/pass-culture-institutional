@@ -1136,7 +1136,17 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.header',
         'block.simple-text',
         'block.push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.double-push-cta',
+        'block.image-text',
+        'block.image',
+        'block.link',
+        'block.little-list',
+        'block.separator',
+        'block.simple-push-cta',
+        'block.space',
+        'block.vertical-carousel',
+        'block.video'
       ]
     >;
     createdAt: Attribute.DateTime;

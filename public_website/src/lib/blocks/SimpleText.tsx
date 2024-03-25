@@ -4,34 +4,34 @@ import styled, { css } from 'styled-components'
 import { Typo } from '@/ui/components/typographies'
 
 interface SimpleTextProps {
-  Title?: string
-  Text?: string
-  IsNormal?: boolean
-  FirstSubTitle?: string
-  SecondSubTitle?: string
-  FirstText?: string
-  SecondText?: string
+  title?: string
+  text?: string
+  isNormal?: boolean
+  firstSubTitle?: string
+  secondSubTitle?: string
+  firstText?: string
+  secondText?: string
 }
 
 export function SimpleText(props: SimpleTextProps) {
   return (
     <Root data-testid="simple-text">
-      <Typo.Heading2>{props.Title}</Typo.Heading2>
-      <p>{props.Text}</p>
-      {!props.IsNormal && (
+      <Typo.Heading2>{props.title}</Typo.Heading2>
+      <p>{props.text}</p>
+      {!props.isNormal && (
         <Columns>
           <Column>
             <ul>
-              <li>{props.FirstSubTitle}</li>
+              <li>{props.firstSubTitle}</li>
             </ul>
-            <p>{props.FirstText}</p>
+            <p>{props.firstText}</p>
           </Column>
 
           <Column>
             <ul>
-              <li>{props.SecondSubTitle}</li>
+              <li>{props.secondSubTitle}</li>
             </ul>
-            <p>{props.SecondText}</p>
+            <p>{props.secondText}</p>
           </Column>
         </Columns>
       )}

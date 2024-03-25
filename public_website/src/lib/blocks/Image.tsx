@@ -35,7 +35,7 @@ const Root = styled.div`
     gap: 2rem;
 
     img {
-      width: 90%;
+      width: 100%;
       border-radius: 2.5rem;
     }
     p {

@@ -11,9 +11,9 @@ interface DoublePushCTAProps {
   title: string | undefined | TrustedHTML
   description: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  ctaLink: { Label: string; URL: string } | undefined
+  firstCta: { Label: string; URL: string } | undefined
 
-  secondctaLink: { Label: string; URL: string } | undefined
+  secondCta: { Label: string; URL: string } | undefined
   className?: string
 }
 
@@ -35,12 +35,12 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
 
-        <CtaLink href={props.ctaLink?.URL}>{props.ctaLink?.Label}</CtaLink>
+        <CtaLink href={props.firstCta?.URL}>{props.firstCta?.Label}</CtaLink>
         <Button
-          href={props.secondctaLink?.URL}
+          href={props.secondCta?.URL}
           target="_blank"
           variant="quaternary">
-          {props.secondctaLink?.Label}
+          {props.secondCta?.Label}
         </Button>
       </RightSide>
     </Root>

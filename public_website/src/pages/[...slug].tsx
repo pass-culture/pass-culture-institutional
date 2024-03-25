@@ -1,5 +1,6 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
+import { stringify } from 'qs'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { APIResponseData } from '@/types/strapi'
@@ -21,14 +22,22 @@ export default function CustomPage(props: CustomPageProps) {
 }
 
 export const getStaticProps = (async ({ params }) => {
-  const pagePath = '/' + (params?.['slug'] as string[]).join('/')
-  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>(
-    `/pages?populate=*&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
-  )
+  const pagePath = (params?.['slug'] as string[]).join('/')
+
+  const queryParams = stringify({
+    populate: ['Blocks.image.image', 'Blocks.firstCta', 'Blocks.secondCta'],
+  })
+
+  const apiEndpoint = `/pages?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+
+  const response =
+    await fetchCMS<APIResponseData<'api::page.page'>[]>(apiEndpoint)
 
   if (response.data.length === 0) {
     return { notFound: true }
   }
+
+  console.log(response.data[0]?.attributes.Blocks, 'hey')
 
   return {
     props: {
