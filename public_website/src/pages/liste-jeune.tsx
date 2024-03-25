@@ -66,6 +66,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     })
 
     setFilters(filtres)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchData = async () => {
@@ -108,6 +109,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 
   useEffect(() => {
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation])
 
   return (

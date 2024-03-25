@@ -49,6 +49,7 @@ export function FilterContainer({
       newFilterValues[filtre.filtre] = ['']
     })
     setFilterValues(newFilterValues)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtres])
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
