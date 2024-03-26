@@ -801,6 +801,37 @@ export interface ApiActivePlaylistTagActivePlaylistTag
   };
 }
 
+export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
+  extends Schema.SingleType {
+  collectionName: 'actualites_rdv_acteurs_culturels';
+  info: {
+    singularName: 'actualites-rdv-acteurs-culturel';
+    pluralName: 'actualites-rdv-acteurs-culturels';
+    displayName: 'ActualitesRdvActeursCulturels';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -1232,6 +1263,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
       'api::category.category': ApiCategoryCategory;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;

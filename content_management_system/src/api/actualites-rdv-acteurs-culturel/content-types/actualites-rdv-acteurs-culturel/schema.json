@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "actualites_rdv_acteurs_culturels",
+  "info": {
+    "singularName": "actualites-rdv-acteurs-culturel",
+    "pluralName": "actualites-rdv-acteurs-culturels",
+    "displayName": "ActualitesRdvActeursCulturels"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}
