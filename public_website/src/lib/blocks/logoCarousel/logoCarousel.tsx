@@ -28,7 +28,7 @@ export function LogoCarousel({
   previousButtonLabel,
   items,
 }: LogoCarouselProps) {
-  const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+  const LOGO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     'title'
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
@@ -51,13 +51,13 @@ export function LogoCarousel({
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 6
 
   useEffect(() => {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
+    const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
 
     if (carouselEl && carouselSlidesEl) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
-  }, [CAROUSEL_SELECTOR])
+  }, [LOGO_CAROUSEL_SELECTOR])
 
   function cleanSlideAttributes(
     carouselEl: Element,
@@ -73,7 +73,7 @@ export function LogoCarousel({
   }
 
   function handleNavigationButtonClick() {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
+    const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
 
     if (carouselEl && carouselSlidesEl) {

@@ -208,6 +208,17 @@ export interface BlockVerticalCarousel extends Schema.Component {
   };
 }
 
+export interface CommonFiltre extends Schema.Component {
+  collectionName: 'components_common_filtres';
+  info: {
+    displayName: 'Filtre';
+    description: '';
+  };
+  attributes: {
+    filtre: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface CommonKeyNumberItems extends Schema.Component {
   collectionName: 'components_common_key_number_items';
   info: {
@@ -219,17 +230,6 @@ export interface CommonKeyNumberItems extends Schema.Component {
     thirdEmoji: Attribute.String;
     title: Attribute.String;
     description: Attribute.Text;
-  };
-}
-
-export interface CommonFiltre extends Schema.Component {
-  collectionName: 'components_common_filtres';
-  info: {
-    displayName: 'Filtre';
-    description: '';
-  };
-  attributes: {
-    filtre: Attribute.String & Attribute.Required;
   };
 }
 
@@ -570,8 +570,8 @@ declare module '@strapi/types' {
       'block.social-media': BlockSocialMedia;
       'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
-      'common.key-number-items': CommonKeyNumberItems;
       'common.filtre': CommonFiltre;
+      'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
       'common.logo': CommonLogo;
       'common.testimony-carousel': CommonTestimonyCarousel;
