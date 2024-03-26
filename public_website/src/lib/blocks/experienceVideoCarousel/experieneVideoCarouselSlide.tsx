@@ -52,14 +52,14 @@ export function ExperienceVideoCarouselSlide({
         </button>
 
         {image && (
-          <StyledVideo
+          <StyledExperienceVideo
             ref={videoRef}
             poster={
               image.data.attributes.url &&
               getStrapiURL(image.data.attributes.url)
             }>
             <source src={url} />
-          </StyledVideo>
+          </StyledExperienceVideo>
         )}
         <StyledTitle>{title}</StyledTitle>
         <Typo.Body>{description}</Typo.Body>
@@ -80,7 +80,7 @@ const Root = styled(Slide)`
   `}
 `
 
-const StyledVideo = styled.video`
+const StyledExperienceVideo = styled.video`
   border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;

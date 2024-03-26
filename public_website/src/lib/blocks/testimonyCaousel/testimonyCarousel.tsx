@@ -33,10 +33,10 @@ export function TestimonyCarousel({
   previousButtonLabel,
   items,
 }: TestimonyCarouselProps) {
-  const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+  const TESTIMONY_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
-  const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const TESTIMONY_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
 
   const [screenWidth, setScreenWidth] = useState<number>()
 
@@ -56,13 +56,15 @@ export function TestimonyCarousel({
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   useEffect(() => {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(TESTIMONY_CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      TESTIMONY_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
-  }, [CAROUSEL_SELECTOR])
+  }, [TESTIMONY_CAROUSEL_SELECTOR])
 
   function cleanSlideAttributes(
     carouselEl: Element,
@@ -78,8 +80,10 @@ export function TestimonyCarousel({
   }
 
   function handleNavigationButtonClick() {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(TESTIMONY_CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      TESTIMONY_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       setTimeout(() => {

@@ -33,10 +33,11 @@ export function ExperienceVideoCarousel({
   previousButtonLabel,
   items,
 }: ExperienceVideoCarouselProps) {
-  const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+  const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
-  const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const EXPERIENCE_VIDEO_SLIDES_SELECTOR =
+    '[aria-roledescription="diapositive"]'
 
   const [screenWidth, setScreenWidth] = useState<number>()
 
@@ -56,13 +57,17 @@ export function ExperienceVideoCarousel({
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
 
   useEffect(() => {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(
+      EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
+    )
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      EXPERIENCE_VIDEO_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
-  }, [CAROUSEL_SELECTOR])
+  }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
 
   function cleanSlideAttributes(
     carouselEl: Element,
@@ -78,8 +83,12 @@ export function ExperienceVideoCarousel({
   }
 
   function handleNavigationButtonClick() {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(
+      EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
+    )
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      EXPERIENCE_VIDEO_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       setTimeout(() => {

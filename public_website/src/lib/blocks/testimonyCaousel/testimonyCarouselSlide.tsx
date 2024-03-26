@@ -52,14 +52,14 @@ export function TestimonyCarouselSlide({
         </button>
 
         {image && (
-          <StyledVideo
+          <StyledTestimonyVideo
             ref={videoRef}
             poster={
               image.data.attributes.url &&
               getStrapiURL(image.data.attributes.url)
             }>
             <source src={url} />
-          </StyledVideo>
+          </StyledTestimonyVideo>
         )}
         <StyledTitle>{title}</StyledTitle>
         <Typo.Body>{description}</Typo.Body>
@@ -80,7 +80,7 @@ const Root = styled(Slide)`
   `}
 `
 
-const StyledVideo = styled.video`
+const StyledTestimonyVideo = styled.video`
   border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;
