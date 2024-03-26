@@ -23,16 +23,16 @@ export function TestimonyCarouselSlide({
   description,
   url,
 }: TestimonyCarouselSlideProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const playVideo = () => {
-    if (videoRef.current) {
-      if (!isPlaying) {
-        videoRef.current.play()
-        setIsPlaying(true)
+  const testimonyVideoRef = useRef<HTMLVideoElement>(null)
+  const [isTestimonyPlaying, setIsTestimonyPlaying] = useState<boolean>(false)
+  const playTetsimonyVideo = () => {
+    if (testimonyVideoRef.current) {
+      if (!isTestimonyPlaying) {
+        testimonyVideoRef.current.play()
+        setIsTestimonyPlaying(true)
       } else {
-        videoRef.current.pause()
-        setIsPlaying(false)
+        testimonyVideoRef.current.pause()
+        setIsTestimonyPlaying(false)
       }
     }
   }
@@ -44,16 +44,16 @@ export function TestimonyCarouselSlide({
       role="group"
       aria-roledescription="diapositive">
       <StyledWrapper>
-        <button onMouseDown={playVideo}>
+        <button onMouseDown={playTetsimonyVideo}>
           <span className="visually-hidden">
-            {isPlaying ? 'Pause' : 'Lecture'}
+            {isTestimonyPlaying ? 'Pause' : 'Lecture'}
           </span>
-          {!isPlaying ? <Play /> : <Pause />}
+          {!isTestimonyPlaying ? <Play /> : <Pause />}
         </button>
 
         {image && (
           <StyledTestimonyVideo
-            ref={videoRef}
+            ref={testimonyVideoRef}
             poster={
               image.data.attributes.url &&
               getStrapiURL(image.data.attributes.url)
