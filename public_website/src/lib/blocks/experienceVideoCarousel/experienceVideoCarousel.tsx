@@ -38,7 +38,6 @@ export function ExperienceVideoCarousel({
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
 
-  // Computed the number of visible slides depending on screen width
   const [screenWidth, setScreenWidth] = useState<number>()
 
   useEffect(() => {
@@ -53,16 +52,9 @@ export function ExperienceVideoCarousel({
     }
   }, [])
 
-  // Get the MQ in rem and convert it in pixels
   const visibleSlides =
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
 
-  /**
-   * Remove unnecessary HTML attributes for a11y.
-   * PR #469 will improve that: https://github.com/express-labs/pure-react-carousel/pull/469
-   *
-   * "pure-react-carousel" does not permit using `ref` on components to allow changing attributes
-   */
   useEffect(() => {
     const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
@@ -85,7 +77,6 @@ export function ExperienceVideoCarousel({
     })
   }
 
-  // Remove attributes when clicking "previous", "next" and dots buttons
   function handleNavigationButtonClick() {
     const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)

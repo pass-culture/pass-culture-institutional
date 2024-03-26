@@ -8,7 +8,7 @@ type LogoProps = {
   controlsLabel?: string
   nextButtonLabel?: string
   previousButtonLabel?: string
-  images: { logo?: APIResponse<'plugin::upload.file'> | null | undefined }[]
+  images: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
 }
 
 export function Logos({

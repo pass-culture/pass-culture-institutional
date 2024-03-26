@@ -43,7 +43,6 @@ const Root = styled.div`
   ${({ theme }) => css`
     width: 100%;
     margin: 5rem auto;
-    // padding: 6.25rem 0 5rem;
     background-color: ${theme.colors.lightBlue};
 
     display: flex;

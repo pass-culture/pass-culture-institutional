@@ -81,11 +81,9 @@ const CardContainer = styled.div`
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    // background-color: ${theme.colors.tertiary};
     border-radius: 1rem;
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
-    // background-position: center 4.5rem;
     background-repeat: no-repeat;
 
     display: flex;
@@ -95,11 +93,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      //   width: 100%;
-      //   margin-bottom: 3.75rem;
-      //   aspect-ratio: 0.8;
-      //   padding: 0;
-
       width: 95%;
       aspect-ratio: 1.5;
       padding: 0;
@@ -121,8 +114,6 @@ const RightSide = styled.div`
       font-size: ${theme.fonts.sizes.xl};
       line-height: 2.125rem;
       font-weight: ${theme.fonts.weights.medium};
-
-      //   margin-bottom: 2rem;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -141,11 +132,7 @@ const CtaLink = styled.a`
     line-height: 1.4;
 
     margin-right: 1.5rem;
-    // background: linear-gradient(
-    //   90deg,
-    //   ${theme.colors.tertiary},
-    //   ${theme.colors.secondary}
-    // );
+
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
