@@ -73,12 +73,12 @@ export function ExperienceVideoCarousel({
     carouselEl: Element,
     slidesEl: NodeListOf<Element>
   ) {
-    carouselEl?.removeAttribute('tabindex')
     carouselEl?.removeAttribute('aria-live')
+    carouselEl?.removeAttribute('tabindex')
 
     slidesEl.forEach((slideEl) => {
-      slideEl.removeAttribute('tabindex')
       slideEl.removeAttribute('aria-selected')
+      slideEl.removeAttribute('tabindex')
     })
   }
 
@@ -101,19 +101,19 @@ export function ExperienceVideoCarousel({
     <CarouselProvider
       naturalSlideWidth={60}
       naturalSlideHeight={75}
-      totalSlides={items.length}
       visibleSlides={visibleSlides}
+      totalSlides={items.length}
       isIntrinsicHeight={true}
-      infinite={true}
       dragEnabled={false}
+      infinite={true}
       step={1}>
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons role="group" aria-label={controlsLabel}>
           <ButtonBack
-            aria-label={previousButtonLabel}
-            onClick={handleExperienceVideoNavigationButtonClick}>
+            onClick={handleExperienceVideoNavigationButtonClick}
+            aria-label={previousButtonLabel}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
@@ -125,8 +125,8 @@ export function ExperienceVideoCarousel({
       </StyledHeading>
 
       <StyledSlider
-        role="region"
         aria-label={stripTags(title)}
+        role="region"
         aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
@@ -144,8 +144,8 @@ export function ExperienceVideoCarousel({
           return (
             <StyledDot
               onClick={handleExperienceVideoNavigationButtonClick}
-              key={item.title}
               slide={index}
+              key={item.title}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
                 items.length
               } : ${item.title}`}
@@ -162,8 +162,8 @@ const StyledHeading = styled.div`
     display: flex;
     align-items: end;
     justify-content: space-between;
-    padding-right: 7rem;
     margin-bottom: 3rem;
+    padding-right: 7rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
@@ -178,8 +178,8 @@ const StyledSlider = styled(Slider)`
 const StyledNavigationButtons = styled.div`
   ${({ theme }) => css`
     display: flex;
-    align-items: center;
     gap: 0.375rem;
+    align-items: center;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
@@ -189,11 +189,11 @@ const StyledNavigationButtons = styled.div`
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.popover};
       border-radius: 50%;
-      display: flex;
       align-items: center;
+      display: flex;
       justify-content: center;
-      height: 3.625rem;
       width: 3.625rem;
+      height: 3.625rem;
     }
 
     button:first-child {
@@ -208,8 +208,8 @@ const StyledDots = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       gap: 0.5rem;
       margin-top: 2rem;
     }
@@ -219,14 +219,14 @@ const StyledDots = styled.div`
 const StyledDot = styled(Dot)`
   ${({ theme }) => css`
     width: 0.875rem;
-    height: 0.875rem;
     border-radius: 50%;
+    height: 0.875rem;
     opacity: 0.22;
     background-color: ${theme.colors.black};
 
     &[disabled] {
-      background-color: ${theme.colors.secondary};
       opacity: 1;
+      background-color: ${theme.colors.secondary};
     }
   `}
 `
