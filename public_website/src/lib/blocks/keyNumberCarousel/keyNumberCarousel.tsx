@@ -121,7 +121,11 @@ export function KeyNumberCarousel({
             <KeyNumberCarouselSlide
               key={item.title}
               slideIndex={index}
-              {...item}
+              title={item.title}
+              description={item.description}
+              firstEmoji={item.firstEmoji}
+              secondEmoji={item.secondEmoji}
+              thirdEmoji={item.thirdEmoji}
             />
           )
         })}
