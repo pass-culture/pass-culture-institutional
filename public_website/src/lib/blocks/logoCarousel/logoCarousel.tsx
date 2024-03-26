@@ -19,7 +19,7 @@ type LogoCarouselProps = {
   controlsLabel: string | undefined
   nextButtonLabel: string | undefined
   previousButtonLabel: string | undefined
-  items: { logo?: APIResponse<'plugin::upload.file'> | null | undefined }[]
+  items: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
 }
 
 export function LogoCarousel({
