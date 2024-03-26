@@ -94,11 +94,11 @@ export function TestimonyCarousel({
 
   return (
     <CarouselProvider
-      naturalSlideWidth={60}
       naturalSlideHeight={75}
       totalSlides={items.length}
       visibleSlides={visibleTestimonySlides}
       isIntrinsicHeight={true}
+      naturalSlideWidth={60}
       infinite={true}
       dragEnabled={false}
       step={1}>
@@ -112,8 +112,8 @@ export function TestimonyCarousel({
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label={nextButtonLabel}
-            onClick={handleNavigationButtonClick}>
+            onClick={handleNavigationButtonClick}
+            aria-label={nextButtonLabel}>
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
@@ -126,9 +126,9 @@ export function TestimonyCarousel({
         {items.map((item, index) => {
           return (
             <TestimonyCarouselSlide
+              {...item}
               key={item.title}
               slideIndex={index}
-              {...item}
             />
           )
         })}
@@ -138,9 +138,9 @@ export function TestimonyCarousel({
         {items.map((item, index) => {
           return (
             <StyledDot
+              slide={index}
               onClick={handleNavigationButtonClick}
               key={item.title}
-              slide={index}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
                 items.length
               } : ${item.title}`}
@@ -154,15 +154,14 @@ export function TestimonyCarousel({
 
 const StyledHeading = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding-right: 7rem;
-    margin-bottom: 3rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
     }
+    justify-content: space-between;
+    padding-right: 7rem;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: end;
   `}
 `
 
@@ -172,13 +171,12 @@ const StyledSlider = styled(Slider)`
 
 const StyledNavigationButtons = styled.div`
   ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
     }
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
 
     button {
       background-color: ${theme.colors.white};
@@ -203,25 +201,25 @@ const StyledDots = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: flex;
-      align-items: center;
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
+      align-items: center;
     }
   `}
 `
 
 const StyledDot = styled(Dot)`
   ${({ theme }) => css`
+    opacity: 0.22;
     width: 0.875rem;
     height: 0.875rem;
     border-radius: 50%;
-    opacity: 0.22;
     background-color: ${theme.colors.black};
 
     &[disabled] {
-      background-color: ${theme.colors.secondary};
       opacity: 1;
+      background-color: ${theme.colors.secondary};
     }
   `}
 `
