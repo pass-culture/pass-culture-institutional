@@ -969,6 +969,42 @@ export interface ApiHomeHome extends Schema.SingleType {
   };
 }
 
+export interface ApiListeJeuneListeJeune extends Schema.SingleType {
+  collectionName: 'liste_jeunes';
+  info: {
+    singularName: 'liste-jeune';
+    pluralName: 'liste-jeunes';
+    displayName: 'ListeJeune';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    buttonText: Attribute.Text;
+    filtres: Attribute.Component<'common.filtre', true> & Attribute.Required;
+    socialMediaSection: Attribute.Component<'block.social-media'> &
+      Attribute.Required;
+    separator: Attribute.Component<'block.separator'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::liste-jeune.liste-jeune',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::liste-jeune.liste-jeune',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNewsNews extends Schema.CollectionType {
   collectionName: 'news_list';
   info: {
@@ -982,11 +1018,57 @@ export interface ApiNewsNews extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    category: Attribute.Enumeration<['\u00C9tude', 'Article']> &
+    category: Attribute.Enumeration<
+      [
+        '\u00C9tude',
+        'Article',
+        '\u00C9v\u00E8nement',
+        'Partenariat',
+        'Rencontre'
+      ]
+    > &
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
     slug: Attribute.String & Attribute.Required;
+    localisation: Attribute.Enumeration<
+      [
+        'Aquitaine',
+        'Auvergne',
+        'Auvergne-Rh\u00F4ne-Alpes',
+        'Basse-Normandie',
+        'Bourgogne',
+        'Bourgogne-Franche-Comt\u00E9',
+        'Bretagne',
+        'Centre',
+        'Champagne-Ardenne',
+        'Corse',
+        'Franche-Comt\u00E9',
+        'Grand-Est',
+        'Guadeloupe',
+        'Guyane',
+        'Haute-Normandie',
+        'Hauts-de-France',
+        '\u00CEle-de-France',
+        'La-R\u00E9union',
+        'Languedoc-Roussillon',
+        'Languedoc-Roussillon-Midi-Pyr\u00E9n\u00E9es',
+        'Limousin',
+        'Lorraine',
+        'Martinique',
+        'Mayotte',
+        'Midi-Pyr\u00E9n\u00E9es',
+        'Nord-Pas-de-Calais',
+        'Normandie',
+        'Nouvelle-Aquitaine',
+        'Pays-de-la-Loire',
+        'Picardie',
+        'Poitou-Charentes',
+        "Provence-Alpes-C\u00F4te d'Azur",
+        'Rh\u00F4ne-Alpes'
+      ]
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1156,6 +1238,7 @@ declare module '@strapi/types' {
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
+      'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;

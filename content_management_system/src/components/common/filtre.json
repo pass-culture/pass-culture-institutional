@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_common_filtres",
+  "info": {
+    "displayName": "Filtre",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "filtre": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

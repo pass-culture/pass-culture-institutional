@@ -7,6 +7,7 @@ import {
   testDataFixtures,
 } from './fixtures'
 import { homePageFixtures } from './fixtures/home'
+import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { simulatorPageFixtures } from './fixtures/simulator'
 
 const CMS_BASE_URL = 'http://localhost:1337'
@@ -31,6 +32,9 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/simulator`, () => {
     return jsonResponseOf(simulatorPageFixtures.data)
+  }),
+  http.get(`${CMS_BASE_URL}/api/liste-jeune`, () => {
+    return jsonResponseOf(listeJeunePageFixtures.listejeune)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,

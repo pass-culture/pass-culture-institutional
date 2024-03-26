@@ -6,6 +6,7 @@ import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experi
 import { Header } from './blocks/Header'
 import { KeyNumber } from './blocks/Keynumber'
 import { KeyNumberCarousel } from './blocks/keyNumberCarousel/keyNumberCarousel'
+import { KeyNumberCarouselSlide } from './blocks/keyNumberCarousel/keyNumberCarouselSlide'
 import { LatestNews } from './blocks/LatestNews'
 import { LogoCarousel } from './blocks/logoCarousel/logoCarousel'
 import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
@@ -47,6 +48,7 @@ const COMPONENTS: Record<
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
   'block.testimony-carousel': TestimonyCarouselSlide,
+  'block.key-number-carousel-slide': KeyNumberCarouselSlide,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

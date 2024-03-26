@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 
-export type KeyNumberCarouselSlideProps = {
+type KeyNumberCarouselSlideProps = {
   slideIndex: number
   title: string
   description: string
@@ -26,13 +26,12 @@ export function KeyNumberCarouselSlide({
       index={slideIndex}
       key={title}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <StyledWrapper>
         <StyledIconWrapper>
-          <span aria-hidden="true">{firstEmoji}</span>
-          <span aria-hidden="true">{secondEmoji}</span>
-          <span aria-hidden="true">{thirdEmoji}</span>
+          <p>{firstEmoji}</p>
+          <p>{secondEmoji}</p>
+          <p>{thirdEmoji}</p>
         </StyledIconWrapper>
         <StyledTextWrapper>
           <StyledTitle>{title}</StyledTitle>
@@ -48,9 +47,9 @@ const Root = styled(Slide)`
     .inner {
       margin-right: 1rem;
       padding: 5rem 2rem;
-      background-color: #32009620;
+      background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
-      @media (width < ${theme.mediaQueries.mobile}) {
+      @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }
     }
@@ -65,10 +64,12 @@ const StyledWrapper = styled.div`
   display: block;
   position: relative;
 `
+
 const StyledTextWrapper = styled.div`
   display: block;
   position: relative;
 `
+
 const StyledIconWrapper = styled.div`
   display: flex;
   position: relative;

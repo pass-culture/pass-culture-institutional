@@ -20,7 +20,10 @@
       "type": "enumeration",
       "enum": [
         "Étude",
-        "Article"
+        "Article",
+        "Évènement",
+        "Partenariat",
+        "Rencontre"
       ],
       "required": true
     },
@@ -38,6 +41,45 @@
     },
     "slug": {
       "type": "string",
+      "required": true
+    },
+    "localisation": {
+      "type": "enumeration",
+      "enum": [
+        "Aquitaine",
+        "Auvergne",
+        "Auvergne-Rhône-Alpes",
+        "Basse-Normandie",
+        "Bourgogne",
+        "Bourgogne-Franche-Comté",
+        "Bretagne",
+        "Centre",
+        "Champagne-Ardenne",
+        "Corse",
+        "Franche-Comté",
+        "Grand-Est",
+        "Guadeloupe",
+        "Guyane",
+        "Haute-Normandie",
+        "Hauts-de-France",
+        "Île-de-France",
+        "La-Réunion",
+        "Languedoc-Roussillon",
+        "Languedoc-Roussillon-Midi-Pyrénées",
+        "Limousin",
+        "Lorraine",
+        "Martinique",
+        "Mayotte",
+        "Midi-Pyrénées",
+        "Nord-Pas-de-Calais",
+        "Normandie",
+        "Nouvelle-Aquitaine",
+        "Pays-de-la-Loire",
+        "Picardie",
+        "Poitou-Charentes",
+        "Provence-Alpes-Côte d'Azur",
+        "Rhône-Alpes"
+      ],
       "required": true
     }
   }
