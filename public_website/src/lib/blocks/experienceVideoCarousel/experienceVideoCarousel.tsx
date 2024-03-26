@@ -110,7 +110,7 @@ export function ExperienceVideoCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons role="group" aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label={controlsLabel}>
           <ButtonBack
             onClick={handleExperienceVideoNavigationButtonClick}
             aria-label={previousButtonLabel}>
