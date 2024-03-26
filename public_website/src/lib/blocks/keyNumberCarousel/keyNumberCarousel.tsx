@@ -51,7 +51,7 @@ export function KeyNumberCarousel({
     }
   }, [])
 
-  const visibleSlides =
+  const visibleKeySlides =
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2.5
 
   useEffect(() => {
@@ -61,11 +61,11 @@ export function KeyNumberCarousel({
     )
 
     if (carouselEl && carouselSlidesEl) {
-      cleanSlideAttributes(carouselEl, carouselSlidesEl)
+      cleanKeyNumberSlideAttributes(carouselEl, carouselSlidesEl)
     }
   }, [KEY_NUMBER_CAROUSEL_SELECTOR])
 
-  function cleanSlideAttributes(
+  function cleanKeyNumberSlideAttributes(
     carouselEl: Element,
     slidesEl: NodeListOf<Element>
   ) {
@@ -78,7 +78,7 @@ export function KeyNumberCarousel({
     })
   }
 
-  function handleNavigationButtonClick() {
+  function handleKeyNumberNavigationButtonClick() {
     const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(
       KEY_NUMBER_SLIDES_SELECTOR
@@ -86,7 +86,7 @@ export function KeyNumberCarousel({
 
     if (carouselEl && carouselSlidesEl) {
       setTimeout(() => {
-        cleanSlideAttributes(carouselEl, carouselSlidesEl)
+        cleanKeyNumberSlideAttributes(carouselEl, carouselSlidesEl)
       }, 1)
     }
   }
@@ -96,25 +96,25 @@ export function KeyNumberCarousel({
       naturalSlideWidth={60}
       naturalSlideHeight={75}
       totalSlides={items.length}
-      visibleSlides={visibleSlides}
+      visibleSlides={visibleKeySlides}
       isIntrinsicHeight={true}
       infinite={true}
       dragEnabled={false}
       step={1}>
-      <StyledHeading>
+      <StyledKeyCarouselHeading>
         <StyledNavigationButtons role="group" aria-label={controlsLabel}>
           <ButtonBack
             aria-label={previousButtonLabel}
-            onClick={handleNavigationButtonClick}>
+            onClick={handleKeyNumberNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
             aria-label={nextButtonLabel}
-            onClick={handleNavigationButtonClick}>
+            onClick={handleKeyNumberNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
-      </StyledHeading>
+      </StyledKeyCarouselHeading>
 
       <StyledSlider
         role="region"
@@ -139,7 +139,7 @@ export function KeyNumberCarousel({
         {items.map((item, index) => {
           return (
             <StyledDot
-              onClick={handleNavigationButtonClick}
+              onClick={handleKeyNumberNavigationButtonClick}
               key={item.title}
               slide={index}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
@@ -153,7 +153,7 @@ export function KeyNumberCarousel({
   )
 }
 
-const StyledHeading = styled.div`
+const StyledKeyCarouselHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: end;
