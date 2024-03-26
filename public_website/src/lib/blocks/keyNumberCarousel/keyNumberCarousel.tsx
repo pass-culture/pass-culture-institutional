@@ -94,19 +94,19 @@ export function KeyNumberCarousel({
 
   return (
     <CarouselProvider
-      naturalSlideWidth={60}
       naturalSlideHeight={75}
+      naturalSlideWidth={60}
       totalSlides={items.length}
       visibleSlides={visibleKeySlides}
       isIntrinsicHeight={true}
-      infinite={true}
       dragEnabled={false}
+      infinite={true}
       step={1}>
       <StyledKeyCarouselHeading>
         <StyledNavigationButtons role="group" aria-label={controlsLabel}>
           <ButtonBack
-            aria-label={previousButtonLabel}
-            onClick={handleKeyNumberNavigationButtonClick}>
+            onClick={handleKeyNumberNavigationButtonClick}
+            aria-label={previousButtonLabel}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
@@ -118,18 +118,18 @@ export function KeyNumberCarousel({
       </StyledKeyCarouselHeading>
 
       <StyledSlider
-        role="region"
         aria-label={stripTags(title)}
+        role="region"
         aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
             <KeyNumberCarouselSlide
               key={item.title}
-              slideIndex={index}
               title={item.title}
+              slideIndex={index}
               description={item.description}
-              firstEmoji={item.firstEmoji}
               secondEmoji={item.secondEmoji}
+              firstEmoji={item.firstEmoji}
               thirdEmoji={item.thirdEmoji}
             />
           )
@@ -141,8 +141,8 @@ export function KeyNumberCarousel({
           return (
             <StyledDot
               onClick={handleKeyNumberNavigationButtonClick}
-              key={item.title}
               slide={index}
+              key={item.title}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
                 items.length
               } : ${item.title}`}
@@ -177,13 +177,8 @@ const StyledSlider = styled(Slider)`
 const StyledNavigationButtons = styled.div`
   ${({ theme }) => css`
     display: flex;
-    align-items: center;
     gap: 0.375rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
-    }
-
+    align-items: center;
     button {
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.popover};
@@ -194,17 +189,17 @@ const StyledNavigationButtons = styled.div`
       height: 3.625rem;
       width: 3.625rem;
     }
-
     button:first-child {
       transform: rotate(180deg);
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
     }
   `}
 `
 
 const StyledDots = styled.div`
   ${({ theme }) => css`
-    display: none;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       display: flex;
       align-items: center;
@@ -212,17 +207,17 @@ const StyledDots = styled.div`
       gap: 0.5rem;
       margin-top: 2rem;
     }
+    display: none;
   `}
 `
 
 const StyledDot = styled(Dot)`
   ${({ theme }) => css`
-    width: 0.875rem;
     height: 0.875rem;
-    border-radius: 50%;
+    width: 0.875rem;
     opacity: 0.22;
+    border-radius: 50%;
     background-color: ${theme.colors.black};
-
     &[disabled] {
       background-color: ${theme.colors.secondary};
       opacity: 1;
