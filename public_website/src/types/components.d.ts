@@ -286,6 +286,7 @@ export interface CommonKeyNumberItems extends Schema.Component {
     thirdEmoji: Attribute.String;
     title: Attribute.String;
   };
+}
 export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {

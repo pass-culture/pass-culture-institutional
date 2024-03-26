@@ -32,10 +32,10 @@ export function KeyNumberCarousel({
   previousButtonLabel,
   items,
 }: KeyNumberCarouselProps) {
-  const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+  const KEY_NUMBER_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
-  const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const KEY_NUMBER_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
 
   const [screenWidth, setScreenWidth] = useState<number>()
 
@@ -55,13 +55,15 @@ export function KeyNumberCarousel({
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2.5
 
   useEffect(() => {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      KEY_NUMBER_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
-  }, [CAROUSEL_SELECTOR])
+  }, [KEY_NUMBER_CAROUSEL_SELECTOR])
 
   function cleanSlideAttributes(
     carouselEl: Element,
@@ -77,8 +79,10 @@ export function KeyNumberCarousel({
   }
 
   function handleNavigationButtonClick() {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
+    const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
+    const carouselSlidesEl = carouselEl?.querySelectorAll(
+      KEY_NUMBER_SLIDES_SELECTOR
+    )
 
     if (carouselEl && carouselSlidesEl) {
       setTimeout(() => {
