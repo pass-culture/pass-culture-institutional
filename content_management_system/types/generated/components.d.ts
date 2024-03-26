@@ -43,22 +43,6 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
-
-export interface BlockKeyNumberCarousel extends Schema.Component {
-  collectionName: 'components_block_key_number_carousels';
-  info: {
-    displayName: 'KeyNumberCarousel';
-  };
-  attributes: {
-    title: Attribute.String;
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlLabel: Attribute.String;
-    items: Attribute.Component<'common.key-number-items', true> &
-      Attribute.SetMinMax<{
-        max: 4;
-      }>;
-  };}
 export interface BlockImageText extends Schema.Component {
   collectionName: 'components_block_image_texts';
   info: {
@@ -84,6 +68,23 @@ export interface BlockImage extends Schema.Component {
     image: Attribute.Media;
     description: Attribute.Text;
     alt: Attribute.String;
+  };
+}
+
+export interface BlockKeyNumberCarousel extends Schema.Component {
+  collectionName: 'components_block_key_number_carousels';
+  info: {
+    displayName: 'KeyNumberCarousel';
+  };
+  attributes: {
+    title: Attribute.String;
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlLabel: Attribute.String;
+    items: Attribute.Component<'common.key-number-items', true> &
+      Attribute.SetMinMax<{
+        max: 4;
+      }>;
   };
 }
 
@@ -122,20 +123,6 @@ export interface BlockLink extends Schema.Component {
   };
 }
 
-
-export interface BlockLogos extends Schema.Component {
-  collectionName: 'components_block_logos';
-  info: {
-    displayName: 'Logos';
-    description: '';
-  };
-  attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
-    logo: Attribute.Component<'common.logo', true>;
-  };
-}
 export interface BlockLittleList extends Schema.Component {
   collectionName: 'components_block_little_lists';
   info: {
@@ -152,6 +139,20 @@ export interface BlockLittleList extends Schema.Component {
     withDescritpion: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
+  };
+}
+
+export interface BlockLogos extends Schema.Component {
+  collectionName: 'components_block_logos';
+  info: {
+    displayName: 'Logos';
+    description: '';
+  };
+  attributes: {
+    previousButtonLabel: Attribute.String;
+    nextButtonLabel: Attribute.String;
+    controlsLabel: Attribute.String;
+    logo: Attribute.Component<'common.logo', true>;
   };
 }
 
@@ -229,6 +230,16 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
+export interface BlockSpace extends Schema.Component {
+  collectionName: 'components_block_spaces';
+  info: {
+    displayName: 'Space';
+    description: '';
+  };
+  attributes: {
+    space: Attribute.Integer;
+  };
+}
 
 export interface BlockTestimonies extends Schema.Component {
   collectionName: 'components_block_testimonies';
@@ -242,17 +253,6 @@ export interface BlockTestimonies extends Schema.Component {
     controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.testimony-carousel', true>;
-  };
-}
-export interface BlockSpace extends Schema.Component {
-  collectionName: 'components_block_spaces';
-  info: {
-    displayName: 'Space';
-    description: '';
-  };
-  attributes: {
-    space: Attribute.Integer;
-
   };
 }
 
@@ -320,6 +320,19 @@ export interface CommonLink extends Schema.Component {
   };
 }
 
+export interface CommonLittleListComponent extends Schema.Component {
+  collectionName: 'components_common_little_list_components';
+  info: {
+    displayName: 'LittleListComponent';
+    description: '';
+  };
+  attributes: {
+    simple: Attribute.Text & Attribute.Required;
+    description: Attribute.Text;
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+  };
+}
 
 export interface CommonLogo extends Schema.Component {
   collectionName: 'components_common_logos';
@@ -341,19 +354,6 @@ export interface CommonTestimonyCarousel extends Schema.Component {
     title: Attribute.String;
     description: Attribute.Text;
     videoUrl: Attribute.Text;
-  };}
-export interface CommonLittleListComponent extends Schema.Component {
-  collectionName: 'components_common_little_list_components';
-  info: {
-    displayName: 'LittleListComponent';
-    description: '';
-  };
-  attributes: {
-    simple: Attribute.Text & Attribute.Required;
-    description: Attribute.Text;
-    firstEmoji: Attribute.String;
-    secondEmoji: Attribute.String;
-
   };
 }
 
@@ -648,39 +648,28 @@ declare module '@strapi/types' {
       'block.centered-text': BlockCenteredText;
       'block.double-push-cta': BlockDoublePushCta;
       'block.header': BlockHeader;
-
+      'block.image-text': BlockImageText;
+      'block.image': BlockImage;
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
-      'block.logos': BlockLogos;
-
-      'block.image-text': BlockImageText;
-      'block.image': BlockImage;
-      'block.latest-news': BlockLatestNews;
-      'block.link': BlockLink;
       'block.little-list': BlockLittleList;
-
+      'block.logos': BlockLogos;
       'block.push-cta': BlockPushCta;
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
-
-      'block.testimonies': BlockTestimonies;
-
       'block.space': BlockSpace;
-
+      'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
-
+      'common.little-list-component': CommonLittleListComponent;
       'common.logo': CommonLogo;
       'common.testimony-carousel': CommonTestimonyCarousel;
-
-      'common.little-list-component': CommonLittleListComponent;
-
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
