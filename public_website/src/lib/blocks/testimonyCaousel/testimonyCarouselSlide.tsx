@@ -43,7 +43,7 @@ export function TestimonyCarouselSlide({
       innerClassName="inner"
       role="group"
       aria-roledescription="diapositive">
-      <StyledWrapper>
+      <StyledTestimonyWrapper>
         <button onMouseDown={playTetsimonyVideo}>
           <span className="visually-hidden">
             {isTestimonyPlaying ? 'Pause' : 'Lecture'}
@@ -61,9 +61,9 @@ export function TestimonyCarouselSlide({
             <source src={url} />
           </StyledTestimonyVideo>
         )}
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTestimonyTitle>{title}</StyledTestimonyTitle>
         <Typo.Body>{description}</Typo.Body>
-      </StyledWrapper>
+      </StyledTestimonyWrapper>
     </Root>
   )
 }
@@ -88,11 +88,11 @@ const StyledTestimonyVideo = styled.video`
 
   aspect-ratio: 0.7;
 `
-const StyledTitle = styled(Typo.Heading3)`
+const StyledTestimonyTitle = styled(Typo.Heading3)`
   margin: 1.5rem 0 0.25rem;
 `
 
-const StyledWrapper = styled.div`
+const StyledTestimonyWrapper = styled.div`
   display: block;
   position: relative;
 

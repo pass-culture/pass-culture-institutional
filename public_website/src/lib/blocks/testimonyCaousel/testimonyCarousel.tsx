@@ -52,7 +52,7 @@ export function TestimonyCarousel({
     }
   }, [])
 
-  const visibleSlides =
+  const visibleTestimonySlides =
     screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export function TestimonyCarousel({
       naturalSlideWidth={60}
       naturalSlideHeight={75}
       totalSlides={items.length}
-      visibleSlides={visibleSlides}
+      visibleSlides={visibleTestimonySlides}
       isIntrinsicHeight={true}
       infinite={true}
       dragEnabled={false}

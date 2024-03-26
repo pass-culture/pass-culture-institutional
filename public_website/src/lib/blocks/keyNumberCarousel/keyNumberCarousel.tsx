@@ -40,14 +40,15 @@ export function KeyNumberCarousel({
   const [screenWidth, setScreenWidth] = useState<number>()
 
   useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
+    const handleKeyNumberCarouselResize = () =>
+      setScreenWidth(window.innerWidth)
 
-    handleResize()
+    handleKeyNumberCarouselResize()
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleKeyNumberCarouselResize)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleKeyNumberCarouselResize)
     }
   }, [])
 

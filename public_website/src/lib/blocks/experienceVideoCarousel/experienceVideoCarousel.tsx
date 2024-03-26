@@ -65,11 +65,11 @@ export function ExperienceVideoCarousel({
     )
 
     if (carouselEl && carouselSlidesEl) {
-      cleanSlideAttributes(carouselEl, carouselSlidesEl)
+      cleanExperienceSlideAttributes(carouselEl, carouselSlidesEl)
     }
   }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
 
-  function cleanSlideAttributes(
+  function cleanExperienceSlideAttributes(
     carouselEl: Element,
     slidesEl: NodeListOf<Element>
   ) {
@@ -82,7 +82,7 @@ export function ExperienceVideoCarousel({
     })
   }
 
-  function handleNavigationButtonClick() {
+  function handleExperienceVideoNavigationButtonClick() {
     const carouselEl = document.querySelector(
       EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
     )
@@ -92,7 +92,7 @@ export function ExperienceVideoCarousel({
 
     if (carouselEl && carouselSlidesEl) {
       setTimeout(() => {
-        cleanSlideAttributes(carouselEl, carouselSlidesEl)
+        cleanExperienceSlideAttributes(carouselEl, carouselSlidesEl)
       }, 1)
     }
   }
@@ -113,12 +113,12 @@ export function ExperienceVideoCarousel({
         <StyledNavigationButtons role="group" aria-label={controlsLabel}>
           <ButtonBack
             aria-label={previousButtonLabel}
-            onClick={handleNavigationButtonClick}>
+            onClick={handleExperienceVideoNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
             aria-label={nextButtonLabel}
-            onClick={handleNavigationButtonClick}>
+            onClick={handleExperienceVideoNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
@@ -143,7 +143,7 @@ export function ExperienceVideoCarousel({
         {items.map((item, index) => {
           return (
             <StyledDot
-              onClick={handleNavigationButtonClick}
+              onClick={handleExperienceVideoNavigationButtonClick}
               key={item.title}
               slide={index}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
