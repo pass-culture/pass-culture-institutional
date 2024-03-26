@@ -1,15 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { APIResponseData } from '@/types/strapi'
+import { APIResponse } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
   title: string
   description: string
-  image?: APIResponseData<'plugin::upload.file'> | null
-  icon?: APIResponseData<'plugin::upload.file'> | null
+  image?: APIResponse<'plugin::upload.file'> | null
+  icon?: APIResponse<'plugin::upload.file'> | null
   isImageRight?: boolean
 }
 
@@ -25,8 +25,8 @@ export function ImageText({
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledIcon
           className={isImageRight ? 'IconRight' : 'IconLeft'}
-          src={getStrapiURL(icon?.attributes.url)}
-          alt={icon?.attributes.alternativeText}
+          src={getStrapiURL(icon?.data.attributes.url)}
+          alt={icon?.data.attributes.alternativeText}
         />
         <StyledContentTextWrapper className="first">
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
