@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_block_little_lists",
+  "info": {
+    "displayName": "LittleList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "content": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.little-list-component",
+      "max": 4
+    },
+    "withDescritpion": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

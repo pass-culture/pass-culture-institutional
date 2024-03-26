@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_common_little_list_components",
+  "info": {
+    "displayName": "LittleListComponent",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "simple": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "firstEmoji": {
+      "type": "string"
+    },
+    "secondEmoji": {
+      "type": "string"
+    }
+  }
+}

@@ -57,10 +57,16 @@
       "component": "home.recommendations-section",
       "required": true
     },
+
     "logos": {
       "type": "component",
       "repeatable": false,
       "component": "block.logos"
+    },
+    "videoSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.video"
     }
   }
 }

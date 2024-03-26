@@ -1,13 +1,34 @@
 {
   "collectionName": "components_block_simple_texts",
   "info": {
-    "displayName": "Simple Text",
+    "displayName": "SimpleText",
     "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string"
+
+    },
+    "text": {
+      "type": "text"
+    },
+    "isNormal": {
+      "type": "boolean",
+      "default": true
+    },
+    "firstSubTitle": {
+      "type": "text"
+    },
+    "secondSubTitle": {
+      "type": "text"
+    },
+    "firstText": {
+      "type": "text"
+    },
+    "secondText": {
+      "type": "text"
+
     }
   }
 }

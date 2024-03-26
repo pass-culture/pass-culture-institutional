@@ -43,6 +43,7 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+
 export interface BlockKeyNumberCarousel extends Schema.Component {
   collectionName: 'components_block_key_number_carousels';
   info: {
@@ -57,6 +58,32 @@ export interface BlockKeyNumberCarousel extends Schema.Component {
       Attribute.SetMinMax<{
         max: 4;
       }>;
+  };}
+export interface BlockImageText extends Schema.Component {
+  collectionName: 'components_block_image_texts';
+  info: {
+    displayName: 'ImageText';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    icon: Attribute.Media;
+    isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
+  };
+}
+
+export interface BlockImage extends Schema.Component {
+  collectionName: 'components_block_images';
+  info: {
+    displayName: 'Image';
+    description: '';
+  };
+  attributes: {
+    image: Attribute.Media;
+    description: Attribute.Text;
+    alt: Attribute.String;
   };
 }
 
@@ -95,6 +122,7 @@ export interface BlockLink extends Schema.Component {
   };
 }
 
+
 export interface BlockLogos extends Schema.Component {
   collectionName: 'components_block_logos';
   info: {
@@ -106,6 +134,24 @@ export interface BlockLogos extends Schema.Component {
     nextButtonLabel: Attribute.String;
     controlsLabel: Attribute.String;
     logo: Attribute.Component<'common.logo', true>;
+  };
+}
+export interface BlockLittleList extends Schema.Component {
+  collectionName: 'components_block_little_lists';
+  info: {
+    displayName: 'LittleList';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    content: Attribute.Component<'common.little-list-component', true> &
+      Attribute.SetMinMax<{
+        max: 4;
+      }>;
+    withDescritpion: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
   };
 }
 
@@ -156,11 +202,17 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
-    displayName: 'Simple Text';
+    displayName: 'SimpleText';
     description: '';
   };
   attributes: {
     title: Attribute.String;
+    text: Attribute.Text;
+    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
+    firstSubTitle: Attribute.Text;
+    secondSubTitle: Attribute.Text;
+    firstText: Attribute.Text;
+    secondText: Attribute.Text;
   };
 }
 
@@ -177,6 +229,7 @@ export interface BlockSocialMedia extends Schema.Component {
   };
 }
 
+
 export interface BlockTestimonies extends Schema.Component {
   collectionName: 'components_block_testimonies';
   info: {
@@ -189,6 +242,17 @@ export interface BlockTestimonies extends Schema.Component {
     controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.testimony-carousel', true>;
+  };
+}
+export interface BlockSpace extends Schema.Component {
+  collectionName: 'components_block_spaces';
+  info: {
+    displayName: 'Space';
+    description: '';
+  };
+  attributes: {
+    space: Attribute.Integer;
+
   };
 }
 
@@ -205,6 +269,17 @@ export interface BlockVerticalCarousel extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockVideo extends Schema.Component {
+  collectionName: 'components_block_videos';
+  info: {
+    displayName: 'Video';
+  };
+  attributes: {
+    url: Attribute.Text;
+    description: Attribute.Text;
   };
 }
 
@@ -245,6 +320,7 @@ export interface CommonLink extends Schema.Component {
   };
 }
 
+
 export interface CommonLogo extends Schema.Component {
   collectionName: 'components_common_logos';
   info: {
@@ -265,6 +341,19 @@ export interface CommonTestimonyCarousel extends Schema.Component {
     title: Attribute.String;
     description: Attribute.Text;
     videoUrl: Attribute.Text;
+  };}
+export interface CommonLittleListComponent extends Schema.Component {
+  collectionName: 'components_common_little_list_components';
+  info: {
+    displayName: 'LittleListComponent';
+    description: '';
+  };
+  attributes: {
+    simple: Attribute.Text & Attribute.Required;
+    description: Attribute.Text;
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+
   };
 }
 
@@ -559,22 +648,39 @@ declare module '@strapi/types' {
       'block.centered-text': BlockCenteredText;
       'block.double-push-cta': BlockDoublePushCta;
       'block.header': BlockHeader;
+
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
       'block.logos': BlockLogos;
+
+      'block.image-text': BlockImageText;
+      'block.image': BlockImage;
+      'block.latest-news': BlockLatestNews;
+      'block.link': BlockLink;
+      'block.little-list': BlockLittleList;
+
       'block.push-cta': BlockPushCta;
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
+
       'block.testimonies': BlockTestimonies;
+
+      'block.space': BlockSpace;
+
       'block.vertical-carousel': BlockVerticalCarousel;
+      'block.video': BlockVideo;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
+
       'common.logo': CommonLogo;
       'common.testimony-carousel': CommonTestimonyCarousel;
+
+      'common.little-list-component': CommonLittleListComponent;
+
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;

@@ -958,7 +958,10 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
+
     logos: Attribute.Component<'block.logos'>;
+
+    videoSection: Attribute.Component<'block.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -998,6 +1001,44 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::liste-jeune.liste-jeune',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMasterMaster extends Schema.SingleType {
+  collectionName: 'masters';
+  info: {
+    singularName: 'master';
+    pluralName: 'masters';
+    displayName: 'Master';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    simpleText: Attribute.Component<'block.simple-text'>;
+    simpleTextTwo: Attribute.Component<'block.simple-text'>;
+    image: Attribute.Component<'block.image'>;
+    imageTextRight: Attribute.Component<'block.image-text'>;
+    imageTextLeft: Attribute.Component<'block.image-text'>;
+    littleList: Attribute.Component<'block.little-list'>;
+    littleListdescription: Attribute.Component<'block.little-list'>;
+    space: Attribute.Component<'block.space'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::master.master',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::master.master',
       'oneToOne',
       'admin::user'
     > &
@@ -1098,7 +1139,17 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.header',
         'block.simple-text',
         'block.push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.double-push-cta',
+        'block.image-text',
+        'block.image',
+        'block.link',
+        'block.little-list',
+        'block.separator',
+        'block.simple-push-cta',
+        'block.space',
+        'block.vertical-carousel',
+        'block.video'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1239,6 +1290,7 @@ declare module '@strapi/types' {
       'api::help.help': ApiHelpHelp;
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
+      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;

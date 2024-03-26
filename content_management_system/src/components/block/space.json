@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_block_spaces",
+  "info": {
+    "displayName": "Space",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "space": {
+      "type": "integer"
+    }
+  }
+}
