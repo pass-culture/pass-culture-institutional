@@ -34,8 +34,8 @@ export function ImageText({
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">
           <StyledImage
-            src={getStrapiURL(image?.attributes.url)}
-            alt={image?.attributes.alternativeText}
+            src={getStrapiURL(image?.data.attributes.url)}
+            alt={image?.data.attributes.alternativeText}
           />
         </StyledContentImagetWrapper>
       </StyledContentWrapper>

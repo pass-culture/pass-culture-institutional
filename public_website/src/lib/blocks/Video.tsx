@@ -10,12 +10,12 @@ interface VideoProps {
 export function Video(props: VideoProps) {
   return (
     <Root>
-      <ReactPlayer
+      <StyledVideo
         url={props.url}
         light
         width="100%"
         controls={true}
-        height="100%"
+        height="50rem"
       />
       <p>{props.description}</p>
     </Root>
@@ -58,4 +58,9 @@ const Root = styled.div`
       }
     }
   `}
+`
+
+const StyledVideo = styled(ReactPlayer)`
+  max-width: 100%;
+  height: auto;
 `

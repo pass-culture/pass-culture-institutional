@@ -5,10 +5,10 @@ import { Typo } from '@/ui/components/typographies'
 
 interface ContentItem {
   id: number
-  Simple: string
-  Description: string | null
-  FirstEmoji: string
-  SecondEmoji: string
+  simple: string
+  description: string | null
+  firstEmoji: string
+  secondEmoji: string
 }
 interface LittleListProps {
   title?: string
@@ -30,12 +30,12 @@ export function LittleList(props: LittleListProps) {
           {props.content?.map((item) => (
             <ColumnContent key={item.id} as="li">
               <ColumnEmoji>
-                <span>{item.FirstEmoji}</span>
-                <span>{item.SecondEmoji}</span>
+                <span>{item.firstEmoji}</span>
+                <span>{item.secondEmoji}</span>
               </ColumnEmoji>
               <ColumnText>
-                <p>{item.Simple}</p>
-                {props.withDescription && <p>{item.Description}</p>}
+                <p>{item.simple}</p>
+                {props.withDescription && <p>{item.description}</p>}
               </ColumnText>
             </ColumnContent>
           ))}

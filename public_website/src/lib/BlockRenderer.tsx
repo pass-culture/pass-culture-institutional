@@ -9,6 +9,7 @@ import { KeyNumberCarouselSlide } from './blocks/keyNumberCarousel/keyNumberCaro
 import { LatestNews } from './blocks/LatestNews'
 import { LittleList } from './blocks/LittleList'
 import { PushCTA } from './blocks/PushCTA'
+import { Separator } from './blocks/Separator'
 import { SimpleText } from './blocks/SimpleText'
 import { SocialMedia } from './blocks/SocialMedia'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
@@ -43,11 +44,11 @@ const COMPONENTS: Record<
   'block.space': WhiteSpace,
   'block.key-number-carousel-slide': KeyNumberCarouselSlide,
   'block.double-push-cta': DoublePushCTA,
+  'block.separator': Separator,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
   const BlockComponent = COMPONENTS[props.block.__component]
-  // console.log(props.block, 'hwy', props)
 
   if (!BlockComponent) {
     return <UnkwnownBlock block={props.block} />

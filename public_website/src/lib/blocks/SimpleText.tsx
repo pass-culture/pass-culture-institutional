@@ -55,6 +55,8 @@ const Root = styled.div`
       line-height: 1.5;
       font-weight: ${({ theme }) => theme.fonts.weights.medium};
       padding-left: 7.1875rem;
+      max-width: 70%;
+      word-break: break-word;
     }
 
     ul {

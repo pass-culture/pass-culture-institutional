@@ -25,7 +25,15 @@ export const getStaticProps = (async ({ params }) => {
   const pagePath = (params?.['slug'] as string[]).join('/')
 
   const queryParams = stringify({
-    populate: ['Blocks.image.image', 'Blocks.firstCta', 'Blocks.secondCta'],
+    populate: [
+      'Blocks.image.image',
+      'Blocks.firstCta',
+      'Blocks.secondCta',
+      'Blocks.image.image.data',
+      'Blocks.content',
+      'Blocks.items',
+      'Blocks.items.image',
+    ],
   })
 
   const apiEndpoint = `/pages?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
@@ -36,8 +44,6 @@ export const getStaticProps = (async ({ params }) => {
   if (response.data.length === 0) {
     return { notFound: true }
   }
-
-  console.log(response.data[0]?.attributes.Blocks, 'hey')
 
   return {
     props: {
