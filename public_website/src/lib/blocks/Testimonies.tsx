@@ -21,15 +21,13 @@ export function Testimonies({
 }: TestimoniesProps) {
   return (
     <Root>
-      <StyledCarouselWrapper>
-        <TestimonyCarousel
-          title={title}
-          controlsLabel={controlsLabel}
-          nextButtonLabel={nextButtonLabel}
-          previousButtonLabel={previousButtonLabel}
-          items={testimonies}
-        />
-      </StyledCarouselWrapper>
+      <TestimonyCarousel
+        title={title}
+        controlsLabel={controlsLabel}
+        nextButtonLabel={nextButtonLabel}
+        previousButtonLabel={previousButtonLabel}
+        items={testimonies}
+      />
     </Root>
   )
 }
@@ -37,20 +35,10 @@ export function Testimonies({
 const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
-    padding: 6.25rem 0 5rem;
+    padding: 6.25rem 0 7rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;
-      padding: 0;
-    }
-  `}
-`
-
-const StyledCarouselWrapper = styled.div`
-  ${({ theme }) => css`
-    padding: 0 7rem 0 7rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
       padding: 4rem 1.5rem 2rem;
     }
   `}

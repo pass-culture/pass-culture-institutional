@@ -155,8 +155,5 @@ const BackgroundLayer = styled.div`
     width: 100%;
     height: 35rem;
     z-index: -1;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-    }
   `}
 `

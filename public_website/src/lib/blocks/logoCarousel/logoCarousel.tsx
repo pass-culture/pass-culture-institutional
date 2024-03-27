@@ -115,8 +115,6 @@ export function LogoCarousel({
         })}
       </StyledSlider>
       <StyledHeading>
-        {/* <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} /> */}
-
         <StyledNavigationButtons aria-label={controlsLabel}>
           <ButtonBack
             aria-label={previousButtonLabel}

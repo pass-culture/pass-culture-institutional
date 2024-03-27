@@ -19,34 +19,22 @@ export function Logos({
 }: LogoProps) {
   return (
     <Root>
-      <StyledCarouselWrapper>
-        <LogoCarousel
-          controlsLabel={controlsLabel}
-          nextButtonLabel={nextButtonLabel}
-          previousButtonLabel={previousButtonLabel}
-          items={logo}
-        />
-      </StyledCarouselWrapper>
+      <LogoCarousel
+        controlsLabel={controlsLabel}
+        nextButtonLabel={nextButtonLabel}
+        previousButtonLabel={previousButtonLabel}
+        items={logo}
+      />
     </Root>
   )
 }
 
 const Root = styled.div`
   ${({ theme }) => css`
-    padding: 6.25rem 0 5rem;
+    padding: 6.25rem 0 7rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;
-      padding: 0;
-    }
-  `}
-`
-
-const StyledCarouselWrapper = styled.div`
-  ${({ theme }) => css`
-    padding: 0 0 0 7rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
       padding: 4rem 1.5rem 2rem;
     }
   `}

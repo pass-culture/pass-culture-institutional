@@ -2,8 +2,6 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { theme } from '@/theme/theme'
-
 export type OffersCarouselSlideProps = {
   slideIndex: number
   title: string
@@ -65,9 +63,6 @@ const Root = styled(Slide)`
 const CardContainer = styled.div`
   position: relative;
   z-index: 1;
-
-  @media (width < ${theme.mediaQueries.tablet}) {
-  }
 `
 
 const Card = styled.div`
@@ -82,9 +77,6 @@ const Card = styled.div`
     height: 15rem;
 
     position: relative;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-    }
   `}
 `
 
@@ -99,9 +91,6 @@ const BackgroundLayer = styled.div`
     width: 100%;
     height: 100%;
     z-index: -1;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-    }
   `}
 `
 
@@ -116,9 +105,6 @@ const SecondBackgroundLayer = styled.div`
     width: 100%;
     height: 100%;
     z-index: -1;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-    }
   `}
 `
 

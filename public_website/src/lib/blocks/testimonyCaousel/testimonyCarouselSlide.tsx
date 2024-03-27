@@ -47,7 +47,7 @@ export function TestimonyCarouselSlide({
           <span className="visually-hidden">
             {isTestimonyPlaying ? 'Pause' : 'Lecture'}
           </span>
-          {!isTestimonyPlaying ? <Play /> : <Pause />}
+          {isTestimonyPlaying ? <Pause /> : <Play />}
         </button>
 
         {image && (

@@ -7,7 +7,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
   title: string | undefined
-  surtititle: string | undefined
+  surtitle: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   cta: { Label: string; URL: string } | undefined
 
@@ -18,8 +18,8 @@ export function SimplePushCta(props: PushCTAProps) {
   return (
     <Root className={props.className}>
       <RightSide>
-        {props.surtititle && (
-          <p dangerouslySetInnerHTML={{ __html: props.surtititle }} />
+        {props.surtitle && (
+          <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
         )}
 
         {props.title && (

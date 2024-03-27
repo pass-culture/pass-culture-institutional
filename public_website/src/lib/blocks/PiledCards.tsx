@@ -59,7 +59,6 @@ export function PiledCards(props: PiledCardsProps) {
             key={_.title}
             active={index === 0}
             onClick={() => handleDotClick(index)}
-            aria-label={`Dot ${index + 1}`}
           />
         ))}
       </DotsWrapper>
@@ -154,8 +153,6 @@ const Dot = styled.div<{ active: boolean }>`
     margin: 0 2px;
     cursor: pointer;
     gap: 0.5rem;
-
-    ${active ? 'aria-label: Active dot' : 'aria-label: Inactive dot'};
   `}
 `
 

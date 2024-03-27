@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "surtititle": {
+    "surtitle": {
       "type": "string",
       "required": true
     },
