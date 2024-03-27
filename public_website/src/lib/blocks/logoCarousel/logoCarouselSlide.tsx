@@ -22,6 +22,7 @@ export function LogoCarouselSlide({
       aria-roledescription="diapositive">
       <StyledLink>
         <StyledImageSimple
+          alt={image?.data.attributes.alternativeText}
           src={getStrapiURL(image?.data.attributes.url)}></StyledImageSimple>
       </StyledLink>
     </Root>
