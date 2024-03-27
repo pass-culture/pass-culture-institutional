@@ -14,7 +14,7 @@ interface DoublePushCTAProps {
 
   secondCta: { Label?: string; URL?: string } | undefined
   className?: string
-  icon: string
+  icon?: string
 }
 
 export function DoublePushCTA(props: DoublePushCTAProps) {
