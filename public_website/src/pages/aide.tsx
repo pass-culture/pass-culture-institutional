@@ -43,7 +43,7 @@ export default function Help({ helpData }: HelpProps) {
         helpData.attributes.simplepushcta[0] && (
           <StyledSimplePushCTA
             title={helpData.attributes.simplepushcta[0]?.title}
-            surtititle={helpData.attributes.simplepushcta[0]?.surtititle}
+            surtitle={helpData.attributes.simplepushcta[0]?.surtitle}
             image={helpData.attributes.simplepushcta[0]?.image}
             cta={helpData.attributes.simplepushcta[0]?.cta}
           />

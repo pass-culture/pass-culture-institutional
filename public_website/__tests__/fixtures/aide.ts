@@ -102,7 +102,7 @@ export const AidePageFixtures = {
               id: 5,
             },
           },
-          surtititle: 'Pour aller plus loin',
+          surtitle: 'Pour aller plus loin',
           title: 'Les offres et expériences à vivre avec le pass',
         },
       ],
