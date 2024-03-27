@@ -1,0 +1,36 @@
+{
+  "kind": "singleType",
+  "collectionName": "ressources_enseignants",
+  "info": {
+    "singularName": "ressources-enseignant",
+    "pluralName": "ressources-enseignants",
+    "displayName": "RessourcesEnseignants"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "filtres": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.filtre"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    }
+  }
+}

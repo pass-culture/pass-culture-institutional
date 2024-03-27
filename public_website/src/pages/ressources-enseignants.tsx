@@ -13,12 +13,12 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  presseListe: APIResponseData<'api::presse.presse'>
+  ressourcesEnseignantsListe: APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
 }
 
 export default function RessourcesEnseignants({
   newsData,
-  presseListe,
+  ressourcesEnseignantsListe,
 }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -54,36 +54,38 @@ export default function RessourcesEnseignants({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = presseListe.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(newsData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
+    const filtres = ressourcesEnseignantsListe.attributes?.filtres?.map(
+      (filtre) => {
+        switch (filtre.filtre) {
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
+            }
+          case 'Localisation':
+            uniqueLocalisations = Array.from(
+              new Set(newsData.map((item) => item.attributes.localisation))
+            )
+            return {
+              ...filtre,
+              value: uniqueLocalisations,
+            }
+          case "Secteur d'activités":
+            uniqueSecteurs = Array.from(
+              new Set(newsData.map((item) => item.attributes.secteur))
+            )
+            return {
+              ...filtre,
+              value: uniqueSecteurs,
+            }
+          default:
+            return { ...filtre, value: [] }
+        }
       }
-    })
+    )
 
     setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -146,7 +148,7 @@ export default function RessourcesEnseignants({
       <StyledTitle>
         <Typo.Heading2
           dangerouslySetInnerHTML={{
-            __html: presseListe.attributes.title,
+            __html: ressourcesEnseignantsListe.attributes.title,
           }}
         />
         <FilterContainer
@@ -156,16 +158,24 @@ export default function RessourcesEnseignants({
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={presseListe.attributes.buttonText}
+        buttonText={ressourcesEnseignantsListe.attributes.buttonText}
       />
 
-      <Separator isActive={presseListe.attributes.separator?.isActive} />
-      {presseListe.attributes.socialMediaSection &&
-        presseListe.attributes.socialMediaSection.title &&
-        presseListe.attributes.socialMediaSection.socialMediaLink && (
+      <Separator
+        isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
+      />
+      {ressourcesEnseignantsListe.attributes.socialMediaSection &&
+        ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
+        ressourcesEnseignantsListe.attributes.socialMediaSection
+          .socialMediaLink && (
           <StyledSocialMedia
-            title={presseListe.attributes.socialMediaSection.title}
-            links={presseListe.attributes.socialMediaSection.socialMediaLink}
+            title={
+              ressourcesEnseignantsListe.attributes.socialMediaSection.title
+            }
+            links={
+              ressourcesEnseignantsListe.attributes.socialMediaSection
+                .socialMediaLink
+            }
           />
         )}
     </React.Fragment>
@@ -189,9 +199,9 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
-  )
+  const news = await fetchCMS<
+    APIResponseData<'api::ressources-enseignant.ressources-enseignant'>[]
+  >(`/news-list?${newsQuery}`)
 
   // Fetch list jeune data
   const query = stringify({
@@ -205,12 +215,12 @@ export const getStaticProps = (async () => {
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(
-    `/presse?${query}`
+    `/ressources-enseignant?${query}`
   )
   return {
     props: {
       newsData: news.data,
-      presseListe: data,
+      ressourcesEnseignantsListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>

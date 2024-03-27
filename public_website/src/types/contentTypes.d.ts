@@ -1059,7 +1059,11 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Article',
         '\u00C9v\u00E8nement',
         'Partenariat',
-        'Rencontre'
+        'Rencontre',
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
       ]
     > &
       Attribute.Required;
@@ -1184,6 +1188,41 @@ export interface ApiPressePresse extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRessourcesEnseignantRessourcesEnseignant
+  extends Schema.SingleType {
+  collectionName: 'ressources_enseignants';
+  info: {
+    singularName: 'ressources-enseignant';
+    pluralName: 'ressources-enseignants';
+    displayName: 'RessourcesEnseignants';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
       'oneToOne',
       'admin::user'
     > &
@@ -1323,6 +1362,7 @@ declare module '@strapi/types' {
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
+      'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }

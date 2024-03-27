@@ -1195,6 +1195,41 @@ export interface ApiPressePresse extends Schema.SingleType {
   };
 }
 
+export interface ApiRessourcesEnseignantRessourcesEnseignant
+  extends Schema.SingleType {
+  collectionName: 'ressources_enseignants';
+  info: {
+    singularName: 'ressources-enseignant';
+    pluralName: 'ressources-enseignants';
+    displayName: 'RessourcesEnseignants';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiRestaurantRestaurant extends Schema.CollectionType {
   collectionName: 'restaurants';
   info: {
@@ -1327,6 +1362,7 @@ declare module '@strapi/types' {
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
+      'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }
