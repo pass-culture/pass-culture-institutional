@@ -56,7 +56,7 @@ export function PiledCards(props: PiledCardsProps) {
       <DotsWrapper>
         {items.map((_, index) => (
           <Dot
-            key={index}
+            key={_.title}
             active={index === 0}
             onClick={() => handleDotClick(index)}
             aria-label={`Dot ${index + 1}`}

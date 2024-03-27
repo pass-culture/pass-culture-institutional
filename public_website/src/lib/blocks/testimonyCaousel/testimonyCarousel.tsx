@@ -120,7 +120,6 @@ export function TestimonyCarousel({
       </StyledHeading>
 
       <StyledSlider
-        role="region"
         aria-label={stripTags(title)}
         aria-roledescription="carrousel">
         {items.map((item, index) => {
