@@ -68,7 +68,7 @@ export const AidePageFixtures = {
         id: 5,
         Surtitle: 'sdf',
         Text: 'sdfdss',
-        Title: 'Aide et accompagnement',
+        title: 'Aide et accompagnement',
       },
       publishedAt: '2024-03-16T14:35:21.940Z',
       simplepushcta: [
