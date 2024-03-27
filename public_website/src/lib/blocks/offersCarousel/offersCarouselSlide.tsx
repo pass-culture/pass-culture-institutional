@@ -28,7 +28,6 @@ export function OffersCarouselSlide({
       index={slideIndex}
       key={title}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <CardContainer>
         <Card>

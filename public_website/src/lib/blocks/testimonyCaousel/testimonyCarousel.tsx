@@ -105,7 +105,7 @@ export function TestimonyCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons role="group" aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label={controlsLabel}>
           <ButtonBack
             aria-label={previousButtonLabel}
             onClick={handleNavigationButtonClick}>
@@ -134,7 +134,7 @@ export function TestimonyCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label={controlsLabel}>
+      <StyledDots aria-label={controlsLabel}>
         {items.map((item, index) => {
           return (
             <StyledDot

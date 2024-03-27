@@ -41,7 +41,6 @@ export function ExperienceVideoCarouselSlide({
       index={slideIndex}
       key={title}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <StyledWrapper>
         <button onMouseDown={playVideo}>

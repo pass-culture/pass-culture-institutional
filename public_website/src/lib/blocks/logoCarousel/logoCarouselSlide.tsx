@@ -19,7 +19,6 @@ export function LogoCarouselSlide({
       index={slideIndex}
       key={image?.data.attributes.alternativeText}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <StyledLink>
         <StyledImageSimple

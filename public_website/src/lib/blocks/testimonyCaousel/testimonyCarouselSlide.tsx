@@ -41,7 +41,6 @@ export function TestimonyCarouselSlide({
       index={slideIndex}
       key={title}
       innerClassName="inner"
-      role="group"
       aria-roledescription="diapositive">
       <StyledTestimonyWrapper>
         <button onMouseDown={playTetsimonyVideo}>

@@ -126,7 +126,6 @@ export function ExperienceVideoCarousel({
 
       <StyledSlider
         aria-label={stripTags(title)}
-        role="region"
         aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
@@ -139,7 +138,7 @@ export function ExperienceVideoCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label={controlsLabel}>
+      <StyledDots aria-label={controlsLabel}>
         {items.map((item, index) => {
           return (
             <StyledDot

@@ -106,7 +106,7 @@ export function KeyNumberCarousel({
       <StyledKeyCarouselHeading>
         <StyledTitle>{title}</StyledTitle>
 
-        <StyledNavigationButtons role="group" aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label={controlsLabel}>
           <ButtonBack
             onClick={handleKeyNumberNavigationButtonClick}
             aria-label={previousButtonLabel}>
@@ -122,7 +122,6 @@ export function KeyNumberCarousel({
 
       <StyledSlider
         aria-label={stripTags(title)}
-        role="region"
         aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
@@ -139,7 +138,7 @@ export function KeyNumberCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label={controlsLabel}>
+      <StyledDots aria-label={controlsLabel}>
         {items.map((item, index) => {
           return (
             <StyledDot

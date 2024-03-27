@@ -101,7 +101,6 @@ export function LogoCarousel({
       dragEnabled={false}
       step={1}>
       <StyledSlider
-        role="region"
         aria-label={stripTags('title')}
         aria-roledescription="carrousel">
         {items?.map((item, index) => {
@@ -118,7 +117,7 @@ export function LogoCarousel({
       <StyledHeading>
         {/* <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} /> */}
 
-        <StyledNavigationButtons role="group" aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label={controlsLabel}>
           <ButtonBack
             aria-label={previousButtonLabel}
             onClick={handleNavigationButtonClick}>
@@ -131,7 +130,7 @@ export function LogoCarousel({
           </ButtonNext>
         </StyledNavigationButtons>
       </StyledHeading>
-      <StyledDots role="group" aria-label={controlsLabel}>
+      <StyledDots aria-label={controlsLabel}>
         {items?.map((item, index) => {
           return (
             <StyledDot
