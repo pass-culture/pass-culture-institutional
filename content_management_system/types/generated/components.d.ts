@@ -177,7 +177,7 @@ export interface BlockOffersCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    OffersCarouselSlideProps: Attribute.String;
+    previousButtonLabel: Attribute.String;
     nextButtonLabel: Attribute.String;
     controlsLabel: Attribute.String;
     title: Attribute.String;

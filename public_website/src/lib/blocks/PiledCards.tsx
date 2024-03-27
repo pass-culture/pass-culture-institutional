@@ -79,6 +79,7 @@ const Root = styled.div`
 
     position: relative;
     @media (width < ${theme.mediaQueries.tablet}) {
+      display: none;
     }
   `}
 `

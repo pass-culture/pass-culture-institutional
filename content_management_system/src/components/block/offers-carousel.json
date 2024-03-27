@@ -6,7 +6,7 @@
   },
   "options": {},
   "attributes": {
-    "OffersCarouselSlideProps": {
+    "previousButtonLabel": {
       "type": "string"
     },
     "nextButtonLabel": {
