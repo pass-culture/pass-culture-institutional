@@ -19,10 +19,10 @@ export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
       <Hero
-        title={helpData.attributes?.heroSection?.Title}
-        text={helpData.attributes.heroSection.Text}
+        title={helpData.attributes?.heroSection?.title}
+        text={helpData.attributes.heroSection.text}
         image={
-          helpData.attributes.heroSection.Image
+          helpData.attributes.heroSection.image
             ?.data as unknown as APIResponseData<'plugin::upload.file'>
         }
       />
