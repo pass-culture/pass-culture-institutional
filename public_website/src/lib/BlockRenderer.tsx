@@ -1,13 +1,20 @@
 import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
+import { DoublePushCTA } from './blocks/DoublePushCta'
 import { Header } from './blocks/Header'
+import { Image } from './blocks/Image'
+import { ImageText } from './blocks/ImageText'
 import { KeyNumberCarouselSlide } from './blocks/keyNumberCarousel/keyNumberCarouselSlide'
 import { LatestNews } from './blocks/LatestNews'
+import { LittleList } from './blocks/LittleList'
 import { PushCTA } from './blocks/PushCTA'
+import { Separator } from './blocks/Separator'
 import { SimpleText } from './blocks/SimpleText'
 import { SocialMedia } from './blocks/SocialMedia'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
+import { Video } from './blocks/Video'
+import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
 
 export interface Block {
@@ -30,7 +37,14 @@ const COMPONENTS: Record<
   'block.social-media': SocialMedia,
   'block.latest-news': LatestNews,
   'block.vertical-carousel': VerticalCarousel,
+  'block.image': Image,
+  'block.image-text': ImageText,
+  'block.little-list': LittleList,
+  'block.video': Video,
+  'block.space': WhiteSpace,
   'block.key-number-carousel-slide': KeyNumberCarouselSlide,
+  'block.double-push-cta': DoublePushCTA,
+  'block.separator': Separator,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
