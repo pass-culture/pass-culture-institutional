@@ -47,7 +47,7 @@ export default function SimulatorPage(props: SimulatorProps) {
 
       <SocialMedia
         title={props.data.attributes.socialMedias.title}
-        links={props.data.attributes.socialMedias.socialMediaLink}
+        socialMediaLink={props.data.attributes.socialMedias.socialMediaLink}
       />
     </Root>
   )

@@ -32,7 +32,13 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.image.image.data',
       'Blocks.content',
       'Blocks.items',
+      'Blocks[0]',
       'Blocks.items.image',
+      'Blocks.logo',
+      'Blocks.logo.logo',
+      'Blocks.cta',
+      'Blocks.items.items',
+      'Blocks.socialMediaLink',
     ],
   })
 

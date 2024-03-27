@@ -19,10 +19,10 @@ export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
       <Hero
-        title={helpData.attributes?.heroSection?.Title}
-        text={helpData.attributes.heroSection.Text}
+        title={helpData.attributes?.heroSection?.title}
+        text={helpData.attributes.heroSection.text}
         image={
-          helpData.attributes.heroSection.Image
+          helpData.attributes.heroSection.image
             ?.data as unknown as APIResponseData<'plugin::upload.file'>
         }
       />
@@ -33,7 +33,7 @@ export default function Help({ helpData }: HelpProps) {
       />
       <StyledPushCTA
         title={helpData.attributes.cardText?.title}
-        description={helpData.attributes.cardText?.text}
+        text={helpData.attributes.cardText?.text}
         image={helpData.attributes.cardText?.image}
         firstCta={helpData.attributes.cardText?.firstCta}
         secondCta={helpData.attributes.cardText?.secondCta}
@@ -43,16 +43,16 @@ export default function Help({ helpData }: HelpProps) {
         helpData.attributes.simplepushcta[0] && (
           <StyledSimplePushCTA
             title={helpData.attributes.simplepushcta[0]?.title}
-            description={helpData.attributes.simplepushcta[0]?.surtititle}
+            surtitle={helpData.attributes.simplepushcta[0]?.surtitle}
             image={helpData.attributes.simplepushcta[0]?.image}
-            ctaLink={helpData.attributes.simplepushcta[0]?.cta}
+            cta={helpData.attributes.simplepushcta[0]?.cta}
           />
         )}
 
       {helpData.attributes?.social && helpData.attributes.social[0] && (
         <StyledSocialMedia
           title={helpData.attributes.social[0].title}
-          links={helpData.attributes.social[0].socialMediaLink}
+          socialMediaLink={helpData.attributes.social[0].socialMediaLink}
         />
       )}
     </React.Fragment>

@@ -7,7 +7,7 @@ import { BlockRenderer } from '@/lib/BlockRenderer'
 describe('BlockRenderer', () => {
   it('should render the correct block', () => {
     const block = {
-      __component: 'block.header',
+      __component: 'block.header-test',
       Title: 'The title',
       Text: 'Some longer text',
     }

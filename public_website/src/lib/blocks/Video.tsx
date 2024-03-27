@@ -15,7 +15,7 @@ export function Video(props: VideoProps) {
         light
         width="100%"
         controls={true}
-        height="50rem"
+        height="100%"
       />
       <p>{props.description}</p>
     </Root>
@@ -32,13 +32,13 @@ const Root = styled.div`
     align-items: center;
     gap: 2rem;
 
-    img {
-      width: 90%;
-      border-radius: 2.5rem;
-    }
-
     p {
       width: 90%;
+    }
+
+    .react-player__preview {
+      border-radius: 2rem;
+      height: 50rem !important;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -56,6 +56,11 @@ const Root = styled.div`
       p {
         width: 100%;
       }
+
+      .react-player__preview {
+        border-radius: 2rem;
+        height: 12rem !important;
+      }
     }
   `}
 `
@@ -63,4 +68,5 @@ const Root = styled.div`
 const StyledVideo = styled(ReactPlayer)`
   max-width: 100%;
   height: auto;
+  border-radius: 2.5rem;
 `

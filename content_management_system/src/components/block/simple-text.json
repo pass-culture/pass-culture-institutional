@@ -8,6 +8,7 @@
   "attributes": {
     "title": {
       "type": "string"
+
     },
     "text": {
       "type": "text"
@@ -27,6 +28,7 @@
     },
     "secondText": {
       "type": "text"
+
     }
   }
 }

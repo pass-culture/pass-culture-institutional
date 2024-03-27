@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_block_experience_video_carousels",
+  "info": {
+    "displayName": "ExperienceVideoCarousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "previousButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "nextButtonLabel": {
+      "type": "string"
+    },
+    "controlsLabel": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.vertical-carousel-item"
+    }
+  }
+}
