@@ -13,13 +13,10 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
+  presseListe: APIResponseData<'api::presse.presse'>
 }
 
-export default function ListeActuCulturels({
-  newsData,
-  listeActuCulturel,
-}: ListProps) {
+export default function Presse({ newsData, presseListe }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -54,7 +51,7 @@ export default function ListeActuCulturels({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
+    const filtres = presseListe.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -146,7 +143,7 @@ export default function ListeActuCulturels({
       <StyledTitle>
         <Typo.Heading2
           dangerouslySetInnerHTML={{
-            __html: listeActuCulturel.attributes.title,
+            __html: presseListe.attributes.title,
           }}
         />
         <FilterContainer
@@ -156,18 +153,16 @@ export default function ListeActuCulturels({
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={listeActuCulturel.attributes.buttonText}
+        buttonText={presseListe.attributes.buttonText}
       />
 
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
-      {listeActuCulturel.attributes.socialMediaSection &&
-        listeActuCulturel.attributes.socialMediaSection.title &&
-        listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
+      <Separator isActive={presseListe.attributes.separator?.isActive} />
+      {presseListe.attributes.socialMediaSection &&
+        presseListe.attributes.socialMediaSection.title &&
+        presseListe.attributes.socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={listeActuCulturel.attributes.socialMediaSection.title}
-            links={
-              listeActuCulturel.attributes.socialMediaSection.socialMediaLink
-            }
+            title={presseListe.attributes.socialMediaSection.title}
+            links={presseListe.attributes.socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -181,7 +176,12 @@ export const getStaticProps = (async () => {
     pagination: {},
     filters: {
       category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+        $eqi: [
+          'Dossier de presse',
+          'Communiqué de presse',
+          'Étude ritualisée',
+          'Étude ponctuelle',
+        ],
       },
     },
   })
@@ -201,13 +201,13 @@ export const getStaticProps = (async () => {
       'separator',
     ],
   })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-  >(`/actualites-rdv-acteurs-culturel?${query}`)
+  const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(
+    `/presse?${query}`
+  )
   return {
     props: {
       newsData: news.data,
-      listeActuCulturel: data,
+      presseListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>

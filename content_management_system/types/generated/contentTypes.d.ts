@@ -808,12 +808,17 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     singularName: 'actualites-rdv-acteurs-culturel';
     pluralName: 'actualites-rdv-acteurs-culturels';
     displayName: 'ActualitesRdvActeursCulturels';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1054,7 +1059,11 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Article',
         '\u00C9v\u00E8nement',
         'Partenariat',
-        'Rencontre'
+        'Rencontre',
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
       ]
     > &
       Attribute.Required;
@@ -1099,6 +1108,17 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    secteur: Attribute.Enumeration<
+      [
+        'Pratiques culturelles',
+        'Spectacle vivant',
+        'Musique',
+        'Lecture',
+        'Cin\u00E9ma',
+        'Offres num\u00E9riques'
+      ]
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1137,6 +1157,40 @@ export interface ApiPagePage extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPressePresse extends Schema.SingleType {
+  collectionName: 'presses';
+  info: {
+    singularName: 'presse';
+    pluralName: 'presses';
+    displayName: 'Presse';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1272,6 +1326,7 @@ declare module '@strapi/types' {
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
+      'api::presse.presse': ApiPressePresse;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }

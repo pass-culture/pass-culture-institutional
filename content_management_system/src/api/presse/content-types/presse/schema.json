@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "actualites_rdv_acteurs_culturels",
+  "collectionName": "presses",
   "info": {
-    "singularName": "actualites-rdv-acteurs-culturel",
-    "pluralName": "actualites-rdv-acteurs-culturels",
-    "displayName": "ActualitesRdvActeursCulturels",
-    "description": ""
+    "singularName": "presse",
+    "pluralName": "presses",
+    "displayName": "Presse"
   },
   "options": {
     "draftAndPublish": true
