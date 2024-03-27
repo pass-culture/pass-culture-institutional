@@ -50,7 +50,6 @@ export const getStaticProps = (async ({ params }) => {
   if (response.data.length === 0) {
     return { notFound: true }
   }
-  console.log(response.data[0]?.attributes?.Blocks[0])
 
   return {
     props: {

@@ -5,6 +5,7 @@ import { DoublePushCTA } from './blocks/DoublePushCta'
 import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Header } from './blocks/Header'
+import { Headertest } from './blocks/HeaderTest'
 import { Image } from './blocks/Image'
 import { ImageText } from './blocks/ImageText'
 import { KeyNumber } from './blocks/Keynumber'
@@ -43,6 +44,7 @@ const COMPONENTS: Record<
   (props: ComponentProps<any>) => React.JSX.Element
 > = {
   'block.header': Header,
+  'block.header-test': Headertest,
   'block.centered-text': CenteredText,
   'block.simple-text': SimpleText,
   'block.push-cta': PushCTA,
@@ -76,8 +78,6 @@ const COMPONENTS: Record<
 
 export function BlockRenderer(props: BlockRendererProps) {
   const BlockComponent = COMPONENTS[props.block.__component]
-
-  console.log(props.block, 'BlockComponent')
 
   if (!BlockComponent) {
     return <UnkwnownBlock block={props.block} />
