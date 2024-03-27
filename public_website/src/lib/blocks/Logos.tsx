@@ -8,14 +8,14 @@ type LogoProps = {
   controlsLabel?: string
   nextButtonLabel?: string
   previousButtonLabel?: string
-  images: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
+  logo: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
 }
 
 export function Logos({
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
-  images,
+  logo,
 }: LogoProps) {
   return (
     <Root>
@@ -24,7 +24,7 @@ export function Logos({
           controlsLabel={controlsLabel}
           nextButtonLabel={nextButtonLabel}
           previousButtonLabel={previousButtonLabel}
-          items={images}
+          items={logo}
         />
       </StyledCarouselWrapper>
     </Root>

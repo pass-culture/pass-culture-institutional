@@ -15,8 +15,11 @@ import { LittleList } from './blocks/LittleList'
 import { LogoCarousel } from './blocks/logoCarousel/logoCarousel'
 import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
 import { Logos } from './blocks/Logos'
+import { OffersCarousel } from './blocks/offersCarousel/offersCarousel'
+import { PiledCards } from './blocks/PiledCards'
 import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
+import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleText } from './blocks/SimpleText'
 import { SocialMedia } from './blocks/SocialMedia'
 import { Testimonies } from './blocks/Testimonies'
@@ -66,10 +69,15 @@ const COMPONENTS: Record<
   'block.key-number-carousel-slide': KeyNumberCarouselSlide,
   'block.double-push-cta': DoublePushCTA,
   'block.separator': Separator,
+  'block.simple-push-cta': SimplePushCta,
+  'block.offers-carousel': OffersCarousel,
+  'block.piled-cards': PiledCards,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
   const BlockComponent = COMPONENTS[props.block.__component]
+
+  console.log(props.block, 'BlockComponent')
 
   if (!BlockComponent) {
     return <UnkwnownBlock block={props.block} />

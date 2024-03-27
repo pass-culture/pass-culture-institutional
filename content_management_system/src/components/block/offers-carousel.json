@@ -1,12 +1,12 @@
 {
-  "collectionName": "components_block_testimonies",
+  "collectionName": "components_block_offers_carousels",
   "info": {
-    "displayName": "TestimoniesCarousel",
+    "displayName": "OffersCarousel",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "previousButtonLabel": {
+    "OffersCarouselSlideProps": {
       "type": "string"
     },
     "nextButtonLabel": {
@@ -21,7 +21,12 @@
     "items": {
       "type": "component",
       "repeatable": true,
-      "component": "common.vertical-carousel-item"
+      "component": "common.offers-carousel-item"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
     }
   }
 }

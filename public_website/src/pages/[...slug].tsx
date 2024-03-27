@@ -32,7 +32,13 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.image.image.data',
       'Blocks.content',
       'Blocks.items',
+      'Blocks[0]',
       'Blocks.items.image',
+      'Blocks.logo',
+      'Blocks.logo.logo',
+      'Blocks.cta',
+      'Blocks.items.items',
+      'Blocks.socialMediaLink',
     ],
   })
 
@@ -44,6 +50,7 @@ export const getStaticProps = (async ({ params }) => {
   if (response.data.length === 0) {
     return { notFound: true }
   }
+  console.log(response.data[0]?.attributes?.Blocks[0])
 
   return {
     props: {

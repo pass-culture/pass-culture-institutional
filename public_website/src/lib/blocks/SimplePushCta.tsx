@@ -7,9 +7,9 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
   title: string | undefined
-  description: string | undefined
+  surtititle: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  ctaLink: { Label: string; URL: string } | undefined
+  cta: { Label: string; URL: string } | undefined
 
   className?: string
 }
@@ -18,16 +18,14 @@ export function SimplePushCta(props: PushCTAProps) {
   return (
     <Root className={props.className}>
       <RightSide>
-        {props.description && (
-          <p dangerouslySetInnerHTML={{ __html: props.description }} />
+        {props.surtititle && (
+          <p dangerouslySetInnerHTML={{ __html: props.surtititle }} />
         )}
 
         {props.title && (
           <Title dangerouslySetInnerHTML={{ __html: props.title }} />
         )}
-        {props.ctaLink && (
-          <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
-        )}
+        {props.cta && <CtaLink href={props.cta.URL}>{props.cta.Label}</CtaLink>}
       </RightSide>
       <CardContainer>
         <Card

@@ -11,33 +11,34 @@ import styled, { css } from 'styled-components'
 import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
 import { Typo } from '../../../ui/components/typographies'
 import {
-  ExperienceVideoCarouselSlide,
-  ExperienceVideoCarouselSlideProps,
-} from './experieneVideoCarouselSlide'
+  OffersCarouselSlide,
+  OffersCarouselSlideProps,
+} from './offersCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type ExperienceVideoCarouselProps = {
+type OffersVideoCarouselProps = {
   title: string
   controlsLabel: string
   nextButtonLabel: string
   previousButtonLabel: string
-  items: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
+  items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
+  cta: { Label: string; URL: string } | undefined
 }
 
-export function ExperienceVideoCarousel({
+export function OffersCarousel({
   title,
   controlsLabel,
   nextButtonLabel,
   previousButtonLabel,
   items,
-}: ExperienceVideoCarouselProps) {
-  const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
+  cta,
+}: OffersVideoCarouselProps) {
+  const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
-  const EXPERIENCE_VIDEO_SLIDES_SELECTOR =
-    '[aria-roledescription="diapositive"]'
+  const OFFERS_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
 
   const [screenWidth, setScreenWidth] = useState<number>()
 
@@ -54,20 +55,18 @@ export function ExperienceVideoCarousel({
   }, [])
 
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.5
 
   useEffect(() => {
-    const carouselEl = document.querySelector(
-      EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
-    )
+    const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(
-      EXPERIENCE_VIDEO_SLIDES_SELECTOR
+      OFFERS_SLIDES_SELECTOR
     )
 
     if (carouselEl && carouselSlidesEl) {
       cleanExperienceSlideAttributes(carouselEl, carouselSlidesEl)
     }
-  }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
+  }, [OFFERS_CAROUSEL_SELECTOR])
 
   function cleanExperienceSlideAttributes(
     carouselEl: Element,
@@ -83,11 +82,9 @@ export function ExperienceVideoCarousel({
   }
 
   function handleExperienceVideoNavigationButtonClick() {
-    const carouselEl = document.querySelector(
-      EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
-    )
+    const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(
-      EXPERIENCE_VIDEO_SLIDES_SELECTOR
+      OFFERS_SLIDES_SELECTOR
     )
 
     if (carouselEl && carouselSlidesEl) {
@@ -110,18 +107,21 @@ export function ExperienceVideoCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons aria-label={controlsLabel}>
-          <ButtonBack
-            onClick={handleExperienceVideoNavigationButtonClick}
-            aria-label={previousButtonLabel}>
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label={nextButtonLabel}
-            onClick={handleExperienceVideoNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
+        <StyledArrowButtonWrapper>
+          <StyledNavigationButtons aria-label={controlsLabel}>
+            <ButtonBack
+              onClick={handleExperienceVideoNavigationButtonClick}
+              aria-label={previousButtonLabel}>
+              <ArrowRight />
+            </ButtonBack>
+            <ButtonNext
+              aria-label={nextButtonLabel}
+              onClick={handleExperienceVideoNavigationButtonClick}>
+              <ArrowRight />
+            </ButtonNext>
+          </StyledNavigationButtons>
+          <CtaLink href={cta?.URL}>{cta?.Label}</CtaLink>
+        </StyledArrowButtonWrapper>
       </StyledHeading>
 
       <StyledSlider
@@ -130,7 +130,7 @@ export function ExperienceVideoCarousel({
         aria-roledescription="carrousel">
         {items.map((item, index) => {
           return (
-            <ExperienceVideoCarouselSlide
+            <OffersCarouselSlide
               key={item.title}
               slideIndex={index}
               {...item}
@@ -153,24 +153,42 @@ export function ExperienceVideoCarousel({
           )
         })}
       </StyledDots>
+
+      <MobileCtaWrapper>
+        <MobileCtaLink href={cta?.URL}>{cta?.Label}</MobileCtaLink>
+      </MobileCtaWrapper>
     </StyledCarousel>
   )
 }
 
 const StyledCarousel = styled(CarouselProvider)`
-  width: 90%;
-  margin: auto;
+  ${({ theme }) => css`
+    width: 90%;
+    margin: auto;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      width: 100%;
+    }
+  `}
 `
 const StyledHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    margin-bottom: 3rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 6rem;
     padding-right: 7rem;
+
+    h2 {
+      width: 60%;
+      text-align: center;
+    }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
+      padding-right: 0;
     }
   `}
 `
@@ -231,6 +249,74 @@ const StyledDot = styled(Dot)`
     &[disabled] {
       opacity: 1;
       background-color: ${theme.colors.secondary};
+    }
+  `}
+`
+
+const CtaLink = styled.a`
+  ${({ theme }) => css`
+    display: inline-block;
+
+    font-size: ${theme.fonts.sizes.xs};
+    font-weight: ${theme.fonts.weights.semiBold};
+    line-height: 1.4;
+
+    margin-right: 1.5rem;
+    background: linear-gradient(
+      90deg,
+      ${theme.colors.tertiary},
+      ${theme.colors.secondary}
+    );
+    color: ${theme.colors.white};
+
+    padding: 1rem 1.75rem;
+    border-radius: 100px;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      display: none;
+    }
+  `}
+`
+
+const StyledArrowButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  align-self: end;
+`
+
+const MobileCtaWrapper = styled.div`
+  ${({ theme }) => css`
+    display: none;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+    }
+  `}
+`
+
+const MobileCtaLink = styled.a`
+  ${({ theme }) => css`
+    display: none;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      display: inline-block;
+      font-size: ${theme.fonts.sizes.xs};
+      font-weight: ${theme.fonts.weights.semiBold};
+      line-height: 1.4;
+      margin: auto;
+      margin-top: 1rem;
+      background: linear-gradient(
+        90deg,
+        ${theme.colors.tertiary},
+        ${theme.colors.secondary}
+      );
+      color: ${theme.colors.white};
+      padding: 1rem 1.75rem;
+      border-radius: 100px;
     }
   `}
 `

@@ -33,7 +33,7 @@ export default function Help({ helpData }: HelpProps) {
       />
       <StyledPushCTA
         title={helpData.attributes.cardText?.title}
-        description={helpData.attributes.cardText?.text}
+        text={helpData.attributes.cardText?.text}
         image={helpData.attributes.cardText?.image}
         firstCta={helpData.attributes.cardText?.firstCta}
         secondCta={helpData.attributes.cardText?.secondCta}
@@ -43,16 +43,16 @@ export default function Help({ helpData }: HelpProps) {
         helpData.attributes.simplepushcta[0] && (
           <StyledSimplePushCTA
             title={helpData.attributes.simplepushcta[0]?.title}
-            description={helpData.attributes.simplepushcta[0]?.surtititle}
+            surtititle={helpData.attributes.simplepushcta[0]?.surtititle}
             image={helpData.attributes.simplepushcta[0]?.image}
-            ctaLink={helpData.attributes.simplepushcta[0]?.cta}
+            cta={helpData.attributes.simplepushcta[0]?.cta}
           />
         )}
 
       {helpData.attributes?.social && helpData.attributes.social[0] && (
         <StyledSocialMedia
           title={helpData.attributes.social[0].title}
-          links={helpData.attributes.social[0].socialMediaLink}
+          socialMediaLink={helpData.attributes.social[0].socialMediaLink}
         />
       )}
     </React.Fragment>

@@ -23,20 +23,12 @@
         "audios"
       ]
     },
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "isImageRight": {
       "type": "boolean",
       "default": true
+    },
+    "icon": {
+      "type": "string"
     }
   }
 }

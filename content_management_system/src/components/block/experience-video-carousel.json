@@ -1,13 +1,14 @@
 {
-  "collectionName": "components_block_testimonies",
+  "collectionName": "components_block_experience_video_carousels",
   "info": {
-    "displayName": "TestimoniesCarousel",
+    "displayName": "ExperienceVideoCarousel",
     "description": ""
   },
   "options": {},
   "attributes": {
     "previousButtonLabel": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "nextButtonLabel": {
       "type": "string"

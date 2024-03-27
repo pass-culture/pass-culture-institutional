@@ -9,11 +9,11 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface DoublePushCTAProps {
   title: string | undefined | TrustedHTML
-  description: string | undefined
+  text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   firstCta: { Label: string; URL: string } | undefined
 
-  secondCta: { Label: string; URL: string } | undefined
+  secondCta: { Label?: string; URL?: string } | undefined
   className?: string
 }
 
@@ -31,17 +31,16 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
         {props.title && (
           <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
         )}
-        {props.description && (
-          <p dangerouslySetInnerHTML={{ __html: props.description }} />
-        )}
-
+        {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
         <CtaLink href={props.firstCta?.URL}>{props.firstCta?.Label}</CtaLink>
-        <Button
-          href={props.secondCta?.URL}
-          target="_blank"
-          variant="quaternary">
-          {props.secondCta?.Label}
-        </Button>
+        {props.secondCta?.URL && props.secondCta?.Label && (
+          <Button
+            href={props.secondCta?.URL}
+            target="_blank"
+            variant="quaternary">
+            {props.secondCta?.Label}
+          </Button>
+        )}
       </RightSide>
     </Root>
   )
@@ -51,7 +50,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
     max-width: 90rem;
-    margin: 0 auto;
+    margin: 5rem auto;
     gap: 5.625rem;
     border-radius: 2.5rem;
     display: grid;
@@ -156,6 +155,8 @@ const CtaLink = styled.a`
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
       margin-bottom: 1.5rem;
+      display: block;
+      width: fit-content;
     }
   `}
 `

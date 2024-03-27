@@ -14,6 +14,7 @@ import {
   KeyNumberCarouselSlideProps,
 } from './keyNumberCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -93,7 +94,7 @@ export function KeyNumberCarousel({
   }
 
   return (
-    <CarouselProvider
+    <StyledCarouselProvider
       naturalSlideHeight={75}
       naturalSlideWidth={60}
       totalSlides={items.length}
@@ -103,6 +104,8 @@ export function KeyNumberCarousel({
       infinite={true}
       step={1}>
       <StyledKeyCarouselHeading>
+        <StyledTitle>{title}</StyledTitle>
+
         <StyledNavigationButtons role="group" aria-label={controlsLabel}>
           <ButtonBack
             onClick={handleKeyNumberNavigationButtonClick}
@@ -150,28 +153,50 @@ export function KeyNumberCarousel({
           )
         })}
       </StyledDots>
-    </CarouselProvider>
+    </StyledCarouselProvider>
   )
 }
 
-const StyledKeyCarouselHeading = styled.div`
+const StyledCarouselProvider = styled(CarouselProvider)`
   ${({ theme }) => css`
     display: flex;
-    align-items: end;
     justify-content: space-between;
-    padding-right: 7rem;
-    margin-bottom: 3rem;
-    position: absolute;
-    left: -45%;
-    top: 14rem;
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 2.5rem;
+    background-color: ${theme.colors.secondary}20;
+
+    padding: 5rem 0;
+    margin: 4rem auto;
+    @media (max-width: ${theme.mediaQueries.mobile}) {
+      padding: 0 1rem;
+      display: block;
     }
   `}
 `
+const StyledKeyCarouselHeading = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    padding-right: 7rem;
+    padding-left: 5rem;
+    margin-bottom: 3rem;
 
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-bottom: 2.5rem;
+      padding: 0;
+    }
+  `}
+`
+const StyledTitle = styled(Typo.Heading2)`
+  margin: 1.5rem 0 0.25rem;
+`
 const StyledSlider = styled(Slider)`
-  overflow: hidden;
+  ${({ theme }) => css`
+    overflow: hidden;
+    width: 70%;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      width: 100%;
+    }
+  `}
 `
 
 const StyledNavigationButtons = styled.div`

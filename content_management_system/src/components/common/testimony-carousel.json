@@ -7,13 +7,27 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "videoUrl": {
-      "type": "text"
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
     }
   }
 }
