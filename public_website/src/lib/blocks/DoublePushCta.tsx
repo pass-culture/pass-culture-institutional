@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
@@ -15,6 +14,7 @@ interface DoublePushCTAProps {
 
   secondCta: { Label?: string; URL?: string } | undefined
   className?: string
+  icon: string
 }
 
 export function DoublePushCTA(props: DoublePushCTAProps) {
@@ -26,6 +26,8 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             props.image?.data.attributes.url &&
             getStrapiURL(props.image?.data.attributes.url)
           }></Card>
+
+        <p>{props.icon}</p>
       </CardContainer>
       <RightSide>
         {props.title && (
@@ -71,21 +73,31 @@ const Root = styled.div`
 `
 
 const CardContainer = styled.div`
-  position: relative;
-  z-index: 1;
-  margin: -3.125rem 0 -3.125rem 5rem;
-  max-width: 28rem;
+  ${({ theme }) => css`
+    position: relative;
+    z-index: 1;
+    margin: -3.125rem 0 -3.125rem 5rem;
+    max-width: 28rem;
 
-  @media (width < ${theme.mediaQueries.tablet}) {
-    margin: 0 auto;
-    position: absolute;
+    p {
+      position: absolute;
+      top: 20%;
+      right: -1.5rem;
+      font-size: ${theme.fonts.sizes['8xl']};
+      transform: rotate(-7deg);
+    }
 
-    min-width: 90%;
-    min-height: 40%;
+    @media (width < ${theme.mediaQueries.tablet}) {
+      margin: 0 auto;
+      position: absolute;
 
-    top: -8rem;
-    left: 1.8rem;
-  }
+      min-width: 90%;
+      min-height: 40%;
+
+      top: -8rem;
+      left: 1.8rem;
+    }
+  `}
 `
 
 const Card = styled.div<{ $imageUrl?: string }>`

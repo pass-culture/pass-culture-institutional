@@ -82,7 +82,7 @@ const StyledContentTextWrapper = styled.div`
 
 const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
-    max-width: 44rem;
+    max-width: 35rem;
     margin: 0 0 3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -93,8 +93,9 @@ const StyledHeading = styled(Typo.Heading1)`
 
 const StyledText = styled.p`
   ${({ theme }) => css`
-    max-width: 34rem;
+    max-width: 43rem;
     margin: 0 0 2rem;
+    line-height: 2;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 3.5rem;
@@ -126,7 +127,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
+    height: 30rem;
 
     position: relative;
 
@@ -152,7 +153,7 @@ const BackgroundLayer = styled.div`
     transform: rotate(7deg);
     border-radius: 1.5rem;
     width: 100%;
-    height: 100%;
+    height: 35rem;
     z-index: -1;
 
     @media (width < ${theme.mediaQueries.tablet}) {
