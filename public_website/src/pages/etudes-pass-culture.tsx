@@ -230,7 +230,7 @@ export const getStaticProps = (async () => {
   })
   const { data } = await fetchCMS<
     APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
-  >(`/ressources-enseignant?${query}`)
+  >(`/etudes-pass-culture?${query}`)
 
   return {
     props: {
