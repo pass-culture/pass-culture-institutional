@@ -15,8 +15,8 @@ jobs:
       image_tag: ${{ github.sha }}
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
-      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
-      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
 
   deploy-public-site-production:
     needs:
@@ -29,6 +29,6 @@ jobs:
       backend_url: https://backend.passculture.team
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
-      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
-      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
       
