@@ -1,0 +1,34 @@
+on: 
+  workflow_dispatch:
+    
+name: Deploy staging CMS and public website
+
+jobs:
+  deploy-cms-staging:
+    uses: ./.github/workflows/reusable_cms_deploy.yml
+    with:
+      environment: staging 
+      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
+      teleport_version: 13.4.4
+      teleport_proxy: teleport.ehp.passculture.team:443
+      teleport_kubernetes_cluster: passculture-metier-ehp
+      image_tag: ${{ github.sha }}
+      secrets_project_id: passculture-metier-ehp
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+
+  deploy-public-site-staging:
+    needs:
+      - deploy-cms-staging
+    uses: ./.github/workflows/reusable_public_site_deploy.yml
+    with:
+      environment: staging
+      workload_identity_provider_secret_name: passculture-metier-ehp/gcp_metier_ehp_workload_identity_provider 
+      cms_url: https://siteinstit-cms.staging.passculture.team
+      backend_url: https://backend.staging.passculture.team
+      secrets_project_id: passculture-metier-ehp
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+      

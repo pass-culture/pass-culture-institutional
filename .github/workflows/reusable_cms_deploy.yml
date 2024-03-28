@@ -27,6 +27,10 @@ on:
         type: string
         required: false
         default: v2.8.4
+      secrets_project_id:
+        type: string
+        description: GCP project to retrieve secrets from
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -58,7 +62,7 @@ jobs:
         uses: 'google-github-actions/get-secretmanager-secrets@v2'
         with:
           secrets: |-
-            INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
+            INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: 'Authenticate to Google Cloud'
@@ -113,7 +117,7 @@ jobs:
         uses: 'google-github-actions/get-secretmanager-secrets@v2'
         with:
           secrets: |-
-            SLACK_BOT_TOKEN:passculture-metier-ehp/passculture-ci-slack-bot-token
+            SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
       - name: "Post to a Slack channel on success"
         if: ${{ always() && contains(needs.deploy-cms.result, 'success') }}
         uses: slackapi/slack-github-action@v1.24.0
