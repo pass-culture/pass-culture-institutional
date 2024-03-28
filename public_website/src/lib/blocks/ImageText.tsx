@@ -23,12 +23,16 @@ export function ImageText({
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
-        <StyledIcon
-          className={isImageRight ? 'IconRight' : 'IconLeft'}
-          dangerouslySetInnerHTML={{ __html: icon }}
-        />
+        {icon && (
+          <StyledIcon
+            className={isImageRight ? 'IconRight' : 'IconLeft'}
+            dangerouslySetInnerHTML={{ __html: icon }}
+          />
+        )}
         <StyledContentTextWrapper className="first">
-          <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          {title && (
+            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          )}
           <StyledText>{description}</StyledText>
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">

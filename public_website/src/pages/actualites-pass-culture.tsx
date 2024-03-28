@@ -11,15 +11,14 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
+  listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
 }
 
-export default function ListeActuCulturels({
+export default function ListeActualitesPassCulture({
   newsData,
-  listeActuCulturel,
+  listeActualitesPassCulture,
 }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -28,16 +27,10 @@ export default function ListeActuCulturels({
   const loc = Array.from(
     new Set(newsData.map((item) => item.attributes.localisation))
   )
-
-  const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
-  )
   const [category, setCategory] = useState<string[]>([])
   const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
-  const [secteur, setSecteur] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
@@ -47,44 +40,36 @@ export default function ListeActuCulturels({
     setLocalisation(loc)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
-    setSecteur(sec)
-    setOriginalSecteur(sec)
 
     setData(newsData)
     let uniqueCategories = []
     let uniqueLocalisations = []
-    let uniqueSecteurs = []
 
-    const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(newsData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
+    const filtres = listeActualitesPassCulture.attributes?.filtres?.map(
+      (filtre) => {
+        switch (filtre.filtre) {
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
+            }
+          case 'Localisation':
+            uniqueLocalisations = Array.from(
+              new Set(newsData.map((item) => item.attributes.localisation))
+            )
+            return {
+              ...filtre,
+              value: uniqueLocalisations,
+            }
+          default:
+            return { ...filtre, value: [] }
+        }
       }
-    })
+    )
+
     if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -100,9 +85,6 @@ export default function ListeActuCulturels({
         },
         localisation: {
           $eqi: localisation,
-        },
-        secteur: {
-          $eqi: secteur,
         },
       },
     })
@@ -127,27 +109,21 @@ export default function ListeActuCulturels({
       } else {
         setLocalisation(value)
       }
-    } else if (name === "Secteur d'activités") {
-      if (value[0] === '') {
-        setSecteur(originalSecteur)
-      } else {
-        setSecteur(value)
-      }
     }
   }
 
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
+  }, [category, localisation])
 
   return (
     <React.Fragment>
       <StyledTitle>
-        {listeActuCulturel.attributes.title && (
+        {listeActualitesPassCulture.attributes.title && (
           <Typo.Heading2
             dangerouslySetInnerHTML={{
-              __html: listeActuCulturel.attributes.title,
+              __html: listeActualitesPassCulture.attributes.title,
             }}
           />
         )}
@@ -158,25 +134,32 @@ export default function ListeActuCulturels({
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={listeActuCulturel.attributes.buttonText}
+        buttonText={listeActualitesPassCulture.attributes.buttonText}
       />
 
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
+      <Separator
+        isActive={listeActualitesPassCulture.attributes.separator?.isActive}
+      />
 
       <SimplePushCta
-        title={listeActuCulturel.attributes.aide?.title}
-        image={listeActuCulturel.attributes.aide?.image}
-        cta={listeActuCulturel.attributes.aide?.cta}
-        surtitle={listeActuCulturel.attributes.aide?.surtitle}
-        icon={listeActuCulturel.attributes.aide?.icon}
+        title={listeActualitesPassCulture.attributes.aide?.title}
+        image={listeActualitesPassCulture.attributes.aide?.image}
+        cta={listeActualitesPassCulture.attributes.aide?.cta}
+        surtitle={listeActualitesPassCulture.attributes.aide?.surtitle}
+        icon={listeActualitesPassCulture.attributes.aide?.icon}
       />
-      {listeActuCulturel.attributes.socialMediaSection &&
-        listeActuCulturel.attributes.socialMediaSection.title &&
-        listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
+
+      {listeActualitesPassCulture.attributes.socialMediaSection &&
+        listeActualitesPassCulture.attributes.socialMediaSection.title &&
+        listeActualitesPassCulture.attributes.socialMediaSection
+          .socialMediaLink && (
           <StyledSocialMedia
-            title={listeActuCulturel.attributes.socialMediaSection.title}
+            title={
+              listeActualitesPassCulture.attributes.socialMediaSection.title
+            }
             socialMediaLink={
-              listeActuCulturel.attributes.socialMediaSection.socialMediaLink
+              listeActualitesPassCulture.attributes.socialMediaSection
+                .socialMediaLink
             }
           />
         )}
@@ -215,12 +198,12 @@ export const getStaticProps = (async () => {
     ],
   })
   const { data } = await fetchCMS<
-    APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-  >(`/actualites-rdv-acteurs-culturel?${query}`)
+    APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
+  >(`/actualites-pass-culture?${query}`)
   return {
     props: {
       newsData: news.data,
-      listeActuCulturel: data,
+      listeActualitesPassCulture: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>

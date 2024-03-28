@@ -84,8 +84,7 @@ export default function Presse({ newsData, presseListe }: ListProps) {
           return { ...filtre, value: [] }
       }
     })
-
-    setFilters(filtres)
+    if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -144,11 +143,13 @@ export default function Presse({ newsData, presseListe }: ListProps) {
   return (
     <React.Fragment>
       <StyledTitle>
-        <Typo.Heading2
-          dangerouslySetInnerHTML={{
-            __html: presseListe.attributes.title,
-          }}
-        />
+        {presseListe.attributes.title && (
+          <Typo.Heading2
+            dangerouslySetInnerHTML={{
+              __html: presseListe.attributes.title,
+            }}
+          />
+        )}
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}

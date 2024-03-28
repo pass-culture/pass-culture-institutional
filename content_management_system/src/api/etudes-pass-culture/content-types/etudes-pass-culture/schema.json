@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "ressources_enseignants",
+  "collectionName": "etudes_pass_cultures",
   "info": {
-    "singularName": "ressources-enseignant",
-    "pluralName": "ressources-enseignants",
-    "displayName": "Ressources Enseignants",
+    "singularName": "etudes-pass-culture",
+    "pluralName": "etudes-pass-cultures",
+    "displayName": "Etudes Pass Culture",
     "description": ""
   },
   "options": {
@@ -33,7 +33,7 @@
       "repeatable": false,
       "component": "block.separator"
     },
-    "aide": {
+    "observatoire": {
       "type": "component",
       "repeatable": false,
       "component": "block.simple-push-cta"

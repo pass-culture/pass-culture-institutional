@@ -65,7 +65,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       }
     })
 
-    setFilters(filtres)
+    if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

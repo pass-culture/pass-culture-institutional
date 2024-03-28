@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
@@ -86,8 +87,7 @@ export default function RessourcesEnseignants({
         }
       }
     )
-
-    setFilters(filtres)
+    if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -146,11 +146,13 @@ export default function RessourcesEnseignants({
   return (
     <React.Fragment>
       <StyledTitle>
-        <Typo.Heading2
-          dangerouslySetInnerHTML={{
-            __html: ressourcesEnseignantsListe.attributes.title,
-          }}
-        />
+        {ressourcesEnseignantsListe.attributes.title && (
+          <Typo.Heading2
+            dangerouslySetInnerHTML={{
+              __html: ressourcesEnseignantsListe.attributes.title,
+            }}
+          />
+        )}
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -164,6 +166,15 @@ export default function RessourcesEnseignants({
       <Separator
         isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
       />
+
+      <SimplePushCta
+        title={ressourcesEnseignantsListe.attributes.aide?.title}
+        image={ressourcesEnseignantsListe.attributes.aide?.image}
+        cta={ressourcesEnseignantsListe.attributes.aide?.cta}
+        surtitle={ressourcesEnseignantsListe.attributes.aide?.surtitle}
+        icon={ressourcesEnseignantsListe.attributes.aide?.icon}
+      />
+
       {ressourcesEnseignantsListe.attributes.socialMediaSection &&
         ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
         ressourcesEnseignantsListe.attributes.socialMediaSection
@@ -172,7 +183,7 @@ export default function RessourcesEnseignants({
             title={
               ressourcesEnseignantsListe.attributes.socialMediaSection.title
             }
-            links={
+            socialMediaLink={
               ressourcesEnseignantsListe.attributes.socialMediaSection
                 .socialMediaLink
             }
@@ -199,9 +210,9 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const news = await fetchCMS<
-    APIResponseData<'api::ressources-enseignant.ressources-enseignant'>[]
-  >(`/news-list?${newsQuery}`)
+  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+    `/news-list?${newsQuery}`
+  )
 
   // Fetch list jeune data
   const query = stringify({
@@ -212,11 +223,14 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'aide',
+      'aide.image',
+      'aide.cta',
     ],
   })
-  const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(
-    `/ressources-enseignant?${query}`
-  )
+  const { data } = await fetchCMS<
+    APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
+  >(`/ressources-enseignant?${query}`)
   return {
     props: {
       newsData: news.data,

@@ -801,13 +801,50 @@ export interface ApiActivePlaylistTagActivePlaylistTag
   };
 }
 
+export interface ApiActualitesPassCultureActualitesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'actualites_pass_cultures';
+  info: {
+    singularName: 'actualites-pass-culture';
+    pluralName: 'actualites-pass-cultures';
+    displayName: 'Actualites Pass Culture';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::actualites-pass-culture.actualites-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::actualites-pass-culture.actualites-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
   extends Schema.SingleType {
   collectionName: 'actualites_rdv_acteurs_culturels';
   info: {
     singularName: 'actualites-rdv-acteurs-culturel';
     pluralName: 'actualites-rdv-acteurs-culturels';
-    displayName: 'ActualitesRdvActeursCulturels';
+    displayName: 'Actualites Rdv Acteurs Culturels';
     description: '';
   };
   options: {
@@ -867,6 +904,43 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEtudesPassCultureEtudesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'etudes_pass_cultures';
+  info: {
+    singularName: 'etudes-pass-culture';
+    pluralName: 'etudes-pass-cultures';
+    displayName: 'Etudes Pass Culture';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    observatoire: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::etudes-pass-culture.etudes-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::etudes-pass-culture.etudes-pass-culture',
       'oneToOne',
       'admin::user'
     > &
@@ -1264,7 +1338,8 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
   info: {
     singularName: 'ressources-enseignant';
     pluralName: 'ressources-enseignants';
-    displayName: 'RessourcesEnseignants';
+    displayName: 'Ressources Enseignants';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1275,6 +1350,7 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
     filtres: Attribute.Component<'common.filtre', true>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1286,6 +1362,42 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRessourcesPassCultureRessourcesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'ressources_pass_cultures';
+  info: {
+    singularName: 'ressources-pass-culture';
+    pluralName: 'ressources-pass-cultures';
+    displayName: 'Ressources Pass Culture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    etudes: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressources-pass-culture.ressources-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressources-pass-culture.ressources-pass-culture',
       'oneToOne',
       'admin::user'
     > &
@@ -1415,8 +1527,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
+      'api::actualites-pass-culture.actualites-pass-culture': ApiActualitesPassCultureActualitesPassCulture;
       'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
       'api::category.category': ApiCategoryCategory;
+      'api::etudes-pass-culture.etudes-pass-culture': ApiEtudesPassCultureEtudesPassCulture;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
@@ -1427,6 +1541,7 @@ declare module '@strapi/types' {
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
       'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
+      'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }

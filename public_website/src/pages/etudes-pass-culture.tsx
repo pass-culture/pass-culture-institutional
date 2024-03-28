@@ -14,12 +14,12 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
+  ressourcesEnseignantsListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
 }
 
-export default function ListeActuCulturels({
+export default function RessourcesEnseignants({
   newsData,
-  listeActuCulturel,
+  ressourcesEnseignantsListe,
 }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -55,36 +55,38 @@ export default function ListeActuCulturels({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(newsData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
+    const filtres = ressourcesEnseignantsListe.attributes?.filtres?.map(
+      (filtre) => {
+        switch (filtre.filtre) {
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
+            }
+          case 'Localisation':
+            uniqueLocalisations = Array.from(
+              new Set(newsData.map((item) => item.attributes.localisation))
+            )
+            return {
+              ...filtre,
+              value: uniqueLocalisations,
+            }
+          case "Secteur d'activités":
+            uniqueSecteurs = Array.from(
+              new Set(newsData.map((item) => item.attributes.secteur))
+            )
+            return {
+              ...filtre,
+              value: uniqueSecteurs,
+            }
+          default:
+            return { ...filtre, value: [] }
+        }
       }
-    })
+    )
     if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -144,10 +146,10 @@ export default function ListeActuCulturels({
   return (
     <React.Fragment>
       <StyledTitle>
-        {listeActuCulturel.attributes.title && (
+        {ressourcesEnseignantsListe.attributes.title && (
           <Typo.Heading2
             dangerouslySetInnerHTML={{
-              __html: listeActuCulturel.attributes.title,
+              __html: ressourcesEnseignantsListe.attributes.title,
             }}
           />
         )}
@@ -158,25 +160,32 @@ export default function ListeActuCulturels({
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={listeActuCulturel.attributes.buttonText}
+        buttonText={ressourcesEnseignantsListe.attributes.buttonText}
       />
 
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
+      <Separator
+        isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
+      />
 
       <SimplePushCta
-        title={listeActuCulturel.attributes.aide?.title}
-        image={listeActuCulturel.attributes.aide?.image}
-        cta={listeActuCulturel.attributes.aide?.cta}
-        surtitle={listeActuCulturel.attributes.aide?.surtitle}
-        icon={listeActuCulturel.attributes.aide?.icon}
+        title={ressourcesEnseignantsListe.attributes.observatoire?.title}
+        image={ressourcesEnseignantsListe.attributes.observatoire?.image}
+        cta={ressourcesEnseignantsListe.attributes.observatoire?.cta}
+        surtitle={ressourcesEnseignantsListe.attributes.observatoire?.surtitle}
+        icon={ressourcesEnseignantsListe.attributes.observatoire?.icon}
       />
-      {listeActuCulturel.attributes.socialMediaSection &&
-        listeActuCulturel.attributes.socialMediaSection.title &&
-        listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
+
+      {ressourcesEnseignantsListe.attributes.socialMediaSection &&
+        ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
+        ressourcesEnseignantsListe.attributes.socialMediaSection
+          .socialMediaLink && (
           <StyledSocialMedia
-            title={listeActuCulturel.attributes.socialMediaSection.title}
+            title={
+              ressourcesEnseignantsListe.attributes.socialMediaSection.title
+            }
             socialMediaLink={
-              listeActuCulturel.attributes.socialMediaSection.socialMediaLink
+              ressourcesEnseignantsListe.attributes.socialMediaSection
+                .socialMediaLink
             }
           />
         )}
@@ -191,7 +200,12 @@ export const getStaticProps = (async () => {
     pagination: {},
     filters: {
       category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+        $eqi: [
+          'Dossier de presse',
+          'Communiqué de presse',
+          'Étude ritualisée',
+          'Étude ponctuelle',
+        ],
       },
     },
   })
@@ -209,18 +223,19 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
-      'aide',
-      'aide.image',
-      'aide.cta',
+      'observatoire',
+      'observatoire.image',
+      'observatoire.cta',
     ],
   })
   const { data } = await fetchCMS<
-    APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-  >(`/actualites-rdv-acteurs-culturel?${query}`)
+    APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+  >(`/ressources-enseignant?${query}`)
+
   return {
     props: {
       newsData: news.data,
-      listeActuCulturel: data,
+      ressourcesEnseignantsListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>

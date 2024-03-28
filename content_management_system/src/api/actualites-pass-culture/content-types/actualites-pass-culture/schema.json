@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "ressources_enseignants",
+  "collectionName": "actualites_pass_cultures",
   "info": {
-    "singularName": "ressources-enseignant",
-    "pluralName": "ressources-enseignants",
-    "displayName": "Ressources Enseignants",
+    "singularName": "actualites-pass-culture",
+    "pluralName": "actualites-pass-cultures",
+    "displayName": "Actualites Pass Culture",
     "description": ""
   },
   "options": {

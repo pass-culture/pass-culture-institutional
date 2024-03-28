@@ -46,6 +46,7 @@ export default function Help({ helpData }: HelpProps) {
             surtitle={helpData.attributes.simplepushcta[0]?.surtitle}
             image={helpData.attributes.simplepushcta[0]?.image}
             cta={helpData.attributes.simplepushcta[0]?.cta}
+            icon={helpData.attributes.simplepushcta[0]?.icon}
           />
         )}
 
