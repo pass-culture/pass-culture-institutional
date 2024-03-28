@@ -1,21 +1,26 @@
 import React from 'react'
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
+
+import { APIResponse } from '@/types/strapi'
 
 interface VideoProps {
   description?: string
   url?: string
+  alt?: string
+  image?: APIResponse<'plugin::upload.file'> | null
 }
 
 export function Video(props: VideoProps) {
   return (
     <Root>
       <StyledVideo
+        light={props.image?.data.attributes.url}
         url={props.url}
-        light
         width="100%"
         controls={true}
         height="100%"
+        alt={props.alt}
       />
       <p>{props.description}</p>
     </Root>
@@ -67,6 +72,6 @@ const Root = styled.div`
 
 const StyledVideo = styled(ReactPlayer)`
   max-width: 100%;
-  height: auto;
+  aspect-ratio: 16 / 9;
   border-radius: 2.5rem;
 `

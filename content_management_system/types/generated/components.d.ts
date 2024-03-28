@@ -65,7 +65,7 @@ export interface BlockHeader extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
+    text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String;
   };
@@ -331,10 +331,13 @@ export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {
     displayName: 'Video';
+    description: '';
   };
   attributes: {
     url: Attribute.Text;
     description: Attribute.Text;
+    alt: Attribute.Text;
+    image: Attribute.Media;
   };
 }
 
