@@ -994,6 +994,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
+    logos: Attribute.Component<'block.logos'>;
     videoSection: Attribute.Component<'block.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1197,7 +1198,14 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.simple-push-cta',
         'block.space',
         'block.vertical-carousel',
-        'block.video'
+        'block.video',
+        'block.key-number-carousel',
+        'block.logos',
+        'block.testimonies',
+        'block.latest-news',
+        'block.experience-video-carousel',
+        'block.offers-carousel',
+        'block.piled-cards'
       ]
     >;
     createdAt: Attribute.DateTime;

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 
-type KeyNumberCarouselSlideProps = {
+export type KeyNumberCarouselSlideProps = {
   slideIndex: number
   title: string
   description: string
@@ -51,6 +51,8 @@ const Root = styled(Slide)`
       border-radius: 0.625rem;
       @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 0;
+        margin-right: 1rem;
+        margin-left: 1rem;
       }
     }
   `}

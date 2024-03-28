@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_common_vertical_carousel_items",
+  "collectionName": "components_block_testimony_carousels",
   "info": {
-    "displayName": "verticalCarouselItem",
+    "displayName": "TestimonyCarouselItem",
     "description": ""
   },
   "options": {},
@@ -11,11 +11,11 @@
       "required": true
     },
     "description": {
-      "type": "string",
+      "type": "text",
       "required": true
     },
-    "url": {
-      "type": "string",
+    "videoUrl": {
+      "type": "text",
       "required": true
     },
     "image": {
@@ -26,7 +26,8 @@
         "audios"
       ],
       "type": "media",
-      "multiple": false
+      "multiple": false,
+      "required": true
     }
   }
 }

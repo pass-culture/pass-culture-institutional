@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_common_key_number_items",
+  "info": {
+    "displayName": "KeyNumberItems"
+  },
+  "options": {},
+  "attributes": {
+    "firstEmoji": {
+      "type": "string"
+    },
+    "secondEmoji": {
+      "type": "string"
+    },
+    "thirdEmoji": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

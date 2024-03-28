@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_block_logos",
+  "info": {
+    "displayName": "Logos",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "previousButtonLabel": {
+      "type": "string"
+    },
+    "nextButtonLabel": {
+      "type": "string"
+    },
+    "controlsLabel": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.logo"
+    }
+  }
+}

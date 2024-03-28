@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_common_not_required_links",
+  "info": {
+    "displayName": "NotRequiredLink",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Label": {
+      "type": "string"
+    },
+    "URL": {
+      "type": "string"
+    }
+  }
+}

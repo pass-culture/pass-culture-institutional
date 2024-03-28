@@ -13,7 +13,7 @@ import { Typo } from '@/ui/components/typographies'
 
 type SocialMediaProps = {
   title: string
-  links: { name: string; url: string }[]
+  socialMediaLink: { name: string; url: string }[]
   className?: string
 }
 
@@ -27,12 +27,16 @@ const SOCIAL_ICONS: { [key: string]: React.JSX.Element } = {
   linkedin: <LinkedIn />,
 }
 
-export function SocialMedia({ title, links, className }: SocialMediaProps) {
+export function SocialMedia({
+  title,
+  socialMediaLink,
+  className,
+}: SocialMediaProps) {
   return (
     <StyledRoot className={className}>
       <StyledHeading>{title}</StyledHeading>
       <StyledList>
-        {links.map((link) => {
+        {socialMediaLink.map((link) => {
           return (
             <StyledListItem key={link.name}>
               <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>

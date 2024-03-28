@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "surtititle": {
+    "surtitle": {
       "type": "string",
       "required": true
     },
@@ -25,22 +25,14 @@
         "audios"
       ]
     },
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "cta": {
       "type": "component",
       "repeatable": false,
       "component": "common.link",
       "required": true
+    },
+    "icon": {
+      "type": "string"
     }
   }
 }

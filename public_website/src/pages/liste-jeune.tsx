@@ -134,7 +134,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         listejeune.attributes.socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
             title={listejeune.attributes.socialMediaSection.title}
-            links={listejeune.attributes.socialMediaSection.socialMediaLink}
+            socialMediaLink={
+              listejeune.attributes.socialMediaSection.socialMediaLink
+            }
           />
         )}
     </React.Fragment>

@@ -1,23 +1,21 @@
 {
-  "collectionName": "components_block_headers",
+  "collectionName": "components_common_piled_card_items",
   "info": {
-    "displayName": "Header",
+    "displayName": "PiledCardItem",
     "description": ""
   },
   "options": {},
   "attributes": {
     "title": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "text": {
-      "type": "text",
-      "required": true
+    "description": {
+      "type": "text"
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
@@ -25,7 +23,13 @@
         "audios"
       ]
     },
-    "icon": {
+    "firstIcon": {
+      "type": "string"
+    },
+    "secondIcon": {
+      "type": "string"
+    },
+    "color": {
       "type": "string"
     }
   }

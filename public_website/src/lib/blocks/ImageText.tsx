@@ -9,7 +9,7 @@ type HeroProps = {
   title: string
   description: string
   image?: APIResponse<'plugin::upload.file'> | null
-  icon?: APIResponse<'plugin::upload.file'> | null
+  icon: string
   isImageRight?: boolean
 }
 
@@ -25,8 +25,7 @@ export function ImageText({
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledIcon
           className={isImageRight ? 'IconRight' : 'IconLeft'}
-          src={getStrapiURL(icon?.data.attributes.url)}
-          alt={icon?.data.attributes.alternativeText}
+          dangerouslySetInnerHTML={{ __html: icon }}
         />
         <StyledContentTextWrapper className="first">
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
@@ -72,7 +71,7 @@ const Root = styled.div`
 
       .IconLeft {
         top: 36rem;
-        left: 33.5rem;
+        left: 35rem;
         z-index: 2;
       }
     }
@@ -89,7 +88,7 @@ const Root = styled.div`
         .IconRight,
         .IconLeft {
           top: 23rem;
-          left: 0;
+          left: 2rem;
           z-index: 2;
         }
       }
@@ -163,14 +162,19 @@ const StyledText = styled.p`
 `
 
 const StyledImage = styled.img`
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   transform: rotate(2deg);
+  box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
+  border-radius: 1.5rem;
 `
 
-const StyledIcon = styled.img`
-  max-width: 5rem;
-  height: auto;
-  transform: rotate(2deg);
-  position: absolute;
+const StyledIcon = styled.p`
+  ${({ theme }) => css`
+    font-size: ${theme.fonts.sizes['8xl']};
+    max-width: 5rem;
+    height: auto;
+    transform: rotate(2deg);
+    position: absolute;
+  `}
 `

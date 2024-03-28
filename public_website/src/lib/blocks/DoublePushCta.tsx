@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
@@ -9,12 +8,13 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface DoublePushCTAProps {
   title: string | undefined | TrustedHTML
-  description: string | undefined
+  text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   firstCta: { Label: string; URL: string } | undefined
 
-  secondCta: { Label: string; URL: string } | undefined
+  secondCta: { Label?: string; URL?: string } | undefined
   className?: string
+  icon?: string
 }
 
 export function DoublePushCTA(props: DoublePushCTAProps) {
@@ -26,22 +26,23 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             props.image?.data.attributes.url &&
             getStrapiURL(props.image?.data.attributes.url)
           }></Card>
+
+        <p>{props.icon}</p>
       </CardContainer>
       <RightSide>
         {props.title && (
           <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
         )}
-        {props.description && (
-          <p dangerouslySetInnerHTML={{ __html: props.description }} />
-        )}
-
+        {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
         <CtaLink href={props.firstCta?.URL}>{props.firstCta?.Label}</CtaLink>
-        <Button
-          href={props.secondCta?.URL}
-          target="_blank"
-          variant="quaternary">
-          {props.secondCta?.Label}
-        </Button>
+        {props.secondCta?.URL && props.secondCta?.Label && (
+          <Button
+            href={props.secondCta?.URL}
+            target="_blank"
+            variant="quaternary">
+            {props.secondCta?.Label}
+          </Button>
+        )}
       </RightSide>
     </Root>
   )
@@ -51,7 +52,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
     max-width: 90rem;
-    margin: 0 auto;
+    margin: 5rem auto;
     gap: 5.625rem;
     border-radius: 2.5rem;
     display: grid;
@@ -72,21 +73,31 @@ const Root = styled.div`
 `
 
 const CardContainer = styled.div`
-  position: relative;
-  z-index: 1;
-  margin: -3.125rem 0 -3.125rem 5rem;
-  max-width: 28rem;
+  ${({ theme }) => css`
+    position: relative;
+    z-index: 1;
+    margin: -3.125rem 0 -3.125rem 5rem;
+    max-width: 28rem;
 
-  @media (width < ${theme.mediaQueries.tablet}) {
-    margin: 0 auto;
-    position: absolute;
+    p {
+      position: absolute;
+      top: 20%;
+      right: -1.5rem;
+      font-size: ${theme.fonts.sizes['8xl']};
+      transform: rotate(-7deg);
+    }
 
-    min-width: 90%;
-    min-height: 40%;
+    @media (width < ${theme.mediaQueries.tablet}) {
+      margin: 0 auto;
+      position: absolute;
 
-    top: -8rem;
-    left: 1.8rem;
-  }
+      min-width: 90%;
+      min-height: 40%;
+
+      top: -8rem;
+      left: 1.8rem;
+    }
+  `}
 `
 
 const Card = styled.div<{ $imageUrl?: string }>`
@@ -156,6 +167,8 @@ const CtaLink = styled.a`
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
       margin-bottom: 1.5rem;
+      display: block;
+      width: fit-content;
     }
   `}
 `

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_block_piled_cards",
+  "info": {
+    "displayName": "PiledCards",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.piled-card-item"
+    }
+  }
+}

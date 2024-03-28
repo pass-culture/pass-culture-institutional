@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_common_offers_carousel_items",
+  "info": {
+    "displayName": "OffersCarouselItem",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "surtitle": {
+      "type": "string"
+    },
+    "firstIcon": {
+      "type": "string"
+    },
+    "secondIcon": {
+      "type": "string"
+    },
+    "text": {
+      "type": "text"
+    },
+    "secondSurtitle": {
+      "type": "string"
+    }
+  }
+}

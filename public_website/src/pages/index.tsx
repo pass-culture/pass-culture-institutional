@@ -103,7 +103,7 @@ export default function Home({
 
       <StyledSocialMedia
         title={homeData.attributes.socialMediaSection.title}
-        links={homeData.attributes.socialMediaSection.socialMediaLink}
+        socialMediaLink={homeData.attributes.socialMediaSection.socialMediaLink}
       />
     </React.Fragment>
   )

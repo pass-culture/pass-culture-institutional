@@ -14,7 +14,7 @@ interface LittleListProps {
   title?: string
   description?: string
   content?: ContentItem[]
-  withDescription?: boolean
+  withDescritpion: boolean
 }
 
 export function LittleList(props: LittleListProps) {
@@ -33,9 +33,12 @@ export function LittleList(props: LittleListProps) {
                 <span>{item.firstEmoji}</span>
                 <span>{item.secondEmoji}</span>
               </ColumnEmoji>
+
               <ColumnText>
                 <p>{item.simple}</p>
-                {props.withDescription && <p>{item.description}</p>}
+                {props.withDescritpion && item.description && (
+                  <p>{item.description}</p>
+                )}
               </ColumnText>
             </ColumnContent>
           ))}
@@ -63,7 +66,6 @@ const Root = styled.div`
         max-width: 80%;
       }
     }
-    /* TODO: mobile style */
   `}
 `
 

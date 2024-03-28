@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_block_offers_carousels",
+  "info": {
+    "displayName": "OffersCarousel",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "previousButtonLabel": {
+      "type": "string"
+    },
+    "nextButtonLabel": {
+      "type": "string"
+    },
+    "controlsLabel": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.offers-carousel-item"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    }
+  }
+}
