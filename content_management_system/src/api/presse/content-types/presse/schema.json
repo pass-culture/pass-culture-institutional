@@ -4,7 +4,8 @@
   "info": {
     "singularName": "presse",
     "pluralName": "presses",
-    "displayName": "Presse"
+    "displayName": "Presse",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,6 +32,21 @@
       "type": "component",
       "repeatable": false,
       "component": "block.separator"
+    },
+    "texteImage": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.image-text"
+    },
+    "pushCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.double-push-cta"
+    },
+    "aide": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
     }
   }
 }

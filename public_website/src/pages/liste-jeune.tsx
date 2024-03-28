@@ -6,11 +6,11 @@ import styled, { css } from 'styled-components'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
@@ -129,6 +129,15 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       />
 
       <Separator isActive={listejeune.attributes.separator?.isActive} />
+
+      <SimplePushCta
+        title={listejeune.attributes.aide?.title}
+        image={listejeune.attributes.aide?.image}
+        cta={listejeune.attributes.aide?.cta}
+        surtitle={listejeune.attributes.aide?.surtitle}
+        icon={listejeune.attributes.aide?.icon}
+      />
+
       {listejeune.attributes.socialMediaSection &&
         listejeune.attributes.socialMediaSection.title &&
         listejeune.attributes.socialMediaSection.socialMediaLink && (
@@ -168,6 +177,9 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'aide',
+      'aide.image',
+      'aide.cta',
     ],
   })
   const { data } = await fetchCMS<

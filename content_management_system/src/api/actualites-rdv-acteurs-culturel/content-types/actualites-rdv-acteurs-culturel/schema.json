@@ -32,6 +32,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.separator"
+    },
+    "aide": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
     }
   }
 }

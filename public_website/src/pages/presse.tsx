@@ -3,9 +3,12 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { ImageText } from '@/lib/blocks/ImageText'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
@@ -157,12 +160,40 @@ export default function Presse({ newsData, presseListe }: ListProps) {
       />
 
       <Separator isActive={presseListe.attributes.separator?.isActive} />
+
+      <ImageText
+        title={presseListe.attributes.texteImage?.title}
+        image={presseListe.attributes.texteImage?.image}
+        description={presseListe.attributes.texteImage?.description}
+        icon={presseListe.attributes.texteImage?.icon}
+        isImageRight={presseListe.attributes.texteImage?.isImageRight}
+      />
+
+      <DoublePushCTA
+        title={presseListe.attributes.pushCta?.title}
+        image={presseListe.attributes.pushCta?.image}
+        firstCta={presseListe.attributes.pushCta?.firstCta}
+        secondCta={presseListe.attributes.pushCta?.secondCta}
+        text={presseListe.attributes.pushCta?.text}
+        icon={presseListe.attributes.pushCta?.icon}
+      />
+
+      <SimplePushCta
+        title={presseListe.attributes.aide?.title}
+        image={presseListe.attributes.aide?.image}
+        cta={presseListe.attributes.aide?.cta}
+        surtitle={presseListe.attributes.aide?.surtitle}
+        icon={presseListe.attributes.aide?.icon}
+      />
+
       {presseListe.attributes.socialMediaSection &&
         presseListe.attributes.socialMediaSection.title &&
         presseListe.attributes.socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
             title={presseListe.attributes.socialMediaSection.title}
-            links={presseListe.attributes.socialMediaSection.socialMediaLink}
+            socialMediaLink={
+              presseListe.attributes.socialMediaSection.socialMediaLink
+            }
           />
         )}
     </React.Fragment>
@@ -199,6 +230,14 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'texteImage',
+      'texteImage.image',
+      'pushCta',
+      'pushCta.image',
+      'pushCta.firstCta',
+      'pushCta.secondCta',
+      'aide.image',
+      'aide.cta',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(

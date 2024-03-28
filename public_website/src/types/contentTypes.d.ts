@@ -819,6 +819,7 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     filtres: Attribute.Component<'common.filtre', true>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1024,6 +1025,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
     socialMediaSection: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1224,6 +1226,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     singularName: 'presse';
     pluralName: 'presses';
     displayName: 'Presse';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1234,6 +1237,9 @@ export interface ApiPressePresse extends Schema.SingleType {
     filtres: Attribute.Component<'common.filtre', true>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
+    texteImage: Attribute.Component<'block.image-text'>;
+    pushCta: Attribute.Component<'block.double-push-cta'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
@@ -160,12 +161,20 @@ export default function ListeActuCulturels({
       />
 
       <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
+
+      <SimplePushCta
+        title={listeActuCulturel.attributes.aide?.title}
+        image={listeActuCulturel.attributes.aide?.image}
+        cta={listeActuCulturel.attributes.aide?.cta}
+        surtitle={listeActuCulturel.attributes.aide?.surtitle}
+        icon={listeActuCulturel.attributes.aide?.icon}
+      />
       {listeActuCulturel.attributes.socialMediaSection &&
         listeActuCulturel.attributes.socialMediaSection.title &&
         listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
             title={listeActuCulturel.attributes.socialMediaSection.title}
-            links={
+            socialMediaLink={
               listeActuCulturel.attributes.socialMediaSection.socialMediaLink
             }
           />
@@ -199,6 +208,9 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'aide',
+      'aide.image',
+      'aide.cta',
     ],
   })
   const { data } = await fetchCMS<
