@@ -2,17 +2,17 @@ export const RessourcesEnseignatsPageFixtures = {
   ressourcesEnseignant: {
     id: 1,
     attributes: {
-      buttonText: 'More',
-      titleEventSection: 'Les prochains rendez-vous',
+      buttonText: 'Moreeeee',
+      titleEventSection: 'Les rendez-vous',
       createdAt: '2024-03-19T10:32:37.437Z',
       filtres: [
         {
           filtre: 'Catégorie',
-          id: 1,
+          id: 78,
         },
         {
           filtre: 'Localisation',
-          id: 2,
+          id: 56,
         },
       ],
       aide: [
@@ -46,12 +46,13 @@ export const RessourcesEnseignatsPageFixtures = {
               id: 5,
             },
           },
-          title: 'Les offres et expériences à vivre avec le pass',
+          title: 'Les offres  à vivre avec le pass',
           surtitle: 'Pour aller plus loin',
         },
       ],
       publishedAt: '2024-03-19T10:32:38.445Z',
-      title: 'Programmes de sensibilisation à lart dans votre région',
+      title:
+        'Programmes  pour la  sensibilisation à la musique dans votre région',
     },
     separator: {
       isActive: true,
@@ -71,7 +72,7 @@ export const RessourcesEnseignatsPageFixtures = {
           url: '#',
         },
       ],
-      title: 'On reste connectés',
+      title: 'On redfdsewrgtjzki  zjzztjtzjj ztjtjste connectés',
     },
 
     updatedAt: '2023-06-19T10:32:38.448Z',

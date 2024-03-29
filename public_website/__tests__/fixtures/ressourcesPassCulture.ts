@@ -2,9 +2,9 @@ export const RessourcesPassCulturePageFixtures = {
   ressourcesPassCulture: {
     id: 1,
     attributes: {
-      titleEventSection: 'Les prochains rendez-vous',
+      titleEventSection: 'Les procfdgfdhains rendez-vous',
       buttonText: 'More',
-      createdAt: '2024-03-19T10:32:37.437Z',
+      createdAt: '2029-03-19T10:37:39.437Z',
       aide: [
         {
           cta: {
@@ -47,11 +47,11 @@ export const RessourcesPassCulturePageFixtures = {
         },
         {
           filtre: 'Localisation',
-          id: 2,
+          id: 34,
         },
       ],
-      publishedAt: '2024-03-19T10:22:38.445Z',
-      title: 'Programmes de sensidsfdsffsdfbilisation à lart dans votre région',
+      publishedAt: '2324-03-19T10:22:38.445Z',
+      title: 'Progra de sensidsfdfdgfsffsdfbilisation à lart dans votre région',
     },
     separator: {
       id: 1,
@@ -61,19 +61,19 @@ export const RessourcesPassCulturePageFixtures = {
       id: 10,
       socialMediaLink: [
         {
-          id: 31,
+          id: 231,
           name: 'tiktok',
-          url: '#',
+          url: '###',
         },
         {
           id: 32,
           name: 'snapchat',
-          url: '#',
+          url: '####',
         },
       ],
       title: 'On restdsfsde connectés',
     },
 
-    updatedAt: '2014-03-19T10:32:38.448Z',
+    updatedAt: '2014-03-19T10:32:38.458Z',
   },
 }
