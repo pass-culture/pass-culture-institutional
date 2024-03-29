@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../../faqData.json'
+import arrowUrl from '../../image/arrowd.svg'
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
 import { LinkFaq } from './Link'
@@ -21,10 +22,11 @@ export function Faq({
   filteringProperty,
   limit,
 }: FaqProps) {
+  /** Extract plain text from html and cut it at 600 characters */
   const cutFaqBody = (body: string) => {
     const plainText = body.replace(/<[^>]*>/g, '')
     if (plainText.length > 200) {
-      return plainText.substring(0, 200) + '...'
+      return plainText.substring(0, 600) + '...'
     } else {
       return plainText
     }
@@ -148,15 +150,22 @@ const StyledAccordion = styled.details`
     summary {
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
-      display: flex;
-      justify-content: space-between;
+      display: block;
+      padding-right 2rem;
+      position: relative;
     }
 
     summary::after {
-      content: url('../../image/arrowd.svg');
-      display: inline-block;
-      width: 20px;
-      height: 20px;
+      content: url('${arrowUrl.src}');
+      right: 2rem;
+      top: 50%;
+      position: absolute;
+      transform: translateY(-50%);
+      line-height: 0;
+    }
+
+    &[open] summary::after {
+      transform: rotate(180deg);
     }
 
     p {
