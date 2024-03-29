@@ -924,6 +924,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
     cardText: Attribute.Component<'block.double-push-cta'>;
     social: Attribute.Component<'block.social-media', true>;
     simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
+    faq: Attribute.Component<'block.faq'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

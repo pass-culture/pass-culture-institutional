@@ -2,7 +2,6 @@ import { afterAll, beforeAll, expect } from 'vitest'
 import type { AxeMatchers } from 'vitest-axe/matchers'
 import * as matchers from 'vitest-axe/matchers'
 
-import 'vitest'
 import 'vitest-canvas-mock'
 import { server } from './__tests__/server'
 

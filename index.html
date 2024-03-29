@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module" async>
+      const categoryResponse = await fetch(
+        "https://passculture.zendesk.com/api/v2/help_center/categories?per_page=100"
+      );
+      const categoryResponseObject = await categoryResponse.json();
+      const categoriesData = categoryResponseObject.categories;
+      const resultObject = {};
+      categoriesData.forEach(async (category) => {
+        resultObject[category.id] = [];
+        let faqResponse = await fetch(
+          `https://passculture.zendesk.com/api/v2/help_center/categories/${category.id}/articles?per_page=100`
+        );
+        let faqResponseObject = await faqResponse.json();
+        resultObject[category.id].push(...faqResponseObject.articles);
+        if (faqResponseObject.page_count > 1) {
+          for (let index = 2; index <= faqResponseObject.page_count; index++) {
+            faqResponse = await fetch(
+              `https://passculture.zendesk.com/api/v2/help_center/categories/${category.id}/articles?per_page=100&page=${index}`
+            );
+            faqResponseObject = await faqResponse.json();
+            resultObject[category.id].push(...faqResponseObject.articles);
+          }
+        }
+      });
+      console.log(resultObject);
+    </script>
+  </body>
+</html>

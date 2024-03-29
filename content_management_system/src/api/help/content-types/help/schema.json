@@ -32,6 +32,12 @@
       "type": "component",
       "repeatable": true,
       "component": "block.simple-push-cta"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.faq",
+      "required": true
     }
   }
 }

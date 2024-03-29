@@ -27,9 +27,11 @@ export default function Help({ helpData }: HelpProps) {
         }
       />
       <Faq
-        title="Les questions les plus posées"
-        cta="Voir toute la FAQ"
-        link="#"
+        title={helpData.attributes.faq.title}
+        cta={helpData.attributes.faq.cta}
+        categories={helpData.attributes.faq.categories}
+        filteringProperty={helpData.attributes.faq.filteringProperty}
+        limit={helpData.attributes.faq.limit}
       />
       <StyledPushCTA
         title={helpData.attributes.cardText?.title}
@@ -72,6 +74,8 @@ export const getStaticProps = (async () => {
       'social',
       'social.socialMediaLink',
       'social.title',
+      'faq',
+      'faq.cta',
       'simplepushcta',
       'simplepushcta.image',
       'simplepushcta.cta',
