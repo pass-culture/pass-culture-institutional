@@ -36,15 +36,15 @@ export default function ListeActuCulturels({
     new Set(newsRDVData.map((item) => item.attributes.secteur))
   )
 
-  const eventCat = Array.from(
+  const eventLACCat = Array.from(
     new Set(eventsData.map((item) => item.attributes.category))
   )
 
-  const eventLoc = Array.from(
+  const eventLACLoc = Array.from(
     new Set(eventsData.map((item) => item.attributes.localisation))
   )
 
-  const eventSec = Array.from(
+  const eventLACSec = Array.from(
     new Set(eventsData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
@@ -74,12 +74,12 @@ export default function ListeActuCulturels({
   >([])
 
   useEffect(() => {
-    setEventCategory(eventCat)
-    setEventLocalisation(eventLoc)
-    setOriginalEventCategory(eventCat)
-    setOriginalEventLocalisation(eventLoc)
-    setEventSecteur(eventSec)
-    setOriginalEventSecteur(eventSec)
+    setEventCategory(eventLACCat)
+    setEventLocalisation(eventLACLoc)
+    setOriginalEventCategory(eventLACCat)
+    setOriginalEventLocalisation(eventLACLoc)
+    setEventSecteur(eventLACSec)
+    setOriginalEventSecteur(eventLACSec)
 
     setEventData(eventsData)
     let uniqueEventCategories = []
