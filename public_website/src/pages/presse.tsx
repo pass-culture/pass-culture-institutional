@@ -74,6 +74,7 @@ export default function Presse({
   const [eventData, setEventData] = useState<
     APIResponseData<'api::event.event'>[]
   >([])
+
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
@@ -109,14 +110,6 @@ export default function Presse({
             ...filtre,
             value: uniqueCategories,
           }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
         case "Secteur d'activités":
           uniqueSecteurs = Array.from(
             new Set(newsData.map((item) => item.attributes.secteur))
@@ -125,6 +118,15 @@ export default function Presse({
             ...filtre,
             value: uniqueSecteurs,
           }
+        case 'Localisation':
+          uniqueLocalisations = Array.from(
+            new Set(newsData.map((item) => item.attributes.localisation))
+          )
+          return {
+            ...filtre,
+            value: uniqueLocalisations,
+          }
+
         default:
           return { ...filtre, value: [] }
       }
@@ -169,8 +171,8 @@ export default function Presse({
   const fetchData = async () => {
     const newsQuery = stringify({
       sort: ['date:desc'],
-      populate: ['image'],
       pagination: {},
+      populate: ['image'],
       filters: {
         category: {
           $eqi: category,
@@ -192,9 +194,9 @@ export default function Presse({
   }
   const fetchEventData = async () => {
     const eventQuery = stringify({
+      pagination: {},
       sort: ['date:desc'],
       populate: ['image'],
-      pagination: {},
       filters: {
         category: {
           $eqi: eventCategory,
@@ -214,21 +216,6 @@ export default function Presse({
 
     setEventData(events.data)
   }
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
-        break
-      default:
-        break
-    }
-  }
   const handleEventFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
@@ -246,6 +233,22 @@ export default function Presse({
         break
     }
   }
+  const handleFilterChange = (name: string, value: string[]) => {
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      case "Secteur d'activités":
+        setSecteur(value[0] === '' ? originalSecteur : value)
+        break
+      default:
+        break
+    }
+  }
+
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
