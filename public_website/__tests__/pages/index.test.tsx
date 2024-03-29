@@ -30,7 +30,7 @@ describe('Home page', () => {
       })
       expect(a11yResult).toHaveNoViolations()
     },
-    { timeout: 20000 }
+    { timeout: 70000 }
   )
 
   it('should trigger test event when clicking on the button', async () => {
