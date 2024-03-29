@@ -341,38 +341,38 @@ export default function Presse({
 export const getStaticProps = (async () => {
   const newsQuery = stringify({
     sort: ['date:desc'],
-    populate: ['image'],
     pagination: {},
+    populate: ['image'],
     filters: {
       category: {
         $eqi: [
           'Dossier de presse',
-          'Communiqué de presse',
           'Étude ritualisée',
           'Étude ponctuelle',
+          'Communiqué de presse',
         ],
       },
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+  const newsRequest = await fetchCMS<APIResponseData<'api::news.news'>[]>(
     `/news-list?${newsQuery}`
   )
 
   const query = stringify({
     populate: [
       'title',
-      'buttonText',
-      'filtres',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
+      'buttonText',
+      'filtres',
       'separator',
-      'texteImage',
-      'texteImage.image',
       'pushCta',
       'pushCta.image',
       'pushCta.firstCta',
       'pushCta.secondCta',
+      'texteImage',
+      'texteImage.image',
       'aide.image',
       'aide.cta',
     ],
@@ -393,7 +393,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: news.data,
+      newsData: newsRequest.data,
       presseListe: data,
       eventsData: events.data,
     },

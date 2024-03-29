@@ -66,7 +66,7 @@ export default function ListeActuCulturels({
   const [eventSecteur, setEventSecteur] = useState<string[]>([])
   const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
-  const [newsRDVfilters, setNewsRDVFilters] = useState<Filter[]>([])
+  const [newsRdvfilters, setNewsRDVFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   const [eventFilters, setEventFilters] = useState<Filter[]>([])
@@ -273,7 +273,7 @@ export default function ListeActuCulturels({
           />
         )}
         <FilterContainer
-          filtres={newsRDVfilters}
+          filtres={newsRdvfilters}
           onFilterChange={handleFilterChange}
         />
       </StyledTitle>
