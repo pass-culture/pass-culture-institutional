@@ -58,14 +58,6 @@ export default function EtudesPassCulture({
     const filtres = etudesPassCultureListe.attributes?.filtres?.map(
       (filtre) => {
         switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
           case 'Localisation':
             uniqueLocalisations = Array.from(
               new Set(newsData.map((item) => item.attributes.localisation))
@@ -73,6 +65,14 @@ export default function EtudesPassCulture({
             return {
               ...filtre,
               value: uniqueLocalisations,
+            }
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
@@ -123,14 +123,14 @@ export default function EtudesPassCulture({
 
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
+      case "Secteur d'activités":
+        setSecteur(value[0] === '' ? originalSecteur : value)
+        break
       case 'Localisation':
         setLocalisation(value[0] === '' ? originalLocalisation : value)
         break
       case 'Catégorie':
         setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
         break
       default:
         break
