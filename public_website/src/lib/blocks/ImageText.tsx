@@ -38,7 +38,7 @@ export function ImageText({
         <StyledContentImagetWrapper className="second">
           <StyledImage
             src={getStrapiURL(image?.data.attributes.url)}
-            alt={image?.data.attributes.alternativeText}
+            alt={image?.data.attributes.alternativeText || ''}
           />
         </StyledContentImagetWrapper>
       </StyledContentWrapper>

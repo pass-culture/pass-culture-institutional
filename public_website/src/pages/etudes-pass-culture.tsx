@@ -25,18 +25,18 @@ export default function EtudesPassCulture({
     new Set(newsData.map((item) => item.attributes.category))
   )
 
+  const sec = Array.from(
+    new Set(newsData.map((item) => item.attributes.secteur))
+  )
   const loc = Array.from(
     new Set(newsData.map((item) => item.attributes.localisation))
   )
 
-  const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
-  )
   const [category, setCategory] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
+  const [originalCategory, setOriginalCategory] = useState<string[]>([])
+  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
@@ -45,9 +45,9 @@ export default function EtudesPassCulture({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
+    setSecteur(sec)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
-    setSecteur(sec)
     setOriginalSecteur(sec)
 
     setData(newsData)
@@ -201,10 +201,6 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
-  )
-
   const query = stringify({
     populate: [
       'title',
@@ -218,6 +214,10 @@ export const getStaticProps = (async () => {
       'observatoire.cta',
     ],
   })
+  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+    `/news-list?${newsQuery}`
+  )
+
   const { data } = await fetchCMS<
     APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
   >(`/etudes-pass-culture?${query}`)

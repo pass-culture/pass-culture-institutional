@@ -37,7 +37,6 @@ export function EventListItems({
                 eventItem.attributes.image &&
                 getStrapiURL(eventItem.attributes.image?.data.attributes.url)
               }
-              slug={eventItem.attributes.slug}
               startTime={eventItem.attributes.startTime}
               endTime={eventItem.attributes.endTime}
               city={eventItem.attributes.city}

@@ -13,7 +13,6 @@ type ListCardProps = {
   category: string
   date: Date | string
   imageUrl: string | null | undefined
-  slug: string
   startTime: string | Date
   endTime: string | Date
   city: string
@@ -37,7 +36,8 @@ export function EventCard({
       timeString = time
     } else {
       const splitTime = time?.toISOString().split('T')[1]
-      timeString = splitTime ? splitTime : ''
+      timeString = ''
+      if (splitTime) timeString = splitTime
     }
 
     const timeArray = timeString.split(':')
@@ -218,28 +218,3 @@ const StyledCardImage = styled(Image)`
     }
   `}
 `
-
-// const StyledMeta = styled.p`
-//   ${({ theme }) => css`
-//     color: ${theme.colors.black};
-//     opacity: 0.6;
-//     text-transform: uppercase;
-//     margin-bottom: 0.5rem;
-//     font-size: ${theme.fonts.sizes['2xs']};
-//     font-weight: ${theme.fonts.weights.semiBold};
-//   `}
-// `
-
-// const StyledCardTitle = styled.h3`
-//   ${({ theme }) => css`
-//     font-weight: ${theme.fonts.weights.semiBold};
-//   `}
-// `
-
-// const StyledCardLink = styled(Link)`
-//   &::after {
-//     inset: 0;
-//     content: '';
-//     position: absolute;
-//   }
-// `

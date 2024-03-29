@@ -28,8 +28,8 @@ export default function ListeActualitesPassCulture({
     new Set(newsData.map((item) => item.attributes.localisation))
   )
   const [category, setCategory] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
+  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
@@ -38,24 +38,16 @@ export default function ListeActualitesPassCulture({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalCategory(cat)
     setOriginalLocalisation(loc)
+    setOriginalCategory(cat)
 
     setData(newsData)
-    let uniqueCategories = []
     let uniqueLocalisations = []
+    let uniqueCategories = []
 
     const filtres = listeActualitesPassCulture.attributes?.filtres?.map(
       (filtre) => {
         switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
           case 'Localisation':
             uniqueLocalisations = Array.from(
               new Set(newsData.map((item) => item.attributes.localisation))
@@ -63,6 +55,14 @@ export default function ListeActualitesPassCulture({
             return {
               ...filtre,
               value: uniqueLocalisations,
+            }
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
             }
           default:
             return { ...filtre, value: [] }
@@ -76,8 +76,8 @@ export default function ListeActualitesPassCulture({
 
   const fetchData = async () => {
     const newsQuery = stringify({
-      sort: ['date:desc'],
       populate: ['image'],
+      sort: ['date:desc'],
       pagination: {},
       filters: {
         category: {
@@ -207,8 +207,8 @@ export const getStaticProps = (async () => {
 const StyledTitle = styled.div`
   ${({ theme }) => css`
     padding: 1rem 1.5rem;
-    max-width: 80rem;
     margin-inline: auto;
+    max-width: 80rem;
     margin-top: 4rem;
 
     h2 {
@@ -225,8 +225,8 @@ const StyledTitle = styled.div`
 
 const StyledListItems = styled(ListItems)`
   ${({ theme }) => css`
-    margin-top: 6rem;
     margin-bottom: 6rem;
+    margin-top: 6rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
     }
@@ -234,11 +234,10 @@ const StyledListItems = styled(ListItems)`
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
     }
+    margin-top: 6rem;
+    margin-bottom: 5rem;
   `}
 `

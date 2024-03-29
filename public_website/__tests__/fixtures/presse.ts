@@ -26,7 +26,7 @@ export const PressePageFixtures = {
           image: {
             data: {
               attributes: {
-                alternativeText: null,
+                alternativeText: 'null',
                 caption: null,
                 createdAt: '2024-02-20T13:46:41.247Z',
                 ext: '.jpg',
@@ -94,7 +94,7 @@ export const PressePageFixtures = {
         image: {
           data: {
             attributes: {
-              alternativeText: null,
+              alternativeText: 'null',
               caption: null,
               createdAt: '2024-02-20T13:46:41.247Z',
               ext: '.jpg',
