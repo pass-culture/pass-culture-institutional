@@ -64,15 +64,6 @@ export const ActusRdvActeursPageFixtures = {
               caption: null,
               createdAt: '2024-02-20T10:17:59.019Z',
               ext: '.jpg',
-
-              hash: 'microsoft_edge_1_N49_Cn7_P0_Fg_unsplash_232b74f43f',
-              height: 5464,
-              mime: 'image/jpeg',
-              name: 'placeholder.jpg',
-              previewUrl: null,
-              provider: 'local',
-              provider_metadata: null,
-              size: 6709.2,
               updatedAt: '2024-02-26T12:28:08.882Z',
               url: '/uploads/microsoft_edge_1_N49_Cn7_P0_Fg_unsplash_232b74f43f.jpg',
               width: 8192,
@@ -97,20 +88,13 @@ export const ActusRdvActeursPageFixtures = {
           data: {
             attributes: {
               alternativeText: null,
-              caption: null,
-              createdAt: '2024-02-20T10:17:59.019Z',
-              ext: '.jpg',
+              url: '/uploads/microsofft_P0_Fg_usplash_232b74f43f.jpg',
 
-              hash: 'microsoft_edge_1_N0_Fg_unsplash_232b74f43f',
-              height: 5764,
-              mime: 'image/jpeg',
               name: 'placeholder.jpg',
               previewUrl: null,
-              provider: 'local',
-              provider_metadata: null,
+
               size: 6700.2,
               updatedAt: '2024-02-26T12:28:08.882Z',
-              url: '/uploads/microsofft_P0_Fg_usplash_232b74f43f.jpg',
               width: 8092,
             },
             id: 2,
