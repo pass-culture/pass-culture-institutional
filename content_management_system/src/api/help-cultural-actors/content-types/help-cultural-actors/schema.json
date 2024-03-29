@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "help_cultural_actors_list",
+  "info": {
+    "singularName": "help-cultural-actors",
+    "pluralName": "help-cultural-actors-list",
+    "displayName": "Help - Cultural Actors"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.header",
+      "required": true
+    },
+    "cardText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.double-push-cta"
+    },
+    "social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.social-media"
+    },
+    "simplepushcta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.simple-push-cta"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.faq",
+      "required": true
+    }
+  }
+}

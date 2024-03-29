@@ -9,8 +9,5 @@ export default factories.createCoreRouter("api::help.help", {
     find: {
       auth: false,
     },
-    create: {
-      auth: false,
-    },
   },
 });

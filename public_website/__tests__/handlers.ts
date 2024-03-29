@@ -40,6 +40,9 @@ export const handlers = [
   http.get(`${CMS_BASE_URL}/api/help`, () => {
     return jsonResponseOf(AideJeunesParentsPageFixtures.data)
   }),
+  http.get(`${CMS_BASE_URL}/api/help-cultural-actors`, () => {
+    return jsonResponseOf(AideJeunesParentsPageFixtures.data)
+  }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
     () => {
