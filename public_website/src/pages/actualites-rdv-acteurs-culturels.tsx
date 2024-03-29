@@ -48,22 +48,21 @@ export default function ListeActuCulturels({
     new Set(eventsData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
-  const [originalrdvCategory, setOriginalRdvCategory] = useState<string[]>([])
+  const [originalRdvCategory, setOriginalRdvCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalrdvLocalisation, setOriginalRdvLocalisation] = useState<
+  const [originalRdvLocalisation, setOriginalRdvLocalisation] = useState<
     string[]
   >([])
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalrdvSecteur, setOriginalRdvSecteur] = useState<string[]>([])
+  const [originalRdvSecteur, setOriginalRdvSecteur] = useState<string[]>([])
 
-  const [eventCategory, setEventCategory] = useState<string[]>([])
-  const [originalEventCategory, setOriginalEventCategory] = useState<string[]>(
-    []
-  )
-  const [eventLocalisation, setEventLocalisation] = useState<string[]>([])
-  const [originalEventLocalisation, setOriginalEventLocalisation] = useState<
+  const [eventRdvCategory, setEventRdvCategory] = useState<string[]>([])
+  const [originalEventRdvCategory, setOriginalEventRdvCategory] = useState<
     string[]
   >([])
+  const [eventRdvLocalisation, setEventRdvLocalisation] = useState<string[]>([])
+  const [originalEventRdvLocalisation, setOriginalEventRdvLocalisation] =
+    useState<string[]>([])
   const [eventSecteur, setEventSecteur] = useState<string[]>([])
   const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
@@ -76,10 +75,10 @@ export default function ListeActuCulturels({
   >([])
 
   useEffect(() => {
-    setEventCategory(eventLACCat)
-    setEventLocalisation(eventLACLoc)
-    setOriginalEventCategory(eventLACCat)
-    setOriginalEventLocalisation(eventLACLoc)
+    setEventRdvCategory(eventLACCat)
+    setEventRdvLocalisation(eventLACLoc)
+    setOriginalEventRdvCategory(eventLACCat)
+    setOriginalEventRdvLocalisation(eventLACLoc)
     setEventSecteur(eventLACSec)
     setOriginalEventSecteur(eventLACSec)
 
@@ -201,10 +200,10 @@ export default function ListeActuCulturels({
       pagination: {},
       filters: {
         category: {
-          $eqi: eventCategory,
+          $eqi: eventRdvCategory,
         },
         localisation: {
-          $eqi: eventLocalisation,
+          $eqi: eventRdvLocalisation,
         },
         secteur: {
           $eqi: eventSecteur,
@@ -222,13 +221,13 @@ export default function ListeActuCulturels({
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setCategory(value[0] === '' ? originalrdvCategory : value)
+        setCategory(value[0] === '' ? originalRdvCategory : value)
         break
       case 'Localisation':
-        setLocalisation(value[0] === '' ? originalrdvLocalisation : value)
+        setLocalisation(value[0] === '' ? originalRdvLocalisation : value)
         break
       case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalrdvSecteur : value)
+        setSecteur(value[0] === '' ? originalRdvSecteur : value)
         break
       default:
         break
@@ -238,11 +237,11 @@ export default function ListeActuCulturels({
   const handleEventFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setEventCategory(value[0] === '' ? originalEventCategory : value)
+        setEventRdvCategory(value[0] === '' ? originalEventRdvCategory : value)
         break
       case 'Localisation':
-        setEventLocalisation(
-          value[0] === '' ? originalEventLocalisation : value
+        setEventRdvLocalisation(
+          value[0] === '' ? originalEventRdvLocalisation : value
         )
         break
       case "Secteur d'activités":
@@ -261,7 +260,7 @@ export default function ListeActuCulturels({
   useEffect(() => {
     fetchEventData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventCategory, eventLocalisation, eventSecteur])
+  }, [eventRdvCategory, eventRdvLocalisation, eventSecteur])
 
   return (
     <React.Fragment>
