@@ -91,7 +91,7 @@ export default function RessourcesEnseignants({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const fetchData = async () => {
+  const fetchDataRessourcesEnseignants = async () => {
     const newsQuery = stringify({
       sort: ['date:desc'],
       populate: ['image'],
@@ -133,7 +133,7 @@ export default function RessourcesEnseignants({
   }
 
   useEffect(() => {
-    fetchData()
+    fetchDataRessourcesEnseignants()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
 
