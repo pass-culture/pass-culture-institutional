@@ -101,32 +101,6 @@ export default function EtudesPassCulture({
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
-
-  const fetchData = async () => {
-    const newsQuery = stringify({
-      sort: ['date:desc'],
-      populate: ['image'],
-      pagination: {},
-      filters: {
-        category: {
-          $eqi: category,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        secteur: {
-          $eqi: secteur,
-        },
-      },
-    })
-
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
-    )
-
-    setData(news.data)
-  }
-
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case "Secteur d'activités":
@@ -141,6 +115,31 @@ export default function EtudesPassCulture({
       default:
         break
     }
+  }
+  const fetchData = async () => {
+    const newsQuery = stringify({
+      populate: ['image'],
+      pagination: {},
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          $eqi: category,
+        },
+
+        secteur: {
+          $eqi: secteur,
+        },
+        localisation: {
+          $eqi: localisation,
+        },
+      },
+    })
+
+    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+      `/news-list?${newsQuery}`
+    )
+
+    setData(news.data)
   }
 
   return (
