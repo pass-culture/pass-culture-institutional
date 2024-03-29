@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
@@ -10,9 +10,41 @@ import arrowUrl from '../../ui/image/arrowd.svg'
 type FaqProps = {
   title: string
   cta: { Label: string; URL: string }
-  categories: string | undefined // Prop for category IDs (CSV string)
-  filteringProperty: string // Prop for boolean property to filter
+  /** Category IDs separated by commas */
+  categories: string | undefined
+  /** Only questions with the given property set to true are displayed. */
+  filteringProperty: string
   limit: number
+}
+
+/** Filter questions based on the wanted categories and flag */
+function filterFaqQuestions(
+  categoryIds: string | undefined,
+  boolProp: string,
+  limit: number
+) {
+  const categoryIdsArray = categoryIds
+    ? categoryIds.split(',').map((id) => parseInt(id.trim(), 10))
+    : []
+
+  const faqKeys = Object.keys(faqJsonData)
+
+  let filteredQuestions: FaqQuestion[] = []
+
+  faqKeys.forEach((key) => {
+    if (categoryIdsArray.includes(parseInt(key, 10)) || !categoryIds) {
+      const faqCategoryData = (faqJsonData as FaqData)[key]
+
+      const filteredData = faqCategoryData?.filter(
+        (faq: FaqQuestion) => faq[boolProp]
+      )
+      if (filteredData) {
+        filteredQuestions = filteredQuestions.concat(filteredData)
+      }
+    }
+  })
+
+  return filteredQuestions.slice(0, limit)
 }
 
 export function Faq({
@@ -32,38 +64,9 @@ export function Faq({
     }
   }
 
-  const filterFaqQuestions = (
-    faqJsonData: FaqData,
-    categoryIds: string | undefined,
-    boolProp: string
-  ) => {
-    const categoryIdsArray = categoryIds
-      ? categoryIds.split(',').map((id) => parseInt(id.trim(), 10))
-      : []
-
-    const faqKeys = Object.keys(faqJsonData)
-
-    let filteredQuestions: FaqQuestion[] = []
-
-    faqKeys.forEach((key) => {
-      if (categoryIdsArray.includes(parseInt(key, 10)) || !categoryIds) {
-        const faqCategoryData = faqJsonData[key]
-
-        const filteredData = faqCategoryData?.filter(
-          (faq: FaqQuestion) => faq[boolProp]
-        )
-        if (filteredData) {
-          filteredQuestions = filteredQuestions.concat(filteredData)
-        }
-      }
-    })
-
-    return filteredQuestions.slice(0, limit)
-  }
-  const filteredQuestions = filterFaqQuestions(
-    faqJsonData,
-    categories,
-    filteringProperty
+  const filteredQuestions = useMemo(
+    () => filterFaqQuestions(categories, filteringProperty, limit),
+    [categories, filteringProperty, limit]
   )
 
   return (
