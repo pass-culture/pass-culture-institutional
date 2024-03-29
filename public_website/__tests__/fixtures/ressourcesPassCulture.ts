@@ -16,7 +16,7 @@ export const RessourcesPassCulturePageFixtures = {
           image: {
             data: {
               attributes: {
-                alternativeText: null,
+                alternativeText: 'ciodsf',
                 caption: null,
                 createdAt: '2024-02-20T13:46:41.247Z',
                 ext: '.jpg',

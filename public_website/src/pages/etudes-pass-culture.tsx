@@ -97,6 +97,11 @@ export default function EtudesPassCulture({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, localisation, secteur])
+
   const fetchData = async () => {
     const newsQuery = stringify({
       sort: ['date:desc'],
@@ -121,11 +126,6 @@ export default function EtudesPassCulture({
 
     setData(news.data)
   }
-
-  useEffect(() => {
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
 
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
