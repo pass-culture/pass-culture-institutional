@@ -33,8 +33,8 @@ export default function RessourcesEnseignants({
     new Set(newsREData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
+  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
@@ -45,8 +45,8 @@ export default function RessourcesEnseignants({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalCategory(cat)
     setOriginalLocalisation(loc)
+    setOriginalCategory(cat)
     setSecteur(sec)
     setOriginalSecteur(sec)
 
@@ -93,18 +93,18 @@ export default function RessourcesEnseignants({
 
   const fetchDataRessourcesEnseignants = async () => {
     const newsQuery = stringify({
-      sort: ['date:desc'],
       populate: ['image'],
+      sort: ['date:desc'],
       pagination: {},
       filters: {
         category: {
           $eqi: category,
         },
-        localisation: {
-          $eqi: localisation,
-        },
         secteur: {
           $eqi: secteur,
+        },
+        localisation: {
+          $eqi: localisation,
         },
       },
     })
@@ -189,16 +189,16 @@ export default function RessourcesEnseignants({
 
 export const getStaticProps = (async () => {
   const newsQuery = stringify({
-    sort: ['date:desc'],
     populate: ['image'],
     pagination: {},
+    sort: ['date:desc'],
     filters: {
       category: {
         $eqi: [
-          'Dossier de presse',
           'Communiqué de presse',
-          'Étude ritualisée',
+          'Dossier de presse',
           'Étude ponctuelle',
+          'Étude ritualisée',
         ],
       },
     },
@@ -208,22 +208,22 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  const query = stringify({
+  const rsQuery = stringify({
     populate: [
       'title',
       'buttonText',
       'filtres',
       'socialMediaSection',
+      'socialMediaSection.socialMediaLink',
+      'separator',
       'aide',
       'aide.image',
       'aide.cta',
-      'socialMediaSection.socialMediaLink',
-      'separator',
     ],
   })
   const { data } = await fetchCMS<
     APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
-  >(`/ressources-enseignant?${query}`)
+  >(`/ressources-enseignant?${rsQuery}`)
 
   return {
     props: {

@@ -66,7 +66,7 @@ export default function ListeActuCulturels({
   const [eventSecteur, setEventSecteur] = useState<string[]>([])
   const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
-  const [newsRdvfilters, setNewsRDVFilters] = useState<Filter[]>([])
+  const [newsRdvfilters, setNewsRdvFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   const [eventFilters, setEventFilters] = useState<Filter[]>([])
@@ -163,7 +163,7 @@ export default function ListeActuCulturels({
       }
     })
 
-    if (filtres) setNewsRDVFilters(filtres)
+    if (filtres) setNewsRdvFilters(filtres)
     if (eventFiltres) setEventFilters(eventFiltres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
