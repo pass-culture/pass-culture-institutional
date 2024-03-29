@@ -48,11 +48,13 @@ export default function ListeActuCulturels({
     new Set(eventsData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
+  const [originalrdvCategory, setOriginalRdvCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
+  const [originalrdvLocalisation, setOriginalRdvLocalisation] = useState<
+    string[]
+  >([])
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
+  const [originalrdvSecteur, setOriginalRdvSecteur] = useState<string[]>([])
 
   const [eventCategory, setEventCategory] = useState<string[]>([])
   const [originalEventCategory, setOriginalEventCategory] = useState<string[]>(
@@ -65,7 +67,7 @@ export default function ListeActuCulturels({
   const [eventSecteur, setEventSecteur] = useState<string[]>([])
   const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
-  const [filters, setFilters] = useState<Filter[]>([])
+  const [newsRDVfilters, setNewsRDVFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   const [eventFilters, setEventFilters] = useState<Filter[]>([])
@@ -88,10 +90,10 @@ export default function ListeActuCulturels({
 
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalCategory(cat)
-    setOriginalLocalisation(loc)
+    setOriginalRdvCategory(cat)
+    setOriginalRdvLocalisation(loc)
     setSecteur(sec)
-    setOriginalSecteur(sec)
+    setOriginalRdvSecteur(sec)
 
     setData(newsRDVData)
     let uniqueCategories = []
@@ -162,7 +164,7 @@ export default function ListeActuCulturels({
       }
     })
 
-    if (filtres) setFilters(filtres)
+    if (filtres) setNewsRDVFilters(filtres)
     if (eventFiltres) setEventFilters(eventFiltres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -220,13 +222,13 @@ export default function ListeActuCulturels({
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
+        setCategory(value[0] === '' ? originalrdvCategory : value)
         break
       case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        setLocalisation(value[0] === '' ? originalrdvLocalisation : value)
         break
       case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
+        setSecteur(value[0] === '' ? originalrdvSecteur : value)
         break
       default:
         break
@@ -272,7 +274,7 @@ export default function ListeActuCulturels({
           />
         )}
         <FilterContainer
-          filtres={filters}
+          filtres={newsRDVfilters}
           onFilterChange={handleFilterChange}
         />
       </StyledTitle>
