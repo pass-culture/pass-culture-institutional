@@ -223,6 +223,16 @@ const StyledTitle = styled.div`
   `}
 `
 
+const StyledSocialMedia = styled(SocialMedia)`
+  ${({ theme }) => css`
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 5rem 0 6.25rem;
+    }
+    margin-bottom: 5rem;
+    margin-top: 6rem;
+  `}
+`
+
 const StyledListItems = styled(ListItems)`
   ${({ theme }) => css`
     margin-bottom: 6rem;
@@ -230,14 +240,5 @@ const StyledListItems = styled(ListItems)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
     }
-  `}
-`
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-    margin-top: 6rem;
-    margin-bottom: 5rem;
   `}
 `
