@@ -43,17 +43,17 @@ export default function EtudesPassCulture({
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
-    setCategory(cat)
-    setLocalisation(loc)
-    setSecteur(sec)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
     setOriginalSecteur(sec)
+    setCategory(cat)
+    setLocalisation(loc)
+    setSecteur(sec)
 
     setData(newsData)
     let uniqueCategories = []
-    let uniqueLocalisations = []
     let uniqueSecteurs = []
+    let uniqueLocalisations = []
 
     const filtres = etudesPassCultureListe.attributes?.filtres?.map(
       (filtre) => {
@@ -116,13 +116,18 @@ export default function EtudesPassCulture({
     setData(news.data)
   }
 
+  useEffect(() => {
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, localisation, secteur])
+
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
       case 'Localisation':
         setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
         break
       case "Secteur d'activités":
         setSecteur(value[0] === '' ? originalSecteur : value)
@@ -131,10 +136,6 @@ export default function EtudesPassCulture({
         break
     }
   }
-  useEffect(() => {
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
 
   return (
     <React.Fragment>
@@ -161,11 +162,11 @@ export default function EtudesPassCulture({
       />
 
       <SimplePushCta
+        surtitle={etudesPassCultureListe.attributes.observatoire?.surtitle}
         title={etudesPassCultureListe.attributes.observatoire?.title}
         image={etudesPassCultureListe.attributes.observatoire?.image}
-        cta={etudesPassCultureListe.attributes.observatoire?.cta}
-        surtitle={etudesPassCultureListe.attributes.observatoire?.surtitle}
         icon={etudesPassCultureListe.attributes.observatoire?.icon}
+        cta={etudesPassCultureListe.attributes.observatoire?.cta}
       />
 
       {etudesPassCultureListe.attributes.socialMediaSection &&
@@ -173,11 +174,11 @@ export default function EtudesPassCulture({
         etudesPassCultureListe.attributes.socialMediaSection
           .socialMediaLink && (
           <StyledSocialMedia
-            title={etudesPassCultureListe.attributes.socialMediaSection.title}
             socialMediaLink={
               etudesPassCultureListe.attributes.socialMediaSection
                 .socialMediaLink
             }
+            title={etudesPassCultureListe.attributes.socialMediaSection.title}
           />
         )}
     </React.Fragment>
@@ -188,7 +189,6 @@ export const getStaticProps = (async () => {
   const newsQuery = stringify({
     sort: ['date:desc'],
     populate: ['image'],
-    pagination: {},
     filters: {
       category: {
         $eqi: [
@@ -199,16 +199,17 @@ export const getStaticProps = (async () => {
         ],
       },
     },
+    pagination: {},
   })
 
   const query = stringify({
     populate: [
       'title',
-      'buttonText',
       'filtres',
-      'socialMediaSection',
+      'buttonText',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'socialMediaSection',
       'observatoire',
       'observatoire.image',
       'observatoire.cta',
