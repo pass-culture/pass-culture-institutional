@@ -47,6 +47,10 @@
       "type": "component",
       "repeatable": false,
       "component": "block.simple-push-cta"
+    },
+    "titleEventSection": {
+      "type": "string",
+      "required": true
     }
   }
 }

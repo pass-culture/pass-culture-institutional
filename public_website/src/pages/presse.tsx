@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
+import { EventListItems } from '@/lib/blocks/EventListItems'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ImageText } from '@/lib/blocks/ImageText'
 import { ListItems } from '@/lib/blocks/ListItems'
@@ -17,9 +18,14 @@ import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   presseListe: APIResponseData<'api::presse.presse'>
+  eventsData: APIResponseData<'api::event.event'>[]
 }
 
-export default function Presse({ newsData, presseListe }: ListProps) {
+export default function Presse({
+  newsData,
+  presseListe,
+  eventsData,
+}: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -31,6 +37,18 @@ export default function Presse({ newsData, presseListe }: ListProps) {
   const sec = Array.from(
     new Set(newsData.map((item) => item.attributes.secteur))
   )
+
+  const eventCat = Array.from(
+    new Set(eventsData.map((item) => item.attributes.category))
+  )
+
+  const eventLoc = Array.from(
+    new Set(eventsData.map((item) => item.attributes.localisation))
+  )
+
+  const eventSec = Array.from(
+    new Set(eventsData.map((item) => item.attributes.secteur))
+  )
   const [category, setCategory] = useState<string[]>([])
   const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
@@ -38,9 +56,24 @@ export default function Presse({ newsData, presseListe }: ListProps) {
   const [secteur, setSecteur] = useState<string[]>([])
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
+  const [eventCategory, setEventCategory] = useState<string[]>([])
+  const [originalEventCategory, setOriginalEventCategory] = useState<string[]>(
+    []
+  )
+  const [eventLocalisation, setEventLocalisation] = useState<string[]>([])
+  const [originalEventLocalisation, setOriginalEventLocalisation] = useState<
+    string[]
+  >([])
+  const [eventSecteur, setEventSecteur] = useState<string[]>([])
+  const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
+
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
+  const [eventFilters, setEventFilters] = useState<Filter[]>([])
+  const [eventData, setEventData] = useState<
+    APIResponseData<'api::event.event'>[]
+  >([])
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
@@ -49,10 +82,22 @@ export default function Presse({ newsData, presseListe }: ListProps) {
     setSecteur(sec)
     setOriginalSecteur(sec)
 
+    setEventCategory(eventCat)
+    setEventLocalisation(eventLoc)
+    setOriginalEventCategory(eventCat)
+    setOriginalEventLocalisation(eventLoc)
+    setEventSecteur(eventSec)
+    setOriginalEventSecteur(eventSec)
+
     setData(newsData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
+
+    setEventData(eventsData)
+    let uniqueEventCategories = []
+    let uniqueEventLocalisations = []
+    let uniqueEventSecteurs = []
 
     const filtres = presseListe.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
@@ -84,7 +129,40 @@ export default function Presse({ newsData, presseListe }: ListProps) {
           return { ...filtre, value: [] }
       }
     })
+
+    const eventFiltres = presseListe.attributes?.filtres?.map((filtre) => {
+      switch (filtre.filtre) {
+        case 'Catégorie':
+          uniqueEventCategories = Array.from(
+            new Set(eventsData.map((item) => item.attributes.category))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventCategories,
+          }
+        case 'Localisation':
+          uniqueEventLocalisations = Array.from(
+            new Set(eventsData.map((item) => item.attributes.localisation))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventLocalisations,
+          }
+        case "Secteur d'activités":
+          uniqueEventSecteurs = Array.from(
+            new Set(eventsData.map((item) => item.attributes.secteur))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventSecteurs,
+          }
+        default:
+          return { ...filtre, value: [] }
+      }
+    })
     if (filtres) setFilters(filtres)
+    if (eventFiltres) setEventFilters(eventFiltres)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -112,33 +190,71 @@ export default function Presse({ newsData, presseListe }: ListProps) {
 
     setData(news.data)
   }
+  const fetchEventData = async () => {
+    const eventQuery = stringify({
+      sort: ['date:desc'],
+      populate: ['image'],
+      pagination: {},
+      filters: {
+        category: {
+          $eqi: eventCategory,
+        },
+        localisation: {
+          $eqi: eventLocalisation,
+        },
+        secteur: {
+          $eqi: eventSecteur,
+        },
+      },
+    })
 
+    const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
+      `/events?${eventQuery}`
+    )
+
+    setEventData(events.data)
+  }
   const handleFilterChange = (name: string, value: string[]) => {
-    if (name === 'Catégorie') {
-      if (value[0] === '') {
-        setCategory(originalCategory)
-      } else {
-        setCategory(value)
-      }
-    } else if (name === 'Localisation') {
-      if (value[0] === '') {
-        setLocalisation(originalLocalisation)
-      } else {
-        setLocalisation(value)
-      }
-    } else if (name === "Secteur d'activités") {
-      if (value[0] === '') {
-        setSecteur(originalSecteur)
-      } else {
-        setSecteur(value)
-      }
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      case "Secteur d'activités":
+        setSecteur(value[0] === '' ? originalSecteur : value)
+        break
+      default:
+        break
     }
   }
-
+  const handleEventFilterChange = (name: string, value: string[]) => {
+    switch (name) {
+      case 'Catégorie':
+        setEventCategory(value[0] === '' ? originalEventCategory : value)
+        break
+      case 'Localisation':
+        setEventLocalisation(
+          value[0] === '' ? originalEventLocalisation : value
+        )
+        break
+      case "Secteur d'activités":
+        setEventSecteur(value[0] === '' ? originalEventSecteur : value)
+        break
+      default:
+        break
+    }
+  }
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
+
+  useEffect(() => {
+    fetchEventData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [eventCategory, eventLocalisation, eventSecteur])
 
   return (
     <React.Fragment>
@@ -162,6 +278,24 @@ export default function Presse({ newsData, presseListe }: ListProps) {
 
       <Separator isActive={presseListe.attributes.separator?.isActive} />
 
+      <StyledTitle>
+        {presseListe.attributes.titleEventSection && (
+          <Typo.Heading3
+            dangerouslySetInnerHTML={{
+              __html: presseListe.attributes.titleEventSection,
+            }}
+          />
+        )}
+        <FilterContainer
+          filtres={eventFilters}
+          onFilterChange={handleEventFilterChange}
+        />
+      </StyledTitle>
+      <StyledeventListItems
+        events={eventData}
+        buttonText={presseListe.attributes.buttonText}
+      />
+      <Separator isActive={presseListe.attributes.separator?.isActive} />
       <ImageText
         title={presseListe.attributes.texteImage?.title}
         image={presseListe.attributes.texteImage?.image}
@@ -222,7 +356,6 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  // Fetch list jeune data
   const query = stringify({
     populate: [
       'title',
@@ -244,10 +377,22 @@ export const getStaticProps = (async () => {
   const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(
     `/presse?${query}`
   )
+
+  const eventQuery = stringify({
+    sort: ['date:desc'],
+    populate: ['image', 'cta'],
+    pagination: {},
+  })
+
+  const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
+    `/events?${eventQuery}`
+  )
+
   return {
     props: {
       newsData: news.data,
       presseListe: data,
+      eventsData: events.data,
     },
   }
 }) satisfies GetStaticProps<ListProps>
@@ -287,6 +432,17 @@ const StyledSocialMedia = styled(SocialMedia)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
+    }
+  `}
+`
+const StyledeventListItems = styled(EventListItems)`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-top: 4rem;
+      margin-bottom: 1rem;
     }
   `}
 `

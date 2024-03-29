@@ -2,44 +2,51 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
-import { ListCard } from '@/ui/components/list-card/ListCard'
+import { EventCard } from '@/ui/components/event-card/EventCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
-  news: APIResponseData<'api::news.news'>[]
+  events: APIResponseData<'api::event.event'>[]
   className?: string
   buttonText?: string
 }
 
-export function ListItems({ news, className, buttonText }: LatestNewsProps) {
-  const [visibleItems, setVisibleItems] = useState(9)
+export function EventListItems({
+  events,
+  className,
+  buttonText,
+}: LatestNewsProps) {
+  const [visibleItems, setVisibleItems] = useState(2)
 
   const loadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setVisibleItems((prevVisibleItems) =>
-      Math.min(prevVisibleItems + 9, news.length)
+      Math.min(prevVisibleItems + 2, events.length)
     )
   }
-
   return (
     <Root className={className}>
       <StyledList>
-        {news.slice(0, visibleItems).map((newsItem) => (
-          <li key={newsItem.attributes.slug}>
-            <ListCard
-              title={newsItem.attributes.title}
-              category={newsItem.attributes.category}
-              date={newsItem.attributes.date}
+        {events.slice(0, visibleItems).map((eventItem) => (
+          <li key={eventItem.attributes.slug}>
+            <EventCard
+              title={eventItem.attributes.title}
+              category={eventItem.attributes.category}
+              date={eventItem.attributes.date}
               imageUrl={
-                newsItem.attributes.image &&
-                getStrapiURL(newsItem.attributes.image?.data.attributes.url)
+                eventItem.attributes.image &&
+                getStrapiURL(eventItem.attributes.image?.data.attributes.url)
               }
-              slug={newsItem.attributes.slug}
+              slug={eventItem.attributes.slug}
+              startTime={eventItem.attributes.startTime}
+              endTime={eventItem.attributes.endTime}
+              city={eventItem.attributes.city}
+              cta={eventItem.attributes.cta}
             />
           </li>
         ))}
       </StyledList>
-      {visibleItems < news.length && (
+      {visibleItems < events.length && (
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
       )}
     </Root>
@@ -59,7 +66,7 @@ const Root = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 80%;
+      padding: 1rem auto;
     }
   `}
 `
@@ -67,7 +74,7 @@ const Root = styled.div`
 const StyledList = styled.ul`
   ${({ theme }) => css`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
     margin-bottom: 5rem;
     overflow-x: auto;

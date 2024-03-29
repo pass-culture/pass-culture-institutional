@@ -857,6 +857,7 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
+    titleEventSection: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -941,6 +942,94 @@ export interface ApiEtudesPassCultureEtudesPassCulture
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::etudes-pass-culture.etudes-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.Date & Attribute.Required;
+    startTime: Attribute.Time & Attribute.Required;
+    endTime: Attribute.Time & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    image: Attribute.Media;
+    category: Attribute.Enumeration<['Salon']> & Attribute.Required;
+    localisation: Attribute.Enumeration<
+      [
+        'Aquitaine',
+        'Auvergne',
+        'Auvergne-Rh\u00F4ne-Alpes',
+        'Basse-Normandie',
+        'Bourgogne',
+        'Bourgogne-Franche-Comt\u00E9',
+        'Bretagne',
+        'Centre',
+        'Champagne-Ardenne',
+        'Corse',
+        'Franche-Comt\u00E9',
+        'Grand-Est',
+        'Guadeloupe',
+        'Guyane',
+        'Haute-Normandie',
+        'Hauts-de-France',
+        '\u00CEle-de-France',
+        'La-R\u00E9union',
+        'Languedoc-Roussillon',
+        'Languedoc-Roussillon-Midi-Pyr\u00E9n\u00E9es',
+        'Limousin',
+        'Lorraine',
+        'Martinique',
+        'Mayotte',
+        'Midi-Pyr\u00E9n\u00E9es',
+        'Nord-Pas-de-Calais',
+        'Normandie',
+        'Nouvelle-Aquitaine',
+        'Pays-de-la-Loire',
+        'Picardie',
+        'Poitou-Charentes',
+        "Provence-Alpes-C\u00F4te d'Azur",
+        'Rh\u00F4ne-Alpes'
+      ]
+    > &
+      Attribute.Required;
+    secteur: Attribute.Enumeration<
+      [
+        'Pratiques culturelles',
+        'Spectacle vivant',
+        'Musique',
+        'Lecture',
+        'Cin\u00E9ma',
+        'Offres num\u00E9riques'
+      ]
+    > &
+      Attribute.Required;
+    city: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
       'oneToOne',
       'admin::user'
     > &
@@ -1314,6 +1403,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     texteImage: Attribute.Component<'block.image-text'>;
     pushCta: Attribute.Component<'block.double-push-cta'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
+    titleEventSection: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1531,6 +1621,7 @@ declare module '@strapi/types' {
       'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
       'api::category.category': ApiCategoryCategory;
       'api::etudes-pass-culture.etudes-pass-culture': ApiEtudesPassCultureEtudesPassCulture;
+      'api::event.event': ApiEventEvent;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;

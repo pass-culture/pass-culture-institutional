@@ -117,27 +117,20 @@ export default function RessourcesEnseignants({
   }
 
   const handleFilterChange = (name: string, value: string[]) => {
-    if (name === 'Catégorie') {
-      if (value[0] === '') {
-        setCategory(originalCategory)
-      } else {
-        setCategory(value)
-      }
-    } else if (name === 'Localisation') {
-      if (value[0] === '') {
-        setLocalisation(originalLocalisation)
-      } else {
-        setLocalisation(value)
-      }
-    } else if (name === "Secteur d'activités") {
-      if (value[0] === '') {
-        setSecteur(originalSecteur)
-      } else {
-        setSecteur(value)
-      }
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      case "Secteur d'activités":
+        setSecteur(value[0] === '' ? originalSecteur : value)
+        break
+      default:
+        break
     }
   }
-
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -214,7 +207,6 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  // Fetch list jeune data
   const query = stringify({
     populate: [
       'title',

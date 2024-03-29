@@ -92,18 +92,15 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   }
 
   const handleFilterChange = (name: string, value: string[]) => {
-    if (name === 'Catégorie') {
-      if (value[0] === '') {
-        setCategory(originalCategory)
-      } else {
-        setCategory(value)
-      }
-    } else if (name === 'Localisation') {
-      if (value[0] === '') {
-        setLocalisation(originalLocalisation)
-      } else {
-        setLocalisation(value)
-      }
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      default:
+        break
     }
   }
 
@@ -168,7 +165,6 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  // Fetch list jeune data
   const query = stringify({
     populate: [
       'title',

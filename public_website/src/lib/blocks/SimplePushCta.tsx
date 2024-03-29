@@ -82,6 +82,10 @@ const CardContainer = styled.div`
 
     min-width: 90%;
     min-height: 40%;
+
+    p {
+      display: none;
+    }
   }
 `
 
