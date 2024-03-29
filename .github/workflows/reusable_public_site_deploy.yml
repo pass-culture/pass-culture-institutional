@@ -18,6 +18,10 @@ on:
         type: string
         description: Pass culture backend URL to fetch playlists from
         required: true
+      secrets_project_id:
+        type: string
+        description: GCP project to retrieve secrets from
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -52,8 +56,8 @@ jobs:
         uses: "google-github-actions/get-secretmanager-secrets@v2"
         with:
           secrets: |-
-            INSTIT_SITE_DEPLOY_SA:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_deploy-service-account
-            IAP_CLIENT_ID:passculture-metier-ehp/passculture-institutional_${{ inputs.environment }}_iap-client-id
+            INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
+            IAP_CLIENT_ID:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_iap-client-id
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: "Authenticate to Google Cloud"
@@ -107,7 +111,7 @@ jobs:
         uses: "google-github-actions/get-secretmanager-secrets@v2"
         with:
           secrets: |-
-            SLACK_BOT_TOKEN:passculture-metier-ehp/passculture-ci-slack-bot-token
+            SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
       - name: "Post to a Slack channel on success"
         if: ${{ always() && contains(needs.deploy-static-site.result, 'success') }}
         uses: slackapi/slack-github-action@v1.24.0
