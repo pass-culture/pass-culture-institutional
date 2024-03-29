@@ -2,8 +2,8 @@ export const RessourcesEnseignatsPageFixtures = {
   ressourcesEnseignant: {
     id: 1,
     attributes: {
-      titleEventSection: 'Les prochains rendez-vous',
       buttonText: 'More',
+      titleEventSection: 'Les prochains rendez-vous',
       createdAt: '2024-03-19T10:32:37.437Z',
       filtres: [
         {
@@ -18,8 +18,8 @@ export const RessourcesEnseignatsPageFixtures = {
       aide: [
         {
           cta: {
-            Label: 'Accéder à la page',
             URL: '#',
+            Label: 'Accéder à la page',
             id: 64,
           },
           id: 1,
@@ -31,39 +31,39 @@ export const RessourcesEnseignatsPageFixtures = {
                 createdAt: '2024-02-20T13:46:41.247Z',
                 ext: '.jpg',
 
-                hash: 'microsoft_edge_Px0_X7g1mc8k_unsplash_1489223492',
                 height: 6446,
                 mime: 'image/jpeg',
                 name: 'microsoft-edge-Px0X7g1mc8k-unsplash.jpg',
                 previewUrl: null,
                 provider: 'local',
                 provider_metadata: null,
+                hash: 'microsoft_edge_Px0_X7g1mc8k_unsplash_1489223492',
                 size: 5112.77,
-                updatedAt: '2024-02-26T12:28:09.419Z',
                 url: '/uploads/microsoft_edge_Px0_X7g1mc8k_unsplash_1489223492.jpg',
+                updatedAt: '2024-02-26T12:28:09.419Z',
                 width: 4299,
               },
               id: 5,
             },
           },
-          surtitle: 'Pour aller plus loin',
           title: 'Les offres et expériences à vivre avec le pass',
+          surtitle: 'Pour aller plus loin',
         },
       ],
       publishedAt: '2024-03-19T10:32:38.445Z',
       title: 'Programmes de sensibilisation à lart dans votre région',
     },
     separator: {
-      id: 1,
       isActive: true,
+      id: 89,
     },
     socialMediaSection: {
       id: 10,
       socialMediaLink: [
         {
+          url: '#',
           id: 31,
           name: 'tiktok',
-          url: '#',
         },
         {
           id: 32,
@@ -74,6 +74,6 @@ export const RessourcesEnseignatsPageFixtures = {
       title: 'On reste connectés',
     },
 
-    updatedAt: '2024-03-19T10:32:38.448Z',
+    updatedAt: '2023-06-19T10:32:38.448Z',
   },
 }

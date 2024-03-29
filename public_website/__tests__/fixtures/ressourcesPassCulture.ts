@@ -5,16 +5,6 @@ export const RessourcesPassCulturePageFixtures = {
       titleEventSection: 'Les prochains rendez-vous',
       buttonText: 'More',
       createdAt: '2024-03-19T10:32:37.437Z',
-      filtres: [
-        {
-          filtre: 'Catégorie',
-          id: 1,
-        },
-        {
-          filtre: 'Localisation',
-          id: 2,
-        },
-      ],
       aide: [
         {
           cta: {
@@ -50,8 +40,18 @@ export const RessourcesPassCulturePageFixtures = {
           title: 'Les offres et expériences à vivre avec le pass',
         },
       ],
-      publishedAt: '2024-03-19T10:32:38.445Z',
-      title: 'Programmes de sensibilisation à lart dans votre région',
+      filtres: [
+        {
+          filtre: 'Catégorie',
+          id: 17897,
+        },
+        {
+          filtre: 'Localisation',
+          id: 2,
+        },
+      ],
+      publishedAt: '2024-03-19T10:22:38.445Z',
+      title: 'Programmes de sensidsfdsffsdfbilisation à lart dans votre région',
     },
     separator: {
       id: 1,
@@ -71,9 +71,9 @@ export const RessourcesPassCulturePageFixtures = {
           url: '#',
         },
       ],
-      title: 'On reste connectés',
+      title: 'On restdsfsde connectés',
     },
 
-    updatedAt: '2024-03-19T10:32:38.448Z',
+    updatedAt: '2014-03-19T10:32:38.448Z',
   },
 }

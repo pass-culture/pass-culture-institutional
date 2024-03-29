@@ -251,21 +251,15 @@ const StyledTitle = styled.div`
 `
 
 const StyledListItems = styled(ListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  margin-top: 6rem;
+  margin-bottom: 6rem;
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
     }
+    margin-top: 6rem;
+    margin-bottom: 5rem;
   `}
 `

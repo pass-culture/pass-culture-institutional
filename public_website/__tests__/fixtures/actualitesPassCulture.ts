@@ -2,12 +2,12 @@ export const ActusPassCultureJeunePageFixtures = {
   listejeune: {
     id: 1,
     attributes: {
-      buttonText: 'More',
       createdAt: '2024-03-19T10:32:37.437Z',
+      buttonText: 'More',
       filtres: [
         {
-          filtre: 'Catégorie',
           id: 1,
+          filtre: 'Catégorie',
         },
         {
           filtre: 'Localisation',
@@ -18,21 +18,21 @@ export const ActusPassCultureJeunePageFixtures = {
       title: 'Programmes de sensibilisation à lart dans votre région',
     },
     separator: {
-      id: 1,
       isActive: true,
+      id: 1,
     },
     socialMediaSection: {
       id: 10,
       socialMediaLink: [
         {
-          id: 31,
           name: 'tiktok',
+          id: 31,
           url: '#',
         },
         {
           id: 32,
-          name: 'snapchat',
           url: '#',
+          name: 'snapchat',
         },
       ],
       title: 'On reste connectés',
@@ -43,9 +43,8 @@ export const ActusPassCultureJeunePageFixtures = {
   newsData: [
     {
       attributes: {
-        category: 'Évènement',
         createdAt: '2024-03-07T09:33:48.812Z',
-        date: '2024-03-07T23:45:00.000Z',
+        category: 'Évènement',
         image: {
           data: {
             attributes: {
@@ -69,19 +68,20 @@ export const ActusPassCultureJeunePageFixtures = {
             id: 2,
           },
         },
+        date: '2024-03-07T23:45:00.000Z',
         localisation: 'Auvergne-Rhône-Alpes',
         publishedAt: '2024-03-07T09:33:58.913Z',
         slug: 'article6',
-        title: 'Article1',
         updatedAt: '2024-03-15T15:02:17.703Z',
+        title: 'Article1',
       },
       id: 11,
     },
     {
       attributes: {
         category: 'Évènement',
-        createdAt: '2022-03-07T09:33:48.812Z',
         date: '2023-03-07T23:45:00.000Z',
+        createdAt: '2022-03-07T09:33:48.812Z',
         image: {
           data: {
             attributes: {
@@ -89,16 +89,15 @@ export const ActusPassCultureJeunePageFixtures = {
               caption: null,
               createdAt: '2024-02-20T10:17:59.019Z',
               ext: '.jpg',
-
               hash: 'microsoft_edge_1_N0_Fg_unsplash_232b74f43f',
-              height: 5764,
               mime: 'image/jpeg',
+              height: 5764,
               name: 'placeholder.jpg',
               previewUrl: null,
               provider: 'local',
               provider_metadata: null,
-              size: 6700.2,
               updatedAt: '2024-02-26T12:28:08.882Z',
+              size: 6700.2,
               url: '/uploads/microsofft_P0_Fg_usplash_232b74f43f.jpg',
               width: 8092,
             },
@@ -107,8 +106,8 @@ export const ActusPassCultureJeunePageFixtures = {
         },
         localisation: 'Auvergne-Rhône-Alpes',
         publishedAt: '2024-03-07Tf09:33:58.913Z',
-        slug: 'article7',
         title: 'Article7',
+        slug: 'article7',
         updatedAt: '2024-03-15T15f:02:17.703Z',
       },
       id: 11,
