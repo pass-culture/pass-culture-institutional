@@ -12,20 +12,20 @@ import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  newsActuPassData: APIResponseData<'api::news.news'>[]
   listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
 }
 
 export default function ListeActualitesPassCulture({
-  newsData,
+  newsActuPassData,
   listeActualitesPassCulture,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(newsActuPassData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(newsActuPassData.map((item) => item.attributes.localisation))
   )
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
@@ -41,7 +41,7 @@ export default function ListeActualitesPassCulture({
     setOriginalLocalisation(loc)
     setOriginalCategory(cat)
 
-    setData(newsData)
+    setData(newsActuPassData)
     let uniqueLocalisations = []
     let uniqueCategories = []
 
@@ -50,7 +50,9 @@ export default function ListeActualitesPassCulture({
         switch (filtre.filtre) {
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsData.map((item) => item.attributes.localisation))
+              new Set(
+                newsActuPassData.map((item) => item.attributes.localisation)
+              )
             )
             return {
               ...filtre,
@@ -58,7 +60,7 @@ export default function ListeActualitesPassCulture({
             }
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
+              new Set(newsActuPassData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -198,7 +200,7 @@ export const getStaticProps = (async () => {
   >(`/actualites-pass-culture?${query}`)
   return {
     props: {
-      newsData: news.data,
+      newsActuPassData: news.data,
       listeActualitesPassCulture: data,
     },
   }
