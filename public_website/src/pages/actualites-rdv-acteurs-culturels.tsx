@@ -98,6 +98,39 @@ export default function ListeActuCulturels({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
+    const eventFiltres = listeActuCulturel.attributes?.filtres?.map(
+      (filtre) => {
+        switch (filtre.filtre) {
+          case "Secteur d'activités":
+            uniqueEventSecteurs = Array.from(
+              new Set(eventsData.map((item) => item.attributes.secteur))
+            )
+            return {
+              ...filtre,
+              value: uniqueEventSecteurs,
+            }
+          case 'Catégorie':
+            uniqueEventCategories = Array.from(
+              new Set(eventsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueEventCategories,
+            }
+          case 'Localisation':
+            uniqueEventLocalisations = Array.from(
+              new Set(eventsData.map((item) => item.attributes.localisation))
+            )
+            return {
+              ...filtre,
+              value: uniqueEventLocalisations,
+            }
+          default:
+            return { ...filtre, value: [] }
+        }
+      }
+    )
+
     const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
@@ -128,39 +161,6 @@ export default function ListeActuCulturels({
           return { ...filtre, value: [] }
       }
     })
-
-    const eventFiltres = listeActuCulturel.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueEventCategories = Array.from(
-              new Set(eventsData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventCategories,
-            }
-          case 'Localisation':
-            uniqueEventLocalisations = Array.from(
-              new Set(eventsData.map((item) => item.attributes.localisation))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventLocalisations,
-            }
-          case "Secteur d'activités":
-            uniqueEventSecteurs = Array.from(
-              new Set(eventsData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventSecteurs,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
-      }
-    )
 
     if (filtres) setFilters(filtres)
     if (eventFiltres) setEventFilters(eventFiltres)
