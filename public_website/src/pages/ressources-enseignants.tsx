@@ -214,11 +214,11 @@ export const getStaticProps = (async () => {
       'buttonText',
       'filtres',
       'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'separator',
       'aide',
       'aide.image',
       'aide.cta',
+      'socialMediaSection.socialMediaLink',
+      'separator',
     ],
   })
   const { data } = await fetchCMS<
@@ -235,11 +235,10 @@ export const getStaticProps = (async () => {
 
 const StyledTitle = styled.div`
   ${({ theme }) => css`
+    margin-inline: auto;
     padding: 1rem 1.5rem;
     max-width: 80rem;
-    margin-inline: auto;
     margin-top: 4rem;
-
     h2 {
       margin-bottom: 4rem;
     }
