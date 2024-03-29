@@ -21,10 +21,13 @@ export default function EtudesPassCulture({
   newsData,
   etudesPassCultureListe,
 }: ListProps) {
+  const [category, setCategory] = useState<string[]>([])
+  const [localisation, setLocalisation] = useState<string[]>([])
+  const [secteur, setSecteur] = useState<string[]>([])
+
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
-
   const sec = Array.from(
     new Set(newsData.map((item) => item.attributes.secteur))
   )
@@ -32,9 +35,6 @@ export default function EtudesPassCulture({
     new Set(newsData.map((item) => item.attributes.localisation))
   )
 
-  const [category, setCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [secteur, setSecteur] = useState<string[]>([])
   const [originalEtudesCategory, setOriginalEtudesCategory] = useState<
     string[]
   >([])
@@ -45,8 +45,8 @@ export default function EtudesPassCulture({
     []
   )
 
-  const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  const [filters, setFilters] = useState<Filter[]>([])
 
   useEffect(() => {
     setOriginalEtudesCategory(cat)
@@ -262,10 +262,10 @@ const StyledListItems = styled(ListItems)`
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 5rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 5rem 0 6.25rem;
     }
-    margin-top: 6rem;
-    margin-bottom: 5rem;
   `}
 `
