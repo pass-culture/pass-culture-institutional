@@ -36,7 +36,7 @@ export function EventCard({
     if (typeof time === 'string') {
       timeString = time
     } else {
-      const splitTime = time.toISOString().split('T')[1]
+      const splitTime = time?.toISOString().split('T')[1]
       timeString = splitTime ? splitTime : ''
     }
 

@@ -224,6 +224,7 @@ export const getStaticProps = (async () => {
   const { data } = await fetchCMS<
     APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
   >(`/ressources-enseignant?${query}`)
+
   return {
     props: {
       newsData: news.data,

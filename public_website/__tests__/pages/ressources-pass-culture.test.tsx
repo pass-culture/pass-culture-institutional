@@ -3,9 +3,10 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import ListeJeune, { getStaticProps } from '@/pages/actualites-jeunes-parents'
-
-describe('Liste jeunes', () => {
+import RessourcesPassCulture, {
+  getStaticProps,
+} from '@/pages/ressources-pass-culture'
+describe('Ressources Pass Culture', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
@@ -18,7 +19,7 @@ describe('Liste jeunes', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<ListeJeune {...props} />)
+      const { container } = render(<RessourcesPassCulture {...props} />)
 
       let a11yResult
       await act(async () => {

@@ -14,12 +14,12 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  ressourcesEnseignantsListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+  etudesPassCultureListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
 }
 
-export default function RessourcesEnseignants({
+export default function EtudesPassCulture({
   newsData,
-  ressourcesEnseignantsListe,
+  etudesPassCultureListe,
 }: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -55,7 +55,7 @@ export default function RessourcesEnseignants({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = ressourcesEnseignantsListe.attributes?.filtres?.map(
+    const filtres = etudesPassCultureListe.attributes?.filtres?.map(
       (filtre) => {
         switch (filtre.filtre) {
           case 'Catégorie':
@@ -139,10 +139,10 @@ export default function RessourcesEnseignants({
   return (
     <React.Fragment>
       <StyledTitle>
-        {ressourcesEnseignantsListe.attributes.title && (
+        {etudesPassCultureListe.attributes.title && (
           <Typo.Heading2
             dangerouslySetInnerHTML={{
-              __html: ressourcesEnseignantsListe.attributes.title,
+              __html: etudesPassCultureListe.attributes.title,
             }}
           />
         )}
@@ -153,31 +153,29 @@ export default function RessourcesEnseignants({
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={ressourcesEnseignantsListe.attributes.buttonText}
+        buttonText={etudesPassCultureListe.attributes.buttonText}
       />
 
       <Separator
-        isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
+        isActive={etudesPassCultureListe.attributes.separator?.isActive}
       />
 
       <SimplePushCta
-        title={ressourcesEnseignantsListe.attributes.observatoire?.title}
-        image={ressourcesEnseignantsListe.attributes.observatoire?.image}
-        cta={ressourcesEnseignantsListe.attributes.observatoire?.cta}
-        surtitle={ressourcesEnseignantsListe.attributes.observatoire?.surtitle}
-        icon={ressourcesEnseignantsListe.attributes.observatoire?.icon}
+        title={etudesPassCultureListe.attributes.observatoire?.title}
+        image={etudesPassCultureListe.attributes.observatoire?.image}
+        cta={etudesPassCultureListe.attributes.observatoire?.cta}
+        surtitle={etudesPassCultureListe.attributes.observatoire?.surtitle}
+        icon={etudesPassCultureListe.attributes.observatoire?.icon}
       />
 
-      {ressourcesEnseignantsListe.attributes.socialMediaSection &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection
+      {etudesPassCultureListe.attributes.socialMediaSection &&
+        etudesPassCultureListe.attributes.socialMediaSection.title &&
+        etudesPassCultureListe.attributes.socialMediaSection
           .socialMediaLink && (
           <StyledSocialMedia
-            title={
-              ressourcesEnseignantsListe.attributes.socialMediaSection.title
-            }
+            title={etudesPassCultureListe.attributes.socialMediaSection.title}
             socialMediaLink={
-              ressourcesEnseignantsListe.attributes.socialMediaSection
+              etudesPassCultureListe.attributes.socialMediaSection
                 .socialMediaLink
             }
           />
@@ -227,7 +225,7 @@ export const getStaticProps = (async () => {
   return {
     props: {
       newsData: news.data,
-      ressourcesEnseignantsListe: data,
+      etudesPassCultureListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>
