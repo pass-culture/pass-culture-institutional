@@ -12,7 +12,9 @@ const fetch = require('node-fetch')
 require('dotenv').config()
 const fs = require('fs').promises
 
-const ZENDESK_API_URL = process.env.ZENDESK_API_URL
+// TODO: add the env variable everywhere it is needed, then remove the default url
+const ZENDESK_API_URL =
+  process.env.ZENDESK_API_URL ?? 'https://passculture.zendesk.com/api/v2'
 const ZENDESK_AUTHORIZATION_TOKEN = process.env.ZENDESK_AUTHORIZATION_TOKEN
 
 const getFaqQuestions = async () => {
