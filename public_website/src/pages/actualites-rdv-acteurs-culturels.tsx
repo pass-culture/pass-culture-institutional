@@ -74,13 +74,6 @@ export default function ListeActuCulturels({
   >([])
 
   useEffect(() => {
-    setCategory(cat)
-    setLocalisation(loc)
-    setOriginalCategory(cat)
-    setOriginalLocalisation(loc)
-    setSecteur(sec)
-    setOriginalSecteur(sec)
-
     setEventCategory(eventCat)
     setEventLocalisation(eventLoc)
     setOriginalEventCategory(eventCat)
@@ -88,15 +81,22 @@ export default function ListeActuCulturels({
     setEventSecteur(eventSec)
     setOriginalEventSecteur(eventSec)
 
-    setData(newsData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
-
     setEventData(eventsData)
     let uniqueEventCategories = []
     let uniqueEventLocalisations = []
     let uniqueEventSecteurs = []
+
+    setCategory(cat)
+    setLocalisation(loc)
+    setOriginalCategory(cat)
+    setOriginalLocalisation(loc)
+    setSecteur(sec)
+    setOriginalSecteur(sec)
+
+    setData(newsData)
+    let uniqueCategories = []
+    let uniqueLocalisations = []
+    let uniqueSecteurs = []
 
     const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
       switch (filtre.filtre) {
