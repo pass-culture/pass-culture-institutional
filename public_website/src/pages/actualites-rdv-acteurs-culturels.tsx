@@ -13,27 +13,27 @@ import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  newsRDVData: APIResponseData<'api::news.news'>[]
   listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
 
   eventsData: APIResponseData<'api::event.event'>[]
 }
 
 export default function ListeActuCulturels({
-  newsData,
+  newsRDVData,
   listeActuCulturel,
   eventsData,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(newsRDVData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(newsRDVData.map((item) => item.attributes.localisation))
   )
 
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(newsRDVData.map((item) => item.attributes.secteur))
   )
 
   const eventCat = Array.from(
@@ -93,7 +93,7 @@ export default function ListeActuCulturels({
     setSecteur(sec)
     setOriginalSecteur(sec)
 
-    setData(newsData)
+    setData(newsRDVData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
@@ -135,7 +135,7 @@ export default function ListeActuCulturels({
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
+            new Set(newsRDVData.map((item) => item.attributes.category))
           )
           return {
             ...filtre,
@@ -143,7 +143,7 @@ export default function ListeActuCulturels({
           }
         case 'Localisation':
           uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
+            new Set(newsRDVData.map((item) => item.attributes.localisation))
           )
           return {
             ...filtre,
@@ -151,7 +151,7 @@ export default function ListeActuCulturels({
           }
         case "Secteur d'activités":
           uniqueSecteurs = Array.from(
-            new Set(newsData.map((item) => item.attributes.secteur))
+            new Set(newsRDVData.map((item) => item.attributes.secteur))
           )
           return {
             ...filtre,
@@ -368,7 +368,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: news.data,
+      newsRDVData: news.data,
       listeActuCulturel: data,
 
       eventsData: events.data,
