@@ -35,17 +35,23 @@ export default function EtudesPassCulture({
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
+  const [originalEtudesCategory, setOriginalEtudesCategory] = useState<
+    string[]
+  >([])
+  const [originalEtudesLocalisation, setOriginalEtudesLocalisation] = useState<
+    string[]
+  >([])
+  const [originalEtudesSecteur, setOriginalEtudesSecteur] = useState<string[]>(
+    []
+  )
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
-    setOriginalCategory(cat)
-    setOriginalLocalisation(loc)
-    setOriginalSecteur(sec)
+    setOriginalEtudesCategory(cat)
+    setOriginalEtudesLocalisation(loc)
+    setOriginalEtudesSecteur(sec)
     setCategory(cat)
     setLocalisation(loc)
     setSecteur(sec)
@@ -124,13 +130,13 @@ export default function EtudesPassCulture({
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
+        setSecteur(value[0] === '' ? originalEtudesSecteur : value)
         break
       case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        setLocalisation(value[0] === '' ? originalEtudesLocalisation : value)
         break
       case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
+        setCategory(value[0] === '' ? originalEtudesCategory : value)
         break
       default:
         break
