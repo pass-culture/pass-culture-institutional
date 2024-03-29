@@ -118,14 +118,14 @@ export default function RessourcesEnseignants({
 
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
       case 'Localisation':
         setLocalisation(value[0] === '' ? originalLocalisation : value)
         break
       case "Secteur d'activités":
         setSecteur(value[0] === '' ? originalSecteur : value)
+        break
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
         break
       default:
         break
