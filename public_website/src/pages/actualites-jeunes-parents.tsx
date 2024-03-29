@@ -150,6 +150,20 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 }
 
 export const getStaticProps = (async () => {
+  const query = stringify({
+    populate: [
+      'title',
+      'buttonText',
+      'filtres',
+      'socialMediaSection',
+      'socialMediaSection.socialMediaLink',
+      'separator',
+      'aide',
+      'aide.image',
+      'aide.cta',
+    ],
+  })
+
   const newsQuery = stringify({
     sort: ['date:desc'],
     populate: ['image'],
@@ -164,20 +178,6 @@ export const getStaticProps = (async () => {
   const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
     `/news-list?${newsQuery}`
   )
-
-  const query = stringify({
-    populate: [
-      'title',
-      'buttonText',
-      'filtres',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'separator',
-      'aide',
-      'aide.image',
-      'aide.cta',
-    ],
-  })
   const { data } = await fetchCMS<
     APIResponseData<'api::liste-jeune.liste-jeune'>
   >(`/liste-jeune?${query}`)
