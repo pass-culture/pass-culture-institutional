@@ -13,24 +13,24 @@ import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  newsREData: APIResponseData<'api::news.news'>[]
   ressourcesEnseignantsListe: APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
 }
 
 export default function RessourcesEnseignants({
-  newsData,
+  newsREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(newsREData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(newsREData.map((item) => item.attributes.localisation))
   )
 
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(newsREData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
   const [originalCategory, setOriginalCategory] = useState<string[]>([])
@@ -50,7 +50,7 @@ export default function RessourcesEnseignants({
     setSecteur(sec)
     setOriginalSecteur(sec)
 
-    setData(newsData)
+    setData(newsREData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
@@ -60,7 +60,7 @@ export default function RessourcesEnseignants({
         switch (filtre.filtre) {
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
+              new Set(newsREData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -68,7 +68,7 @@ export default function RessourcesEnseignants({
             }
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsData.map((item) => item.attributes.localisation))
+              new Set(newsREData.map((item) => item.attributes.localisation))
             )
             return {
               ...filtre,
@@ -76,7 +76,7 @@ export default function RessourcesEnseignants({
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
-              new Set(newsData.map((item) => item.attributes.secteur))
+              new Set(newsREData.map((item) => item.attributes.secteur))
             )
             return {
               ...filtre,
@@ -227,7 +227,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: news.data,
+      newsREData: news.data,
       ressourcesEnseignantsListe: data,
     },
   }
