@@ -1,36 +1,48 @@
+/**
+ * Because of limitations with the zendesk API filtering, we cannot efficiently
+ * fetch only the answers that we want (from one or more specific categories and
+ * with a filtering flag).
+ *
+ * Instead we fetch every answsers at build time and store them in a local JSON file.
+ * This JSON file is then imported in the Faq component which displays only the
+ * answers from the wanted categories with whatever flag.
+ */
+
 const fetch = require('node-fetch')
 require('dotenv').config()
 const fs = require('fs').promises
+
+const ZENDESK_API_URL = process.env.ZENDESK_API_URL
+const ZENDESK_AUTHORIZATION_TOKEN = process.env.ZENDESK_AUTHORIZATION_TOKEN
+
 const getFaqQuestions = async () => {
   try {
     let headers = null
 
-    if (process.env.ZENDESK_AUTHORIZATION_TOKEN) {
+    if (ZENDESK_AUTHORIZATION_TOKEN) {
       headers = {
-        headers: {
-          Authorization: `Basic ${process.env.ZENDESK_AUTHORIZATION_TOKEN}`,
-        },
+        Authorization: `Basic ${ZENDESK_AUTHORIZATION_TOKEN}`,
       }
     }
-    // Fetching category data
+
+    // Fetch categories
     const categoryResponse = await fetch(
-      'https://passculture.zendesk.com/api/v2/help_center/categories?per_page=100',
-      headers
+      `${ZENDESK_API_URL}/help_center/categories?per_page=100`,
+      { headers }
     )
     const categoryResponseObject = await categoryResponse.json()
     const categoriesData = categoryResponseObject.categories
 
     const resultObject = {}
 
-    // Using for...of loop to iterate over categories
     for (const category of categoriesData) {
       const categoryId = category.id
       resultObject[categoryId] = []
 
       // Fetching FAQ data for each category
       let faqResponse = await fetch(
-        `https://passculture.zendesk.com/api/v2/help_center/categories/${categoryId}/articles?per_page=100`,
-        headers
+        `${ZENDESK_API_URL}/help_center/categories/${categoryId}/articles?per_page=100`,
+        { headers }
       )
       let faqResponseObject = await faqResponse.json()
 
@@ -44,7 +56,10 @@ const getFaqQuestions = async () => {
         for (let index = 2; index <= pageCount; index++) {
           additionalPageFetches.push(
             fetch(
-              `https://passculture.zendesk.com/api/v2/help_center/categories/${categoryId}/articles?per_page=100&page=${index}`
+              `${ZENDESK_API_URL}/help_center/categories/${categoryId}/articles?per_page=100&page=${index}`,
+              {
+                headers,
+              }
             ).then((response) => response.json())
           )
         }
@@ -60,11 +75,8 @@ const getFaqQuestions = async () => {
     // Building the content of the JSON file
     const jsonData = JSON.stringify(resultObject)
 
-    // Determining the location of the JSON file in the static generation folder
-    const filePath = './faqData.json' // or './static/data.json' depending on your setup
-
     // Writing the JSON file to the specified location
-    await fs.writeFile(filePath, jsonData)
+    await fs.writeFile('./faqData.json', jsonData)
 
     console.log('JSON file built successfully!')
   } catch (error) {
@@ -72,5 +84,4 @@ const getFaqQuestions = async () => {
   }
 }
 
-// Calling the function to execute the script
 getFaqQuestions()

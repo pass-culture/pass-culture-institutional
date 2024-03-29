@@ -51,5 +51,12 @@ module.exports = {
         'jest/prefer-called-with': 'error',
       },
     },
+    {
+      files: ['getFaqQuestions.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-console': 'off',
+      },
+    },
   ],
 }
