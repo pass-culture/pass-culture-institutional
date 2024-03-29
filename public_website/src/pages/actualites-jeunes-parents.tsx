@@ -69,6 +69,19 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleFilterChange = (name: string, value: string[]) => {
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      default:
+        break
+    }
+  }
+
   const fetchData = async () => {
     const newsQuery = stringify({
       sort: ['date:desc'],
@@ -89,19 +102,6 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     )
 
     setData(news.data)
-  }
-
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      default:
-        break
-    }
   }
 
   useEffect(() => {
