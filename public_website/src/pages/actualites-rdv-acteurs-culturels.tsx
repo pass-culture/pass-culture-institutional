@@ -169,15 +169,15 @@ export default function ListeActuCulturels({
 
   const fetchData = async () => {
     const newsQuery = stringify({
-      sort: ['date:desc'],
       populate: ['image'],
+      sort: ['date:desc'],
       pagination: {},
       filters: {
-        category: {
-          $eqi: category,
-        },
         localisation: {
           $eqi: localisation,
+        },
+        category: {
+          $eqi: category,
         },
         secteur: {
           $eqi: secteur,
