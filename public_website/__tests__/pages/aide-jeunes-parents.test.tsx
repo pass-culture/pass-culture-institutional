@@ -3,10 +3,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import Help, { getStaticProps } from '@/pages/aide'
+import Help, { getStaticProps } from '@/pages/aide-jeunes-parents'
 
 vi.mock('@/lib/analytics/analyticsProvider')
-describe('Help page', () => {
+describe('Help page - Young & adults', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,

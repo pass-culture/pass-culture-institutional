@@ -913,7 +913,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   info: {
     singularName: 'help';
     pluralName: 'helps';
-    displayName: 'Help';
+    displayName: 'Help - Jeunes parents';
     description: '';
   };
   options: {

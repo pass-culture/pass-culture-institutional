@@ -6,7 +6,7 @@ import {
   restaurantDataFixtures,
   testDataFixtures,
 } from './fixtures'
-import { AidePageFixtures } from './fixtures/aide'
+import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { simulatorPageFixtures } from './fixtures/simulator'
@@ -38,7 +38,7 @@ export const handlers = [
     return jsonResponseOf(listeJeunePageFixtures.listejeune)
   }),
   http.get(`${CMS_BASE_URL}/api/help`, () => {
-    return jsonResponseOf(AidePageFixtures.helpdata)
+    return jsonResponseOf(AideJeunesParentsPageFixtures.data)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
