@@ -13,6 +13,7 @@
     "test:deadcode": "ts-prune",
     "test:lint": "next lint",
     "test:types": "yarn tsc --noEmit",
+    "postinstall": "node getFaqQuestions.js",
     "prebuild": "node getFaqQuestions.js"
   },
   "dependencies": {
