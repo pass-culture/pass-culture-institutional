@@ -1,11 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import faqJsonData from '../../../../faqData.json'
-import arrowUrl from '../../image/arrowd.svg'
-import { Button } from '../button/Button'
-import { Typo } from '../typographies'
-import { LinkFaq } from './Link'
+import faqJsonData from '../../../faqData.json'
+import { Button } from '../../ui/components/button/Button'
+import { LinkFaq } from '../../ui/components/help/Link'
+import { Typo } from '../../ui/components/typographies'
+import arrowUrl from '../../ui/image/arrowd.svg'
 
 type FaqProps = {
   title: string
@@ -151,8 +151,8 @@ const StyledAccordion = styled.details`
       font-size: ${theme.fonts.sizes['xl']};
       font-weight: ${theme.fonts.weights.bold};
       display: block;
-      padding-right 2rem;
       position: relative;
+      padding-right: 4rem;
     }
 
     summary::after {

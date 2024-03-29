@@ -4,10 +4,10 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
+import { Faq } from '@/lib/blocks/Faq'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Faq } from '@/ui/components/help/Faq'
 import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
