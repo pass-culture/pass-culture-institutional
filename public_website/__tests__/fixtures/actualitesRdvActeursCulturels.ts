@@ -3,7 +3,9 @@ export const ActusRdvActeursPageFixtures = {
     id: 1,
     attributes: {
       titleEventSection: 'Les prochains rendez-vous',
-      buttonText: 'More',
+      buttonText: 'Morese',
+      title: 'Programmes de sensibdilisation à lart dans votre région',
+
       createdAt: '2024-03-19T10:32:37.437Z',
       filtres: [
         {
@@ -16,7 +18,6 @@ export const ActusRdvActeursPageFixtures = {
         },
       ],
       publishedAt: '2024-03-19T10:32:38.445Z',
-      title: 'Programmes de sensibilisation à lart dans votre région',
     },
     separator: {
       id: 1,

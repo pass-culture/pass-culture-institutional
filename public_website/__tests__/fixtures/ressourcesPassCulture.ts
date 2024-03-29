@@ -22,13 +22,7 @@ export const RessourcesPassCulturePageFixtures = {
                 ext: '.jpg',
 
                 hash: 'microsoft_edge_Px0_X7g1mc8k_unsplash_1489223492',
-                height: 6446,
-                mime: 'image/jpeg',
-                name: 'microsoft-edge-Px0X7g1mc8k-unsplash.jpg',
-                previewUrl: null,
-                provider: 'local',
-                provider_metadata: null,
-                size: 5112.77,
+
                 updatedAt: '2024-02-26T12:28:09.419Z',
                 url: '/uploads/microsoft_edge_Px0_X7g1mc8k_unsplash_1489223492.jpg',
                 width: 4299,
@@ -36,17 +30,17 @@ export const RessourcesPassCulturePageFixtures = {
               id: 5,
             },
           },
-          surtitle: 'Pour aller plus loin',
           title: 'Les offres et expériences à vivre avec le pass',
+          surtitle: 'Pour asller plus loin',
         },
       ],
       filtres: [
         {
-          filtre: 'Catégorie',
+          filtre: 'Catégofrie',
           id: 17897,
         },
         {
-          filtre: 'Localisation',
+          filtre: 'Localisastion',
           id: 34,
         },
       ],
