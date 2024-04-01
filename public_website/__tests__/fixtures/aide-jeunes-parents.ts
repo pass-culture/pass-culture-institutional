@@ -88,16 +88,14 @@ export const AideJeunesParentsPageFixtures = {
           },
         },
       },
-      social: [
-        {
-          id: 7,
-          title: 'On reste connectés',
-          socialMediaLink: [
-            { id: 14, name: 'instagram', url: '#' },
-            { id: 15, name: 'youtube', url: '#' },
-          ],
-        },
-      ],
+      social: {
+        id: 7,
+        title: 'On reste connectés',
+        socialMediaLink: [
+          { id: 14, name: 'instagram', url: '#' },
+          { id: 15, name: 'youtube', url: '#' },
+        ],
+      },
       faq: {
         id: 1,
         title: 'Des questions&nbsp;?',

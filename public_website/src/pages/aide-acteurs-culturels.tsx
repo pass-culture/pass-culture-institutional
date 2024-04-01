@@ -53,12 +53,10 @@ export default function CulturalActorsHelp({
           />
         )}
 
-      {helpData.attributes?.social && helpData.attributes.social[0] && (
-        <StyledSocialMedia
-          title={helpData.attributes.social[0].title}
-          socialMediaLink={helpData.attributes.social[0].socialMediaLink}
-        />
-      )}
+      <StyledSocialMedia
+        title={helpData.attributes.social.title}
+        socialMediaLink={helpData.attributes.social.socialMediaLink}
+      />
     </React.Fragment>
   )
 }

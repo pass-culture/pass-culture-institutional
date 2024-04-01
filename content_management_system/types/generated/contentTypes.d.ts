@@ -922,7 +922,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
     cardText: Attribute.Component<'block.double-push-cta'>;
-    social: Attribute.Component<'block.social-media', true>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -949,7 +949,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
     cardText: Attribute.Component<'block.double-push-cta'>;
-    social: Attribute.Component<'block.social-media', true>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -983,7 +983,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
     cardText: Attribute.Component<'block.double-push-cta'>;
-    social: Attribute.Component<'block.social-media', true>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &

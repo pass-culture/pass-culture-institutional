@@ -60,12 +60,10 @@ export default function TeachersHelp({
         />
       )}
 
-      {data.attributes?.social && data.attributes.social[0] && (
-        <StyledSocialMedia
-          title={data.attributes.social[0].title}
-          socialMediaLink={data.attributes.social[0].socialMediaLink}
-        />
-      )}
+      <StyledSocialMedia
+        title={data.attributes.social.title}
+        socialMediaLink={data.attributes.social.socialMediaLink}
+      />
     </React.Fragment>
   )
 }

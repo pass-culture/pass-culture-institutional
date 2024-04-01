@@ -25,8 +25,9 @@
     },
     "social": {
       "type": "component",
-      "repeatable": true,
-      "component": "block.social-media"
+      "repeatable": false,
+      "component": "block.social-media",
+      "required": true
     },
     "simplepushcta": {
       "type": "component",
