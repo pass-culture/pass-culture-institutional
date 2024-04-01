@@ -20,19 +20,10 @@ import { stripTags } from '@/utils/stripTags'
 
 export type VerticalCarouselProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function VerticalCarousel({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  items,
-}: VerticalCarouselProps) {
+export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -110,14 +101,16 @@ export function VerticalCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons role="group" aria-label={controlsLabel}>
+        <StyledNavigationButtons
+          role="group"
+          aria-label="Contrôles du carousel">
           <ButtonBack
-            aria-label={previousButtonLabel}
+            aria-label="Élement précédent"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label={nextButtonLabel}
+            aria-label="Élément suivant"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
@@ -139,7 +132,7 @@ export function VerticalCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label={controlsLabel}>
+      <StyledDots role="group" aria-label="Contrôles du carousel">
         {items.map((item, index) => {
           return (
             <StyledDot

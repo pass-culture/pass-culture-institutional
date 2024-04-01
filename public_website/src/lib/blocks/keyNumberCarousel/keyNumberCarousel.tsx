@@ -20,19 +20,10 @@ import { stripTags } from '@/utils/stripTags'
 
 type KeyNumberCarouselProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function KeyNumberCarousel({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  items,
-}: KeyNumberCarouselProps) {
+export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
   const KEY_NUMBER_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -106,14 +97,14 @@ export function KeyNumberCarousel({
       <StyledKeyCarouselHeading>
         <StyledTitle>{title}</StyledTitle>
 
-        <StyledNavigationButtons aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack
             onClick={handleKeyNumberNavigationButtonClick}
-            aria-label={previousButtonLabel}>
+            aria-label="Élement précédent">
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label={nextButtonLabel}
+            aria-label="Élément suivant"
             onClick={handleKeyNumberNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
@@ -138,7 +129,7 @@ export function KeyNumberCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots aria-label={controlsLabel}>
+      <StyledDots aria-label="Contrôles du carousel">
         {items.map((item, index) => {
           return (
             <StyledDot

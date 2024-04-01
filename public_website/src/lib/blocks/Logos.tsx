@@ -5,26 +5,13 @@ import { LogoCarousel } from './logoCarousel/logoCarousel'
 import { APIResponse } from '@/types/strapi'
 
 type LogoProps = {
-  controlsLabel?: string
-  nextButtonLabel?: string
-  previousButtonLabel?: string
   logo: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
 }
 
-export function Logos({
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  logo,
-}: LogoProps) {
+export function Logos({ logo }: LogoProps) {
   return (
     <Root>
-      <LogoCarousel
-        controlsLabel={controlsLabel}
-        nextButtonLabel={nextButtonLabel}
-        previousButtonLabel={previousButtonLabel}
-        items={logo}
-      />
+      <LogoCarousel items={logo} />
     </Root>
   )
 }

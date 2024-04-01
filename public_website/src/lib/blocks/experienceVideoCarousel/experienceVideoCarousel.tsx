@@ -20,17 +20,11 @@ import { stripTags } from '@/utils/stripTags'
 
 type ExperienceVideoCarouselProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   items: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
 }
 
 export function ExperienceVideoCarousel({
   title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
   items,
 }: ExperienceVideoCarouselProps) {
   const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
@@ -110,14 +104,14 @@ export function ExperienceVideoCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack
             onClick={handleExperienceVideoNavigationButtonClick}
-            aria-label={previousButtonLabel}>
+            aria-label="Élement précédent">
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label={nextButtonLabel}
+            aria-label="Élément suivant"
             onClick={handleExperienceVideoNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
@@ -138,7 +132,7 @@ export function ExperienceVideoCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots aria-label={controlsLabel}>
+      <StyledDots aria-label="Contrôles du carousel">
         {items.map((item, index) => {
           return (
             <StyledDot

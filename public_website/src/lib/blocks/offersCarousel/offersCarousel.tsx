@@ -20,18 +20,12 @@ import { stripTags } from '@/utils/stripTags'
 
 type OffersVideoCarouselProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
   cta: { Label: string; URL: string } | undefined
 }
 
 export function OffersCarousel({
   title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
   items,
   cta,
 }: OffersVideoCarouselProps) {
@@ -108,14 +102,14 @@ export function OffersCarousel({
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledArrowButtonWrapper>
-          <StyledNavigationButtons aria-label={controlsLabel}>
+          <StyledNavigationButtons aria-label="Contrôles du carousel">
             <ButtonBack
               onClick={handleExperienceVideoNavigationButtonClick}
-              aria-label={previousButtonLabel}>
+              aria-label="Élement précédent">
               <ArrowRight />
             </ButtonBack>
             <ButtonNext
-              aria-label={nextButtonLabel}
+              aria-label="Élément suivant"
               onClick={handleExperienceVideoNavigationButtonClick}>
               <ArrowRight />
             </ButtonNext>
@@ -138,7 +132,7 @@ export function OffersCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots aria-label={controlsLabel}>
+      <StyledDots aria-label="Contrôles du carousel">
         {items.map((item, index) => {
           return (
             <StyledDot

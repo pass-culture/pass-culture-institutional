@@ -35,9 +35,6 @@ export interface BlockExperienceVideoCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
@@ -106,9 +103,6 @@ export interface BlockKeyNumberCarousel extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlLabel: Attribute.String;
     items: Attribute.Component<'common.key-number-items', true> &
       Attribute.SetMinMax<{
         max: 4;
@@ -177,9 +171,6 @@ export interface BlockLogos extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     logo: Attribute.Component<'common.logo', true>;
   };
 }
@@ -191,9 +182,6 @@ export interface BlockOffersCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.offers-carousel-item', true>;
     cta: Attribute.Component<'common.link'>;
@@ -303,9 +291,6 @@ export interface BlockTestimonies extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
@@ -321,9 +306,6 @@ export interface BlockVerticalCarousel extends Schema.Component {
     title: Attribute.Text & Attribute.Required;
     items: Attribute.Component<'common.vertical-carousel-item', true> &
       Attribute.Required;
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String & Attribute.Required;
-    controlsLabel: Attribute.String & Attribute.Required;
   };
 }
 

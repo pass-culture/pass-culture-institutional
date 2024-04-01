@@ -8,15 +8,6 @@
     "title": {
       "type": "string"
     },
-    "previousButtonLabel": {
-      "type": "string"
-    },
-    "nextButtonLabel": {
-      "type": "string"
-    },
-    "controlLabel": {
-      "type": "string"
-    },
     "items": {
       "type": "component",
       "repeatable": true,
