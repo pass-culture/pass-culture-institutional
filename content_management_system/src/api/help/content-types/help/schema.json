@@ -31,8 +31,9 @@
     },
     "simplepushcta": {
       "type": "component",
-      "repeatable": true,
-      "component": "block.simple-push-cta"
+      "repeatable": false,
+      "component": "block.simple-push-cta",
+      "required": true
     },
     "faq": {
       "type": "component",

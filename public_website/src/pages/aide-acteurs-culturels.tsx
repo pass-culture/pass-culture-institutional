@@ -43,15 +43,12 @@ export default function CulturalActorsHelp({
         secondCta={helpData.attributes.cardText?.secondCta}
       />
 
-      {helpData.attributes?.simplepushcta &&
-        helpData.attributes.simplepushcta[0] && (
-          <StyledSimplePushCTA
-            title={helpData.attributes.simplepushcta[0]?.title}
-            surtitle={helpData.attributes.simplepushcta[0]?.surtitle}
-            image={helpData.attributes.simplepushcta[0]?.image}
-            cta={helpData.attributes.simplepushcta[0]?.cta}
-          />
-        )}
+      <StyledSimplePushCTA
+        title={helpData.attributes.simplepushcta.title}
+        surtitle={helpData.attributes.simplepushcta.surtitle}
+        image={helpData.attributes.simplepushcta.image}
+        cta={helpData.attributes.simplepushcta.cta}
+      />
 
       <StyledSocialMedia
         title={helpData.attributes.social.title}

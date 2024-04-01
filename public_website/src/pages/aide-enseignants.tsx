@@ -51,14 +51,12 @@ export default function TeachersHelp({
         secondCta={data.attributes.cardText?.secondCta}
       />
 
-      {data.attributes?.simplepushcta && data.attributes.simplepushcta[0] && (
-        <StyledSimplePushCTA
-          title={data.attributes.simplepushcta[0]?.title}
-          surtitle={data.attributes.simplepushcta[0]?.surtitle}
-          image={data.attributes.simplepushcta[0]?.image}
-          cta={data.attributes.simplepushcta[0]?.cta}
-        />
-      )}
+      <StyledSimplePushCTA
+        title={data.attributes.simplepushcta.title}
+        surtitle={data.attributes.simplepushcta.surtitle}
+        image={data.attributes.simplepushcta.image}
+        cta={data.attributes.simplepushcta.cta}
+      />
 
       <StyledSocialMedia
         title={data.attributes.social.title}
