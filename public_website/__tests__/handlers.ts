@@ -6,6 +6,7 @@ import {
   restaurantDataFixtures,
   testDataFixtures,
 } from './fixtures'
+import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
 import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
@@ -42,6 +43,9 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/help-cultural-actors`, () => {
     return jsonResponseOf(AideJeunesParentsPageFixtures.data)
+  }),
+  http.get(`${CMS_BASE_URL}/api/help-teachers`, () => {
+    return jsonResponseOf(AideEnseignantsPageFixtures.data)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,

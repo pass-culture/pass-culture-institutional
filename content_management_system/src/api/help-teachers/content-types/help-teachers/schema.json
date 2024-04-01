@@ -1,0 +1,48 @@
+{
+  "kind": "singleType",
+  "collectionName": "help_teachers_list",
+  "info": {
+    "singularName": "help-teachers",
+    "pluralName": "help-teachers-list",
+    "displayName": "Help - Teachers"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.header",
+      "required": true
+    },
+    "cardText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.double-push-cta"
+    },
+    "social": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.social-media"
+    },
+    "simplepushcta": {
+      "type": "component",
+      "repeatable": true,
+      "component": "block.simple-push-cta"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.faq",
+      "required": true
+    },
+    "latestStudies": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.latest-news",
+      "required": true
+    }
+  }
+}
