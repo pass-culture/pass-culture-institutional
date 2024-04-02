@@ -11,7 +11,8 @@ interface CenteredTextProps {
 export function CenteredText(props: CenteredTextProps) {
   return (
     <Root data-testid="centered-text">
-      <Typo.Heading2>{props.title}</Typo.Heading2>
+      <Typo.Heading3
+        dangerouslySetInnerHTML={{ __html: props.title }}></Typo.Heading3>
       <p dangerouslySetInnerHTML={{ __html: props.description }} />
     </Root>
   )
@@ -24,8 +25,9 @@ const Root = styled.div`
     margin: 0 auto;
     padding: 1.5rem;
 
-    h2 {
+    h3 {
       margin-bottom: 1.5rem;
+      color: ${theme.colors.secondary};
     }
 
     p {

@@ -385,7 +385,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: '';
   };
   attributes: {
-    simple: Attribute.Text & Attribute.Required;
+    texte: Attribute.Text & Attribute.Required;
     description: Attribute.Text;
     firstEmoji: Attribute.String;
     secondEmoji: Attribute.String;
@@ -396,9 +396,10 @@ export interface CommonLogo extends Schema.Component {
   collectionName: 'components_common_logos';
   info: {
     displayName: 'Logo';
+    description: '';
   };
   attributes: {
-    logo: Attribute.Media;
+    logo: Attribute.Media & Attribute.Required;
   };
 }
 
