@@ -4,6 +4,7 @@ import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
 import EtudesPassCulture, { getStaticProps } from '@/pages/etudes-pass-culture'
+
 describe('Etudes Pass Culture', () => {
   beforeEach(() => {
     process.env = {
