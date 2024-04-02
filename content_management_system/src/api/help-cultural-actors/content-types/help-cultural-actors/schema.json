@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "helps",
+  "collectionName": "help_cultural_actors_list",
   "info": {
-    "singularName": "help",
-    "pluralName": "helps",
-    "displayName": "Help - Jeunes parents",
-    "description": ""
+    "singularName": "help-cultural-actors",
+    "pluralName": "help-cultural-actors-list",
+    "displayName": "Help - Cultural Actors"
   },
   "options": {
     "draftAndPublish": true

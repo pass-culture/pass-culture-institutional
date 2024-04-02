@@ -8,7 +8,8 @@ import {
 } from './fixtures'
 import { ActusPassCultureJeunePageFixtures } from './fixtures/actualitesPassCulture'
 import { ActusRdvActeursPageFixtures } from './fixtures/actualitesRdvActeursCulturels'
-import { AidePageFixtures } from './fixtures/aide'
+import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
+import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
@@ -43,7 +44,13 @@ export const handlers = [
     return jsonResponseOf(listeJeunePageFixtures.listejeune)
   }),
   http.get(`${CMS_BASE_URL}/api/help`, () => {
-    return jsonResponseOf(AidePageFixtures.helpdata)
+    return jsonResponseOf(AideJeunesParentsPageFixtures.data)
+  }),
+  http.get(`${CMS_BASE_URL}/api/help-cultural-actors`, () => {
+    return jsonResponseOf(AideJeunesParentsPageFixtures.data)
+  }),
+  http.get(`${CMS_BASE_URL}/api/help-teachers`, () => {
+    return jsonResponseOf(AideEnseignantsPageFixtures.data)
   }),
   http.get(`${CMS_BASE_URL}/api/actualites-pass-culture`, () => {
     return jsonResponseOf(ActusPassCultureJeunePageFixtures.listejeune)

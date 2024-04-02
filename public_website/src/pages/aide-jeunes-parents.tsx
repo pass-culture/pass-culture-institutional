@@ -4,10 +4,10 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
+import { Faq } from '@/lib/blocks/Faq'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Faq } from '@/ui/components/help/Faq'
 import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -27,9 +27,11 @@ export default function Help({ helpData }: HelpProps) {
         }
       />
       <Faq
-        title="Les questions les plus posées"
-        cta="Voir toute la FAQ"
-        link="#"
+        title={helpData.attributes.faq.title}
+        cta={helpData.attributes.faq.cta}
+        categories={helpData.attributes.faq.categories}
+        filteringProperty={helpData.attributes.faq.filteringProperty}
+        limit={helpData.attributes.faq.limit}
       />
       <StyledPushCTA
         title={helpData.attributes.cardText?.title}
@@ -39,23 +41,17 @@ export default function Help({ helpData }: HelpProps) {
         secondCta={helpData.attributes.cardText?.secondCta}
       />
 
-      {helpData.attributes?.simplepushcta &&
-        helpData.attributes.simplepushcta[0] && (
-          <StyledSimplePushCTA
-            title={helpData.attributes.simplepushcta[0]?.title}
-            surtitle={helpData.attributes.simplepushcta[0]?.surtitle}
-            image={helpData.attributes.simplepushcta[0]?.image}
-            cta={helpData.attributes.simplepushcta[0]?.cta}
-            icon={helpData.attributes.simplepushcta[0]?.icon}
-          />
-        )}
+      <StyledSimplePushCTA
+        title={helpData.attributes.simplepushcta.title}
+        surtitle={helpData.attributes.simplepushcta.surtitle}
+        image={helpData.attributes.simplepushcta.image}
+        cta={helpData.attributes.simplepushcta.cta}
+      />
 
-      {helpData.attributes?.social && helpData.attributes.social[0] && (
-        <StyledSocialMedia
-          title={helpData.attributes.social[0].title}
-          socialMediaLink={helpData.attributes.social[0].socialMediaLink}
-        />
-      )}
+      <StyledSocialMedia
+        title={helpData.attributes.social.title}
+        socialMediaLink={helpData.attributes.social.socialMediaLink}
+      />
     </React.Fragment>
   )
 }
@@ -73,6 +69,8 @@ export const getStaticProps = (async () => {
       'social',
       'social.socialMediaLink',
       'social.title',
+      'faq',
+      'faq.cta',
       'simplepushcta',
       'simplepushcta.image',
       'simplepushcta.cta',
