@@ -20,11 +20,11 @@ export interface BlockDoublePushCta extends Schema.Component {
   };
   attributes: {
     image: Attribute.Media & Attribute.Required;
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
-    firstCta: Attribute.Component<'common.link'>;
+    firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<'common.not-required-link'>;
+    secondCta: Attribute.Component<'common.link'>;
   };
 }
 
