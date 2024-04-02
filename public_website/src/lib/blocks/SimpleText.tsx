@@ -39,10 +39,10 @@ export function SimpleText(props: SimpleTextProps) {
 
           <Column>
             <ul>
-              {props.firstSubTitle && (
+              {props.secondSubTitle && (
                 <li
                   dangerouslySetInnerHTML={{
-                    __html: props.firstSubTitle,
+                    __html: props.secondSubTitle,
                   }}></li>
               )}
             </ul>
