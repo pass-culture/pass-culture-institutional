@@ -77,7 +77,7 @@ export const handlers = [
     return jsonResponseOf(PressePageFixtures.presse)
   }),
   http.get(`${CMS_BASE_URL}/api/liste-offre`, () => {
-    return jsonResponseOf(listeOffrePageFixtures.listoffre)
+    return jsonResponseOf(listeOffrePageFixtures.offerListe)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
