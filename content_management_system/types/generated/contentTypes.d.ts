@@ -1143,6 +1143,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
     singularName: 'help-cultural-actors';
     pluralName: 'help-cultural-actors-list';
     displayName: 'Help - Cultural Actors';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1427,12 +1428,10 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.centered-text',
         'block.header',
         'block.simple-text',
-        'block.push-cta',
         'block.social-media',
         'block.double-push-cta',
         'block.image-text',
         'block.image',
-        'block.link',
         'block.little-list',
         'block.separator',
         'block.simple-push-cta',

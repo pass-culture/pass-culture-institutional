@@ -1,12 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import ReactPlayer from 'react-player/youtube'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 import { APIResponse } from '@/types/strapi'
-import { Pause } from '@/ui/components/icons/Pause'
 import { Play } from '@/ui/components/icons/Play'
-import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type ExperienceVideoCarouselSlideProps = {
   slideIndex: number
@@ -23,19 +22,12 @@ export function ExperienceVideoCarouselSlide({
   description,
   url,
 }: ExperienceVideoCarouselSlideProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState<boolean>(false)
-  const playVideo = () => {
-    if (videoRef.current) {
-      if (!isPlaying) {
-        videoRef.current.play()
-        setIsPlaying(true)
-      } else {
-        videoRef.current.pause()
-        setIsPlaying(false)
-      }
-    }
-  }
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
     <Root
       index={slideIndex}
@@ -43,22 +35,16 @@ export function ExperienceVideoCarouselSlide({
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledWrapper>
-        <button onMouseDown={playVideo}>
-          <span className="visually-hidden">
-            {isPlaying ? 'Pause' : 'Lecture'}
-          </span>
-          {!isPlaying ? <Play /> : <Pause />}
-        </button>
-
-        {image && (
+        {image && isMounted && (
           <StyledExperienceVideo
-            ref={videoRef}
-            poster={
-              image.data.attributes.url &&
-              getStrapiURL(image.data.attributes.url)
-            }>
-            <source src={url} />
-          </StyledExperienceVideo>
+            light={image?.data.attributes.url}
+            url={url}
+            width="100%"
+            controls={false}
+            height="100%"
+            alt={description}
+            playIcon={<StyledPlayIcon />}
+          />
         )}
         <StyledTitle>{title}</StyledTitle>
         <Typo.Body>{description}</Typo.Body>
@@ -79,7 +65,7 @@ const Root = styled(Slide)`
   `}
 `
 
-const StyledExperienceVideo = styled.video`
+const StyledExperienceVideo = styled(ReactPlayer)`
   border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;
@@ -101,4 +87,11 @@ const StyledWrapper = styled.div`
     bottom: 8rem;
     z-index: 15;
   }
+`
+
+const StyledPlayIcon = styled(Play)`
+  position: absolute;
+  left: 1rem;
+  bottom: 8rem;
+  z-index: 15;
 `

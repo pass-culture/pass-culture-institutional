@@ -9,18 +9,12 @@ import { getOfferUrl } from '@/utils/apiHelpers'
 
 type RecommendationsProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   recommendations: Offer[]
   cta: { Label: string; URL: string }
 }
 
 export function Recommendations({
   title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
   recommendations,
   cta,
 }: RecommendationsProps) {
@@ -37,13 +31,7 @@ export function Recommendations({
   return (
     <Root>
       <StyledCarouselWrapper>
-        <VerticalCarousel
-          title={title}
-          controlsLabel={controlsLabel}
-          nextButtonLabel={nextButtonLabel}
-          previousButtonLabel={previousButtonLabel}
-          items={verticalCarouselItems}
-        />
+        <VerticalCarousel title={title} items={verticalCarouselItems} />
       </StyledCarouselWrapper>
       <StyledCtaWrapper>
         <Button href={cta.URL}>{cta.Label}</Button>

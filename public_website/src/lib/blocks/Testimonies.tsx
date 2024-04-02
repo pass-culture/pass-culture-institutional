@@ -6,28 +6,13 @@ import { TestimonyCarouselSlideProps } from './testimonyCaousel/testimonyCarouse
 
 type TestimoniesProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   testimonies: Omit<TestimonyCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function Testimonies({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  testimonies,
-}: TestimoniesProps) {
+export function Testimonies({ title, testimonies }: TestimoniesProps) {
   return (
     <Root>
-      <TestimonyCarousel
-        title={title}
-        controlsLabel={controlsLabel}
-        nextButtonLabel={nextButtonLabel}
-        previousButtonLabel={previousButtonLabel}
-        items={testimonies}
-      />
+      <TestimonyCarousel title={title} items={testimonies} />
     </Root>
   )
 }

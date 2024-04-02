@@ -5,29 +5,14 @@ import { ExperienceVideoCarousel } from './experienceVideoCarousel/experienceVid
 import { ExperienceVideoCarouselSlideProps } from './experienceVideoCarousel/experieneVideoCarouselSlide'
 type ExperienceVideoProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   videos: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function ExperienceVideo({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  videos,
-}: ExperienceVideoProps) {
+export function ExperienceVideo({ title, videos }: ExperienceVideoProps) {
   return (
     <Root>
       <StyledCarouselWrapper>
-        <ExperienceVideoCarousel
-          title={title}
-          controlsLabel={controlsLabel}
-          nextButtonLabel={nextButtonLabel}
-          previousButtonLabel={previousButtonLabel}
-          items={videos}
-        />
+        <ExperienceVideoCarousel title={title} items={videos} />
       </StyledCarouselWrapper>
     </Root>
   )

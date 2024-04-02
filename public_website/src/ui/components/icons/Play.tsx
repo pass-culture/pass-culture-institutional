@@ -2,9 +2,10 @@ import React from 'react'
 
 import { Icon } from './Icon'
 
-export function Play() {
+export function Play({ className }: { className?: string }) {
   return (
     <Icon
+      className={className}
       width="88"
       height="88"
       viewBox="0 0 88 88"

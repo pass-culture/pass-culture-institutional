@@ -16,18 +16,10 @@ import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
 type LogoCarouselProps = {
-  controlsLabel: string | undefined
-  nextButtonLabel: string | undefined
-  previousButtonLabel: string | undefined
   items: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
 }
 
-export function LogoCarousel({
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  items,
-}: LogoCarouselProps) {
+export function LogoCarousel({ items }: LogoCarouselProps) {
   const LOGO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     'title'
   )}"]`
@@ -115,20 +107,20 @@ export function LogoCarousel({
         })}
       </StyledSlider>
       <StyledHeading>
-        <StyledNavigationButtons aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack
-            aria-label={previousButtonLabel}
+            aria-label="Élement précédent"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
-            aria-label={nextButtonLabel}
+            aria-label="Élément suivant"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
       </StyledHeading>
-      <StyledDots aria-label={controlsLabel}>
+      <StyledDots aria-label="Contrôles du carousel">
         {items?.map((item, index) => {
           return (
             <StyledDot

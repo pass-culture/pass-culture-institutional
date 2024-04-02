@@ -2,6 +2,15 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
+
+type OffersCarouselSlideTheme =
+  | 'purple'
+  | 'yellow'
+  | 'magenta'
+  | 'orange'
+  | 'green'
+
 export type OffersCarouselSlideProps = {
   slideIndex: number
   title: string
@@ -10,6 +19,7 @@ export type OffersCarouselSlideProps = {
   firstIcon: string
   secondIcon: string
   text: string
+  theme: OffersCarouselSlideTheme
 }
 
 export function OffersCarouselSlide({
@@ -20,6 +30,7 @@ export function OffersCarouselSlide({
   secondIcon,
   secondSurtitle,
   text,
+  theme,
 }: OffersCarouselSlideProps) {
   return (
     <Root
@@ -27,7 +38,7 @@ export function OffersCarouselSlide({
       key={title}
       innerClassName="inner"
       aria-roledescription="diapositive">
-      <CardContainer>
+      <CardContainer $slideTheme={theme}>
         <Card>
           <StyledOffersHeader>
             <StyledOffersSurtitle>{surtitle}</StyledOffersSurtitle>
@@ -40,7 +51,7 @@ export function OffersCarouselSlide({
             <p>{text}</p>
           </StyledOffersContentWrapper>
         </Card>
-        <BackgroundLayer />
+        <FirstBackgroundLayer />
         <SecondBackgroundLayer />
       </CardContainer>
     </Root>
@@ -60,24 +71,43 @@ const Root = styled(Slide)`
   `}
 `
 
-const CardContainer = styled.div`
+const CARD_BACKGROUNDS: Record<OffersCarouselSlideTheme, [string, string]> = {
+  purple: [theme.uniqueColors.purple, theme.uniqueColors.purple],
+  yellow: [
+    `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
+    theme.uniqueColors.yellow,
+  ],
+  magenta: [
+    `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
+    theme.uniqueColors.magentaDark,
+  ],
+  orange: [
+    `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
+    theme.uniqueColors.orange,
+  ],
+  green: [theme.uniqueColors.green, theme.uniqueColors.green],
+}
+
+const CardContainer = styled.div<{ $slideTheme: OffersCarouselSlideTheme }>`
   position: relative;
   z-index: 1;
+
+  --card-background: ${({ $slideTheme }) => CARD_BACKGROUNDS[$slideTheme][0]};
+  --card-background-layer-backgroud: ${({ $slideTheme }) =>
+    CARD_BACKGROUNDS[$slideTheme][1]};
 `
 
 const Card = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.tertiary};
-    border-radius: 1rem;
+  border-radius: 1rem;
 
-    display: flex;
-    flex-direction: column;
-    padding: 6rem 2rem;
-    width: calc(100% - 4rem);
-    height: 15rem;
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 2rem;
+  width: calc(100% - 4rem);
+  height: 15rem;
 
-    position: relative;
-  `}
+  position: relative;
+  background: var(--card-background);
 `
 
 const BackgroundLayer = styled.div`
@@ -85,27 +115,23 @@ const BackgroundLayer = styled.div`
     position: absolute;
     content: '';
     inset: 0;
-    background-color: ${theme.colors.secondary};
-    transform: rotate(7deg);
+    background: var(--card-background-layer-backgroud);
+
     border-radius: 1.5rem;
     width: 100%;
     height: 100%;
     z-index: -1;
+
+    box-shadow: -4px 8px 24px 0px ${theme.shadows.banner};
   `}
 `
 
-const SecondBackgroundLayer = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    content: '';
-    inset: 0;
-    background-color: ${theme.colors.tertiary}50;
-    transform: rotate(6deg);
-    border-radius: 1.5rem;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  `}
+const FirstBackgroundLayer = styled(BackgroundLayer)`
+  transform: rotate(7deg);
+`
+
+const SecondBackgroundLayer = styled(BackgroundLayer)`
+  transform: rotate(2deg);
 `
 
 const StyledOffersHeader = styled.div`
