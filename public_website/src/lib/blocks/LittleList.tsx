@@ -5,7 +5,7 @@ import { Typo } from '@/ui/components/typographies'
 
 interface ContentItem {
   id: number
-  simple: string
+  text: string
   description: string | null
   firstEmoji: string
   secondEmoji: string
@@ -22,7 +22,10 @@ export function LittleList(props: LittleListProps) {
     <Root>
       <Columns>
         <Column>
-          <Typo.Heading2>{props.title}</Typo.Heading2>
+          {props.title && (
+            <Typo.Heading2
+              dangerouslySetInnerHTML={{ __html: props.title }}></Typo.Heading2>
+          )}
           <p>{props.description}</p>
         </Column>
 
@@ -35,7 +38,7 @@ export function LittleList(props: LittleListProps) {
               </ColumnEmoji>
 
               <ColumnText>
-                <p>{item.simple}</p>
+                <p>{item.text}</p>
                 {props.withDescritpion && item.description && (
                   <p>{item.description}</p>
                 )}

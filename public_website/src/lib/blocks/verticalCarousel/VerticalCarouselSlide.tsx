@@ -39,7 +39,7 @@ export function VerticalCarouselSlide({
             src={getStrapiURL(imageUrl)}
             alt=""
             width={300}
-            height={400}
+            height={650}
           />
         )}
         <StyledTitle>{title}</StyledTitle>
@@ -65,7 +65,6 @@ const StyledImage = styled(Image)`
   border-radius: 0.5rem;
   object-fit: cover;
   width: 100%;
-  height: auto;
 `
 
 const StyledTitle = styled(Typo.Heading3)`

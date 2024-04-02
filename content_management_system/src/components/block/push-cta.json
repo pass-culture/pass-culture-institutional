@@ -1,7 +1,7 @@
 {
   "collectionName": "components_block_push_ctas",
   "info": {
-    "displayName": "pushCTA",
+    "displayName": "Push CTA With QrCode",
     "description": ""
   },
   "options": {},
@@ -17,7 +17,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "ctaLink": {
       "type": "component",

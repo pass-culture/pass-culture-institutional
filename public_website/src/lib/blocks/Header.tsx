@@ -18,7 +18,7 @@ export function Header(props: HeaderProps) {
       <StyledContentWrapper>
         <StyledContentTextWrapper>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
-          <StyledText>{props.text}</StyledText>
+          {props.text && <StyledText>{props.text}</StyledText>}
         </StyledContentTextWrapper>
         <CardContainer>
           <Card

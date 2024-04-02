@@ -6,16 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "previousButtonLabel": {
-      "type": "string",
-      "required": true
-    },
-    "nextButtonLabel": {
-      "type": "string"
-    },
-    "controlsLabel": {
-      "type": "string"
-    },
     "title": {
       "type": "string"
     },

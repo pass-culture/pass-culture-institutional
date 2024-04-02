@@ -23,6 +23,18 @@
     },
     "secondSurtitle": {
       "type": "string"
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "purple",
+        "yellow",
+        "magenta",
+        "orange",
+        "green"
+      ],
+      "required": true,
+      "default": "purple"
     }
   }
 }

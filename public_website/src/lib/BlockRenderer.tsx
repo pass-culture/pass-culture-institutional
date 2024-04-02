@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
+import { DetailedLogos } from './blocks/DetailedLogos'
 import { DoublePushCTA } from './blocks/DoublePushCta'
 import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
@@ -18,6 +19,7 @@ import { LogoCarousel } from './blocks/logoCarousel/logoCarousel'
 import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
 import { Logos } from './blocks/Logos'
 import { OffersCarousel } from './blocks/offersCarousel/offersCarousel'
+import { OrganizationChart } from './blocks/OrganizationChart'
 import { PiledCards } from './blocks/PiledCards'
 import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
@@ -56,6 +58,7 @@ const COMPONENTS: Record<
   'block.experience-video': ExperienceVideo,
   'block.key-number': KeyNumber,
   'block.logos': Logos,
+  'block.detailed-logos': DetailedLogos,
   'block.testimonies': Testimonies,
   'block.experience-video-carousel': ExperienceVideoCarousel,
   'block.key-number-carousel': KeyNumberCarousel,
@@ -77,6 +80,7 @@ const COMPONENTS: Record<
   'block.piled-cards': PiledCards,
 
   'block.faq': Faq,
+  'block.organization-chart': OrganizationChart,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

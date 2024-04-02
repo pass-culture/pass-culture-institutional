@@ -1,7 +1,7 @@
 {
   "collectionName": "components_block_double_push_ctas",
   "info": {
-    "displayName": "DoublePushCTA",
+    "displayName": "Push Grey CTA",
     "description": ""
   },
   "options": {},
@@ -11,14 +11,12 @@
       "multiple": false,
       "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "text": {
       "type": "text"
@@ -26,7 +24,8 @@
     "firstCta": {
       "type": "component",
       "repeatable": false,
-      "component": "common.link"
+      "component": "common.link",
+      "required": true
     },
     "icon": {
       "type": "string"
@@ -34,7 +33,8 @@
     "secondCta": {
       "type": "component",
       "repeatable": false,
-      "component": "common.not-required-link"
+      "component": "common.not-required-link",
+      "required": true
     }
   }
 }
