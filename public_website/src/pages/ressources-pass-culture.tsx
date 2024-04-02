@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
@@ -13,10 +14,13 @@ import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
-  listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
+  ressourcesPassCultureListe: APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
 }
 
-export default function ListeJeune({ newsData, listejeune }: ListProps) {
+export default function RessourcesPassCulture({
+  newsData,
+  ressourcesPassCultureListe,
+}: ListProps) {
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -24,10 +28,16 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   const loc = Array.from(
     new Set(newsData.map((item) => item.attributes.localisation))
   )
+
+  const sec = Array.from(
+    new Set(newsData.map((item) => item.attributes.secteur))
+  )
   const [category, setCategory] = useState<string[]>([])
   const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
+  const [secteur, setSecteur] = useState<string[]>([])
+  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
@@ -37,35 +47,47 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     setLocalisation(loc)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
+    setSecteur(sec)
+    setOriginalSecteur(sec)
 
     setData(newsData)
     let uniqueCategories = []
     let uniqueLocalisations = []
+    let uniqueSecteurs = []
 
-    const filtres = listejeune.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        default:
-          return { ...filtre, value: [] }
+    const filtres = ressourcesPassCultureListe.attributes?.filtres?.map(
+      (filtre) => {
+        switch (filtre.filtre) {
+          case 'Catégorie':
+            uniqueCategories = Array.from(
+              new Set(newsData.map((item) => item.attributes.category))
+            )
+            return {
+              ...filtre,
+              value: uniqueCategories,
+            }
+          case 'Localisation':
+            uniqueLocalisations = Array.from(
+              new Set(newsData.map((item) => item.attributes.localisation))
+            )
+            return {
+              ...filtre,
+              value: uniqueLocalisations,
+            }
+          case "Secteur d'activités":
+            uniqueSecteurs = Array.from(
+              new Set(newsData.map((item) => item.attributes.secteur))
+            )
+            return {
+              ...filtre,
+              value: uniqueSecteurs,
+            }
+          default:
+            return { ...filtre, value: [] }
+        }
       }
-    })
-
-    setFilters(filtres)
+    )
+    if (filtres) setFilters(filtres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -81,6 +103,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         localisation: {
           $eqi: localisation,
         },
+        secteur: {
+          $eqi: secteur,
+        },
       },
     })
 
@@ -92,32 +117,36 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   }
 
   const handleFilterChange = (name: string, value: string[]) => {
-    if (name === 'Catégorie') {
-      if (value[0] === '') {
-        setCategory(originalCategory)
-      } else {
-        setCategory(value)
-      }
-    } else if (name === 'Localisation') {
-      if (value[0] === '') {
-        setLocalisation(originalLocalisation)
-      } else {
-        setLocalisation(value)
-      }
+    switch (name) {
+      case 'Catégorie':
+        setCategory(value[0] === '' ? originalCategory : value)
+        break
+      case 'Localisation':
+        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        break
+      case "Secteur d'activités":
+        setSecteur(value[0] === '' ? originalSecteur : value)
+        break
+      default:
+        break
     }
   }
 
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation])
+  }, [category, localisation, secteur])
 
   return (
     <React.Fragment>
       <StyledTitle>
-        <Typo.Heading2
-          dangerouslySetInnerHTML={{ __html: listejeune.attributes.title }}
-        />
+        {ressourcesPassCultureListe.attributes.title && (
+          <Typo.Heading2
+            dangerouslySetInnerHTML={{
+              __html: ressourcesPassCultureListe.attributes.title,
+            }}
+          />
+        )}
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -125,17 +154,32 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       </StyledTitle>
       <StyledListItems
         news={data}
-        buttonText={listejeune.attributes.buttonText}
+        buttonText={ressourcesPassCultureListe.attributes.buttonText}
       />
 
-      <Separator isActive={listejeune.attributes.separator?.isActive} />
-      {listejeune.attributes.socialMediaSection &&
-        listejeune.attributes.socialMediaSection.title &&
-        listejeune.attributes.socialMediaSection.socialMediaLink && (
+      <Separator
+        isActive={ressourcesPassCultureListe.attributes.separator?.isActive}
+      />
+
+      <SimplePushCta
+        title={ressourcesPassCultureListe.attributes.etudes?.title}
+        image={ressourcesPassCultureListe.attributes.etudes?.image}
+        cta={ressourcesPassCultureListe.attributes.etudes?.cta}
+        surtitle={ressourcesPassCultureListe.attributes.etudes?.surtitle}
+        icon={ressourcesPassCultureListe.attributes.etudes?.icon}
+      />
+
+      {ressourcesPassCultureListe.attributes.socialMediaSection &&
+        ressourcesPassCultureListe.attributes.socialMediaSection.title &&
+        ressourcesPassCultureListe.attributes.socialMediaSection
+          .socialMediaLink && (
           <StyledSocialMedia
-            title={listejeune.attributes.socialMediaSection.title}
+            title={
+              ressourcesPassCultureListe.attributes.socialMediaSection.title
+            }
             socialMediaLink={
-              listejeune.attributes.socialMediaSection.socialMediaLink
+              ressourcesPassCultureListe.attributes.socialMediaSection
+                .socialMediaLink
             }
           />
         )}
@@ -150,7 +194,12 @@ export const getStaticProps = (async () => {
     pagination: {},
     filters: {
       category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+        $eqi: [
+          'Dossier de presse',
+          'Communiqué de presse',
+          'Étude ritualisée',
+          'Étude ponctuelle',
+        ],
       },
     },
   })
@@ -159,7 +208,6 @@ export const getStaticProps = (async () => {
     `/news-list?${newsQuery}`
   )
 
-  // Fetch list jeune data
   const query = stringify({
     populate: [
       'title',
@@ -168,15 +216,18 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'separator',
+      'etudes',
+      'etudes.image',
+      'etudes.cta',
     ],
   })
   const { data } = await fetchCMS<
-    APIResponseData<'api::liste-jeune.liste-jeune'>
-  >(`/liste-jeune?${query}`)
+    APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
+  >(`/ressources-pass-culture?${query}`)
   return {
     props: {
       newsData: news.data,
-      listejeune: data,
+      ressourcesPassCultureListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>

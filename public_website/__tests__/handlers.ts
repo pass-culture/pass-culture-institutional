@@ -6,12 +6,17 @@ import {
   restaurantDataFixtures,
   testDataFixtures,
 } from './fixtures'
+import { ActusPassCultureJeunePageFixtures } from './fixtures/actualitesPassCulture'
+import { ActusRdvActeursPageFixtures } from './fixtures/actualitesRdvActeursCulturels'
 import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
 import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
+import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
+import { PressePageFixtures } from './fixtures/presse'
+import { RessourcesEnseignatsPageFixtures } from './fixtures/ressourcesEnseignants'
+import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { simulatorPageFixtures } from './fixtures/simulator'
-
 const CMS_BASE_URL = 'http://localhost:1337'
 const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
 const jsonResponseOf = <T>(data: T) => HttpResponse.json({ data })
@@ -46,6 +51,29 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/help-teachers`, () => {
     return jsonResponseOf(AideEnseignantsPageFixtures.data)
+  }),
+  http.get(`${CMS_BASE_URL}/api/actualites-pass-culture`, () => {
+    return jsonResponseOf(ActusPassCultureJeunePageFixtures.listejeune)
+  }),
+  http.get(`${CMS_BASE_URL}/api/actualites-rdv-acteurs-culturel`, () => {
+    return jsonResponseOf(ActusRdvActeursPageFixtures.actusrdv)
+  }),
+  http.get(`${CMS_BASE_URL}/api/events`, () => {
+    return jsonResponseOf(ActusRdvActeursPageFixtures.eventsData)
+  }),
+  http.get(`${CMS_BASE_URL}/api/ressources-enseignant`, () => {
+    return jsonResponseOf(RessourcesEnseignatsPageFixtures.ressourcesEnseignant)
+  }),
+  http.get(`${CMS_BASE_URL}/api/etudes-pass-culture`, () => {
+    return jsonResponseOf(EtudesPassCulturePageFixtures.etudesPassCulture)
+  }),
+  http.get(`${CMS_BASE_URL}/api/ressources-pass-culture`, () => {
+    return jsonResponseOf(
+      RessourcesPassCulturePageFixtures.ressourcesPassCulture
+    )
+  }),
+  http.get(`${CMS_BASE_URL}/api/presse`, () => {
+    return jsonResponseOf(PressePageFixtures.presse)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,

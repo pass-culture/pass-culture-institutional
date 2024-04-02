@@ -63,6 +63,7 @@ export function FilterContainer({
 
   const checkValue = (name: string, value: string) => {
     const filterState = filterValues[name]
+
     const newFilterValues = { ...filterValues }
 
     if (value === '') {

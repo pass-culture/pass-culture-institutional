@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "actualites_rdv_acteurs_culturels",
+  "info": {
+    "singularName": "actualites-rdv-acteurs-culturel",
+    "pluralName": "actualites-rdv-acteurs-culturels",
+    "displayName": "Actualites Rdv Acteurs Culturels",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "filtres": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.filtre"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    },
+    "aide": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
+    },
+    "titleEventSection": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

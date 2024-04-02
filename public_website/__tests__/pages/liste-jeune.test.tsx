@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import ListeJeune, { getStaticProps } from '@/pages/liste-jeune'
+import ListeJeune, { getStaticProps } from '@/pages/actualites-jeunes-parents'
 
 describe('Liste jeunes', () => {
   beforeEach(() => {

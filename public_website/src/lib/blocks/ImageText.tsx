@@ -6,10 +6,10 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
-  title: string
-  description: string
+  title?: string
+  description?: string
   image?: APIResponse<'plugin::upload.file'> | null
-  icon: string
+  icon?: string
   isImageRight?: boolean
 }
 
@@ -23,18 +23,22 @@ export function ImageText({
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
-        <StyledIcon
-          className={isImageRight ? 'IconRight' : 'IconLeft'}
-          dangerouslySetInnerHTML={{ __html: icon }}
-        />
+        {icon && (
+          <StyledIcon
+            className={isImageRight ? 'IconRight' : 'IconLeft'}
+            dangerouslySetInnerHTML={{ __html: icon }}
+          />
+        )}
         <StyledContentTextWrapper className="first">
-          <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          {title && (
+            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          )}
           <StyledText>{description}</StyledText>
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">
           <StyledImage
             src={getStrapiURL(image?.data.attributes.url)}
-            alt={image?.data.attributes.alternativeText}
+            alt={image?.data.attributes.alternativeText || ''}
           />
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
@@ -44,11 +48,6 @@ export function ImageText({
 
 const Root = styled.div`
   ${({ theme }) => css`
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.lightBlue} 0%,
-      ${theme.colors.white} 100%
-    );
     overflow: hidden;
 
     .right {
@@ -146,7 +145,7 @@ const StyledContentImagetWrapper = styled.div`
 
 const StyledHeading = styled(Typo.Heading1)`
   ${({ theme }) => css`
-    max-width: 44rem;
+    max-width: 36rem;
     margin: 0 0 3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -156,7 +155,7 @@ const StyledHeading = styled(Typo.Heading1)`
 `
 
 const StyledText = styled.p`
-  max-width: 34rem;
+  max-width: 40rem;
   margin: 0 0 2rem;
   line-height: 2;
 `

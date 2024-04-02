@@ -23,7 +23,11 @@
         "Article",
         "Évènement",
         "Partenariat",
-        "Rencontre"
+        "Rencontre",
+        "Dossier de presse",
+        "Communiqué de presse",
+        "Étude ritualisée",
+        "Étude ponctuelle"
       ],
       "required": true
     },
@@ -79,6 +83,18 @@
         "Poitou-Charentes",
         "Provence-Alpes-Côte d'Azur",
         "Rhône-Alpes"
+      ],
+      "required": true
+    },
+    "secteur": {
+      "type": "enumeration",
+      "enum": [
+        "Pratiques culturelles",
+        "Spectacle vivant",
+        "Musique",
+        "Lecture",
+        "Cinéma",
+        "Offres numériques"
       ],
       "required": true
     }

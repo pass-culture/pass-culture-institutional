@@ -30,29 +30,30 @@ export default function CulturalActorsHelp({
       />
       <Faq
         title={helpData.attributes.faq.title}
-        cta={helpData.attributes.faq.cta}
         categories={helpData.attributes.faq.categories}
+        cta={helpData.attributes.faq.cta}
         filteringProperty={helpData.attributes.faq.filteringProperty}
         limit={helpData.attributes.faq.limit}
       />
       <StyledPushCTA
         title={helpData.attributes.cardText?.title}
         text={helpData.attributes.cardText?.text}
-        image={helpData.attributes.cardText?.image}
         firstCta={helpData.attributes.cardText?.firstCta}
+        image={helpData.attributes.cardText?.image}
         secondCta={helpData.attributes.cardText?.secondCta}
       />
 
       <StyledSimplePushCTA
         title={helpData.attributes.simplepushcta.title}
         surtitle={helpData.attributes.simplepushcta.surtitle}
-        image={helpData.attributes.simplepushcta.image}
         cta={helpData.attributes.simplepushcta.cta}
+        image={helpData.attributes.simplepushcta.image}
+        icon={helpData.attributes.simplepushcta.icon}
       />
 
       <StyledSocialMedia
-        title={helpData.attributes.social.title}
         socialMediaLink={helpData.attributes.social.socialMediaLink}
+        title={helpData.attributes.social.title}
       />
     </React.Fragment>
   )

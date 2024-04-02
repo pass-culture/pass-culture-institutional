@@ -10,7 +10,7 @@ interface PushCTAProps {
   surtitle: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   cta: { Label: string; URL: string } | undefined
-
+  icon: string | undefined
   className?: string
 }
 
@@ -33,6 +33,7 @@ export function SimplePushCta(props: PushCTAProps) {
             props.image?.data.attributes.url &&
             getStrapiURL(props.image?.data.attributes.url)
           }></Card>
+        <p>{props.icon}</p>
       </CardContainer>
     </Root>
   )
@@ -43,7 +44,7 @@ const Root = styled.div`
     background-color: ${theme.colors.secondary};
     color: ${theme.colors.white};
     max-width: 90rem;
-    margin: 0 auto;
+    margin: 10rem auto;
     gap: 5.625rem;
     border-radius: 2.5rem;
     display: grid;
@@ -66,6 +67,13 @@ const CardContainer = styled.div`
   margin: -3.125rem 0 -3.125rem 5rem;
   max-width: 28rem;
 
+  p {
+    position: absolute;
+    top: 20%;
+    font-size: ${theme.fonts.sizes['8xl']};
+    right: -1.5rem;
+    transform: rotate(7deg);
+  }
   @media (width < ${theme.mediaQueries.tablet}) {
     margin: 0 auto;
     position: absolute;
@@ -74,6 +82,10 @@ const CardContainer = styled.div`
 
     min-width: 90%;
     min-height: 40%;
+
+    p {
+      display: none;
+    }
   }
 `
 
@@ -154,6 +166,7 @@ const Title = styled.h2`
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
       margin-bottom: 1.5rem;
+      font-size: ${theme.fonts.sizes['5xl']};
     }
   `}
 `

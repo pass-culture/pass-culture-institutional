@@ -801,6 +801,81 @@ export interface ApiActivePlaylistTagActivePlaylistTag
   };
 }
 
+export interface ApiActualitesPassCultureActualitesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'actualites_pass_cultures';
+  info: {
+    singularName: 'actualites-pass-culture';
+    pluralName: 'actualites-pass-cultures';
+    displayName: 'Actualites Pass Culture';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::actualites-pass-culture.actualites-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::actualites-pass-culture.actualites-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
+  extends Schema.SingleType {
+  collectionName: 'actualites_rdv_acteurs_culturels';
+  info: {
+    singularName: 'actualites-rdv-acteurs-culturel';
+    pluralName: 'actualites-rdv-acteurs-culturels';
+    displayName: 'Actualites Rdv Acteurs Culturels';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
+    titleEventSection: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -830,6 +905,131 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEtudesPassCultureEtudesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'etudes_pass_cultures';
+  info: {
+    singularName: 'etudes-pass-culture';
+    pluralName: 'etudes-pass-cultures';
+    displayName: 'Etudes Pass Culture';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    observatoire: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::etudes-pass-culture.etudes-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::etudes-pass-culture.etudes-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEventEvent extends Schema.CollectionType {
+  collectionName: 'events';
+  info: {
+    singularName: 'event';
+    pluralName: 'events';
+    displayName: 'Event';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.Date & Attribute.Required;
+    startTime: Attribute.Time & Attribute.Required;
+    endTime: Attribute.Time & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    image: Attribute.Media;
+    category: Attribute.Enumeration<['Salon']> & Attribute.Required;
+    localisation: Attribute.Enumeration<
+      [
+        'Aquitaine',
+        'Auvergne',
+        'Auvergne-Rh\u00F4ne-Alpes',
+        'Basse-Normandie',
+        'Bourgogne',
+        'Bourgogne-Franche-Comt\u00E9',
+        'Bretagne',
+        'Centre',
+        'Champagne-Ardenne',
+        'Corse',
+        'Franche-Comt\u00E9',
+        'Grand-Est',
+        'Guadeloupe',
+        'Guyane',
+        'Haute-Normandie',
+        'Hauts-de-France',
+        '\u00CEle-de-France',
+        'La-R\u00E9union',
+        'Languedoc-Roussillon',
+        'Languedoc-Roussillon-Midi-Pyr\u00E9n\u00E9es',
+        'Limousin',
+        'Lorraine',
+        'Martinique',
+        'Mayotte',
+        'Midi-Pyr\u00E9n\u00E9es',
+        'Nord-Pas-de-Calais',
+        'Normandie',
+        'Nouvelle-Aquitaine',
+        'Pays-de-la-Loire',
+        'Picardie',
+        'Poitou-Charentes',
+        "Provence-Alpes-C\u00F4te d'Azur",
+        'Rh\u00F4ne-Alpes'
+      ]
+    > &
+      Attribute.Required;
+    secteur: Attribute.Enumeration<
+      [
+        'Pratiques culturelles',
+        'Spectacle vivant',
+        'Musique',
+        'Lecture',
+        'Cin\u00E9ma',
+        'Offres num\u00E9riques'
+      ]
+    > &
+      Attribute.Required;
+    city: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::event.event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::event.event',
       'oneToOne',
       'admin::user'
     > &
@@ -1063,6 +1263,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
     socialMediaSection: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1138,7 +1339,11 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Article',
         '\u00C9v\u00E8nement',
         'Partenariat',
-        'Rencontre'
+        'Rencontre',
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
       ]
     > &
       Attribute.Required;
@@ -1180,6 +1385,17 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Poitou-Charentes',
         "Provence-Alpes-C\u00F4te d'Azur",
         'Rh\u00F4ne-Alpes'
+      ]
+    > &
+      Attribute.Required;
+    secteur: Attribute.Enumeration<
+      [
+        'Pratiques culturelles',
+        'Spectacle vivant',
+        'Musique',
+        'Lecture',
+        'Cin\u00E9ma',
+        'Offres num\u00E9riques'
       ]
     > &
       Attribute.Required;
@@ -1239,6 +1455,118 @@ export interface ApiPagePage extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPressePresse extends Schema.SingleType {
+  collectionName: 'presses';
+  info: {
+    singularName: 'presse';
+    pluralName: 'presses';
+    displayName: 'Presse';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    texteImage: Attribute.Component<'block.image-text'>;
+    pushCta: Attribute.Component<'block.double-push-cta'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
+    titleEventSection: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRessourcesEnseignantRessourcesEnseignant
+  extends Schema.SingleType {
+  collectionName: 'ressources_enseignants';
+  info: {
+    singularName: 'ressources-enseignant';
+    pluralName: 'ressources-enseignants';
+    displayName: 'Ressources Enseignants';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    aide: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressources-enseignant.ressources-enseignant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRessourcesPassCultureRessourcesPassCulture
+  extends Schema.SingleType {
+  collectionName: 'ressources_pass_cultures';
+  info: {
+    singularName: 'ressources-pass-culture';
+    pluralName: 'ressources-pass-cultures';
+    displayName: 'Ressources Pass Culture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    filtres: Attribute.Component<'common.filtre', true>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    etudes: Attribute.Component<'block.simple-push-cta'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressources-pass-culture.ressources-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressources-pass-culture.ressources-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1365,7 +1693,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
+      'api::actualites-pass-culture.actualites-pass-culture': ApiActualitesPassCultureActualitesPassCulture;
+      'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
       'api::category.category': ApiCategoryCategory;
+      'api::etudes-pass-culture.etudes-pass-culture': ApiEtudesPassCultureEtudesPassCulture;
+      'api::event.event': ApiEventEvent;
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
@@ -1376,6 +1708,9 @@ declare module '@strapi/types' {
       'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;
+      'api::presse.presse': ApiPressePresse;
+      'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
+      'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }

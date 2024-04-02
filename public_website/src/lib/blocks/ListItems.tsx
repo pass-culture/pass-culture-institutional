@@ -95,7 +95,7 @@ const LoadMoreButton = styled.button`
       ${theme.colors.secondary} 64.8%
     );
     border-radius: 2rem;
-    color: #${theme.colors.white};
+    color: ${theme.colors.white};
     display: inline-block;
     font-size: 0.875rem;
     font-weight: 600;

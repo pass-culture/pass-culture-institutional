@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "etudes_pass_cultures",
+  "info": {
+    "singularName": "etudes-pass-culture",
+    "pluralName": "etudes-pass-cultures",
+    "displayName": "Etudes Pass Culture",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "filtres": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.filtre"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    },
+    "observatoire": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
+    }
+  }
+}

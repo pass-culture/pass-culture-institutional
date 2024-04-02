@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "ressources_pass_cultures",
+  "info": {
+    "singularName": "ressources-pass-culture",
+    "pluralName": "ressources-pass-cultures",
+    "displayName": "Ressources Pass Culture"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "filtres": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.filtre"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    },
+    "etudes": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
+    }
+  }
+}
