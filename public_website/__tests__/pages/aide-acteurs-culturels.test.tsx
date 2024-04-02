@@ -3,10 +3,10 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import Help, { getStaticProps } from '@/pages/aide'
+import CulturalActorsHelp, { getStaticProps } from '@/pages/aide-acteurs-culturels'
 
 vi.mock('@/lib/analytics/analyticsProvider')
-describe('Help page', () => {
+describe('Help page - Cultural actors', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
@@ -17,7 +17,7 @@ describe('Help page', () => {
 
   it('should pass accessibility tests', async () => {
     const { props } = await getStaticProps()
-    const { container } = render(<Help {...props} />)
+    const { container } = render(<CulturalActorsHelp {...props} />)
 
     let a11yResult
     await act(async () => {

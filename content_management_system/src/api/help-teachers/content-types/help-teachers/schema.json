@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "helps",
+  "collectionName": "help_teachers_list",
   "info": {
-    "singularName": "help",
-    "pluralName": "helps",
-    "displayName": "Help - Jeunes parents",
-    "description": ""
+    "singularName": "help-teachers",
+    "pluralName": "help-teachers-list",
+    "displayName": "Help - Teachers"
   },
   "options": {
     "draftAndPublish": true
@@ -39,6 +38,12 @@
       "type": "component",
       "repeatable": false,
       "component": "block.faq",
+      "required": true
+    },
+    "latestStudies": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.latest-news",
       "required": true
     }
   }

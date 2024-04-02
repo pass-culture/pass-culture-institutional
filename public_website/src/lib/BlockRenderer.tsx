@@ -4,6 +4,7 @@ import { CenteredText } from './blocks/CenteredText'
 import { DoublePushCTA } from './blocks/DoublePushCta'
 import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
+import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
 import { Image } from './blocks/Image'
@@ -74,6 +75,8 @@ const COMPONENTS: Record<
   'block.simple-push-cta': SimplePushCta,
   'block.offers-carousel': OffersCarousel,
   'block.piled-cards': PiledCards,
+
+  'block.faq': Faq,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

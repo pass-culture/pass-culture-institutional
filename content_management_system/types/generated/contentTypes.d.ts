@@ -913,7 +913,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   info: {
     singularName: 'help';
     pluralName: 'helps';
-    displayName: 'Help';
+    displayName: 'Help - Jeunes parents';
     description: '';
   };
   options: {
@@ -922,14 +922,89 @@ export interface ApiHelpHelp extends Schema.SingleType {
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
     cardText: Attribute.Component<'block.double-push-cta'>;
-    social: Attribute.Component<'block.social-media', true>;
-    simplepushcta: Attribute.Component<'block.simple-push-cta', true>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
+    simplepushcta: Attribute.Component<'block.simple-push-cta'> &
+      Attribute.Required;
+    faq: Attribute.Component<'block.faq'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::help.help', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::help.help', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHelpCulturalActorsHelpCulturalActors
+  extends Schema.SingleType {
+  collectionName: 'help_cultural_actors_list';
+  info: {
+    singularName: 'help-cultural-actors';
+    pluralName: 'help-cultural-actors-list';
+    displayName: 'Help - Cultural Actors';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    heroSection: Attribute.Component<'block.header'> & Attribute.Required;
+    cardText: Attribute.Component<'block.double-push-cta'>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
+    simplepushcta: Attribute.Component<'block.simple-push-cta'> &
+      Attribute.Required;
+    faq: Attribute.Component<'block.faq'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::help-cultural-actors.help-cultural-actors',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::help-cultural-actors.help-cultural-actors',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
+  collectionName: 'help_teachers_list';
+  info: {
+    singularName: 'help-teachers';
+    pluralName: 'help-teachers-list';
+    displayName: 'Help - Teachers';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    heroSection: Attribute.Component<'block.header'> & Attribute.Required;
+    cardText: Attribute.Component<'block.double-push-cta'>;
+    social: Attribute.Component<'block.social-media'> & Attribute.Required;
+    simplepushcta: Attribute.Component<'block.simple-push-cta'> &
+      Attribute.Required;
+    faq: Attribute.Component<'block.faq'> & Attribute.Required;
+    latestStudies: Attribute.Component<'block.latest-news'> &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::help-teachers.help-teachers',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::help-teachers.help-teachers',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1154,7 +1229,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.latest-news',
         'block.experience-video-carousel',
         'block.offers-carousel',
-        'block.piled-cards'
+        'block.piled-cards',
+        'block.faq'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1293,6 +1369,8 @@ declare module '@strapi/types' {
       'api::footer.footer': ApiFooterFooter;
       'api::header.header': ApiHeaderHeader;
       'api::help.help': ApiHelpHelp;
+      'api::help-cultural-actors.help-cultural-actors': ApiHelpCulturalActorsHelpCulturalActors;
+      'api::help-teachers.help-teachers': ApiHelpTeachersHelpTeachers;
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::master.master': ApiMasterMaster;

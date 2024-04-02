@@ -41,7 +41,8 @@
         "block.latest-news",
         "block.experience-video-carousel",
         "block.offers-carousel",
-        "block.piled-cards"
+        "block.piled-cards",
+        "block.faq"
       ]
     }
   }

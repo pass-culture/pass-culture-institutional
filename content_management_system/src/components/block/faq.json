@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_block_faqs",
+  "info": {
+    "displayName": "Faq"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "categories": {
+      "type": "string"
+    },
+    "filteringProperty": {
+      "type": "string",
+      "required": true
+    },
+    "limit": {
+      "type": "integer",
+      "required": true,
+      "default": 10
+    }
+  }
+}

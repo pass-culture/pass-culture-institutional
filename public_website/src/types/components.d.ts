@@ -43,6 +43,20 @@ export interface BlockExperienceVideoCarousel extends Schema.Component {
   };
 }
 
+export interface BlockFaq extends Schema.Component {
+  collectionName: 'components_block_faqs';
+  info: {
+    displayName: 'Faq';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    categories: Attribute.String;
+    filteringProperty: Attribute.String & Attribute.Required;
+    limit: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<10>;
+  };
+}
+
 export interface BlockHeader extends Schema.Component {
   collectionName: 'components_block_headers';
   info: {
@@ -734,6 +748,7 @@ declare module '@strapi/types' {
       'block.centered-text': BlockCenteredText;
       'block.double-push-cta': BlockDoublePushCta;
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
+      'block.faq': BlockFaq;
       'block.header': BlockHeader;
       'block.image-text': BlockImageText;
       'block.image': BlockImage;
