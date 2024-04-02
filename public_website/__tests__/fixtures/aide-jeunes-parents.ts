@@ -7,7 +7,7 @@ export const AideJeunesParentsPageFixtures = {
       publishedAt: '2024-03-13T16:02:16.755Z',
       heroSection: {
         id: 1,
-        title: 'Aide et <mark>accompagnement</mark>',
+        title: 'Aide et <mark>accompagnement</mark>',
         text: 'Tu as entre 15 et 18 ans notamment et souhaites poser une question sur le pass Culture ? La réponse se trouve certainement ici !',
         icon: null,
       },
