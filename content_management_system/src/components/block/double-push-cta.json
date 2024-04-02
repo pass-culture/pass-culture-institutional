@@ -1,7 +1,7 @@
 {
   "collectionName": "components_block_double_push_ctas",
   "info": {
-    "displayName": "Push CTA Gris",
+    "displayName": "Push Grey CTA",
     "description": ""
   },
   "options": {},
@@ -10,9 +10,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "title": {
       "type": "string",

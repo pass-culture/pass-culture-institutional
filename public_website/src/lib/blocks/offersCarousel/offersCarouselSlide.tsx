@@ -109,18 +109,19 @@ const Card = styled.div`
 `
 
 const BackgroundLayer = styled.div`
-  position: absolute;
-  content: '';
-  inset: 0;
-  background: var(--card-background-layer-backgroud);
-  /* opacity: 0.5; */
+  ${({ theme }) => css`
+    position: absolute;
+    content: '';
+    inset: 0;
+    background: var(--card-background-layer-backgroud);
 
-  border-radius: 1.5rem;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+    border-radius: 1.5rem;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 
-  box-shadow: -4px 8px 24px 0px #4d4d4d26;
+    box-shadow: -4px 8px 24px 0px ${theme.shadows.banner};
+  `}
 `
 
 const FirstBackgroundLayer = styled(BackgroundLayer)`

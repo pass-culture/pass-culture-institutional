@@ -1,7 +1,7 @@
 {
   "collectionName": "components_block_simple_push_ctas",
   "info": {
-    "displayName": "Push CTA Bleu",
+    "displayName": "Push Blue CTA",
     "description": ""
   },
   "options": {},
@@ -18,12 +18,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "cta": {
       "type": "component",

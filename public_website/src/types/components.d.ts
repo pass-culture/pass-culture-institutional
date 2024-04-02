@@ -15,7 +15,7 @@ export interface BlockCenteredText extends Schema.Component {
 export interface BlockDoublePushCta extends Schema.Component {
   collectionName: 'components_block_double_push_ctas';
   info: {
-    displayName: 'DoublePushCTA';
+    displayName: 'Push CTA Gris';
     description: '';
   };
   attributes: {
@@ -24,7 +24,7 @@ export interface BlockDoublePushCta extends Schema.Component {
     text: Attribute.Text;
     firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<'common.link'>;
+    secondCta: Attribute.Component<'common.not-required-link'>;
   };
 }
 
@@ -202,7 +202,7 @@ export interface BlockPiledCards extends Schema.Component {
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
-    displayName: 'pushCTA';
+    displayName: 'Push CTA With QrCode';
     description: '';
   };
   attributes: {
@@ -231,7 +231,7 @@ export interface BlockSeparator extends Schema.Component {
 export interface BlockSimplePushCta extends Schema.Component {
   collectionName: 'components_block_simple_push_ctas';
   info: {
-    displayName: 'SimplePushCTA';
+    displayName: 'Push CTA Bleu';
     description: '';
   };
   attributes: {
@@ -367,7 +367,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: '';
   };
   attributes: {
-    texte: Attribute.Text & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
     description: Attribute.Text;
     firstEmoji: Attribute.String;
     secondEmoji: Attribute.String;
