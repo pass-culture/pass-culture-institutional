@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
@@ -12,16 +12,24 @@ interface VideoProps {
 }
 
 export function Video(props: VideoProps) {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
-    <Root>
-      <StyledVideo
-        light={props.image?.data.attributes.url}
-        url={props.url}
-        width="100%"
-        controls={true}
-        height="100%"
-        alt={props.alt}
-      />
+    <Root suppressHydrationWarning={true}>
+      {isMounted && (
+        <StyledVideo
+          light={props.image?.data.attributes.url}
+          url={props.url}
+          width="100%"
+          controls={true}
+          height="100%"
+          alt={props.alt}
+        />
+      )}
       <p>{props.description}</p>
     </Root>
   )
