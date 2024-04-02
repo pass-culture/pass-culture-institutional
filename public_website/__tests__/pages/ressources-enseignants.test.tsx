@@ -3,9 +3,8 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import RessourcesEnseignants, {
-  getStaticProps,
-} from '@/pages/ressources-enseignants'
+import RessourcesEnseignants, { getStaticProps } from '@/pages/ressources-enseignants'
+
 describe('Ressources enseignants', () => {
   beforeEach(() => {
     process.env = {
