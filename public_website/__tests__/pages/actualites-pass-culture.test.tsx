@@ -3,9 +3,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import ListeActualitesPassCulture, {
-  getStaticProps,
-} from '@/pages/actualites-pass-culture'
+import ListeActualitesPassCulture, { getStaticProps } from '@/pages/actualites-pass-culture'
 
 describe('Actus pass culture', () => {
   beforeEach(() => {
