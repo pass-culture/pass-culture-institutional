@@ -188,6 +188,7 @@ const StyledHeading = styled.div`
 
 const StyledSlider = styled(Slider)`
   overflow: hidden;
+  padding: 2rem 0;
 `
 
 const StyledNavigationButtons = styled.div`

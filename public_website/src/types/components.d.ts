@@ -410,6 +410,11 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     secondIcon: Attribute.String;
     text: Attribute.Text;
     secondSurtitle: Attribute.String;
+    theme: Attribute.Enumeration<
+      ['purple', 'yellow', 'magenta', 'orange', 'green']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
   };
 }
 
