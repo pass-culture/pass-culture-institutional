@@ -63,7 +63,7 @@ export const getStaticProps = (async () => {
   const helpQuery = stringify({
     populate: [
       'heroSection',
-      'heroSection.Image',
+      'heroSection.image',
       'cardText',
       'cardText.image',
       'cardText.firstCta',
