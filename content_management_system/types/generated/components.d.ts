@@ -496,18 +496,6 @@ export interface CommonOffersCarouselItem extends Schema.Component {
   };
 }
 
-export interface CommonPerson extends Schema.Component {
-  collectionName: 'components_common_people';
-  info: {
-    displayName: 'Person';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    position: Attribute.String & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
-  };
-}
-
 export interface CommonOffers extends Schema.Component {
   collectionName: 'components_common_offers';
   info: {
@@ -520,6 +508,18 @@ export interface CommonOffers extends Schema.Component {
     previousButtonLabel: Attribute.String & Attribute.Required;
     nextButtonLabel: Attribute.String & Attribute.Required;
     controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonPerson extends Schema.Component {
+  collectionName: 'components_common_people';
+  info: {
+    displayName: 'Person';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    position: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
   };
 }
 
