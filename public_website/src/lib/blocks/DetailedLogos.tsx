@@ -49,7 +49,7 @@ export function DetailedLogos({ title, logos }: DetailedLogosProps) {
 const Root = styled.div`
   padding: 6.25rem 2rem;
   max-width: 80rem;
-  margin: 5rem auto;
+  margin: 0 auto;
 `
 
 const StyledHeading = styled(Typo.Heading2)`

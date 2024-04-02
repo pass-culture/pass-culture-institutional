@@ -1446,7 +1446,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.offers-carousel',
         'block.piled-cards',
         'block.faq',
-        'block.detailed-logos'
+        'block.detailed-logos',
+        'block.organization-chart'
       ]
     >;
     createdAt: Attribute.DateTime;

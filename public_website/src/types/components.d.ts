@@ -201,6 +201,19 @@ export interface BlockOffersCarousel extends Schema.Component {
   };
 }
 
+export interface BlockOrganizationChart extends Schema.Component {
+  collectionName: 'components_block_organization_charts';
+  info: {
+    displayName: 'Organization Chart';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    people: Attribute.Component<'common.person', true> & Attribute.Required;
+  };
+}
+
 export interface BlockPiledCards extends Schema.Component {
   collectionName: 'components_block_piled_cards';
   info: {
@@ -441,6 +454,18 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     > &
       Attribute.Required &
       Attribute.DefaultTo<'purple'>;
+  };
+}
+
+export interface CommonPerson extends Schema.Component {
+  collectionName: 'components_common_people';
+  info: {
+    displayName: 'Person';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    position: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -776,6 +801,7 @@ declare module '@strapi/types' {
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offers-carousel': BlockOffersCarousel;
+      'block.organization-chart': BlockOrganizationChart;
       'block.piled-cards': BlockPiledCards;
       'block.push-cta': BlockPushCta;
       'block.separator': BlockSeparator;
@@ -794,6 +820,7 @@ declare module '@strapi/types' {
       'common.logo': CommonLogo;
       'common.not-required-link': CommonNotRequiredLink;
       'common.offers-carousel-item': CommonOffersCarouselItem;
+      'common.person': CommonPerson;
       'common.piled-card-item': CommonPiledCardItem;
       'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
