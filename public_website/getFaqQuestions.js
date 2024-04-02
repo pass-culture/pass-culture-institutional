@@ -8,6 +8,7 @@
  * answers from the wanted categories with whatever flag.
  */
 
+/* eslint-disable @typescript-eslint/no-var-requires */
 const fetch = require('node-fetch')
 require('dotenv').config()
 const fs = require('fs').promises
@@ -80,6 +81,7 @@ const getFaqQuestions = async () => {
     // Writing the JSON file to the specified location
     await fs.writeFile('./faqData.json', jsonData)
 
+    /* eslint-disable-next-line no-console */
     console.log('JSON file built successfully!')
   } catch (error) {
     console.error('Error building JSON file:', error)
