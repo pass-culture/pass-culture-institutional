@@ -10,7 +10,6 @@ interface PushCTAProps {
   surtitle: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   cta: { Label: string; URL: string } | undefined
-  icon: string | undefined
   className?: string
 }
 
