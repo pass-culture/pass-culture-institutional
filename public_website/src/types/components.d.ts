@@ -15,7 +15,7 @@ export interface BlockCenteredText extends Schema.Component {
 export interface BlockDoublePushCta extends Schema.Component {
   collectionName: 'components_block_double_push_ctas';
   info: {
-    displayName: 'Push CTA Gris';
+    displayName: 'Push Grey CTA';
     description: '';
   };
   attributes: {
@@ -24,7 +24,8 @@ export interface BlockDoublePushCta extends Schema.Component {
     text: Attribute.Text;
     firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<'common.not-required-link'>;
+    secondCta: Attribute.Component<'common.not-required-link'> &
+      Attribute.Required;
   };
 }
 
@@ -62,7 +63,7 @@ export interface BlockHeader extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    text: Attribute.Text;
+    text: Attribute.Text & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String;
   };
@@ -231,7 +232,7 @@ export interface BlockSeparator extends Schema.Component {
 export interface BlockSimplePushCta extends Schema.Component {
   collectionName: 'components_block_simple_push_ctas';
   info: {
-    displayName: 'Push CTA Bleu';
+    displayName: 'Push Blue CTA';
     description: '';
   };
   attributes: {
@@ -392,8 +393,8 @@ export interface CommonNotRequiredLink extends Schema.Component {
     description: '';
   };
   attributes: {
-    Label: Attribute.String;
-    URL: Attribute.String;
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
   };
 }
 

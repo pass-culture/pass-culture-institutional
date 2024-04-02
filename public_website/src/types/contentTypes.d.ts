@@ -1143,6 +1143,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
     singularName: 'help-cultural-actors';
     pluralName: 'help-cultural-actors-list';
     displayName: 'Help - Cultural Actors';
+    description: '';
   };
   options: {
     draftAndPublish: true;
