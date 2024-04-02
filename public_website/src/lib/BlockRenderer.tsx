@@ -1,6 +1,7 @@
 import React, { ComponentProps } from 'react'
 
 import { CenteredText } from './blocks/CenteredText'
+import { DetailedLogos } from './blocks/DetailedLogos'
 import { DoublePushCTA } from './blocks/DoublePushCta'
 import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
@@ -56,6 +57,7 @@ const COMPONENTS: Record<
   'block.experience-video': ExperienceVideo,
   'block.key-number': KeyNumber,
   'block.logos': Logos,
+  'block.detailed-logos': DetailedLogos,
   'block.testimonies': Testimonies,
   'block.experience-video-carousel': ExperienceVideoCarousel,
   'block.key-number-carousel': KeyNumberCarousel,
