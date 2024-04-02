@@ -13,6 +13,7 @@ import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
+import { listeOffrePageFixtures } from './fixtures/listeOffre'
 import { PressePageFixtures } from './fixtures/presse'
 import { RessourcesEnseignatsPageFixtures } from './fixtures/ressourcesEnseignants'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
@@ -74,6 +75,9 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/presse`, () => {
     return jsonResponseOf(PressePageFixtures.presse)
+  }),
+  http.get(`${CMS_BASE_URL}/api/liste-offre`, () => {
+    return jsonResponseOf(listeOffrePageFixtures.listoffre)
   }),
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
