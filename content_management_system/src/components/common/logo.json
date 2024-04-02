@@ -1,19 +1,21 @@
 {
   "collectionName": "components_common_logos",
   "info": {
-    "displayName": "Logo"
+    "displayName": "Logo",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     }
   }
 }

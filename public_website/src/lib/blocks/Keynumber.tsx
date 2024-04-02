@@ -6,19 +6,10 @@ import { KeyNumberCarouselSlideProps } from './keyNumberCarousel/keyNumberCarous
 import { Typo } from '@/ui/components/typographies'
 type KeyNumberProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   cards: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function KeyNumber({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  cards,
-}: KeyNumberProps) {
+export function KeyNumber({ title, cards }: KeyNumberProps) {
   return (
     <Root>
       <StyledWrapper>
@@ -26,13 +17,7 @@ export function KeyNumber({
           <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
         </div>
         <StyledCarouselWrapper>
-          <KeyNumberCarousel
-            title={title}
-            controlsLabel={controlsLabel}
-            nextButtonLabel={nextButtonLabel}
-            previousButtonLabel={previousButtonLabel}
-            items={cards}
-          />
+          <KeyNumberCarousel title={title} items={cards} />
         </StyledCarouselWrapper>
       </StyledWrapper>
     </Root>

@@ -20,19 +20,10 @@ import { stripTags } from '@/utils/stripTags'
 
 type TestimonyCarouselProps = {
   title: string
-  controlsLabel: string
-  nextButtonLabel: string
-  previousButtonLabel: string
   items: Omit<TestimonyCarouselSlideProps, 'slideIndex'>[]
 }
 
-export function TestimonyCarousel({
-  title,
-  controlsLabel,
-  nextButtonLabel,
-  previousButtonLabel,
-  items,
-}: TestimonyCarouselProps) {
+export function TestimonyCarousel({ title, items }: TestimonyCarouselProps) {
   const TESTIMONY_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -105,15 +96,15 @@ export function TestimonyCarousel({
       <StyledHeading>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons aria-label={controlsLabel}>
+        <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack
-            aria-label={previousButtonLabel}
+            aria-label="Élement précédent"
             onClick={handleNavigationButtonClick}>
             <ArrowRight />
           </ButtonBack>
           <ButtonNext
             onClick={handleNavigationButtonClick}
-            aria-label={nextButtonLabel}>
+            aria-label="Élément suivant">
             <ArrowRight />
           </ButtonNext>
         </StyledNavigationButtons>
@@ -133,7 +124,7 @@ export function TestimonyCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots aria-label={controlsLabel}>
+      <StyledDots aria-label="Contrôles du carousel">
         {items.map((item, index) => {
           return (
             <StyledDot

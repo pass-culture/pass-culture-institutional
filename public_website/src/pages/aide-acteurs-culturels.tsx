@@ -22,7 +22,7 @@ export default function CulturalActorsHelp({
     <React.Fragment>
       <Hero
         title={helpData.attributes?.heroSection?.title}
-        text={helpData.attributes.heroSection.text}
+        text={helpData.attributes?.heroSection?.text}
         image={
           helpData.attributes.heroSection.image
             ?.data as unknown as APIResponseData<'plugin::upload.file'>
@@ -63,7 +63,7 @@ export const getStaticProps = (async () => {
   const helpQuery = stringify({
     populate: [
       'heroSection',
-      'heroSection.Image',
+      'heroSection.image',
       'cardText',
       'cardText.image',
       'cardText.firstCta',

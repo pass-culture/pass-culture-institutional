@@ -33,7 +33,9 @@ export function ImageText({
           {title && (
             <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
           )}
-          <StyledText>{description}</StyledText>
+          {description && (
+            <StyledText dangerouslySetInnerHTML={{ __html: description }} />
+          )}
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">
           <StyledImage
@@ -158,6 +160,14 @@ const StyledText = styled.p`
   max-width: 40rem;
   margin: 0 0 2rem;
   line-height: 2;
+
+  ul {
+    list-style-type: circle;
+    padding-left: 9.1875rem;
+    font-weight: 700;
+    margin-top: 3rem;
+    padding-left: 2rem;
+  }
 `
 
 const StyledImage = styled.img`

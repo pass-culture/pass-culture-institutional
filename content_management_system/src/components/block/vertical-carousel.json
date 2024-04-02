@@ -16,18 +16,6 @@
       "repeatable": true,
       "component": "common.vertical-carousel-item",
       "required": true
-    },
-    "previousButtonLabel": {
-      "type": "string",
-      "required": true
-    },
-    "nextButtonLabel": {
-      "type": "string",
-      "required": true
-    },
-    "controlsLabel": {
-      "type": "string",
-      "required": true
     }
   }
 }

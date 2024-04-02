@@ -16,22 +16,39 @@ interface SimpleTextProps {
 export function SimpleText(props: SimpleTextProps) {
   return (
     <Root data-testid="simple-text">
-      <Typo.Heading2>{props.title}</Typo.Heading2>
-      <p>{props.text}</p>
+      {props.title && (
+        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+      )}
+
+      {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
       {!props.isNormal && (
         <Columns>
           <Column>
             <ul>
-              <li>{props.firstSubTitle}</li>
+              {props.firstSubTitle && (
+                <li
+                  dangerouslySetInnerHTML={{
+                    __html: props.firstSubTitle,
+                  }}></li>
+              )}
             </ul>
-            <p>{props.firstText}</p>
+            {props.firstText && (
+              <p dangerouslySetInnerHTML={{ __html: props.firstText }}></p>
+            )}
           </Column>
 
           <Column>
             <ul>
-              <li>{props.secondSubTitle}</li>
+              {props.secondSubTitle && (
+                <li
+                  dangerouslySetInnerHTML={{
+                    __html: props.secondSubTitle,
+                  }}></li>
+              )}
             </ul>
-            <p>{props.secondText}</p>
+            {props.secondText && (
+              <p dangerouslySetInnerHTML={{ __html: props.secondText }}></p>
+            )}
           </Column>
         </Columns>
       )}
@@ -50,6 +67,11 @@ const Root = styled.div`
       margin-bottom: 4rem;
       color: ${theme.colors.secondary};
     }
+    ul {
+      list-style-type: circle;
+      padding-left: 9.1875rem;
+      font-weight: 700;
+    }
 
     p {
       line-height: 1.5;
@@ -57,12 +79,16 @@ const Root = styled.div`
       padding-left: 7.1875rem;
       max-width: 70%;
       word-break: break-word;
+
+      ul {
+        margin-top: 3rem;
+        padding-left: 2rem;
+      }
     }
 
-    ul {
-      list-style-type: circle;
-      padding-left: 9.1875rem;
-      font-weight: 700;
+    a {
+      color: ${theme.colors.primary}!important;
+      text-decoration: underline;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -80,6 +106,9 @@ const Root = styled.div`
       p,
       ul {
         padding-left: 0;
+      }
+      p {
+        max-width: 90%;
       }
     }
     /* TODO: mobile style */

@@ -12,19 +12,32 @@ export interface BlockCenteredText extends Schema.Component {
   };
 }
 
+export interface BlockDetailedLogos extends Schema.Component {
+  collectionName: 'components_block_detailed_logos';
+  info: {
+    displayName: 'Detailed Logos';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    logos: Attribute.Component<'common.detailed-logo', true> &
+      Attribute.Required;
+  };
+}
+
 export interface BlockDoublePushCta extends Schema.Component {
   collectionName: 'components_block_double_push_ctas';
   info: {
-    displayName: 'DoublePushCTA';
+    displayName: 'Push Grey CTA';
     description: '';
   };
   attributes: {
     image: Attribute.Media & Attribute.Required;
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
-    firstCta: Attribute.Component<'common.link'>;
+    firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<'common.not-required-link'>;
+    secondCta: Attribute.Component<'common.not-required-link'> &
+      Attribute.Required;
   };
 }
 
@@ -35,9 +48,6 @@ export interface BlockExperienceVideoCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
@@ -106,9 +116,6 @@ export interface BlockKeyNumberCarousel extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlLabel: Attribute.String;
     items: Attribute.Component<'common.key-number-items', true> &
       Attribute.SetMinMax<{
         max: 4;
@@ -177,9 +184,6 @@ export interface BlockLogos extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     logo: Attribute.Component<'common.logo', true>;
   };
 }
@@ -211,9 +215,6 @@ export interface BlockOffersCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.offers-carousel-item', true>;
     cta: Attribute.Component<'common.link'>;
@@ -239,6 +240,19 @@ export interface BlockOffersSection extends Schema.Component {
   };
 }
 
+export interface BlockOrganizationChart extends Schema.Component {
+  collectionName: 'components_block_organization_charts';
+  info: {
+    displayName: 'Organization Chart';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    people: Attribute.Component<'common.person', true> & Attribute.Required;
+  };
+}
+
 export interface BlockPiledCards extends Schema.Component {
   collectionName: 'components_block_piled_cards';
   info: {
@@ -253,7 +267,7 @@ export interface BlockPiledCards extends Schema.Component {
 export interface BlockPushCta extends Schema.Component {
   collectionName: 'components_block_push_ctas';
   info: {
-    displayName: 'pushCTA';
+    displayName: 'Push CTA With QrCode';
     description: '';
   };
   attributes: {
@@ -282,7 +296,7 @@ export interface BlockSeparator extends Schema.Component {
 export interface BlockSimplePushCta extends Schema.Component {
   collectionName: 'components_block_simple_push_ctas';
   info: {
-    displayName: 'SimplePushCTA';
+    displayName: 'Push Blue CTA';
     description: '';
   };
   attributes: {
@@ -342,9 +356,6 @@ export interface BlockTestimonies extends Schema.Component {
     description: '';
   };
   attributes: {
-    previousButtonLabel: Attribute.String;
-    nextButtonLabel: Attribute.String;
-    controlsLabel: Attribute.String;
     title: Attribute.String;
     items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
@@ -360,9 +371,6 @@ export interface BlockVerticalCarousel extends Schema.Component {
     title: Attribute.Text & Attribute.Required;
     items: Attribute.Component<'common.vertical-carousel-item', true> &
       Attribute.Required;
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String & Attribute.Required;
-    controlsLabel: Attribute.String & Attribute.Required;
   };
 }
 
@@ -370,10 +378,26 @@ export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {
     displayName: 'Video';
+    description: '';
   };
   attributes: {
     url: Attribute.Text;
     description: Attribute.Text;
+    alt: Attribute.Text;
+    image: Attribute.Media;
+  };
+}
+
+export interface CommonDetailedLogo extends Schema.Component {
+  collectionName: 'components_common_detailed_logos';
+  info: {
+    displayName: 'Detailed Logo';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -421,7 +445,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: '';
   };
   attributes: {
-    simple: Attribute.Text & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
     description: Attribute.Text;
     firstEmoji: Attribute.String;
     secondEmoji: Attribute.String;
@@ -432,9 +456,10 @@ export interface CommonLogo extends Schema.Component {
   collectionName: 'components_common_logos';
   info: {
     displayName: 'Logo';
+    description: '';
   };
   attributes: {
-    logo: Attribute.Media;
+    logo: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -445,8 +470,8 @@ export interface CommonNotRequiredLink extends Schema.Component {
     description: '';
   };
   attributes: {
-    Label: Attribute.String;
-    URL: Attribute.String;
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
   };
 }
 
@@ -463,6 +488,23 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     secondIcon: Attribute.String;
     text: Attribute.Text;
     secondSurtitle: Attribute.String;
+    theme: Attribute.Enumeration<
+      ['purple', 'yellow', 'magenta', 'orange', 'green']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
+  };
+}
+
+export interface CommonPerson extends Schema.Component {
+  collectionName: 'components_common_people';
+  info: {
+    displayName: 'Person';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    position: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -800,6 +842,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.centered-text': BlockCenteredText;
+      'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
       'block.faq': BlockFaq;
@@ -814,6 +857,7 @@ declare module '@strapi/types' {
       'block.offer-list': BlockOfferList;
       'block.offers-carousel': BlockOffersCarousel;
       'block.offers-section': BlockOffersSection;
+      'block.organization-chart': BlockOrganizationChart;
       'block.piled-cards': BlockPiledCards;
       'block.push-cta': BlockPushCta;
       'block.separator': BlockSeparator;
@@ -824,6 +868,7 @@ declare module '@strapi/types' {
       'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
+      'common.detailed-logo': CommonDetailedLogo;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
@@ -832,6 +877,7 @@ declare module '@strapi/types' {
       'common.not-required-link': CommonNotRequiredLink;
       'common.offers-carousel-item': CommonOffersCarouselItem;
       'common.offers': CommonOffers;
+      'common.person': CommonPerson;
       'common.piled-card-item': CommonPiledCardItem;
       'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
