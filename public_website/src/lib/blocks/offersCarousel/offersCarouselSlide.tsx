@@ -2,6 +2,8 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
+
 type OffersCarouselSlideTheme =
   | 'purple'
   | 'yellow'
@@ -70,20 +72,20 @@ const Root = styled(Slide)`
 `
 
 const CARD_BACKGROUNDS: Record<OffersCarouselSlideTheme, [string, string]> = {
-  purple: ['#ad86ff', '#ad86ff'],
+  purple: [theme.uniqueColors.purple, theme.uniqueColors.purple],
   yellow: [
-    'linear-gradient(141.28deg, #FFD748 1.24%, #DFBD0C 97.04%)',
-    '#E5C216',
+    `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
+    theme.uniqueColors.yellow,
   ],
   magenta: [
-    'linear-gradient(140.89deg, #FF5996 1.32%, #F8045E 99.76%)',
-    '#CF1D5F',
+    `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
+    theme.uniqueColors.magentaDark,
   ],
   orange: [
-    'linear-gradient(139.76deg, #FF8F60 -0.2%, #E64B0A 98.71%)',
-    '#F0652B',
+    `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
+    theme.uniqueColors.orange,
   ],
-  green: ['#27DCA8', '#27DCA8'],
+  green: [theme.uniqueColors.green, theme.uniqueColors.green],
 }
 
 const CardContainer = styled.div<{ $slideTheme: OffersCarouselSlideTheme }>`
