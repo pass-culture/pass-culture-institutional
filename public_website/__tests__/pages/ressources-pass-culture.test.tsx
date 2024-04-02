@@ -3,9 +3,8 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import RessourcesPassCulture, {
-  getStaticProps,
-} from '@/pages/ressources-pass-culture'
+import RessourcesPassCulture, { getStaticProps } from '@/pages/ressources-pass-culture'
+
 describe('Ressources Pass Culture', () => {
   beforeEach(() => {
     process.env = {
