@@ -48,6 +48,7 @@ export default function CulturalActorsHelp({
         surtitle={helpData.attributes.simplepushcta.surtitle}
         image={helpData.attributes.simplepushcta.image}
         cta={helpData.attributes.simplepushcta.cta}
+        icon={helpData.attributes.simplepushcta.icon}
       />
 
       <StyledSocialMedia

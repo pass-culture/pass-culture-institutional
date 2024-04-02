@@ -56,6 +56,7 @@ export default function TeachersHelp({
         surtitle={data.attributes.simplepushcta.surtitle}
         image={data.attributes.simplepushcta.image}
         cta={data.attributes.simplepushcta.cta}
+        icon={data.attributes.simplepushcta.icon}
       />
 
       <StyledSocialMedia
