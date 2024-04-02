@@ -19,6 +19,7 @@ import { LogoCarousel } from './blocks/logoCarousel/logoCarousel'
 import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
 import { Logos } from './blocks/Logos'
 import { OffersCarousel } from './blocks/offersCarousel/offersCarousel'
+import { OrganizationChart } from './blocks/OrganizationChart'
 import { PiledCards } from './blocks/PiledCards'
 import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
@@ -79,6 +80,7 @@ const COMPONENTS: Record<
   'block.piled-cards': PiledCards,
 
   'block.faq': Faq,
+  'block.organization-chart': OrganizationChart,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

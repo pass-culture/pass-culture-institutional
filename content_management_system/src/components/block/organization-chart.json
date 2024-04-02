@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_block_organization_charts",
+  "info": {
+    "displayName": "Organization Chart",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "people": {
+      "displayName": "Person",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.person",
+      "required": true
+    }
+  }
+}
