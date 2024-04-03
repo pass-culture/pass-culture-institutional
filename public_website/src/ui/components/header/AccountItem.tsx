@@ -1,9 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../icons/ArrowRight'
 import { OutlinedText } from '../OutlinedText'
+import { Link } from '@/ui/components/Link'
 
 type AccountItemProps = {
   color: string

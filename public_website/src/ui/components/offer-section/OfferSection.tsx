@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Offer } from '@/types/playlist'
+import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
 

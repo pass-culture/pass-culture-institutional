@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 
 type NewsCardProps = {
