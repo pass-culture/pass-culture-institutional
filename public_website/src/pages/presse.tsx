@@ -300,11 +300,11 @@ export default function Presse({
       />
       <Separator isActive={presseListe.attributes.separator?.isActive} />
       <ImageText
-        title={presseListe.attributes.texteImage?.title}
-        image={presseListe.attributes.texteImage?.image}
-        description={presseListe.attributes.texteImage?.description}
-        icon={presseListe.attributes.texteImage?.icon}
-        isImageRight={presseListe.attributes.texteImage?.isImageRight}
+        title={presseListe.attributes.texteImage.title}
+        image={presseListe.attributes.texteImage.image}
+        text={presseListe.attributes.texteImage.text}
+        icon={presseListe.attributes.texteImage.icon}
+        isImageRight={presseListe.attributes.texteImage.isImageRight}
       />
 
       <DoublePushCTA

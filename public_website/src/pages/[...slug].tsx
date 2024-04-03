@@ -11,6 +11,7 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  console.log(JSON.stringify(props.data, null, 2))
   return (
     /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
