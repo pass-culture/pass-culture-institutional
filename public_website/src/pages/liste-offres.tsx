@@ -88,8 +88,7 @@ export const getStaticProps = (async () => {
     APIResponseData<'api::liste-offre.liste-offre'>
   >(`/liste-offre?${query}`)
   const offerTag = data.attributes.offres?.offreTag
- 
- 
+
   const offerItems = (await fetchBackend(
     `institutional/playlist/${offerTag}`
   )) as Offer[]
