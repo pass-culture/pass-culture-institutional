@@ -7,7 +7,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
   title: string
-  text: string
+  text?: string
   image: APIResponseData<'plugin::upload.file'> | null
 }
 
@@ -17,7 +17,7 @@ export function Hero({ title, text, image }: HeroProps) {
       <StyledContentWrapper>
         <StyledContentTextWrapper>
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-          <StyledText>{text}</StyledText>
+          {text && <StyledText>{text}</StyledText>}
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper>
           <StyledImage
