@@ -3,7 +3,6 @@ export const listeOffrePageFixtures = {
     id: 1,
     attributes: {
       createdAt: '2024-03-19T10:32:37.437Z',
-
       publishedAt: '2024-03-19T10:32:38.445Z',
       title: 'Programmes de sensibilisation à lart dans votre région',
       separator: {
@@ -56,13 +55,13 @@ export const listeOffrePageFixtures = {
       },
       offres: {
         id: 1,
-        title: "Qu'est-ce qu'il se pass en ce moment ?",
+        title: "Qu'est-ce qu'il se pass ence moment ?",
         description: 'Découvre les tendances du moment',
         offreTag: 'Bons_plans_du_moment',
         firstCartTitle: 'Rejoins',
         secondCartTitle: "l'aventure",
         descritptionCard:
-          'Inscris-toi vite pour \nvoir plus d’offres près de chez toi !',
+          'Inscris-toi vite pour \nvoir plus doffres près de chez toi !',
         firstIcon: '🕑',
         secondIcon: '😣',
         ctaCard: { URL: 'https://www.passculture.app/', Label: 'Découvrir' },
