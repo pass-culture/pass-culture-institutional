@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_common_simple_text_columns",
+  "info": {
+    "displayName": "Simple Text Column"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}

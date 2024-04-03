@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_block_simple_text_v2s",
+  "info": {
+    "displayName": "Simple Text v2"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "blocks",
+      "required": true
+    },
+    "columns": {
+      "displayName": "Simple Text Column",
+      "type": "component",
+      "repeatable": true,
+      "component": "common.simple-text-column",
+      "max": 2
+    }
+  }
+}

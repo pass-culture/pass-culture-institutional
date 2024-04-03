@@ -269,6 +269,21 @@ export interface BlockSimplePushCta extends Schema.Component {
   };
 }
 
+export interface BlockSimpleTextV2 extends Schema.Component {
+  collectionName: 'components_block_simple_text_v2s';
+  info: {
+    displayName: 'Simple Text v2';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Blocks & Attribute.Required;
+    columns: Attribute.Component<'common.simple-text-column', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
+  };
+}
+
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
@@ -482,6 +497,17 @@ export interface CommonPiledCardItem extends Schema.Component {
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
     color: Attribute.String;
+  };
+}
+
+export interface CommonSimpleTextColumn extends Schema.Component {
+  collectionName: 'components_common_simple_text_columns';
+  info: {
+    displayName: 'Simple Text Column';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Blocks & Attribute.Required;
   };
 }
 
@@ -806,6 +832,7 @@ declare module '@strapi/types' {
       'block.push-cta': BlockPushCta;
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
+      'block.simple-text-v2': BlockSimpleTextV2;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
@@ -822,6 +849,7 @@ declare module '@strapi/types' {
       'common.offers-carousel-item': CommonOffersCarouselItem;
       'common.person': CommonPerson;
       'common.piled-card-item': CommonPiledCardItem;
+      'common.simple-text-column': CommonSimpleTextColumn;
       'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
