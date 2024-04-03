@@ -21,11 +21,14 @@ export default function CustomPage(props: CustomPageProps) {
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
 
-      <StyledLatestNews
-        news={props.latestStudies}
-        title={props.data.attributes.relatedNews.title}
-        cta={props.data.attributes.relatedNews.cta}
-      />
+      {props.data.attributes.relatedNews.cta &&
+        props.data.attributes.relatedNews.title && (
+          <StyledLatestNews
+            news={props.latestStudies}
+            title={props.data.attributes.relatedNews.title}
+            cta={props.data.attributes.relatedNews.cta}
+          />
+        )}
     </React.Fragment>
   )
 }
