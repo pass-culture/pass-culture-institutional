@@ -25,6 +25,7 @@ import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleText } from './blocks/SimpleText'
+import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SocialMedia } from './blocks/SocialMedia'
 import { Testimonies } from './blocks/Testimonies'
 import { TestimonyCarouselSlide } from './blocks/testimonyCaousel/testimonyCarouselSlide'
@@ -81,6 +82,8 @@ const COMPONENTS: Record<
 
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
+
+  'block.simple-text-v2': SimpleTextV2,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

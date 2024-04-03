@@ -34,7 +34,7 @@
       "type": "component",
       "repeatable": false,
       "component": "common.not-required-link",
-      "required": true
+      "required": false
     }
   }
 }

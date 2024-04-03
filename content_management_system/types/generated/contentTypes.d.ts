@@ -1447,7 +1447,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.piled-cards',
         'block.faq',
         'block.detailed-logos',
-        'block.organization-chart'
+        'block.organization-chart',
+        'block.simple-text-v2'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1477,7 +1478,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     filtres: Attribute.Component<'common.filtre', true>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
-    texteImage: Attribute.Component<'block.image-text'>;
+    texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
     pushCta: Attribute.Component<'block.double-push-cta'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
