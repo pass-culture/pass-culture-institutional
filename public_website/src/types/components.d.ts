@@ -279,6 +279,31 @@ export interface BlockPushCta extends Schema.Component {
   };
 }
 
+export interface BlockRelatedNews extends Schema.Component {
+  collectionName: 'components_block_related_news';
+  info: {
+    displayName: 'RelatedNews';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    cta: Attribute.Component<'common.link'>;
+    category: Attribute.Enumeration<
+      [
+        '\u00C9tude',
+        'Article',
+        '\u00C9v\u00E8nement',
+        'Partenariat',
+        'Rencontre',
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
+      ]
+    >;
+  };
+}
+
 export interface BlockSeparator extends Schema.Component {
   collectionName: 'components_block_separators';
   info: {
@@ -885,6 +910,7 @@ declare module '@strapi/types' {
       'block.organization-chart': BlockOrganizationChart;
       'block.piled-cards': BlockPiledCards;
       'block.push-cta': BlockPushCta;
+      'block.related-news': BlockRelatedNews;
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text-v2': BlockSimpleTextV2;
