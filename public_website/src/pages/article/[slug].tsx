@@ -2,7 +2,7 @@ import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 
-import { BlockRenderer } from '@/lib/BlockRenderer'
+import { BlockRenderer } from '@/components/BlockRenderer'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -11,6 +11,7 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  console.log('props', props)
   return (
     /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
@@ -22,7 +23,7 @@ export default function CustomPage(props: CustomPageProps) {
 }
 
 export const getStaticProps = (async ({ params }) => {
-  const pagePath = (params?.['slug'] as string[]).join('/')
+  const pagePath = params?.['slug'] as string
   console.log('pagePath', pagePath)
   const queryParams = stringify({
     populate: [
@@ -42,14 +43,12 @@ export const getStaticProps = (async ({ params }) => {
     ],
   })
 
-  const apiEndpoint = `/article?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
-  console.log('apiEndpoint', apiEndpoint)
+  const apiEndpoint = `/articles?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
 
   const response =
     await fetchCMS<APIResponseData<'api::article.article'>[]>(apiEndpoint)
 
   if (response.data.length === 0) {
-    console.log('not found')
     return { notFound: true }
   }
 
@@ -67,7 +66,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.Path.split('/').filter((slug) => slug.length),
+        slug: page.attributes.Path,
       },
     })),
     fallback: false,
