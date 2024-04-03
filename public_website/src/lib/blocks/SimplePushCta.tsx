@@ -146,7 +146,7 @@ const CtaLink = styled.a`
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
-    border-radius: 9999px;
+    border-radius: 100px;
     border: 1px solid ${theme.colors.white};
 
     @media (width < ${theme.mediaQueries.tablet}) {

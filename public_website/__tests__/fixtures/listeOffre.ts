@@ -58,7 +58,7 @@ export const listeOffrePageFixtures = {
         id: 1,
         title: "Qu'est-ce qu'il se pass en ce moment ?",
         description: 'Découvre les tendances du moment',
-        offreTag: 'home_site_instit',
+        offreTag: 'Bons_plans_du_moment',
         firstCartTitle: 'Rejoins',
         secondCartTitle: "l'aventure",
         descritptionCard:
