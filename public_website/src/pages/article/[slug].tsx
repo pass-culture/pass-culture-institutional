@@ -15,7 +15,6 @@ interface CustomPageProps {
 
 export default function CustomPage(props: CustomPageProps) {
   return (
-    /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
       {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
