@@ -196,6 +196,6 @@ const CtaLink = styled.a`
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
-    border-radius: 9999px;
+    border-radius: 100px;
   `}
 `

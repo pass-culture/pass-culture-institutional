@@ -50,7 +50,7 @@ export const PressePageFixtures = {
           title: 'Les offres et expériences à vivre avec le pass',
         },
       ],
-      textImage: {
+      texteImage: {
         id: 1,
         image: {
           data: {
@@ -75,8 +75,35 @@ export const PressePageFixtures = {
           },
         },
         title: 'Les offres et expériences à vivre avec le pass',
-        description:
-          'Découvrez les offres et expériences à vivre avec le pass Culture',
+        text: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text: ' lsdfjk qslkdf ',
+                type: 'text',
+              },
+              {
+                bold: true,
+                text: 'qmsdlf qsdlf qsmdfql',
+                type: 'text',
+              },
+              {
+                text: ' skdf jqsldkflqsdf jqlsdjf qlksdfj ',
+                type: 'text',
+              },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text: 'qsdlkf jqsdlkf qsdlfj qsldkfj lsqdf',
+                type: 'text',
+              },
+            ],
+          },
+        ],
         isImageRight: true,
         icon: '🦻🏼👁️',
       },

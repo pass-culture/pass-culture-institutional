@@ -95,7 +95,7 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
       infinite={true}
       step={1}>
       <StyledKeyCarouselHeading>
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack

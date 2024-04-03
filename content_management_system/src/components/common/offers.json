@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_common_offers",
+  "info": {
+    "displayName": "Offers",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "previousButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "nextButtonLabel": {
+      "type": "string",
+      "required": true
+    },
+    "controlsLabel": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

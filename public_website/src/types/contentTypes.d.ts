@@ -1324,6 +1324,42 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
   };
 }
 
+export interface ApiListeOffreListeOffre extends Schema.SingleType {
+  collectionName: 'liste_offres';
+  info: {
+    singularName: 'liste-offre';
+    pluralName: 'liste-offres';
+    displayName: 'Liste offres';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    hero: Attribute.Component<'block.header'>;
+    offres: Attribute.Component<'block.offer-list'>;
+    separator: Attribute.Component<'block.separator'>;
+    question: Attribute.Component<'block.simple-push-cta'>;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    offers: Attribute.Component<'block.offers-section'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::liste-offre.liste-offre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::liste-offre.liste-offre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMasterMaster extends Schema.SingleType {
   collectionName: 'masters';
   info: {
@@ -1488,7 +1524,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.piled-cards',
         'block.faq',
         'block.detailed-logos',
-        'block.organization-chart'
+        'block.organization-chart',
+        'block.simple-text-v2'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1518,7 +1555,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     filtres: Attribute.Component<'common.filtre', true>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
-    texteImage: Attribute.Component<'block.image-text'>;
+    texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
     pushCta: Attribute.Component<'block.double-push-cta'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
@@ -1748,6 +1785,7 @@ declare module '@strapi/types' {
       'api::help-teachers.help-teachers': ApiHelpTeachersHelpTeachers;
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
+      'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
       'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::page.page': ApiPagePage;

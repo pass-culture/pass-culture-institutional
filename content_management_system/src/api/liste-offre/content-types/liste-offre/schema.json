@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "liste_offres",
+  "info": {
+    "singularName": "liste-offre",
+    "pluralName": "liste-offres",
+    "displayName": "Liste offres",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hero": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.header"
+    },
+    "offres": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.offer-list"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    },
+    "question": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "offers": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.offers-section"
+    }
+  }
+}

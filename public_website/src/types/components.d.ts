@@ -36,8 +36,7 @@ export interface BlockDoublePushCta extends Schema.Component {
     text: Attribute.Text;
     firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<'common.not-required-link'> &
-      Attribute.Required;
+    secondCta: Attribute.Component<'common.not-required-link'>;
   };
 }
 
@@ -75,7 +74,7 @@ export interface BlockHeader extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
+    text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String;
   };
@@ -88,11 +87,11 @@ export interface BlockImageText extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
+    title: Attribute.String & Attribute.Required;
     image: Attribute.Media;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
+    text: Attribute.Blocks & Attribute.Required;
   };
 }
 
@@ -188,6 +187,26 @@ export interface BlockLogos extends Schema.Component {
   };
 }
 
+export interface BlockOfferList extends Schema.Component {
+  collectionName: 'components_block_offer_lists';
+  info: {
+    displayName: 'OfferList';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    offreTag: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    firstCartTitle: Attribute.String & Attribute.Required;
+    secondCartTitle: Attribute.String;
+    descritptionCard: Attribute.Text;
+    firstIcon: Attribute.String;
+    secondIcon: Attribute.String;
+    ctaCard: Attribute.Component<'common.link'>;
+  };
+}
+
 export interface BlockOffersCarousel extends Schema.Component {
   collectionName: 'components_block_offers_carousels';
   info: {
@@ -198,6 +217,25 @@ export interface BlockOffersCarousel extends Schema.Component {
     title: Attribute.String;
     items: Attribute.Component<'common.offers-carousel-item', true>;
     cta: Attribute.Component<'common.link'>;
+  };
+}
+
+export interface BlockOffersSection extends Schema.Component {
+  collectionName: 'components_block_offers_sections';
+  info: {
+    displayName: 'OffersSection';
+    description: '';
+  };
+  attributes: {
+    offers: Attribute.Component<'common.offers'>;
+    offerTag: Attribute.String;
+    cta: Attribute.Component<'common.link'>;
+    firstCardtitle: Attribute.String & Attribute.Required;
+    secondCardTitle: Attribute.String & Attribute.Required;
+    descriptionCard: Attribute.Text & Attribute.Required;
+    firstCardIcon: Attribute.String;
+    secondCardIcon: Attribute.String;
+    cardCta: Attribute.Component<'common.link'>;
   };
 }
 
@@ -291,6 +329,21 @@ export interface BlockSimplePushCta extends Schema.Component {
     image: Attribute.Media & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
+  };
+}
+
+export interface BlockSimpleTextV2 extends Schema.Component {
+  collectionName: 'components_block_simple_text_v2s';
+  info: {
+    displayName: 'Simple Text v2';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Blocks & Attribute.Required;
+    columns: Attribute.Component<'common.simple-text-column', true> &
+      Attribute.SetMinMax<{
+        max: 2;
+      }>;
   };
 }
 
@@ -494,6 +547,21 @@ export interface CommonPerson extends Schema.Component {
   };
 }
 
+export interface CommonOffers extends Schema.Component {
+  collectionName: 'components_common_offers';
+  info: {
+    displayName: 'Offers';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    previousButtonLabel: Attribute.String & Attribute.Required;
+    nextButtonLabel: Attribute.String & Attribute.Required;
+    controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface CommonPiledCardItem extends Schema.Component {
   collectionName: 'components_common_piled_card_items';
   info: {
@@ -507,6 +575,17 @@ export interface CommonPiledCardItem extends Schema.Component {
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
     color: Attribute.String;
+  };
+}
+
+export interface CommonSimpleTextColumn extends Schema.Component {
+  collectionName: 'components_common_simple_text_columns';
+  info: {
+    displayName: 'Simple Text Column';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Blocks & Attribute.Required;
   };
 }
 
@@ -825,13 +904,16 @@ declare module '@strapi/types' {
       'block.link': BlockLink;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
+      'block.offer-list': BlockOfferList;
       'block.offers-carousel': BlockOffersCarousel;
+      'block.offers-section': BlockOffersSection;
       'block.organization-chart': BlockOrganizationChart;
       'block.piled-cards': BlockPiledCards;
       'block.push-cta': BlockPushCta;
       'block.related-news': BlockRelatedNews;
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
+      'block.simple-text-v2': BlockSimpleTextV2;
       'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
@@ -846,8 +928,10 @@ declare module '@strapi/types' {
       'common.logo': CommonLogo;
       'common.not-required-link': CommonNotRequiredLink;
       'common.offers-carousel-item': CommonOffersCarouselItem;
+      'common.offers': CommonOffers;
       'common.person': CommonPerson;
       'common.piled-card-item': CommonPiledCardItem;
+      'common.simple-text-column': CommonSimpleTextColumn;
       'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;

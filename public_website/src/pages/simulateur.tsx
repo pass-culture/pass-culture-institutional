@@ -43,8 +43,6 @@ export default function SimulatorPage(props: SimulatorProps) {
         bottomEmoji={props.data.attributes.bottomEmoji}
       />
 
-      {/* TODO: add SimplePushCTA here */}
-
       <SocialMedia
         title={props.data.attributes.socialMedias.title}
         socialMediaLink={props.data.attributes.socialMedias.socialMediaLink}

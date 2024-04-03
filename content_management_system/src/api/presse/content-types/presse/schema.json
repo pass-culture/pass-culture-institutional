@@ -36,7 +36,8 @@
     "texteImage": {
       "type": "component",
       "repeatable": false,
-      "component": "block.image-text"
+      "component": "block.image-text",
+      "required": true
     },
     "pushCta": {
       "type": "component",
