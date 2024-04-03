@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -180,7 +181,7 @@ const RightSide = styled.div`
   `}
 `
 
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
 

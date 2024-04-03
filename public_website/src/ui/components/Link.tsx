@@ -8,7 +8,7 @@ type LinkProps = {
   AnchorHTMLAttributes<HTMLAnchorElement>
 
 export function Link(props: LinkProps) {
-  const external = !props.href.startsWith('/')
+  const external = !props.href?.startsWith('/')
 
   return (
     <NextLink

@@ -7,17 +7,20 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "items": {
       "type": "component",
       "repeatable": true,
-      "component": "common.offers-carousel-item"
+      "component": "common.offers-carousel-item",
+      "required": true
     },
     "cta": {
       "type": "component",
       "repeatable": false,
-      "component": "common.link"
+      "component": "common.link",
+      "required": true
     }
   }
 }

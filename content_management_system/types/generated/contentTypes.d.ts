@@ -1121,7 +1121,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1150,7 +1150,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1185,7 +1185,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1296,11 +1296,11 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
   };
   attributes: {
     hero: Attribute.Component<'block.header'>;
-    offres: Attribute.Component<'block.offer-list'>;
+    offres: Attribute.Component<'block.offer-list'> & Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
-    offers: Attribute.Component<'block.offers-section'>;
+    offers: Attribute.Component<'block.offers-section'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1515,7 +1515,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
-    pushCta: Attribute.Component<'block.double-push-cta'>;
+    pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
