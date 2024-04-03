@@ -1,30 +1,37 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
+import styled, { css } from 'styled-components'
 
-import { BlockRenderer } from '@/components/BlockRenderer'
+import { BlockRenderer } from '@/lib/BlockRenderer'
+import { LatestNews } from '@/lib/blocks/LatestNews'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::article.article'>
+  latestStudies: APIResponseData<'api::news.news'>[]
 }
 
 export default function CustomPage(props: CustomPageProps) {
-  console.log('props', props)
   return (
     /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
       {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
+
+      <StyledLatestNews
+        news={props.latestStudies}
+        title={props.data.attributes.relatedNews.title}
+        cta={props.data.attributes.relatedNews.cta}
+      />
     </React.Fragment>
   )
 }
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
-  console.log('pagePath', pagePath)
   const queryParams = stringify({
     populate: [
       'Blocks.image.image',
@@ -40,6 +47,15 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.cta',
       'Blocks.items.items',
       'Blocks.socialMediaLink',
+      'Blocks.news',
+      'Blocks.news.cta',
+      'Blocks',
+      'news',
+      'Blocks.*',
+      'Blocks.news.*',
+      'relatedNews',
+      'relatedNews.cta',
+      'relatedNews.category',
     ],
   })
 
@@ -52,9 +68,26 @@ export const getStaticProps = (async ({ params }) => {
     return { notFound: true }
   }
 
+  const latestStudiesQuery = stringify({
+    sort: ['date:desc'],
+    populate: ['image'],
+    pagination: {
+      limit: 3,
+    },
+    filters: {
+      category: {
+        $eqi: response.data[0]!.attributes.relatedNews.category,
+      },
+    },
+  })
+  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
+    `/news-list?${latestStudiesQuery}`
+  )
+
   return {
     props: {
       data: response.data[0]!,
+      latestStudies: latestStudies.data,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
@@ -74,3 +107,14 @@ export const getStaticPaths = (async () => {
 
   return result
 }) satisfies GetStaticPaths
+
+const StyledLatestNews = styled(LatestNews)`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 6rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 3.5rem 0 5rem;
+    }
+  `}
+`

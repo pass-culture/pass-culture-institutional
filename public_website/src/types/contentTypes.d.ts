@@ -882,6 +882,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     singularName: 'article';
     pluralName: 'articles';
     displayName: 'Article';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -897,6 +898,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
+    relatedNews: Attribute.Component<'block.related-news'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

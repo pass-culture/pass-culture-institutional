@@ -4,7 +4,8 @@
   "info": {
     "singularName": "article",
     "pluralName": "articles",
-    "displayName": "Article"
+    "displayName": "Article",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,6 +25,12 @@
         "block.double-push-cta",
         "block.social-media"
       ]
+    },
+    "relatedNews": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.related-news",
+      "required": true
     }
   }
 }
