@@ -346,8 +346,6 @@ export const getStaticProps = (async () => {
     pagination: {},
   })
 
-  console.log(`/events?${eventQuery}`)
-
   const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
     `/events?${eventQuery}`
   )
