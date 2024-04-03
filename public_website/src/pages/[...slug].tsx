@@ -39,6 +39,8 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.cta',
       'Blocks.items.items',
       'Blocks.socialMediaLink',
+      'Blocks.people',
+      'Blocks.logos.cta',
     ],
   })
 
