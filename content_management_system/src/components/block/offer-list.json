@@ -1,0 +1,49 @@
+{
+  "collectionName": "components_block_offer_lists",
+  "info": {
+    "displayName": "OfferList",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "offreTag": {
+      "type": "string",
+      "required": true
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    },
+    "firstCartTitle": {
+      "type": "string",
+      "required": true
+    },
+    "secondCartTitle": {
+      "type": "string"
+    },
+    "descritptionCard": {
+      "type": "text"
+    },
+    "firstIcon": {
+      "type": "string"
+    },
+    "secondIcon": {
+      "type": "string"
+    },
+    "ctaCard": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    }
+  }
+}

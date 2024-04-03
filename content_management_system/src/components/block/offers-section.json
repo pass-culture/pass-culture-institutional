@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_block_offers_sections",
+  "info": {
+    "displayName": "OffersSection",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "offers": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.offers"
+    },
+    "offerTag": {
+      "type": "string"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    },
+    "firstCardtitle": {
+      "type": "string",
+      "required": true
+    },
+    "secondCardTitle": {
+      "type": "string",
+      "required": true
+    },
+    "descriptionCard": {
+      "type": "text",
+      "required": true
+    },
+    "firstCardIcon": {
+      "type": "string"
+    },
+    "secondCardIcon": {
+      "type": "string"
+    },
+    "cardCta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    }
+  }
+}
