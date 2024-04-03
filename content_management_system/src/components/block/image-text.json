@@ -7,10 +7,8 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
+      "type": "string",
+      "required": true
     },
     "image": {
       "type": "media",
@@ -29,6 +27,10 @@
     },
     "icon": {
       "type": "string"
+    },
+    "text": {
+      "type": "blocks",
+      "required": true
     }
   }
 }

@@ -1,4 +1,8 @@
 import React from 'react'
+import {
+  type BlocksContent,
+  BlocksRenderer,
+} from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
@@ -6,8 +10,8 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
-  title?: string
-  description?: string
+  title: string
+  text: BlocksContent
   image?: APIResponse<'plugin::upload.file'> | null
   icon?: string
   isImageRight?: boolean
@@ -15,7 +19,7 @@ type HeroProps = {
 
 export function ImageText({
   title,
-  description,
+  text,
   image,
   icon,
   isImageRight,
@@ -30,12 +34,8 @@ export function ImageText({
           />
         )}
         <StyledContentTextWrapper className="first">
-          {title && (
-            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-          )}
-          {description && (
-            <StyledText dangerouslySetInnerHTML={{ __html: description }} />
-          )}
+          <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">
           <StyledImage
@@ -127,6 +127,20 @@ const StyledContentTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    ul {
+      list-style-type: disc;
+      padding-left: 2rem;
+    }
+
+    a {
+      color: ${theme.colors.primary}!important;
+      text-decoration: underline;
+    }
+
+    strong {
+      font-weight: ${({ theme }) => theme.fonts.weights.bold};
+    }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
