@@ -5,11 +5,11 @@ import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
+import { Header } from '@/lib/blocks/Header'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { Header } from '@/lib/blocks/Header'
 
 interface CulturalActorsHelpProps {
   helpData: APIResponseData<'api::help-cultural-actors.help-cultural-actors'>

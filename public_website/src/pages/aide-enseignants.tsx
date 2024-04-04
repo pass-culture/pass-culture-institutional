@@ -5,12 +5,12 @@ import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
+import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { APIResponse, APIResponseData } from '@/types/strapi'
+import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { Header } from '@/lib/blocks/Header'
 
 interface TeachersHelpProps {
   data: APIResponseData<'api::help-teachers.help-teachers'>
