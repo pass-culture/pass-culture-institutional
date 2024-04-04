@@ -38,7 +38,7 @@ export function OfferSection({
       <Typo.Heading2>{title}</Typo.Heading2>
       <Typo.Body>{description}</Typo.Body>
       <StyledOfferWrapper>
-        {offers.map((offer) => (
+        {offers.slice(0, 7).map((offer) => (
           <div key={offer.id}>
             <StyledLink href={getOfferUrl(offer.id)}>
               {offer.image?.url && (

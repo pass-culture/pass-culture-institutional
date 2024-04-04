@@ -1275,8 +1275,6 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
-    logos: Attribute.Component<'block.logos'>;
-    videoSection: Attribute.Component<'block.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1292,7 +1290,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
   info: {
     singularName: 'liste-jeune';
     pluralName: 'liste-jeunes';
-    displayName: 'ListeJeune';
+    displayName: 'Actualit\u00E9s jeunes parents';
     description: '';
   };
   options: {
@@ -1483,6 +1481,36 @@ export interface ApiNewsNews extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::news.news', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNotFoundNotFound extends Schema.SingleType {
+  collectionName: 'not_founds';
+  info: {
+    singularName: 'not-found';
+    pluralName: 'not-founds';
+    displayName: 'Not Found';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    header: Attribute.Component<'block.header'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::not-found.not-found',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::not-found.not-found',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1788,6 +1816,7 @@ declare module '@strapi/types' {
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
       'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
+      'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
       'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
