@@ -15,6 +15,8 @@ interface HeaderProps {
   cta?: { Label: string; URL: string }
 }
 
+import { OutlinedText } from '@/ui/components/OutlinedText'
+
 export function Header(props: HeaderProps) {
   return (
     <Root>
@@ -32,7 +34,7 @@ export function Header(props: HeaderProps) {
               props.image?.data.attributes.url &&
               getStrapiURL(props.image?.data.attributes.url)
             }>
-            <p>{props.icon}</p>
+            <OutlinedText>{props.icon}</OutlinedText>
           </Card>
           <BackgroundLayer />
         </CardContainer>
@@ -137,12 +139,13 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
     position: relative;
 
-    p {
-      font-size: ${theme.fonts.sizes['6xl']};
+    span {
+      font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
 
-      bottom: 30%;
+      top: 30%;
       right: -5%;
+      transform: rotate(-15deg);
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
