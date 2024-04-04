@@ -6,12 +6,12 @@ import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
 interface HeaderProps {
   title: string
   text?: string
   image: APIResponse<'plugin::upload.file'> | null
   icon: string
-
   cta?: { Label: string; URL: string }
 }
 
