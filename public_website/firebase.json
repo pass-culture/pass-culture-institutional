@@ -8,7 +8,12 @@
         "**/.*",
         "**/node_modules/**"
       ],
-      "cleanUrls": true
+      "cleanUrls": true,
+      "redirects": [ {
+        "source": "/le-dispositif",
+        "destination": "/le-pass-culture-cest-quoi",
+        "type": 301
+      } ]
     },
     {
       "target": "staging",
