@@ -8,7 +8,12 @@
         "**/.*",
         "**/node_modules/**"
       ],
-      "cleanUrls": true
+      "cleanUrls": true,
+      "redirects": [ {
+        "source": "/foo",
+        "destination": "/bar",
+        "type": 301
+      } ]
     },
     {
       "target": "staging",
