@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 interface HeaderProps {
@@ -10,6 +11,8 @@ interface HeaderProps {
   text?: string
   image: APIResponse<'plugin::upload.file'> | null
   icon: string
+
+  cta?: { Label: string; URL: string }
 }
 
 export function Header(props: HeaderProps) {
@@ -19,6 +22,9 @@ export function Header(props: HeaderProps) {
         <StyledContentTextWrapper>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
+          {props.cta && props.cta.Label && props.cta.URL && (
+            <Button href={props.cta.URL}>{props.cta.Label}</Button>
+          )}
         </StyledContentTextWrapper>
         <CardContainer>
           <Card

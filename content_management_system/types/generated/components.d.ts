@@ -77,6 +77,7 @@ export interface BlockHeader extends Schema.Component {
     text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String;
+    cta: Attribute.Component<'common.link'>;
   };
 }
 
