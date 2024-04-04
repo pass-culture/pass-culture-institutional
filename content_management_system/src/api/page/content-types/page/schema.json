@@ -22,7 +22,6 @@
       "components": [
         "block.centered-text",
         "block.header",
-        "block.simple-text",
         "block.social-media",
         "block.double-push-cta",
         "block.image-text",
@@ -35,7 +34,6 @@
         "block.video",
         "block.key-number-carousel",
         "block.logos",
-        "block.testimonies",
         "block.latest-news",
         "block.experience-video-carousel",
         "block.offers-carousel",

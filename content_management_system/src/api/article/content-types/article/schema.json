@@ -19,7 +19,6 @@
     "Blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.simple-text",
         "block.image",
         "block.video",
         "block.double-push-cta",

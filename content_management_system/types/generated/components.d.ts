@@ -335,7 +335,8 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleTextV2 extends Schema.Component {
   collectionName: 'components_block_simple_text_v2s';
   info: {
-    displayName: 'Simple Text v2';
+    displayName: 'Simple Text';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -344,23 +345,6 @@ export interface BlockSimpleTextV2 extends Schema.Component {
       Attribute.SetMinMax<{
         max: 2;
       }>;
-  };
-}
-
-export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts';
-  info: {
-    displayName: 'SimpleText (NE PAS UTILISER)';
-    description: 'Obsolete. Utiliser `Simple Text v2` \u00E0 la place.';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Text;
-    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
-    firstSubTitle: Attribute.Text;
-    secondSubTitle: Attribute.Text;
-    firstText: Attribute.Text;
-    secondText: Attribute.Text;
   };
 }
 
@@ -914,7 +898,6 @@ declare module '@strapi/types' {
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text-v2': BlockSimpleTextV2;
-      'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.testimonies': BlockTestimonies;

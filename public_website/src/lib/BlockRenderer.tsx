@@ -24,7 +24,6 @@ import { PiledCards } from './blocks/PiledCards'
 import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
-import { SimpleText } from './blocks/SimpleText'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SocialMedia } from './blocks/SocialMedia'
 import { Testimonies } from './blocks/Testimonies'
@@ -50,7 +49,6 @@ const COMPONENTS: Record<
   'block.header': Header,
   'block.header-test': Headertest,
   'block.centered-text': CenteredText,
-  'block.simple-text': SimpleText,
   'block.push-cta': PushCTA,
   'block.social-media': SocialMedia,
   'block.latest-news': LatestNews,
