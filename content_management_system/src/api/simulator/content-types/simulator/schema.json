@@ -118,6 +118,11 @@
       "repeatable": true,
       "component": "common.link",
       "required": true
+    },
+    "BreadCrumbs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.bread-crumb"
     }
   }
 }

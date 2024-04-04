@@ -1735,6 +1735,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     breadcrumbLinks: Attribute.Component<'common.link', true> &
       Attribute.Required;
+    BreadCrumbs: Attribute.Component<'common.bread-crumb', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

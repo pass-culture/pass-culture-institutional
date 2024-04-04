@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_common_bread_crumbs",
+  "info": {
+    "displayName": "breadCrumb"
+  },
+  "options": {},
+  "attributes": {
+    "parent": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    },
+    "fils": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.link"
+    }
+  }
+}

@@ -427,6 +427,17 @@ export interface BlockVideo extends Schema.Component {
   };
 }
 
+export interface CommonBreadCrumb extends Schema.Component {
+  collectionName: 'components_common_bread_crumbs';
+  info: {
+    displayName: 'breadCrumb';
+  };
+  attributes: {
+    parent: Attribute.Component<'common.link'>;
+    fils: Attribute.Component<'common.link', true>;
+  };
+}
+
 export interface CommonDetailedLogo extends Schema.Component {
   collectionName: 'components_common_detailed_logos';
   info: {
@@ -920,6 +931,7 @@ declare module '@strapi/types' {
       'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
+      'common.bread-crumb': CommonBreadCrumb;
       'common.detailed-logo': CommonDetailedLogo;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;
