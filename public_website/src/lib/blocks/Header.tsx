@@ -119,7 +119,7 @@ const CardContainer = styled.div`
   max-width: 28rem;
 
   @media (width < ${theme.mediaQueries.tablet}) {
-    margin: -2.125rem 2rem -20.125rem 2rem;
+    margin: 3.875rem 2rem -10.125rem 2rem;
   }
 `
 
@@ -135,8 +135,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
-    height: 30rem;
-
+    aspect-ratio: 290 / 360;
     position: relative;
 
     span {
@@ -146,9 +145,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
       top: 30%;
       right: -5%;
       transform: rotate(-15deg);
-    }
-
-    @media (width < ${theme.mediaQueries.tablet}) {
     }
   `}
 `
@@ -162,7 +158,7 @@ const BackgroundLayer = styled.div`
     transform: rotate(7deg);
     border-radius: 1.5rem;
     width: 100%;
-    height: 35rem;
     z-index: -1;
+    aspect-ratio: 290 / 360;
   `}
 `
