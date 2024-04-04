@@ -8,9 +8,9 @@ If you set `NEXT_PUBLIC_STRAPI_API_URL` to a non-local instance of the CMS (for 
 
 > To access environment variables in the browser, they have to be prefixed by `NEXT_PUBLIC_`.
 
-There is also an environment variable that is used to build the playlists. Set `NEXT_PUBLIC_BACKEND_API_URL` to `https://backend.passculture.app/`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
+There is also an environment variable that is used to build the playlists. Set `NEXT_PUBLIC_BACKEND_API_URL` to `https://backend.passculture.app`. We have also included dummy playlist data directly in Next for local development/testing (MSW mocks the playlist data).
 
-Set `NEXT_PUBLIC_APP_URL` to `https://passculture.app/` to build offers' URLs.
+Set `NEXT_PUBLIC_APP_URL` to `https://passculture.app` to build offers' URLs.
 
 ## Start the Public Website
 
