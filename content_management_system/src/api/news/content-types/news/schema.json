@@ -97,6 +97,25 @@
         "Offres numériques"
       ],
       "required": true
+    },
+    "Blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.image",
+        "block.video",
+        "block.simple-text-v2",
+        "block.double-push-cta",
+        "block.social-media",
+        "block.centered-text"
+      ]
+    },
+    "relatedNews": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.related-news"
+    },
+    "Path": {
+      "type": "string"
     }
   }
 }

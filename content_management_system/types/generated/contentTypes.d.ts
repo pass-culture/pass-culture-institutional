@@ -1475,6 +1475,18 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    Blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.video',
+        'block.simple-text-v2',
+        'block.double-push-cta',
+        'block.social-media',
+        'block.centered-text'
+      ]
+    >;
+    relatedNews: Attribute.Component<'block.related-news'>;
+    Path: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
