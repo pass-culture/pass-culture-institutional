@@ -1,14 +1,13 @@
 {
   "collectionName": "components_block_simple_texts",
   "info": {
-    "displayName": "SimpleText",
-    "description": ""
+    "displayName": "SimpleText (NE PAS UTILISER)",
+    "description": "Obsolete. Utiliser `Simple Text v2` à la place."
   },
   "options": {},
   "attributes": {
     "title": {
       "type": "string"
-
     },
     "text": {
       "type": "text"
@@ -28,7 +27,6 @@
     },
     "secondText": {
       "type": "text"
-
     }
   }
 }

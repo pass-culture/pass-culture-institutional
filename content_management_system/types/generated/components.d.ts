@@ -350,8 +350,8 @@ export interface BlockSimpleTextV2 extends Schema.Component {
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
-    displayName: 'SimpleText';
-    description: '';
+    displayName: 'SimpleText (NE PAS UTILISER)';
+    description: 'Obsolete. Utiliser `Simple Text v2` \u00E0 la place.';
   };
   attributes: {
     title: Attribute.String;
