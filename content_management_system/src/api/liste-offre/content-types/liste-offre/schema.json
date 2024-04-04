@@ -20,7 +20,8 @@
     "offres": {
       "type": "component",
       "repeatable": false,
-      "component": "block.offer-list"
+      "component": "block.offer-list",
+      "required": true
     },
     "separator": {
       "type": "component",
@@ -40,7 +41,8 @@
     "offers": {
       "type": "component",
       "repeatable": false,
-      "component": "block.offers-section"
+      "component": "block.offers-section",
+      "required": true
     }
   }
 }

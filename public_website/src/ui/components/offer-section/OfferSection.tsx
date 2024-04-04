@@ -1,24 +1,24 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Offer } from '@/types/playlist'
+import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
 type OfferProps = {
-  title?: string
-  description?: string
+  title: string
+  description: string
   offers: Offer[]
-  cta: { Label: string; URL: string } | undefined
-  firstCartTitle?: string
-  secondCartTitle?: string
-  ctaCard?: { Label: string; URL: string }
-  descriptionCard?: string
-  firstIcon?: string
-  secondIcon?: string
+  cta: { Label: string; URL: string }
+  firstCartTitle: string
+  secondCartTitle: string
+  ctaCard: { Label: string; URL: string }
+  descriptionCard: string
+  firstIcon: string
+  secondIcon: string
 }
 
 export function OfferSection({
@@ -63,12 +63,12 @@ export function OfferSection({
               <StyledOffersSurtitle>{secondCartTitle}</StyledOffersSurtitle>
             </StyledOffersHeader>
             <StyledCardDescription>{descriptionCard}</StyledCardDescription>
-            <CtaLink href={ctaCard?.URL}>{ctaCard?.Label}</CtaLink>
+            <CtaLink href={ctaCard.URL}>{ctaCard.Label}</CtaLink>
           </StyledCardWrapper>
         </StyledLastCard>
       </StyledOfferWrapper>
       <StyledBtnWrapper>
-        <Button href={cta?.URL}>{cta?.Label}</Button>
+        <Button href={cta.URL}>{cta.Label}</Button>
       </StyledBtnWrapper>
       {/* {TODO: ADD CARD AND TEMOIGNAGES VIDEO} */}
     </Root>
@@ -201,7 +201,7 @@ const StyledOffersSurtitle = styled.h2`
     }
   `}
 `
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
 

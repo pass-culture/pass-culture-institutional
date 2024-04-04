@@ -29,21 +29,26 @@
       "required": true
     },
     "secondCartTitle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "descritptionCard": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "firstIcon": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "secondIcon": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "ctaCard": {
       "type": "component",
       "repeatable": false,
-      "component": "common.link"
+      "component": "common.link",
+      "required": true
     }
   }
 }

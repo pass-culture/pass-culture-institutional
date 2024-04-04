@@ -7,32 +7,32 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "surtitle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "firstIcon": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "secondIcon": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "text": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "secondSurtitle": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "theme": {
       "type": "enumeration",
-      "enum": [
-        "purple",
-        "yellow",
-        "magenta",
-        "orange",
-        "green"
-      ],
+      "enum": ["purple", "yellow", "magenta", "orange", "green"],
       "required": true,
       "default": "purple"
     }

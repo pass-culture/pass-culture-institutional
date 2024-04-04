@@ -6,6 +6,7 @@ import { ArrowLeft } from '../icons/ArrowLeft'
 import { Calendar } from '../icons/Calendar'
 import { Clock } from '../icons/Clock'
 import { TargetBlank } from '../icons/TargeBlank'
+import { Link } from '../Link'
 import { formatDate } from '@/utils/formatDate'
 
 type ListCardProps = {
@@ -63,9 +64,9 @@ export function EventCard({
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
-        <CtaLink href={cta?.URL} target="_blank">
+        <CtaLink href={cta.URL} target="_blank">
           <TargetBlank />
-          {cta?.Label}
+          {cta.Label}
         </CtaLink>
       </StyledContentWrapper>
 
@@ -179,7 +180,7 @@ const StyledTimeWrapper = styled.div`
     }
   `}
 `
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: flex;
     gap: 0.5rem;

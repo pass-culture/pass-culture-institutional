@@ -3,14 +3,15 @@ import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
+import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface DoublePushCTAProps {
-  title: string | undefined | TrustedHTML
+  title: string | TrustedHTML
   text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  firstCta: { Label: string; URL: string } | undefined
+  firstCta: { Label: string; URL: string }
 
   secondCta: { Label: string; URL: string } | undefined
   className?: string
@@ -145,7 +146,7 @@ const RightSide = styled.div`
   `}
 `
 
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
 

@@ -34,11 +34,11 @@ export default function Help({ helpData }: HelpProps) {
         limit={helpData.attributes.faq.limit}
       />
       <StyledPushCTA
-        title={helpData.attributes.cardText?.title}
-        text={helpData.attributes.cardText?.text}
-        image={helpData.attributes.cardText?.image}
-        firstCta={helpData.attributes.cardText?.firstCta}
-        secondCta={helpData.attributes.cardText?.secondCta}
+        title={helpData.attributes.cardText.title}
+        text={helpData.attributes.cardText.text}
+        image={helpData.attributes.cardText.image}
+        firstCta={helpData.attributes.cardText.firstCta}
+        secondCta={helpData.attributes.cardText.secondCta}
       />
 
       <StyledSimplePushCTA

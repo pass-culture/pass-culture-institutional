@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
+
+import { Link } from '@/ui/components/Link'
 
 type MobileMenuListSubPanelProps = {
   primaryList: { Label: string; URL: string }[]
