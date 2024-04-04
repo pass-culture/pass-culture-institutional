@@ -17,7 +17,7 @@
     },
     "pc-site-instit-production": {
       "hosting": {
-        "staging": [
+        "production": [
           "pc-site-instit-production"
         ]
       }
