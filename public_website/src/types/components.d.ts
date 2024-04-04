@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface BlockBreadCrumbWrapper extends Schema.Component {
+  collectionName: 'components_block_bread_crumb_wrappers';
+  info: {
+    displayName: 'BreadCrumbWrapper';
+  };
+  attributes: {
+    parent: Attribute.Component<'common.link'>;
+    fils: Attribute.Component<'common.link', true>;
+  };
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -154,6 +165,17 @@ export interface BlockLink extends Schema.Component {
     > &
       Attribute.Required;
     url: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockListBreadCrumb extends Schema.Component {
+  collectionName: 'components_block_list_bread_crumbs';
+  info: {
+    displayName: 'List BreadCrumb';
+    description: '';
+  };
+  attributes: {
+    breadCrumbs: Attribute.Component<'block.bread-crumb-wrapper', true>;
   };
 }
 
@@ -424,17 +446,6 @@ export interface BlockVideo extends Schema.Component {
     description: Attribute.Text;
     alt: Attribute.Text;
     image: Attribute.Media;
-  };
-}
-
-export interface CommonBreadCrumb extends Schema.Component {
-  collectionName: 'components_common_bread_crumbs';
-  info: {
-    displayName: 'breadCrumb';
-  };
-  attributes: {
-    parent: Attribute.Component<'common.link'>;
-    fils: Attribute.Component<'common.link', true>;
   };
 }
 
@@ -902,6 +913,7 @@ export interface SimulatorSuccessScreen extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
@@ -913,6 +925,7 @@ declare module '@strapi/types' {
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
+      'block.list-bread-crumb': BlockListBreadCrumb;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offer-list': BlockOfferList;
@@ -931,7 +944,6 @@ declare module '@strapi/types' {
       'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
-      'common.bread-crumb': CommonBreadCrumb;
       'common.detailed-logo': CommonDetailedLogo;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;

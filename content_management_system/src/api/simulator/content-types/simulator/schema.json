@@ -113,16 +113,10 @@
       "required": true,
       "component": "block.social-media"
     },
-    "breadcrumbLinks": {
+    "bread": {
       "type": "component",
-      "repeatable": true,
-      "component": "common.link",
-      "required": true
-    },
-    "BreadCrumbs": {
-      "type": "component",
-      "repeatable": true,
-      "component": "common.bread-crumb"
+      "repeatable": false,
+      "component": "block.list-bread-crumb"
     }
   }
 }

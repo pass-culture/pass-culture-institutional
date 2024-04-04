@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_common_bread_crumbs",
+  "collectionName": "components_block_bread_crumb_wrappers",
   "info": {
-    "displayName": "breadCrumb"
+    "displayName": "BreadCrumbWrapper"
   },
   "options": {},
   "attributes": {

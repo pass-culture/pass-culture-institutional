@@ -5,11 +5,9 @@ import styled from 'styled-components'
 
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-
 interface SimulatorProps {
   data: APIResponseData<'api::simulator.simulator'>
 }
@@ -23,8 +21,6 @@ export default function SimulatorPage(props: SimulatorProps) {
       <Description
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
-
-      <Breadcrumb links={props.data.attributes.breadcrumbLinks} />
 
       <StyledSimulator
         ageQuestion={props.data.attributes.ageQuestion}
@@ -99,6 +95,9 @@ export const getStaticProps = (async () => {
         'amountScreen_17',
         'amountScreen_18',
         'socialMedias.socialMediaLink',
+        'bread.breadCrumbs',
+        'bread.breadCrumbs.parent',
+        'bread.breadCrumbs.fils',
       ],
     },
     { encodeValuesOnly: true }
