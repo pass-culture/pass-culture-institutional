@@ -26,7 +26,8 @@
       ]
     },
     "icon": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }

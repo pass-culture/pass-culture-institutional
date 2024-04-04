@@ -78,10 +78,10 @@ const StyledContentContainer = styled.div`
   ${({ theme }) => css`
     max-width: 1440px;
     margin: 0 auto;
-    padding: 5rem 1rem;
+    padding: 5rem 2rem 2.875rem 2rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 2rem 1rem;
+      padding: 2rem 1.5rem 2.875rem 1.5rem;
     }
   `}
 `
@@ -92,7 +92,6 @@ const StyledTopSection = styled.div`
     grid-template-columns: 25rem 1fr;
     align-items: start;
     gap: 6.25rem;
-    margin-bottom: 5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
@@ -126,7 +125,7 @@ const StyledLists = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     gap: 4rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       gap: 0;
       grid-template-columns: 1fr;
     }

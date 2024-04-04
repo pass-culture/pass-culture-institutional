@@ -140,9 +140,16 @@ const CtaLink = styled.a`
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
     margin-right: 1.5rem;
 
+    outline-offset: 2px;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: ${`rgba(255, 255, 255, 0.20);`};
+    }
+    &:focus {
+      outline: 2px solid ${theme.colors.white};
+    }
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
