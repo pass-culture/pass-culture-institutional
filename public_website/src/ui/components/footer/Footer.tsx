@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
@@ -8,6 +7,7 @@ import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
+import { Link } from '@/ui/components/Link'
 
 export type FooterProps = {
   PlayStoreUrl: string

@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { ChevronDown } from '../icons/ChevronDown'
+import { Link } from '../Link'
 import { FooterListProps } from './FooterList'
 
 export function FooterMobileList({ title, listItems }: FooterListProps) {
@@ -15,7 +16,7 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
         {listItems.map((anchor) => {
           return (
             <li key={anchor.Label}>
-              <a href={anchor.URL}>{anchor.Label}</a>
+              <Link href={anchor.URL}>{anchor.Label}</Link>
             </li>
           )
         })}

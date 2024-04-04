@@ -42,11 +42,11 @@ export default function TeachersHelp({
         cta={data.attributes.latestStudies.cta}
       />
       <StyledPushCTA
-        title={data.attributes.cardText?.title}
-        text={data.attributes.cardText?.text}
-        image={data.attributes.cardText?.image}
-        firstCta={data.attributes.cardText?.firstCta}
-        secondCta={data.attributes.cardText?.secondCta}
+        title={data.attributes.cardText.title}
+        text={data.attributes.cardText.text}
+        image={data.attributes.cardText.image}
+        firstCta={data.attributes.cardText.firstCta}
+        secondCta={data.attributes.cardText.secondCta}
       />
 
       <StyledSimplePushCTA

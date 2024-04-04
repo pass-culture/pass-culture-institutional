@@ -1,8 +1,8 @@
 import React, { ButtonHTMLAttributes, forwardRef, Ref } from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { Link } from '@/ui/components/Link'
 
 type ButtonVariants = 'primary' | 'secondary' | 'tertiary' | 'quaternary'
 

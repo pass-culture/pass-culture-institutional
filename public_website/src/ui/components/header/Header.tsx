@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
@@ -10,6 +9,7 @@ import { PassCulture } from '../icons/PassCulture'
 import { AccountDropdown, AccountItemProps } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
+import { Link } from '@/ui/components/Link'
 
 export type HeaderProps = {
   targetItems: HeaderNavigationItemProps[]

@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { Link } from '../Link'
+
 type SkipLinkProps = {
   label: string
   href: string
@@ -10,7 +12,7 @@ export function SkipLink({ label, href }: SkipLinkProps) {
   return <StyledLink href={href}>{label}</StyledLink>
 }
 
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
   ${({ theme }) => css`
     background-color: ${theme.colors.primary};
     color: ${theme.colors.white};

@@ -1162,7 +1162,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1191,7 +1191,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1226,7 +1226,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
   };
   attributes: {
     heroSection: Attribute.Component<'block.header'> & Attribute.Required;
-    cardText: Attribute.Component<'block.double-push-cta'>;
+    cardText: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     social: Attribute.Component<'block.social-media'> & Attribute.Required;
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
@@ -1275,8 +1275,6 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
-    logos: Attribute.Component<'block.logos'>;
-    videoSection: Attribute.Component<'block.video'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1292,7 +1290,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
   info: {
     singularName: 'liste-jeune';
     pluralName: 'liste-jeunes';
-    displayName: 'ListeJeune';
+    displayName: 'Actualit\u00E9s jeunes parents';
     description: '';
   };
   options: {
@@ -1337,11 +1335,11 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
   };
   attributes: {
     hero: Attribute.Component<'block.header'>;
-    offres: Attribute.Component<'block.offer-list'>;
+    offres: Attribute.Component<'block.offer-list'> & Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
-    offers: Attribute.Component<'block.offers-section'>;
+    offers: Attribute.Component<'block.offers-section'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1487,6 +1485,36 @@ export interface ApiNewsNews extends Schema.CollectionType {
   };
 }
 
+export interface ApiNotFoundNotFound extends Schema.SingleType {
+  collectionName: 'not_founds';
+  info: {
+    singularName: 'not-found';
+    pluralName: 'not-founds';
+    displayName: 'Not Found';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    header: Attribute.Component<'block.header'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::not-found.not-found',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::not-found.not-found',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -1556,7 +1584,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
-    pushCta: Attribute.Component<'block.double-push-cta'>;
+    pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -1788,6 +1816,7 @@ declare module '@strapi/types' {
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
       'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
+      'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
       'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;

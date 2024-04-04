@@ -3,14 +3,19 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
 interface HeaderProps {
   title: string
   text?: string
   image: APIResponse<'plugin::upload.file'> | null
   icon: string
+  cta?: { Label: string; URL: string }
 }
+
+import { OutlinedText } from '@/ui/components/OutlinedText'
 
 export function Header(props: HeaderProps) {
   return (
@@ -19,6 +24,9 @@ export function Header(props: HeaderProps) {
         <StyledContentTextWrapper>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
+          {props.cta?.Label && props.cta?.URL && (
+            <Button href={props.cta.URL}>{props.cta.Label}</Button>
+          )}
         </StyledContentTextWrapper>
         <CardContainer>
           <Card
@@ -26,7 +34,7 @@ export function Header(props: HeaderProps) {
               props.image?.data.attributes.url &&
               getStrapiURL(props.image?.data.attributes.url)
             }>
-            <p>{props.icon}</p>
+            <OutlinedText>{props.icon}</OutlinedText>
           </Card>
           <BackgroundLayer />
         </CardContainer>
@@ -111,7 +119,7 @@ const CardContainer = styled.div`
   max-width: 28rem;
 
   @media (width < ${theme.mediaQueries.tablet}) {
-    margin: -2.125rem 2rem -20.125rem 2rem;
+    margin: 3.875rem 2rem -10.125rem 2rem;
   }
 `
 
@@ -127,19 +135,16 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
-    height: 30rem;
-
+    aspect-ratio: 290 / 360;
     position: relative;
 
-    p {
-      font-size: ${theme.fonts.sizes['6xl']};
+    span {
+      font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
 
-      bottom: 30%;
+      top: 30%;
       right: -5%;
-    }
-
-    @media (width < ${theme.mediaQueries.tablet}) {
+      transform: rotate(-15deg);
     }
   `}
 `
@@ -153,7 +158,7 @@ const BackgroundLayer = styled.div`
     transform: rotate(7deg);
     border-radius: 1.5rem;
     width: 100%;
-    height: 35rem;
     z-index: -1;
+    aspect-ratio: 290 / 360;
   `}
 `

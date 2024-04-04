@@ -15,13 +15,14 @@ import {
   OffersCarouselSlideProps,
 } from './offersCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { Link } from '@/ui/components/Link'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
 type OffersVideoCarouselProps = {
   title: string
   items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
-  cta: { Label: string; URL: string } | undefined
+  cta: { Label: string; URL: string }
 }
 
 export function OffersCarousel({
@@ -114,7 +115,7 @@ export function OffersCarousel({
               <ArrowRight />
             </ButtonNext>
           </StyledNavigationButtons>
-          <CtaLink href={cta?.URL}>{cta?.Label}</CtaLink>
+          <CtaLink href={cta.URL}>{cta.Label}</CtaLink>
         </StyledArrowButtonWrapper>
       </StyledHeading>
 
@@ -247,7 +248,7 @@ const StyledDot = styled(Dot)`
   `}
 `
 
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
 
@@ -292,7 +293,7 @@ const MobileCtaWrapper = styled.div`
   `}
 `
 
-const MobileCtaLink = styled.a`
+const MobileCtaLink = styled(Link)`
   ${({ theme }) => css`
     display: none;
 
