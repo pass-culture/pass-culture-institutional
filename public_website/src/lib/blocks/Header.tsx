@@ -24,7 +24,7 @@ export function Header(props: HeaderProps) {
         <StyledContentTextWrapper>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
-          {props.cta && props.cta.Label && props.cta.URL && (
+          {props.cta?.Label && props.cta?.URL && (
             <Button href={props.cta.URL}>{props.cta.Label}</Button>
           )}
         </StyledContentTextWrapper>
