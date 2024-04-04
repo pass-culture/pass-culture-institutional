@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../button/Button'
+import { Link } from '../Link'
 import { Typo } from '../typographies'
 
 interface ResultScreenProps {
@@ -34,7 +35,7 @@ export function ResultScreen(props: ResultScreenProps) {
 
       <HelpText>
         <span dangerouslySetInnerHTML={{ __html: props.helpText }} />
-        <a href={props.ctaLink.URL}>{props.supportLink.Label}</a>
+        <Link href={props.ctaLink.URL}>{props.supportLink.Label}</Link>
       </HelpText>
     </Root>
   )

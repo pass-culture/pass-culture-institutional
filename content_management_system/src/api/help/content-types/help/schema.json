@@ -21,7 +21,8 @@
     "cardText": {
       "type": "component",
       "repeatable": false,
-      "component": "block.double-push-cta"
+      "component": "block.double-push-cta",
+      "required": true
     },
     "social": {
       "type": "component",

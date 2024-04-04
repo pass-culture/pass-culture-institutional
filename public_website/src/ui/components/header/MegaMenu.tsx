@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { Button } from '../button/Button'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { Link } from '@/ui/components/Link'
 
 type MegaMenuProps = {
   onBlur: () => void

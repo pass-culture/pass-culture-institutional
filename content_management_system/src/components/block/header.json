@@ -27,6 +27,11 @@
     },
     "icon": {
       "type": "string"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
     }
   }
 }

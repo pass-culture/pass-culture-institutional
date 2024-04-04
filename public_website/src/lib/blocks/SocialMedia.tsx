@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { Facebook } from '@/ui/components/icons/social-media/facebook'
@@ -9,6 +8,7 @@ import { SnapChat } from '@/ui/components/icons/social-media/snapchat'
 import { TikTok } from '@/ui/components/icons/social-media/tiktok'
 import { X } from '@/ui/components/icons/social-media/x'
 import { YouTube } from '@/ui/components/icons/social-media/youtube'
+import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 
 type SocialMediaProps = {

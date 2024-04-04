@@ -308,12 +308,12 @@ export default function Presse({
       />
 
       <DoublePushCTA
-        title={presseListe.attributes.pushCta?.title}
-        image={presseListe.attributes.pushCta?.image}
-        firstCta={presseListe.attributes.pushCta?.firstCta}
-        secondCta={presseListe.attributes.pushCta?.secondCta}
-        text={presseListe.attributes.pushCta?.text}
-        icon={presseListe.attributes.pushCta?.icon}
+        title={presseListe.attributes.pushCta.title}
+        image={presseListe.attributes.pushCta.image}
+        firstCta={presseListe.attributes.pushCta.firstCta}
+        secondCta={presseListe.attributes.pushCta.secondCta}
+        text={presseListe.attributes.pushCta.text}
+        icon={presseListe.attributes.pushCta.icon}
       />
 
       <SimplePushCta

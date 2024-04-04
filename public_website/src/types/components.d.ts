@@ -88,6 +88,7 @@ export interface BlockHeader extends Schema.Component {
     text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String;
+    cta: Attribute.Component<'common.link'>;
   };
 }
 
@@ -221,11 +222,11 @@ export interface BlockOfferList extends Schema.Component {
     offreTag: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     firstCartTitle: Attribute.String & Attribute.Required;
-    secondCartTitle: Attribute.String;
-    descritptionCard: Attribute.Text;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    ctaCard: Attribute.Component<'common.link'>;
+    secondCartTitle: Attribute.String & Attribute.Required;
+    descritptionCard: Attribute.Text & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -236,9 +237,10 @@ export interface BlockOffersCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    items: Attribute.Component<'common.offers-carousel-item', true>;
-    cta: Attribute.Component<'common.link'>;
+    title: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'common.offers-carousel-item', true> &
+      Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -543,12 +545,12 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    surtitle: Attribute.String;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    text: Attribute.Text;
-    secondSurtitle: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    surtitle: Attribute.String & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &

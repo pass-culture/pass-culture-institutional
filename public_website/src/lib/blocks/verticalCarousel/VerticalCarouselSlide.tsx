@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 import { APIResponse } from '@/types/strapi'
+import { Link } from '@/ui/components/Link'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type VerticalCarouselSlideProps = {

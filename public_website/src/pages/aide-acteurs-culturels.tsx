@@ -12,7 +12,7 @@ import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CulturalActorsHelpProps {
-  helpData: APIResponseData<'api::help.help'>
+  helpData: APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
 }
 
 export default function CulturalActorsHelp({
@@ -36,11 +36,11 @@ export default function CulturalActorsHelp({
         limit={helpData.attributes.faq.limit}
       />
       <StyledPushCTA
-        title={helpData.attributes.cardText?.title}
-        text={helpData.attributes.cardText?.text}
-        firstCta={helpData.attributes.cardText?.firstCta}
-        image={helpData.attributes.cardText?.image}
-        secondCta={helpData.attributes.cardText?.secondCta}
+        title={helpData.attributes.cardText.title}
+        text={helpData.attributes.cardText.text}
+        firstCta={helpData.attributes.cardText.firstCta}
+        image={helpData.attributes.cardText.image}
+        secondCta={helpData.attributes.cardText.secondCta}
       />
 
       <StyledSimplePushCTA
