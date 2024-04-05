@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { OutlinedText } from '@/ui/components/OutlinedText'
+import { Typo } from '@/ui/components/typographies'
 
 /*
 
@@ -10,7 +12,7 @@ TODO:
 
 - [x] Width chelou (overflow)
 - [ ] fleche de controle
-- [ ] emoji outline
+- [x] emoji outline
 - [ ] gestion des couleurs
   - [x] Ajout d'une prop theme sur strapi
   - [ ] Vérifier la liste des couleurs dispo
@@ -80,6 +82,16 @@ export function PiledCards(props: PiledCardsProps) {
                   src={item.image?.data.attributes.url}
                   alt={item.image?.data.attributes.alternativeText}
                 />
+                <StyledFirstEmoji aria-hidden="true">
+                  <OutlinedText blurDeviation={1}>
+                    {item.firstIcon}
+                  </OutlinedText>
+                </StyledFirstEmoji>
+                <StyledSecondEmoji aria-hidden="true">
+                  <OutlinedText blurDeviation={1}>
+                    {item.secondIcon}
+                  </OutlinedText>
+                </StyledSecondEmoji>
               </StyledImageWrapper>
 
               <StyledContentTextWrapper>
@@ -182,6 +194,7 @@ const StyledImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `
 
 const StyledImage = styled.img`
@@ -219,3 +232,28 @@ const StyledImage = styled.img`
 //   z-index: 2;
 //   width: fit-content;
 // `
+
+const StyledFirstEmoji = styled(Typo.Emoji)`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 4rem;
+    right: 0;
+    transform: rotate(8.7deg) translateX(2rem);
+
+    /* @media (width < ${theme.mediaQueries.tablet}) {
+      display: none;
+    } */
+  `}
+`
+const StyledSecondEmoji = styled(Typo.Emoji)`
+  ${({ theme }) => css`
+    position: absolute;
+    bottom: 4rem;
+    left: 0;
+    transform: rotate(-8.7deg) translateX(-2rem);
+
+    /* @media (width < ${theme.mediaQueries.tablet}) {
+      display: none;
+    } */
+  `}
+`
