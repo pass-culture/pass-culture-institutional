@@ -126,7 +126,7 @@ const CardContainer = styled.div`
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
     background-color: ${theme.colors.tertiary};
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-repeat: no-repeat;
