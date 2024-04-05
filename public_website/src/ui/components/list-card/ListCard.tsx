@@ -11,6 +11,7 @@ type ListCardProps = {
   date: Date | string
   imageUrl: string | null
   slug: string
+  type: string
 }
 
 export function ListCard({
@@ -19,6 +20,7 @@ export function ListCard({
   date,
   imageUrl,
   slug,
+  type,
 }: ListCardProps) {
   return (
     <Root>
@@ -36,7 +38,9 @@ export function ListCard({
         <time>{formatDate(date)}</time>
       </StyledMeta>
       <StyledCardTitle>
-        <StyledCardLink href={slug} aria-describedby={`news-meta-${slug}`}>
+        <StyledCardLink
+          href={type + '/' + slug}
+          aria-describedby={`news-meta-${slug}`}>
           {title}
         </StyledCardLink>
       </StyledCardTitle>

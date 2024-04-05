@@ -290,19 +290,6 @@ export interface BlockRelatedNews extends Schema.Component {
   attributes: {
     title: Attribute.String;
     cta: Attribute.Component<'common.link'>;
-    category: Attribute.Enumeration<
-      [
-        '\u00C9tude',
-        'Article',
-        '\u00C9v\u00E8nement',
-        'Partenariat',
-        'Rencontre',
-        'Dossier de presse',
-        'Communiqu\u00E9 de presse',
-        '\u00C9tude ritualis\u00E9e',
-        '\u00C9tude ponctuelle'
-      ]
-    >;
   };
 }
 

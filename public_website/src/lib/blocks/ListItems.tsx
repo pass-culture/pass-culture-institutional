@@ -8,10 +8,16 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 type LatestNewsProps = {
   news: APIResponseData<'api::news.news'>[]
   className?: string
+  type: string
   buttonText?: string
 }
 
-export function ListItems({ news, className, buttonText }: LatestNewsProps) {
+export function ListItems({
+  news,
+  className,
+  buttonText,
+  type,
+}: LatestNewsProps) {
   const [visibleItems, setVisibleItems] = useState(9)
 
   const loadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -27,6 +33,7 @@ export function ListItems({ news, className, buttonText }: LatestNewsProps) {
         {news.slice(0, visibleItems).map((newsItem) => (
           <li key={newsItem.attributes.slug}>
             <ListCard
+              type={type}
               title={newsItem.attributes.title}
               category={newsItem.attributes.category}
               date={newsItem.attributes.date}

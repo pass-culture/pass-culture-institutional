@@ -19,15 +19,10 @@
     "category": {
       "type": "enumeration",
       "enum": [
-        "Étude",
         "Article",
         "Évènement",
         "Partenariat",
-        "Rencontre",
-        "Dossier de presse",
-        "Communiqué de presse",
-        "Étude ritualisée",
-        "Étude ponctuelle"
+        "Rencontre"
       ],
       "required": true
     },
@@ -105,8 +100,7 @@
         "block.video",
         "block.simple-text-v2",
         "block.double-push-cta",
-        "block.social-media",
-        "block.centered-text"
+        "block.social-media"
       ]
     },
     "relatedNews": {
@@ -116,6 +110,15 @@
     },
     "Path": {
       "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Jeunes et parents",
+        "Acteurs culturels",
+        "Documentation"
+      ],
+      "required": true
     }
   }
 }

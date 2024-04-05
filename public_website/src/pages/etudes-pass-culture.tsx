@@ -13,12 +13,12 @@ import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  ressourcesData: APIResponseData<'api::resource.resource'>[]
   etudesPassCultureListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
 }
 
 export default function EtudesPassCulture({
-  newsData,
+  ressourcesData,
   etudesPassCultureListe,
 }: ListProps) {
   const [category, setCategory] = useState<string[]>([])
@@ -26,13 +26,13 @@ export default function EtudesPassCulture({
   const [secteur, setSecteur] = useState<string[]>([])
 
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(ressourcesData.map((item) => item.attributes.category))
   )
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(ressourcesData.map((item) => item.attributes.secteur))
   )
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(ressourcesData.map((item) => item.attributes.localisation))
   )
 
   const [originalEtudesCategory, setOriginalEtudesCategory] = useState<
@@ -45,7 +45,9 @@ export default function EtudesPassCulture({
     []
   )
 
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+    []
+  )
   const [filters, setFilters] = useState<Filter[]>([])
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function EtudesPassCulture({
     setLocalisation(loc)
     setSecteur(sec)
 
-    setData(newsData)
+    setData(ressourcesData)
     let uniqueCategories = []
     let uniqueSecteurs = []
     let uniqueLocalisations = []
@@ -66,7 +68,9 @@ export default function EtudesPassCulture({
         switch (filtre.filtre) {
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsData.map((item) => item.attributes.localisation))
+              new Set(
+                ressourcesData.map((item) => item.attributes.localisation)
+              )
             )
             return {
               ...filtre,
@@ -74,7 +78,7 @@ export default function EtudesPassCulture({
             }
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
+              new Set(ressourcesData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -82,7 +86,7 @@ export default function EtudesPassCulture({
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
-              new Set(newsData.map((item) => item.attributes.secteur))
+              new Set(ressourcesData.map((item) => item.attributes.secteur))
             )
             return {
               ...filtre,
@@ -132,11 +136,14 @@ export default function EtudesPassCulture({
         localisation: {
           $eqi: localisation,
         },
+        type: {
+          $eqi: 'Etudes',
+        },
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
+    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+      `/resources?${newsQuery}`
     )
 
     setData(news.data)
@@ -159,6 +166,7 @@ export default function EtudesPassCulture({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="ressources"
         buttonText={etudesPassCultureListe.attributes.buttonText}
       />
 
@@ -203,6 +211,9 @@ export const getStaticProps = (async () => {
           'Étude ponctuelle',
         ],
       },
+      type: {
+        $eqi: 'Etudes',
+      },
     },
     pagination: {},
   })
@@ -220,8 +231,8 @@ export const getStaticProps = (async () => {
       'observatoire.cta',
     ],
   })
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+    `/resources?${newsQuery}`
   )
 
   const { data } = await fetchCMS<
@@ -230,7 +241,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: news.data,
+      ressourcesData: news.data,
       etudesPassCultureListe: data,
     },
   }

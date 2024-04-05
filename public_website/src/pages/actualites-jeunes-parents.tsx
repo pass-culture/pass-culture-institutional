@@ -94,6 +94,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         localisation: {
           $eqi: localisation,
         },
+        type: {
+          $eqi: 'Jeunes et parents',
+        },
       },
     })
 
@@ -121,6 +124,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         />
       </StyledTitle>
       <StyledListItems
+        type="actualite"
         news={data}
         buttonText={listejeune.attributes.buttonText}
       />
@@ -171,6 +175,9 @@ export const getStaticProps = (async () => {
     filters: {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+      },
+      type: {
+        $eqi: 'Jeunes et parents',
       },
     },
   })

@@ -7,9 +7,8 @@ import { BlockRenderer } from '@/lib/BlockRenderer'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
-
 interface CustomPageProps {
-  data: APIResponseData<'api::article.article'>
+  data: APIResponseData<'api::news.news'>
   latestStudies: APIResponseData<'api::news.news'>[]
 }
 
@@ -34,6 +33,7 @@ export default function CustomPage(props: CustomPageProps) {
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
+
   const queryParams = stringify({
     populate: [
       'Blocks.image.image',
@@ -43,22 +43,25 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.items',
       'Blocks',
       'news',
-      'relatedNews',
-      'relatedNews.cta',
-      'relatedNews.category',
       'Blocks[0]',
       'Blocks.items.image',
       'Blocks.logo',
       'Blocks.logo.logo',
+      'relatedNews',
+      'relatedNews.cta',
+      'relatedNews.category',
       'Blocks.cta',
       'Blocks.items.items',
+      'Blocks.columns',
+      'Blocks.firstCta',
+      'Blocks.secondCta',
     ],
   })
 
-  const apiEndpoint = `/articles?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/news-list?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
 
   const response =
-    await fetchCMS<APIResponseData<'api::article.article'>[]>(apiEndpoint)
+    await fetchCMS<APIResponseData<'api::news.news'>[]>(apiEndpoint)
 
   if (response.data.length === 0) {
     return { notFound: true }
@@ -72,7 +75,7 @@ export const getStaticProps = (async ({ params }) => {
     },
     filters: {
       category: {
-        $eqi: response.data[0]!.attributes.relatedNews.category,
+        $eqi: response.data[0]!.attributes.category,
       },
     },
   })
@@ -90,7 +93,7 @@ export const getStaticProps = (async ({ params }) => {
 
 export const getStaticPaths = (async () => {
   const response =
-    await fetchCMS<APIResponseData<'api::article.article'>[]>('/articles')
+    await fetchCMS<APIResponseData<'api::news.news'>[]>('/news-list')
 
   const result = {
     paths: response.data.map((page) => ({

@@ -64,10 +64,12 @@ export function EventCard({
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
-        <CtaLink href={cta.URL} target="_blank">
-          <TargetBlank />
-          {cta.Label}
-        </CtaLink>
+        {cta?.URL && (
+          <CtaLink href={'evenement/' + cta.URL} target="_blank">
+            <TargetBlank />
+            {cta.Label}
+          </CtaLink>
+        )}
       </StyledContentWrapper>
 
       {imageUrl && (

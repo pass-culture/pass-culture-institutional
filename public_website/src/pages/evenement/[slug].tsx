@@ -3,96 +3,68 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { BlockRenderer } from '@/lib/BlockRenderer'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface CustomPageProps {
-  data: APIResponseData<'api::news.news'>
-  latestStudies: APIResponseData<'api::news.news'>[]
+  data: APIResponseData<'api::event.event'>
 }
 
 export default function CustomPage(props: CustomPageProps) {
   return (
+    /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
-      {/* {props.data.attributes.Blocks?.map((block) => (
+      {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-
-      {props.data.attributes.relatedNews.cta &&
-        props.data.attributes.relatedNews.title && (
-          <StyledLatestNews
-            news={props.latestStudies}
-            title={props.data.attributes.relatedNews.title}
-            cta={props.data.attributes.relatedNews.cta}
-          />
-        )} */}
-
-      <p>ds</p>
     </React.Fragment>
   )
 }
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
+
   const queryParams = stringify({
     populate: [
       'Blocks.image.image',
-      'Blocks.socialMediaLink',
-      'Blocks.image.image.data',
-      'Blocks.content',
-      'Blocks.items',
       'Blocks',
       'news',
-      'relatedNews',
-      'relatedNews.cta',
-      'relatedNews.category',
       'Blocks[0]',
       'Blocks.items.image',
       'Blocks.logo',
       'Blocks.logo.logo',
       'Blocks.cta',
+      'Blocks.socialMediaLink',
+      'Blocks.image.image.data',
+      'Blocks.content',
+      'Blocks.items',
       'Blocks.items.items',
+      'Blocks.columns',
+      'Blocks.firstCta',
+      'Blocks.secondCta',
     ],
   })
 
-  const apiEndpoint = `/news-list?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/events?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
 
   const response =
-    await fetchCMS<APIResponseData<'api::news.news'>[]>(apiEndpoint)
+    await fetchCMS<APIResponseData<'api::event.event'>[]>(apiEndpoint)
 
   if (response.data.length === 0) {
     return { notFound: true }
   }
 
-  console.log(response.data[0]!.attributes.Blocks)
-
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eqi: response.data[0]!.attributes.category,
-      },
-    },
-  })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
-
   return {
     props: {
       data: response.data[0]!,
-      latestStudies: latestStudies.data,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
   const response =
-    await fetchCMS<APIResponseData<'api::news.news'>[]>('/articles')
+    await fetchCMS<APIResponseData<'api::event.event'>[]>('/events')
 
   const result = {
     paths: response.data.map((page) => ({
