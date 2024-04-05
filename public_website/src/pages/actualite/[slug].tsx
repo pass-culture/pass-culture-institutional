@@ -19,8 +19,9 @@ export default function CustomPage(props: CustomPageProps) {
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
 
-      {props.data.attributes.relatedNews.cta &&
-        props.data.attributes.relatedNews.title && (
+      {props.data.attributes?.relatedNews &&
+        props.data.attributes?.relatedNews?.cta &&
+        props.data.attributes?.relatedNews?.title && (
           <StyledLatestNews
             news={props.latestStudies}
             title={props.data.attributes.relatedNews.title}
