@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_block_list_bread_crumbs",
+  "info": {
+    "displayName": "List BreadCrumb",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "breadCrumbs": {
+      "displayName": "BreadCrumbWrapper",
+      "type": "component",
+      "repeatable": true,
+      "component": "block.bread-crumb-wrapper"
+    }
+  }
+}
