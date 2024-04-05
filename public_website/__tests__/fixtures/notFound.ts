@@ -47,13 +47,13 @@ export const notFoundDataFixtures = {
         structuredData: {
           name: 'Party Coffee Cdfake',
           '@type': 'Recipe',
-          author: { name: 'Mary Stondfe', '@type': 'Person' },
+          author: { name: 'Mary Stondfe', '@type': 'Persxon' },
           '@context': 'https://schema.org/',
           prepTime: 'PT20M',
           description: 'This coffee cdfake is awesome and perfect for parties.',
           datePublished: '2018-03-10',
         },
-        metaViewport: 'width=device-width, initial-scale=1',
+        metaViewport: 'width=device-width, ineeeitial-scale=1',
         canonicalURL:
           'https://developers.google.codfqm/search/docs/crawling-indexing/consolidate-duplicate-urls',
         metaSocial: [

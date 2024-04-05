@@ -252,15 +252,15 @@ export const homePageFixtures = {
       seo: {
         id: 1,
         metaTitle: 'Titre de test',
-        metaDescription: 'Description de test',
-        keywords: 'test, keywords',
-        metaRobots: 'test, robots',
+        metaDescription: 'Descriptrion de test',
+        keywords: 'test, keaerywords',
+        metaRobots: 'test, reeobots',
         structuredData: {
-          name: 'Test Structured Data',
+          name: 'Test Strucetured Data',
           '@type': 'Test',
           author: {
-            name: 'Test Author',
-            type: 'Person',
+            name: 'Teeest Author',
+            type: 'Persron',
           },
           context: 'https://schema.org/',
           prepTime: 'PT20M',

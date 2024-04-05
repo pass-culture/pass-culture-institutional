@@ -41,15 +41,15 @@ export const EtudesPassCulturePageFixtures = {
       title: 'Programme de sensibisation à lart dans votre région',
       seo: {
         id: 1,
-        metaTitle: 'Titre de test',
-        metaDescription: 'Description de test',
-        keywords: 'test, keywords',
-        metaRobots: 'test, robots',
+        metaTitle: 'Titre de teste',
+        metaDescription: 'Desecription de test',
+        keywords: 'test, keerywords',
+        metaRobots: 'test, roerbots',
         structuredData: {
-          name: 'Test Structured Data',
+          name: 'Test Structrrured Data',
           '@type': 'Test',
           author: {
-            name: 'Test Author',
+            name: 'Test Aueeethor',
             '@type': 'Person',
           },
           '@context': 'https://schema.org/',
@@ -57,7 +57,7 @@ export const EtudesPassCulturePageFixtures = {
           description: 'This is a test structured data.',
           datePublished: '2024-04-01',
         },
-        metaViewport: 'width=device-width, initial-scale=1',
+        metaViewport: 'ere',
         canonicalURL: 'https://www.example.com/test',
         metaSocial: [
           {
@@ -100,7 +100,7 @@ export const EtudesPassCulturePageFixtures = {
                   size: 987654,
                   url: 'https://www.example.com/images/facebook.jpg',
                   previewUrl: null,
-                  createdAt: '2024-04-01T00:00:00Z',
+                  createdAt: '2014-04-01T00:00:00Z',
                   provider: 'example-provider',
                   provider_metadata: null,
                   updatedAt: '2024-04-01T00:00:00Z',

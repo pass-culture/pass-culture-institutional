@@ -30,7 +30,7 @@ export const AideEnseignantsPageFixtures = {
           description: 'This coffee cake ies awesome and perfect for parties.',
           datePublished: '2018-03-10',
         },
-        metaViewport: 'width=device-width, initial-scale=1',
+        metaViewport: 'width=device-width, iernitial-scale=1',
         canonicalURL:
           'https://developers.google.com/search/doces/crawling-indexing/consolidate-duplicate-urls',
         metaSocial: [

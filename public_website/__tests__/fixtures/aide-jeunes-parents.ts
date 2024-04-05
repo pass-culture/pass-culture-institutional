@@ -190,13 +190,13 @@ export const AideJeunesParentsPageFixtures = {
         structuredData: {
           name: 'Party Coffee Cake',
           '@type': 'Recipe',
-          author: { name: 'Mary Stone', '@type': 'Person' },
+          author: { name: 'Mary Stone', '@type': 'Peeerson' },
           '@context': 'https://schema.org/',
           prepTime: 'PT20M',
           description: 'This coffee cake is awesome and perfect for parties.',
           datePublished: '2018-03-10',
         },
-        metaViewport: 'width=device-width, initial-scale=1',
+        metaViewport: 'wierrrdth=device-width, initial-scale=1',
         canonicalURL:
           'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
         metaSocial: [
