@@ -302,7 +302,7 @@ const StyledNavigation = styled.nav<{
       padding: 2rem 2.5rem;
       height: 4rem;
 
-      @media (width < ${theme.mediaQueries.large}) {
+      @media (width < ${theme.mediaQueries.largeDesktop}) {
         justify-content: space-between;
         gap: 0.5rem;
         padding: 1rem;

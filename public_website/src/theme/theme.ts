@@ -113,7 +113,7 @@ export const theme = {
   mediaQueries: {
     mobile: MediaQueries.MOBILE,
     tablet: MediaQueries.TABLET,
-    large: MediaQueries.LARGE,
+    largeDesktop: MediaQueries.LARGE_DESKTOP,
   },
 } as const
 
