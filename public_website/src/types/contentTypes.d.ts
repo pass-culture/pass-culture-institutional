@@ -1448,7 +1448,6 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
-    relatedNews: Attribute.Component<'block.related-news'>;
     path: Attribute.String;
     type: Attribute.Enumeration<
       ['Jeunes et parents', 'Acteurs culturels', 'Documentation']

@@ -105,11 +105,6 @@
         "block.social-media"
       ]
     },
-    "relatedNews": {
-      "type": "component",
-      "repeatable": false,
-      "component": "block.related-news"
-    },
     "path": {
       "type": "string"
     },
