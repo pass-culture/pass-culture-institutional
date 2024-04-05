@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
@@ -36,40 +36,60 @@ interface PiledCardsProps {
 }
 
 export function PiledCards(props: PiledCardsProps) {
-  // const [items, setItems] = useState(props.items)
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([])
+  const sentinelRefs = useRef<(HTMLLIElement | null)[]>([])
 
-  // const handleDotClick = (index: number) => {
-  //   const newItems = [...items]
-  //   const [selectedItem] = newItems.splice(index, 1)
-  //   if (selectedItem) {
-  //     newItems.unshift(selectedItem)
-  //     setItems(newItems)
-  //   }
-  // }
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      for (let i = 0; i < itemRefs.current.length; i++) {
+        const itemEl = itemRefs.current[i]
+        const sentinelEl = sentinelRefs.current[i]
+        if (!itemEl || !sentinelEl) continue
+
+        const d = Math.max(
+          0,
+          Math.min(256, itemEl.offsetTop - sentinelEl.offsetTop - 128)
+        )
+
+        const ratio = (256 - d) / 256
+        const easedValue = ratio * ratio
+
+        const scaleDiff = 0.1
+        const scale = 1 - scaleDiff + scaleDiff * easedValue
+
+        itemEl.style.transform = `scale(${scale})`
+      }
+    })
+  }, [])
 
   return (
     <Root>
       <StyledContentWrapper>
-        {/* {items.map((item, index) => ( */}
         {props.items.map((item, index) => (
-          <StyledContentListItems
-            key={item.id}
-            $index={index}
-            $itemTheme={item.theme}
-            aria-label={`Card ${index + 1}`}>
-            <StyledImageWrapper>
-              <StyledImage
-                src={item.image?.data.attributes.url}
-                alt={item.image?.data.attributes.alternativeText}
-              />
-            </StyledImageWrapper>
+          <React.Fragment key={item.id}>
+            <ItemScrollSentinel
+              aria-hidden="true"
+              ref={(el) => (sentinelRefs.current[index] = el)}
+            />
+            <StyledContentListItems
+              ref={(el) => (itemRefs.current[index] = el)}
+              $index={index}
+              $itemTheme={item.theme}
+              aria-label={`Card ${index + 1}`}>
+              <StyledImageWrapper>
+                <StyledImage
+                  src={item.image?.data.attributes.url}
+                  alt={item.image?.data.attributes.alternativeText}
+                />
+              </StyledImageWrapper>
 
-            <StyledContentTextWrapper>
-              <p>0{index}</p>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </StyledContentTextWrapper>
-          </StyledContentListItems>
+              <StyledContentTextWrapper>
+                <p>0{index}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </StyledContentTextWrapper>
+            </StyledContentListItems>
+          </React.Fragment>
         ))}
       </StyledContentWrapper>
 
@@ -88,26 +108,26 @@ export function PiledCards(props: PiledCardsProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    max-width: 90rem;
-    height: 100vh;
-    margin: 16rem auto;
-    padding: 8rem auto 0 auto;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 2rem;
 
-    margin-bottom: 10rem;
+    margin-bottom: 8rem;
     color: ${theme.colors.white};
 
-    position: relative;
-    @media (width < ${theme.mediaQueries.tablet}) {
+    /* @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
-    }
+    } */
   `}
 `
 
 const StyledContentWrapper = styled.ul`
-  max-width: 90rem;
+  max-width: 75rem;
   margin: 0 auto;
-  position: relative;
-  transform: translateY(-8rem);
+`
+
+const ItemScrollSentinel = styled.li`
+  margin-bottom: 8rem;
 `
 
 // TODO: update available color list
@@ -125,17 +145,15 @@ const StyledContentListItems = styled.li<{
   $itemTheme: PiledCardItemsTheme
 }>`
   ${({ $index, $itemTheme, theme }) => css`
-    width: 100%;
-
-    transform: scale(${$index ? 1 + $index * 0.01 : 1});
+    /* transform: scale(${$index ? 1 + $index * 0.01 : 1}); */
+    transform-origin: center top;
 
     background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 40rem;
     border-radius: 2rem;
     box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
-    position: absolute;
-    top: ${$index ? $index * -2 : 0}rem;
-    transform-origin: center top;
+    position: sticky;
+    top: 2rem;
 
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -163,11 +181,13 @@ const StyledContentTextWrapper = styled.div`
     }
   `}
 `
+
 const StyledImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
 `
+
 const StyledImage = styled.img`
   width: 100%;
   height: 100%;
