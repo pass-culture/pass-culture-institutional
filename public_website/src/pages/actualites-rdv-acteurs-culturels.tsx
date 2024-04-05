@@ -184,6 +184,9 @@ export default function ListeActuCulturels({
         secteur: {
           $eqi: secteur,
         },
+        type: {
+          $eqi: 'Acteurs culturels',
+        },
       },
     })
 
@@ -197,7 +200,7 @@ export default function ListeActuCulturels({
   const fetchEventData = async () => {
     const eventQuery = stringify({
       sort: ['date:desc'],
-      populate: ['image'],
+      populate: ['image', 'cta'],
       pagination: {},
       filters: {
         category: {
@@ -208,6 +211,9 @@ export default function ListeActuCulturels({
         },
         secteur: {
           $eqi: eventSecteur,
+        },
+        type: {
+          $eqi: 'Acteurs culturels',
         },
       },
     })
@@ -283,6 +289,7 @@ export default function ListeActuCulturels({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="actualite"
         buttonText={listeActuCulturel.attributes.buttonText}
       />
 
@@ -302,6 +309,7 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledeventListItems
+        type="evenement/"
         events={eventData}
         buttonText={listeActuCulturel.attributes.buttonText}
       />
@@ -337,6 +345,9 @@ export const getStaticProps = (async () => {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
       },
+      type: {
+        $eqi: 'Acteurs culturels',
+      },
     },
   })
 
@@ -348,6 +359,11 @@ export const getStaticProps = (async () => {
     sort: ['date:desc'],
     populate: ['image', 'cta'],
     pagination: {},
+    filter: {
+      type: {
+        $eqi: 'Acteurs culturels',
+      },
+    },
   })
 
   const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(

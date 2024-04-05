@@ -89,6 +89,9 @@ export default function ListeActualitesPassCulture({
         localisation: {
           $eqi: localisation,
         },
+        type: {
+          $eqi: 'Documentation',
+        },
       },
     })
 
@@ -137,6 +140,7 @@ export default function ListeActualitesPassCulture({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="actualite"
         buttonText={listeActualitesPassCulture.attributes.buttonText}
       />
 
@@ -178,6 +182,9 @@ export const getStaticProps = (async () => {
     filters: {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+      },
+      type: {
+        $eqi: 'Documentation',
       },
     },
   })

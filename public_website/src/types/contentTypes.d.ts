@@ -878,48 +878,6 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
   };
 }
 
-export interface ApiArticleArticle extends Schema.CollectionType {
-  collectionName: 'articles';
-  info: {
-    singularName: 'article';
-    pluralName: 'articles';
-    displayName: 'Article';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Path: Attribute.String & Attribute.Required;
-    Blocks: Attribute.DynamicZone<
-      [
-        'block.simple-text',
-        'block.image',
-        'block.video',
-        'block.double-push-cta',
-        'block.social-media'
-      ]
-    >;
-    relatedNews: Attribute.Component<'block.related-news'> & Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -1015,6 +973,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     category: Attribute.Enumeration<['Salon']> & Attribute.Required;
     localisation: Attribute.Enumeration<
       [
+        'Aucune',
         'Aquitaine',
         'Auvergne',
         'Auvergne-Rh\u00F4ne-Alpes',
@@ -1053,6 +1012,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     secteur: Attribute.Enumeration<
       [
+        'Aucun',
         'Pratiques culturelles',
         'Spectacle vivant',
         'Musique',
@@ -1063,7 +1023,18 @@ export interface ApiEventEvent extends Schema.CollectionType {
     > &
       Attribute.Required;
     city: Attribute.String & Attribute.Required;
-    slug: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    type: Attribute.Enumeration<['Espace presse', 'Acteurs culturels']>;
+    path: Attribute.String & Attribute.Required;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.video',
+        'block.social-media',
+        'block.simple-text-v2',
+        'block.double-push-cta'
+      ]
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1383,17 +1354,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     category: Attribute.Enumeration<
-      [
-        '\u00C9tude',
-        'Article',
-        '\u00C9v\u00E8nement',
-        'Partenariat',
-        'Rencontre',
-        'Dossier de presse',
-        'Communiqu\u00E9 de presse',
-        '\u00C9tude ritualis\u00E9e',
-        '\u00C9tude ponctuelle'
-      ]
+      ['Article', '\u00C9v\u00E8nement', 'Partenariat', 'Rencontre']
     > &
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
@@ -1401,6 +1362,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
     slug: Attribute.String & Attribute.Required;
     localisation: Attribute.Enumeration<
       [
+        'Aucune',
         'Aquitaine',
         'Auvergne',
         'Auvergne-Rh\u00F4ne-Alpes',
@@ -1439,6 +1401,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       Attribute.Required;
     secteur: Attribute.Enumeration<
       [
+        'Aucun',
         'Pratiques culturelles',
         'Spectacle vivant',
         'Musique',
@@ -1446,6 +1409,21 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'Cin\u00E9ma',
         'Offres num\u00E9riques'
       ]
+    > &
+      Attribute.Required;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.video',
+        'block.simple-text-v2',
+        'block.double-push-cta',
+        'block.social-media'
+      ]
+    >;
+    relatedNews: Attribute.Component<'block.related-news'>;
+    path: Attribute.String;
+    type: Attribute.Enumeration<
+      ['Jeunes et parents', 'Acteurs culturels', 'Documentation']
     > &
       Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -1507,7 +1485,6 @@ export interface ApiPagePage extends Schema.CollectionType {
       [
         'block.centered-text',
         'block.header',
-        'block.simple-text',
         'block.social-media',
         'block.double-push-cta',
         'block.image-text',
@@ -1520,7 +1497,6 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.video',
         'block.key-number-carousel',
         'block.logos',
-        'block.testimonies',
         'block.latest-news',
         'block.experience-video-carousel',
         'block.offers-carousel',
@@ -1576,6 +1552,128 @@ export interface ApiPressePresse extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::presse.presse',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiResourceResource extends Schema.CollectionType {
+  collectionName: 'resources';
+  info: {
+    singularName: 'resource';
+    pluralName: 'resources';
+    displayName: 'Resources';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    category: Attribute.Enumeration<
+      [
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
+      ]
+    > &
+      Attribute.Required;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    slug: Attribute.String & Attribute.Required;
+    localisation: Attribute.Enumeration<
+      [
+        'Aucune',
+        'Aquitaine',
+        'Auvergne',
+        'Auvergne-Rh\u00F4ne-Alpes',
+        'Basse-Normandie',
+        'Bourgogne',
+        'Bourgogne-Franche-Comt\u00E9',
+        'Bretagne',
+        'Centre',
+        'Champagne-Ardenne',
+        'Corse',
+        'Franche-Comt\u00E9',
+        'Grand-Est',
+        'Guadeloupe',
+        'Guyane',
+        'Haute-Normandie',
+        'Hauts-de-France',
+        '\u00CEle-de-France',
+        'La-R\u00E9union',
+        'Languedoc-Roussillon',
+        'Languedoc-Roussillon-Midi-Pyr\u00E9n\u00E9es',
+        'Limousin',
+        'Lorraine',
+        'Martinique',
+        'Mayotte',
+        'Midi-Pyr\u00E9n\u00E9es',
+        'Nord-Pas-de-Calais',
+        'Normandie',
+        'Nouvelle-Aquitaine',
+        'Pays-de-la-Loire',
+        'Picardie',
+        'Poitou-Charentes',
+        "Provence-Alpes-C\u00F4te d'Azur",
+        'Rh\u00F4ne-Alpes'
+      ]
+    > &
+      Attribute.Required;
+    secteur: Attribute.Enumeration<
+      [
+        'Aucun',
+        'Pratiques culturelles',
+        'Spectacle vivant',
+        'Musique',
+        'Lecture',
+        'Cin\u00E9ma',
+        'Offres num\u00E9riques'
+      ]
+    > &
+      Attribute.Required;
+    path: Attribute.String & Attribute.Required;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.simple-text-v2',
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
+      ]
+    >;
+    type: Attribute.Enumeration<
+      ['Enseignants', 'Documentation', 'Presse', 'Etudes']
+    > &
+      Attribute.Required;
+    partnership: Attribute.Enumeration<
+      [
+        'AUCUN',
+        'INRIA',
+        'Le Syndicat de la librairie fran\u00E7aise',
+        'DEPS',
+        'PRODISS',
+        'DITP',
+        'L\u2019Institut Jean-Nicod',
+        'ENS-PSL',
+        'CNRS'
+      ]
+    > &
+      Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::resource.resource',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::resource.resource',
       'oneToOne',
       'admin::user'
     > &
@@ -1783,7 +1881,6 @@ declare module '@strapi/types' {
       'api::active-playlist-tag.active-playlist-tag': ApiActivePlaylistTagActivePlaylistTag;
       'api::actualites-pass-culture.actualites-pass-culture': ApiActualitesPassCultureActualitesPassCulture;
       'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
-      'api::article.article': ApiArticleArticle;
       'api::category.category': ApiCategoryCategory;
       'api::etudes-pass-culture.etudes-pass-culture': ApiEtudesPassCultureEtudesPassCulture;
       'api::event.event': ApiEventEvent;
@@ -1799,6 +1896,7 @@ declare module '@strapi/types' {
       'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
+      'api::resource.resource': ApiResourceResource;
       'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
       'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
       'api::restaurant.restaurant': ApiRestaurantRestaurant;

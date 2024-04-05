@@ -83,6 +83,10 @@ export const handlers = [
   http.get(`${CMS_BASE_URL}/api/not-found`, () => {
     return jsonResponseOf(notFoundDataFixtures.notFoundDataFixtures)
   }),
+  http.get(`${CMS_BASE_URL}/api/resources`, () => {
+    return jsonResponseOf(homePageFixtures.latestStudies)
+  }),
+
   http.get(
     `${BACKEND_BASE_URL}/institutional/playlist/Bons_plans_du_moment`,
     () => {
