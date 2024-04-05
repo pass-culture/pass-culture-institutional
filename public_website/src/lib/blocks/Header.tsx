@@ -25,7 +25,9 @@ export function Header(props: HeaderProps) {
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
           {props.cta?.Label && props.cta?.URL && (
-            <Button href={props.cta.URL}>{props.cta.Label}</Button>
+            <StyledBtnWrapper>
+              <Button href={props.cta.URL}>{props.cta.Label}</Button>
+            </StyledBtnWrapper>
           )}
         </StyledContentTextWrapper>
         <CardContainer>
@@ -50,6 +52,7 @@ const Root = styled.div`
       ${theme.colors.lightBlue} 0%,
       ${theme.colors.white} 100%
     );
+
     transform: translateY(-8rem);
     overflow: hidden;
 
@@ -71,9 +74,19 @@ const StyledContentWrapper = styled.div`
     grid-template-columns: 1.5fr 1fr;
     gap: 1.5rem;
 
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      grid-template-columns: 1fr;
+      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
+      gap: 1.5rem;
       padding: calc(10rem + 10rem) 1.5rem 2.5rem;
     }
   `}
@@ -82,6 +95,7 @@ const StyledContentWrapper = styled.div`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     padding-left: 2rem;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -93,6 +107,13 @@ const StyledHeading = styled(Typo.Heading1)`
     max-width: 35rem;
     margin: 0 0 3rem;
 
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      max-width: 100%;
+    }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      text-align: center;
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
     }
@@ -105,6 +126,14 @@ const StyledText = styled.p`
     margin: 0 0 2rem;
     line-height: 2;
 
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      max-width: 100%;
+    }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      text-align: center;
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 3.5rem;
       padding-bottom: 1.5rem;
@@ -115,10 +144,15 @@ const StyledText = styled.p`
 const CardContainer = styled.div`
   position: relative;
   z-index: 1;
-  margin: -3.125rem 0 -3.125rem 5rem;
+  margin: -3.125rem 0 -3.125rem 0rem;
   max-width: 28rem;
 
   @media (width < ${theme.mediaQueries.tablet}) {
+    max-width: 100%;
+    margin: 3.875rem 10rem -4.125rem 10rem;
+  }
+
+  @media (width < ${theme.mediaQueries.mobile}) {
     margin: 3.875rem 2rem -10.125rem 2rem;
   }
 `
@@ -161,4 +195,11 @@ const BackgroundLayer = styled.div`
     z-index: -1;
     aspect-ratio: 290 / 360;
   `}
+`
+
+const StyledBtnWrapper = styled.div`
+  @media (width < ${theme.mediaQueries.tablet}) {
+    display: flex;
+    justify-content: center;
+  }
 `
