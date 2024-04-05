@@ -39,10 +39,10 @@ export default function RessourcesPassCulture({
   const [secteur, setSecteur] = useState<string[]>([])
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
-  const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
     []
   )
+  const [filters, setFilters] = useState<Filter[]>([])
 
   useEffect(() => {
     setCategory(cat)

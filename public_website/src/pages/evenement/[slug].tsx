@@ -23,7 +23,7 @@ export default function CustomPage(props: CustomPageProps) {
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
-  const queryParams = stringify({
+  const query = stringify({
     populate: [
       'Blocks.image.image',
       'Blocks',
@@ -44,18 +44,18 @@ export const getStaticProps = (async ({ params }) => {
     ],
   })
 
-  const apiEndpoint = `/events?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/events?${query}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
 
-  const response =
+  const responseQuery =
     await fetchCMS<APIResponseData<'api::event.event'>[]>(apiEndpoint)
 
-  if (response.data.length === 0) {
+  if (responseQuery.data.length === 0) {
     return { notFound: true }
   }
 
   return {
     props: {
-      data: response.data[0]!,
+      data: responseQuery.data[0]!,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>

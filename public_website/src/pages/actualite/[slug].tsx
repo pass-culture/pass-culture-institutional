@@ -33,8 +33,6 @@ export default function CustomPage(props: CustomPageProps) {
 }
 
 export const getStaticProps = (async ({ params }) => {
-  const pagePath = params?.['slug'] as string
-
   const queryParams = stringify({
     populate: [
       'Blocks.image.image',
@@ -58,6 +56,7 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.secondCta',
     ],
   })
+  const pagePath = params?.['slug'] as string
 
   const apiEndpoint = `/news-list?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
 
