@@ -284,6 +284,7 @@ export interface BlockPiledCards extends Schema.Component {
   };
   attributes: {
     items: Attribute.Component<'common.piled-card-item', true>;
+    accessibleTitle: Attribute.String & Attribute.Required;
   };
 }
 
@@ -580,12 +581,16 @@ export interface CommonPiledCardItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
-    color: Attribute.String;
+    theme: Attribute.Enumeration<
+      ['purple', 'yellow', 'magenta', 'orange', 'green']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
   };
 }
 
