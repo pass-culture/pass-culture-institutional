@@ -176,7 +176,8 @@ export function Header({
                         }
                         onClick={() => toggleMegaMenu(i)}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
-                        onMouseEnter={() => toggleMegaMenu(i)}>
+                        onMouseEnter={() => toggleMegaMenu(i)}
+                        onMouseLeave={() => setActiveMegaMenuId(null)}>
                         {el.label}
                       </button>
                       {i === activeMegaMenuId && (
@@ -301,9 +302,10 @@ const StyledNavigation = styled.nav<{
       padding: 2rem 2.5rem;
       height: 4rem;
 
-      @media (width < ${theme.mediaQueries.tablet}) {
+      @media (width < ${theme.mediaQueries.largeDesktop}) {
         justify-content: space-between;
-        padding: 1.5rem;
+        gap: 0.5rem;
+        padding: 1rem;
       }
 
       /* Only show logo + burger menu on mobile */
@@ -358,7 +360,6 @@ const StyledNavigationItem = styled.li`
       color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
-      padding: 0.5rem;
     }
   `}
 `

@@ -42,6 +42,9 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.columns',
       'Blocks.people',
       'Blocks.logos.cta',
+      'Blocks.breadCrumbs',
+      'Blocks.breadCrumbs.fils',
+      'Blocks.breadCrumbs.parent',
     ],
   })
 

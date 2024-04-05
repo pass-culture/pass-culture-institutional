@@ -2,10 +2,6 @@ export const simulatorPageFixtures = {
   data: {
     id: 1,
     attributes: {
-      breadcrumbLinks: [
-        { Label: 'Accueil', URL: '#' },
-        { Label: 'Simulateur', URL: '#' },
-      ],
       title: '<mark>Simulateur</mark> d&apos;éligibilité',
       description:
         "Tu veux savoir si tu peux bénéficier du pass Culture, à combien tu as droit<br />\net comment débloquer ton crédit ? C'est par ici !",
@@ -194,6 +190,21 @@ export const simulatorPageFixtures = {
             id: 2,
             name: 'youtube',
             url: 'https://example.com/youtube',
+          },
+        ],
+      },
+      bread: {
+        id: 1,
+        breadCrumbs: [
+          {
+            id: 1,
+            parent: { id: 133, Label: 'dfsdf', URL: '#dsfds' },
+            fils: [],
+          },
+          {
+            id: 2,
+            parent: { id: 134, Label: 'dsfsf', URL: '#sdfds' },
+            fils: [{ id: 136, Label: 'dsfds', URL: '#dsfsd' }],
           },
         ],
       },
