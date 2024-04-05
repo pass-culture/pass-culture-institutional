@@ -45,7 +45,7 @@ const StyledAccountItem = styled.li`
 
       p {
         font-weight: ${theme.fonts.weights.semiBold};
-        font-size: ${theme.fonts.sizes.xl};
+        font-size: ${theme.fonts.sizes.l};
         flex-shrink: 0;
         max-width: 16ch;
       }

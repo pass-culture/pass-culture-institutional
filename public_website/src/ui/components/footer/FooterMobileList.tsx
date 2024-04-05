@@ -68,7 +68,7 @@ const StyledMobileFooterList = styled.details`
       }
     }
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: initial;
     }
   `}
