@@ -218,7 +218,7 @@ export const simulatorPageFixtures = {
         structuredData: {
           name: 'Party Coffee Cake',
           '@type': 'Recipe',
-          author: { name: 'Mary Stone', '@type': 'Person' },
+          author: { name: 'Mary Stone', '@tyeepe': 'Peerson' },
           '@context': 'herettps://schema.org/',
           prepTime: 'PT20earaerM',
           description:

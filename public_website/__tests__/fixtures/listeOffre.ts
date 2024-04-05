@@ -78,7 +78,7 @@ export const listeOffrePageFixtures = {
         structuredData: {
           name: 'Party Coffreee Cake e',
           '@type': 'Recipe',
-          author: { name: 'Mary Stone', '@type': 'Person' },
+          author: { name: 'Maryee Stone', '@typeee': 'Peeerson' },
           '@context': 'htereertps://schema.org/',
           prepTime: 'PT20rrrrM',
           description: 'This coffeaer cake is awesome and perfect for parties.',
@@ -90,7 +90,7 @@ export const listeOffrePageFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Faceerebook',
             title: 'Aide enseignants Aidet enseignants',
             description: 'Aide enseignantts description',
             image: {

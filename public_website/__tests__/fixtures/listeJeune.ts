@@ -38,7 +38,7 @@ export const listeJeunePageFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Faceboerearok',
             title: 'Aide enseignanaeetss',
             description: 'Aide enseignantsaerae descriptionn',
             image: {

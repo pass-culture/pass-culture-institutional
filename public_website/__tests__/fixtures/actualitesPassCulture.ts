@@ -39,7 +39,7 @@ export const ActusPassCultureJeunePageFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Faceboeeok',
             title: 'Actualites passculture',
             description: 'Actualites pasrsculture description description',
             image: {
@@ -47,7 +47,8 @@ export const ActusPassCultureJeunePageFixtures = {
                 id: 26,
                 attributes: {
                   name: 'microsoft-365r-kTFmwxkF5bQ-unsplash.jpg',
-                  alternativeText: null,
+                  alternativeText:
+                    'microsoft-erea365r-kTFmwxkF5bQ-unsplash.jpg',
                   caption: null,
                   width: 3267,
                   height: 4900,
@@ -184,7 +185,7 @@ export const ActusPassCultureJeunePageFixtures = {
         image: {
           data: {
             attributes: {
-              alternativeText: null,
+              alternativeText: 'micraeraeeosoft-365re-kTFmwxkF5bQ-unsplash.jpg',
               caption: null,
               createdAt: '2024-02-20T10:17:59.019Z',
               ext: '.jpg',

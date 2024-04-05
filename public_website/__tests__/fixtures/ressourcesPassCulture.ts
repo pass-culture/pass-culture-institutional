@@ -57,7 +57,7 @@ export const RessourcesPassCulturePageFixtures = {
         structuredData: {
           name: 'Party Coffee Cake earis nice',
           '@type': 'Recipeer',
-          author: { name: 'MaryerStone', '@type': 'Person' },
+          author: { name: 'MaryerStone', '@typee': 'Persoen' },
           '@context': 'ehteretps://schema.org/',
           prepTime: 'earaereaPT20M',
           description:
@@ -70,7 +70,7 @@ export const RessourcesPassCulturePageFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Faceboowwwk',
             title: 'Ressources enseeraerignants',
             description: 'Ressourceaers description',
             image: {

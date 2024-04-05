@@ -75,7 +75,7 @@ export const RessourcesEnseignatsPageFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Facebrrook',
             title: 'Aide enseignarnts enseignants Ressources',
             description: 'Aide enseerignants Ressources enseignants Ressources',
             image: {

@@ -59,7 +59,7 @@ export const notFoundDataFixtures = {
         metaSocial: [
           {
             id: 1,
-            socialNetwork: 'Facebook',
+            socialNetwork: 'Facebcccook',
             title: 'Not found',
             description: 'Aide enseignantdfs description',
             image: {

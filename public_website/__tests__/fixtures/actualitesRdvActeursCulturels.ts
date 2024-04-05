@@ -83,7 +83,7 @@ const actusrdv = {
       metaSocial: [
         {
           id: 1,
-          socialNetwork: 'Facebook',
+          socialNetwork: 'Faereaacebook',
           title: 'Actualites acteurs culturel',
           description: 'Actualites acreurs culturel description',
           image: {
@@ -91,7 +91,7 @@ const actusrdv = {
               id: 96,
               attributes: {
                 name: 'microsoft-365-keeTFmwxkF5bQ-unsplash.jpg',
-                alternativeText: null,
+                alternativeText: 'microsofteae-365r-kTFmwxkF5bQ-unsplash.jpg',
                 caption: null,
                 width: 1267,
                 height: 4980,
