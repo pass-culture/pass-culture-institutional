@@ -1,6 +1,7 @@
 import React from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
+
+import { Link } from '@/ui/components/Link'
 
 export type FooterListProps = {
   title: string
@@ -33,7 +34,7 @@ const StyledFooterList = styled.div`
       color: ${theme.colors.secondary};
       text-transform: uppercase;
       font-size: ${theme.fonts.sizes.xs};
-      margin-bottom: 1rem;
+      margin-bottom: 0.575rem;
       font-weight: ${theme.fonts.weights.bold};
     }
 
@@ -44,7 +45,7 @@ const StyledFooterList = styled.div`
       font-weight: ${theme.fonts.weights.semiBold};
 
       &:not(:last-child) {
-        margin-bottom: 1rem;
+        margin-bottom: 0.575rem;
       }
 
       a:hover {
@@ -52,7 +53,7 @@ const StyledFooterList = styled.div`
       }
     }
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
     }
   `}

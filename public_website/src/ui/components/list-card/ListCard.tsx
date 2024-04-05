@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
+import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 
 type ListCardProps = {
@@ -11,6 +11,7 @@ type ListCardProps = {
   date: Date | string
   imageUrl: string | null
   slug: string
+  type: string
 }
 
 export function ListCard({
@@ -19,6 +20,7 @@ export function ListCard({
   date,
   imageUrl,
   slug,
+  type,
 }: ListCardProps) {
   return (
     <Root>
@@ -36,7 +38,9 @@ export function ListCard({
         <time>{formatDate(date)}</time>
       </StyledMeta>
       <StyledCardTitle>
-        <StyledCardLink href={slug} aria-describedby={`news-meta-${slug}`}>
+        <StyledCardLink
+          href={type + '/' + slug}
+          aria-describedby={`news-meta-${slug}`}>
           {title}
         </StyledCardLink>
       </StyledCardTitle>

@@ -1,9 +1,9 @@
 import React from 'react'
-import Link from 'next/link'
 import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../icons/ArrowRight'
 import { OutlinedText } from '../OutlinedText'
+import { Link } from '@/ui/components/Link'
 
 type AccountItemProps = {
   color: string
@@ -45,7 +45,7 @@ const StyledAccountItem = styled.li`
 
       p {
         font-weight: ${theme.fonts.weights.semiBold};
-        font-size: ${theme.fonts.sizes.xl};
+        font-size: ${theme.fonts.sizes.l};
         flex-shrink: 0;
         max-width: 16ch;
       }

@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface BlockBreadCrumbWrapper extends Schema.Component {
+  collectionName: 'components_block_bread_crumb_wrappers';
+  info: {
+    displayName: 'BreadCrumbWrapper';
+  };
+  attributes: {
+    parent: Attribute.Component<'common.link'>;
+    fils: Attribute.Component<'common.link', true>;
+  };
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -76,7 +87,8 @@ export interface BlockHeader extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
-    icon: Attribute.String;
+    icon: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'>;
   };
 }
 
@@ -157,6 +169,17 @@ export interface BlockLink extends Schema.Component {
   };
 }
 
+export interface BlockListBreadCrumb extends Schema.Component {
+  collectionName: 'components_block_list_bread_crumbs';
+  info: {
+    displayName: 'List BreadCrumb';
+    description: '';
+  };
+  attributes: {
+    breadCrumbs: Attribute.Component<'block.bread-crumb-wrapper', true>;
+  };
+}
+
 export interface BlockLittleList extends Schema.Component {
   collectionName: 'components_block_little_lists';
   info: {
@@ -199,11 +222,11 @@ export interface BlockOfferList extends Schema.Component {
     offreTag: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     firstCartTitle: Attribute.String & Attribute.Required;
-    secondCartTitle: Attribute.String;
-    descritptionCard: Attribute.Text;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    ctaCard: Attribute.Component<'common.link'>;
+    secondCartTitle: Attribute.String & Attribute.Required;
+    descritptionCard: Attribute.Text & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -214,9 +237,10 @@ export interface BlockOffersCarousel extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    items: Attribute.Component<'common.offers-carousel-item', true>;
-    cta: Attribute.Component<'common.link'>;
+    title: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'common.offers-carousel-item', true> &
+      Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
@@ -288,19 +312,6 @@ export interface BlockRelatedNews extends Schema.Component {
   attributes: {
     title: Attribute.String;
     cta: Attribute.Component<'common.link'>;
-    category: Attribute.Enumeration<
-      [
-        '\u00C9tude',
-        'Article',
-        '\u00C9v\u00E8nement',
-        'Partenariat',
-        'Rencontre',
-        'Dossier de presse',
-        'Communiqu\u00E9 de presse',
-        '\u00C9tude ritualis\u00E9e',
-        '\u00C9tude ponctuelle'
-      ]
-    >;
   };
 }
 
@@ -335,7 +346,8 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleTextV2 extends Schema.Component {
   collectionName: 'components_block_simple_text_v2s';
   info: {
-    displayName: 'Simple Text v2';
+    displayName: 'Simple Text';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -350,8 +362,8 @@ export interface BlockSimpleTextV2 extends Schema.Component {
 export interface BlockSimpleText extends Schema.Component {
   collectionName: 'components_block_simple_texts';
   info: {
-    displayName: 'SimpleText (NE PAS UTILISER)';
-    description: 'Obsolete. Utiliser `Simple Text v2` \u00E0 la place.';
+    displayName: 'SimpleText';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -521,12 +533,12 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    surtitle: Attribute.String;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    text: Attribute.Text;
-    secondSurtitle: Attribute.String;
+    title: Attribute.String & Attribute.Required;
+    surtitle: Attribute.String & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
@@ -891,6 +903,7 @@ export interface SimulatorSuccessScreen extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
@@ -902,6 +915,7 @@ declare module '@strapi/types' {
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
+      'block.list-bread-crumb': BlockListBreadCrumb;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offer-list': BlockOfferList;

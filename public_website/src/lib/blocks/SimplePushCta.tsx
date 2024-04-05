@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Link } from '@/ui/components/Link'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface PushCTAProps {
@@ -133,16 +134,23 @@ const RightSide = styled.div`
   `}
 `
 
-const CtaLink = styled.a`
+const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
 
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
     margin-right: 1.5rem;
 
+    outline-offset: 2px;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: ${`rgba(255, 255, 255, 0.20);`};
+    }
+    &:focus {
+      outline: 2px solid ${theme.colors.white};
+    }
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;

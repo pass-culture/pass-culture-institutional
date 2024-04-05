@@ -1,0 +1,141 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resources",
+  "info": {
+    "singularName": "resource",
+    "pluralName": "resources",
+    "displayName": "Resources",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Dossier de presse",
+        "Communiqué de presse",
+        "Étude ritualisée",
+        "Étude ponctuelle"
+      ],
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "localisation": {
+      "type": "enumeration",
+      "enum": [
+        "Aucune",
+        "Aquitaine",
+        "Auvergne",
+        "Auvergne-Rhône-Alpes",
+        "Basse-Normandie",
+        "Bourgogne",
+        "Bourgogne-Franche-Comté",
+        "Bretagne",
+        "Centre",
+        "Champagne-Ardenne",
+        "Corse",
+        "Franche-Comté",
+        "Grand-Est",
+        "Guadeloupe",
+        "Guyane",
+        "Haute-Normandie",
+        "Hauts-de-France",
+        "Île-de-France",
+        "La-Réunion",
+        "Languedoc-Roussillon",
+        "Languedoc-Roussillon-Midi-Pyrénées",
+        "Limousin",
+        "Lorraine",
+        "Martinique",
+        "Mayotte",
+        "Midi-Pyrénées",
+        "Nord-Pas-de-Calais",
+        "Normandie",
+        "Nouvelle-Aquitaine",
+        "Pays-de-la-Loire",
+        "Picardie",
+        "Poitou-Charentes",
+        "Provence-Alpes-Côte d'Azur",
+        "Rhône-Alpes"
+      ],
+      "required": true
+    },
+    "secteur": {
+      "type": "enumeration",
+      "enum": [
+        "Aucun",
+        "Pratiques culturelles",
+        "Spectacle vivant",
+        "Musique",
+        "Lecture",
+        "Cinéma",
+        "Offres numériques"
+      ],
+      "required": true
+    },
+    "path": {
+      "type": "string",
+      "required": true
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.image",
+        "block.simple-text-v2",
+        "block.video",
+        "block.double-push-cta",
+        "block.social-media"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Enseignants",
+        "Documentation",
+        "Presse",
+        "Etudes"
+      ],
+      "required": true
+    },
+    "partnership": {
+      "type": "enumeration",
+      "enum": [
+        "AUCUN",
+        "INRIA",
+        "Le Syndicat de la librairie française",
+        "DEPS",
+        "PRODISS",
+        "DITP",
+        "L’Institut Jean-Nicod",
+        "ENS-PSL",
+        "CNRS"
+      ],
+      "required": true
+    }
+  }
+}

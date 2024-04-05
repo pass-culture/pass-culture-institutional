@@ -5,11 +5,11 @@ import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
+import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface TeachersHelpProps {
@@ -23,13 +23,11 @@ export default function TeachersHelp({
 }: TeachersHelpProps) {
   return (
     <React.Fragment>
-      <Hero
+      <Header
         title={data.attributes?.heroSection?.title}
-        text={data.attributes.heroSection.text}
-        image={
-          data.attributes.heroSection.image
-            ?.data as unknown as APIResponseData<'plugin::upload.file'>
-        }
+        text={data.attributes?.heroSection?.text}
+        icon={data.attributes.heroSection.icon}
+        image={data.attributes.heroSection.image}
       />
       <Faq
         title={data.attributes.faq.title}
@@ -44,11 +42,11 @@ export default function TeachersHelp({
         cta={data.attributes.latestStudies.cta}
       />
       <StyledPushCTA
-        title={data.attributes.cardText?.title}
-        text={data.attributes.cardText?.text}
-        image={data.attributes.cardText?.image}
-        firstCta={data.attributes.cardText?.firstCta}
-        secondCta={data.attributes.cardText?.secondCta}
+        title={data.attributes.cardText.title}
+        text={data.attributes.cardText.text}
+        image={data.attributes.cardText.image}
+        firstCta={data.attributes.cardText.firstCta}
+        secondCta={data.attributes.cardText.secondCta}
       />
 
       <StyledSimplePushCTA
@@ -110,7 +108,6 @@ export const getStaticProps = (async () => {
   const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
     `/news-list?${latestStudiesQuery}`
   )
-
   return {
     props: {
       data: help.data,

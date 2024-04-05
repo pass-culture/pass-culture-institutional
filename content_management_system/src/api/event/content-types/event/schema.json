@@ -52,6 +52,7 @@
     "localisation": {
       "type": "enumeration",
       "enum": [
+        "Aucune",
         "Aquitaine",
         "Auvergne",
         "Auvergne-Rhône-Alpes",
@@ -91,6 +92,7 @@
     "secteur": {
       "type": "enumeration",
       "enum": [
+        "Aucun",
         "Pratiques culturelles",
         "Spectacle vivant",
         "Musique",
@@ -106,7 +108,29 @@
     },
     "slug": {
       "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Espace presse",
+        "Acteurs culturels"
+      ]
+    },
+    "path": {
+      "type": "string",
       "required": true
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.image",
+        "block.video",
+        "block.social-media",
+        "block.simple-text-v2",
+        "block.double-push-cta"
+      ]
     }
   }
 }
