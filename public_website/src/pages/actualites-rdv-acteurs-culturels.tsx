@@ -184,7 +184,7 @@ export default function ListeActuCulturels({
         secteur: {
           $eqi: secteur,
         },
-        type: {
+        pageDaffichage: {
           $eqi: 'Acteurs culturels',
         },
       },
@@ -212,7 +212,7 @@ export default function ListeActuCulturels({
         secteur: {
           $eqi: eventSecteur,
         },
-        type: {
+        pageDaffichage: {
           $eqi: 'Acteurs culturels',
         },
       },
@@ -345,7 +345,7 @@ export const getStaticProps = (async () => {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
       },
-      type: {
+      pageDaffichage: {
         $eqi: 'Acteurs culturels',
       },
     },
@@ -360,7 +360,7 @@ export const getStaticProps = (async () => {
     populate: ['image', 'cta'],
     pagination: {},
     filter: {
-      type: {
+      pageDaffichage: {
         $eqi: 'Acteurs culturels',
       },
     },

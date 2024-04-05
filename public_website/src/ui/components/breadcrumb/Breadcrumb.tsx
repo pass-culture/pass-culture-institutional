@@ -59,7 +59,7 @@ export function Breadcrumb({ breadCrumbs }: BreadcrumbProps) {
 
 const Root = styled.nav`
   ${({ theme }) => css`
-    @media (max-width: ${theme.mediaQueries.mobile}) {
+    @media (max-width: ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
 
@@ -79,6 +79,8 @@ const Root = styled.nav`
       font-weight: ${theme.fonts.weights.medium};
       cursor: pointer;
     }
+
+    transform: translateY(-13rem);
   `}
 `
 const ListItem = styled.li`

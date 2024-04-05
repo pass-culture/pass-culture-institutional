@@ -18,16 +18,11 @@ export default function CustomPage(props: CustomPageProps) {
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-
-      {props.data.attributes?.relatedNews &&
-        props.data.attributes?.relatedNews?.cta &&
-        props.data.attributes?.relatedNews?.title && (
-          <StyledLatestNews
-            news={props.latestStudies}
-            title="Les dernières
+      <StyledLatestNews
+        news={props.latestStudies}
+        title="Les dernières
             <mark>actualités</mark>"
-          />
-        )}
+      />
     </React.Fragment>
   )
 }

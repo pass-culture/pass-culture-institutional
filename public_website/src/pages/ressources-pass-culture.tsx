@@ -111,7 +111,7 @@ export default function RessourcesPassCulture({
         secteur: {
           $eqi: secteur,
         },
-        type: {
+        pageDaffichage: {
           $eqi: 'Documentation',
         },
       },
@@ -213,7 +213,7 @@ export const getStaticProps = (async () => {
           'Étude ponctuelle',
         ],
       },
-      type: {
+      pageDaffichage: {
         $eqi: 'Documentation',
       },
     },
