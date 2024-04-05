@@ -1,10 +1,8 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
-import { LatestNews } from '@/lib/blocks/LatestNews'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface CustomPageProps {
@@ -77,14 +75,3 @@ export const getStaticPaths = (async () => {
 
   return result
 }) satisfies GetStaticPaths
-
-const StyledLatestNews = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
-    }
-  `}
-`
