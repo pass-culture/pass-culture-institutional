@@ -6,7 +6,9 @@ import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
-  news: APIResponseData<'api::news.news'>[]
+  news:
+    | APIResponseData<'api::news.news'>[]
+    | APIResponseData<'api::resource.resource'>[]
   className?: string
   type: string
   buttonText?: string
