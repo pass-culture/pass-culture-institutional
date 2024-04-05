@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "events",
+  "collectionName": "resources",
   "info": {
-    "singularName": "event",
-    "pluralName": "events",
-    "displayName": "Event",
+    "singularName": "resource",
+    "pluralName": "resources",
+    "displayName": "Resources",
     "description": ""
   },
   "options": {
@@ -16,37 +16,33 @@
       "type": "string",
       "required": true
     },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Dossier de presse",
+        "Communiqué de presse",
+        "Étude ritualisée",
+        "Étude ponctuelle"
+      ],
+      "required": true
+    },
     "date": {
-      "type": "date",
-      "required": true
-    },
-    "startTime": {
-      "type": "time",
-      "required": true
-    },
-    "endTime": {
-      "type": "time",
-      "required": true
-    },
-    "cta": {
-      "type": "component",
-      "repeatable": false,
-      "component": "common.link",
+      "type": "datetime",
       "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos",
+        "audios"
       ]
     },
-    "category": {
-      "type": "enumeration",
-      "enum": [
-        "Salon"
-      ],
+    "slug": {
+      "type": "string",
       "required": true
     },
     "localisation": {
@@ -102,22 +98,6 @@
       ],
       "required": true
     },
-    "city": {
-      "type": "string",
-      "required": true
-    },
-    "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "Espace presse",
-        "Acteurs culturels"
-      ]
-    },
     "path": {
       "type": "string",
       "required": true
@@ -126,11 +106,36 @@
       "type": "dynamiczone",
       "components": [
         "block.image",
-        "block.video",
-        "block.social-media",
         "block.simple-text-v2",
-        "block.double-push-cta"
+        "block.video",
+        "block.double-push-cta",
+        "block.social-media"
       ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Enseignants",
+        "Documentation",
+        "Presse",
+        "Etudes"
+      ],
+      "required": true
+    },
+    "partnership": {
+      "type": "enumeration",
+      "enum": [
+        "AUCUN",
+        "INRIA",
+        "Le Syndicat de la librairie française",
+        "DEPS",
+        "PRODISS",
+        "DITP",
+        "L’Institut Jean-Nicod",
+        "ENS-PSL",
+        "CNRS"
+      ],
+      "required": true
     }
   }
 }
