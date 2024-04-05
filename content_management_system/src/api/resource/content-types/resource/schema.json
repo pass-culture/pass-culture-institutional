@@ -112,13 +112,13 @@
         "block.social-media"
       ]
     },
-    "type": {
+    "pageDaffichage": {
       "type": "enumeration",
       "enum": [
         "Enseignants",
-        "Documentation",
-        "Presse",
-        "Etudes"
+        "S’informer - ressources",
+        "S’informer - presse",
+        "S’informer - études"
       ],
       "required": true
     },

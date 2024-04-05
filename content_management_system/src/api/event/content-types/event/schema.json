@@ -111,11 +111,11 @@
       "required": true,
       "unique": true
     },
-    "type": {
+    "pageDaffichage": {
       "type": "enumeration",
       "enum": [
-        "Espace presse",
-        "Acteurs culturels"
+        "Acteurs culturels",
+        "S’informer - presse"
       ]
     },
     "path": {
