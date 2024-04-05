@@ -9,7 +9,9 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
   title: string
-  news: APIResponseData<'api::news.news'>[]
+  news:
+    | APIResponseData<'api::news.news'>[]
+    | APIResponseData<'api::resource.resource'>[]
   cta: { Label: string; URL: string }
   className?: string
 }
