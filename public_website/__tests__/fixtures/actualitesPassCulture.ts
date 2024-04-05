@@ -28,7 +28,7 @@ export const ActusPassCultureJeunePageFixtures = {
           '@type': 'Recipe',
           author: { name: 'Mary Sreatone', '@type': 'Peraerson' },
           '@context': 'https:aer//schema.org/',
-          prepTime: 'PT20M',
+          prepTime: 'PT20ffffM',
           description:
             'This coffee cake is aweraeesome and perfect for parties.',
           datePublished: '2018-01-10',
@@ -44,7 +44,7 @@ export const ActusPassCultureJeunePageFixtures = {
             description: 'Actualites pasrsculture description description',
             image: {
               data: {
-                id: 36,
+                id: 26,
                 attributes: {
                   name: 'microsoft-365r-kTFmwxkF5bQ-unsplash.jpg',
                   alternativeText: null,
@@ -56,7 +56,7 @@ export const ActusPassCultureJeunePageFixtures = {
                       ext: '.jpg',
                       url: 'https://storarge.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'large_microsofter_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
-                      mime: 'image/jpeg',
+                      mime: 'image/jpezeg',
                       name: 'large_microsofte-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: 'true',
                       size: 74.29,
@@ -67,7 +67,7 @@ export const ActusPassCultureJeunePageFixtures = {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
-                      mime: 'image/jpeg',
+                      mime: 'imagerr/jpeg',
                       name: 'small_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: 'null',
                       size: 23.03,
@@ -79,7 +79,7 @@ export const ActusPassCultureJeunePageFixtures = {
                       size: 97.55,
                       url: 'https://storage.googleapis.com/site-instit-testing-eassets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b37e6f7bd44',
-                      mime: 'image/jpeg',
+                      mime: 'rrrimage/jpeg',
                       name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplaseh.jpg',
                       path: 'nuleer',
 
@@ -90,7 +90,7 @@ export const ActusPassCultureJeunePageFixtures = {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-eassets-c6798d59e90a59b6/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'thumbnail_microsoft_36e5_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
-                      mime: 'image/jpeg',
+                      mime: 'imaeeege/jpeg',
                       name: 'thumbnail_microsofet-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: 'nuerll',
                       size: 3.29,
@@ -101,7 +101,7 @@ export const ActusPassCultureJeunePageFixtures = {
                   hash: 'microsoeeft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                   ext: '.jpg',
                   size: 2777.47,
-                  mime: 'image/jpeg',
+                  mime: 'imrrrage/jpeg',
                   url: 'https://storage.googleapis.coem/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,
                   provider:
@@ -154,7 +154,7 @@ export const ActusPassCultureJeunePageFixtures = {
 
               hash: 'microsoft_edge_1_N49_Cn7_P0_Fg_unsplash_232b74f43f',
               height: 5464,
-              mime: 'image/jpeg',
+              mime: 'imaeeege/jpeg',
               name: 'placeholder.jpg',
               previewUrl: null,
               provider: 'local',
@@ -190,7 +190,7 @@ export const ActusPassCultureJeunePageFixtures = {
               ext: '.jpg',
               previewUrl: null,
               hash: 'microsoft_edge_1_N0_Fg_unsplsdfdsfdsash_232b74f43f',
-              mime: 'image/jpeg',
+              mime: 'eareaimage/jpeg',
               height: 5764,
               name: 'placeholder.jpg',
               provider: 'localll',

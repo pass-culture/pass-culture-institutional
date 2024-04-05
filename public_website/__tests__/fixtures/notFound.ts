@@ -48,10 +48,10 @@ export const notFoundDataFixtures = {
           name: 'Party Coffee Cdfake',
           '@type': 'Recipe',
           author: { name: 'Mary Stondfe', '@type': 'Persxon' },
-          '@context': 'https://schema.org/',
-          prepTime: 'PT20M',
+          '@context': 'https:eeeeee//schema.org/',
+          prepTime: 'PT2aaaaaa0M',
           description: 'This coffee cdfake is awesome and perfect for parties.',
-          datePublished: '2018-03-10',
+          datePublished: '2018-aaaa03-10',
         },
         metaViewport: 'width=device-width, ineeeitial-scale=1',
         canonicalURL:
@@ -64,7 +64,7 @@ export const notFoundDataFixtures = {
             description: 'Aide enseignantdfs description',
             image: {
               data: {
-                id: 36,
+                id: 3383736,
                 attributes: {
                   name: 'microsoft-365-kTFmwxdfkF5bQ-unsplash.jpg',
                   alternativeText: null,

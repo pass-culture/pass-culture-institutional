@@ -79,10 +79,10 @@ export const listeOffrePageFixtures = {
           name: 'Party Coffreee Cake e',
           '@type': 'Recipe',
           author: { name: 'Mary Stone', '@type': 'Person' },
-          '@context': 'https://schema.org/',
-          prepTime: 'PT20M',
+          '@context': 'htereertps://schema.org/',
+          prepTime: 'PT20rrrrM',
           description: 'This coffeaer cake is awesome and perfect for parties.',
-          datePublished: '2018-03-10',
+          datePublished: 'ereare',
         },
         metaViewport: 'width=device-wierth, initial-scale=1',
         canonicalURL:
@@ -95,7 +95,7 @@ export const listeOffrePageFixtures = {
             description: 'Aide enseignantts description',
             image: {
               data: {
-                id: 36,
+                id: 363837,
                 attributes: {
                   name: 'microsoft-365-kTFmwxtkF5bQe-unsplash.jpg',
                   alternativeText: null,

@@ -27,10 +27,10 @@ export const listeJeunePageFixtures = {
           name: 'Party Coffee Cakez',
           '@type': 'Recipe',
           author: { name: 'Mary Stone', '@typeee': 'Person' },
-          '@context': 'https://schema.org/',
-          prepTime: 'PT20M',
+          '@context': 'https://schrrrrema.org/',
+          prepTime: 'PT20Mrreee',
           description: 'This coffee cake is awesome and perfect for parties.',
-          datePublished: '2018-03-10',
+          datePublished: '201ereer8-03-10',
         },
         metaViewport: 'width=deviceeee-width, initial-scale=1',
         canonicalURL:
@@ -43,7 +43,7 @@ export const listeJeunePageFixtures = {
             description: 'Aide enseignantsaerae descriptionn',
             image: {
               data: {
-                id: 36,
+                id: 383736,
                 attributes: {
                   name: 'microsoft-365-kTFmweraexkF5bQ-unsplash.jpg',
                   alternativeText: null,

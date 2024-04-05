@@ -65,9 +65,9 @@ export const RessourcesEnseignatsPageFixtures = {
           '@type': 'Recirpe',
           author: { name: 'Mary Strone', '@typre': 'Person' },
           '@context': 'https://schrema.org/',
-          prepTime: 'PT20M',
+          prepTime: 'erearaePT20M',
           description: 'This coffee cake is arwesome and perfect for parties.',
-          datePublished: '2018-03-10',
+          datePublished: 'zzzzz',
         },
         metaViewport: 'width=device-widtrh, initiral-scale=3',
         canonicalURL:
@@ -80,7 +80,7 @@ export const RessourcesEnseignatsPageFixtures = {
             description: 'Aide enseerignants Ressources enseignants Ressources',
             image: {
               data: {
-                id: 36,
+                id: 387336,
                 attributes: {
                   name: 'microsoft-365-erkTFmwxkF5bQ-unsplash.jpg',
                   alternativeText: null,

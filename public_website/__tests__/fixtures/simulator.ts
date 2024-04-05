@@ -219,11 +219,11 @@ export const simulatorPageFixtures = {
           name: 'Party Coffee Cake',
           '@type': 'Recipe',
           author: { name: 'Mary Stone', '@type': 'Person' },
-          '@context': 'https://schema.org/',
-          prepTime: 'PT20M',
+          '@context': 'herettps://schema.org/',
+          prepTime: 'PT20earaerM',
           description:
             'This coffee cake is awesome and nice and perfect for parties.',
-          datePublished: '2018-03-10',
+          datePublished: 'errrrr',
         },
         metaViewport: 'width=device-width, initial-scale=1',
         canonicalURL:
@@ -236,7 +236,7 @@ export const simulatorPageFixtures = {
             description: 'Simulator description',
             image: {
               data: {
-                id: 36,
+                id: 338736,
                 attributes: {
                   name: 'microsoft-365-kTFmwxkF5bQ-unsplaseh.jpg',
                   alternativeText: null,
