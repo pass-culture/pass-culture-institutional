@@ -970,6 +970,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
     category: Attribute.Enumeration<['Salon']> & Attribute.Required;
     localisation: Attribute.Enumeration<
       [
+        'Aucune',
         'Aquitaine',
         'Auvergne',
         'Auvergne-Rh\u00F4ne-Alpes',
@@ -1008,6 +1009,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     secteur: Attribute.Enumeration<
       [
+        'Aucun',
         'Pratiques culturelles',
         'Spectacle vivant',
         'Musique',
@@ -1020,8 +1022,8 @@ export interface ApiEventEvent extends Schema.CollectionType {
     city: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
     type: Attribute.Enumeration<['Espace presse', 'Acteurs culturels']>;
-    Path: Attribute.String & Attribute.Required;
-    Blocks: Attribute.DynamicZone<
+    path: Attribute.String & Attribute.Required;
+    blocks: Attribute.DynamicZone<
       [
         'block.image',
         'block.video',
@@ -1388,6 +1390,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
     slug: Attribute.String & Attribute.Required;
     localisation: Attribute.Enumeration<
       [
+        'Aucune',
         'Aquitaine',
         'Auvergne',
         'Auvergne-Rh\u00F4ne-Alpes',
@@ -1426,6 +1429,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       Attribute.Required;
     secteur: Attribute.Enumeration<
       [
+        'Aucun',
         'Pratiques culturelles',
         'Spectacle vivant',
         'Musique',
@@ -1435,7 +1439,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    Blocks: Attribute.DynamicZone<
+    blocks: Attribute.DynamicZone<
       [
         'block.image',
         'block.video',
@@ -1445,7 +1449,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ]
     >;
     relatedNews: Attribute.Component<'block.related-news'>;
-    Path: Attribute.String;
+    path: Attribute.String;
     type: Attribute.Enumeration<
       ['Jeunes et parents', 'Acteurs culturels', 'Documentation']
     > &
@@ -1607,6 +1611,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
     slug: Attribute.String & Attribute.Required;
     localisation: Attribute.Enumeration<
       [
+        'Aucune',
         'Aquitaine',
         'Auvergne',
         'Auvergne-Rh\u00F4ne-Alpes',
@@ -1645,6 +1650,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
       Attribute.Required;
     secteur: Attribute.Enumeration<
       [
+        'Aucun',
         'Pratiques culturelles',
         'Spectacle vivant',
         'Musique',
@@ -1654,10 +1660,8 @@ export interface ApiResourceResource extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    relatedRessources: Attribute.Component<'block.related-news'> &
-      Attribute.Required;
-    Path: Attribute.String & Attribute.Required;
-    Blocks: Attribute.DynamicZone<
+    path: Attribute.String & Attribute.Required;
+    blocks: Attribute.DynamicZone<
       [
         'block.image',
         'block.simple-text-v2',
@@ -1668,6 +1672,20 @@ export interface ApiResourceResource extends Schema.CollectionType {
     >;
     type: Attribute.Enumeration<
       ['Enseignants', 'Documentation', 'Presse', 'Etudes']
+    > &
+      Attribute.Required;
+    partnership: Attribute.Enumeration<
+      [
+        'AUCUN',
+        'INRIA',
+        'Le Syndicat de la librairie fran\u00E7aise',
+        'DEPS',
+        'PRODISS',
+        'DITP',
+        'L\u2019Institut Jean-Nicod',
+        'ENS-PSL',
+        'CNRS'
+      ]
     > &
       Attribute.Required;
     createdAt: Attribute.DateTime;

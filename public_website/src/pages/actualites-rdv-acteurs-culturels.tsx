@@ -305,6 +305,7 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledeventListItems
+        type="evenement/"
         events={eventData}
         buttonText={listeActuCulturel.attributes.buttonText}
       />

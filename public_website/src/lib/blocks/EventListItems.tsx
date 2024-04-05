@@ -9,12 +9,14 @@ type LatestNewsProps = {
   events: APIResponseData<'api::event.event'>[]
   className?: string
   buttonText?: string
+  type?: string
 }
 
 export function EventListItems({
   events,
   className,
   buttonText,
+  type,
 }: LatestNewsProps) {
   const [visibleItems, setVisibleItems] = useState(2)
 
@@ -42,6 +44,7 @@ export function EventListItems({
                 endTime={eventItem.attributes.endTime}
                 city={eventItem.attributes.city}
                 cta={eventItem.attributes.cta}
+                type={type}
               />
             </li>
           ))}

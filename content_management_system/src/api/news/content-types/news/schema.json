@@ -45,6 +45,7 @@
     "localisation": {
       "type": "enumeration",
       "enum": [
+        "Aucune",
         "Aquitaine",
         "Auvergne",
         "Auvergne-Rhône-Alpes",
@@ -84,6 +85,7 @@
     "secteur": {
       "type": "enumeration",
       "enum": [
+        "Aucun",
         "Pratiques culturelles",
         "Spectacle vivant",
         "Musique",
@@ -93,7 +95,7 @@
       ],
       "required": true
     },
-    "Blocks": {
+    "blocks": {
       "type": "dynamiczone",
       "components": [
         "block.image",
@@ -108,7 +110,7 @@
       "repeatable": false,
       "component": "block.related-news"
     },
-    "Path": {
+    "path": {
       "type": "string"
     },
     "type": {

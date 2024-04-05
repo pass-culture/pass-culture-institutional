@@ -304,6 +304,7 @@ export default function Presse({
         />
       </StyledTitle>
       <StyledeventListItems
+        type="evenement/"
         events={eventData}
         buttonText={presseListe.attributes.buttonText}
       />

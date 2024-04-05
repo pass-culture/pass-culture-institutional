@@ -52,6 +52,7 @@
     "localisation": {
       "type": "enumeration",
       "enum": [
+        "Aucune",
         "Aquitaine",
         "Auvergne",
         "Auvergne-Rhône-Alpes",
@@ -91,6 +92,7 @@
     "secteur": {
       "type": "enumeration",
       "enum": [
+        "Aucun",
         "Pratiques culturelles",
         "Spectacle vivant",
         "Musique",
@@ -116,11 +118,11 @@
         "Acteurs culturels"
       ]
     },
-    "Path": {
+    "path": {
       "type": "string",
       "required": true
     },
-    "Blocks": {
+    "blocks": {
       "type": "dynamiczone",
       "components": [
         "block.image",

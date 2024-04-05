@@ -15,7 +15,7 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
-      {props.data.attributes.Blocks?.map((block) => (
+      {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
 
@@ -23,8 +23,8 @@ export default function CustomPage(props: CustomPageProps) {
         props.data.attributes.relatedRessources.title && (
           <StyledLatestNews
             news={props.latestStudies}
-            title={props.data.attributes.relatedRessources.title}
-            cta={props.data.attributes.relatedRessources.cta}
+            title="Les dernières
+            <mark>ressources</mark>"
           />
         )}
     </React.Fragment>
@@ -38,7 +38,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.Path,
+        slug: page.attributes.path,
       },
     })),
     fallback: false,
@@ -52,28 +52,28 @@ export const getStaticProps = (async ({ params }) => {
 
   const queryParams = stringify({
     populate: [
-      'Blocks.image.image',
-      'Blocks.socialMediaLink',
-      'Blocks.image.image.data',
-      'Blocks.content',
-      'Blocks.items',
-      'Blocks',
+      'blocks.image.image',
+      'blocks.socialMediaLink',
+      'blocks.image.image.data',
+      'blocks.content',
+      'blocks.items',
+      'blocks',
       'news',
-      'Blocks.logo.logo',
-      'Blocks.cta',
-      'Blocks.items.items',
+      'blocks.logo.logo',
+      'blocks.cta',
+      'blocks.items.items',
       'relatedRessources.cta',
       'relatedRessources.category',
-      'Blocks[0]',
-      'Blocks.items.image',
-      'Blocks.logo',
-      'Blocks.columns',
-      'Blocks.firstCta',
-      'Blocks.secondCta',
+      'blocks[0]',
+      'blocks.items.image',
+      'blocks.logo',
+      'blocks.columns',
+      'blocks.firstCta',
+      'blocks.secondCta',
     ],
   })
 
-  const apiEndpoint = `/resources?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/resources?${queryParams}&filters[path][$eqi]=${encodeURIComponent(pagePath)}`
 
   const response =
     await fetchCMS<APIResponseData<'api::resource.resource'>[]>(apiEndpoint)
@@ -91,6 +91,9 @@ export const getStaticProps = (async ({ params }) => {
     filters: {
       category: {
         $eqi: response.data[0]!.attributes.category,
+      },
+      title: {
+        $ne: response.data[0]!.attributes.title,
       },
     },
   })

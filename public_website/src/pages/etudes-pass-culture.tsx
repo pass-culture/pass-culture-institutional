@@ -24,6 +24,7 @@ export default function EtudesPassCulture({
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
+  const [partner, setPartner] = useState<string[]>([])
 
   const cat = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.category))
@@ -34,6 +35,9 @@ export default function EtudesPassCulture({
   const loc = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.localisation))
   )
+  const part = Array.from(
+    new Set(ressourcesData.map((item) => item.attributes.partnership))
+  )
 
   const [originalEtudesCategory, setOriginalEtudesCategory] = useState<
     string[]
@@ -42,6 +46,9 @@ export default function EtudesPassCulture({
     string[]
   >([])
   const [originalEtudesSecteur, setOriginalEtudesSecteur] = useState<string[]>(
+    []
+  )
+  const [originalEtudesPartner, setOriginalEtudesPartner] = useState<string[]>(
     []
   )
 
@@ -54,14 +61,17 @@ export default function EtudesPassCulture({
     setOriginalEtudesCategory(cat)
     setOriginalEtudesLocalisation(loc)
     setOriginalEtudesSecteur(sec)
+    setOriginalEtudesPartner(part)
     setCategory(cat)
     setLocalisation(loc)
     setSecteur(sec)
+    setPartner(part)
 
     setData(ressourcesData)
     let uniqueCategories = []
     let uniqueSecteurs = []
     let uniqueLocalisations = []
+    let uniquePartners = []
 
     const filtres = etudesPassCultureListe.attributes?.filtres?.map(
       (filtre) => {
@@ -92,6 +102,14 @@ export default function EtudesPassCulture({
               ...filtre,
               value: uniqueSecteurs,
             }
+          case 'Partenariat':
+            uniquePartners = Array.from(
+              new Set(ressourcesData.map((item) => item.attributes.partnership))
+            )
+            return {
+              ...filtre,
+              value: uniquePartners,
+            }
           default:
             return { ...filtre, value: [] }
         }
@@ -104,7 +122,8 @@ export default function EtudesPassCulture({
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
+  }, [category, localisation, secteur, partner])
+
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case "Secteur d'activités":
@@ -115,6 +134,9 @@ export default function EtudesPassCulture({
         break
       case 'Catégorie':
         setCategory(value[0] === '' ? originalEtudesCategory : value)
+        break
+      case 'Partenariat':
+        setPartner(value[0] === '' ? originalEtudesPartner : value)
         break
       default:
         break
@@ -135,6 +157,9 @@ export default function EtudesPassCulture({
         },
         localisation: {
           $eqi: localisation,
+        },
+        partnership: {
+          $eqi: partner,
         },
         type: {
           $eqi: 'Etudes',

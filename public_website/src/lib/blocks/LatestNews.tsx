@@ -12,7 +12,7 @@ type LatestNewsProps = {
   news:
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
-  cta: { Label: string; URL: string }
+  cta?: { Label: string; URL: string }
   className?: string
 }
 
@@ -38,7 +38,9 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
           )
         })}
       </StyledList>
-      <Button href={cta.URL}>{cta.Label}</Button>
+      {cta && cta.Label && cta.URL && (
+        <Button href={cta.URL}>{cta.Label}</Button>
+      )}
     </Root>
   )
 }
