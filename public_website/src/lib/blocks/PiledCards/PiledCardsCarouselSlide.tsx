@@ -72,17 +72,13 @@ const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
 }
 
 const Root = styled(Slide)<{ $slideTheme: PiledCardItemsTheme }>`
-  ${({ theme, $slideTheme }) => css`
+  ${({ $slideTheme }) => css`
     .inner {
       margin-right: 1rem;
 
       background: ${CARD_BACKGROUNDS[$slideTheme]};
       padding: 2rem;
       border-radius: 1.25rem;
-
-      /* @media (width < ${theme.mediaQueries.mobile}) {
-        margin-right: 0;
-      } */
     }
   `}
 `

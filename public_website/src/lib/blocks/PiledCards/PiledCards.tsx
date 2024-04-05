@@ -9,22 +9,6 @@ import { APIResponse } from '@/types/strapi'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
-/*
-
-TODO:
-
-- [x] Width chelou (overflow)
-- [ ] fleche de controle
-- [x] emoji outline
-- [ ] gestion des couleurs
-  - [x] Ajout d'une prop theme sur strapi
-  - [ ] Vérifier la liste des couleurs dispo
-- [ ] version mobile
-- [ ] En fait c'est pas un carousel mais
-  - [x] desktop : une animation au scroll
-  - [ ] mobile : carousel-ish
-*/
-
 interface Item {
   id: number
   title: string
@@ -113,16 +97,6 @@ export function PiledCards(props: PiledCardsProps) {
             </React.Fragment>
           ))}
         </StyledContentWrapper>
-
-        {/* <DotsWrapper>
-        {items.map((_, index) => (
-          <Dot
-            key={_.title}
-            active={index === 0}
-            onClick={() => handleDotClick(index)}
-          />
-        ))}
-      </DotsWrapper> */}
       </Root>
       <StyledCarousel title="Pouet" items={carouselItems} />
     </React.Fragment>
@@ -163,7 +137,6 @@ const ItemScrollSentinel = styled.li`
   margin-bottom: 8rem;
 `
 
-// TODO: update available color list
 const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
   purple: theme.uniqueColors.purple,
   yellow: `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
@@ -231,35 +204,6 @@ const StyledImage = styled.img`
   object-fit: cover;
   border-radius: 1rem;
 `
-
-// const Dot = styled.div<{ active: boolean }>`
-//   ${({ active, theme }) => css`
-//     height: 1rem;
-//     width: 1rem;
-//     background-color: ${active
-//       ? theme.colors.white
-//       : theme.colors.white + '22'};
-//     border-radius: 50%;
-//     display: inline-block;
-//     margin: 0 2px;
-//     cursor: pointer;
-//     gap: 0.5rem;
-//   `}
-// `
-
-// const DotsWrapper = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   margin-top: 20px;
-
-//   position: absolute;
-//   right: -5rem;
-//   top: 20%;
-//   transform: rotateZ(90deg);
-//   z-index: 2;
-//   width: fit-content;
-// `
 
 const StyledFirstEmoji = styled(Typo.Emoji)`
   ${({ theme }) => css`

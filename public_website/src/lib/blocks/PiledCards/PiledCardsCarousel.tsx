@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { CarouselProvider, Dot, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
@@ -23,21 +23,6 @@ export function PiledCardsCarousel({
     title
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-
-  // Computed the number of visible slides depending on screen width
-  const [screenWidth, setScreenWidth] = useState<number>()
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
-
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   // Get the MQ in rem and convert it in pixels
   // const visibleSlides =
@@ -95,23 +80,6 @@ export function PiledCardsCarousel({
       dragEnabled={false}
       step={1}
       className={className}>
-      {/* <StyledHeading>
-        <StyledNavigationButtons
-          role="group"
-          aria-label="Contrôles du carousel">
-          <ButtonBack
-            aria-label="Élement précédent"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label="Élément suivant"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
-      </StyledHeading> */}
-
       <StyledSlider
         role="region"
         aria-label={stripTags(title)}
@@ -145,66 +113,17 @@ export function PiledCardsCarousel({
   )
 }
 
-const StyledHeading = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding-right: 7rem;
-    margin-bottom: 2.5rem;
-  `}
-`
-
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding-left: 1rem;
 `
 
-const StyledNavigationButtons = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-
-    /* @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
-    } */
-
-    button {
-      background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.popover};
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 3.625rem;
-      width: 3.625rem;
-    }
-
-    button:first-child {
-      transform: rotate(180deg);
-    }
-  `}
-`
-
 const StyledDots = styled.div`
-  ${({ theme }) => css`
-    /* display: none;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    } */
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-  `}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
 `
 
 const StyledDot = styled(Dot)`
