@@ -31,6 +31,22 @@ export default function CustomPage(props: CustomPageProps) {
   )
 }
 
+export const getStaticPaths = (async () => {
+  const response =
+    await fetchCMS<APIResponseData<'api::resource.resource'>[]>('/resources')
+
+  const result = {
+    paths: response.data.map((page) => ({
+      params: {
+        slug: page.attributes.Path,
+      },
+    })),
+    fallback: false,
+  }
+
+  return result
+}) satisfies GetStaticPaths
+
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
@@ -89,22 +105,6 @@ export const getStaticProps = (async ({ params }) => {
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
-
-export const getStaticPaths = (async () => {
-  const response =
-    await fetchCMS<APIResponseData<'api::resource.resource'>[]>('/resources')
-
-  const result = {
-    paths: response.data.map((page) => ({
-      params: {
-        slug: page.attributes.Path,
-      },
-    })),
-    fallback: false,
-  }
-
-  return result
-}) satisfies GetStaticPaths
 
 const StyledLatestNews = styled(LatestNews)`
   ${({ theme }) => css`
