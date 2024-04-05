@@ -1,7 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+
+/*
+
+TODO:
+
+- [ ] Width chelou (overflow)
+- [ ] fleche de controle
+- [ ] emoji outline
+- [ ] gestion des couleurs
+  - [x] Ajout d'une prop theme sur strapi
+  - [ ] Vérifier la liste des couleurs dispo
+- [ ] version mobile
+- [ ] En fait c'est pas un carousel mais
+  - [ ] desktop : une animation au scroll
+  - [ ] mobile : carousel-ish
+*/
+
+type PiledCardItemsTheme = 'purple' | 'yellow' | 'magenta' | 'orange' | 'green'
 
 interface Item {
   id: number
@@ -10,32 +29,33 @@ interface Item {
   firstIcon: string
   secondIcon: string
   image: APIResponse<'plugin::upload.file'> | null
-  color: string
+  theme: PiledCardItemsTheme
 }
 interface PiledCardsProps {
   items: Item[]
 }
 
 export function PiledCards(props: PiledCardsProps) {
-  const [items, setItems] = useState(props.items)
+  // const [items, setItems] = useState(props.items)
 
-  const handleDotClick = (index: number) => {
-    const newItems = [...items]
-    const [selectedItem] = newItems.splice(index, 1)
-    if (selectedItem) {
-      newItems.unshift(selectedItem)
-      setItems(newItems)
-    }
-  }
+  // const handleDotClick = (index: number) => {
+  //   const newItems = [...items]
+  //   const [selectedItem] = newItems.splice(index, 1)
+  //   if (selectedItem) {
+  //     newItems.unshift(selectedItem)
+  //     setItems(newItems)
+  //   }
+  // }
 
   return (
     <Root>
       <StyledContentWrapper>
-        {items.map((item, index) => (
+        {/* {items.map((item, index) => ( */}
+        {props.items.map((item, index) => (
           <StyledContentListItems
             key={item.id}
             $index={index}
-            $color={item.color}
+            $itemTheme={item.theme}
             aria-label={`Card ${index + 1}`}>
             <StyledImageWrapper>
               <StyledImage
@@ -53,7 +73,7 @@ export function PiledCards(props: PiledCardsProps) {
         ))}
       </StyledContentWrapper>
 
-      <DotsWrapper>
+      {/* <DotsWrapper>
         {items.map((_, index) => (
           <Dot
             key={_.title}
@@ -61,7 +81,7 @@ export function PiledCards(props: PiledCardsProps) {
             onClick={() => handleDotClick(index)}
           />
         ))}
-      </DotsWrapper>
+      </DotsWrapper> */}
     </Root>
   )
 }
@@ -90,13 +110,26 @@ const StyledContentWrapper = styled.ul`
   transform: translateY(-8rem);
 `
 
-const StyledContentListItems = styled.li<{ $index?: number; $color?: string }>`
-  ${({ $index, $color, theme }) => css`
+// TODO: update available color list
+const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
+  purple: theme.uniqueColors.purple,
+  yellow: `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
+  magenta: `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
+  orange: `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
+  green: theme.uniqueColors.green,
+}
+
+const StyledContentListItems = styled.li<{
+  $index?: number
+  $color?: string
+  $itemTheme: PiledCardItemsTheme
+}>`
+  ${({ $index, $itemTheme, theme }) => css`
     width: 100%;
 
     transform: scale(${$index ? 1 + $index * 0.01 : 1});
 
-    background-color: ${$color};
+    background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 40rem;
     border-radius: 2rem;
     box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
@@ -141,31 +174,32 @@ const StyledImage = styled.img`
   object-fit: cover;
   border-radius: 1rem;
 `
-const Dot = styled.div<{ active: boolean }>`
-  ${({ active, theme }) => css`
-    height: 1rem;
-    width: 1rem;
-    background-color: ${active
-      ? theme.colors.white
-      : theme.colors.white + '22'};
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 2px;
-    cursor: pointer;
-    gap: 0.5rem;
-  `}
-`
 
-const DotsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+// const Dot = styled.div<{ active: boolean }>`
+//   ${({ active, theme }) => css`
+//     height: 1rem;
+//     width: 1rem;
+//     background-color: ${active
+//       ? theme.colors.white
+//       : theme.colors.white + '22'};
+//     border-radius: 50%;
+//     display: inline-block;
+//     margin: 0 2px;
+//     cursor: pointer;
+//     gap: 0.5rem;
+//   `}
+// `
 
-  position: absolute;
-  right: -5rem;
-  top: 20%;
-  transform: rotateZ(90deg);
-  z-index: 2;
-  width: fit-content;
-`
+// const DotsWrapper = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 20px;
+
+//   position: absolute;
+//   right: -5rem;
+//   top: 20%;
+//   transform: rotateZ(90deg);
+//   z-index: 2;
+//   width: fit-content;
+// `
