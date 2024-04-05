@@ -236,7 +236,6 @@ export const getStaticProps = (async () => {
     APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
   >(`/ressources-enseignant?${rsQuery}`)
 
-  console.log(data, 'dsf')
   return {
     props: {
       resourceREData: news.data,
