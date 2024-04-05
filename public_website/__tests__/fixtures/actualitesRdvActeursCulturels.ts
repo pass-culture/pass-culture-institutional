@@ -63,19 +63,19 @@ const actusrdv = {
     },
     seo: {
       id: 1,
-      metaTitle: 'Aide enseignants',
+      metaTitle: 'Actualites acteurs culturel',
       metaDescription:
-        'Aide enseignants description description description description',
-      keywords: 'follow,noindex',
+        'Actualites acteurs culturel description description description description',
       metaRobots: 'follow,noindex',
+      keywords: 'follow,noindex',
       structuredData: {
-        name: 'Party Coffee Cake',
+        name: 'Party Coffee Cake two',
         '@type': 'Recipe',
         author: { name: 'Mary Stone', '@type': 'Person' },
         '@context': 'https://schema.org/',
         prepTime: 'PT20M',
-        description: 'This coffee cake is awesome and perfect for parties.',
         datePublished: '2018-03-10',
+        description: 'This coffee cake is awesome and perfect for parties.',
       },
       metaViewport: 'width=device-width, initial-scale=1',
       canonicalURL:
@@ -84,8 +84,8 @@ const actusrdv = {
         {
           id: 1,
           socialNetwork: 'Facebook',
-          title: 'Aide enseignants',
-          description: 'Aide enseignants description',
+          title: 'Actualites acteurs culturel',
+          description: 'Actualites acteurs culturel description',
           image: {
             data: {
               id: 36,
@@ -98,17 +98,17 @@ const actusrdv = {
                 formats: {
                   large: {
                     ext: '.jpg',
+                    size: 74.29,
                     url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                     hash: 'large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                     mime: 'image/jpeg',
                     name: 'large_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                     path: null,
-                    size: 74.29,
+
                     width: 667,
                     height: 1000,
                   },
                   small: {
-                    ext: '.jpg',
                     url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                     hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                     mime: 'image/jpeg',
@@ -117,25 +117,27 @@ const actusrdv = {
                     size: 25.03,
                     width: 333,
                     height: 500,
+                    ext: '.jpg',
                   },
                   medium: {
                     ext: '.jpg',
                     url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                     hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                     mime: 'image/jpeg',
+                    width: 500,
                     name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                     path: null,
                     size: 47.55,
-                    width: 500,
+
                     height: 750,
                   },
                   thumbnail: {
+                    path: null,
                     ext: '.jpg',
                     url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                     hash: 'thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                     mime: 'image/jpeg',
                     name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
-                    path: null,
                     size: 4.29,
                     width: 104,
                     height: 156,

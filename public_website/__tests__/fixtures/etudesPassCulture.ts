@@ -41,9 +41,9 @@ export const EtudesPassCulturePageFixtures = {
       title: 'Programme de sensibisation à lart dans votre région',
       seo: {
         id: 1,
-        metaTitle: 'Aide enseignants',
+        metaTitle: 'Etude description',
         metaDescription:
-          'Aide enseignants description description description description',
+          'Etude description description description description description',
         keywords: 'follow,noindex',
         metaRobots: 'follow,noindex',
         structuredData: {
@@ -62,8 +62,8 @@ export const EtudesPassCulturePageFixtures = {
           {
             id: 1,
             socialNetwork: 'Facebook',
-            title: 'Aide enseignants',
-            description: 'Aide enseignants description',
+            title: 'Etude description',
+            description: 'Etude description',
             image: {
               data: {
                 id: 36,
@@ -79,14 +79,16 @@ export const EtudesPassCulturePageFixtures = {
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
+                      size: 74.29,
                       name: 'large_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
-                      size: 74.29,
+
                       width: 667,
                       height: 1000,
                     },
                     small: {
                       ext: '.jpg',
+                      height: 500,
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
@@ -94,25 +96,24 @@ export const EtudesPassCulturePageFixtures = {
                       path: null,
                       size: 25.03,
                       width: 333,
-                      height: 500,
                     },
                     medium: {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
+                      height: 750,
                       name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
                       size: 47.55,
                       width: 500,
-                      height: 750,
                     },
                     thumbnail: {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
-                      name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
+                      name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplaseh.jpg',
                       path: null,
                       size: 4.29,
                       width: 104,
@@ -125,10 +126,11 @@ export const EtudesPassCulturePageFixtures = {
                   size: 1777.47,
                   url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,
+                  createdAt: '2024-03-04T15:59:07.100Z',
                   provider:
                     '@strapi-community/strapi-provider-upload-google-cloud-storage',
                   provider_metadata: null,
-                  createdAt: '2024-03-04T15:59:07.100Z',
+
                   updatedAt: '2024-03-13T15:17:30.823Z',
                 },
               },
@@ -138,13 +140,13 @@ export const EtudesPassCulturePageFixtures = {
             id: 2,
             socialNetwork: 'Twitter',
             title: 'twiter',
-            description: "c'est twitter",
+            description: "c'est twitter 2",
             image: {
               data: {
                 id: 36,
                 attributes: {
-                  name: 'microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                   alternativeText: null,
+                  name: 'microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                   caption: null,
                   width: 3267,
                   height: 4900,
@@ -167,8 +169,8 @@ export const EtudesPassCulturePageFixtures = {
                       mime: 'image/jpeg',
                       name: 'small_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
-                      size: 25.03,
                       width: 333,
+                      size: 25.03,
                       height: 500,
                     },
                     medium: {
@@ -186,10 +188,10 @@ export const EtudesPassCulturePageFixtures = {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
-                      mime: 'image/jpeg',
                       name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
                       size: 4.29,
+                      mime: 'image/jpeg',
                       width: 104,
                       height: 156,
                     },

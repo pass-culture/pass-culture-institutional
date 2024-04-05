@@ -18,10 +18,10 @@ export const ActusPassCultureJeunePageFixtures = {
       title: 'Programmes de sensibilisation à lart dans votre région',
       seo: {
         id: 1,
-        metaTitle: 'Aide enseignants',
+        metaTitle: 'Actualites passculture',
         metaDescription:
-          'Aide enseignants description description description description',
-        keywords: 'follow,noindex',
+          'Actualites passculture description description description',
+        keywords: 'pass,culture',
         metaRobots: 'follow,noindex',
         structuredData: {
           name: 'Party Coffee Cake',
@@ -32,15 +32,15 @@ export const ActusPassCultureJeunePageFixtures = {
           description: 'This coffee cake is awesome and perfect for parties.',
           datePublished: '2018-03-10',
         },
-        metaViewport: 'width=device-width, initial-scale=1',
+        metaViewport: 'width=device-width, initial-scale=2',
         canonicalURL:
           'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
         metaSocial: [
           {
             id: 1,
             socialNetwork: 'Facebook',
-            title: 'Aide enseignants',
-            description: 'Aide enseignants description',
+            title: 'Actualites passculture',
+            description: 'Actualites passculture description description',
             image: {
               data: {
                 id: 36,
@@ -75,12 +75,13 @@ export const ActusPassCultureJeunePageFixtures = {
                     },
                     medium: {
                       ext: '.jpg',
+                      size: 47.55,
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
                       name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
-                      size: 47.55,
+
                       width: 500,
                       height: 750,
                     },
@@ -98,8 +99,8 @@ export const ActusPassCultureJeunePageFixtures = {
                   },
                   hash: 'microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                   ext: '.jpg',
-                  mime: 'image/jpeg',
                   size: 1777.47,
+                  mime: 'image/jpeg',
                   url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,
                   provider:

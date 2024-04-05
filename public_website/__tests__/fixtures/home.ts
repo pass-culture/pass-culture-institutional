@@ -251,18 +251,18 @@ export const homePageFixtures = {
       },
       seo: {
         id: 1,
-        metaTitle: 'Aide enseignants',
-        metaDescription:
-          'Aide enseignants description description description description',
-        keywords: 'follow,noindex',
+        metaTitle: 'Home',
+        metaDescription: 'Home description description description description',
         metaRobots: 'follow,noindex',
+        keywords: 'follow,noindex',
+
         structuredData: {
           name: 'Party Coffee Cake',
           '@type': 'Recipe',
           author: { name: 'Mary Stone', '@type': 'Person' },
           '@context': 'https://schema.org/',
           prepTime: 'PT20M',
-          description: 'This coffee cake is awesome and perfect for parties.',
+          description: 'This coffee cakee is awesome and perfect for parties.',
           datePublished: '2018-03-10',
         },
         metaViewport: 'width=device-width, initial-scale=1',
@@ -272,8 +272,8 @@ export const homePageFixtures = {
           {
             id: 1,
             socialNetwork: 'Facebook',
-            title: 'Aide enseignants',
-            description: 'Aide enseignants description',
+            title: 'Aide enseignantes',
+            description: 'Aide enseignants descriptione',
             image: {
               data: {
                 id: 36,
@@ -287,7 +287,7 @@ export const homePageFixtures = {
                     large: {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
-                      hash: 'large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
+                      hash: 'large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd4r4',
                       mime: 'image/jpeg',
                       name: 'large_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
@@ -298,7 +298,7 @@ export const homePageFixtures = {
                     small: {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
-                      hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
+                      hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44e',
                       mime: 'image/jpeg',
                       name: 'small_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
@@ -309,7 +309,7 @@ export const homePageFixtures = {
                     medium: {
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
-                      hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
+                      hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_uznsplash_b376f7bd44',
                       mime: 'image/jpeg',
                       name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
@@ -322,7 +322,7 @@ export const homePageFixtures = {
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'thumbnail_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
-                      name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
+                      name: 'thumbnail_mivcrosoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
                       size: 4.29,
                       width: 104,
@@ -333,8 +333,8 @@ export const homePageFixtures = {
                   ext: '.jpg',
                   mime: 'image/jpeg',
                   size: 1777.47,
-                  url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,
+                  url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   provider:
                     '@strapi-community/strapi-provider-upload-google-cloud-storage',
                   provider_metadata: null,

@@ -182,9 +182,9 @@ export const AideJeunesParentsPageFixtures = {
       },
       seo: {
         id: 1,
-        metaTitle: 'Aide enseignants',
+        metaTitle: 'Aide jeunes parents',
         metaDescription:
-          'Aide enseignants description description description description',
+          'Aide jeunes parents description description description description',
         keywords: 'follow,noindex',
         metaRobots: 'follow,noindex',
         structuredData: {
@@ -203,8 +203,8 @@ export const AideJeunesParentsPageFixtures = {
           {
             id: 1,
             socialNetwork: 'Facebook',
-            title: 'Aide enseignants',
-            description: 'Aide enseignants description',
+            title: 'Aide jeunes parents',
+            description: 'Aide jeunes parents description',
             image: {
               data: {
                 id: 36,
@@ -216,12 +216,12 @@ export const AideJeunesParentsPageFixtures = {
                   height: 4900,
                   formats: {
                     large: {
+                      path: null,
                       ext: '.jpg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'large_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
                       name: 'large_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
-                      path: null,
                       size: 74.29,
                       width: 667,
                       height: 1000,
@@ -232,16 +232,16 @@ export const AideJeunesParentsPageFixtures = {
                       hash: 'small_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
                       mime: 'image/jpeg',
                       name: 'small_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
-                      path: null,
                       size: 25.03,
                       width: 333,
+                      path: null,
                       height: 500,
                     },
                     medium: {
                       ext: '.jpg',
+                      mime: 'image/jpeg',
                       url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                       hash: 'medium_microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
-                      mime: 'image/jpeg',
                       name: 'medium_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
                       size: 47.55,
@@ -255,20 +255,21 @@ export const AideJeunesParentsPageFixtures = {
                       mime: 'image/jpeg',
                       name: 'thumbnail_microsoft-365-kTFmwxkF5bQ-unsplash.jpg',
                       path: null,
+                      height: 156,
                       size: 4.29,
                       width: 104,
-                      height: 156,
                     },
                   },
-                  hash: 'microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44',
+                  hash: 'microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd454',
                   ext: '.jpg',
                   mime: 'image/jpeg',
                   size: 1777.47,
+                  provider_metadata: null,
                   url: 'https://storage.googleapis.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,
                   provider:
                     '@strapi-community/strapi-provider-upload-google-cloud-storage',
-                  provider_metadata: null,
+
                   createdAt: '2024-03-04T15:59:07.100Z',
                   updatedAt: '2024-03-13T15:17:30.823Z',
                 },
