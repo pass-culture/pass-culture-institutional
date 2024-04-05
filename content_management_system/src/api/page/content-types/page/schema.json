@@ -45,6 +45,11 @@
         "block.organization-chart",
         "block.simple-text-v2"
       ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

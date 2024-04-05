@@ -11,6 +11,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -261,6 +262,9 @@ export default function Presse({
 
   return (
     <React.Fragment>
+      {presseListe.attributes.seo && (
+        <Seo metaData={presseListe.attributes.seo} />
+      )}
       <StyledTitle>
         {presseListe.attributes.title && (
           <Typo.Heading2
@@ -375,6 +379,9 @@ export const getStaticProps = (async () => {
       'texteImage.image',
       'aide.image',
       'aide.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(

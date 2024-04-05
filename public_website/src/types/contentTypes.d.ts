@@ -820,6 +820,7 @@ export interface ApiActualitesPassCultureActualitesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -858,6 +859,7 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -899,6 +901,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       ]
     >;
     relatedNews: Attribute.Component<'block.related-news'> & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -972,6 +975,7 @@ export interface ApiEtudesPassCultureEtudesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     observatoire: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1167,6 +1171,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1196,6 +1201,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1220,6 +1226,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
     singularName: 'help-teachers';
     pluralName: 'help-teachers-list';
     displayName: 'Help - Teachers';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1233,6 +1240,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &
       Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1275,6 +1283,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1304,6 +1313,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
       Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1340,6 +1350,7 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     offers: Attribute.Component<'block.offers-section'> & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1351,44 +1362,6 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::liste-offre.liste-offre',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMasterMaster extends Schema.SingleType {
-  collectionName: 'masters';
-  info: {
-    singularName: 'master';
-    pluralName: 'masters';
-    displayName: 'Master';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    simpleText: Attribute.Component<'block.simple-text'>;
-    simpleTextTwo: Attribute.Component<'block.simple-text'>;
-    image: Attribute.Component<'block.image'>;
-    imageTextRight: Attribute.Component<'block.image-text'>;
-    imageTextLeft: Attribute.Component<'block.image-text'>;
-    littleList: Attribute.Component<'block.little-list'>;
-    littleListdescription: Attribute.Component<'block.little-list'>;
-    space: Attribute.Component<'block.space'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::master.master',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::master.master',
       'oneToOne',
       'admin::user'
     > &
@@ -1491,12 +1464,14 @@ export interface ApiNotFoundNotFound extends Schema.SingleType {
     singularName: 'not-found';
     pluralName: 'not-founds';
     displayName: 'Not Found';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     header: Attribute.Component<'block.header'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1556,6 +1531,7 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.simple-text-v2'
       ]
     >;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1587,6 +1563,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1624,6 +1601,7 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1649,6 +1627,7 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     singularName: 'ressources-pass-culture';
     pluralName: 'ressources-pass-cultures';
     displayName: 'Ressources Pass Culture';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1660,6 +1639,7 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     etudes: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1763,6 +1743,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     breadcrumbLinks: Attribute.Component<'common.link', true> &
       Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1814,7 +1795,6 @@ declare module '@strapi/types' {
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
-      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;

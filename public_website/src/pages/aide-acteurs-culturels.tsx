@@ -7,6 +7,7 @@ import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -20,6 +21,7 @@ export default function CulturalActorsHelp({
 }: CulturalActorsHelpProps) {
   return (
     <React.Fragment>
+      {helpData.attributes.seo && <Seo metaData={helpData.attributes.seo} />}
       <Hero
         title={helpData.attributes?.heroSection?.title}
         text={helpData.attributes?.heroSection?.text}
@@ -77,6 +79,9 @@ export const getStaticProps = (async () => {
       'simplepushcta.image',
       'simplepushcta.cta',
       'simplepushcta.cta[0]',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

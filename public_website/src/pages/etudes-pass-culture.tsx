@@ -8,6 +8,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -144,6 +145,9 @@ export default function EtudesPassCulture({
 
   return (
     <React.Fragment>
+      {etudesPassCultureListe.attributes.seo && (
+        <Seo metaData={etudesPassCultureListe.attributes.seo} />
+      )}
       <StyledTitle>
         {etudesPassCultureListe.attributes.title && (
           <Typo.Heading2
@@ -218,6 +222,9 @@ export const getStaticProps = (async () => {
       'observatoire',
       'observatoire.image',
       'observatoire.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(

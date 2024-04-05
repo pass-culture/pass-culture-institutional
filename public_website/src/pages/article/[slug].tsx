@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { LatestNews } from '@/lib/blocks/LatestNews'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -16,6 +17,9 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
+      {props.data.attributes.seo && (
+        <Seo metaData={props.data.attributes.seo} />
+      )}
       {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
@@ -52,6 +56,9 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.logo.logo',
       'Blocks.cta',
       'Blocks.items.items',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

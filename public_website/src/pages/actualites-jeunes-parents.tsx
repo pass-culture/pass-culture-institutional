@@ -8,6 +8,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -111,6 +112,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 
   return (
     <React.Fragment>
+      {listejeune.attributes.seo && (
+        <Seo metaData={listejeune.attributes.seo} />
+      )}
       <StyledTitle>
         <Typo.Heading2
           dangerouslySetInnerHTML={{ __html: listejeune.attributes.title }}
@@ -161,6 +165,9 @@ export const getStaticProps = (async () => {
       'aide',
       'aide.image',
       'aide.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 
