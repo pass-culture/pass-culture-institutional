@@ -80,17 +80,17 @@ export const getStaticProps = (async ({ params }) => {
   }
 
   const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
     populate: ['image'],
+    sort: ['date:desc'],
     pagination: {
       limit: 3,
     },
     filters: {
-      category: {
-        $eqi: response.data[0]!.attributes.category,
-      },
       title: {
         $ne: response.data[0]!.attributes.title,
+      },
+      category: {
+        $eqi: response.data[0]!.attributes.category,
       },
     },
   })
