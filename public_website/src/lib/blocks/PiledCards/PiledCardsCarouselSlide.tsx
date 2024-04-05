@@ -62,7 +62,6 @@ export function VerticalCarouselSlide({
   )
 }
 
-// TODO: update available color list
 const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
   purple: theme.uniqueColors.purple,
   yellow: `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
@@ -86,7 +85,6 @@ const Root = styled(Slide)<{ $slideTheme: PiledCardItemsTheme }>`
 const StyledImage = styled(Image)`
   border-radius: 0.5rem;
   object-fit: cover;
-  /* width: 100%; */
 `
 
 const StyledTitle = styled(Typo.Heading3)`

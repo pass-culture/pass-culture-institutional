@@ -18,8 +18,10 @@ interface Item {
   image: APIResponse<'plugin::upload.file'> | null
   theme: PiledCardItemsTheme
 }
+
 interface PiledCardsProps {
   items: Item[]
+  accessibleTitle: string
 }
 
 export function PiledCards(props: PiledCardsProps) {
@@ -98,7 +100,7 @@ export function PiledCards(props: PiledCardsProps) {
           ))}
         </StyledContentWrapper>
       </Root>
-      <StyledCarousel title="Pouet" items={carouselItems} />
+      <StyledCarousel title={props.accessibleTitle} items={carouselItems} />
     </React.Fragment>
   )
 }
@@ -174,7 +176,6 @@ const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     gap: 1rem;
 
     overflow: hidden;

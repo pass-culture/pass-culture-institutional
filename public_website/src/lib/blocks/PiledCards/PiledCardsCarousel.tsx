@@ -8,7 +8,7 @@ import {
 } from './PiledCardsCarouselSlide'
 import { stripTags } from '@/utils/stripTags'
 
-export type PiledCardsCarouselProps = {
+type PiledCardsCarouselProps = {
   title: string
   items: Omit<PiledCardsCarouselSlideProps, 'slideIndex'>[]
   className?: string

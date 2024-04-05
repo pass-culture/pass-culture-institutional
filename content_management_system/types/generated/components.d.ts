@@ -284,6 +284,7 @@ export interface BlockPiledCards extends Schema.Component {
   };
   attributes: {
     items: Attribute.Component<'common.piled-card-item', true>;
+    accessibleTitle: Attribute.String & Attribute.Required;
   };
 }
 
