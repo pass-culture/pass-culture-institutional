@@ -33,7 +33,7 @@ import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
-
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 export interface Block {
   __component: string
 }
@@ -66,24 +66,21 @@ const COMPONENTS: Record<
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
   'block.testimony-carousel': TestimonyCarouselSlide,
-
   'block.image': Image,
   'block.image-text': ImageText,
   'block.little-list': LittleList,
   'block.video': Video,
   'block.space': WhiteSpace,
-
   'block.key-number-carousel-slide': KeyNumberCarouselSlide,
   'block.double-push-cta': DoublePushCTA,
   'block.separator': Separator,
   'block.simple-push-cta': SimplePushCta,
   'block.offers-carousel': OffersCarousel,
   'block.piled-cards': PiledCards,
-
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
-
   'block.simple-text-v2': SimpleTextV2,
+  'block.list-bread-crumb': Breadcrumb,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

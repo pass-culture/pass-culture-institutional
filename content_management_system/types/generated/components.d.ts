@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface BlockBreadCrumbWrapper extends Schema.Component {
+  collectionName: 'components_block_bread_crumb_wrappers';
+  info: {
+    displayName: 'BreadCrumbWrapper';
+  };
+  attributes: {
+    parent: Attribute.Component<'common.link'>;
+    fils: Attribute.Component<'common.link', true>;
+  };
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -76,7 +87,7 @@ export interface BlockHeader extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
-    icon: Attribute.String;
+    icon: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'>;
   };
 }
@@ -155,6 +166,17 @@ export interface BlockLink extends Schema.Component {
     > &
       Attribute.Required;
     url: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockListBreadCrumb extends Schema.Component {
+  collectionName: 'components_block_list_bread_crumbs';
+  info: {
+    displayName: 'List BreadCrumb';
+    description: '';
+  };
+  attributes: {
+    breadCrumbs: Attribute.Component<'block.bread-crumb-wrapper', true>;
   };
 }
 
@@ -897,6 +919,7 @@ export interface SimulatorSuccessScreen extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
@@ -908,6 +931,7 @@ declare module '@strapi/types' {
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
+      'block.list-bread-crumb': BlockListBreadCrumb;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offer-list': BlockOfferList;

@@ -1553,7 +1553,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.faq',
         'block.detailed-logos',
         'block.organization-chart',
-        'block.simple-text-v2'
+        'block.simple-text-v2',
+        'block.list-bread-crumb'
       ]
     >;
     createdAt: Attribute.DateTime;
@@ -1761,8 +1762,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     bottomEmoji: Attribute.String & Attribute.Required;
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
-    breadcrumbLinks: Attribute.Component<'common.link', true> &
-      Attribute.Required;
+    bread: Attribute.Component<'block.list-bread-crumb'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

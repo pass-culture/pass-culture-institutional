@@ -14,6 +14,13 @@
           "pc-site-instit-staging"
         ]
       }
+    },
+    "pc-site-instit-production": {
+      "hosting": {
+        "production": [
+          "pc-site-instit-production"
+        ]
+      }
     }
   },
   "etags": {}
