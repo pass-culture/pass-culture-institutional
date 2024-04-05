@@ -38,9 +38,7 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
           )
         })}
       </StyledList>
-      {cta && cta.Label && cta.URL && (
-        <Button href={cta.URL}>{cta.Label}</Button>
-      )}
+      {cta?.Label && cta?.URL && <Button href={cta.URL}>{cta.Label}</Button>}
     </Root>
   )
 }
