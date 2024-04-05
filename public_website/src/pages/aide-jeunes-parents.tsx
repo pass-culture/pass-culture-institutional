@@ -5,10 +5,10 @@ import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
+import { Header } from '@/lib/blocks/Header'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
-import { Hero } from '@/ui/components/help/Hero'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HelpProps {
@@ -18,13 +18,11 @@ interface HelpProps {
 export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
-      <Hero
+      <Header
         title={helpData.attributes?.heroSection?.title}
         text={helpData.attributes.heroSection.text}
-        image={
-          helpData.attributes.heroSection.image
-            ?.data as unknown as APIResponseData<'plugin::upload.file'>
-        }
+        icon={helpData.attributes.heroSection.icon}
+        image={helpData.attributes.heroSection.image}
       />
       <Faq
         title={helpData.attributes.faq.title}
