@@ -12,10 +12,10 @@ export interface BlockBreadCrumbWrapper extends Schema.Component {
 }
 
 export interface BlockCenteredText extends Schema.Component {
-  collectionName: "components_block_centered_texts";
+  collectionName: 'components_block_centered_texts';
   info: {
-    displayName: "Centered Text";
-    description: "";
+    displayName: 'Centered Text';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -24,53 +24,53 @@ export interface BlockCenteredText extends Schema.Component {
 }
 
 export interface BlockDetailedLogos extends Schema.Component {
-  collectionName: "components_block_detailed_logos";
+  collectionName: 'components_block_detailed_logos';
   info: {
-    displayName: "Detailed Logos";
+    displayName: 'Detailed Logos';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    logos: Attribute.Component<"common.detailed-logo", true> &
+    logos: Attribute.Component<'common.detailed-logo', true> &
       Attribute.Required;
   };
 }
 
 export interface BlockDoublePushCta extends Schema.Component {
-  collectionName: "components_block_double_push_ctas";
+  collectionName: 'components_block_double_push_ctas';
   info: {
-    displayName: "Push Grey CTA";
-    description: "";
+    displayName: 'Push Grey CTA';
+    description: '';
   };
   attributes: {
     image: Attribute.Media & Attribute.Required;
     title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
-    firstCta: Attribute.Component<"common.link"> & Attribute.Required;
+    firstCta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
-    secondCta: Attribute.Component<"common.not-required-link">;
+    secondCta: Attribute.Component<'common.not-required-link'>;
   };
 }
 
 export interface BlockExperienceVideoCarousel extends Schema.Component {
-  collectionName: "components_block_experience_video_carousels";
+  collectionName: 'components_block_experience_video_carousels';
   info: {
-    displayName: "ExperienceVideoCarousel";
-    description: "";
+    displayName: 'ExperienceVideoCarousel';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
-    items: Attribute.Component<"common.vertical-carousel-item", true>;
+    items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
 }
 
 export interface BlockFaq extends Schema.Component {
-  collectionName: "components_block_faqs";
+  collectionName: 'components_block_faqs';
   info: {
-    displayName: "Faq";
+    displayName: 'Faq';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     categories: Attribute.String;
     filteringProperty: Attribute.String & Attribute.Required;
     limit: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<10>;
@@ -78,25 +78,25 @@ export interface BlockFaq extends Schema.Component {
 }
 
 export interface BlockHeader extends Schema.Component {
-  collectionName: "components_block_headers";
+  collectionName: 'components_block_headers';
   info: {
-    displayName: "Header";
-    description: "";
+    displayName: 'Header';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link">;
+    cta: Attribute.Component<'common.link'>;
   };
 }
 
 export interface BlockImageText extends Schema.Component {
-  collectionName: "components_block_image_texts";
+  collectionName: 'components_block_image_texts';
   info: {
-    displayName: "ImageText";
-    description: "";
+    displayName: 'ImageText';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -108,10 +108,10 @@ export interface BlockImageText extends Schema.Component {
 }
 
 export interface BlockImage extends Schema.Component {
-  collectionName: "components_block_images";
+  collectionName: 'components_block_images';
   info: {
-    displayName: "Image";
-    description: "";
+    displayName: 'Image';
+    description: '';
   };
   attributes: {
     image: Attribute.Media;
@@ -121,13 +121,13 @@ export interface BlockImage extends Schema.Component {
 }
 
 export interface BlockKeyNumberCarousel extends Schema.Component {
-  collectionName: "components_block_key_number_carousels";
+  collectionName: 'components_block_key_number_carousels';
   info: {
-    displayName: "KeyNumberCarousel";
+    displayName: 'KeyNumberCarousel';
   };
   attributes: {
     title: Attribute.String;
-    items: Attribute.Component<"common.key-number-items", true> &
+    items: Attribute.Component<'common.key-number-items', true> &
       Attribute.SetMinMax<{
         max: 4;
       }>;
@@ -135,33 +135,33 @@ export interface BlockKeyNumberCarousel extends Schema.Component {
 }
 
 export interface BlockLatestNews extends Schema.Component {
-  collectionName: "components_block_latest_news";
+  collectionName: 'components_block_latest_news';
   info: {
-    displayName: "latestNews";
-    description: "";
+    displayName: 'latestNews';
+    description: '';
   };
   attributes: {
     title: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
 export interface BlockLink extends Schema.Component {
-  collectionName: "components_block_links";
+  collectionName: 'components_block_links';
   info: {
-    displayName: "socialMediaLink";
-    description: "";
+    displayName: 'socialMediaLink';
+    description: '';
   };
   attributes: {
     name: Attribute.Enumeration<
       [
-        "x",
-        "instagram",
-        "tiktok",
-        "youtube",
-        "facebook",
-        "snapchat",
-        "linkedin"
+        'x',
+        'instagram',
+        'tiktok',
+        'youtube',
+        'facebook',
+        'snapchat',
+        'linkedin'
       ]
     > &
       Attribute.Required;
@@ -181,15 +181,15 @@ export interface BlockListBreadCrumb extends Schema.Component {
 }
 
 export interface BlockLittleList extends Schema.Component {
-  collectionName: "components_block_little_lists";
+  collectionName: 'components_block_little_lists';
   info: {
-    displayName: "LittleList";
-    description: "";
+    displayName: 'LittleList';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    content: Attribute.Component<"common.little-list-component", true> &
+    content: Attribute.Component<'common.little-list-component', true> &
       Attribute.SetMinMax<{
         max: 4;
       }>;
@@ -200,139 +200,139 @@ export interface BlockLittleList extends Schema.Component {
 }
 
 export interface BlockLogos extends Schema.Component {
-  collectionName: "components_block_logos";
+  collectionName: 'components_block_logos';
   info: {
-    displayName: "Logos";
-    description: "";
+    displayName: 'Logos';
+    description: '';
   };
   attributes: {
-    logo: Attribute.Component<"common.logo", true>;
+    logo: Attribute.Component<'common.logo', true>;
   };
 }
 
 export interface BlockOfferList extends Schema.Component {
-  collectionName: "components_block_offer_lists";
+  collectionName: 'components_block_offer_lists';
   info: {
-    displayName: "OfferList";
-    description: "";
+    displayName: 'OfferList';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
     offreTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     firstCartTitle: Attribute.String & Attribute.Required;
     secondCartTitle: Attribute.String & Attribute.Required;
     descritptionCard: Attribute.Text & Attribute.Required;
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
-    ctaCard: Attribute.Component<"common.link"> & Attribute.Required;
+    ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
 export interface BlockOffersCarousel extends Schema.Component {
-  collectionName: "components_block_offers_carousels";
+  collectionName: 'components_block_offers_carousels';
   info: {
-    displayName: "OffersCarousel";
-    description: "";
+    displayName: 'OffersCarousel';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    items: Attribute.Component<"common.offers-carousel-item", true> &
+    items: Attribute.Component<'common.offers-carousel-item', true> &
       Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
 export interface BlockOffersSection extends Schema.Component {
-  collectionName: "components_block_offers_sections";
+  collectionName: 'components_block_offers_sections';
   info: {
-    displayName: "OffersSection";
-    description: "";
+    displayName: 'OffersSection';
+    description: '';
   };
   attributes: {
-    offers: Attribute.Component<"common.offers">;
+    offers: Attribute.Component<'common.offers'>;
     offerTag: Attribute.String;
-    cta: Attribute.Component<"common.link">;
+    cta: Attribute.Component<'common.link'>;
     firstCardtitle: Attribute.String & Attribute.Required;
     secondCardTitle: Attribute.String & Attribute.Required;
     descriptionCard: Attribute.Text & Attribute.Required;
     firstCardIcon: Attribute.String;
     secondCardIcon: Attribute.String;
-    cardCta: Attribute.Component<"common.link">;
+    cardCta: Attribute.Component<'common.link'>;
   };
 }
 
 export interface BlockOrganizationChart extends Schema.Component {
-  collectionName: "components_block_organization_charts";
+  collectionName: 'components_block_organization_charts';
   info: {
-    displayName: "Organization Chart";
-    description: "";
+    displayName: 'Organization Chart';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
-    people: Attribute.Component<"common.person", true> & Attribute.Required;
+    people: Attribute.Component<'common.person', true> & Attribute.Required;
   };
 }
 
 export interface BlockPiledCards extends Schema.Component {
-  collectionName: "components_block_piled_cards";
+  collectionName: 'components_block_piled_cards';
   info: {
-    displayName: "PiledCards";
-    description: "";
+    displayName: 'PiledCards';
+    description: '';
   };
   attributes: {
-    items: Attribute.Component<"common.piled-card-item", true>;
+    items: Attribute.Component<'common.piled-card-item', true>;
   };
 }
 
 export interface BlockPushCta extends Schema.Component {
-  collectionName: "components_block_push_ctas";
+  collectionName: 'components_block_push_ctas';
   info: {
-    displayName: "Push CTA With QrCode";
-    description: "";
+    displayName: 'Push CTA With QrCode';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
     image: Attribute.Media & Attribute.Required;
-    ctaLink: Attribute.Component<"common.link"> & Attribute.Required;
+    ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
     qrCodeDescription: Attribute.String & Attribute.Required;
     qrCodeUrl: Attribute.String & Attribute.Required;
   };
 }
 
 export interface BlockRelatedNews extends Schema.Component {
-  collectionName: "components_block_related_news";
+  collectionName: 'components_block_related_news';
   info: {
-    displayName: "RelatedNews";
-    description: "";
+    displayName: 'RelatedNews';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
-    cta: Attribute.Component<"common.link">;
+    cta: Attribute.Component<'common.link'>;
     category: Attribute.Enumeration<
       [
-        "\u00C9tude",
-        "Article",
-        "\u00C9v\u00E8nement",
-        "Partenariat",
-        "Rencontre",
-        "Dossier de presse",
-        "Communiqu\u00E9 de presse",
-        "\u00C9tude ritualis\u00E9e",
-        "\u00C9tude ponctuelle"
+        '\u00C9tude',
+        'Article',
+        '\u00C9v\u00E8nement',
+        'Partenariat',
+        'Rencontre',
+        'Dossier de presse',
+        'Communiqu\u00E9 de presse',
+        '\u00C9tude ritualis\u00E9e',
+        '\u00C9tude ponctuelle'
       ]
     >;
   };
 }
 
 export interface BlockSeparator extends Schema.Component {
-  collectionName: "components_block_separators";
+  collectionName: 'components_block_separators';
   info: {
-    displayName: "Separator";
-    description: "";
+    displayName: 'Separator';
+    description: '';
   };
   attributes: {
     isActive: Attribute.Boolean &
@@ -342,29 +342,29 @@ export interface BlockSeparator extends Schema.Component {
 }
 
 export interface BlockSimplePushCta extends Schema.Component {
-  collectionName: "components_block_simple_push_ctas";
+  collectionName: 'components_block_simple_push_ctas';
   info: {
-    displayName: "Push Blue CTA";
-    description: "";
+    displayName: 'Push Blue CTA';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     surtitle: Attribute.String & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     icon: Attribute.String;
   };
 }
 
 export interface BlockSimpleTextV2 extends Schema.Component {
-  collectionName: "components_block_simple_text_v2s";
+  collectionName: 'components_block_simple_text_v2s';
   info: {
-    displayName: "Simple Text v2";
+    displayName: 'Simple Text v2';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Blocks & Attribute.Required;
-    columns: Attribute.Component<"common.simple-text-column", true> &
+    columns: Attribute.Component<'common.simple-text-column', true> &
       Attribute.SetMinMax<{
         max: 2;
       }>;
@@ -372,10 +372,10 @@ export interface BlockSimpleTextV2 extends Schema.Component {
 }
 
 export interface BlockSimpleText extends Schema.Component {
-  collectionName: "components_block_simple_texts";
+  collectionName: 'components_block_simple_texts';
   info: {
-    displayName: "SimpleText";
-    description: "";
+    displayName: 'SimpleText';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -389,23 +389,23 @@ export interface BlockSimpleText extends Schema.Component {
 }
 
 export interface BlockSocialMedia extends Schema.Component {
-  collectionName: "components_block_social_medias";
+  collectionName: 'components_block_social_medias';
   info: {
-    displayName: "socialMedia";
-    description: "";
+    displayName: 'socialMedia';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    socialMediaLink: Attribute.Component<"block.link", true> &
+    socialMediaLink: Attribute.Component<'block.link', true> &
       Attribute.Required;
   };
 }
 
 export interface BlockSpace extends Schema.Component {
-  collectionName: "components_block_spaces";
+  collectionName: 'components_block_spaces';
   info: {
-    displayName: "Space";
-    description: "";
+    displayName: 'Space';
+    description: '';
   };
   attributes: {
     space: Attribute.Integer;
@@ -413,35 +413,35 @@ export interface BlockSpace extends Schema.Component {
 }
 
 export interface BlockTestimonies extends Schema.Component {
-  collectionName: "components_block_testimonies";
+  collectionName: 'components_block_testimonies';
   info: {
-    displayName: "TestimoniesCarousel";
-    description: "";
+    displayName: 'TestimoniesCarousel';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
-    items: Attribute.Component<"common.vertical-carousel-item", true>;
+    items: Attribute.Component<'common.vertical-carousel-item', true>;
   };
 }
 
 export interface BlockVerticalCarousel extends Schema.Component {
-  collectionName: "components_block_vertical_carousels";
+  collectionName: 'components_block_vertical_carousels';
   info: {
-    displayName: "VerticalCarousel";
-    description: "";
+    displayName: 'VerticalCarousel';
+    description: '';
   };
   attributes: {
     title: Attribute.Text & Attribute.Required;
-    items: Attribute.Component<"common.vertical-carousel-item", true> &
+    items: Attribute.Component<'common.vertical-carousel-item', true> &
       Attribute.Required;
   };
 }
 
 export interface BlockVideo extends Schema.Component {
-  collectionName: "components_block_videos";
+  collectionName: 'components_block_videos';
   info: {
-    displayName: "Video";
-    description: "";
+    displayName: 'Video';
+    description: '';
   };
   attributes: {
     url: Attribute.Text;
@@ -452,23 +452,23 @@ export interface BlockVideo extends Schema.Component {
 }
 
 export interface CommonDetailedLogo extends Schema.Component {
-  collectionName: "components_common_detailed_logos";
+  collectionName: 'components_common_detailed_logos';
   info: {
-    displayName: "Detailed Logo";
+    displayName: 'Detailed Logo';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
   };
 }
 
 export interface CommonFiltre extends Schema.Component {
-  collectionName: "components_common_filtres";
+  collectionName: 'components_common_filtres';
   info: {
-    displayName: "Filtre";
-    description: "";
+    displayName: 'Filtre';
+    description: '';
   };
   attributes: {
     filtre: Attribute.String & Attribute.Required;
@@ -476,9 +476,9 @@ export interface CommonFiltre extends Schema.Component {
 }
 
 export interface CommonKeyNumberItems extends Schema.Component {
-  collectionName: "components_common_key_number_items";
+  collectionName: 'components_common_key_number_items';
   info: {
-    displayName: "KeyNumberItems";
+    displayName: 'KeyNumberItems';
   };
   attributes: {
     firstEmoji: Attribute.String;
@@ -490,10 +490,10 @@ export interface CommonKeyNumberItems extends Schema.Component {
 }
 
 export interface CommonLink extends Schema.Component {
-  collectionName: "components_common_links";
+  collectionName: 'components_common_links';
   info: {
-    displayName: "Link";
-    description: "";
+    displayName: 'Link';
+    description: '';
   };
   attributes: {
     Label: Attribute.String & Attribute.Required;
@@ -502,10 +502,10 @@ export interface CommonLink extends Schema.Component {
 }
 
 export interface CommonLittleListComponent extends Schema.Component {
-  collectionName: "components_common_little_list_components";
+  collectionName: 'components_common_little_list_components';
   info: {
-    displayName: "LittleListComponent";
-    description: "";
+    displayName: 'LittleListComponent';
+    description: '';
   };
   attributes: {
     text: Attribute.Text & Attribute.Required;
@@ -516,10 +516,10 @@ export interface CommonLittleListComponent extends Schema.Component {
 }
 
 export interface CommonLogo extends Schema.Component {
-  collectionName: "components_common_logos";
+  collectionName: 'components_common_logos';
   info: {
-    displayName: "Logo";
-    description: "";
+    displayName: 'Logo';
+    description: '';
   };
   attributes: {
     logo: Attribute.Media & Attribute.Required;
@@ -527,10 +527,10 @@ export interface CommonLogo extends Schema.Component {
 }
 
 export interface CommonNotRequiredLink extends Schema.Component {
-  collectionName: "components_common_not_required_links";
+  collectionName: 'components_common_not_required_links';
   info: {
-    displayName: "NotRequiredLink";
-    description: "";
+    displayName: 'NotRequiredLink';
+    description: '';
   };
   attributes: {
     Label: Attribute.String & Attribute.Required;
@@ -539,10 +539,10 @@ export interface CommonNotRequiredLink extends Schema.Component {
 }
 
 export interface CommonOffersCarouselItem extends Schema.Component {
-  collectionName: "components_common_offers_carousel_items";
+  collectionName: 'components_common_offers_carousel_items';
   info: {
-    displayName: "OffersCarouselItem";
-    description: "";
+    displayName: 'OffersCarouselItem';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -552,18 +552,18 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     text: Attribute.Text & Attribute.Required;
     secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
-      ["purple", "yellow", "magenta", "orange", "green"]
+      ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
       Attribute.Required &
-      Attribute.DefaultTo<"purple">;
+      Attribute.DefaultTo<'purple'>;
   };
 }
 
 export interface CommonOffers extends Schema.Component {
-  collectionName: "components_common_offers";
+  collectionName: 'components_common_offers';
   info: {
-    displayName: "Offers";
-    description: "";
+    displayName: 'Offers';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -575,9 +575,9 @@ export interface CommonOffers extends Schema.Component {
 }
 
 export interface CommonPerson extends Schema.Component {
-  collectionName: "components_common_people";
+  collectionName: 'components_common_people';
   info: {
-    displayName: "Person";
+    displayName: 'Person';
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
@@ -587,10 +587,10 @@ export interface CommonPerson extends Schema.Component {
 }
 
 export interface CommonPiledCardItem extends Schema.Component {
-  collectionName: "components_common_piled_card_items";
+  collectionName: 'components_common_piled_card_items';
   info: {
-    displayName: "PiledCardItem";
-    description: "";
+    displayName: 'PiledCardItem';
+    description: '';
   };
   attributes: {
     title: Attribute.String;
@@ -603,9 +603,9 @@ export interface CommonPiledCardItem extends Schema.Component {
 }
 
 export interface CommonSimpleTextColumn extends Schema.Component {
-  collectionName: "components_common_simple_text_columns";
+  collectionName: 'components_common_simple_text_columns';
   info: {
-    displayName: "Simple Text Column";
+    displayName: 'Simple Text Column';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -614,10 +614,10 @@ export interface CommonSimpleTextColumn extends Schema.Component {
 }
 
 export interface CommonTestimonyCarousel extends Schema.Component {
-  collectionName: "components_block_testimony_carousels";
+  collectionName: 'components_block_testimony_carousels';
   info: {
-    displayName: "TestimonyCarouselItem";
-    description: "";
+    displayName: 'TestimonyCarouselItem';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -628,10 +628,10 @@ export interface CommonTestimonyCarousel extends Schema.Component {
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
-  collectionName: "components_common_vertical_carousel_items";
+  collectionName: 'components_common_vertical_carousel_items';
   info: {
-    displayName: "verticalCarouselItem";
-    description: "";
+    displayName: 'verticalCarouselItem';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -642,42 +642,42 @@ export interface CommonVerticalCarouselItem extends Schema.Component {
 }
 
 export interface FooterLegalLinks extends Schema.Component {
-  collectionName: "components_footer_legal_links";
+  collectionName: 'components_footer_legal_links';
   info: {
-    displayName: "LegalLinks";
+    displayName: 'LegalLinks';
   };
   attributes: {};
 }
 
 export interface FooterList extends Schema.Component {
-  collectionName: "components_footer_lists";
+  collectionName: 'components_footer_lists';
   info: {
-    displayName: "Lists";
-    description: "";
+    displayName: 'Lists';
+    description: '';
   };
   attributes: {
     Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<"common.link", true>;
+    Links: Attribute.Component<'common.link', true>;
   };
 }
 
 export interface HeaderAccountDropdown extends Schema.Component {
-  collectionName: "components_header_account_dropdowns";
+  collectionName: 'components_header_account_dropdowns';
   info: {
-    displayName: "accountDropdown";
+    displayName: 'accountDropdown';
   };
   attributes: {
     buttonLabel: Attribute.String & Attribute.Required;
-    items: Attribute.Component<"header.account-item", true> &
+    items: Attribute.Component<'header.account-item', true> &
       Attribute.Required;
   };
 }
 
 export interface HeaderAccountItem extends Schema.Component {
-  collectionName: "components_header_account_item";
+  collectionName: 'components_header_account_item';
   info: {
-    displayName: "accountItem";
-    description: "";
+    displayName: 'accountItem';
+    description: '';
   };
   attributes: {
     label: Attribute.String & Attribute.Required;
@@ -688,17 +688,17 @@ export interface HeaderAccountItem extends Schema.Component {
 }
 
 export interface HeaderHeader extends Schema.Component {
-  collectionName: "components_header_headers";
+  collectionName: 'components_header_headers';
   info: {
-    displayName: "header";
+    displayName: 'header';
   };
   attributes: {};
 }
 
 export interface HeaderLoginItems extends Schema.Component {
-  collectionName: "components_header_login_items";
+  collectionName: 'components_header_login_items';
   info: {
-    displayName: "loginItems";
+    displayName: 'loginItems';
   };
   attributes: {
     label: Attribute.String & Attribute.Required;
@@ -709,13 +709,13 @@ export interface HeaderLoginItems extends Schema.Component {
 }
 
 export interface HeaderLogin extends Schema.Component {
-  collectionName: "components_header_logins";
+  collectionName: 'components_header_logins';
   info: {
-    displayName: "login";
+    displayName: 'login';
   };
   attributes: {
     buttonLabel: Attribute.String & Attribute.Required;
-    loginItems: Attribute.Component<"header.login-items", true> &
+    loginItems: Attribute.Component<'header.login-items', true> &
       Attribute.SetMinMax<{
         max: 2;
       }>;
@@ -723,21 +723,21 @@ export interface HeaderLogin extends Schema.Component {
 }
 
 export interface HeaderMegaMenu extends Schema.Component {
-  collectionName: "components_header_mega_menus";
+  collectionName: 'components_header_mega_menus';
   info: {
-    displayName: "megaMenu";
-    description: "";
+    displayName: 'megaMenu';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    primaryListItems: Attribute.Component<"common.link", true> &
+    primaryListItems: Attribute.Component<'common.link', true> &
       Attribute.Required;
-    secondaryListItems: Attribute.Component<"common.link", true> &
+    secondaryListItems: Attribute.Component<'common.link', true> &
       Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     cardTitle: Attribute.String & Attribute.Required;
     cardDescription: Attribute.String & Attribute.Required;
-    cardLink: Attribute.Component<"common.link"> & Attribute.Required;
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
     bannerText: Attribute.String;
     cardFirstEmoji: Attribute.String & Attribute.Required;
     cardSecondEmoji: Attribute.String & Attribute.Required;
@@ -745,20 +745,20 @@ export interface HeaderMegaMenu extends Schema.Component {
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
-  collectionName: "components_header_navigation_items";
+  collectionName: 'components_header_navigation_items';
   info: {
-    displayName: "navigationItems";
+    displayName: 'navigationItems';
   };
   attributes: {
     label: Attribute.String & Attribute.Required;
-    megaMenu: Attribute.Component<"header.mega-menu">;
+    megaMenu: Attribute.Component<'header.mega-menu'>;
   };
 }
 
 export interface HomeEligibilityItems extends Schema.Component {
-  collectionName: "components_home_eligibility_items";
+  collectionName: 'components_home_eligibility_items';
   info: {
-    displayName: "eligibilityItems";
+    displayName: 'eligibilityItems';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -768,33 +768,33 @@ export interface HomeEligibilityItems extends Schema.Component {
 }
 
 export interface HomeEligibilitySection extends Schema.Component {
-  collectionName: "components_home_eligibility_sections";
+  collectionName: 'components_home_eligibility_sections';
   info: {
-    displayName: "eligibilitySection";
-    description: "";
+    displayName: 'eligibilitySection';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    items: Attribute.Component<"home.eligibility-items", true> &
+    items: Attribute.Component<'home.eligibility-items', true> &
       Attribute.Required;
     cardTitle: Attribute.Text & Attribute.Required;
     cardDescription: Attribute.String & Attribute.Required;
-    cardCta: Attribute.Component<"common.link"> & Attribute.Required;
+    cardCta: Attribute.Component<'common.link'> & Attribute.Required;
     firstEmoji: Attribute.String & Attribute.Required;
     secondEmoji: Attribute.String & Attribute.Required;
   };
 }
 
 export interface HomeHeroSection extends Schema.Component {
-  collectionName: "components_home_hero_sections";
+  collectionName: 'components_home_hero_sections';
   info: {
-    displayName: "heroSection";
-    description: "";
+    displayName: 'heroSection';
+    description: '';
   };
   attributes: {
     title: Attribute.Text & Attribute.Required;
     subTitle: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     firstEmoji: Attribute.String & Attribute.Required;
     secondEmoji: Attribute.String & Attribute.Required;
     thirdEmoji: Attribute.String & Attribute.Required;
@@ -806,27 +806,27 @@ export interface HomeHeroSection extends Schema.Component {
 }
 
 export interface HomeRecommendationsSection extends Schema.Component {
-  collectionName: "components_home_recommendations_sections";
+  collectionName: 'components_home_recommendations_sections';
   info: {
-    displayName: "recommendationsSection";
+    displayName: 'recommendationsSection';
   };
   attributes: {
-    recommendations: Attribute.Component<"block.vertical-carousel"> &
+    recommendations: Attribute.Component<'block.vertical-carousel'> &
       Attribute.Required;
     recommendationsBackendTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
 export interface SimulatorAgeQuestion extends Schema.Component {
-  collectionName: "components_simulator_age_questions";
+  collectionName: 'components_simulator_age_questions';
   info: {
-    displayName: "AgeQuestion";
-    description: "";
+    displayName: 'AgeQuestion';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    answers: Attribute.Component<"simulator.answer", true> &
+    answers: Attribute.Component<'simulator.answer', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
         min: 6;
@@ -836,9 +836,9 @@ export interface SimulatorAgeQuestion extends Schema.Component {
 }
 
 export interface SimulatorAmountScreen extends Schema.Component {
-  collectionName: "components_simulator_amount_screens";
+  collectionName: 'components_simulator_amount_screens';
   info: {
-    displayName: "Amount Screen";
+    displayName: 'Amount Screen';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -847,10 +847,10 @@ export interface SimulatorAmountScreen extends Schema.Component {
 }
 
 export interface SimulatorAnswer extends Schema.Component {
-  collectionName: "components_simulator_answers";
+  collectionName: 'components_simulator_answers';
   info: {
-    displayName: "Answer";
-    description: "";
+    displayName: 'Answer';
+    description: '';
   };
   attributes: {
     answer: Attribute.String & Attribute.Required;
@@ -859,27 +859,27 @@ export interface SimulatorAnswer extends Schema.Component {
 }
 
 export interface SimulatorFailureScreen extends Schema.Component {
-  collectionName: "components_simulator_failure_screens";
+  collectionName: 'components_simulator_failure_screens';
   info: {
-    displayName: "Failure Screen";
-    description: "";
+    displayName: 'Failure Screen';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
 export interface SimulatorRadioQuestion extends Schema.Component {
-  collectionName: "components_simulator_radio_questions";
+  collectionName: 'components_simulator_radio_questions';
   info: {
-    displayName: "RadioQuestion";
-    description: "";
+    displayName: 'RadioQuestion';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    answers: Attribute.Component<"simulator.answer", true> &
+    answers: Attribute.Component<'simulator.answer', true> &
       Attribute.Required &
       Attribute.SetMinMax<{
         min: 2;
@@ -889,9 +889,9 @@ export interface SimulatorRadioQuestion extends Schema.Component {
 }
 
 export interface SimulatorStep extends Schema.Component {
-  collectionName: "components_simulator_steps";
+  collectionName: 'components_simulator_steps';
   info: {
-    displayName: "Step";
+    displayName: 'Step';
   };
   attributes: {
     step: Attribute.String & Attribute.Required;
@@ -899,20 +899,20 @@ export interface SimulatorStep extends Schema.Component {
 }
 
 export interface SimulatorSuccessScreen extends Schema.Component {
-  collectionName: "components_simulator_success_screens";
+  collectionName: 'components_simulator_success_screens';
   info: {
-    displayName: "Success Screen";
+    displayName: 'Success Screen';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    steps: Attribute.Component<"simulator.step", true> & Attribute.Required;
-    cta: Attribute.Component<"common.link"> & Attribute.Required;
+    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
     needSupport: Attribute.String & Attribute.Required;
-    supportLink: Attribute.Component<"common.link"> & Attribute.Required;
+    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
   };
 }
 
-declare module "@strapi/types" {
+declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
