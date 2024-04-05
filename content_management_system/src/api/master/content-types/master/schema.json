@@ -12,16 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "simpleText": {
-      "type": "component",
-      "repeatable": false,
-      "component": "block.simple-text"
-    },
-    "simpleTextTwo": {
-      "type": "component",
-      "repeatable": false,
-      "component": "block.simple-text"
-    },
     "image": {
       "type": "component",
       "repeatable": false,

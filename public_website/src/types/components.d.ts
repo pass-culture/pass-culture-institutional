@@ -13,11 +13,18 @@ export interface BlockBreadCrumbWrapper extends Schema.Component {
 
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
+  collectionName: 'components_block_centered_texts';
   info: {
     displayName: 'Centered Text';
     description: '';
   };
+    displayName: 'Centered Text';
+    description: '';
+  };
   attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+  };
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
   };
@@ -284,6 +291,7 @@ export interface BlockPiledCards extends Schema.Component {
   };
   attributes: {
     items: Attribute.Component<'common.piled-card-item', true>;
+    accessibleTitle: Attribute.String & Attribute.Required;
   };
 }
 
@@ -346,7 +354,8 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleTextV2 extends Schema.Component {
   collectionName: 'components_block_simple_text_v2s';
   info: {
-    displayName: 'Simple Text v2';
+    displayName: 'Simple Text';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -580,12 +589,16 @@ export interface CommonPiledCardItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    image: Attribute.Media;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
-    color: Attribute.String;
+    theme: Attribute.Enumeration<
+      ['purple', 'yellow', 'magenta', 'orange', 'green']
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
   };
 }
 
