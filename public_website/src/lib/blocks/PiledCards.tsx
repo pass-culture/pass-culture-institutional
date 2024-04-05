@@ -8,7 +8,7 @@ import { APIResponse } from '@/types/strapi'
 
 TODO:
 
-- [ ] Width chelou (overflow)
+- [x] Width chelou (overflow)
 - [ ] fleche de controle
 - [ ] emoji outline
 - [ ] gestion des couleurs
@@ -16,7 +16,7 @@ TODO:
   - [ ] Vérifier la liste des couleurs dispo
 - [ ] version mobile
 - [ ] En fait c'est pas un carousel mais
-  - [ ] desktop : une animation au scroll
+  - [x] desktop : une animation au scroll
   - [ ] mobile : carousel-ish
 */
 
@@ -73,7 +73,6 @@ export function PiledCards(props: PiledCardsProps) {
             />
             <StyledContentListItems
               ref={(el) => (itemRefs.current[index] = el)}
-              $index={index}
               $itemTheme={item.theme}
               aria-label={`Card ${index + 1}`}>
               <StyledImageWrapper>
@@ -84,7 +83,7 @@ export function PiledCards(props: PiledCardsProps) {
               </StyledImageWrapper>
 
               <StyledContentTextWrapper>
-                <p>0{index}</p>
+                <p>{(index + 1).toString().padStart(2, '0')}</p>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </StyledContentTextWrapper>
@@ -115,9 +114,9 @@ const Root = styled.div`
     margin-bottom: 8rem;
     color: ${theme.colors.white};
 
-    /* @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
-    } */
+    }
   `}
 `
 
@@ -140,16 +139,13 @@ const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
 }
 
 const StyledContentListItems = styled.li<{
-  $index?: number
-  $color?: string
   $itemTheme: PiledCardItemsTheme
 }>`
-  ${({ $index, $itemTheme, theme }) => css`
-    /* transform: scale(${$index ? 1 + $index * 0.01 : 1}); */
+  ${({ $itemTheme, theme }) => css`
     transform-origin: center top;
 
     background: ${CARD_BACKGROUNDS[$itemTheme]};
-    height: 40rem;
+    height: 30rem;
     border-radius: 2rem;
     box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
     position: sticky;
