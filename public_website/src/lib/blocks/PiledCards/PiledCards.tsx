@@ -1,6 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
+import { PiledCardItemsTheme } from './piled-card-items-theme'
+import { PiledCardsCarousel } from './PiledCardsCarousel'
+import { PiledCardsCarouselSlideProps } from './PiledCardsCarouselSlide'
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -21,8 +24,6 @@ TODO:
   - [x] desktop : une animation au scroll
   - [ ] mobile : carousel-ish
 */
-
-type PiledCardItemsTheme = 'purple' | 'yellow' | 'magenta' | 'orange' | 'green'
 
 interface Item {
   id: number
@@ -64,47 +65,56 @@ export function PiledCards(props: PiledCardsProps) {
     })
   }, [])
 
+  const carouselItems = useMemo(() => {
+    const items: PiledCardsCarouselSlideProps[] = props.items.map((it, i) => ({
+      slideIndex: i,
+      ...it,
+    }))
+    return items
+  }, [props.items])
+
   return (
-    <Root>
-      <StyledContentWrapper>
-        {props.items.map((item, index) => (
-          <React.Fragment key={item.id}>
-            <ItemScrollSentinel
-              aria-hidden="true"
-              ref={(el) => (sentinelRefs.current[index] = el)}
-            />
-            <StyledContentListItems
-              ref={(el) => (itemRefs.current[index] = el)}
-              $itemTheme={item.theme}
-              aria-label={`Card ${index + 1}`}>
-              <StyledImageWrapper>
-                <StyledImage
-                  src={item.image?.data.attributes.url}
-                  alt={item.image?.data.attributes.alternativeText}
-                />
-                <StyledFirstEmoji aria-hidden="true">
-                  <OutlinedText blurDeviation={1}>
-                    {item.firstIcon}
-                  </OutlinedText>
-                </StyledFirstEmoji>
-                <StyledSecondEmoji aria-hidden="true">
-                  <OutlinedText blurDeviation={1}>
-                    {item.secondIcon}
-                  </OutlinedText>
-                </StyledSecondEmoji>
-              </StyledImageWrapper>
+    <React.Fragment>
+      <Root>
+        <StyledContentWrapper>
+          {props.items.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <ItemScrollSentinel
+                aria-hidden="true"
+                ref={(el) => (sentinelRefs.current[index] = el)}
+              />
+              <StyledContentListItems
+                ref={(el) => (itemRefs.current[index] = el)}
+                $itemTheme={item.theme}
+                aria-label={`Card ${index + 1}`}>
+                <StyledImageWrapper>
+                  <StyledImage
+                    src={item.image?.data.attributes.url}
+                    alt={item.image?.data.attributes.alternativeText}
+                  />
+                  <StyledFirstEmoji aria-hidden="true">
+                    <OutlinedText blurDeviation={1}>
+                      {item.firstIcon}
+                    </OutlinedText>
+                  </StyledFirstEmoji>
+                  <StyledSecondEmoji aria-hidden="true">
+                    <OutlinedText blurDeviation={1}>
+                      {item.secondIcon}
+                    </OutlinedText>
+                  </StyledSecondEmoji>
+                </StyledImageWrapper>
 
-              <StyledContentTextWrapper>
-                <p>{(index + 1).toString().padStart(2, '0')}</p>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </StyledContentTextWrapper>
-            </StyledContentListItems>
-          </React.Fragment>
-        ))}
-      </StyledContentWrapper>
+                <StyledContentTextWrapper>
+                  <p>{(index + 1).toString().padStart(2, '0')}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </StyledContentTextWrapper>
+              </StyledContentListItems>
+            </React.Fragment>
+          ))}
+        </StyledContentWrapper>
 
-      {/* <DotsWrapper>
+        {/* <DotsWrapper>
         {items.map((_, index) => (
           <Dot
             key={_.title}
@@ -113,7 +123,9 @@ export function PiledCards(props: PiledCardsProps) {
           />
         ))}
       </DotsWrapper> */}
-    </Root>
+      </Root>
+      <StyledCarousel title="Pouet" items={carouselItems} />
+    </React.Fragment>
   )
 }
 
@@ -126,7 +138,17 @@ const Root = styled.div`
     margin-bottom: 8rem;
     color: ${theme.colors.white};
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
+  `}
+`
+
+const StyledCarousel = styled(PiledCardsCarousel)`
+  ${({ theme }) => css`
+    margin-bottom: 8rem;
+
+    @media (width >= ${theme.mediaQueries.mobile}) {
       display: none;
     }
   `}
@@ -168,6 +190,10 @@ const StyledContentListItems = styled.li<{
     gap: 10rem;
 
     padding: 5rem;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      gap: 2rem;
+    }
   `}
 `
 
@@ -175,8 +201,10 @@ const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     gap: 1rem;
+
+    overflow: hidden;
 
     h3 {
       font-size: ${theme.fonts.sizes['6xl']};
@@ -240,9 +268,10 @@ const StyledFirstEmoji = styled(Typo.Emoji)`
     right: 0;
     transform: rotate(8.7deg) translateX(2rem);
 
-    /* @media (width < ${theme.mediaQueries.tablet}) {
-      display: none;
-    } */
+    @media (width < ${theme.mediaQueries.tablet}) {
+      font-size: ${theme.fonts.sizes['2xl']};
+      transform: rotate(8.7deg) translateX(1rem);
+    }
   `}
 `
 const StyledSecondEmoji = styled(Typo.Emoji)`
@@ -252,8 +281,9 @@ const StyledSecondEmoji = styled(Typo.Emoji)`
     left: 0;
     transform: rotate(-8.7deg) translateX(-2rem);
 
-    /* @media (width < ${theme.mediaQueries.tablet}) {
-      display: none;
-    } */
+    @media (width < ${theme.mediaQueries.tablet}) {
+      font-size: ${theme.fonts.sizes['2xl']};
+      transform: rotate(8.7deg) translateX(-1rem);
+    }
   `}
 `
