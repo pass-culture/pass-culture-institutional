@@ -106,14 +106,15 @@
       ]
     },
     "path": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
-    "type": {
+    "pageDaffichage": {
       "type": "enumeration",
       "enum": [
         "Jeunes et parents",
         "Acteurs culturels",
-        "Documentation"
+        "S’informer"
       ],
       "required": true
     }

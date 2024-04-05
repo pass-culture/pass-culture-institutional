@@ -1021,7 +1021,9 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     city: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    type: Attribute.Enumeration<['Espace presse', 'Acteurs culturels']>;
+    pageDaffichage: Attribute.Enumeration<
+      ['Acteurs culturels', 'S\u2019informer - presse']
+    >;
     path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
@@ -1448,9 +1450,9 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
-    path: Attribute.String;
-    type: Attribute.Enumeration<
-      ['Jeunes et parents', 'Acteurs culturels', 'Documentation']
+    path: Attribute.String & Attribute.Required;
+    pageDaffichage: Attribute.Enumeration<
+      ['Jeunes et parents', 'Acteurs culturels', 'S\u2019informer']
     > &
       Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -1670,8 +1672,13 @@ export interface ApiResourceResource extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
-    type: Attribute.Enumeration<
-      ['Enseignants', 'Documentation', 'Presse', 'Etudes']
+    pageDaffichage: Attribute.Enumeration<
+      [
+        'Enseignants',
+        'S\u2019informer - ressources',
+        'S\u2019informer - presse',
+        'S\u2019informer - \u00E9tudes'
+      ]
     > &
       Attribute.Required;
     partnership: Attribute.Enumeration<
