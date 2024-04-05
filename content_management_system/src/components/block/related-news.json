@@ -13,20 +13,6 @@
       "type": "component",
       "repeatable": false,
       "component": "common.link"
-    },
-    "category": {
-      "type": "enumeration",
-      "enum": [
-        "Étude",
-        "Article",
-        "Évènement",
-        "Partenariat",
-        "Rencontre",
-        "Dossier de presse",
-        "Communiqué de presse",
-        "Étude ritualisée",
-        "Étude ponctuelle"
-      ]
     }
   }
 }

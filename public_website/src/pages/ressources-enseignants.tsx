@@ -13,24 +13,24 @@ import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsREData: APIResponseData<'api::news.news'>[]
+  resourceREData: APIResponseData<'api::resource.resource'>[]
   ressourcesEnseignantsListe: APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
 }
 
 export default function RessourcesEnseignants({
-  newsREData,
+  resourceREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsREData.map((item) => item.attributes.category))
+    new Set(resourceREData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsREData.map((item) => item.attributes.localisation))
+    new Set(resourceREData.map((item) => item.attributes.localisation))
   )
 
   const sec = Array.from(
-    new Set(newsREData.map((item) => item.attributes.secteur))
+    new Set(resourceREData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
@@ -40,7 +40,9 @@ export default function RessourcesEnseignants({
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+    []
+  )
 
   useEffect(() => {
     setCategory(cat)
@@ -50,7 +52,7 @@ export default function RessourcesEnseignants({
     setSecteur(sec)
     setOriginalSecteur(sec)
 
-    setData(newsREData)
+    setData(resourceREData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
@@ -60,7 +62,7 @@ export default function RessourcesEnseignants({
         switch (filtre.filtre) {
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsREData.map((item) => item.attributes.category))
+              new Set(resourceREData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -68,7 +70,9 @@ export default function RessourcesEnseignants({
             }
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsREData.map((item) => item.attributes.localisation))
+              new Set(
+                resourceREData.map((item) => item.attributes.localisation)
+              )
             )
             return {
               ...filtre,
@@ -76,7 +80,7 @@ export default function RessourcesEnseignants({
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
-              new Set(newsREData.map((item) => item.attributes.secteur))
+              new Set(resourceREData.map((item) => item.attributes.secteur))
             )
             return {
               ...filtre,
@@ -106,11 +110,14 @@ export default function RessourcesEnseignants({
         localisation: {
           $eqi: localisation,
         },
+        type: {
+          $eqi: 'Enseignants',
+        },
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
+    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+      `/resources?${newsQuery}`
     )
 
     setData(news.data)
@@ -154,6 +161,7 @@ export default function RessourcesEnseignants({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="ressources"
         buttonText={ressourcesEnseignantsListe.attributes.buttonText}
       />
 
@@ -201,11 +209,14 @@ export const getStaticProps = (async () => {
           'Étude ritualisée',
         ],
       },
+      type: {
+        $eqi: 'Enseignants',
+      },
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+    `/resources?${newsQuery}`
   )
 
   const rsQuery = stringify({
@@ -227,7 +238,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsREData: news.data,
+      resourceREData: news.data,
       ressourcesEnseignantsListe: data,
     },
   }

@@ -18,6 +18,7 @@ type ListCardProps = {
   endTime: string | Date
   city: string
   cta: { Label: string; URL: string }
+  type?: string
 }
 
 export function EventCard({
@@ -29,6 +30,7 @@ export function EventCard({
   endTime,
   city,
   cta,
+  type,
 }: ListCardProps) {
   const convertTime = (time: string | Date) => {
     let timeString: string
@@ -64,10 +66,14 @@ export function EventCard({
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
-        <CtaLink href={cta.URL} target="_blank">
-          <TargetBlank />
-          {cta.Label}
-        </CtaLink>
+        {type
+          ? cta?.URL && (
+              <CtaLink href={type + cta.URL} target="_blank">
+                <TargetBlank />
+                {cta.Label}
+              </CtaLink>
+            )
+          : cta?.URL && <CtaLink href={cta.URL}>{cta.Label}</CtaLink>}
       </StyledContentWrapper>
 
       {imageUrl && (

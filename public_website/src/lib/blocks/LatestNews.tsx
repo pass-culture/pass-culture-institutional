@@ -9,8 +9,10 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 type LatestNewsProps = {
   title: string
-  news: APIResponseData<'api::news.news'>[]
-  cta: { Label: string; URL: string }
+  news:
+    | APIResponseData<'api::news.news'>[]
+    | APIResponseData<'api::resource.resource'>[]
+  cta?: { Label: string; URL: string }
   className?: string
 }
 
@@ -36,7 +38,7 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
           )
         })}
       </StyledList>
-      <Button href={cta.URL}>{cta.Label}</Button>
+      {cta?.Label && cta?.URL && <Button href={cta.URL}>{cta.Label}</Button>}
     </Root>
   )
 }
