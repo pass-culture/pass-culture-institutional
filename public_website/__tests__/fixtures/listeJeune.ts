@@ -50,6 +50,10 @@ export const listeJeunePageFixtures = {
                   caption: null,
                   width: 3267,
                   height: 4900,
+
+                  hash: 'microsoft_365_k_T_Fmwxk_aerF5b_Q_unsplash_b376f7bd44',
+                  ext: '.jpg',
+                  mime: 'image/jpeg',
                   formats: {
                     large: {
                       ext: '.jpg',
@@ -96,9 +100,6 @@ export const listeJeunePageFixtures = {
                       height: 154,
                     },
                   },
-                  hash: 'microsoft_365_k_T_Fmwxk_aerF5b_Q_unsplash_b376f7bd44',
-                  ext: '.jpg',
-                  mime: 'image/jpeg',
                   size: 1777.4237,
                   url: 'https://storage.googledapisrae.com/site-instit-testing-assets-c6798d59e90a59b6/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44/microsoft_365_k_T_Fmwxk_F5b_Q_unsplash_b376f7bd44.jpg',
                   previewUrl: null,

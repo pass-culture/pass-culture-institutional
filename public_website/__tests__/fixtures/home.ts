@@ -282,8 +282,6 @@ export const homePageFixtures = {
                   name: 'facebook-imagreae.jpg',
                   alternativeText: null,
                   caption: null,
-                  width: 1200,
-                  height: 628,
                   formats: {
                     large: {
                       ext: '.jpg',
@@ -294,6 +292,8 @@ export const homePageFixtures = {
                       name: 'large-facebodfdok.jpg',
                       path: null,
                     },
+                    width: 1200,
+                    height: 628,
                     thumbnail: {
                       ext: '.jpg',
                       url: 'https://www.example.cdfsom/images/facebook/thumbnail.jpg',
@@ -304,12 +304,12 @@ export const homePageFixtures = {
                       path: null,
                     },
                   },
-                  hash: 'facebook-image-hash',
-                  ext: '.jpg',
+                  hash: 'aa',
                   mime: 'image/aerejpeg',
                   size: 987654,
                   url: 'https://www.example.com/sdfimages/facebook.jpg',
                   previewUrl: null,
+                  ext: '.jpg',
                   createdAt: '2024-04-0321T00:03:00Z',
                   provider: 'example-zzzprovider',
                   provider_metadata: null,

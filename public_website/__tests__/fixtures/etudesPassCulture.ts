@@ -94,7 +94,7 @@ export const EtudesPassCulturePageFixtures = {
                       path: null,
                     },
                   },
-                  hash: 'facebook-image-hash',
+                  hash: 'facebook-image-heeash',
                   ext: '.jpg',
                   mime: 'image/jpeg',
                   size: 987654,
