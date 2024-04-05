@@ -1342,8 +1342,6 @@ export interface ApiMasterMaster extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    simpleText: Attribute.Component<'block.simple-text'>;
-    simpleTextTwo: Attribute.Component<'block.simple-text'>;
     image: Attribute.Component<'block.image'>;
     imageTextRight: Attribute.Component<'block.image-text'>;
     imageTextLeft: Attribute.Component<'block.image-text'>;
@@ -1511,7 +1509,6 @@ export interface ApiPagePage extends Schema.CollectionType {
       [
         'block.centered-text',
         'block.header',
-        'block.simple-text',
         'block.social-media',
         'block.double-push-cta',
         'block.image-text',
@@ -1524,7 +1521,6 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.video',
         'block.key-number-carousel',
         'block.logos',
-        'block.testimonies',
         'block.latest-news',
         'block.experience-video-carousel',
         'block.offers-carousel',

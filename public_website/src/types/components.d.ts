@@ -347,7 +347,8 @@ export interface BlockSimplePushCta extends Schema.Component {
 export interface BlockSimpleTextV2 extends Schema.Component {
   collectionName: 'components_block_simple_text_v2s';
   info: {
-    displayName: 'Simple Text v2';
+    displayName: 'Simple Text';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;

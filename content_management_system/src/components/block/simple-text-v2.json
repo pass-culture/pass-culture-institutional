@@ -1,7 +1,8 @@
 {
   "collectionName": "components_block_simple_text_v2s",
   "info": {
-    "displayName": "Simple Text v2"
+    "displayName": "Simple Text",
+    "description": ""
   },
   "options": {},
   "attributes": {
