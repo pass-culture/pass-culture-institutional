@@ -16,11 +16,10 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
-      <Seo metaData={props.data.attributes.seo} />
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-
+      <Seo metaData={props.data.attributes.seo} />
       <StyledLatestNews
         news={props.latestStudies}
         title="Les dernières
