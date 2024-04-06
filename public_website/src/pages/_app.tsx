@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
+import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { Footer, FooterProps } from '@/ui/components/footer/Footer'
 import { Header, HeaderProps } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
@@ -28,25 +29,31 @@ export default function MyApp({
 }: MyAppProps) {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {/* eslint-disable-next-line react/no-unknown-property */}
-      <style jsx global>{`
-        html {
-          font-family: ${montSerrat.style.fontFamily} !important;
-        }
-      `}</style>
-      <SkipLink label="Aller au contenu principal" href="#main-content" />
-      <SkipLink label="Aller au pied de page" href="#footer" />
-      <Header
-        targetItems={headerData.targetItems}
-        aboutItems={headerData.aboutItems}
-        login={headerData.login}
-        signup={headerData.signup}
-      />
-      <main id="main-content">
-        <Component {...pageProps} />
-      </main>
-      <Footer {...footerData} />
+      <BreadcrumbContext.Provider
+        value={{
+          targetItems: headerData.targetItems,
+          aboutItems: headerData.aboutItems,
+        }}>
+        <GlobalStyles />
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        <style jsx global>{`
+          html {
+            font-family: ${montSerrat.style.fontFamily} !important;
+          }
+        `}</style>
+        <SkipLink label="Aller au contenu principal" href="#main-content" />
+        <SkipLink label="Aller au pied de page" href="#footer" />
+        <Header
+          targetItems={headerData.targetItems}
+          aboutItems={headerData.aboutItems}
+          login={headerData.login}
+          signup={headerData.signup}
+        />
+        <main id="main-content">
+          <Component {...pageProps} />
+        </main>
+        <Footer {...footerData} />
+      </BreadcrumbContext.Provider>
     </ThemeProvider>
   )
 }

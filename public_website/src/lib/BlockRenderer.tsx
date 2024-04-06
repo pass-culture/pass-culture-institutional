@@ -32,7 +32,7 @@ import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
-import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { Breadcrumb2 } from '@/ui/components/breadcrumb/Breadcrumb2'
 export interface Block {
   __component: string
 }
@@ -44,7 +44,7 @@ interface BlockRendererProps {
 const COMPONENTS: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (props: ComponentProps<any>) => React.JSX.Element
+  (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
   'block.header': Header,
   'block.header-test': Headertest,
@@ -78,7 +78,7 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.list-bread-crumb': Breadcrumb,
+  'block.list-bread-crumb': Breadcrumb2,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
