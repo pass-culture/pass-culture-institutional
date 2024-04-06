@@ -54,6 +54,8 @@ const Root = styled.div`
     position: relative;
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      margin: 17rem auto;
+
       display: flex;
       justify-content: center;
       border-radius: 0;
@@ -61,6 +63,8 @@ const Root = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 10rem auto;
+
       padding: 1.5rem;
       display: block;
       border-radius: 0;
@@ -124,7 +128,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
     padding: 2rem;
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
-
+    aspect-ratio: 333.49/415;
     @media (width < ${theme.mediaQueries.tablet}) {
       width: 70%;
       aspect-ratio: 1.5;
@@ -166,6 +170,8 @@ const RightSide = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: 0;
       max-width: none;
+      margin: 3rem 0 3rem 0;
+
       p {
         margin: 0;
       }

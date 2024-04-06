@@ -67,6 +67,9 @@ const Root = styled.div`
         width: 100%;
         border-radius: 1rem;
       }
+      figure {
+        margin-bottom: 2rem;
+      }
 
       figcaption {
         width: 100%;

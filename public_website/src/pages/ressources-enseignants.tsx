@@ -263,13 +263,7 @@ const StyledTitle = styled.div`
 `
 
 const StyledListItems = styled(ListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  margin-top: 3rem;
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`

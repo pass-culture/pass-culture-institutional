@@ -37,14 +37,12 @@ export function Eligibility({
         <StyledCardFirstEmoji
           as={OutlinedText}
           dilationRadius={1}
-          shadow
           aria-hidden="true">
           {cardFirstEmoji}
         </StyledCardFirstEmoji>
         <StyledCardSecondEmoji
           as={OutlinedText}
           dilationRadius={1}
-          shadow
           aria-hidden="true">
           {cardSecondEmoji}
         </StyledCardSecondEmoji>
@@ -131,8 +129,8 @@ const StyledCardHeading = styled(OutlinedText)`
 const StyledCardDescription = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.white};
-    font-weight: ${theme.fonts.weights.medium};
     line-height: 2;
+    width: 80%;
   `}
 `
 

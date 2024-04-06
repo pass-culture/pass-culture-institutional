@@ -325,15 +325,15 @@ export default function Presse({
         text={presseListe.attributes.pushCta.text}
         icon={presseListe.attributes.pushCta.icon}
       />
-
-      <SimplePushCta
-        title={presseListe.attributes.aide?.title}
-        image={presseListe.attributes.aide?.image}
-        cta={presseListe.attributes.aide?.cta}
-        surtitle={presseListe.attributes.aide?.surtitle}
-        icon={presseListe.attributes.aide?.icon}
-      />
-
+      <StyledSimplePushCta>
+        <SimplePushCta
+          title={presseListe.attributes.aide?.title}
+          image={presseListe.attributes.aide?.image}
+          cta={presseListe.attributes.aide?.cta}
+          surtitle={presseListe.attributes.aide?.surtitle}
+          icon={presseListe.attributes.aide?.icon}
+        />
+      </StyledSimplePushCta>
       {presseListe.attributes.socialMediaSection &&
         presseListe.attributes.socialMediaSection.title &&
         presseListe.attributes.socialMediaSection.socialMediaLink && (
@@ -438,13 +438,7 @@ const StyledTitle = styled.div`
 `
 
 const StyledListItems = styled(ListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  margin-top: 3rem;
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
@@ -457,13 +451,10 @@ const StyledSocialMedia = styled(SocialMedia)`
   `}
 `
 const StyledeventListItems = styled(EventListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+`
 
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 4rem;
-      margin-bottom: 1rem;
-    }
-  `}
+const StyledSimplePushCta = styled.div`
+  margin-top: 17rem;
 `

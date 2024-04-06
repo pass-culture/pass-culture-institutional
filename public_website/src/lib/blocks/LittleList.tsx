@@ -86,6 +86,7 @@ const Columns = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
+      gap: 3rem;
       display: flex;
       flex-direction: column;
       margin-top: 2rem;

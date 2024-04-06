@@ -84,6 +84,7 @@ const StyledList = styled.ul`
 
     > li {
       scroll-snap-align: center;
+      margin-bottom: 1rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {

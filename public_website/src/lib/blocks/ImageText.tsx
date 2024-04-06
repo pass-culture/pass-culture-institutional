@@ -27,11 +27,6 @@ export function ImageText({
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
-        {icon && (
-          <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
-            {icon}
-          </StyledIcon>
-        )}
         <StyledContentTextWrapper className="first">
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
           <BlocksRenderer content={text} />
@@ -41,6 +36,11 @@ export function ImageText({
             src={getStrapiURL(image?.data.attributes.url)}
             alt={image?.data.attributes.alternativeText || ''}
           />
+          {icon && (
+            <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+              {icon}
+            </StyledIcon>
+          )}
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>
@@ -57,8 +57,8 @@ const Root = styled.div`
       position: relative;
 
       .IconRight {
-        top: 36rem;
-        right: -1rem;
+        top: 6rem;
+        right: -2rem;
         z-index: 2;
       }
     }
@@ -70,17 +70,17 @@ const Root = styled.div`
       gap: 2.5rem;
 
       .IconLeft {
-        top: 36rem;
-        left: 35rem;
+        top: 6rem;
+        right: -2rem;
         z-index: 2;
       }
     }
     @media (width < ${theme.mediaQueries.tablet}) {
       .right {
         .IconRight {
-          top: 23rem;
+          top: 3rem;
           right: auto;
-          left: 37rem;
+          left: -1rem;
           z-index: 2;
         }
       }
@@ -90,9 +90,9 @@ const Root = styled.div`
         grid-template-columns: 1.5fr 1fr;
 
         .IconLeft {
-          top: 23rem;
+          top: 3rem;
           right: auto;
-          left: 37rem;
+          left: -1rem;
           z-index: 2;
         }
       }
@@ -108,7 +108,7 @@ const Root = styled.div`
 
         .IconRight,
         .IconLeft {
-          top: 23rem;
+          top: 1rem;
           left: 2rem;
           z-index: 2;
         }
@@ -123,7 +123,7 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-    padding: 10rem 1.5rem 2.5rem;
+    padding: 10rem 3.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
 
@@ -181,7 +181,7 @@ const StyledContentImagetWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: end;
-
+    position: relative;
     @media (width < ${theme.mediaQueries.tablet}) {
       justify-content: center;
     }
@@ -193,8 +193,14 @@ const StyledContentImagetWrapper = styled.div`
 `
 
 const StyledHeading = styled(Typo.Heading2)`
-  max-width: 36rem;
-  margin: 0 0 3rem;
+  ${({ theme }) => css`
+    max-width: 36rem;
+    margin: 0 0 3rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 0 0 1rem;
+    }
+  `}
 `
 
 const StyledImage = styled.img`
@@ -204,6 +210,7 @@ const StyledImage = styled.img`
     transform: rotate(2deg);
     box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
     border-radius: 1.5rem;
+    aspect-ratio: 385.54/480.87;
 
     @media (width < ${theme.mediaQueries.tablet}) {
       max-width: 100%;
@@ -217,9 +224,12 @@ const StyledImage = styled.img`
 const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['8xl']};
-    max-width: 5rem;
     height: auto;
     transform: rotate(2deg);
     position: absolute;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      font-size: ${theme.fonts.sizes['6xl']};
+    }
   `}
 `

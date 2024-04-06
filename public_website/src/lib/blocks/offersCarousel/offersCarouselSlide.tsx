@@ -3,6 +3,7 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 
 type OffersCarouselSlideTheme =
   | 'purple'
@@ -43,8 +44,8 @@ export function OffersCarouselSlide({
           <StyledOffersHeader>
             <StyledOffersSurtitle>{surtitle}</StyledOffersSurtitle>
             <StyledOffersSurtitle>{secondSurtitle}</StyledOffersSurtitle>
-            <StyledFirstIcon>{firstIcon}</StyledFirstIcon>
-            <StyledSecondIcon>{secondIcon}</StyledSecondIcon>
+            <StyledFirstIcon shadow>{firstIcon}</StyledFirstIcon>
+            <StyledSecondIcon shadow>{secondIcon}</StyledSecondIcon>
           </StyledOffersHeader>
           <StyledOffersContentWrapper>
             <h3>{title}</h3>
@@ -156,7 +157,7 @@ const StyledOffersHeader = styled.div`
   `}
 `
 
-const StyledFirstIcon = styled.p`
+const StyledFirstIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     position: absolute;
     top: 0;
@@ -165,7 +166,7 @@ const StyledFirstIcon = styled.p`
   `}
 `
 
-const StyledSecondIcon = styled.p`
+const StyledSecondIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     position: absolute;
     bottom: 0;
