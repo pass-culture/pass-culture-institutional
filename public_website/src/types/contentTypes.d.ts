@@ -1313,7 +1313,6 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
     separator: Attribute.Component<'block.separator'>;
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
-    offers: Attribute.Component<'block.offers-section'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

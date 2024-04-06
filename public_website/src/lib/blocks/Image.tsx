@@ -1,25 +1,29 @@
 import React from 'react'
+import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
-
 interface ImageProps {
   description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  alt?: string
+  image: APIResponse<'plugin::upload.file'>
+  alt: string
 }
 
-export function Image(props: ImageProps) {
+export function Imageblock(props: ImageProps) {
   return (
     <Root>
-      <figure>
-        <img
-          src={getStrapiURL(props.image?.data.attributes.url)}
-          alt={props.alt}
-        />
-        <figcaption>{props.description}</figcaption>
-      </figure>
+      {props.image && (
+        <figure>
+          <Image
+            src={getStrapiURL(props.image.data.attributes.url)}
+            alt={props.alt}
+            layout={'fill'}
+            objectFit={'cover'}
+          />
+          <figcaption>{props.description}</figcaption>
+        </figure>
+      )}
     </Root>
   )
 }
@@ -28,19 +32,28 @@ const Root = styled.div`
   ${({ theme }) => css`
     max-width: 90rem;
     margin: 8rem auto;
-    padding: 5rem auto;
+    padding: 5rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
 
     img {
-      width: 100%;
+      position: absolute;
       border-radius: 2.5rem;
       margin-bottom: 2rem;
     }
-    p {
-      width: 90%;
+    figure {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+    figcaption {
+      position: absolute;
+      width: 95%;
+      right: 0;
+      bottom: -4rem;
+      margin: 0 auto;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -55,7 +68,7 @@ const Root = styled.div`
         border-radius: 1rem;
       }
 
-      p {
+      figcaption {
         width: 100%;
       }
     }

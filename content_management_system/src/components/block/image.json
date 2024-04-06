@@ -9,7 +9,7 @@
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
@@ -21,7 +21,8 @@
       "type": "text"
     },
     "alt": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }
