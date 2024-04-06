@@ -1032,6 +1032,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
         'block.double-push-cta'
       ]
     >;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1349,8 +1350,6 @@ export interface ApiMasterMaster extends Schema.SingleType {
     draftAndPublish: true;
   };
   attributes: {
-    simpleText: Attribute.Component<'block.simple-text'>;
-    simpleTextTwo: Attribute.Component<'block.simple-text'>;
     image: Attribute.Component<'block.image'>;
     imageTextRight: Attribute.Component<'block.image-text'>;
     imageTextLeft: Attribute.Component<'block.image-text'>;
@@ -1460,6 +1459,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ['Jeunes et parents', 'Acteurs culturels', 'S\u2019informer']
     > &
       Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1702,6 +1702,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1931,6 +1932,7 @@ declare module '@strapi/types' {
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
+      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;

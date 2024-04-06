@@ -117,6 +117,11 @@
         "S’informer"
       ],
       "required": true
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

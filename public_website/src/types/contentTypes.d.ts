@@ -891,11 +891,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required & Attribute.Unique;
-    restaurants: Attribute.Relation<
-      'api::category.category',
-      'manyToMany',
-      'api::restaurant.restaurant'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1335,6 +1330,44 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::liste-offre.liste-offre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMasterMaster extends Schema.SingleType {
+  collectionName: 'masters';
+  info: {
+    singularName: 'master';
+    pluralName: 'masters';
+    displayName: 'Master';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    simpleText: Attribute.Component<'block.simple-text'>;
+    simpleTextTwo: Attribute.Component<'block.simple-text'>;
+    image: Attribute.Component<'block.image'>;
+    imageTextRight: Attribute.Component<'block.image-text'>;
+    imageTextLeft: Attribute.Component<'block.image-text'>;
+    littleList: Attribute.Component<'block.little-list'>;
+    littleListdescription: Attribute.Component<'block.little-list'>;
+    space: Attribute.Component<'block.space'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::master.master',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::master.master',
       'oneToOne',
       'admin::user'
     > &
