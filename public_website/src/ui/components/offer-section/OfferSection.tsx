@@ -33,6 +33,9 @@ export function OfferSection({
   firstIcon,
   secondIcon,
 }: OfferProps) {
+  offers = offers.filter((offer) => {
+    return offer.image?.url && offer.image.url !== ''
+  })
   return (
     <Root>
       <Typo.Heading2>{title}</Typo.Heading2>

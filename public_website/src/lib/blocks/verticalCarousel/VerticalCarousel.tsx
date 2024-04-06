@@ -24,6 +24,10 @@ export type VerticalCarouselProps = {
 }
 
 export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
+  items = items.filter((item) => {
+    return item.image && item.image !== ''
+  })
+
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -45,9 +49,17 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
   }, [])
 
   // Get the MQ in rem and convert it in pixels
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
+  // const visibleSlides =
+  //   screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4.5
+  let visibleSlides: number
 
+  if (screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE)) {
+    visibleSlides = 1
+  } else if (screenWidth && screenWidth < getMediaQuery(MediaQueries.TABLET)) {
+    visibleSlides = 2
+  } else {
+    visibleSlides = 4.5
+  }
   /**
    * Remove unnecessary HTML attributes for a11y.
    * PR #469 will improve that: https://github.com/express-labs/pure-react-carousel/pull/469

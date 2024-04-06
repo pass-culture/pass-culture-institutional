@@ -31,19 +31,20 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
           />
         )}
 
-      <OfferSection
-        title={offerListe.attributes.offres.title}
-        description={offerListe.attributes.offres.description}
-        offers={offerItems}
-        cta={offerListe.attributes.offres.cta}
-        firstCartTitle={offerListe.attributes.offres.firstCartTitle}
-        secondCartTitle={offerListe.attributes.offres.secondCartTitle}
-        descriptionCard={offerListe.attributes.offres.descritptionCard}
-        ctaCard={offerListe.attributes.offres.ctaCard}
-        firstIcon={offerListe.attributes.offres.firstIcon}
-        secondIcon={offerListe.attributes.offres.secondIcon}
-      />
-
+      {offerItems.length > 0 && (
+        <OfferSection
+          title={offerListe.attributes.offres.title}
+          description={offerListe.attributes.offres.description}
+          offers={offerItems}
+          cta={offerListe.attributes.offres.cta}
+          firstCartTitle={offerListe.attributes.offres.firstCartTitle}
+          secondCartTitle={offerListe.attributes.offres.secondCartTitle}
+          descriptionCard={offerListe.attributes.offres.descritptionCard}
+          ctaCard={offerListe.attributes.offres.ctaCard}
+          firstIcon={offerListe.attributes.offres.firstIcon}
+          secondIcon={offerListe.attributes.offres.secondIcon}
+        />
+      )}
       {offerListe.attributes.separator && (
         <Separator isActive={offerListe.attributes.separator.isActive} />
       )}

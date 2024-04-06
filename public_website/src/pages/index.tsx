@@ -19,7 +19,7 @@ import { fetchCMS } from '@/utils/fetchCMS'
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
   recommendationItems: Offer[]
-  latestStudies: APIResponseData<'api::news.news'>[]
+  latestStudies: APIResponseData<'api::resource.resource'>[]
 }
 
 export default function Home({
@@ -77,11 +77,15 @@ export default function Home({
         qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
       />
 
-      <Recommendations
-        title={homeData.attributes.recommendationsSection.recommendations.title}
-        recommendations={recommendationItems}
-        cta={homeData.attributes.recommendationsSection.cta}
-      />
+      {recommendationItems.length > 0 && (
+        <Recommendations
+          title={
+            homeData.attributes.recommendationsSection.recommendations.title
+          }
+          recommendations={recommendationItems}
+          cta={homeData.attributes.recommendationsSection.cta}
+        />
+      )}
 
       <StyledLatestNews
         news={latestStudies}
@@ -133,13 +137,13 @@ export const getStaticProps = (async () => {
     },
     filters: {
       category: {
-        $eqi: 'Étude',
+        $eqi: ['Étude ponctuelle', 'Étude ritualisée'],
       },
     },
   })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
+  const latestStudies = await fetchCMS<
+    APIResponseData<'api::resource.resource'>[]
+  >(`/resources?${latestStudiesQuery}`)
 
   // Fetch recommandation items
   const recommendationTag =

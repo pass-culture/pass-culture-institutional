@@ -45,7 +45,12 @@ const Root = styled.div`
     background-color: ${theme.colors.lightBlue};
     padding: 6.25rem 0 5rem;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
     @media (width < ${theme.mediaQueries.mobile}) {
+      display: block;
       background-color: transparent;
       padding: 0;
     }
@@ -54,15 +59,20 @@ const Root = styled.div`
 
 const StyledCarouselWrapper = styled.div`
   ${({ theme }) => css`
-    padding: 0 0 0 7rem;
-
+    width: 80%;
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      max-width: 90%;
+      width: 90%;
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
+      width: auto;
       padding: 4rem 1.5rem 2rem;
     }
   `}
 `
 
 const StyledCtaWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 4rem;
