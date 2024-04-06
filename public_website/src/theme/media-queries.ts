@@ -1,5 +1,5 @@
 export enum MediaQueries {
   MOBILE = '50rem', // 800px
-  TABLET = '62.5rem', // 1000px
+  TABLET = '64.2rem', // 1024px
   LARGE_DESKTOP = '75rem', // 1200px
 }

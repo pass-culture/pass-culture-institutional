@@ -6,9 +6,9 @@ import {
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-
 type HeroProps = {
   title: string
   text: BlocksContent
@@ -28,10 +28,9 @@ export function ImageText({
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         {icon && (
-          <StyledIcon
-            className={isImageRight ? 'IconRight' : 'IconLeft'}
-            dangerouslySetInnerHTML={{ __html: icon }}
-          />
+          <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+            {icon}
+          </StyledIcon>
         )}
         <StyledContentTextWrapper className="first">
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
@@ -76,12 +75,33 @@ const Root = styled.div`
         z-index: 2;
       }
     }
+    @media (width < ${theme.mediaQueries.tablet}) {
+      .right {
+        .IconRight {
+          top: 23rem;
+          right: auto;
+          left: 37rem;
+          z-index: 2;
+        }
+      }
 
+      .left {
+        grid-template-areas: 'first second';
+        grid-template-columns: 1.5fr 1fr;
+
+        .IconLeft {
+          top: 23rem;
+          right: auto;
+          left: 37rem;
+          z-index: 2;
+        }
+      }
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
       .right,
       .left {
         grid-template-columns: 1fr;
-        padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+        padding: 10rem 1.5rem 2.5rem;
         grid-template-areas:
           'second'
           'first';
@@ -103,7 +123,7 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-    padding: calc(18rem + 10rem) 1.5rem 2.5rem;
+    padding: 10rem 1.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
 
@@ -127,7 +147,6 @@ const StyledContentTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     ul {
       list-style-type: disc;
       padding-left: 2rem;
@@ -142,9 +161,19 @@ const StyledContentTextWrapper = styled.div`
       font-weight: ${({ theme }) => theme.fonts.weights.bold};
     }
 
+    p {
+      font-size: ${theme.fonts.sizes['xl']};
+      line-height: 2.2;
+      width: 70%;
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
-    }
+
+      p {
+        font-size: ${theme.fonts.sizes['m']};
+        width: 100%;
+      }
   `}
 `
 
@@ -153,32 +182,39 @@ const StyledContentImagetWrapper = styled.div`
     display: flex;
     justify-content: end;
 
+    @media (width < ${theme.mediaQueries.tablet}) {
+      justify-content: center;
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       justify-content: center;
     }
   `}
 `
 
-const StyledHeading = styled(Typo.Heading1)`
-  ${({ theme }) => css`
-    max-width: 36rem;
-    margin: 0 0 3rem;
+const StyledHeading = styled(Typo.Heading2)`
+  max-width: 36rem;
+  margin: 0 0 3rem;
+`
 
+const StyledImage = styled.img`
+  ${({ theme }) => css`
+    max-width: 80%;
+    height: auto;
+    transform: rotate(2deg);
+    box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
+    border-radius: 1.5rem;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
-      font-size: ${theme.fonts.sizes['l']};
+      max-width: 80%;
     }
   `}
 `
 
-const StyledImage = styled.img`
-  max-width: 80%;
-  height: auto;
-  transform: rotate(2deg);
-  box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
-  border-radius: 1.5rem;
-`
-
-const StyledIcon = styled.p`
+const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['8xl']};
     max-width: 5rem;
