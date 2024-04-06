@@ -15,11 +15,8 @@ export const AideEnseignantsPageFixtures = {
         },
       },
       seo: {
-        id: 1,
         metaTitle: 'Aide enseignants',
-        metaDescription:
-          'Aide enseignants description description descriptione description',
-        keywords: 'follow,noindex',
+        id: 13938,
         metaRobots: 'follow',
         structuredData: {
           name: 'Party Coffee Cakee',
@@ -30,9 +27,9 @@ export const AideEnseignantsPageFixtures = {
           description: 'This coffee cake ies awesome and perfect for parties.',
           datePublished: '201338-03-10',
         },
-        metaViewport: 'width=device-width, iernitial-scale=1',
-        canonicalURL:
-          'https://developers.google.com/search/doces/crawling-indexing/consolidate-duplicate-urls',
+        metaDescription:
+          'Aide enseignants description description descriptione description',
+        keywords: 'follow,noindex',
         metaSocial: [
           {
             id: 1,
@@ -185,6 +182,9 @@ export const AideEnseignantsPageFixtures = {
             },
           },
         ],
+        metaViewport: 'width=devereice-width, iernitial-scale=1',
+        canonicalURL:
+          'https://developers.google.com/search/doces/crawling-indexing/consolidate-duplicate-urls',
       },
     },
   },
