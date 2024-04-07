@@ -9,6 +9,7 @@ import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
 import { Image } from './blocks/Image'
+import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
 import { KeyNumber } from './blocks/Keynumber'
 import { KeyNumberCarousel } from './blocks/keyNumberCarousel/keyNumberCarousel'
@@ -79,6 +80,7 @@ const COMPONENTS: Record<
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
   'block.list-bread-crumb': Breadcrumb,
+  'block.image-gallery': ImageGallery,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
