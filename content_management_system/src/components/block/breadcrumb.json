@@ -5,5 +5,10 @@
     "description": ""
   },
   "options": {},
-  "attributes": {}
+  "attributes": {
+    "isUnderHeader": {
+      "type": "boolean",
+      "default": false
+    }
+  }
 }

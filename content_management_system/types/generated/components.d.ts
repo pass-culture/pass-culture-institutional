@@ -17,7 +17,9 @@ export interface BlockBreadcrumb extends Schema.Component {
     displayName: 'Breadcrumbs';
     description: '';
   };
-  attributes: {};
+  attributes: {
+    isUnderHeader: Attribute.Boolean & Attribute.DefaultTo<false>;
+  };
 }
 
 export interface BlockCenteredText extends Schema.Component {

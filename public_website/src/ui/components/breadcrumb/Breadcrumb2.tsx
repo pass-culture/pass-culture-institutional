@@ -6,7 +6,11 @@ import styled, { css } from 'styled-components'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
 
-export function Breadcrumb2() {
+interface Breadcrumb2Props {
+  isUnderHeader?: boolean
+}
+
+export function Breadcrumb2(props: Breadcrumb2Props) {
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
   const router = useRouter()
@@ -37,7 +41,7 @@ export function Breadcrumb2() {
   }
 
   return (
-    <Root aria-label="fil d’arianne">
+    <Root aria-label="fil d’arianne" $isUnderHeader={props.isUnderHeader}>
       <ol>
         <ListItem>
           <StyledSimpleLink>
@@ -67,14 +71,15 @@ export function Breadcrumb2() {
   )
 }
 
-const Root = styled.nav`
-  ${({ theme }) => css`
-    @media (max-width: ${theme.mediaQueries.largeDesktop}) {
+const Root = styled.nav<{ $isUnderHeader?: boolean }>`
+  ${({ theme, $isUnderHeader }) => css`
+    @media (max-width: ${theme.mediaQueries.mobile}) {
       display: none;
     }
 
     max-width: 90rem;
     margin: 0 auto;
+    padding: 0 3.5rem;
 
     ol {
       display: flex;
@@ -92,8 +97,15 @@ const Root = styled.nav`
       cursor: pointer;
     }
 
-    /* TODO: move this to wherever it should be */
-    /* transform: translateY(-13rem); */
+    ${$isUnderHeader &&
+    css`
+      transform: translateY(-10rem);
+      position: absolute;
+
+      @media (max-width: ${theme.mediaQueries.tablet}) {
+        transform: none;
+      }
+    `}
   `}
 `
 const ListItem = styled.li`
@@ -123,6 +135,7 @@ const StyledSimpleLink = styled.div`
 
 const Select = styled.select`
   appearance: none;
+  padding: 0 0.25rem;
 `
 
 const SelectWrapper = styled.div<{ $groupLabel: string }>`
