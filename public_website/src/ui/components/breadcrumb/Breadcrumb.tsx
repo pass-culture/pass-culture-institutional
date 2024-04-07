@@ -8,21 +8,31 @@ import { BreadcrumbContext } from './breadcrumb-context'
 
 interface Breadcrumb2Props {
   isUnderHeader?: boolean
+  className?: string
 }
 
-export function Breadcrumb2(props: Breadcrumb2Props) {
+export function Breadcrumb(props: Breadcrumb2Props) {
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
+  console.log('🚀 ~ Breadcrumb ~ pathname:', pathname)
   const router = useRouter()
 
   if (!headerData) {
     return null
   }
 
-  const currentNavigationGroup = headerData?.targetItems.find((x) =>
-    x.megaMenu.primaryListItems.some(
-      (y) => y.URL.toLowerCase() === pathname.toLowerCase()
-    )
+  const currentNavigationGroup = headerData?.targetItems.find(
+    (x) =>
+      x.megaMenu.primaryListItems.some(
+        (y) => y.URL.toLowerCase() === pathname.toLowerCase()
+      ) ||
+      x.megaMenu.secondaryListItems.some(
+        (y) => y.URL.toLowerCase() === pathname.toLowerCase()
+      )
+  )
+  console.log(
+    '🚀 ~ Breadcrumb ~ currentNavigationGroup:',
+    currentNavigationGroup
   )
 
   if (!currentNavigationGroup) {
@@ -41,7 +51,10 @@ export function Breadcrumb2(props: Breadcrumb2Props) {
   }
 
   return (
-    <Root aria-label="fil d’arianne" $isUnderHeader={props.isUnderHeader}>
+    <Root
+      aria-label="fil d’arianne"
+      $isUnderHeader={props.isUnderHeader}
+      className={props.className}>
       <ol>
         <ListItem>
           <StyledSimpleLink>

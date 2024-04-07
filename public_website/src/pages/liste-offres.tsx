@@ -8,6 +8,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -30,6 +31,8 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
             icon={offerListe.attributes.hero.icon}
           />
         )}
+
+      <Breadcrumb isUnderHeader />
 
       <OfferSection
         title={offerListe.attributes.offres.title}

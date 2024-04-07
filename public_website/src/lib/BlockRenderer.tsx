@@ -32,7 +32,7 @@ import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
-import { Breadcrumb2 } from '@/ui/components/breadcrumb/Breadcrumb'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 export interface Block {
   __component: string
 }
@@ -78,7 +78,7 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.breadcrumb': Breadcrumb2,
+  'block.breadcrumb': Breadcrumb,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

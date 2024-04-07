@@ -100,7 +100,7 @@ export interface BlockImageText extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    image: Attribute.Media;
+    image: Attribute.Media & Attribute.Required;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
