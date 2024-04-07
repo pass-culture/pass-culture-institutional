@@ -53,7 +53,11 @@ const Root = styled.div`
     grid-template-columns: 1.25fr 1fr;
     position: relative;
 
+    @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
+      max-width: 95%;
+    }
     @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
       margin: 17rem auto;
 
       display: flex;
@@ -130,7 +134,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
     aspect-ratio: 333.49/415;
     @media (width < ${theme.mediaQueries.tablet}) {
-      width: 70%;
+      width: 80%;
       aspect-ratio: 1.5;
       padding: 0;
       margin: 0 auto;
@@ -146,7 +150,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
 const RightSide = styled.div`
   ${({ theme }) => css`
-    padding: 6.25rem 0;
+    padding: 10.25rem 0 6.25rem 0;
     padding-left: 5rem;
     max-width: 35rem;
 

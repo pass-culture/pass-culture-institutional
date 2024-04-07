@@ -130,6 +130,7 @@ const Root = styled.div`
     padding: 8rem 1.5rem 12.5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 0 auto 0;
       padding: 0 1.5rem 5rem;
     }
   `}
@@ -153,7 +154,7 @@ const StyledHeroBackground = styled.div`
       user-select: none;
 
       span {
-        font-size: ${theme.fonts.sizes['7xl']};
+        font-size: ${theme.fonts.sizes['5xl']};
       }
     }
   `}

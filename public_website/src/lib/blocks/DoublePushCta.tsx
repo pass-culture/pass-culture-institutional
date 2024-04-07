@@ -61,7 +61,12 @@ const Root = styled.div`
     grid-template-columns: 1fr 1.25fr;
     position: relative;
 
+    @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
+      max-width: 95%;
+    }
+
     @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
       padding: 1.5rem;
       display: block;
 

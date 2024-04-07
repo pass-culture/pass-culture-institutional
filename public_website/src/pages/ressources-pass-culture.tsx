@@ -257,6 +257,7 @@ const StyledTitle = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       h2 {
         text-align: center;
+        font-size: ${theme.fonts.sizes['5xl']};
       }
     }
   `}

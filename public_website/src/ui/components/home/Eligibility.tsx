@@ -103,6 +103,8 @@ const StyledCard = styled.div`
     container-type: inline-size;
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      border-radius: 1.5rem;
+
       padding: 2rem 1rem;
     }
 
@@ -140,10 +142,6 @@ const StyledCardFirstEmoji = styled(Typo.Emoji)`
     top: 0;
     right: 2rem;
     transform: rotate(10deg);
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      display: none;
-    }
   `}
 `
 
@@ -161,6 +159,8 @@ const StyledListContainer = styled.div`
     padding: 3.25rem 3rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      border-radius: 1.5rem;
+
       padding: 2.5rem 2rem;
     }
   `}

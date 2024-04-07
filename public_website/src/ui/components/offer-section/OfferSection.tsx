@@ -7,6 +7,7 @@ import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
+import { OutlinedText } from '../OutlinedText'
 
 type OfferProps = {
   title: string
@@ -192,10 +193,11 @@ const StyledOffersHeader = styled.div`
     }
   `}
 `
-const StyledOffersSurtitle = styled.h2`
+const StyledOffersSurtitle = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['5xl']};
     font-weight: ${theme.fonts.weights.bold};
+    color: ${theme.colors.secondary} !important;
     line-height: 1;
     width: fit-content;
     &:nth-child(2) {
@@ -241,7 +243,7 @@ const StyledCardWrapper = styled.div`
   `}
 `
 
-const StyledIcon = styled.p`
+const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     position: absolute;
     top: 0;

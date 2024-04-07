@@ -72,8 +72,14 @@ const StyledCarouselWrapper = styled.div`
 `
 
 const StyledCtaWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 4rem;
+  ${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-top: 1rem;
+    }
+  `}
 `
