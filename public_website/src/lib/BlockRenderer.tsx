@@ -32,7 +32,7 @@ import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
-import { Breadcrumb2 } from '@/ui/components/breadcrumb/Breadcrumb2'
+import { Breadcrumb2 } from '@/ui/components/breadcrumb/Breadcrumb'
 export interface Block {
   __component: string
 }
