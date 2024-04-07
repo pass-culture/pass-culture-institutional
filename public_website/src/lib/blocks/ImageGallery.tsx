@@ -6,6 +6,14 @@ import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 
 type ImageData = APIResponseData<'plugin::upload.file'>
 
+interface ImageFormats {
+  medium?: {
+    width: number
+    height: number
+    url: string
+  }
+}
+
 interface ImageGalleryProps {
   images: { data: ImageData[] }
 }
@@ -43,7 +51,7 @@ function splitImages(images: ImageData[]): [ImageData[], ImageData[]] {
 }
 
 export function ImageGallery(props: ImageGalleryProps) {
-  const imageRows = useMemo(
+  const [firstRow, secondRow] = useMemo(
     () => splitImages(props.images.data),
     [props.images.data]
   )
@@ -61,19 +69,34 @@ export function ImageGallery(props: ImageGalleryProps) {
   return (
     <div>
       <Rows ref={galleryElement} aria-label="Galerie d'images">
-        {imageRows.map((images, i) => (
-          <Row key={i}>
-            {images.map((image) => (
-              <img
-                key={image.id}
-                src={image.attributes.url}
-                alt=""
-                width={image.attributes.width}
-                height={image.attributes.height}
-              />
-            ))}
-          </Row>
-        ))}
+        <Row>
+          {firstRow.map((image) => (
+            <img
+              key={image.id}
+              src={
+                (image.attributes.formats as ImageFormats)?.medium?.url ||
+                image.attributes.url
+              }
+              alt={image.attributes.alternativeText ?? ''}
+              width={image.attributes.width}
+              height={image.attributes.height}
+            />
+          ))}
+        </Row>
+        <Row>
+          {secondRow.map((image) => (
+            <img
+              key={image.id}
+              src={
+                (image.attributes.formats as ImageFormats)?.medium?.url ||
+                image.attributes.url
+              }
+              alt={image.attributes.alternativeText ?? ''}
+              width={image.attributes.width}
+              height={image.attributes.height}
+            />
+          ))}
+        </Row>
       </Rows>
       <Controls>
         <ControlButton
