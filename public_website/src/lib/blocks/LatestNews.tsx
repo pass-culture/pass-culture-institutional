@@ -19,7 +19,7 @@ type LatestNewsProps = {
 }
 
 export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
-  const [newsdata, setNewsData] = useState<
+  const [newsData, setNewsData] = useState<
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
     | null
@@ -52,7 +52,7 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
     <Root className={className}>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
       <StyledList>
-        {newsdata?.slice(0, 3).map((newsItem) => {
+        {newsData?.slice(0, 3).map((newsItem) => {
           return (
             <li
               key={
