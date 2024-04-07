@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
-import styled from 'styled-components'
+import React, { useCallback, useMemo, useRef } from 'react'
+import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 
 type ImageData = APIResponseData<'plugin::upload.file'>
 
@@ -47,26 +48,51 @@ export function ImageGallery(props: ImageGalleryProps) {
     [props.images.data]
   )
 
+  const galleryElement = useRef<HTMLDivElement>(null)
+
+  const scrollForward = useCallback(() => {
+    galleryElement.current?.scrollBy({ left: 300, behavior: 'smooth' })
+  }, [])
+
+  const scrollBackward = useCallback(() => {
+    galleryElement.current?.scrollBy({ left: -300, behavior: 'smooth' })
+  }, [])
+
   return (
-    <Root>
-      {imageRows.map((images, i) => (
-        <Row key={i}>
-          {images.map((image) => (
-            <img
-              key={image.id}
-              src={image.attributes.url}
-              alt=""
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
-          ))}
-        </Row>
-      ))}
-    </Root>
+    <div>
+      <Rows ref={galleryElement} aria-label="Galerie d'images">
+        {imageRows.map((images, i) => (
+          <Row key={i}>
+            {images.map((image) => (
+              <img
+                key={image.id}
+                src={image.attributes.url}
+                alt=""
+                width={image.attributes.width}
+                height={image.attributes.height}
+              />
+            ))}
+          </Row>
+        ))}
+      </Rows>
+      <Controls>
+        <ControlButton
+          $flip
+          onClick={scrollBackward}
+          aria-label="Défiler la galerie d'image vers la droite">
+          <ArrowRight />
+        </ControlButton>
+        <ControlButton
+          onClick={scrollForward}
+          aria-label="Défiler la galerie d'image vers la gauche">
+          <ArrowRight />
+        </ControlButton>
+      </Controls>
+    </div>
   )
 }
 
-const Root = styled.div`
+const Rows = styled.div`
   overflow: scroll;
   padding: 1rem;
 
@@ -93,4 +119,26 @@ const Row = styled.div`
     width: auto;
     border-radius: 1.25rem;
   }
+`
+
+const Controls = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+`
+
+const ControlButton = styled.button<{ $flip?: boolean }>`
+  ${({ theme, $flip }) => css`
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+    box-shadow: ${theme.shadows.popover};
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      ${$flip && 'transform: rotate(180deg);'}
+    }
+  `}
 `
