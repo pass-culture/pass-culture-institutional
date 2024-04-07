@@ -1,20 +1,22 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
 
+type ImageData = APIResponseData<'plugin::upload.file'>
+
 interface ImageGalleryProps {
-  images: { data: APIResponseData<'plugin::upload.file'>[] }
+  images: { data: ImageData[] }
 }
 
-export function ImageGallery(props: ImageGalleryProps) {
-  const images = props.images.data
+/**
+ * Split images based on their size. Some images may be wider than other and take more place in a row.
+ * So images are split in half based on their width
+ */
+function splitImages(images: ImageData[]): [ImageData[], ImageData[]] {
+  const firstRowImages: ImageData[] = []
+  const secondRowImages: ImageData[] = []
 
-  const firstRowImages: APIResponseData<'plugin::upload.file'>[] = []
-  const secondRowImages: APIResponseData<'plugin::upload.file'>[] = []
-
-  // Split images based on their size. Some images may be wider than other and take more place in a row.
-  // So images are split in half based on their width
   {
     const ratios = images.map(
       (image) => image.attributes.width! / image.attributes.height!
@@ -30,35 +32,36 @@ export function ImageGallery(props: ImageGalleryProps) {
       } else {
         secondRowImages.push(img)
       }
-      // 0.1 is to take the gap between the images in the rendered row into account
+      // 0.1 is to take the gap between the images in the rendered row into
+      // account (1.5rem horizontal gap over 15rem image height)
       currentRatio += ratio + 0.1
     }
   }
 
+  return [firstRowImages, secondRowImages]
+}
+
+export function ImageGallery(props: ImageGalleryProps) {
+  const imageRows = useMemo(
+    () => splitImages(props.images.data),
+    [props.images.data]
+  )
+
   return (
     <Root>
-      <Row>
-        {firstRowImages.map((image) => (
-          <img
-            key={image.id}
-            src={image.attributes.url}
-            alt=""
-            width={image.attributes.width}
-            height={image.attributes.height}
-          />
-        ))}
-      </Row>
-      <Row>
-        {secondRowImages.map((image) => (
-          <img
-            key={image.id}
-            src={image.attributes.url}
-            alt=""
-            width={image.attributes.width}
-            height={image.attributes.height}
-          />
-        ))}
-      </Row>
+      {imageRows.map((images, i) => (
+        <Row key={i}>
+          {images.map((image) => (
+            <img
+              key={image.id}
+              src={image.attributes.url}
+              alt=""
+              width={image.attributes.width}
+              height={image.attributes.height}
+            />
+          ))}
+        </Row>
+      ))}
     </Root>
   )
 }
