@@ -14,7 +14,6 @@ interface Breadcrumb2Props {
 export function Breadcrumb(props: Breadcrumb2Props) {
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
-  console.log('🚀 ~ Breadcrumb ~ pathname:', pathname)
   const router = useRouter()
 
   if (!headerData) {
@@ -29,10 +28,6 @@ export function Breadcrumb(props: Breadcrumb2Props) {
       x.megaMenu.secondaryListItems.some(
         (y) => y.URL.toLowerCase() === pathname.toLowerCase()
       )
-  )
-  console.log(
-    '🚀 ~ Breadcrumb ~ currentNavigationGroup:',
-    currentNavigationGroup
   )
 
   if (!currentNavigationGroup) {
