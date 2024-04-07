@@ -3,11 +3,11 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
-import { OutlinedText } from '../OutlinedText'
 
 type OfferProps = {
   title: string

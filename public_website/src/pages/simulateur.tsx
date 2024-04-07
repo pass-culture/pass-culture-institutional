@@ -1,13 +1,13 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
+import styled, { css } from 'styled-components'
 
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-import styled, { css } from 'styled-components'
 
 interface SimulatorProps {
   data: APIResponseData<'api::simulator.simulator'>

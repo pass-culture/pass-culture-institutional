@@ -258,7 +258,6 @@ const StyledTitle = styled.div`
       h2 {
         text-align: center;
         font-size: ${theme.fonts.sizes['5xl']};
-
       }
     }
   `}

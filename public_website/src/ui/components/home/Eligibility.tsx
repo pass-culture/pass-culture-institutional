@@ -137,12 +137,10 @@ const StyledCardDescription = styled.p`
 `
 
 const StyledCardFirstEmoji = styled(Typo.Emoji)`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    right: 2rem;
-    transform: rotate(10deg);
-  `}
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  transform: rotate(10deg);
 `
 
 const StyledCardSecondEmoji = styled(Typo.Emoji)`
