@@ -1865,7 +1865,6 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     bottomEmoji: Attribute.String & Attribute.Required;
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
-    bread: Attribute.Component<'block.list-bread-crumb'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
