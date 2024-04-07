@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { AppContext, AppProps } from 'next/app'
 import App from 'next/app'
 import { Montserrat } from 'next/font/google'
@@ -27,13 +27,17 @@ export default function MyApp({
   headerData,
   footerData,
 }: MyAppProps) {
+  const breadcrumbContextValue = useMemo(
+    () => ({
+      targetItems: headerData.targetItems,
+      aboutItems: headerData.aboutItems,
+    }),
+    [headerData.targetItems, headerData.aboutItems]
+  )
+
   return (
     <ThemeProvider theme={theme}>
-      <BreadcrumbContext.Provider
-        value={{
-          targetItems: headerData.targetItems,
-          aboutItems: headerData.aboutItems,
-        }}>
+      <BreadcrumbContext.Provider value={breadcrumbContextValue}>
         <GlobalStyles />
         {/* eslint-disable-next-line react/no-unknown-property */}
         <style jsx global>{`
