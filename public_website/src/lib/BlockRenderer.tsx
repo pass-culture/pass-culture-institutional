@@ -78,7 +78,7 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.list-bread-crumb': Breadcrumb2,
+  'block.breadcrumb': Breadcrumb2,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

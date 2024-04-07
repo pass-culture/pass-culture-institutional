@@ -11,6 +11,15 @@ export interface BlockBreadCrumbWrapper extends Schema.Component {
   };
 }
 
+export interface BlockBreadcrumb extends Schema.Component {
+  collectionName: 'components_block_breadcrumbs';
+  info: {
+    displayName: 'Breadcrumbs';
+    description: '';
+  };
+  attributes: {};
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -357,23 +366,6 @@ export interface BlockSimpleTextV2 extends Schema.Component {
       Attribute.SetMinMax<{
         max: 2;
       }>;
-  };
-}
-
-export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts';
-  info: {
-    displayName: 'SimpleText';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Text;
-    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
-    firstSubTitle: Attribute.Text;
-    secondSubTitle: Attribute.Text;
-    firstText: Attribute.Text;
-    secondText: Attribute.Text;
   };
 }
 
@@ -909,6 +901,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
+      'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
@@ -933,7 +926,6 @@ declare module '@strapi/types' {
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text-v2': BlockSimpleTextV2;
-      'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.testimonies': BlockTestimonies;
