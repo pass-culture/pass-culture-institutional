@@ -206,6 +206,10 @@ const StyledNavigationButtons = styled.div`
     }
 
     button {
+      &:hover {
+        box-shadow: none;
+        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
+      }
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.popover};
       border-radius: 50%;
@@ -215,14 +219,10 @@ const StyledNavigationButtons = styled.div`
       width: 3.625rem;
       height: 3.625rem;
       cursor: pointer;
-      &:hover {
-        box-shadow: none;
-        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
-      }
+      transition: all 0.3s ease-in-out;
       &:focus {
         outline: 2px solid ${theme.colors.primary};
       }
-      transition: all 0.3s ease-in-out;
     }
 
     button:first-child {

@@ -185,6 +185,7 @@ const StyledNavigationButtons = styled.div`
     button {
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.popover};
+      transition: all 0.3s ease-in-out;
       border-radius: 50%;
       align-items: center;
       display: flex;
@@ -192,14 +193,13 @@ const StyledNavigationButtons = styled.div`
       width: 3.625rem;
       height: 3.625rem;
       cursor: pointer;
+      &:focus {
+        outline: 2px solid ${theme.colors.primary};
+      }
       &:hover {
         box-shadow: none;
         filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
       }
-      &:focus {
-        outline: 2px solid ${theme.colors.primary};
-      }
-      transition: all 0.3s ease-in-out;
     }
 
     button:first-child {
