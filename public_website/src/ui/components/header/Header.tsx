@@ -176,8 +176,7 @@ export function Header({
                         }
                         onClick={() => toggleMegaMenu(i)}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
-                        onMouseEnter={() => toggleMegaMenu(i)}
-                        onMouseLeave={() => setActiveMegaMenuId(null)}>
+                        onMouseEnter={() => toggleMegaMenu(i)}>
                         {el.label}
                       </button>
                       {i === activeMegaMenuId && (
