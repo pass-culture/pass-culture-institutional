@@ -31,7 +31,7 @@ export function Seo(props: SeoProps) {
           <meta name="viewport" content={props.metaData?.metaViewport} />
         )}
         {props.metaData?.keywords && (
-          <meta name="keywords" content={props.metaData.keywords}></meta>
+          <meta name="keywords" content={props.metaData.keywords} />
         )}
         {props.metaData?.canonicalURL && (
           <link rel="canonical" href={props.metaData.canonicalURL} />
