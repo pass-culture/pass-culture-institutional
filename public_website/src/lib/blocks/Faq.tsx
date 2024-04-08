@@ -115,6 +115,9 @@ const StyledContentWrapper = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   `}
 `
@@ -141,7 +144,12 @@ const StyledContentTextWrapper = styled.div`
 `
 
 const StyledFaqtWrapper = styled.div`
-  margin-top: 2rem;
+  ${({ theme }) => css`
+    margin-top: 2rem;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      order: -1;
+    }
+  `}
 `
 
 const StyledAccordion = styled.details`
