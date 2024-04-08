@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { LatestNews } from '@/lib/blocks/LatestNews'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface CustomPageProps {
@@ -18,7 +19,7 @@ export default function CustomPage(props: CustomPageProps) {
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-
+      <Seo metaData={props.data.attributes.seo} />
       <StyledLatestNews
         news={props.latestStudies}
         title="Les dernières
@@ -67,6 +68,9 @@ export const getStaticProps = (async ({ params }) => {
       'blocks.columns',
       'blocks.firstCta',
       'blocks.secondCta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

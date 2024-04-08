@@ -4,7 +4,8 @@
   "info": {
     "singularName": "not-found",
     "pluralName": "not-founds",
-    "displayName": "Not Found"
+    "displayName": "Not Found",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,6 +16,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.header"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

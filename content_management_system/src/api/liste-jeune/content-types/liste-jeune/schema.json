@@ -40,6 +40,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.simple-push-cta"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }
