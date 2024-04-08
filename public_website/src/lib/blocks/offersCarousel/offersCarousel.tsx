@@ -115,7 +115,9 @@ export function OffersCarousel({
               <ArrowRight />
             </ButtonNext>
           </StyledNavigationButtons>
-          <CtaLink href={cta.URL}>{cta.Label}</CtaLink>
+          <CtaLink href={cta.URL}>
+            <span>{cta.Label}</span>
+          </CtaLink>
         </StyledArrowButtonWrapper>
       </StyledHeading>
 
@@ -204,6 +206,10 @@ const StyledNavigationButtons = styled.div`
     }
 
     button {
+      &:hover {
+        box-shadow: none;
+        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
+      }
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.popover};
       border-radius: 50%;
@@ -212,6 +218,11 @@ const StyledNavigationButtons = styled.div`
       justify-content: center;
       width: 3.625rem;
       height: 3.625rem;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      &:focus {
+        outline: 2px solid ${theme.colors.primary};
+      }
     }
 
     button:first-child {
@@ -265,7 +276,33 @@ const CtaLink = styled(Link)`
       ${theme.colors.secondary}
     );
     color: ${theme.colors.white};
-
+    position: relative;
+    span {
+      position: relative;
+      z-index: 1;
+    }
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 100px;
+      background-color: rgba(46, 5, 146, 0.7);
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 0.4s ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
     padding: 1rem 1.75rem;
     border-radius: 100px;
 
@@ -280,6 +317,7 @@ const StyledArrowButtonWrapper = styled.div`
   justify-content: space-between;
   width: 50%;
   align-self: end;
+  align-items: center;
 `
 
 const MobileCtaWrapper = styled.div`

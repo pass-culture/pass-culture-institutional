@@ -27,7 +27,11 @@ export function SimplePushCta(props: PushCTAProps) {
         {props.title && (
           <Title dangerouslySetInnerHTML={{ __html: props.title }} />
         )}
-        {props.cta && <CtaLink href={props.cta.URL}>{props.cta.Label}</CtaLink>}
+        {props.cta && (
+          <CtaLink href={props.cta.URL}>
+            <span>{props.cta.Label}</span>
+          </CtaLink>
+        )}
       </RightSide>
       <CardContainer>
         <Card

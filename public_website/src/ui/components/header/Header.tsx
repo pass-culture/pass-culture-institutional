@@ -206,6 +206,7 @@ export function Header({
                   id="login-dropdown"
                   aria-controls="account-menu"
                   aria-expanded={loginDropdownOpen}
+                  className={loginDropdownOpen ? 'mega-menu-active' : ''}
                   onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
                   onMouseEnter={onLoginDropdownMouseEnter}>
                   {login.buttonLabel}
@@ -319,6 +320,7 @@ const StyledNavigation = styled.nav<{
 
 const StyledLogoLink = styled(Link)`
   display: block;
+  cursor: pointer;
   width: 9.5rem;
 `
 
@@ -347,15 +349,21 @@ const StyledNavigationItem = styled.li`
       &::after {
         content: '';
         position: absolute;
-        left: 0.5rem;
-        right: 0.5rem;
+        left: 0;
+        right: 0;
         bottom: 0;
         background: ${theme.colors.primary};
         height: 1px;
       }
     }
-
+    &:focus {
+      color: ${theme.colors.primary};
+      position: relative;
+      outline: 1px solid ${theme.colors.primary};
+    }
     button {
+      cursor: pointer;
+      position: relative;
       color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
@@ -367,12 +375,26 @@ const StyledLoginItem = styled.li`
   ${({ theme }) => css`
     margin-left: auto;
     position: relative;
+    .mega-menu-active {
+      color: ${theme.colors.primary};
+      position: relative;
 
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: ${theme.colors.primary};
+        height: 1px;
+      }
+    }
     button {
+      cursor: pointer;
       color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
-      padding: 1rem 0.5rem;
+      padding: 0 0.5rem;
     }
   `}
 `

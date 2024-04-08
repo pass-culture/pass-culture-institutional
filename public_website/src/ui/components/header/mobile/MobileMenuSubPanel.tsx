@@ -38,6 +38,7 @@ const StyledMobileMenuSubPanel = styled.div`
       display: flex;
       align-items: center;
       gap: 1.25rem;
+      font-weight: 500;
       text-decoration: underline;
       margin-bottom: 1.5rem;
 

@@ -39,8 +39,8 @@ export function OutlinedText(props: OutlinedTextProps) {
 
   const {
     color = [1, 1, 1],
-    blurDeviation = 2,
-    dilationRadius = 5,
+    blurDeviation = 2.5,
+    dilationRadius = 1,
     shadow,
     innerAs,
     className,
@@ -77,7 +77,7 @@ export function OutlinedText(props: OutlinedTextProps) {
 
           {shadow && (
             <React.Fragment>
-              <feGaussianBlur stdDeviation={8} result="shadow" />
+              <feGaussianBlur stdDeviation={2.5} result="shadow" />
               <feColorMatrix
                 in="shadow"
                 mode="matrix"

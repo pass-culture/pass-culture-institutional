@@ -94,8 +94,7 @@ const StyledListItem = styled.li`
         max-height: 2rem;
       }
     }
-
-    transition: all 0.7s ease-in-out;
+    transition: all 0.4s ease-in-out;
     &:nth-child(even) a {
       background: ${theme.colors.tertiary};
       transform: rotate(-4deg);
@@ -105,7 +104,10 @@ const StyledListItem = styled.li`
       transform: rotate(-35deg);
       filter: brightness(0.8);
     }
-
+    &:focus {
+      outline: 2px solid ${theme.colors.primary};
+    }
+    outline-offset: 2px;
     @media (width < ${theme.mediaQueries.mobile}) {
       a {
         height: 3.25rem;
