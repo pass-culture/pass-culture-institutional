@@ -269,7 +269,7 @@ export interface BlockOrganizationChart extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     description: Attribute.Text & Attribute.Required;
     people: Attribute.Component<'common.person', true> & Attribute.Required;
   };

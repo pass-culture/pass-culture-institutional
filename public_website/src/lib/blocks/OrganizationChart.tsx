@@ -6,7 +6,7 @@ import { APIResponse } from '@/types/strapi'
 import { Typo } from '@/ui/components/typographies'
 
 type OrganizationChartProps = {
-  title: string
+  title?: string
   description: string
   people: {
     name: string
@@ -22,7 +22,7 @@ export function OrganizationChart({
 }: OrganizationChartProps) {
   return (
     <Root>
-      <StyledHeading>{title}</StyledHeading>
+      {title && <StyledHeading>{title}</StyledHeading>}
       <StyledDescription>{description}</StyledDescription>
       <StyledList>
         {people.map((person) => {
