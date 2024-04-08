@@ -12,6 +12,7 @@ export default ({ env }) => ({
   'seo': {
     enabled: true,
   },
+  'users-permissions': false,
   'upload': {
     config: {
       provider: '@strapi-community/strapi-provider-upload-google-cloud-storage',
