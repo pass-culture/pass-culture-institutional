@@ -187,6 +187,14 @@ const StyledNavigationButtons = styled.div`
       justify-content: center;
       height: 3.625rem;
       width: 3.625rem;
+      cursor: pointer;
+      &:hover {
+        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
+      }
+      &:focus {
+        outline: 2px solid ${theme.colors.primary};
+      }
+      transition: all 0.3s ease-in-out;
     }
 
     button:first-child {

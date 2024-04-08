@@ -35,7 +35,9 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
           <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
         )}
         {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
-        <CtaLink href={props.firstCta?.URL}>{props.firstCta?.Label}</CtaLink>
+        <CtaLink href={props.firstCta?.URL}>
+          <span>{props.firstCta?.Label}</span>
+        </CtaLink>
         {props.secondCta && (
           <Button
             href={props.secondCta.URL}
@@ -164,7 +166,33 @@ const CtaLink = styled(Link)`
 
     padding: 1rem 1.75rem;
     border-radius: 100px;
-
+    position: relative;
+    span {
+      position: relative;
+      z-index: 1;
+    }
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 2rem;
+      background-color: rgba(46, 5, 146, 0.7);
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 0.4s ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
       margin-bottom: 1.5rem;

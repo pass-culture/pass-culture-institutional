@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
+import { OutlinedText } from '../../OutlinedText'
 import { Link } from '@/ui/components/Link'
 
 type MobileMenuListSubPanelProps = {
@@ -53,7 +54,7 @@ export function MobileMenuListSubPanel({
         })}
       </StyledSubPanelList>
       <StyledSubPanelCard href={cardLink.URL}>
-        <p>{cardTitle}</p>
+        <OutlinedText innerAs={'p'}>{cardTitle}</OutlinedText>
         <p>{cardDescription}</p>
         <span>{cardFirstEmoji}</span>
         <span>{cardSecondEmoji}</span>
@@ -66,7 +67,7 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.875rem;
     margin-bottom: 3.5rem;
 
     li {
@@ -90,6 +91,7 @@ const StyledSubPanelCard = styled(Link)`
       font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.black};
       margin-bottom: 1.5rem;
+      color: ${theme.colors.secondary};
     }
 
     p:nth-child(2) {
@@ -101,12 +103,12 @@ const StyledSubPanelCard = styled(Link)`
     span {
       font-size: 2.5rem;
       position: absolute;
-      right: 6rem;
+      right: 3rem;
       top: 40%;
       transform: rotate(-10deg);
 
       &:last-child {
-        right: 4rem;
+        right: 1rem;
         top: 45%;
         transform: rotate(10deg);
       }

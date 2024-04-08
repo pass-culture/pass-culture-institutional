@@ -48,7 +48,9 @@ export function PushCTA(props: PushCTAProps) {
         {props.description && (
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
-        <CtaLink href={props.ctaLink.URL}>{props.ctaLink.Label}</CtaLink>
+        <CtaLink href={props.ctaLink.URL}>
+          <span>{props.ctaLink.Label}</span>
+        </CtaLink>
       </RightSide>
     </Root>
   )
@@ -188,7 +190,33 @@ const CtaLink = styled(Link)`
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
+    position: relative;
+    span {
+      position: relative;
+      z-index: 1;
+    }
+    &:hover {
+      &:after {
+        opacity: 1;
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 2rem;
+      background-color: rgba(46, 5, 146, 0.7);
+      opacity: 0;
+      z-index: 0;
+      transition: opacity 0.4s ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
     background: linear-gradient(
       90deg,
       ${theme.colors.tertiary},

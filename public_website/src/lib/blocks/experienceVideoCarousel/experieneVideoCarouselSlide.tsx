@@ -4,6 +4,7 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
+import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Play } from '@/ui/components/icons/Play'
 
@@ -94,4 +95,13 @@ const StyledPlayIcon = styled(Play)`
   left: 1rem;
   bottom: 8rem;
   z-index: 15;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  outline-offset: 3px;
+  &:hover {
+    box-shadow: -4px 8px 24px 0px rgba(80, 80, 80, 0.25);
+  }
+  &:focus {
+    outline: 2px solid ${theme.colors.primary};
+  }
 `

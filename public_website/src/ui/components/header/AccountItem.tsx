@@ -42,7 +42,9 @@ const StyledAccountItem = styled.li`
       align-items: center;
       justify-content: space-between;
       gap: 1.875rem;
-
+      &:hover {
+        color: ${theme.colors.primary};
+      }
       p {
         font-weight: ${theme.fonts.weights.semiBold};
         font-size: ${theme.fonts.sizes.l};

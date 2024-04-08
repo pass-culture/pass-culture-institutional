@@ -94,7 +94,14 @@ const StyledListItem = styled.li`
         max-height: 2rem;
       }
     }
-
+    transition: filter 0.3s ease-in-out;
+    &:hover {
+      filter: brightness(0.8);
+    }
+    &:focus {
+      outline: 2px solid ${theme.colors.primary};
+    }
+    outline-offset: 2px;
     &:nth-child(even) a {
       background: ${theme.colors.tertiary};
       transform: rotate(-4deg);

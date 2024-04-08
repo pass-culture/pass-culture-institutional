@@ -146,10 +146,7 @@ const StyledMobileMenuWrapper = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     position: fixed;
-    top: 7rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 6rem 0px 0px;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -160,7 +157,7 @@ const StyledMobileMenuWrapper = styled.div`
 const StyledMobileMenuList = styled.ul<{ tabIndex: number }>`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.875rem;
   padding: 0 1.5rem 2.5rem;
 `
 
