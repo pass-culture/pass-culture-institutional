@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { stringify } from 'querystring'
 import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
@@ -6,6 +7,7 @@ import { Button } from '@/ui/components/button/Button'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { fetchCMS } from '@/utils/fetchCMS'
 
 type LatestNewsProps = {
   title: string
@@ -17,13 +19,47 @@ type LatestNewsProps = {
 }
 
 export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
+  const [newsData, setNewsData] = useState<
+    | APIResponseData<'api::news.news'>[]
+    | APIResponseData<'api::resource.resource'>[]
+    | null
+  >(null)
+
+  const [isModule, setIsModule] = useState(true)
+  useEffect(() => {
+    const fetchLatestStudies = async () => {
+      if (!news) {
+        const latestStudiesQuery = stringify({
+          sort: ['date:desc'],
+          populate: ['image', 'cta'],
+        })
+        const latestStudies = await fetchCMS<
+          APIResponseData<'api::news.news'>[]
+        >(`/news-list?${latestStudiesQuery}`)
+
+        setNewsData(latestStudies.data)
+      } else {
+        setIsModule(false)
+
+        setNewsData(news)
+      }
+    }
+
+    fetchLatestStudies()
+  }, [isModule, news])
+
   return (
     <Root className={className}>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
       <StyledList>
-        {news?.map((newsItem) => {
+        {newsData?.slice(0, 3).map((newsItem) => {
           return (
-            <li key={newsItem.attributes.slug}>
+            <li
+              key={
+                isModule
+                  ? `/actualite/${newsItem.attributes.slug}`
+                  : newsItem.attributes.slug
+              }>
               <NewsCard
                 title={newsItem.attributes.title}
                 category={newsItem.attributes.category}
@@ -32,13 +68,22 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
                   newsItem.attributes.image &&
                   getStrapiURL(newsItem.attributes.image?.data.attributes.url)
                 }
-                slug={newsItem.attributes.slug}
+                slug={
+                  isModule
+                    ? `/actualite/${newsItem.attributes.slug}`
+                    : newsItem.attributes.slug
+                }
               />
             </li>
           )
         })}
       </StyledList>
-      {cta?.Label && cta?.URL && <Button href={cta.URL}>{cta.Label}</Button>}
+      {cta?.Label && cta?.URL && isModule && (
+        <Button href={`/actualite/${cta.URL}`}>{cta.Label}</Button>
+      )}
+      {cta?.Label && cta?.URL && !isModule && (
+        <Button href={cta.URL}>{cta.Label}</Button>
+      )}
     </Root>
   )
 }

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "help-teachers",
     "pluralName": "help-teachers-list",
-    "displayName": "Help - Teachers"
+    "displayName": "Help - Teachers",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -46,6 +47,11 @@
       "repeatable": false,
       "component": "block.latest-news",
       "required": true
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

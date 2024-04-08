@@ -41,6 +41,11 @@
       "repeatable": false,
       "component": "block.faq",
       "required": true
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

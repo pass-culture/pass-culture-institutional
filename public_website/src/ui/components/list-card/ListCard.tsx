@@ -55,9 +55,8 @@ const Root = styled.article`
 const StyledCardImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
-  aspect-ratio: 1.2;
-  height: auto;
-  min-width: 100%;
+  aspect-ratio: 395/318;
+  height: revert-layer !important;
   object-fit: cover;
 `
 

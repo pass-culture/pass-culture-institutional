@@ -9,6 +9,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
@@ -271,6 +272,9 @@ export default function ListeActuCulturels({
 
   return (
     <React.Fragment>
+      {listeActuCulturel.attributes.seo && (
+        <Seo metaData={listeActuCulturel.attributes.seo} />
+      )}
       <StyledTitle>
         {listeActuCulturel.attributes.title && (
           <Typo.Heading2
@@ -380,6 +384,9 @@ export const getStaticProps = (async () => {
       'aide',
       'aide.image',
       'aide.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<
@@ -410,20 +417,13 @@ const StyledTitle = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       h2 {
         text-align: center;
+        font-size: ${theme.fonts.sizes['5xl']};
       }
     }
   `}
 `
 const StyledListItems = styled(ListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 4rem;
-      margin-bottom: 1rem;
-    }
-  `}
+  margin-top: 3rem;
 `
 
 const StyledSocialMedia = styled(SocialMedia)`
@@ -438,15 +438,8 @@ const StyledSocialMedia = styled(SocialMedia)`
 `
 
 const StyledeventListItems = styled(EventListItems)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 4rem;
-      margin-bottom: 1rem;
-    }
-  `}
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

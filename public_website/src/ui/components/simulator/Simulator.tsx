@@ -259,7 +259,7 @@ const Root = styled.div`
     position: absolute;
     content: '';
     inset: 0;
-    border-radius: 1.875rem;
+    border-radius: 1rem;
     background-color: ${({ theme }) => theme.colors.secondary};
     transform: rotate(2.1deg);
     z-index: -1;
@@ -297,7 +297,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
   background-color: ${({ theme, $showingResult }) =>
     $showingResult ? theme.colors.lightGray : theme.colors.white};
   position: relative;
-  border-radius: 1.875rem;
+  border-radius: 1rem;
   min-height: 42rem;
 
   display: grid;

@@ -45,10 +45,10 @@ export function OffersCarouselSlide({
                 <span dangerouslySetInnerHTML={{ __html: surtitle }} />
               </OutlinedText>
             </StyledOffersSurtitle>
-            <StyledFirstIcon aria-hidden="true" dilationRadius={2}>
+            <StyledFirstIcon shadow aria-hidden="true" dilationRadius={2}>
               {firstIcon}
             </StyledFirstIcon>
-            <StyledSecondIcon aria-hidden="true" dilationRadius={2}>
+            <StyledSecondIcon shadow aria-hidden="true" dilationRadius={2}>
               {secondIcon}
             </StyledSecondIcon>
           </StyledOffersHeader>

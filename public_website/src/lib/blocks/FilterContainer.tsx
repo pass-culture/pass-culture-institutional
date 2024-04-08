@@ -373,13 +373,17 @@ const StyleSelectContent = styled.div`
 const StyledMobileFilterLabel = styled.div`
   ${({ theme }) => css`
     display: flex;
-    align-items: center;
+    align-items: start;
     margin-right: 5rem;
     padding-left: 1rem;
     gap: 1rem;
 
+    padding-top: 0.75rem;
+
     p {
       height: fit-content;
+      scale: 0.9;
+      display: flex;
     }
 
     div {
@@ -397,6 +401,11 @@ const StyledMobileFilterLabel = styled.div`
         align-items: center;
         justify-content: center;
       }
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding-top: 0;
+      align-items: center;
     }
   `}
 `

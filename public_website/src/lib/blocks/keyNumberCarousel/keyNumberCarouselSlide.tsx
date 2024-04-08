@@ -3,6 +3,7 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 
 export type KeyNumberCarouselSlideProps = {
   slideIndex: number
@@ -29,9 +30,9 @@ export function KeyNumberCarouselSlide({
       aria-roledescription="diapositive">
       <StyledWrapper>
         <StyledIconWrapper>
-          <p>{firstEmoji}</p>
-          <p>{secondEmoji}</p>
-          <p>{thirdEmoji}</p>
+          <OutlinedText>{firstEmoji}</OutlinedText>
+          <OutlinedText>{secondEmoji}</OutlinedText>
+          <OutlinedText>{thirdEmoji}</OutlinedText>
         </StyledIconWrapper>
         <StyledTextWrapper>
           <StyledTitle>{title}</StyledTitle>
@@ -45,21 +46,23 @@ export function KeyNumberCarouselSlide({
 const Root = styled(Slide)`
   ${({ theme }) => css`
     .inner {
-      margin-right: 1rem;
-      padding: 5rem 2rem;
+      margin-right: 1.5rem;
+      padding: 2rem 3rem;
       background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
+      aspect-ratio: 2.8;
       @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 0;
-        margin-right: 1rem;
-        margin-left: 1rem;
       }
     }
   `}
 `
 
 const StyledTitle = styled(Typo.Heading2)`
-  margin: 1.5rem 0 0.25rem;
+  ${({ theme }) => css`
+    margin: 1.5rem 0 0.25rem;
+    font-weight: ${theme.fonts.weights.semiBold};
+  `}
 `
 
 const StyledWrapper = styled.div`
@@ -73,7 +76,17 @@ const StyledTextWrapper = styled.div`
 `
 
 const StyledIconWrapper = styled.div`
-  display: flex;
-  position: relative;
-  font-size: 5rem;
+  ${({ theme }) => css`
+    display: flex;
+    position: relative;
+    font-size: ${theme.fonts.sizes['6xl']};
+    span:nth-child(2) {
+      transform: translateY(0.9rem);
+      z-index: 1;
+    }
+
+    @media (max-width: ${theme.mediaQueries.mobile}) {
+      font-size: ${theme.fonts.sizes['5xl']};
+    }
+  `}
 `

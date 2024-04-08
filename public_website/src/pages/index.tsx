@@ -8,6 +8,7 @@ import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
@@ -19,7 +20,7 @@ import { fetchCMS } from '@/utils/fetchCMS'
 interface HomeProps {
   homeData: APIResponseData<'api::home.home'>
   recommendationItems: Offer[]
-  latestStudies: APIResponseData<'api::news.news'>[]
+  latestStudies: APIResponseData<'api::resource.resource'>[]
 }
 
 export default function Home({
@@ -33,6 +34,7 @@ export default function Home({
 
   return (
     <React.Fragment>
+      {homeData.attributes.seo && <Seo metaData={homeData.attributes.seo} />}
       <StyledHomeGradient>
         <Hero
           title={homeData.attributes.heroSection.title}
@@ -77,11 +79,15 @@ export default function Home({
         qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
       />
 
-      <Recommendations
-        title={homeData.attributes.recommendationsSection.recommendations.title}
-        recommendations={recommendationItems}
-        cta={homeData.attributes.recommendationsSection.cta}
-      />
+      {recommendationItems.length > 0 && (
+        <Recommendations
+          title={
+            homeData.attributes.recommendationsSection.recommendations.title
+          }
+          recommendations={recommendationItems}
+          cta={homeData.attributes.recommendationsSection.cta}
+        />
+      )}
 
       <StyledLatestNews
         news={latestStudies}
@@ -118,6 +124,9 @@ export const getStaticProps = (async () => {
       'latestStudies.cta',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
@@ -133,13 +142,13 @@ export const getStaticProps = (async () => {
     },
     filters: {
       category: {
-        $eqi: 'Étude',
+        $eqi: ['Étude ponctuelle', 'Étude ritualisée'],
       },
     },
   })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
+  const latestStudies = await fetchCMS<
+    APIResponseData<'api::resource.resource'>[]
+  >(`/resources?${latestStudiesQuery}`)
 
   // Fetch recommandation items
   const recommendationTag =

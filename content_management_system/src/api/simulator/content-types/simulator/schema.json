@@ -112,6 +112,11 @@
       "repeatable": false,
       "required": true,
       "component": "block.social-media"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

@@ -8,7 +8,7 @@ import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experi
 import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
-import { Image } from './blocks/Image'
+import { Imageblock } from './blocks/Image'
 import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
 import { KeyNumber } from './blocks/Keynumber'
@@ -65,7 +65,7 @@ const COMPONENTS: Record<
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
   'block.testimony-carousel': TestimonyCarouselSlide,
-  'block.image': Image,
+  'block.image': Imageblock,
   'block.image-text': ImageText,
   'block.little-list': LittleList,
   'block.video': Video,

@@ -256,6 +256,7 @@ const CtaLink = styled(Link)`
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
+    height: fit-content;
 
     margin-right: 1.5rem;
     background: linear-gradient(
