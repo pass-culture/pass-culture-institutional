@@ -73,6 +73,8 @@ function getHoverBackgroundColor(variant?: ButtonVariants) {
       return 'rgba(256, 256, 256, 0.2)'
     case 'tertiary':
       return `transparent`
+    case 'quaternary':
+      return 'rgba(50, 0, 150, 0.07)'
     default:
       return 'rgba(46, 5, 146, 0.7)'
   }
@@ -91,7 +93,7 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
 
     ${$variant &&
     $variant === 'quaternary' &&
-    `border: 1px solid ${theme.colors.primary};`}
+    `border: 1px solid ${theme.colors.purple};`}
     outline-offset: 2px;
     transition: all 0.4s ease-in-out;
     &:focus {
@@ -137,9 +139,7 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
       ? theme.colors.secondary
       : theme.colors.white};
 
-    ${$variant &&
-    $variant === 'quaternary' &&
-    `color: ${theme.colors.primary};`}
+    ${$variant && $variant === 'quaternary' && `color: ${theme.colors.purple};`}
 
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.medium};
