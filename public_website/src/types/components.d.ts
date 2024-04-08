@@ -1,16 +1,5 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface BlockBreadCrumbWrapper extends Schema.Component {
-  collectionName: 'components_block_bread_crumb_wrappers';
-  info: {
-    displayName: 'BreadCrumbWrapper';
-  };
-  attributes: {
-    parent: Attribute.Component<'common.link'>;
-    fils: Attribute.Component<'common.link', true>;
-  };
-}
-
 export interface BlockBreadcrumb extends Schema.Component {
   collectionName: 'components_block_breadcrumbs';
   info: {
@@ -120,12 +109,12 @@ export interface BlockImageText extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;;
-    image: Attribute.Media & Attribute.Required;;
-    isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;;
-    icon: Attribute.String;;
-    text: Attribute.Blocks & Attribute.Required;;
-  };;
+    title: Attribute.String & Attribute.Required;
+    image: Attribute.Media & Attribute.Required;
+    isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
+    icon: Attribute.String;
+    text: Attribute.Blocks & Attribute.Required;
+  };
 }
 
 export interface BlockImage extends Schema.Component {
@@ -187,17 +176,6 @@ export interface BlockLink extends Schema.Component {
     > &
       Attribute.Required;
     url: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockListBreadCrumb extends Schema.Component {
-  collectionName: 'components_block_list_bread_crumbs';
-  info: {
-    displayName: 'List BreadCrumb';
-    description: '';
-  };
-  attributes: {
-    breadCrumbs: Attribute.Component<'block.bread-crumb-wrapper', true>;
   };
 }
 
@@ -538,11 +516,11 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;;
-    surtitle: Attribute.String & Attribute.Required;;
-    firstIcon: Attribute.String & Attribute.Required;;
-    secondIcon: Attribute.String & Attribute.Required;;
-    text: Attribute.Text & Attribute.Required;;;
+    title: Attribute.String & Attribute.Required;
+    surtitle: Attribute.String & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
@@ -843,7 +821,6 @@ export interface SharedSeo extends Schema.Component {
     displayName: 'seo';
     icon: 'search';
   };
-
   attributes: {
     metaTitle: Attribute.String &
       Attribute.Required &
@@ -963,7 +940,6 @@ export interface SimulatorSuccessScreen extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
       'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
@@ -977,71 +953,6 @@ declare module '@strapi/types' {
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
-      'block.list-bread-crumb': BlockListBreadCrumb;
-      'block.little-list': BlockLittleList;
-      'block.logos': BlockLogos;
-      'block.offer-list': BlockOfferList;
-      'block.offers-carousel': BlockOffersCarousel;
-      'block.offers-section': BlockOffersSection;
-      'block.organization-chart': BlockOrganizationChart;
-      'block.piled-cards': BlockPiledCards;
-      'block.push-cta': BlockPushCta;
-      'block.related-news': BlockRelatedNews;
-      'block.separator': BlockSeparator;
-      'block.simple-push-cta': BlockSimplePushCta;
-      'block.simple-text-v2': BlockSimpleTextV2;
-      'block.social-media': BlockSocialMedia;
-      'block.space': BlockSpace;
-      'block.testimonies': BlockTestimonies;
-      'block.vertical-carousel': BlockVerticalCarousel;
-      'block.video': BlockVideo;
-      'common.detailed-logo': CommonDetailedLogo;
-      'common.filtre': CommonFiltre;
-      'common.key-number-items': CommonKeyNumberItems;
-      'common.link': CommonLink;
-      'common.little-list-component': CommonLittleListComponent;
-      'common.logo': CommonLogo;
-      'common.not-required-link': CommonNotRequiredLink;
-      'common.offers-carousel-item': CommonOffersCarouselItem;
-      'common.offers': CommonOffers;
-      'common.person': CommonPerson;
-      'common.piled-card-item': CommonPiledCardItem;
-      'common.simple-text-column': CommonSimpleTextColumn;
-      'common.testimony-carousel': CommonTestimonyCarousel;
-      'common.vertical-carousel-item': CommonVerticalCarouselItem;
-      'footer.legal-links': FooterLegalLinks;
-      'footer.list': FooterList;
-      'header.account-dropdown': HeaderAccountDropdown;
-      'header.account-item': HeaderAccountItem;
-      'header.header': HeaderHeader;
-      'header.login-items': HeaderLoginItems;
-      'header.login': HeaderLogin;
-      'header.mega-menu': HeaderMegaMenu;
-      'header.navigation-items': HeaderNavigationItems;
-      'home.eligibility-items': HomeEligibilityItems;
-      'home.eligibility-section': HomeEligibilitySection;
-      'home.hero-section': HomeHeroSection;
-      'home.recommendations-section': HomeRecommendationsSection;
-      'simulator.age-question': SimulatorAgeQuestion;
-      'simulator.amount-screen': SimulatorAmountScreen;
-      'simulator.answer': SimulatorAnswer;
-      'simulator.failure-screen': SimulatorFailureScreen;
-      'simulator.radio-question': SimulatorRadioQuestion;
-      'simulator.step': SimulatorStep;
-      'simulator.success-screen': SimulatorSuccessScreen;
-      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
-      'block.centered-text': BlockCenteredText;
-      'block.detailed-logos': BlockDetailedLogos;
-      'block.double-push-cta': BlockDoublePushCta;
-      'block.experience-video-carousel': BlockExperienceVideoCarousel;
-      'block.faq': BlockFaq;
-      'block.header': BlockHeader;
-      'block.image-text': BlockImageText;
-      'block.image': BlockImage;
-      'block.key-number-carousel': BlockKeyNumberCarousel;
-      'block.latest-news': BlockLatestNews;
-      'block.link': BlockLink;
-      'block.list-bread-crumb': BlockListBreadCrumb;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offer-list': BlockOfferList;
