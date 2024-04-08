@@ -29,7 +29,7 @@ export interface BlockDetailedLogos extends Schema.Component {
     displayName: 'Detailed Logos';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     logos: Attribute.Component<'common.detailed-logo', true> &
       Attribute.Required;
   };
