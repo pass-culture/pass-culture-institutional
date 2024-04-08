@@ -360,23 +360,6 @@ export interface BlockSimpleTextV2 extends Schema.Component {
   };
 }
 
-export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts';
-  info: {
-    displayName: 'SimpleText';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Text;
-    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
-    firstSubTitle: Attribute.Text;
-    secondSubTitle: Attribute.Text;
-    firstText: Attribute.Text;
-    secondText: Attribute.Text;
-  };
-}
-
 export interface BlockSocialMedia extends Schema.Component {
   collectionName: 'components_block_social_medias';
   info: {
@@ -539,7 +522,6 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
-    secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
@@ -933,7 +915,6 @@ declare module '@strapi/types' {
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text-v2': BlockSimpleTextV2;
-      'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.testimonies': BlockTestimonies;
