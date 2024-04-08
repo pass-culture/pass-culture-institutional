@@ -1530,8 +1530,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.detailed-logos',
         'block.organization-chart',
         'block.simple-text-v2',
-        'block.list-bread-crumb',
-        'block.image-gallery'
+        'block.image-gallery',
+        'block.breadcrumb'
       ]
     >;
     createdAt: Attribute.DateTime;
