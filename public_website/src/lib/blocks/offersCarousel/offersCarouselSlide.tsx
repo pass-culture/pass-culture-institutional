@@ -146,24 +146,17 @@ const SecondBackgroundLayer = styled(BackgroundLayer)`
 `
 
 const StyledOffersHeader = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 
-    align-self: center;
-    width: 80%;
+  align-self: center;
+  width: 80%;
 
-    /* margin-bottom: 4rem; */
-
-    transform: rotate(-2.15deg);
-    flex-shrink: 0;
-    filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
-    /* @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 2.5rem;
-    } */
-  `}
+  transform: rotate(-2.15deg);
+  flex-shrink: 0;
+  filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
 `
 
 const StyledFirstIcon = styled(OutlinedText)`
