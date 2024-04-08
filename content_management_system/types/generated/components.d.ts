@@ -11,6 +11,17 @@ export interface BlockBreadCrumbWrapper extends Schema.Component {
   };
 }
 
+export interface BlockBreadcrumb extends Schema.Component {
+  collectionName: 'components_block_breadcrumbs';
+  info: {
+    displayName: 'Breadcrumbs';
+    description: '';
+  };
+  attributes: {
+    isUnderHeader: Attribute.Boolean & Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -92,6 +103,16 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockImageGallery extends Schema.Component {
+  collectionName: 'components_block_image_galleries';
+  info: {
+    displayName: 'Image Gallery';
+  };
+  attributes: {
+    images: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface BlockImageText extends Schema.Component {
   collectionName: 'components_block_image_texts';
   info: {
@@ -100,7 +121,7 @@ export interface BlockImageText extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    image: Attribute.Media;
+    image: Attribute.Media & Attribute.Required;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
@@ -360,23 +381,6 @@ export interface BlockSimpleTextV2 extends Schema.Component {
   };
 }
 
-export interface BlockSimpleText extends Schema.Component {
-  collectionName: 'components_block_simple_texts';
-  info: {
-    displayName: 'SimpleText';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Text;
-    isNormal: Attribute.Boolean & Attribute.DefaultTo<true>;
-    firstSubTitle: Attribute.Text;
-    secondSubTitle: Attribute.Text;
-    firstText: Attribute.Text;
-    secondText: Attribute.Text;
-  };
-}
-
 export interface BlockSocialMedia extends Schema.Component {
   collectionName: 'components_block_social_medias';
   info: {
@@ -539,7 +543,6 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
-    secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
@@ -909,12 +912,14 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
+      'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
       'block.faq': BlockFaq;
       'block.header': BlockHeader;
+      'block.image-gallery': BlockImageGallery;
       'block.image-text': BlockImageText;
       'block.image': BlockImage;
       'block.key-number-carousel': BlockKeyNumberCarousel;
@@ -933,7 +938,6 @@ declare module '@strapi/types' {
       'block.separator': BlockSeparator;
       'block.simple-push-cta': BlockSimplePushCta;
       'block.simple-text-v2': BlockSimpleTextV2;
-      'block.simple-text': BlockSimpleText;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
       'block.testimonies': BlockTestimonies;

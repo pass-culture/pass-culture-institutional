@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_block_breadcrumbs",
+  "info": {
+    "displayName": "Breadcrumbs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "isUnderHeader": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
