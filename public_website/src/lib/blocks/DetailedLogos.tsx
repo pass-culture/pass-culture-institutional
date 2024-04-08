@@ -7,7 +7,7 @@ import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 
 type DetailedLogosProps = {
-  title: string
+  title?: string
   logos: {
     title: string
     description: string
@@ -19,7 +19,7 @@ type DetailedLogosProps = {
 export function DetailedLogos({ title, logos }: DetailedLogosProps) {
   return (
     <Root>
-      <StyledHeading>{title}</StyledHeading>
+      {title && <StyledHeading>{title}</StyledHeading>}
       <StyledList>
         {logos.map((logo) => {
           return (
