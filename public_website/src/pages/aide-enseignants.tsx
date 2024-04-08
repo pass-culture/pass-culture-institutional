@@ -33,6 +33,7 @@ export default function TeachersHelp({
         image={data.attributes.heroSection.image}
       />
       <Breadcrumb isUnderHeader />
+      <StyledSpacer />
       <Faq
         title={data.attributes.faq.title}
         cta={data.attributes.faq.cta}
@@ -123,6 +124,13 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<TeachersHelpProps>
 
+const StyledSpacer = styled.div`
+  ${({ theme }) => css`
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding-top: 5rem;
+    }
+  `}
+`
 const StyledPushCTA = styled(DoublePushCTA)`
   ${({ theme }) => css`
     margin-top: 12.5rem;
