@@ -178,7 +178,6 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
   }
 
-  select[editable] > button { stroke: #ff0000 !important; }
 `
 
 export default GlobalStyles
