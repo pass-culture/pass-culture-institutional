@@ -7,21 +7,18 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "required": true,
+      "allowedTypes": ["images"]
     },
     "firstIcon": {
       "type": "string"
@@ -29,8 +26,11 @@
     "secondIcon": {
       "type": "string"
     },
-    "color": {
-      "type": "string"
+    "theme": {
+      "type": "enumeration",
+      "enum": ["purple", "yellow", "magenta", "orange", "green"],
+      "required": true,
+      "default": "purple"
     }
   }
 }

@@ -12,30 +12,31 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  resourcesData: APIResponseData<'api::resource.resource'>[]
   presseListe: APIResponseData<'api::presse.presse'>
   eventsData: APIResponseData<'api::event.event'>[]
 }
 
 export default function Presse({
-  newsData,
+  resourcesData,
   presseListe,
   eventsData,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(resourcesData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(resourcesData.map((item) => item.attributes.localisation))
   )
 
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(resourcesData.map((item) => item.attributes.secteur))
   )
 
   const eventCat = Array.from(
@@ -68,7 +69,9 @@ export default function Presse({
   const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+    []
+  )
 
   const [eventFilters, setEventFilters] = useState<Filter[]>([])
   const [eventData, setEventData] = useState<
@@ -90,7 +93,7 @@ export default function Presse({
     setEventSecteur(eventSec)
     setOriginalEventSecteur(eventSec)
 
-    setData(newsData)
+    setData(resourcesData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
@@ -104,7 +107,7 @@ export default function Presse({
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
+            new Set(resourcesData.map((item) => item.attributes.category))
           )
           return {
             ...filtre,
@@ -112,7 +115,7 @@ export default function Presse({
           }
         case "Secteur d'activités":
           uniqueSecteurs = Array.from(
-            new Set(newsData.map((item) => item.attributes.secteur))
+            new Set(resourcesData.map((item) => item.attributes.secteur))
           )
           return {
             ...filtre,
@@ -120,7 +123,7 @@ export default function Presse({
           }
         case 'Localisation':
           uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
+            new Set(resourcesData.map((item) => item.attributes.localisation))
           )
           return {
             ...filtre,
@@ -183,11 +186,14 @@ export default function Presse({
         secteur: {
           $eqi: secteur,
         },
+        pageDaffichage: {
+          $eqi: 'Presse',
+        },
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
+    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+      `/resources?${newsQuery}`
     )
 
     setData(news.data)
@@ -196,7 +202,7 @@ export default function Presse({
     const eventQuery = stringify({
       pagination: {},
       sort: ['date:desc'],
-      populate: ['image'],
+      populate: ['image', 'cta'],
       filters: {
         category: {
           $eqi: eventCategory,
@@ -206,6 +212,9 @@ export default function Presse({
         },
         secteur: {
           $eqi: eventSecteur,
+        },
+        pageDaffichage: {
+          $eqi: 'Espace presse',
         },
       },
     })
@@ -269,6 +278,9 @@ export default function Presse({
             }}
           />
         )}
+
+        <Breadcrumb />
+
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -276,6 +288,7 @@ export default function Presse({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="ressources"
         buttonText={presseListe.attributes.buttonText}
       />
 
@@ -295,6 +308,7 @@ export default function Presse({
         />
       </StyledTitle>
       <StyledeventListItems
+        type="evenement/"
         events={eventData}
         buttonText={presseListe.attributes.buttonText}
       />
@@ -352,12 +366,15 @@ export const getStaticProps = (async () => {
           'Communiqué de presse',
         ],
       },
+      pageDaffichage: {
+        $eqi: 'Presse',
+      },
     },
   })
 
-  const newsRequest = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
-  )
+  const newsRequest = await fetchCMS<
+    APIResponseData<'api::resource.resource'>[]
+  >(`/resources?${newsQuery}`)
 
   const query = stringify({
     populate: [
@@ -385,6 +402,11 @@ export const getStaticProps = (async () => {
     sort: ['date:desc'],
     populate: ['image', 'cta'],
     pagination: {},
+    filter: {
+      pageDaffichage: {
+        $eqi: 'Espace presse',
+      },
+    },
   })
 
   const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
@@ -393,7 +415,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: newsRequest.data,
+      resourcesData: newsRequest.data,
       presseListe: data,
       eventsData: events.data,
     },

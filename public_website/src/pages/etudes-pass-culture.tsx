@@ -9,30 +9,35 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  ressourcesData: APIResponseData<'api::resource.resource'>[]
   etudesPassCultureListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
 }
 
 export default function EtudesPassCulture({
-  newsData,
+  ressourcesData,
   etudesPassCultureListe,
 }: ListProps) {
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
+  const [partner, setPartner] = useState<string[]>([])
 
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(ressourcesData.map((item) => item.attributes.category))
   )
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(ressourcesData.map((item) => item.attributes.secteur))
   )
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(ressourcesData.map((item) => item.attributes.localisation))
+  )
+  const part = Array.from(
+    new Set(ressourcesData.map((item) => item.attributes.partnership))
   )
 
   const [originalEtudesCategory, setOriginalEtudesCategory] = useState<
@@ -44,29 +49,39 @@ export default function EtudesPassCulture({
   const [originalEtudesSecteur, setOriginalEtudesSecteur] = useState<string[]>(
     []
   )
+  const [originalEtudesPartner, setOriginalEtudesPartner] = useState<string[]>(
+    []
+  )
 
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+    []
+  )
   const [filters, setFilters] = useState<Filter[]>([])
 
   useEffect(() => {
     setOriginalEtudesCategory(cat)
     setOriginalEtudesLocalisation(loc)
     setOriginalEtudesSecteur(sec)
+    setOriginalEtudesPartner(part)
     setCategory(cat)
     setLocalisation(loc)
     setSecteur(sec)
+    setPartner(part)
 
-    setData(newsData)
+    setData(ressourcesData)
     let uniqueCategories = []
     let uniqueSecteurs = []
     let uniqueLocalisations = []
+    let uniquePartners = []
 
     const filtres = etudesPassCultureListe.attributes?.filtres?.map(
       (filtre) => {
         switch (filtre.filtre) {
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsData.map((item) => item.attributes.localisation))
+              new Set(
+                ressourcesData.map((item) => item.attributes.localisation)
+              )
             )
             return {
               ...filtre,
@@ -74,7 +89,7 @@ export default function EtudesPassCulture({
             }
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
+              new Set(ressourcesData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -82,11 +97,19 @@ export default function EtudesPassCulture({
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
-              new Set(newsData.map((item) => item.attributes.secteur))
+              new Set(ressourcesData.map((item) => item.attributes.secteur))
             )
             return {
               ...filtre,
               value: uniqueSecteurs,
+            }
+          case 'Partenariat':
+            uniquePartners = Array.from(
+              new Set(ressourcesData.map((item) => item.attributes.partnership))
+            )
+            return {
+              ...filtre,
+              value: uniquePartners,
             }
           default:
             return { ...filtre, value: [] }
@@ -100,7 +123,8 @@ export default function EtudesPassCulture({
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
+  }, [category, localisation, secteur, partner])
+
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case "Secteur d'activités":
@@ -111,6 +135,9 @@ export default function EtudesPassCulture({
         break
       case 'Catégorie':
         setCategory(value[0] === '' ? originalEtudesCategory : value)
+        break
+      case 'Partenariat':
+        setPartner(value[0] === '' ? originalEtudesPartner : value)
         break
       default:
         break
@@ -132,11 +159,17 @@ export default function EtudesPassCulture({
         localisation: {
           $eqi: localisation,
         },
+        partnership: {
+          $eqi: partner,
+        },
+        pageDaffichage: {
+          $eqi: 'Etudes',
+        },
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
+    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+      `/resources?${newsQuery}`
     )
 
     setData(news.data)
@@ -152,6 +185,7 @@ export default function EtudesPassCulture({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -159,6 +193,7 @@ export default function EtudesPassCulture({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="ressources"
         buttonText={etudesPassCultureListe.attributes.buttonText}
       />
 
@@ -203,6 +238,9 @@ export const getStaticProps = (async () => {
           'Étude ponctuelle',
         ],
       },
+      pageDaffichage: {
+        $eqi: 'Etudes',
+      },
     },
     pagination: {},
   })
@@ -220,8 +258,8 @@ export const getStaticProps = (async () => {
       'observatoire.cta',
     ],
   })
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+    `/resources?${newsQuery}`
   )
 
   const { data } = await fetchCMS<
@@ -230,7 +268,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      newsData: news.data,
+      ressourcesData: news.data,
       etudesPassCultureListe: data,
     },
   }
@@ -267,4 +305,8 @@ const StyledSocialMedia = styled(SocialMedia)`
       margin: 5rem 0 6.25rem;
     }
   `}
+`
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

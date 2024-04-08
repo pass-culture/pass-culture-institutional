@@ -9,6 +9,7 @@ import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
 import { Image } from './blocks/Image'
+import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
 import { KeyNumber } from './blocks/Keynumber'
 import { KeyNumberCarousel } from './blocks/keyNumberCarousel/keyNumberCarousel'
@@ -20,11 +21,10 @@ import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
 import { Logos } from './blocks/Logos'
 import { OffersCarousel } from './blocks/offersCarousel/offersCarousel'
 import { OrganizationChart } from './blocks/OrganizationChart'
-import { PiledCards } from './blocks/PiledCards'
+import { PiledCards } from './blocks/PiledCards/PiledCards'
 import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
-import { SimpleText } from './blocks/SimpleText'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SocialMedia } from './blocks/SocialMedia'
 import { Testimonies } from './blocks/Testimonies'
@@ -45,12 +45,11 @@ interface BlockRendererProps {
 const COMPONENTS: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (props: ComponentProps<any>) => React.JSX.Element
+  (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
   'block.header': Header,
   'block.header-test': Headertest,
   'block.centered-text': CenteredText,
-  'block.simple-text': SimpleText,
   'block.push-cta': PushCTA,
   'block.social-media': SocialMedia,
   'block.latest-news': LatestNews,
@@ -80,7 +79,8 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.list-bread-crumb': Breadcrumb,
+  'block.image-gallery': ImageGallery,
+  'block.breadcrumb': Breadcrumb,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

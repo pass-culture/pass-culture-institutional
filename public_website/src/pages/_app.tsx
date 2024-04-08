@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { AppContext, AppProps } from 'next/app'
 import App from 'next/app'
 import { Montserrat } from 'next/font/google'
@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
+import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { Footer, FooterProps } from '@/ui/components/footer/Footer'
 import { Header, HeaderProps } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
@@ -26,27 +27,37 @@ export default function MyApp({
   headerData,
   footerData,
 }: MyAppProps) {
+  const breadcrumbContextValue = useMemo(
+    () => ({
+      targetItems: headerData.targetItems,
+      aboutItems: headerData.aboutItems,
+    }),
+    [headerData.targetItems, headerData.aboutItems]
+  )
+
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      {/* eslint-disable-next-line react/no-unknown-property */}
-      <style jsx global>{`
-        html {
-          font-family: ${montSerrat.style.fontFamily} !important;
-        }
-      `}</style>
-      <SkipLink label="Aller au contenu principal" href="#main-content" />
-      <SkipLink label="Aller au pied de page" href="#footer" />
-      <Header
-        targetItems={headerData.targetItems}
-        aboutItems={headerData.aboutItems}
-        login={headerData.login}
-        signup={headerData.signup}
-      />
-      <main id="main-content">
-        <Component {...pageProps} />
-      </main>
-      <Footer {...footerData} />
+      <BreadcrumbContext.Provider value={breadcrumbContextValue}>
+        <GlobalStyles />
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        <style jsx global>{`
+          html {
+            font-family: ${montSerrat.style.fontFamily} !important;
+          }
+        `}</style>
+        <SkipLink label="Aller au contenu principal" href="#main-content" />
+        <SkipLink label="Aller au pied de page" href="#footer" />
+        <Header
+          targetItems={headerData.targetItems}
+          aboutItems={headerData.aboutItems}
+          login={headerData.login}
+          signup={headerData.signup}
+        />
+        <main id="main-content">
+          <Component {...pageProps} />
+        </main>
+        <Footer {...footerData} />
+      </BreadcrumbContext.Provider>
     </ThemeProvider>
   )
 }

@@ -41,10 +41,13 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.socialMediaLink',
       'Blocks.columns',
       'Blocks.people',
+      'Blocks.people.image',
       'Blocks.logos.cta',
+      'Blocks.logos.image',
       'Blocks.breadCrumbs',
       'Blocks.breadCrumbs.fils',
       'Blocks.breadCrumbs.parent',
+      'Blocks.images',
     ],
   })
 

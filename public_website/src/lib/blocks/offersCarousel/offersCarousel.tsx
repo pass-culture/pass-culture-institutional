@@ -50,7 +50,7 @@ export function OffersCarousel({
   }, [])
 
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.5
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.2
 
   useEffect(() => {
     const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
@@ -159,9 +159,6 @@ export function OffersCarousel({
 
 const StyledCarousel = styled(CarouselProvider)`
   ${({ theme }) => css`
-    width: 90%;
-    margin: auto;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;
     }
@@ -192,6 +189,10 @@ const StyledHeading = styled.div`
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding: 2rem 0;
+
+  .carousel__slider-tray {
+    transition: transform 0.2s ease-in;
+  }
 `
 
 const StyledNavigationButtons = styled.div`

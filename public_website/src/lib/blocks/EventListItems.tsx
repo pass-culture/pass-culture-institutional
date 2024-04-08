@@ -9,12 +9,14 @@ type LatestNewsProps = {
   events: APIResponseData<'api::event.event'>[]
   className?: string
   buttonText?: string
+  type?: string
 }
 
 export function EventListItems({
   events,
   className,
   buttonText,
+  type,
 }: LatestNewsProps) {
   const [visibleItems, setVisibleItems] = useState(2)
 
@@ -27,23 +29,25 @@ export function EventListItems({
   return (
     <Root className={className}>
       <StyledList>
-        {events.slice(0, visibleItems).map((eventItem) => (
-          <li key={eventItem.attributes.slug}>
-            <EventCard
-              title={eventItem.attributes.title}
-              category={eventItem.attributes.category}
-              date={eventItem.attributes.date}
-              imageUrl={
-                eventItem.attributes.image &&
-                getStrapiURL(eventItem.attributes.image?.data.attributes.url)
-              }
-              startTime={eventItem.attributes.startTime}
-              endTime={eventItem.attributes.endTime}
-              city={eventItem.attributes.city}
-              cta={eventItem.attributes.cta}
-            />
-          </li>
-        ))}
+        {events.length > 0 &&
+          events.slice(0, visibleItems).map((eventItem) => (
+            <li key={eventItem.attributes.slug}>
+              <EventCard
+                title={eventItem.attributes.title}
+                category={eventItem.attributes.category}
+                date={eventItem.attributes.date}
+                imageUrl={
+                  eventItem.attributes.image &&
+                  getStrapiURL(eventItem.attributes.image?.data.attributes.url)
+                }
+                startTime={eventItem.attributes.startTime}
+                endTime={eventItem.attributes.endTime}
+                city={eventItem.attributes.city}
+                cta={eventItem.attributes.cta}
+                type={type}
+              />
+            </li>
+          ))}
       </StyledList>
       {visibleItems < events.length && (
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>

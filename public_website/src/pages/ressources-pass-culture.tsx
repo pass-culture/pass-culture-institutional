@@ -9,28 +9,29 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface ListProps {
-  newsData: APIResponseData<'api::news.news'>[]
+  ressourcesData: APIResponseData<'api::resource.resource'>[]
   ressourcesPassCultureListe: APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
 }
 
 export default function RessourcesPassCulture({
-  newsData,
+  ressourcesData,
   ressourcesPassCultureListe,
 }: ListProps) {
   const cat = Array.from(
-    new Set(newsData.map((item) => item.attributes.category))
+    new Set(ressourcesData.map((item) => item.attributes.category))
   )
 
   const loc = Array.from(
-    new Set(newsData.map((item) => item.attributes.localisation))
+    new Set(ressourcesData.map((item) => item.attributes.localisation))
   )
 
   const sec = Array.from(
-    new Set(newsData.map((item) => item.attributes.secteur))
+    new Set(ressourcesData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
   const [originalCategory, setOriginalCategory] = useState<string[]>([])
@@ -39,8 +40,10 @@ export default function RessourcesPassCulture({
   const [secteur, setSecteur] = useState<string[]>([])
   const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
+  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+    []
+  )
   const [filters, setFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
   useEffect(() => {
     setCategory(cat)
@@ -50,7 +53,7 @@ export default function RessourcesPassCulture({
     setSecteur(sec)
     setOriginalSecteur(sec)
 
-    setData(newsData)
+    setData(ressourcesData)
     let uniqueCategories = []
     let uniqueLocalisations = []
     let uniqueSecteurs = []
@@ -60,7 +63,7 @@ export default function RessourcesPassCulture({
         switch (filtre.filtre) {
           case 'Catégorie':
             uniqueCategories = Array.from(
-              new Set(newsData.map((item) => item.attributes.category))
+              new Set(ressourcesData.map((item) => item.attributes.category))
             )
             return {
               ...filtre,
@@ -68,7 +71,9 @@ export default function RessourcesPassCulture({
             }
           case 'Localisation':
             uniqueLocalisations = Array.from(
-              new Set(newsData.map((item) => item.attributes.localisation))
+              new Set(
+                ressourcesData.map((item) => item.attributes.localisation)
+              )
             )
             return {
               ...filtre,
@@ -76,7 +81,7 @@ export default function RessourcesPassCulture({
             }
           case "Secteur d'activités":
             uniqueSecteurs = Array.from(
-              new Set(newsData.map((item) => item.attributes.secteur))
+              new Set(ressourcesData.map((item) => item.attributes.secteur))
             )
             return {
               ...filtre,
@@ -106,11 +111,14 @@ export default function RessourcesPassCulture({
         secteur: {
           $eqi: secteur,
         },
+        pageDaffichage: {
+          $eqi: 'Documentation',
+        },
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
+    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+      `/resources?${newsQuery}`
     )
 
     setData(news.data)
@@ -147,6 +155,7 @@ export default function RessourcesPassCulture({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -154,6 +163,7 @@ export default function RessourcesPassCulture({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="ressources"
         buttonText={ressourcesPassCultureListe.attributes.buttonText}
       />
 
@@ -201,11 +211,14 @@ export const getStaticProps = (async () => {
           'Étude ponctuelle',
         ],
       },
+      pageDaffichage: {
+        $eqi: 'Documentation',
+      },
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
+    `/resources?${newsQuery}`
   )
 
   const query = stringify({
@@ -226,7 +239,7 @@ export const getStaticProps = (async () => {
   >(`/ressources-pass-culture?${query}`)
   return {
     props: {
-      newsData: news.data,
+      ressourcesData: news.data,
       ressourcesPassCultureListe: data,
     },
   }
@@ -269,4 +282,7 @@ const StyledSocialMedia = styled(SocialMedia)`
       margin: 5rem 0 6.25rem;
     }
   `}
+`
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

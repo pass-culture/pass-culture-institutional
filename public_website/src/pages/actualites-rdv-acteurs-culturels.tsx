@@ -10,6 +10,7 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
@@ -183,6 +184,9 @@ export default function ListeActuCulturels({
         secteur: {
           $eqi: secteur,
         },
+        pageDaffichage: {
+          $eqi: 'Acteurs culturels',
+        },
       },
     })
 
@@ -196,7 +200,7 @@ export default function ListeActuCulturels({
   const fetchEventData = async () => {
     const eventQuery = stringify({
       sort: ['date:desc'],
-      populate: ['image'],
+      populate: ['image', 'cta'],
       pagination: {},
       filters: {
         category: {
@@ -207,6 +211,9 @@ export default function ListeActuCulturels({
         },
         secteur: {
           $eqi: eventSecteur,
+        },
+        pageDaffichage: {
+          $eqi: 'Acteurs culturels',
         },
       },
     })
@@ -272,6 +279,8 @@ export default function ListeActuCulturels({
             }}
           />
         )}
+
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={newsRdvFilters}
           onFilterChange={handleFilterChange}
@@ -279,6 +288,7 @@ export default function ListeActuCulturels({
       </StyledTitle>
       <StyledListItems
         news={data}
+        type="actualite"
         buttonText={listeActuCulturel.attributes.buttonText}
       />
 
@@ -298,6 +308,7 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledeventListItems
+        type="evenement/"
         events={eventData}
         buttonText={listeActuCulturel.attributes.buttonText}
       />
@@ -333,6 +344,9 @@ export const getStaticProps = (async () => {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
       },
+      pageDaffichage: {
+        $eqi: 'Acteurs culturels',
+      },
     },
   })
 
@@ -344,6 +358,11 @@ export const getStaticProps = (async () => {
     sort: ['date:desc'],
     populate: ['image', 'cta'],
     pagination: {},
+    filter: {
+      pageDaffichage: {
+        $eqi: 'Acteurs culturels',
+      },
+    },
   })
 
   const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
@@ -428,4 +447,8 @@ const StyledeventListItems = styled(EventListItems)`
       margin-bottom: 1rem;
     }
   `}
+`
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

@@ -146,6 +146,10 @@ const StyledHeading = styled.div`
     padding-right: 7rem;
     margin-top: 3rem;
 
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      padding-right: 0;
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-top: 2.5rem;
     }
