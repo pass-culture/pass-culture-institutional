@@ -182,6 +182,7 @@ const RightSide = styled.div`
 
       p {
         margin: 0;
+        font-size: ${theme.fonts.sizes.s};
       }
     }
   `}
@@ -227,7 +228,7 @@ const Title = styled.h2`
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-right: 0;
       margin-bottom: 1.5rem;
-      font-size: ${theme.fonts.sizes['5xl']};
+      font-size: ${theme.fonts.sizes['3xl']};
     }
   `}
 `
