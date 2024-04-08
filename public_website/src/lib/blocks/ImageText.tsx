@@ -10,7 +10,7 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
-  title: string
+  title?: string
   text: BlocksContent
   image?: APIResponse<'plugin::upload.file'> | null
   icon?: string
@@ -34,7 +34,9 @@ export function ImageText({
           />
         )}
         <StyledContentTextWrapper className="first">
-          <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          {title && (
+            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+          )}
           <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper className="second">
