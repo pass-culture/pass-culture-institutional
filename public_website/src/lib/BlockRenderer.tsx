@@ -44,7 +44,7 @@ interface BlockRendererProps {
 const COMPONENTS: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (props: ComponentProps<any>) => React.JSX.Element
+  (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
   'block.header': Header,
   'block.header-test': Headertest,
@@ -78,7 +78,7 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.list-bread-crumb': Breadcrumb,
+  'block.breadcrumb': Breadcrumb,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

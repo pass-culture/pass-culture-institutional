@@ -11,6 +11,17 @@ export interface BlockBreadCrumbWrapper extends Schema.Component {
   };
 }
 
+export interface BlockBreadcrumb extends Schema.Component {
+  collectionName: 'components_block_breadcrumbs';
+  info: {
+    displayName: 'Breadcrumbs';
+    description: '';
+  };
+  attributes: {
+    isUnderHeader: Attribute.Boolean & Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlockCenteredText extends Schema.Component {
   collectionName: 'components_block_centered_texts';
   info: {
@@ -100,7 +111,7 @@ export interface BlockImageText extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    image: Attribute.Media;
+    image: Attribute.Media & Attribute.Required;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
@@ -891,6 +902,7 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
+      'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
