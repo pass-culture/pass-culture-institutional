@@ -8,7 +8,7 @@ import styled, { css } from 'styled-components'
 import { Typo } from '@/ui/components/typographies'
 
 interface SimpleTextV2Props {
-  title: string
+  title?: string
   text: BlocksContent
   columns: {
     id: number
@@ -20,7 +20,9 @@ interface SimpleTextV2Props {
 export function SimpleTextV2(props: SimpleTextV2Props) {
   return (
     <Root data-testid="simple-text">
-      <StyledHeading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+      {props.title && (
+        <StyledHeading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+      )}
 
       <Content>
         <BlocksRenderer content={props.text} />

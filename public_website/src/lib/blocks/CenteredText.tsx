@@ -4,16 +4,19 @@ import styled, { css } from 'styled-components'
 import { Typo } from '@/ui/components/typographies'
 
 interface CenteredTextProps {
-  title: string
+  title?: string
   description: string
 }
 
 export function CenteredText(props: CenteredTextProps) {
   return (
     <Root data-testid="centered-text">
-      <Typo.Heading3
-        as="h2"
-        dangerouslySetInnerHTML={{ __html: props.title }}></Typo.Heading3>
+      {props.title && (
+        <Typo.Heading3
+          as="h2"
+          dangerouslySetInnerHTML={{ __html: props.title }}
+        />
+      )}
       <p dangerouslySetInnerHTML={{ __html: props.description }} />
     </Root>
   )
