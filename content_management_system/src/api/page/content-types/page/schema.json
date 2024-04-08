@@ -42,6 +42,7 @@
         "block.detailed-logos",
         "block.organization-chart",
         "block.simple-text-v2",
+        "block.image-gallery",
         "block.breadcrumb"
       ]
     }

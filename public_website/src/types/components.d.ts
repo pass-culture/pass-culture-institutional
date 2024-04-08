@@ -103,6 +103,16 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockImageGallery extends Schema.Component {
+  collectionName: 'components_block_image_galleries';
+  info: {
+    displayName: 'Image Gallery';
+  };
+  attributes: {
+    images: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface BlockImageText extends Schema.Component {
   collectionName: 'components_block_image_texts';
   info: {
@@ -909,6 +919,7 @@ declare module '@strapi/types' {
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
       'block.faq': BlockFaq;
       'block.header': BlockHeader;
+      'block.image-gallery': BlockImageGallery;
       'block.image-text': BlockImageText;
       'block.image': BlockImage;
       'block.key-number-carousel': BlockKeyNumberCarousel;
