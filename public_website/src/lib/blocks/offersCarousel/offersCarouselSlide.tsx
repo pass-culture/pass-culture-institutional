@@ -3,6 +3,7 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 
 type OffersCarouselSlideTheme =
   | 'purple'
@@ -15,7 +16,6 @@ export type OffersCarouselSlideProps = {
   slideIndex: number
   title: string
   surtitle: string
-  secondSurtitle: string
   firstIcon: string
   secondIcon: string
   text: string
@@ -28,7 +28,6 @@ export function OffersCarouselSlide({
   surtitle,
   firstIcon,
   secondIcon,
-  secondSurtitle,
   text,
   theme,
 }: OffersCarouselSlideProps) {
@@ -41,10 +40,17 @@ export function OffersCarouselSlide({
       <CardContainer $slideTheme={theme}>
         <Card>
           <StyledOffersHeader>
-            <StyledOffersSurtitle>{surtitle}</StyledOffersSurtitle>
-            <StyledOffersSurtitle>{secondSurtitle}</StyledOffersSurtitle>
-            <StyledFirstIcon>{firstIcon}</StyledFirstIcon>
-            <StyledSecondIcon>{secondIcon}</StyledSecondIcon>
+            <StyledOffersSurtitle>
+              <OutlinedText dilationRadius={3}>
+                <span dangerouslySetInnerHTML={{ __html: surtitle }} />
+              </OutlinedText>
+            </StyledOffersSurtitle>
+            <StyledFirstIcon aria-hidden="true" dilationRadius={2}>
+              {firstIcon}
+            </StyledFirstIcon>
+            <StyledSecondIcon aria-hidden="true" dilationRadius={2}>
+              {secondIcon}
+            </StyledSecondIcon>
           </StyledOffersHeader>
           <StyledOffersContentWrapper>
             <h3>{title}</h3>
@@ -61,7 +67,7 @@ export function OffersCarouselSlide({
 const Root = styled(Slide)`
   ${({ theme }) => css`
     .inner {
-      margin-right: 9rem;
+      padding: 1rem;
 
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 1rem;
@@ -102,12 +108,15 @@ const Card = styled.div`
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   padding: 6rem 2rem;
   width: calc(100% - 4rem);
   height: 15rem;
 
   position: relative;
   background: var(--card-background);
+
+  box-shadow: ${theme.shadows.banner};
 `
 
 const BackgroundLayer = styled.div`
@@ -122,66 +131,61 @@ const BackgroundLayer = styled.div`
     height: 100%;
     z-index: -1;
 
-    box-shadow: -4px 8px 24px 0px ${theme.shadows.banner};
+    box-shadow: ${theme.shadows.banner};
+
+    mix-blend-mode: color-burn;
   `}
 `
 
 const FirstBackgroundLayer = styled(BackgroundLayer)`
-  transform: rotate(7deg);
+  transform: rotate(6.5deg);
 `
 
 const SecondBackgroundLayer = styled(BackgroundLayer)`
-  transform: rotate(2deg);
+  transform: rotate(2.5deg);
 `
 
 const StyledOffersHeader = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 
-    align-self: center;
-    width: 80%;
+  align-self: center;
+  width: 80%;
 
-    margin-bottom: 4rem;
-    margin-top: 1rem;
-
-    transform: rotate(-2.15deg);
-    flex-shrink: 0;
-    filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 2.5rem;
-    }
-  `}
+  transform: rotate(-2.15deg);
+  flex-shrink: 0;
+  filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
 `
 
-const StyledFirstIcon = styled.p`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: ${theme.fonts.sizes['6xl']};
-  `}
-`
-
-const StyledSecondIcon = styled.p`
+const StyledFirstIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     position: absolute;
     bottom: 0;
+    left: 0;
+    font-size: ${theme.fonts.sizes['6xl']};
+    transform: translate(-1rem, 2rem);
+  `}
+`
+
+const StyledSecondIcon = styled(OutlinedText)`
+  ${({ theme }) => css`
+    position: absolute;
+    top: 0;
     right: 0;
     font-size: ${theme.fonts.sizes['6xl']};
+    transform: translate(1rem, -3rem);
   `}
 `
 const StyledOffersSurtitle = styled.h2`
   ${({ theme }) => css`
-    font-size: ${theme.fonts.sizes['4xl']};
-    font-weight: ${theme.fonts.weights.bold};
+    font-size: ${theme.fonts.sizes['5xl']};
+    font-weight: ${theme.fonts.weights.black};
     line-height: 1;
-
-    &:nth-child(2) {
-      text-align: right;
-    }
+    letter-spacing: -0.0625rem;
+    text-align: center;
+    color: var(--card-surtitle-color);
   `}
 `
 
@@ -193,16 +197,18 @@ const StyledOffersContentWrapper = styled.div`
     align-items: center;
     gap: 1rem;
     text-align: center;
-    transform: rotate(-1deg);
 
     h3 {
-      font-size: ${theme.fonts.sizes['4xl']};
+      font-size: ${theme.fonts.sizes['5xl']};
       font-weight: ${theme.fonts.weights.bold};
+      line-height: 1.4;
+      letter-spacing: -0.0625rem;
     }
 
     p {
       width: 70%;
       text-align: center;
+      font-size: ${theme.fonts.sizes['xl']};
     }
     @media (width < ${theme.mediaQueries.mobile}) {
       gap: 0.5rem;
