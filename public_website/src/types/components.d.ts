@@ -18,7 +18,7 @@ export interface BlockCenteredText extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     description: Attribute.Text & Attribute.Required;
   };
 }
@@ -29,7 +29,7 @@ export interface BlockDetailedLogos extends Schema.Component {
     displayName: 'Detailed Logos';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     logos: Attribute.Component<'common.detailed-logo', true> &
       Attribute.Required;
   };
@@ -109,7 +109,7 @@ export interface BlockImageText extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     image: Attribute.Media & Attribute.Required;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
@@ -269,7 +269,7 @@ export interface BlockOrganizationChart extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     description: Attribute.Text & Attribute.Required;
     people: Attribute.Component<'common.person', true> & Attribute.Required;
   };
@@ -350,7 +350,7 @@ export interface BlockSimpleTextV2 extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
     columns: Attribute.Component<'common.simple-text-column', true> &
       Attribute.SetMinMax<{
