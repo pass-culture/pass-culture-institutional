@@ -201,9 +201,8 @@ const StyledOffersContentWrapper = styled.div`
     h3 {
       font-size: ${theme.fonts.sizes['5xl']};
       font-weight: ${theme.fonts.weights.bold};
-      font-size: 35px;
-      line-height: 50px;
-      letter-spacing: -1.044583797454834px;
+      line-height: 1.4;
+      letter-spacing: -0.0625rem;
     }
 
     p {
