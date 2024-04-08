@@ -20,7 +20,7 @@ interface SimpleTextV2Props {
 export function SimpleTextV2(props: SimpleTextV2Props) {
   return (
     <Root data-testid="simple-text">
-      <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+      <StyledHeading2 dangerouslySetInnerHTML={{ __html: props.title }} />
 
       <Content>
         <BlocksRenderer content={props.text} />
@@ -55,13 +55,14 @@ const Root = styled.div`
 
     h2 {
       font-size: 2.5rem;
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
       color: ${theme.colors.secondary};
     }
 
     ul {
       list-style-type: disc;
       padding-left: 2rem;
+      list-style-position: inside;
     }
 
     p {
@@ -83,6 +84,12 @@ const Root = styled.div`
       font-weight: ${({ theme }) => theme.fonts.weights.bold};
     }
 
+    @media (width < ${theme.mediaQueries.tablet}) {
+      p {
+        max-width: 90%;
+      }
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 90%;
       max-width: 100%;
@@ -100,7 +107,7 @@ const Root = styled.div`
         padding-left: 0;
       }
       p {
-        max-width: 90%;
+        max-width: 95%;
       }
     }
   `}
@@ -109,10 +116,9 @@ const Root = styled.div`
 const Content = styled.div`
   padding-left: 7.1875rem;
 
-  & > *:not(:last-child) {
-    margin-bottom: 2rem;
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+    padding-left: 3rem;
   }
-
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding-left: 0;
   }
@@ -123,7 +129,7 @@ const Columns = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
@@ -144,4 +150,13 @@ const ColumnTitle = styled.h3`
   list-style-position: inside;
   padding-left: 0.5rem;
   font-weight: ${({ theme }) => theme.fonts.weights.bold};
+`
+
+const StyledHeading2 = styled(Typo.Heading2)`
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+    padding-left: 3rem;
+  }
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding-left: 0;
+  }
 `

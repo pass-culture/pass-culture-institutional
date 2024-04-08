@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { OutlinedText } from '../OutlinedText'
 import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
@@ -33,6 +34,9 @@ export function OfferSection({
   firstIcon,
   secondIcon,
 }: OfferProps) {
+  offers = offers.filter((offer) => {
+    return offer.image?.url && offer.image.url !== ''
+  })
   return (
     <Root>
       <Typo.Heading2>{title}</Typo.Heading2>
@@ -189,10 +193,11 @@ const StyledOffersHeader = styled.div`
     }
   `}
 `
-const StyledOffersSurtitle = styled.h2`
+const StyledOffersSurtitle = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['5xl']};
     font-weight: ${theme.fonts.weights.bold};
+    color: ${theme.colors.secondary} !important;
     line-height: 1;
     width: fit-content;
     &:nth-child(2) {
@@ -238,7 +243,7 @@ const StyledCardWrapper = styled.div`
   `}
 `
 
-const StyledIcon = styled.p`
+const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     position: absolute;
     top: 0;

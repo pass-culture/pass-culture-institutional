@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { Link } from '@/ui/components/Link'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -28,7 +29,7 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             getStrapiURL(props.image?.data.attributes.url)
           }></Card>
 
-        <p>{props.icon}</p>
+        <OutlinedText shadow>{props.icon}</OutlinedText>
       </CardContainer>
       <RightSide>
         {props.title && (
@@ -60,15 +61,31 @@ const Root = styled.div`
     grid-template-columns: 1fr 1.25fr;
     position: relative;
 
+    @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
+      max-width: 95%;
+    }
+
     @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
       padding: 1.5rem;
       display: block;
 
       border-radius: 0;
 
       position: relative;
-      padding-top: 7.125rem;
-      margin-top: 13.125rem;
+      padding-top: 25.125rem;
+      margin-top: 15.125rem;
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: 1.5rem;
+      display: block;
+
+      border-radius: 0;
+
+      position: relative;
+      padding-top: 10.125rem;
+      margin-top: 15.125rem;
     }
   `}
 `
@@ -80,10 +97,10 @@ const CardContainer = styled.div`
     margin: -3.125rem 0 -3.125rem 5rem;
     max-width: 28rem;
 
-    p {
+    span {
       position: absolute;
       top: 20%;
-      right: -1.5rem;
+      right: -1rem;
       font-size: ${theme.fonts.sizes['8xl']};
       transform: rotate(-7deg);
     }
@@ -95,7 +112,21 @@ const CardContainer = styled.div`
       min-width: 90%;
       min-height: 40%;
 
-      top: -8rem;
+      top: -10rem;
+      left: 1.8rem;
+      span {
+        display: none;
+      }
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 0 auto;
+      position: absolute;
+
+      min-width: 90%;
+      min-height: 40%;
+
+      top: -7rem;
       left: 1.8rem;
     }
   `}
@@ -114,10 +145,19 @@ const Card = styled.div<{ $imageUrl?: string }>`
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
 
+    aspect-ratio: 510/634.64;
     @media (width < ${theme.mediaQueries.tablet}) {
-      width: 95%;
-      aspect-ratio: 1.5;
+      width: 80%;
+      aspect-ratio: 338/233;
       padding: 0;
+      margin: 0 auto;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      width: 90%;
+      aspect-ratio: 338/233;
+      padding: 0;
+      margin: 0 auto;
+      margin-right: 1.7rem;
     }
   `}
 `

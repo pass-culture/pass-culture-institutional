@@ -236,6 +236,7 @@ const StyledTitle = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       h2 {
         text-align: center;
+        font-size: ${theme.fonts.sizes['5xl']};
       }
     }
   `}
@@ -252,13 +253,7 @@ const StyledSocialMedia = styled(SocialMedia)`
 `
 
 const StyledListItems = styled(ListItems)`
-  ${({ theme }) => css`
-    margin-bottom: 6rem;
-    margin-top: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
+  margin-bottom: 3rem;
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

@@ -37,14 +37,12 @@ export function Eligibility({
         <StyledCardFirstEmoji
           as={OutlinedText}
           dilationRadius={1}
-          shadow
           aria-hidden="true">
           {cardFirstEmoji}
         </StyledCardFirstEmoji>
         <StyledCardSecondEmoji
           as={OutlinedText}
           dilationRadius={1}
-          shadow
           aria-hidden="true">
           {cardSecondEmoji}
         </StyledCardSecondEmoji>
@@ -105,6 +103,8 @@ const StyledCard = styled.div`
     container-type: inline-size;
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      border-radius: 1.5rem;
+
       padding: 2rem 1rem;
     }
 
@@ -131,22 +131,16 @@ const StyledCardHeading = styled(OutlinedText)`
 const StyledCardDescription = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.white};
-    font-weight: ${theme.fonts.weights.medium};
     line-height: 2;
+    width: 80%;
   `}
 `
 
 const StyledCardFirstEmoji = styled(Typo.Emoji)`
-  ${({ theme }) => css`
-    position: absolute;
-    top: 0;
-    right: 2rem;
-    transform: rotate(10deg);
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      display: none;
-    }
-  `}
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  transform: rotate(10deg);
 `
 
 const StyledCardSecondEmoji = styled(Typo.Emoji)`
@@ -163,6 +157,8 @@ const StyledListContainer = styled.div`
     padding: 3.25rem 3rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      border-radius: 1.5rem;
+
       padding: 2.5rem 2rem;
     }
   `}

@@ -33,7 +33,6 @@ const Root = styled.div`
 
     p {
       font-size: ${theme.fonts.sizes['4xl']};
-      font-weight: ${theme.fonts.weights.semiBold};
       line-height: 1.7;
 
       @media (width < ${theme.mediaQueries.mobile}) {

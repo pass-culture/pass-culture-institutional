@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export function BackButton(props: { onClick: () => void }) {
   return (
@@ -23,7 +23,10 @@ export function BackButton(props: { onClick: () => void }) {
 }
 
 const StyledButton = styled.button`
-  svg {
-    margin-right: 0.625rem;
-  }
+  ${({ theme }) => css`
+    svg {
+      margin-right: 0.625rem;
+    }
+    font-weight: ${theme.fonts.weights.medium};
+  `}
 `

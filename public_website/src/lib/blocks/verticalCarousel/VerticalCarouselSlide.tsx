@@ -35,12 +35,14 @@ export function VerticalCarouselSlide({
       aria-roledescription="diapositive">
       <StyledLink href={url}>
         {imageUrl && (
-          <StyledImage
-            src={getStrapiURL(imageUrl)}
-            alt=""
-            width={300}
-            height={650}
-          />
+          <StyledImageWrapper>
+            <Image
+              src={getStrapiURL(imageUrl)}
+              alt=""
+              layout={'fill'}
+              objectFit={'cover'}
+            />
+          </StyledImageWrapper>
         )}
         <StyledTitle>{title}</StyledTitle>
         <Typo.Body>{description}</Typo.Body>
@@ -51,26 +53,31 @@ export function VerticalCarouselSlide({
 
 const Root = styled(Slide)`
   ${({ theme }) => css`
+    margin: 0 1rem;
     .inner {
-      margin-right: 1rem;
-
       @media (width < ${theme.mediaQueries.mobile}) {
-        margin-right: 0;
+        margin: 0;
       }
     }
   `}
 `
 
-const StyledImage = styled(Image)`
-  border-radius: 0.5rem;
-  object-fit: cover;
-  width: 100%;
-`
-
 const StyledTitle = styled(Typo.Heading3)`
   margin: 1.5rem 0 0.25rem;
+  width: 90%;
+  font-size: ${({ theme }) => theme.fonts.sizes['xl']};
 `
 
 const StyledLink = styled(Link)`
   display: block;
+`
+const StyledImageWrapper = styled.div`
+  width: 100%;
+  border-radius: 0.5rem;
+  position: relative;
+  aspect-ratio: 283 / 401;
+  border-radius: 0.5rem;
+  img {
+    border-radius: 0.5rem;
+  }
 `

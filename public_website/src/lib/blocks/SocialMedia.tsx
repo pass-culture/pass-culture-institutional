@@ -95,9 +95,15 @@ const StyledListItem = styled.li`
       }
     }
 
+    transition: all 0.7s ease-in-out;
     &:nth-child(even) a {
       background: ${theme.colors.tertiary};
       transform: rotate(-4deg);
+    }
+
+    &:hover {
+      transform: rotate(-35deg);
+      filter: brightness(0.8);
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {

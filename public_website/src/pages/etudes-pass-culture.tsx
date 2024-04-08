@@ -295,14 +295,14 @@ const StyledTitle = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       h2 {
         text-align: center;
+        font-size: ${theme.fonts.sizes['5xl']};
       }
     }
   `}
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin-top: 3rem;
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
