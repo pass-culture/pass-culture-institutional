@@ -10,6 +10,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -158,6 +159,7 @@ export default function RessourcesEnseignants({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -287,4 +289,7 @@ const StyledSocialMedia = styled(SocialMedia)`
       margin: 5rem 0 6.25rem;
     }
   `}
+`
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

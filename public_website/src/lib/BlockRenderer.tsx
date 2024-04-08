@@ -9,6 +9,7 @@ import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
 import { Image } from './blocks/Image'
+import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
 import { KeyNumber } from './blocks/Keynumber'
 import { KeyNumberCarousel } from './blocks/keyNumberCarousel/keyNumberCarousel'
@@ -44,7 +45,7 @@ interface BlockRendererProps {
 const COMPONENTS: Record<
   string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (props: ComponentProps<any>) => React.JSX.Element
+  (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
   'block.header': Header,
   'block.header-test': Headertest,
@@ -78,7 +79,8 @@ const COMPONENTS: Record<
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,
   'block.simple-text-v2': SimpleTextV2,
-  'block.list-bread-crumb': Breadcrumb,
+  'block.image-gallery': ImageGallery,
+  'block.breadcrumb': Breadcrumb,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

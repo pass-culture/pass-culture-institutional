@@ -11,6 +11,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface TeachersHelpProps {
@@ -31,6 +32,7 @@ export default function TeachersHelp({
         icon={data.attributes.heroSection.icon}
         image={data.attributes.heroSection.image}
       />
+      <Breadcrumb isUnderHeader />
       <Faq
         title={data.attributes.faq.title}
         cta={data.attributes.faq.cta}

@@ -10,6 +10,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
@@ -133,6 +134,7 @@ export default function ListeActualitesPassCulture({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -257,4 +259,8 @@ const StyledListItems = styled(ListItems)`
     @media (width < ${theme.mediaQueries.mobile}) {
     }
   `}
+`
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

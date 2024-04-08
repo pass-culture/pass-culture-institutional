@@ -10,6 +10,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HelpProps {
@@ -26,6 +27,8 @@ export default function Help({ helpData }: HelpProps) {
         icon={helpData.attributes.heroSection.icon}
         image={helpData.attributes.heroSection.image}
       />
+
+      <Breadcrumb isUnderHeader />
       <Faq
         title={helpData.attributes.faq.title}
         cta={helpData.attributes.faq.cta}

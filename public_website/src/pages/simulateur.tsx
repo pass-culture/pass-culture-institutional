@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -25,6 +26,7 @@ export default function SimulatorPage(props: SimulatorProps) {
       <Description
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
+      <UnpaddedBreadcrumb />
 
       <StyledSimulator
         ageQuestion={props.data.attributes.ageQuestion}
@@ -119,3 +121,7 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<SimulatorProps>
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
+`

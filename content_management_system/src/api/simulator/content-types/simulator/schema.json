@@ -113,11 +113,6 @@
       "required": true,
       "component": "block.social-media"
     },
-    "bread": {
-      "type": "component",
-      "repeatable": false,
-      "component": "block.list-bread-crumb"
-    },
     "seo": {
       "type": "component",
       "repeatable": false,

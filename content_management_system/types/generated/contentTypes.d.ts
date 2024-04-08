@@ -1539,7 +1539,8 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.detailed-logos',
         'block.organization-chart',
         'block.simple-text-v2',
-        'block.list-bread-crumb'
+        'block.list-bread-crumb',
+        'block.image-gallery'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1880,7 +1881,6 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     bottomEmoji: Attribute.String & Attribute.Required;
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
-    bread: Attribute.Component<'block.list-bread-crumb'>;
     seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

@@ -13,6 +13,7 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -281,6 +282,9 @@ export default function Presse({
             }}
           />
         )}
+
+        <Breadcrumb />
+
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
