@@ -10,7 +10,7 @@
       "type": "enumeration",
       "enum": [
         "Facebook",
-        "Twitter"
+        "X"
       ],
       "required": true
     },

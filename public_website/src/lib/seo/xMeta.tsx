@@ -4,12 +4,12 @@ import Head from 'next/head'
 import { APIResponse } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-interface TwitterMetaProps {
+interface XMetaProps {
   title: string
   description: string
   image: APIResponse<'plugin::upload.file'> | null | undefined
 }
-export function TwitterMeta(props: TwitterMetaProps) {
+export function XMeta(props: XMetaProps) {
   return (
     <Head>
       <meta

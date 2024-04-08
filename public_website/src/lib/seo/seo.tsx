@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 
 import { FacebookMeta } from './facebookMeta'
-import { TwitterMeta } from './twitterMeta'
+import { XMeta } from './xMeta'
 import { APIResponseData } from '@/types/strapi'
 
 interface SeoProps {
@@ -49,8 +49,8 @@ export function Seo(props: SeoProps) {
                 image={social.image}
               />
             )}
-            {social.socialNetwork === 'Twitter' && (
-              <TwitterMeta
+            {social.socialNetwork === 'X' && (
+              <XMeta
                 key={social.title}
                 title={social.title}
                 description={social.description}

@@ -799,7 +799,7 @@ export interface SharedMetaSocial extends Schema.Component {
     icon: 'project-diagram';
   };
   attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'Twitter']> &
+    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
       Attribute.Required;
     title: Attribute.String &
       Attribute.Required &
