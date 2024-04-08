@@ -8,7 +8,9 @@ import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HelpProps {
@@ -18,12 +20,15 @@ interface HelpProps {
 export default function Help({ helpData }: HelpProps) {
   return (
     <React.Fragment>
+      {helpData.attributes.seo && <Seo metaData={helpData.attributes.seo} />}
       <Header
         title={helpData.attributes?.heroSection?.title}
         text={helpData.attributes.heroSection.text}
         icon={helpData.attributes.heroSection.icon}
         image={helpData.attributes.heroSection.image}
       />
+
+      <Breadcrumb isUnderHeader />
       <Faq
         title={helpData.attributes.faq.title}
         cta={helpData.attributes.faq.cta}
@@ -74,6 +79,9 @@ export const getStaticProps = (async () => {
       'simplepushcta.image',
       'simplepushcta.cta',
       'simplepushcta.cta[0]',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

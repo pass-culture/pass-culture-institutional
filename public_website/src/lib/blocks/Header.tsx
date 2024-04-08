@@ -54,10 +54,12 @@ const Root = styled.div`
     );
 
     transform: translateY(-8rem);
+    margin-bottom: -8rem;
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       transform: translateY(-7rem);
+      margin-bottom: -7rem;
       overflow: visible;
     }
   `}

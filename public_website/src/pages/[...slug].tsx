@@ -3,6 +3,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -14,6 +15,9 @@ export default function CustomPage(props: CustomPageProps) {
   return (
     /* eslint-disable-next-line react/jsx-no-useless-fragment */
     <React.Fragment>
+      {props.data.attributes.seo && (
+        <Seo metaData={props.data.attributes.seo} />
+      )}
       {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
@@ -47,6 +51,10 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.breadCrumbs',
       'Blocks.breadCrumbs.fils',
       'Blocks.breadCrumbs.parent',
+      'Blocks.images',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

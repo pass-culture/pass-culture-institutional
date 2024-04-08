@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_block_image_galleries",
+  "info": {
+    "displayName": "Image Gallery"
+  },
+  "options": {},
+  "attributes": {
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
+    }
+  }
+}

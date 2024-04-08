@@ -6,8 +6,10 @@ import { Header } from '@/lib/blocks/Header'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -20,6 +22,9 @@ interface ListProps {
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   return (
     <React.Fragment>
+      {offerListe.attributes.seo && (
+        <Seo metaData={offerListe.attributes.seo} />
+      )}
       {offerListe.attributes.hero &&
         offerListe.attributes.hero.title &&
         offerListe.attributes.hero.icon && (
@@ -31,20 +36,21 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
           />
         )}
 
-      {offerItems.length > 0 && (
-        <OfferSection
-          title={offerListe.attributes.offres.title}
-          description={offerListe.attributes.offres.description}
-          offers={offerItems}
-          cta={offerListe.attributes.offres.cta}
-          firstCartTitle={offerListe.attributes.offres.firstCartTitle}
-          secondCartTitle={offerListe.attributes.offres.secondCartTitle}
-          descriptionCard={offerListe.attributes.offres.descritptionCard}
-          ctaCard={offerListe.attributes.offres.ctaCard}
-          firstIcon={offerListe.attributes.offres.firstIcon}
-          secondIcon={offerListe.attributes.offres.secondIcon}
-        />
-      )}
+      <Breadcrumb isUnderHeader />
+
+      <OfferSection
+        title={offerListe.attributes.offres.title}
+        description={offerListe.attributes.offres.description}
+        offers={offerItems}
+        cta={offerListe.attributes.offres.cta}
+        firstCartTitle={offerListe.attributes.offres.firstCartTitle}
+        secondCartTitle={offerListe.attributes.offres.secondCartTitle}
+        descriptionCard={offerListe.attributes.offres.descritptionCard}
+        ctaCard={offerListe.attributes.offres.ctaCard}
+        firstIcon={offerListe.attributes.offres.firstIcon}
+        secondIcon={offerListe.attributes.offres.secondIcon}
+      />
+
       {offerListe.attributes.separator && (
         <Separator isActive={offerListe.attributes.separator.isActive} />
       )}
@@ -83,6 +89,9 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'offres.ctaCard',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<

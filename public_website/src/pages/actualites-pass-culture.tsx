@@ -8,7 +8,9 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
@@ -121,6 +123,9 @@ export default function ListeActualitesPassCulture({
 
   return (
     <React.Fragment>
+      {listeActualitesPassCulture.attributes.seo && (
+        <Seo metaData={listeActualitesPassCulture.attributes.seo} />
+      )}
       <StyledTitle>
         {listeActualitesPassCulture.attributes.title && (
           <Typo.Heading2
@@ -129,6 +134,7 @@ export default function ListeActualitesPassCulture({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -200,6 +206,9 @@ export const getStaticProps = (async () => {
       'aide',
       'aide.image',
       'aide.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<
@@ -245,4 +254,8 @@ const StyledSocialMedia = styled(SocialMedia)`
 
 const StyledListItems = styled(ListItems)`
   margin-bottom: 3rem;
+`
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

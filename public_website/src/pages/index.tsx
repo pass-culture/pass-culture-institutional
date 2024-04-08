@@ -8,6 +8,7 @@ import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility } from '@/ui/components/home/Eligibility'
@@ -33,6 +34,7 @@ export default function Home({
 
   return (
     <React.Fragment>
+      {homeData.attributes.seo && <Seo metaData={homeData.attributes.seo} />}
       <StyledHomeGradient>
         <Hero
           title={homeData.attributes.heroSection.title}
@@ -122,6 +124,9 @@ export const getStaticProps = (async () => {
       'latestStudies.cta',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(

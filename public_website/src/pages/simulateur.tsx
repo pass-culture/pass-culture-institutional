@@ -4,7 +4,9 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -16,12 +18,16 @@ interface SimulatorProps {
 export default function SimulatorPage(props: SimulatorProps) {
   return (
     <Root>
+      {props.data.attributes.seo && (
+        <Seo metaData={props.data.attributes.seo} />
+      )}
       <Title
         dangerouslySetInnerHTML={{ __html: props.data.attributes.title }}
       />
       <Description
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
+      <UnpaddedBreadcrumb />
 
       <StyledSimulator
         ageQuestion={props.data.attributes.ageQuestion}
@@ -106,6 +112,9 @@ export const getStaticProps = (async () => {
         'bread.breadCrumbs',
         'bread.breadCrumbs.parent',
         'bread.breadCrumbs.fils',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
       ],
     },
     { encodeValuesOnly: true }
@@ -120,3 +129,7 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<SimulatorProps>
+
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
+`

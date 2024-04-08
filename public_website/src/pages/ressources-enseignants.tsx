@@ -8,7 +8,9 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -146,6 +148,9 @@ export default function RessourcesEnseignants({
 
   return (
     <React.Fragment>
+      {ressourcesEnseignantsListe.attributes.seo && (
+        <Seo metaData={ressourcesEnseignantsListe.attributes.seo} />
+      )}
       <StyledTitle>
         {ressourcesEnseignantsListe.attributes.title && (
           <Typo.Heading2
@@ -154,6 +159,7 @@ export default function RessourcesEnseignants({
             }}
           />
         )}
+        <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
@@ -230,6 +236,9 @@ export const getStaticProps = (async () => {
       'aide',
       'aide.image',
       'aide.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<
@@ -275,4 +284,7 @@ const StyledSocialMedia = styled(SocialMedia)`
       margin: 5rem 0 6.25rem;
     }
   `}
+`
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
 `

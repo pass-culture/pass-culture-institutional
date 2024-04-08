@@ -1,13 +1,13 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface BlockBreadCrumbWrapper extends Schema.Component {
-  collectionName: 'components_block_bread_crumb_wrappers';
+export interface BlockBreadcrumb extends Schema.Component {
+  collectionName: 'components_block_breadcrumbs';
   info: {
-    displayName: 'BreadCrumbWrapper';
+    displayName: 'Breadcrumbs';
+    description: '';
   };
   attributes: {
-    parent: Attribute.Component<'common.link'>;
-    fils: Attribute.Component<'common.link', true>;
+    isUnderHeader: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
@@ -92,6 +92,16 @@ export interface BlockHeader extends Schema.Component {
   };
 }
 
+export interface BlockImageGallery extends Schema.Component {
+  collectionName: 'components_block_image_galleries';
+  info: {
+    displayName: 'Image Gallery';
+  };
+  attributes: {
+    images: Attribute.Media & Attribute.Required;
+  };
+}
+
 export interface BlockImageText extends Schema.Component {
   collectionName: 'components_block_image_texts';
   info: {
@@ -100,7 +110,7 @@ export interface BlockImageText extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    image: Attribute.Media;
+    image: Attribute.Media & Attribute.Required;
     isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
     icon: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
@@ -166,17 +176,6 @@ export interface BlockLink extends Schema.Component {
     > &
       Attribute.Required;
     url: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockListBreadCrumb extends Schema.Component {
-  collectionName: 'components_block_list_bread_crumbs';
-  info: {
-    displayName: 'List BreadCrumb';
-    description: '';
-  };
-  attributes: {
-    breadCrumbs: Attribute.Component<'block.bread-crumb-wrapper', true>;
   };
 }
 
@@ -522,7 +521,6 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
-    secondSurtitle: Attribute.String & Attribute.Required;
     theme: Attribute.Enumeration<
       ['purple', 'yellow', 'magenta', 'orange', 'green']
     > &
@@ -794,6 +792,57 @@ export interface HomeRecommendationsSection extends Schema.Component {
   };
 }
 
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media;
+  };
+}
+
+export interface SharedSeo extends Schema.Component {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
+  };
+}
+
 export interface SimulatorAgeQuestion extends Schema.Component {
   collectionName: 'components_simulator_age_questions';
   info: {
@@ -891,19 +940,19 @@ export interface SimulatorSuccessScreen extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'block.bread-crumb-wrapper': BlockBreadCrumbWrapper;
+      'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
       'block.faq': BlockFaq;
       'block.header': BlockHeader;
+      'block.image-gallery': BlockImageGallery;
       'block.image-text': BlockImageText;
       'block.image': BlockImage;
       'block.key-number-carousel': BlockKeyNumberCarousel;
       'block.latest-news': BlockLatestNews;
       'block.link': BlockLink;
-      'block.list-bread-crumb': BlockListBreadCrumb;
       'block.little-list': BlockLittleList;
       'block.logos': BlockLogos;
       'block.offer-list': BlockOfferList;
@@ -948,6 +997,8 @@ declare module '@strapi/types' {
       'home.eligibility-section': HomeEligibilitySection;
       'home.hero-section': HomeHeroSection;
       'home.recommendations-section': HomeRecommendationsSection;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.seo': SharedSeo;
       'simulator.age-question': SimulatorAgeQuestion;
       'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.answer': SimulatorAnswer;

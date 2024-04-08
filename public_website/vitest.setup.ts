@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, expect } from 'vitest'
+import { afterAll, beforeAll, expect, vi } from 'vitest'
 import type { AxeMatchers } from 'vitest-axe/matchers'
 import * as matchers from 'vitest-axe/matchers'
 
@@ -14,6 +14,19 @@ afterAll(() => {
 })
 
 expect.extend(matchers)
+
+// Mock useRouter and usePathname, required by the Breadcrumb component
+vi.mock('next/navigation', async () => {
+  const actual = (await vi.importActual('next/navigation')) as object
+  return {
+    ...actual,
+    useRouter: vi.fn(() => ({
+      push: vi.fn(),
+      replace: vi.fn(),
+    })),
+    usePathname: vi.fn(),
+  }
+})
 
 declare module 'vitest' {
   export interface Assertion extends AxeMatchers {}

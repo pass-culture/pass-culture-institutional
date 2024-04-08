@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled from 'styled-components'
 
 import { Header } from '@/lib/blocks/Header'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -14,6 +15,7 @@ interface ListProps {
 export default function NotFound({ notData }: ListProps) {
   return (
     <Root>
+      {notData.attributes.seo && <Seo metaData={notData.attributes.seo} />}
       {notData.attributes.header?.title &&
         notData.attributes.header?.image &&
         notData.attributes.header?.icon && (
@@ -31,7 +33,14 @@ export default function NotFound({ notData }: ListProps) {
 
 export const getStaticProps = (async () => {
   const query = stringify({
-    populate: ['header.image', 'header', 'header.cta'],
+    populate: [
+      'header.image',
+      'header',
+      'header.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
+    ],
   })
 
   const { data } = await fetchCMS<APIResponseData<'api::not-found.not-found'>>(
