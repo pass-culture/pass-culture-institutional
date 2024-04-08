@@ -6,9 +6,9 @@ import {
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-
 type HeroProps = {
   title: string
   text: BlocksContent
@@ -27,12 +27,6 @@ export function ImageText({
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
-        {icon && (
-          <StyledIcon
-            className={isImageRight ? 'IconRight' : 'IconLeft'}
-            dangerouslySetInnerHTML={{ __html: icon }}
-          />
-        )}
         <StyledContentTextWrapper className="first">
           <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
           <BlocksRenderer content={text} />
@@ -42,6 +36,11 @@ export function ImageText({
             src={getStrapiURL(image?.data.attributes.url)}
             alt={image?.data.attributes.alternativeText || ''}
           />
+          {icon && (
+            <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+              {icon}
+            </StyledIcon>
+          )}
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>
@@ -58,8 +57,8 @@ const Root = styled.div`
       position: relative;
 
       .IconRight {
-        top: 36rem;
-        right: -1rem;
+        top: 6rem;
+        right: -2rem;
         z-index: 2;
       }
     }
@@ -71,24 +70,45 @@ const Root = styled.div`
       gap: 2.5rem;
 
       .IconLeft {
-        top: 36rem;
-        left: 35rem;
+        top: 6rem;
+        right: -2rem;
         z-index: 2;
       }
     }
+    @media (width < ${theme.mediaQueries.tablet}) {
+      .right {
+        .IconRight {
+          top: 3rem;
+          right: auto;
+          left: -1rem;
+          z-index: 2;
+        }
+      }
 
+      .left {
+        grid-template-areas: 'first second';
+        grid-template-columns: 1.5fr 1fr;
+
+        .IconLeft {
+          top: 3rem;
+          right: auto;
+          left: -1rem;
+          z-index: 2;
+        }
+      }
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
       .right,
       .left {
         grid-template-columns: 1fr;
-        padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+        padding: 10rem 1.5rem 2.5rem;
         grid-template-areas:
           'second'
           'first';
 
         .IconRight,
         .IconLeft {
-          top: 23rem;
+          top: 1rem;
           left: 2rem;
           z-index: 2;
         }
@@ -103,7 +123,7 @@ const StyledContentWrapper = styled.div`
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-    padding: calc(18rem + 10rem) 1.5rem 2.5rem;
+    padding: 10rem 3.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
 
@@ -127,7 +147,6 @@ const StyledContentTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     ul {
       list-style-type: disc;
       padding-left: 2rem;
@@ -142,9 +161,19 @@ const StyledContentTextWrapper = styled.div`
       font-weight: ${({ theme }) => theme.fonts.weights.bold};
     }
 
+    p {
+      font-size: ${theme.fonts.sizes['xl']};
+      line-height: 2.2;
+      width: 70%;
+    }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
-    }
+
+      p {
+        font-size: ${theme.fonts.sizes['m']};
+        width: 100%;
+      }
   `}
 `
 
@@ -152,6 +181,10 @@ const StyledContentImagetWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: end;
+    position: relative;
+    @media (width < ${theme.mediaQueries.tablet}) {
+      justify-content: center;
+    }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       justify-content: center;
@@ -159,31 +192,44 @@ const StyledContentImagetWrapper = styled.div`
   `}
 `
 
-const StyledHeading = styled(Typo.Heading1)`
+const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     max-width: 36rem;
     margin: 0 0 3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      font-size: ${theme.fonts.sizes['l']};
+      margin: 0 0 1rem;
     }
   `}
 `
 
 const StyledImage = styled.img`
-  max-width: 80%;
-  height: auto;
-  transform: rotate(2deg);
-  box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
-  border-radius: 1.5rem;
+  ${({ theme }) => css`
+    max-width: 80%;
+    height: auto;
+    transform: rotate(2deg);
+    box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
+    border-radius: 1.5rem;
+    aspect-ratio: 385.54/480.87;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      max-width: 80%;
+    }
+  `}
 `
 
-const StyledIcon = styled.p`
+const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['8xl']};
-    max-width: 5rem;
     height: auto;
     transform: rotate(2deg);
     position: absolute;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      font-size: ${theme.fonts.sizes['6xl']};
+    }
   `}
 `

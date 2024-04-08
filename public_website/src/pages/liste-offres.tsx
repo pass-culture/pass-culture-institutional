@@ -6,6 +6,7 @@ import { Header } from '@/lib/blocks/Header'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
@@ -21,6 +22,9 @@ interface ListProps {
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   return (
     <React.Fragment>
+      {offerListe.attributes.seo && (
+        <Seo metaData={offerListe.attributes.seo} />
+      )}
       {offerListe.attributes.hero &&
         offerListe.attributes.hero.title &&
         offerListe.attributes.hero.icon && (
@@ -85,6 +89,9 @@ export const getStaticProps = (async () => {
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
       'offres.ctaCard',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
   const { data } = await fetchCMS<

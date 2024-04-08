@@ -138,7 +138,7 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     `color: ${theme.colors.primary};`}
 
     font-size: ${theme.fonts.sizes.xs};
-    font-weight: ${theme.fonts.weights.semiBold};
+    font-weight: ${theme.fonts.weights.medium};
     padding: 1rem 2rem;
     display: inline-block;
     text-align: center;

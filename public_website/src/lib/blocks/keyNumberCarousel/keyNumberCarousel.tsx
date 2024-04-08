@@ -153,7 +153,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     justify-content: space-between;
     background-color: ${theme.colors.secondary}20;
 
-    padding: 5rem 0;
+    padding: 2rem 0;
     margin: 4rem auto;
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
@@ -165,12 +165,13 @@ const StyledKeyCarouselHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 2rem;
     padding-right: 7rem;
     padding-left: 5rem;
     margin-bottom: 3rem;
-
+    width: 30%;
     @media (width < ${theme.mediaQueries.mobile}) {
+      width: 100%;
       margin-bottom: 2.5rem;
       padding: 0;
     }
@@ -229,6 +230,7 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
+      padding-bottom: 1rem;
     }
     display: none;
   `}

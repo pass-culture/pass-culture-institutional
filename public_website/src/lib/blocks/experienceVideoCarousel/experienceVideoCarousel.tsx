@@ -102,7 +102,7 @@ export function ExperienceVideoCarousel({
       infinite={true}
       step={1}>
       <StyledHeading>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+        <StyledHeading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack
@@ -160,7 +160,7 @@ const StyledHeading = styled.div`
     align-items: end;
     justify-content: space-between;
     margin-bottom: 3rem;
-    padding-right: 7rem;
+    padding-right: 1.3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
@@ -232,6 +232,15 @@ const StyledDot = styled(Dot)`
     &[disabled] {
       opacity: 1;
       background-color: ${theme.colors.secondary};
+    }
+  `}
+`
+
+const StyledHeading2 = styled(Typo.Heading2)`
+  ${({ theme }) => css`
+    max-width: 50%;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      max-width: 100%;
     }
   `}
 `

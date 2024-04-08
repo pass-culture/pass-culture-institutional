@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { default as BaseSlider } from 'rc-slider'
 import type { AriaValueFormat } from 'rc-slider/lib/interface'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import 'rc-slider/assets/index.css'
 import { ChevronDown } from '../icons/ChevronDown'
@@ -205,8 +205,14 @@ const Select = styled.select`
 `
 
 const SelectIcon = styled(ChevronDown)`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1rem;
+  ${({ theme }) => css`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      right: 2.2rem;
+    }
+  `}
 `

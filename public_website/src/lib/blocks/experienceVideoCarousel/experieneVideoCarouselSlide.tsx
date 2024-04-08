@@ -7,6 +7,7 @@ import { Typo } from '../../../ui/components/typographies'
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Play } from '@/ui/components/icons/Play'
+import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type ExperienceVideoCarouselSlideProps = {
   slideIndex: number
@@ -38,7 +39,7 @@ export function ExperienceVideoCarouselSlide({
       <StyledWrapper>
         {image && isMounted && (
           <StyledExperienceVideo
-            light={image?.data.attributes.url}
+            light={image ? getStrapiURL(image?.data.attributes.url) : true}
             url={url}
             width="100%"
             controls={false}
@@ -58,7 +59,9 @@ const Root = styled(Slide)`
   ${({ theme }) => css`
     .inner {
       margin-right: 1rem;
-
+      .react-player__preview {
+        border-radius: 1rem;
+      }
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }
@@ -91,10 +94,19 @@ const StyledWrapper = styled.div`
 `
 
 const StyledPlayIcon = styled(Play)`
-  position: absolute;
-  left: 1rem;
-  bottom: 8rem;
-  z-index: 15;
+  ${({ theme }) => css`
+    position: absolute;
+    left: 2rem;
+    bottom: 9rem;
+    z-index: 15;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      scale: 0.5;
+      left: 0;
+
+      bottom: 6rem;
+    }
+  `}
   transition: all 0.3s ease-in-out;
   border-radius: 50%;
   outline-offset: 3px;

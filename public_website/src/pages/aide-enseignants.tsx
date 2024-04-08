@@ -9,6 +9,7 @@ import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
@@ -24,6 +25,7 @@ export default function TeachersHelp({
 }: TeachersHelpProps) {
   return (
     <React.Fragment>
+      {data.attributes.seo && <Seo metaData={data.attributes.seo} />}
       <Header
         title={data.attributes?.heroSection?.title}
         text={data.attributes?.heroSection?.text}
@@ -87,6 +89,9 @@ export const getStaticProps = (async () => {
       'simplepushcta.cta[0]',
       'latestStudies',
       'latestStudies.cta',
+      'seo',
+      'seo.metaSocial',
+      'seo.metaSocial.image',
     ],
   })
 

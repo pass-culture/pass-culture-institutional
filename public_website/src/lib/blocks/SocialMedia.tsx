@@ -94,17 +94,17 @@ const StyledListItem = styled.li`
         max-height: 2rem;
       }
     }
-    transition: filter 0.3s ease-in-out;
-    &:hover {
-      filter: brightness(0.8);
-    }
-    &:focus {
-      outline: 2px solid ${theme.colors.primary};
-    }
-    outline-offset: 2px;
+    
+
+    transition: all 0.7s ease-in-out;
     &:nth-child(even) a {
       background: ${theme.colors.tertiary};
       transform: rotate(-4deg);
+    }
+
+    &:hover {
+      transform: rotate(-35deg);
+      filter: brightness(0.8);
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {

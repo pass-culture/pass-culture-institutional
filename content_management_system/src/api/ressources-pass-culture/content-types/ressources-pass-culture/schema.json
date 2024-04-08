@@ -4,7 +4,8 @@
   "info": {
     "singularName": "ressources-pass-culture",
     "pluralName": "ressources-pass-cultures",
-    "displayName": "Ressources Pass Culture"
+    "displayName": "Ressources Pass Culture",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -36,6 +37,11 @@
       "type": "component",
       "repeatable": false,
       "component": "block.simple-push-cta"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
     }
   }
 }

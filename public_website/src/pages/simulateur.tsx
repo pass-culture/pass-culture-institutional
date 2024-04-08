@@ -1,14 +1,16 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+
 interface SimulatorProps {
   data: APIResponseData<'api::simulator.simulator'>
 }
@@ -16,6 +18,9 @@ interface SimulatorProps {
 export default function SimulatorPage(props: SimulatorProps) {
   return (
     <Root>
+      {props.data.attributes.seo && (
+        <Seo metaData={props.data.attributes.seo} />
+      )}
       <Title
         dangerouslySetInnerHTML={{ __html: props.data.attributes.title }}
       />
@@ -73,8 +78,15 @@ const Description = styled(Typo.Body)`
 `
 
 const StyledSimulator = styled(Simulator)`
-  margin-top: 7rem;
-  margin-bottom: 11rem;
+  ${({ theme }) => css`
+    margin-top: 7rem;
+    margin-bottom: 11rem;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+  `}
 `
 
 export const getStaticProps = (async () => {
@@ -100,6 +112,9 @@ export const getStaticProps = (async () => {
         'bread.breadCrumbs',
         'bread.breadCrumbs.parent',
         'bread.breadCrumbs.fils',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
       ],
     },
     { encodeValuesOnly: true }
