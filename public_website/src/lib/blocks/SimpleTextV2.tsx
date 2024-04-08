@@ -78,6 +78,14 @@ const Root = styled.div`
     a {
       color: ${theme.colors.primary}!important;
       text-decoration: underline;
+      font-weight: 600;
+      outline-offset: 10px;
+      &:hover {
+        text-decoration: none;
+      }
+      &:focus {
+        outline: 2px solid ${theme.colors.primary};
+      }
     }
 
     strong {

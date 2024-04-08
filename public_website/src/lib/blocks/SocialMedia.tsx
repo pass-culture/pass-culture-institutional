@@ -94,7 +94,7 @@ const StyledListItem = styled.li`
         max-height: 2rem;
       }
     }
-    transition: all 0.7s ease-in-out;
+    transition: all 0.4s ease-in-out;
     &:nth-child(even) a {
       background: ${theme.colors.tertiary};
       transform: rotate(-4deg);

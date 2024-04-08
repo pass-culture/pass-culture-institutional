@@ -95,6 +95,10 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     outline-offset: 2px;
     transition: all 0.4s ease-in-out;
     &:focus {
+      ${$variant &&
+      $variant === 'tertiary' &&
+      `background:rgba(255,255,255,0);
+        color:${theme.colors.white};`}
       ${$variant ? getFocusOutlineColor($variant) : ''}
     }
     &:hover {

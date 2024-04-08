@@ -193,6 +193,7 @@ const StyledNavigationButtons = styled.div`
       height: 3.625rem;
       cursor: pointer;
       &:hover {
+        box-shadow: none;
         filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
       }
       &:focus {

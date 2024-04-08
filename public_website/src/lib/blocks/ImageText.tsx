@@ -155,6 +155,14 @@ const StyledContentTextWrapper = styled.div`
     a {
       color: ${theme.colors.primary}!important;
       text-decoration: underline;
+      outline-offset: 10px;
+      font-weight: 600;
+      &:hover{
+        text-decoration: none;
+      }
+      &:focus{
+        outline:2px solid ${theme.colors.primary};
+      }
     }
 
     strong {
