@@ -6,12 +6,12 @@ import styled, { css } from 'styled-components'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
 
-interface Breadcrumb2Props {
+interface BreadcrumbProps {
   isUnderHeader?: boolean
   className?: string
 }
 
-export function Breadcrumb(props: Breadcrumb2Props) {
+export function Breadcrumb(props: BreadcrumbProps) {
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
   const router = useRouter()
