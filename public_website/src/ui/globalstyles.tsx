@@ -177,7 +177,6 @@ const GlobalStyles = createGlobalStyle`
     background-repeat: no-repeat;
     color: inherit;
   }
-
 `
 
 export default GlobalStyles
