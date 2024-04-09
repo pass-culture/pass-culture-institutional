@@ -6,6 +6,7 @@ import { Button } from '../../ui/components/button/Button'
 import { LinkFaq } from '../../ui/components/help/Link'
 import { Typo } from '../../ui/components/typographies'
 import arrowUrl from '../../ui/image/arrowd.svg'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
 type FaqProps = {
   title: string
@@ -70,44 +71,33 @@ export function Faq({
   )
 
   return (
-    <Root>
-      <StyledContentWrapper>
-        <StyledContentTextWrapper>
-          {title && (
-            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-          )}
-          {cta && <Button href={cta.URL}>{cta.Label}</Button>}
-        </StyledContentTextWrapper>
-        <StyledFaqtWrapper>
-          {filteredQuestions.map((faq) => (
-            <StyledAccordion key={faq.id}>
-              <summary
-                dangerouslySetInnerHTML={{
-                  __html: faq.title.replace(/\[.*?\]/g, ''),
-                }}></summary>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: cutFaqBody(faq.body),
-                }}></p>
-              {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
-            </StyledAccordion>
-          ))}
-        </StyledFaqtWrapper>
-      </StyledContentWrapper>
-    </Root>
+    <StyledContentWrapper>
+      <StyledContentTextWrapper>
+        {title && <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />}
+        {cta && <Button href={cta.URL}>{cta.Label}</Button>}
+      </StyledContentTextWrapper>
+      <StyledFaqtWrapper>
+        {filteredQuestions.map((faq) => (
+          <StyledAccordion key={faq.id}>
+            <summary
+              dangerouslySetInnerHTML={{
+                __html: faq.title.replace(/\[.*?\]/g, ''),
+              }}></summary>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: cutFaqBody(faq.body),
+              }}></p>
+            {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
+          </StyledAccordion>
+        ))}
+      </StyledFaqtWrapper>
+    </StyledContentWrapper>
   )
 }
 
-const Root = styled.div`
-  overflow: hidden;
-`
-
-const StyledContentWrapper = styled.div`
+const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
-    max-width: 90rem;
-    margin: 0 auto;
     position: relative;
-    padding: 0rem 1.5rem 2.5rem;
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 1.5rem;
@@ -125,8 +115,6 @@ const StyledContentWrapper = styled.div`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
-    max-width: 20rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.75rem;
     }
@@ -135,8 +123,6 @@ const StyledHeading = styled(Typo.Heading2)`
 
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
-    padding-left: 2rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
@@ -145,7 +131,6 @@ const StyledContentTextWrapper = styled.div`
 
 const StyledFaqtWrapper = styled.div`
   ${({ theme }) => css`
-    margin-top: 2rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       order: -1;
     }
