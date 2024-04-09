@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
@@ -13,53 +12,46 @@ interface ImageProps {
 
 export function Imageblock(props: ImageProps) {
   return (
-    <Root>
-      {props.image && (
-        <figure>
-          <Image
-            src={getStrapiURL(props.image.data.attributes.url)}
-            alt={props.alt}
-            layout={'fill'}
-            objectFit={'cover'}
-          />
-          <figcaption>{props.description}</figcaption>
-        </figure>
-      )}
-    </Root>
+    <ContentWrapper>
+      <Root>
+        {props.image && (
+          <figure>
+            <img
+              src={getStrapiURL(props.image.data.attributes.url)}
+              alt={props.alt}
+            />
+            <figcaption>{props.description}</figcaption>
+          </figure>
+        )}
+      </Root>
+    </ContentWrapper>
   )
 }
 
-const Root = styled(ContentWrapper)`
+const Root = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
 
+    padding: 0 8.5%;
+
     img {
-      position: absolute;
       border-radius: 2.5rem;
       margin-bottom: 2rem;
+      width: 100%;
+      object-fit: cover;
     }
     figure {
       width: 100%;
-      aspect-ratio: 16 / 9;
       position: relative;
-    }
-    figcaption {
-      position: absolute;
-      width: 95%;
-      right: 0;
-      bottom: -4rem;
-      margin: 0 auto;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;
-      padding: 1.5rem;
-      max-width: 90%;
-      margin: 2rem auto;
       gap: 1rem;
+      padding: 0;
 
       img {
         width: 100%;
