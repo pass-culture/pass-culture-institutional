@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 
 type OrganizationChartProps = {
@@ -21,7 +22,7 @@ export function OrganizationChart({
   people,
 }: OrganizationChartProps) {
   return (
-    <Root>
+    <ContentWrapper>
       {title && <StyledHeading>{title}</StyledHeading>}
       <StyledDescription>{description}</StyledDescription>
       <StyledList>
@@ -44,21 +45,21 @@ export function OrganizationChart({
           )
         })}
       </StyledList>
-    </Root>
+    </ContentWrapper>
   )
 }
 
-const Root = styled.div`
-  ${({ theme }) => css`
-    padding: 6.25rem 2rem;
-    max-width: 80rem;
-    margin: 0 auto;
+// const Root = styled.div`
+//   ${({ theme }) => css`
+//     padding: 6.25rem 2rem;
+//     max-width: 80rem;
+//     margin: 0 auto;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      padding: 3.75rem 1rem;
-    }
-  `}
-`
+//     @media (width < ${theme.mediaQueries.tablet}) {
+//       padding: 3.75rem 1rem;
+//     }
+//   `}
+// `
 
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
@@ -127,7 +128,7 @@ const StyledImage = styled(Image)`
 const StyledName = styled.h3`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes.xl};
-    font-weight: ${theme.fonts.weights.bold};
+    font-weight: ${theme.fonts.weights.semiBold};
     margin-bottom: 0.5rem;
   `}
 `
