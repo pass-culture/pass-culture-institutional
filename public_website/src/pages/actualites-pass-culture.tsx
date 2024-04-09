@@ -90,8 +90,8 @@ export default function ListeActualitesPassCulture({
         localisation: {
           $eqi: localisation,
         },
-        pageDaffichage: {
-          $eqi: 'Documentation',
+        pageLocalisation: {
+          $containsi: 'S’informer',
         },
       },
     })
@@ -185,8 +185,8 @@ export const getStaticProps = (async () => {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
       },
-      pageDaffichage: {
-        $eqi: 'Documentation',
+      pageLocalisation: {
+        $containsi: 'S’informer',
       },
     },
   })

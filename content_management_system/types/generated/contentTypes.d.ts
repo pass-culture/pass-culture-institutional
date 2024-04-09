@@ -804,9 +804,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     city: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    pageDaffichage: Attribute.Enumeration<
-      ['Acteurs culturels', 'S\u2019informer - presse']
-    >;
     path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
@@ -818,6 +815,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
+    pageLocalisation: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['Acteurs culturels', 'S\u2019informer - presse']
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1240,11 +1242,12 @@ export interface ApiNewsNews extends Schema.CollectionType {
       ]
     >;
     path: Attribute.String & Attribute.Required;
-    pageDaffichage: Attribute.Enumeration<
-      ['Jeunes et parents', 'Acteurs culturels', 'S\u2019informer']
-    > &
-      Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    pageLocalisation: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['Jeunes et parents', 'Acteurs culturels', 'S\u2019informer']
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1465,15 +1468,6 @@ export interface ApiResourceResource extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
-    pageDaffichage: Attribute.Enumeration<
-      [
-        'Enseignants',
-        'S\u2019informer - ressources',
-        'S\u2019informer - presse',
-        'S\u2019informer - \u00E9tudes'
-      ]
-    > &
-      Attribute.Required;
     partnership: Attribute.Enumeration<
       [
         'AUCUN',
@@ -1489,6 +1483,16 @@ export interface ApiResourceResource extends Schema.CollectionType {
     > &
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    pageLocalisation: Attribute.JSON &
+      Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        [
+          'Enseignants',
+          'S\u2019informer - ressources',
+          'S\u2019informer - presse',
+          'S\u2019informer - \u00E9tudes'
+        ]
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

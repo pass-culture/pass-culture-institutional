@@ -124,10 +124,10 @@ export interface BlockImage extends Schema.Component {
     description: '';
   };
   attributes: {
-    image: Attribute.Media & Attribute.Required
-    description: Attribute.Text
-    alt: Attribute.String & Attribute.Required
-  }
+    image: Attribute.Media & Attribute.Required;
+    description: Attribute.Text;
+    alt: Attribute.String & Attribute.Required;
+  };
 }
 
 export interface BlockKeyNumberCarousel extends Schema.Component {
