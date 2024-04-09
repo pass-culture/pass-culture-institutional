@@ -5,6 +5,7 @@ import {
 } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 
 interface SimpleTextV2Props {
@@ -46,11 +47,11 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    width: 100%;
-    max-width: 75rem;
-    margin: 5rem auto;
+    /* width: 100%; */
+    /* max-width: 75rem; */
+    /* margin: 5rem auto; */
 
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};

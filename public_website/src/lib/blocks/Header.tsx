@@ -21,7 +21,7 @@ export function Header(props: HeaderProps) {
   return (
     <Root>
       <StyledContentWrapper>
-        <StyledContentTextWrapper>
+        <div>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
           {props.cta?.Label && props.cta?.URL && (
@@ -29,7 +29,7 @@ export function Header(props: HeaderProps) {
               <Button href={props.cta.URL}>{props.cta.Label}</Button>
             </StyledBtnWrapper>
           )}
-        </StyledContentTextWrapper>
+        </div>
         <CardContainer>
           <Card
             $imageUrl={
@@ -54,7 +54,7 @@ const Root = styled.div`
     );
 
     transform: translateY(-8rem);
-    margin-bottom: -3rem;
+    margin-bottom: -8rem;
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -67,14 +67,14 @@ const Root = styled.div`
 
 const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
-    max-width: 90rem;
+    max-width: calc(75.8125rem + 1.3rem);
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-    padding: calc(18rem + 10rem) 1.5rem 2.5rem;
+    padding: calc(18rem + 10rem) 1.3rem 2.5rem;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 1.5rem;
+    gap: 8rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       grid-template-columns: 1fr 1fr;
@@ -83,23 +83,13 @@ const StyledContentWrapper = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       grid-template-columns: 1fr;
-      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+      padding: calc(10rem + 10rem) 1.3rem 2.5rem;
     }
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
       gap: 1.5rem;
-      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
-    }
-  `}
-`
-
-const StyledContentTextWrapper = styled.div`
-  ${({ theme }) => css`
-    padding-left: 2rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      padding-left: 0;
+      padding: calc(10rem + 10rem) 1.3rem 2.5rem;
     }
   `}
 `
@@ -141,8 +131,8 @@ const StyledText = styled.p`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 3.5rem;
-      padding-bottom: 1.5rem;
+      margin-bottom: 0;
+      /* padding-bottom: 1.5rem; */
     }
   `}
 `
