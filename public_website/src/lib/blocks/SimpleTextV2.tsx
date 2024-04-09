@@ -49,10 +49,6 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
 
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    /* width: 100%; */
-    /* max-width: 75rem; */
-    /* margin: 5rem auto; */
-
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
 
@@ -69,7 +65,6 @@ const Root = styled(ContentWrapper)`
     }
 
     p {
-      max-width: 70%;
       word-break: break-word;
 
       ul {
@@ -125,13 +120,12 @@ const Root = styled(ContentWrapper)`
 `
 
 const Content = styled.div`
-  padding-left: 7.1875rem;
+  padding-left: 8.5%;
+  padding-right: 8.5%;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
-    padding-left: 3rem;
-  }
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding-left: 0;
+    padding-right: 0;
   }
 `
 
