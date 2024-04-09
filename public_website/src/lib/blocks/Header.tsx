@@ -132,7 +132,6 @@ const StyledText = styled.p`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 0;
-      /* padding-bottom: 1.5rem; */
     }
   `}
 `
