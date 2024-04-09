@@ -15,6 +15,7 @@ import {
   VerticalCarouselSlideProps,
 } from './VerticalCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -93,7 +94,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
   }
 
   return (
-    <CarouselProvider
+    <StyledCarouselProvider
       naturalSlideWidth={60}
       naturalSlideHeight={75}
       totalSlides={items.length}
@@ -150,16 +151,19 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
           )
         })}
       </StyledDots>
-    </CarouselProvider>
+    </StyledCarouselProvider>
   )
 }
 
-const StyledHeading = styled.div`
+const StyledCarouselProvider = styled(CarouselProvider)`
+  margin-bottom: 5rem;
+`
+
+const StyledHeading = styled(ContentWrapper)`
   ${({ theme }) => css`
     display: flex;
     align-items: end;
     justify-content: space-between;
-    padding-right: 7rem;
     margin-bottom: 3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
