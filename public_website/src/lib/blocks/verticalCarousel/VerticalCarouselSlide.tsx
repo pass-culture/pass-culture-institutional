@@ -4,13 +4,13 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
-import { APIResponse } from '@/types/strapi'
+import { APIResponseData } from '@/types/strapi'
 import { Link } from '@/ui/components/Link'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type VerticalCarouselSlideProps = {
   slideIndex: number
-  image: string | APIResponse<'plugin::upload.file'> | null
+  image: string | { data: APIResponseData<'plugin::upload.file'> | null } | null
   title: string
   description: string
   url: string
@@ -24,7 +24,7 @@ export function VerticalCarouselSlide({
   url,
 }: VerticalCarouselSlideProps) {
   const imageUrl =
-    typeof image === 'string' ? image : image?.data.attributes.url
+    typeof image === 'string' ? image : image?.data?.attributes.url
 
   return (
     <Root
