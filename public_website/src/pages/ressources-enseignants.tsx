@@ -112,8 +112,8 @@ export default function RessourcesEnseignants({
         localisation: {
           $eqi: localisation,
         },
-        pageDaffichage: {
-          $eqi: 'Enseignants',
+        pageLocalisation: {
+          $containsi: 'S’informer - ressources',
         },
       },
     })
@@ -215,8 +215,8 @@ export const getStaticProps = (async () => {
           'Étude ritualisée',
         ],
       },
-      pageDaffichage: {
-        $eqi: 'Enseignants',
+      pageLocalisation: {
+        $containsi: 'S’informer - ressources',
       },
     },
   })

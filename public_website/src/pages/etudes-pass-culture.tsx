@@ -163,8 +163,8 @@ export default function EtudesPassCulture({
         partnership: {
           $eqi: partner,
         },
-        pageDaffichage: {
-          $eqi: 'Etudes',
+        pageLocalisation: {
+          $containsi: 'S’informer - études',
         },
       },
     })
@@ -242,8 +242,8 @@ export const getStaticProps = (async () => {
           'Étude ponctuelle',
         ],
       },
-      pageDaffichage: {
-        $eqi: 'Etudes',
+      pageLocalisation: {
+        $containsi: 'S’informer - études',
       },
     },
     pagination: {},

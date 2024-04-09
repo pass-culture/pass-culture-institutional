@@ -111,13 +111,6 @@
       "required": true,
       "unique": true
     },
-    "pageDaffichage": {
-      "type": "enumeration",
-      "enum": [
-        "Acteurs culturels",
-        "S’informer - presse"
-      ]
-    },
     "path": {
       "type": "string",
       "required": true
@@ -136,6 +129,14 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "pageLocalisation": {
+      "type": "customField",
+      "options": [
+        "Acteurs culturels",
+        "S’informer - presse"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }
