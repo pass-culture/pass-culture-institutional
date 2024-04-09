@@ -17,11 +17,6 @@
       "repeatable": true,
       "component": "common.little-list-component",
       "max": 4
-    },
-    "withDescritpion": {
-      "type": "boolean",
-      "default": false,
-      "required": true
     }
   }
 }

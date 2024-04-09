@@ -6,6 +6,7 @@ import {
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -33,16 +34,20 @@ export function ImageText({
           )}
           <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
-        <StyledContentImagetWrapper className="second">
-          <StyledImage
-            src={getStrapiURL(image?.data.attributes.url)}
-            alt={image?.data.attributes.alternativeText || ''}
-          />
-          {icon && (
-            <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
-              {icon}
-            </StyledIcon>
-          )}
+        <StyledContentImagetWrapper
+          className="second"
+          $imageOnRight={isImageRight}>
+          <ImageContainer>
+            <StyledImage
+              src={getStrapiURL(image?.data.attributes.url)}
+              alt={image?.data.attributes.alternativeText || ''}
+            />
+            {icon && (
+              <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+                {icon}
+              </StyledIcon>
+            )}
+          </ImageContainer>
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>
@@ -119,13 +124,9 @@ const Root = styled.div`
   `}
 `
 
-const StyledContentWrapper = styled.div`
+const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
-    max-width: 90rem;
-    margin: 0 auto;
     position: relative;
-    transform: translateY(-8rem);
-    padding: 10rem 3.5rem 2.5rem;
     display: grid;
     gap: 1.5rem;
 
@@ -145,10 +146,14 @@ const StyledContentWrapper = styled.div`
 
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
-    padding-left: 2rem;
+    font-weight: ${theme.fonts.weights.medium};
+    line-height: 2.25rem;
+    font-size: ${theme.fonts.sizes['xl']};
+
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     ul {
       list-style-type: disc;
       padding-left: 2rem;
@@ -171,12 +176,6 @@ const StyledContentTextWrapper = styled.div`
       font-weight: ${({ theme }) => theme.fonts.weights.bold};
     }
 
-    p {
-      font-size: ${theme.fonts.sizes['xl']};
-      line-height: 2.2;
-      width: 70%;
-    }
-
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
 
@@ -187,11 +186,13 @@ const StyledContentTextWrapper = styled.div`
   `}
 `
 
-const StyledContentImagetWrapper = styled.div`
-  ${({ theme }) => css`
+const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
+  ${({ theme, $imageOnRight: $imageOnLeft }) => css`
     display: flex;
-    justify-content: end;
+    justify-content: ${$imageOnLeft ? 'end' : 'start'};
     position: relative;
+    align-items: self-start;
+
     @media (width < ${theme.mediaQueries.tablet}) {
       justify-content: center;
     }
@@ -213,14 +214,20 @@ const StyledHeading = styled(Typo.Heading2)`
   `}
 `
 
+const ImageContainer = styled.div`
+  transform: rotate(2deg);
+  aspect-ratio: 385.54/480.87;
+  max-width: 80%;
+  text-align: center;
+`
+
 const StyledImage = styled.img`
   ${({ theme }) => css`
-    max-width: 80%;
-    height: auto;
-    transform: rotate(2deg);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
     border-radius: 1.5rem;
-    aspect-ratio: 385.54/480.87;
 
     @media (width < ${theme.mediaQueries.tablet}) {
       max-width: 100%;

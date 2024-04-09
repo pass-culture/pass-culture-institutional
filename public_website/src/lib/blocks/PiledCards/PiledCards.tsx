@@ -6,6 +6,7 @@ import { PiledCardsCarousel } from './PiledCardsCarousel'
 import { PiledCardsCarouselSlideProps } from './PiledCardsCarouselSlide'
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
@@ -62,56 +63,49 @@ export function PiledCards(props: PiledCardsProps) {
   return (
     <React.Fragment>
       <Root>
-        <StyledContentWrapper>
-          {props.items.map((item, index) => (
-            <React.Fragment key={item.id}>
-              <ItemScrollSentinel
-                aria-hidden="true"
-                ref={(el) => (sentinelRefs.current[index] = el)}
-              />
-              <StyledContentListItems
-                ref={(el) => (itemRefs.current[index] = el)}
-                $itemTheme={item.theme}
-                aria-label={`Card ${index + 1}`}>
-                <StyledImageWrapper>
-                  <StyledImage
-                    src={item.image?.data.attributes.url}
-                    alt={item.image?.data.attributes.alternativeText}
-                  />
-                  <StyledFirstEmoji aria-hidden="true">
-                    <OutlinedText blurDeviation={1}>
-                      {item.firstIcon}
-                    </OutlinedText>
-                  </StyledFirstEmoji>
-                  <StyledSecondEmoji aria-hidden="true">
-                    <OutlinedText blurDeviation={1}>
-                      {item.secondIcon}
-                    </OutlinedText>
-                  </StyledSecondEmoji>
-                </StyledImageWrapper>
+        {props.items.map((item, index) => (
+          <React.Fragment key={item.id}>
+            <ItemScrollSentinel
+              aria-hidden="true"
+              ref={(el) => (sentinelRefs.current[index] = el)}
+            />
+            <StyledContentListItems
+              ref={(el) => (itemRefs.current[index] = el)}
+              $itemTheme={item.theme}
+              aria-label={`Card ${index + 1}`}>
+              <StyledImageWrapper>
+                <StyledImage
+                  src={item.image?.data.attributes.url}
+                  alt={item.image?.data.attributes.alternativeText}
+                />
+                <StyledFirstEmoji aria-hidden="true">
+                  <OutlinedText blurDeviation={1}>
+                    {item.firstIcon}
+                  </OutlinedText>
+                </StyledFirstEmoji>
+                <StyledSecondEmoji aria-hidden="true">
+                  <OutlinedText blurDeviation={1}>
+                    {item.secondIcon}
+                  </OutlinedText>
+                </StyledSecondEmoji>
+              </StyledImageWrapper>
 
-                <StyledContentTextWrapper>
-                  <p>{(index + 1).toString().padStart(2, '0')}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </StyledContentTextWrapper>
-              </StyledContentListItems>
-            </React.Fragment>
-          ))}
-        </StyledContentWrapper>
+              <StyledContentTextWrapper>
+                <p>{(index + 1).toString().padStart(2, '0')}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </StyledContentTextWrapper>
+            </StyledContentListItems>
+          </React.Fragment>
+        ))}
       </Root>
       <StyledCarousel title={props.accessibleTitle} items={carouselItems} />
     </React.Fragment>
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    max-width: 75rem;
-    margin: 0 auto;
-    padding: 0 2rem;
-
-    margin-bottom: 8rem;
     color: ${theme.colors.white};
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -128,11 +122,6 @@ const StyledCarousel = styled(PiledCardsCarousel)`
       display: none;
     }
   `}
-`
-
-const StyledContentWrapper = styled.ul`
-  max-width: 75rem;
-  margin: 0 auto;
 `
 
 const ItemScrollSentinel = styled.li`

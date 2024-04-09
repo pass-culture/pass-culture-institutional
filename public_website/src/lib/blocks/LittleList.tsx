@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
@@ -15,7 +16,6 @@ interface LittleListProps {
   title?: string
   description?: string
   content?: ContentItem[]
-  withDescritpion: boolean
 }
 
 export function LittleList(props: LittleListProps) {
@@ -40,9 +40,7 @@ export function LittleList(props: LittleListProps) {
 
               <ColumnText>
                 <p>{item.text}</p>
-                {props.withDescritpion && item.description && (
-                  <p>{item.description}</p>
-                )}
+                {item.description && <p>{item.description}</p>}
               </ColumnText>
             </ColumnContent>
           ))}
@@ -52,18 +50,9 @@ export function LittleList(props: LittleListProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    width: 100%;
-    max-width: 90rem;
-    margin: 5rem auto;
-
     @media (width < ${theme.mediaQueries.mobile}) {
-      width: 90%;
-      max-width: 100%;
-      padding-left: 1rem;
-      padding-right: 1rem;
-
       h2 {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
@@ -76,9 +65,8 @@ const Root = styled.div`
 const Columns = styled.div`
   ${({ theme }) => css`
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
-    gap: 9rem;
     margin-top: 5rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -100,14 +88,16 @@ const Column = styled.div`
     flex-direction: column;
     gap: 1.5rem;
 
-    margin-left: 2rem;
-    margin-right: 1rem;
-    @media (width < ${theme.mediaQueries.tablet}) {
-      padding-left: 3rem;
-    }
+    &:first-child {
+      padding-right: 6rem;
+      margin-bottom: 3rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 0;
+      @media (width < ${theme.mediaQueries.tablet}) {
+        padding-right: 0;
+      }
+      @media (width < ${theme.mediaQueries.mobile}) {
+        margin-bottom: 0;
+      }
     }
   `}
 `
@@ -119,6 +109,7 @@ const ColumnContent = styled.div`
     gap: 2rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       flex-direction: column;
+      gap: 0;
     }
   `}
 `
@@ -165,26 +156,21 @@ const ColumnEmoji = styled.div`
 const ColumnText = styled.div`
   ${({ theme }) => css`
     padding-bottom: 1.5rem;
-    min-width: 75%;
-    max-width: 75%;
     border-bottom: solid 1px ${theme.colors.black}20;
 
     p:nth-child(1) {
       font-weight: ${theme.fonts.weights.bold};
-      max-width: 75%;
       line-height: 2;
     }
 
     p:nth-child(2) {
-      max-width: 80%;
-
       line-height: 2;
       font-weight: ${theme.fonts.weights.medium};
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       max-width: 100%;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
 
       p:nth-child(1) {
         max-width: 100%;

@@ -192,9 +192,6 @@ export interface BlockLittleList extends Schema.Component {
       Attribute.SetMinMax<{
         max: 4;
       }>;
-    withDescritpion: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
   };
 }
 

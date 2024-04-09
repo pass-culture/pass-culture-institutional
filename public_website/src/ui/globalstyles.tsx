@@ -177,6 +177,11 @@ const GlobalStyles = createGlobalStyle`
     background-repeat: no-repeat;
     color: inherit;
   }
+
+  /* Add transition to carousels */
+  .carousel__slider-tray {
+    transition: transform 0.2s ease-in;
+  }
 `
 
 export default GlobalStyles
