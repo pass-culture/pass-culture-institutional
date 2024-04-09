@@ -36,7 +36,7 @@ export function Header(props: HeaderProps) {
               props.image?.data.attributes.url &&
               getStrapiURL(props.image?.data.attributes.url)
             }>
-            <OutlinedText>{props.icon}</OutlinedText>
+            <OutlinedText shadow>{props.icon}</OutlinedText>
           </Card>
           <BackgroundLayer />
         </CardContainer>
@@ -126,7 +126,11 @@ const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 43rem;
     margin: 0 0 2rem;
-    line-height: 2;
+
+    color: #000;
+    font-size: ${theme.fonts.sizes.s};
+    font-weight: ${theme.fonts.weights.medium};
+    line-height: 1.875rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       max-width: 100%;
@@ -178,7 +182,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
       font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
 
-      top: 30%;
+      bottom: 30%;
       right: -5%;
       transform: rotate(-15deg);
     }
