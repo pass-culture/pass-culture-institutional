@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
@@ -66,10 +66,33 @@ export function ImageGallery(props: ImageGalleryProps) {
     galleryElement.current?.scrollBy({ left: -300, behavior: 'smooth' })
   }, [])
 
+  const rowElement = useRef<HTMLDivElement>(null)
+  const [showScrollButtons, setShowScrollButtons] = useState(true)
+
+  // Show scroll buttons only if the image gallery is wider than the screen
+  const checkGalleryWidth = () => {
+    if (!rowElement.current) return
+
+    const galleryWidth = rowElement.current?.getBoundingClientRect().width
+    const screenWidth = window.innerWidth
+    setShowScrollButtons(screenWidth < galleryWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      checkGalleryWidth()
+    })
+
+    checkGalleryWidth()
+  }, [])
+
   return (
-    <div>
-      <Rows ref={galleryElement} aria-label="Galerie d'images">
-        <Row>
+    <Root>
+      <Rows
+        ref={galleryElement}
+        aria-label="Galerie d'images"
+        $galleryIsShort={!showScrollButtons}>
+        <Row ref={rowElement}>
           {firstRow.map((image) => (
             <img
               key={image.id}
@@ -98,26 +121,40 @@ export function ImageGallery(props: ImageGalleryProps) {
           ))}
         </Row>
       </Rows>
-      <Controls>
-        <ControlButton
-          $flip
-          onClick={scrollBackward}
-          aria-label="Défiler la galerie d'image vers la droite">
-          <ArrowRight />
-        </ControlButton>
-        <ControlButton
-          onClick={scrollForward}
-          aria-label="Défiler la galerie d'image vers la gauche">
-          <ArrowRight />
-        </ControlButton>
-      </Controls>
-    </div>
+      {showScrollButtons && (
+        <Controls>
+          <ControlButton
+            $flip
+            onClick={scrollBackward}
+            aria-label="Défiler la galerie d'image vers la droite">
+            <ArrowRight />
+          </ControlButton>
+          <ControlButton
+            onClick={scrollForward}
+            aria-label="Défiler la galerie d'image vers la gauche">
+            <ArrowRight />
+          </ControlButton>
+        </Controls>
+      )}
+    </Root>
   )
 }
 
-const Rows = styled.div`
+const Root = styled.div`
+  margin-bottom: 5rem;
+`
+
+const Rows = styled.div<{ $galleryIsShort: boolean }>`
   overflow: scroll;
   padding: 1rem;
+
+  ${({ $galleryIsShort }) =>
+    $galleryIsShort &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
 
   /* Hide scroll bar */
   -ms-overflow-style: none;
@@ -132,6 +169,7 @@ const Row = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-bottom: 1.5rem;
+  width: fit-content;
 
   &:nth-child(2) {
     padding-left: 7.5rem;

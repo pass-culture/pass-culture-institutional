@@ -21,7 +21,7 @@ export function Header(props: HeaderProps) {
   return (
     <Root>
       <StyledContentWrapper>
-        <StyledContentTextWrapper>
+        <div>
           <StyledHeading dangerouslySetInnerHTML={{ __html: props.title }} />
           {props.text && <StyledText>{props.text}</StyledText>}
           {props.cta?.Label && props.cta?.URL && (
@@ -29,14 +29,14 @@ export function Header(props: HeaderProps) {
               <Button href={props.cta.URL}>{props.cta.Label}</Button>
             </StyledBtnWrapper>
           )}
-        </StyledContentTextWrapper>
+        </div>
         <CardContainer>
           <Card
             $imageUrl={
               props.image?.data.attributes.url &&
               getStrapiURL(props.image?.data.attributes.url)
             }>
-            <OutlinedText>{props.icon}</OutlinedText>
+            <OutlinedText shadow>{props.icon}</OutlinedText>
           </Card>
           <BackgroundLayer />
         </CardContainer>
@@ -59,7 +59,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       transform: translateY(-7rem);
-      margin-bottom: -7rem;
+      margin-bottom: -2rem;
       overflow: visible;
     }
   `}
@@ -67,14 +67,14 @@ const Root = styled.div`
 
 const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
-    max-width: 90rem;
+    max-width: calc(75.8125rem + 1.3rem);
     margin: 0 auto;
     position: relative;
     transform: translateY(-8rem);
-    padding: calc(18rem + 10rem) 1.5rem 2.5rem;
+    padding: calc(18rem + 10rem) 1.3rem 2.5rem;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 1.5rem;
+    gap: 8rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       grid-template-columns: 1fr 1fr;
@@ -83,23 +83,13 @@ const StyledContentWrapper = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       grid-template-columns: 1fr;
-      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+      padding: calc(10rem + 10rem) 1.3rem 2.5rem;
     }
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
       text-align: center;
       gap: 1.5rem;
-      padding: calc(10rem + 10rem) 1.5rem 2.5rem;
-    }
-  `}
-`
-
-const StyledContentTextWrapper = styled.div`
-  ${({ theme }) => css`
-    padding-left: 2rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      padding-left: 0;
+      padding: calc(10rem + 10rem) 1.3rem 2.5rem;
     }
   `}
 `
@@ -126,7 +116,11 @@ const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 43rem;
     margin: 0 0 2rem;
-    line-height: 2;
+
+    color: #000;
+    font-size: ${theme.fonts.sizes.s};
+    font-weight: ${theme.fonts.weights.medium};
+    line-height: 1.875rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       max-width: 100%;
@@ -137,8 +131,7 @@ const StyledText = styled.p`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 3.5rem;
-      padding-bottom: 1.5rem;
+      margin-bottom: 0;
     }
   `}
 `
@@ -178,7 +171,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
       font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
 
-      top: 30%;
+      bottom: 30%;
       right: -5%;
       transform: rotate(-15deg);
     }
