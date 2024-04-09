@@ -16,7 +16,6 @@ interface LittleListProps {
   title?: string
   description?: string
   content?: ContentItem[]
-  withDescritpion: boolean
 }
 
 export function LittleList(props: LittleListProps) {
@@ -41,9 +40,7 @@ export function LittleList(props: LittleListProps) {
 
               <ColumnText>
                 <p>{item.text}</p>
-                {props.withDescritpion && item.description && (
-                  <p>{item.description}</p>
-                )}
+                {item.description && <p>{item.description}</p>}
               </ColumnText>
             </ColumnContent>
           ))}
