@@ -45,7 +45,7 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
   }, [])
 
   const visibleKeySlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2.5
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
 
   useEffect(() => {
     const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
@@ -153,8 +153,10 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     justify-content: space-between;
     background-color: ${theme.colors.secondary}20;
 
-    padding: 2rem 0;
-    margin: 4rem auto;
+    padding: 3.5rem 0;
+    margin: auto;
+    margin-bottom: 5rem;
+
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
       display: block;
