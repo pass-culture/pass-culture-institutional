@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getStrapiURL } from '@/utils/apiHelpers'
 interface ImageProps {
   description?: string
@@ -28,11 +29,8 @@ export function Imageblock(props: ImageProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    max-width: 90rem;
-    margin: 8rem auto;
-    padding: 5rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
