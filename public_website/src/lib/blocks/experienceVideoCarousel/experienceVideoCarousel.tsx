@@ -15,6 +15,7 @@ import {
   ExperienceVideoCarouselSlideProps,
 } from './experieneVideoCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -92,75 +93,72 @@ export function ExperienceVideoCarousel({
   }
 
   return (
-    <StyledCarousel
-      naturalSlideWidth={60}
-      naturalSlideHeight={75}
-      visibleSlides={visibleSlides}
-      totalSlides={items.length}
-      isIntrinsicHeight={true}
-      dragEnabled={false}
-      infinite={true}
-      step={1}>
-      <StyledHeading>
-        <StyledHeading2 dangerouslySetInnerHTML={{ __html: title }} />
+    <ContentWrapper>
+      <CarouselProvider
+        naturalSlideWidth={60}
+        naturalSlideHeight={75}
+        visibleSlides={visibleSlides}
+        totalSlides={items.length}
+        isIntrinsicHeight={true}
+        dragEnabled={false}
+        infinite={true}
+        step={1}>
+        <StyledHeading>
+          <StyledHeading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons aria-label="Contrôles du carousel">
-          <ButtonBack
-            onClick={handleExperienceVideoNavigationButtonClick}
-            aria-label="Élement précédent">
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label="Élément suivant"
-            onClick={handleExperienceVideoNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
-      </StyledHeading>
-
-      <StyledSlider
-        aria-label={stripTags(title)}
-        aria-roledescription="carrousel">
-        {items.map((item, index) => {
-          return (
-            <ExperienceVideoCarouselSlide
-              key={item.title}
-              slideIndex={index}
-              {...item}
-            />
-          )
-        })}
-      </StyledSlider>
-
-      <StyledDots aria-label="Contrôles du carousel">
-        {items.map((item, index) => {
-          return (
-            <StyledDot
+          <StyledNavigationButtons aria-label="Contrôles du carousel">
+            <ButtonBack
               onClick={handleExperienceVideoNavigationButtonClick}
-              slide={index}
-              key={item.title}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.title}`}
-            />
-          )
-        })}
-      </StyledDots>
-    </StyledCarousel>
+              aria-label="Élement précédent">
+              <ArrowRight />
+            </ButtonBack>
+            <ButtonNext
+              aria-label="Élément suivant"
+              onClick={handleExperienceVideoNavigationButtonClick}>
+              <ArrowRight />
+            </ButtonNext>
+          </StyledNavigationButtons>
+        </StyledHeading>
+
+        <StyledSlider
+          aria-label={stripTags(title)}
+          aria-roledescription="carrousel">
+          {items.map((item, index) => {
+            return (
+              <ExperienceVideoCarouselSlide
+                key={item.title}
+                slideIndex={index}
+                {...item}
+              />
+            )
+          })}
+        </StyledSlider>
+
+        <StyledDots aria-label="Contrôles du carousel">
+          {items.map((item, index) => {
+            return (
+              <StyledDot
+                onClick={handleExperienceVideoNavigationButtonClick}
+                slide={index}
+                key={item.title}
+                aria-label={`Afficher la diapositive ${index + 1} sur ${
+                  items.length
+                } : ${item.title}`}
+              />
+            )
+          })}
+        </StyledDots>
+      </CarouselProvider>
+    </ContentWrapper>
   )
 }
 
-const StyledCarousel = styled(CarouselProvider)`
-  width: 90%;
-  margin: auto;
-`
 const StyledHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: end;
     justify-content: space-between;
     margin-bottom: 3rem;
-    padding-right: 1.3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;

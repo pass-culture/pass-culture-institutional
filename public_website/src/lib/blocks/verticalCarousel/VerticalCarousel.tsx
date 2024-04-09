@@ -103,7 +103,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
       infinite={true}
       dragEnabled={false}
       step={1}>
-      <StyledHeading>
+      <StyledHeading $noBottomMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons

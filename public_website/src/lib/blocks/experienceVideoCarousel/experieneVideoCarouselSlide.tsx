@@ -49,7 +49,7 @@ export function ExperienceVideoCarouselSlide({
           />
         )}
         <StyledTitle>{title}</StyledTitle>
-        <Typo.Body>{description}</Typo.Body>
+        <Description>{description}</Description>
       </StyledWrapper>
     </Root>
   )
@@ -78,7 +78,17 @@ const StyledExperienceVideo = styled(ReactPlayer)`
   aspect-ratio: 1.5;
 `
 const StyledTitle = styled(Typo.Heading3)`
-  margin: 1.5rem 0 0.25rem;
+  ${({ theme }) => css`
+    margin: 1.5rem 0 0.25rem;
+    font-size: ${theme.fonts.sizes.xl};
+    font-weight: ${theme.fonts.weights.bold};
+    line-height: 1.4;
+  `}
+`
+const Description = styled.p`
+  font-size: ${theme.fonts.sizes.xl};
+  font-weight: ${theme.fonts.weights.medium};
+  line-height: 1.6;
 `
 
 const StyledWrapper = styled.div`
