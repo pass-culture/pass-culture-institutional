@@ -96,8 +96,8 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         localisation: {
           $eqi: localisation,
         },
-        pageDaffichage: {
-          $eqi: 'Jeunes et parents',
+        pageLocalisation: {
+          $containsi: 'Jeunes et parents',
         },
       },
     })
@@ -187,8 +187,8 @@ export const getStaticProps = (async () => {
       category: {
         $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
       },
-      pageDaffichage: {
-        $eqi: 'Jeunes et parents',
+      pageLocalisation: {
+        $containsi: 'Jeunes et parents',
       },
     },
   })

@@ -23,6 +23,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^5.2.0",
+    "strapi-plugin-multi-select": "^1.2.3",
     "strapi-plugin-update-static-content": "https://github.com/pass-culture/strapi-plugin-update-static-content#main",
     "styled-components": "^5.2.1"
   },

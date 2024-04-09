@@ -187,8 +187,8 @@ export default function Presse({
         secteur: {
           $eqi: secteur,
         },
-        pageDaffichage: {
-          $eqi: 'Presse',
+        pageLocalisation: {
+          $containsi: 'S’informer - presse',
         },
       },
     })
@@ -214,8 +214,8 @@ export default function Presse({
         secteur: {
           $eqi: eventSecteur,
         },
-        pageDaffichage: {
-          $eqi: 'Espace presse',
+        pageLocalisation: {
+          $containsi: 'S’informer - presse',
         },
       },
     })
@@ -370,8 +370,8 @@ export const getStaticProps = (async () => {
           'Communiqué de presse',
         ],
       },
-      pageDaffichage: {
-        $eqi: 'Presse',
+      pageLocalisation: {
+        $containsi: 'S’informer - presse',
       },
     },
   })
@@ -410,8 +410,8 @@ export const getStaticProps = (async () => {
     populate: ['image', 'cta'],
     pagination: {},
     filter: {
-      pageDaffichage: {
-        $eqi: 'Espace presse',
+      pageLocalisation: {
+        $containsi: 'S’informer - presse',
       },
     },
   })
