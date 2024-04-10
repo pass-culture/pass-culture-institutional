@@ -15,6 +15,7 @@ import {
   OffersCarouselSlideProps,
 } from './offersCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
@@ -99,7 +100,7 @@ export function OffersCarousel({
       dragEnabled={false}
       infinite={true}
       step={1}>
-      <StyledHeading>
+      <StyledHeading $noBottomMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledArrowButtonWrapper>
@@ -164,15 +165,13 @@ const StyledCarousel = styled(CarouselProvider)`
     }
   `}
 `
-const StyledHeading = styled.div`
+const StyledHeading = styled(ContentWrapper)`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
-    margin-bottom: 6rem;
-    padding-right: 7rem;
 
     h2 {
       width: 60%;

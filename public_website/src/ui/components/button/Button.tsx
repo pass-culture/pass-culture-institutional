@@ -37,7 +37,7 @@ export const Button = forwardRef(function Button(
       href={href}
       onClick={onClick}
       target={target}>
-      <span>{children}</span>
+      <InnerButton>{children}</InnerButton>
     </StyledButton>
   )
 })
@@ -112,10 +112,7 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
         opacity: 1;
       }
     }
-    span {
-      position: relative;
-      z-index: 1;
-    }
+
     &::after {
       content: '';
       position: absolute;
@@ -148,4 +145,9 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
     text-align: center;
     width: max-content;
   `}
+`
+
+const InnerButton = styled.span`
+  position: relative;
+  z-index: 1;
 `

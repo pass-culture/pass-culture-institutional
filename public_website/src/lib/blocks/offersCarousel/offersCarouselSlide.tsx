@@ -68,6 +68,7 @@ const Root = styled(Slide)`
   ${({ theme }) => css`
     .inner {
       padding: 1rem;
+      margin-right: 1rem;
 
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 1rem;
@@ -100,6 +101,8 @@ const CardContainer = styled.div<{ $slideTheme: OffersCarouselSlideTheme }>`
 
   --card-background: ${({ $slideTheme }) => CARD_BACKGROUNDS[$slideTheme][0]};
   --card-background-layer-backgroud: ${({ $slideTheme }) =>
+    CARD_BACKGROUNDS[$slideTheme][1]};
+  --card-surtitle-color: ${({ $slideTheme }) =>
     CARD_BACKGROUNDS[$slideTheme][1]};
 `
 
@@ -201,7 +204,7 @@ const StyledOffersContentWrapper = styled.div`
     h3 {
       font-size: ${theme.fonts.sizes['5xl']};
       font-weight: ${theme.fonts.weights.bold};
-      line-height: 1.4;
+      line-height: 1.1;
       letter-spacing: -0.0625rem;
     }
 

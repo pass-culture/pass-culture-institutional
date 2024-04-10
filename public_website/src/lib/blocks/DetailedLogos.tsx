@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 
 type DetailedLogosProps = {
@@ -18,43 +19,50 @@ type DetailedLogosProps = {
 
 export function DetailedLogos({ title, logos }: DetailedLogosProps) {
   return (
-    <Root>
-      {title && <StyledHeading>{title}</StyledHeading>}
-      <StyledList>
-        {logos.map((logo) => {
-          return (
-            <StyledListItem key={logo.title}>
-              {logo.image && (
-                <StyledLogoImage
-                  src={logo.image?.data.attributes.url}
-                  alt=""
-                  width={logo.image?.data.attributes.width}
-                  height={logo.image?.data.attributes.height}
-                />
-              )}
-              <StyledLogoHeading>{logo.title}</StyledLogoHeading>
-              <StyledLogoDescription>{logo.description}</StyledLogoDescription>
-              <StyledCta href={logo.cta.URL}>
-                {logo.cta.Label}
-                <span className="visually-hidden">sur {logo.title}</span>
-              </StyledCta>
-            </StyledListItem>
-          )
-        })}
-      </StyledList>
-    </Root>
+    <ContentWrapper>
+      <InnerWrapper>
+        {title && <StyledHeading>{title}</StyledHeading>}
+        <StyledList>
+          {logos.map((logo) => {
+            return (
+              <StyledListItem key={logo.title}>
+                {logo.image && (
+                  <StyledLogoImage
+                    src={logo.image?.data.attributes.url}
+                    alt=""
+                    width={logo.image?.data.attributes.width}
+                    height={logo.image?.data.attributes.height}
+                  />
+                )}
+                <StyledLogoHeading>{logo.title}</StyledLogoHeading>
+                <StyledLogoDescription>
+                  {logo.description}
+                </StyledLogoDescription>
+                <div>
+                  <StyledCta href={logo.cta.URL}>
+                    {logo.cta.Label}
+                    <span className="visually-hidden">sur {logo.title}</span>
+                  </StyledCta>
+                </div>
+              </StyledListItem>
+            )
+          })}
+        </StyledList>
+      </InnerWrapper>
+    </ContentWrapper>
   )
 }
-
-const Root = styled.div`
-  padding: 6.25rem 2rem;
-  max-width: 80rem;
-  margin: 0 auto;
-`
 
 const StyledHeading = styled(Typo.Heading2)`
   text-align: center;
   margin-bottom: 4rem;
+`
+
+const InnerWrapper = styled.div`
+  padding: 0 8.5%;
+  @media (width < ${(p) => p.theme.mediaQueries.tablet}) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const StyledList = styled.ul`
@@ -87,6 +95,8 @@ const StyledListItem = styled.li`
 
 const StyledLogoImage = styled(Image)`
   margin-bottom: 2.5rem;
+  height: 10rem;
+  width: auto;
 `
 
 const StyledLogoHeading = styled.h3`
@@ -100,6 +110,7 @@ const StyledLogoHeading = styled.h3`
 const StyledLogoDescription = styled(Typo.Body)`
   margin: 0 auto 2rem;
   max-width: 40ch;
+  font-size: ${(p) => p.theme.fonts.sizes.s};
 `
 
 const StyledCta = styled(Button)`

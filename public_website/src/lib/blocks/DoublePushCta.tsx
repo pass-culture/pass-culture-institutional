@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
@@ -21,73 +22,81 @@ interface DoublePushCTAProps {
 
 export function DoublePushCTA(props: DoublePushCTAProps) {
   return (
-    <Root className={props.className}>
-      <CardContainer>
-        <Card
-          $imageUrl={
-            props.image?.data.attributes.url &&
-            getStrapiURL(props.image?.data.attributes.url)
-          }></Card>
+    <StyledContentWrapper>
+      <MobileImage
+        src={
+          props.image?.data.attributes.url &&
+          getStrapiURL(props.image?.data.attributes.url)
+        }
+        alt=""
+      />
+      <Root className={props.className}>
+        <CardContainer>
+          <Card
+            $imageUrl={
+              props.image?.data.attributes.url &&
+              getStrapiURL(props.image?.data.attributes.url)
+            }></Card>
 
-        <OutlinedText shadow>{props.icon}</OutlinedText>
-      </CardContainer>
-      <RightSide>
-        {props.title && (
-          <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
-        )}
-        {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
-        <CtaLink href={props.firstCta?.URL}>
-          <span>{props.firstCta?.Label}</span>
-        </CtaLink>
-        {props.secondCta && (
-          <Button
-            href={props.secondCta.URL}
-            target="_blank"
-            variant="quaternary">
-            {props.secondCta.Label}
-          </Button>
-        )}
-      </RightSide>
-    </Root>
+          <OutlinedText shadow>{props.icon}</OutlinedText>
+        </CardContainer>
+        <RightSide>
+          {props.title && (
+            <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+          )}
+          {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
+          <CtaLink href={props.firstCta?.URL}>
+            <span>{props.firstCta?.Label}</span>
+          </CtaLink>
+          {props.secondCta && (
+            <Button
+              href={props.secondCta.URL}
+              target="_blank"
+              variant="quaternary">
+              {props.secondCta.Label}
+            </Button>
+          )}
+        </RightSide>
+      </Root>
+    </StyledContentWrapper>
   )
 }
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding: 0;
+  }
+`
 
 const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.lightBlue};
-    max-width: 90rem;
-    margin: 5rem auto;
     gap: 5.625rem;
     border-radius: 2.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     position: relative;
-
-    @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
-      max-width: 95%;
-    }
+    margin: 0 -3.4rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 100%;
-      padding: 1.5rem;
       display: block;
 
       border-radius: 0;
 
       position: relative;
       padding-top: 25.125rem;
+      margin: 0;
       margin-top: 15.125rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 1.5rem;
       display: block;
 
       border-radius: 0;
 
       position: relative;
-      padding-top: 10.125rem;
-      margin-top: 15.125rem;
+      padding: 0;
+      margin-top: 0;
     }
   `}
 `
@@ -96,7 +105,8 @@ const CardContainer = styled.div`
   ${({ theme }) => css`
     position: relative;
     z-index: 1;
-    margin: -3.125rem 0 -3.125rem 5rem;
+    margin: -3.125rem 0;
+    margin-left: 3.4rem;
     max-width: 28rem;
 
     span {
@@ -148,18 +158,16 @@ const Card = styled.div<{ $imageUrl?: string }>`
     height: calc(100% - 4rem);
 
     aspect-ratio: 510/634.64;
+
     @media (width < ${theme.mediaQueries.tablet}) {
       width: 80%;
       aspect-ratio: 338/233;
       padding: 0;
       margin: 0 auto;
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
-      width: 90%;
-      aspect-ratio: 338/233;
-      padding: 0;
-      margin: 0 auto;
-      margin-right: 1.7rem;
+      display: none;
     }
   `}
 `
@@ -182,8 +190,13 @@ const RightSide = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      padding: 0;
+      padding: 2rem;
       max-width: none;
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding-top: 12rem;
+      margin-top: -10rem;
     }
   `}
 `
@@ -238,6 +251,21 @@ const CtaLink = styled(Link)`
       margin-bottom: 1.5rem;
       display: block;
       width: fit-content;
+    }
+  `}
+`
+
+const MobileImage = styled.img`
+  ${({ theme }) => css`
+    display: none;
+    width: 85%;
+    margin: auto;
+    z-index: 1;
+    position: relative;
+    border-radius: 1rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: block;
     }
   `}
 `

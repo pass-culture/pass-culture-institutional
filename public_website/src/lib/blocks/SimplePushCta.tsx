@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -19,65 +20,74 @@ interface PushCTAProps {
 export function SimplePushCta(props: PushCTAProps) {
   return (
     <Root className={props.className}>
-      <RightSide>
-        {props.surtitle && (
-          <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
-        )}
+      <StyledContentWrapper>
+        <RightSide>
+          {props.surtitle && (
+            <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
+          )}
 
-        {props.title && (
-          <Title dangerouslySetInnerHTML={{ __html: props.title }} />
-        )}
-        {props.cta && (
-          <CtaLink href={props.cta.URL}>
-            <span>{props.cta.Label}</span>
-          </CtaLink>
-        )}
-      </RightSide>
-      <CardContainer>
-        <Card
-          $imageUrl={
-            props.image?.data.attributes.url &&
-            getStrapiURL(props.image?.data.attributes.url)
-          }></Card>
-        <OutlinedText>{props.icon}</OutlinedText>
-      </CardContainer>
+          {props.title && (
+            <Title dangerouslySetInnerHTML={{ __html: props.title }} />
+          )}
+          {props.cta && (
+            <CtaLink href={props.cta.URL}>
+              <span>{props.cta.Label}</span>
+            </CtaLink>
+          )}
+        </RightSide>
+        <CardContainer>
+          <Card
+            $imageUrl={
+              props.image?.data.attributes.url &&
+              getStrapiURL(props.image?.data.attributes.url)
+            }></Card>
+          <OutlinedText>{props.icon}</OutlinedText>
+        </CardContainer>
+      </StyledContentWrapper>
     </Root>
   )
 }
+
+const StyledContentWrapper = styled(ContentWrapper)`
+  gap: 5.625rem;
+
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  position: relative;
+
+  @media (width < ${theme.mediaQueries.tablet}) {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  @media (width < ${theme.mediaQueries.mobile}) {
+    display: block;
+    text-align: center;
+  }
+`
 
 const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
     color: ${theme.colors.white};
     max-width: 90rem;
-    margin: 10rem auto;
-    gap: 5.625rem;
+    margin: auto;
+    margin-top: 10rem;
     border-radius: 2.5rem;
-    display: grid;
-    grid-template-columns: 1.25fr 1fr;
-    position: relative;
 
     @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
       max-width: 95%;
     }
+
     @media (width < ${theme.mediaQueries.tablet}) {
       max-width: 100%;
-      margin: 17rem auto;
+      margin-top: 17rem;
 
       display: flex;
       justify-content: center;
       border-radius: 0;
       text-align: center;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 10rem auto;
-
-      padding: 1.5rem;
-      display: block;
-      border-radius: 0;
-      text-align: center;
-      padding-top: 10.125rem;
     }
   `}
 `
@@ -100,20 +110,7 @@ const CardContainer = styled.div`
     margin: 0 auto;
     position: absolute;
 
-    top: -12rem;
-
-    min-width: 90%;
-    min-height: 40%;
-
-    span {
-      display: none;
-    }
-  }
-  @media (width < ${theme.mediaQueries.mobile}) {
-    margin: 0 auto;
-    position: absolute;
-
-    top: -6rem;
+    top: -16rem;
 
     min-width: 90%;
     min-height: 40%;
@@ -137,17 +134,11 @@ const Card = styled.div<{ $imageUrl?: string }>`
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
     aspect-ratio: 333.49/415;
+
     @media (width < ${theme.mediaQueries.tablet}) {
       width: 80%;
-      aspect-ratio: 1.5;
       padding: 0;
       margin: 0 auto;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      width: 95%;
-      aspect-ratio: 1.5;
-      padding: 0;
     }
   `}
 `
@@ -155,7 +146,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
 const RightSide = styled.div`
   ${({ theme }) => css`
     padding: 10.25rem 0 6.25rem 0;
-    padding-left: 5rem;
     max-width: 35rem;
 
     h2 {
@@ -175,10 +165,11 @@ const RightSide = styled.div`
         margin-top: 1rem;
       }
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 0;
-      max-width: none;
       margin: 3rem 0 3rem 0;
+      padding-bottom: 2rem;
+      margin-bottom: 0;
 
       p {
         margin: 0;

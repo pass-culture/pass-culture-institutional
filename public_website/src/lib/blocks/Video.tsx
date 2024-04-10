@@ -3,6 +3,7 @@ import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface VideoProps {
@@ -20,70 +21,54 @@ export function Video(props: VideoProps) {
   }, [])
 
   return (
-    <Root suppressHydrationWarning={true}>
-      {isMounted && (
-        <StyledVideo
-          light={
-            props.image ? getStrapiURL(props.image?.data.attributes.url) : true
-          }
-          url={props.url}
-          width="100%"
-          controls={true}
-          height="100%"
-          alt={props.alt}
-        />
-      )}
-      <p>{props.description}</p>
-    </Root>
+    <ContentWrapper>
+      <Root suppressHydrationWarning={true}>
+        {isMounted && (
+          <StyledVideo
+            light={
+              props.image
+                ? getStrapiURL(props.image?.data.attributes.url)
+                : true
+            }
+            url={props.url}
+            width="100%"
+            controls={true}
+            height="100%"
+            alt={props.alt}
+          />
+        )}
+        <p>{props.description}</p>
+      </Root>
+    </ContentWrapper>
   )
 }
 
 const Root = styled.div`
   ${({ theme }) => css`
-    max-width: 90rem;
-    margin: 8rem auto;
-    padding: 5rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
 
-    p {
-      width: 90%;
-    }
-
     .react-player__preview {
       border-radius: 2rem;
-      height: 50rem !important;
+      aspect-ratio: 16 / 9;
     }
+
+    padding: 0 8.5%;
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;
-      padding: 1.5rem;
-      max-width: 90%;
-      margin: 2rem auto;
       gap: 1rem;
+      padding: 0;
 
       img {
         width: 100%;
         border-radius: 1rem;
       }
 
-      p {
-        width: 100%;
-      }
-
       .react-player__preview {
-        max-width: 100%;
         border-radius: 1rem;
-        height: 25rem !important;
-        aspect-ratio: 16 / 9;
-      }
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      .react-player__preview {
-        height: 12rem !important;
       }
     }
   `}
