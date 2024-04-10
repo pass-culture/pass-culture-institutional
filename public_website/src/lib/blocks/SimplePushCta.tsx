@@ -74,6 +74,7 @@ const Root = styled.div`
     max-width: 90rem;
     margin: auto;
     margin-top: 10rem;
+    margin-bottom: 10rem;
     border-radius: 2.5rem;
 
     @media (width < ${theme.mediaQueries.extraLargeDesktop}) {

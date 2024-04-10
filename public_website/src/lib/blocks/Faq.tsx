@@ -91,7 +91,7 @@ export function Faq({
           </StyledAccordion>
         ))}
       </StyledFaqtWrapper>
-      {cta && <Button href={cta.URL}>{cta.Label}</Button>}
+      {cta && <MobileCta href={cta.URL}>{cta.Label}</MobileCta>}
     </StyledContentWrapper>
   )
 }
@@ -204,4 +204,11 @@ const StyledAccordion = styled.details`
       }
     }
   `}
+`
+
+const MobileCta = styled(Button)`
+  display: none;
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    display: inline-block;
+  }
 `
