@@ -49,18 +49,6 @@ export function OrganizationChart({
   )
 }
 
-// const Root = styled.div`
-//   ${({ theme }) => css`
-//     padding: 6.25rem 2rem;
-//     max-width: 80rem;
-//     margin: 0 auto;
-
-//     @media (width < ${theme.mediaQueries.tablet}) {
-//       padding: 3.75rem 1rem;
-//     }
-//   `}
-// `
-
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 1.5rem;

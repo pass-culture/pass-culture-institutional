@@ -172,7 +172,6 @@ const StyledHeading = styled(ContentWrapper)`
     justify-content: center;
     flex-direction: column;
     gap: 2rem;
-    /* padding-right: 7rem; */
 
     h2 {
       width: 60%;
