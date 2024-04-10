@@ -27,7 +27,7 @@ export function LittleList(props: LittleListProps) {
             <Typo.Heading2
               dangerouslySetInnerHTML={{ __html: props.title }}></Typo.Heading2>
           )}
-          <p>{props.description}</p>
+          <Description>{props.description}</Description>
         </Column>
 
         <Column as="ul">
@@ -55,8 +55,6 @@ const Root = styled(ContentWrapper)`
     @media (width < ${theme.mediaQueries.mobile}) {
       h2 {
         font-size: 1.5rem;
-        margin-bottom: 1.5rem;
-        max-width: 80%;
       }
     }
   `}
@@ -100,6 +98,10 @@ const Column = styled.div`
       }
     }
   `}
+`
+
+const Description = styled(Typo.Body)`
+  font-size: 1.125rem;
 `
 
 const ColumnContent = styled.div`
