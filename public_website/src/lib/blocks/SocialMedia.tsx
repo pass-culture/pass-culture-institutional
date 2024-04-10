@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Facebook } from '@/ui/components/icons/social-media/facebook'
 import { Instagram } from '@/ui/components/icons/social-media/instagram'
 import { LinkedIn } from '@/ui/components/icons/social-media/linkedin'
@@ -33,7 +34,7 @@ export function SocialMedia({
   className,
 }: SocialMediaProps) {
   return (
-    <StyledRoot className={className}>
+    <ContentWrapper className={className}>
       <StyledHeading>{title}</StyledHeading>
       <StyledList>
         {socialMediaLink.map((link) => {
@@ -44,14 +45,9 @@ export function SocialMedia({
           )
         })}
       </StyledList>
-    </StyledRoot>
+    </ContentWrapper>
   )
 }
-
-const StyledRoot = styled.div`
-  padding: 1rem;
-  text-align: center;
-`
 
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
