@@ -100,7 +100,7 @@ export function OffersCarousel({
       dragEnabled={false}
       infinite={true}
       step={1}>
-      <StyledHeading $noBottomMargin>
+      <StyledHeading $noMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledArrowButtonWrapper>

@@ -141,7 +141,7 @@ export function ImageGallery(props: ImageGalleryProps) {
 }
 
 const Root = styled.div`
-  margin-bottom: 5rem;
+  margin: 5rem 0;
 `
 
 const Rows = styled.div<{ $galleryIsShort: boolean }>`

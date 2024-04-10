@@ -154,8 +154,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     background-color: ${theme.colors.secondary}20;
 
     padding: 3.5rem 0;
-    margin: auto;
-    margin-bottom: 5rem;
+    margin: 5rem auto;
 
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;

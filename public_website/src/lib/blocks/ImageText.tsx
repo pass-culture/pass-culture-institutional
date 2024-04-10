@@ -130,9 +130,6 @@ const StyledContentWrapper = styled(ContentWrapper)`
     display: grid;
     gap: 1.5rem;
 
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-
     .first {
       grid-area: first;
     }
