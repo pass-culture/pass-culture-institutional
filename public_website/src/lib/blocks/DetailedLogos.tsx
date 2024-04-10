@@ -90,6 +90,10 @@ const StyledListItem = styled.li`
     @media (width < ${theme.mediaQueries.tablet}) {
       padding: 2rem 1rem;
     }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      border-radius: 1.25rem;
+    }
   `}
 `
 
