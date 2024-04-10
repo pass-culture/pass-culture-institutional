@@ -157,6 +157,10 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 
 const StyledCarouselProvider = styled(CarouselProvider)`
   margin: 5rem 0;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin-bottom: 2.825rem 0;
+  }
 `
 
 const StyledHeading = styled(ContentWrapper)`
