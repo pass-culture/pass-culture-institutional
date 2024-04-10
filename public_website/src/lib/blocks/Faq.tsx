@@ -91,6 +91,7 @@ export function Faq({
           </StyledAccordion>
         ))}
       </StyledFaqtWrapper>
+      {cta && <Button href={cta.URL}>{cta.Label}</Button>}
     </StyledContentWrapper>
   )
 }
@@ -126,20 +127,23 @@ const StyledContentTextWrapper = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
     }
-  `}
-`
 
-const StyledFaqtWrapper = styled.div`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
-      order: -1;
+    a {
+      @media (width < ${theme.mediaQueries.mobile}) {
+        padding-left: 0;
+        display: none;
+      }
     }
   `}
 `
 
+const StyledFaqtWrapper = styled.div``
+
 const StyledAccordion = styled.details`
   ${({ theme }) => css`
-    margin-bottom: 3rem;
+    &:not(:last-of-type) {
+      margin-bottom: 3rem;
+    }
     padding-bottom: 3rem;
     border-bottom: solid 1px ${theme.colors.black}20;
 
@@ -158,6 +162,10 @@ const StyledAccordion = styled.details`
       position: absolute;
       transform: translateY(-50%);
       line-height: 0;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
     }
 
     &[open] summary::after {
@@ -188,6 +196,12 @@ const StyledAccordion = styled.details`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       text-align: left;
+
+      padding-bottom: 2rem;
+
+      &:not(:last-of-type) {
+        margin-bottom: 2rem;
+      }
     }
   `}
 `
