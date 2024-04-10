@@ -8,7 +8,7 @@ export async function fetchCMS<T>(path: string) {
     const apiPath = `/api${path}`
     const sep = getStrapiURL(apiPath).includes('?') ? '&' : '?'
     const requestUrl = `${getStrapiURL(apiPath)}${
-      process.env['PREVIEW_MODE'] === 'true'
+      process.env['NEXT_PUBLIC_PREVIEW_MODE'] === 'true'
         ? `${sep}publicationState=preview`
         : ''
     }`
