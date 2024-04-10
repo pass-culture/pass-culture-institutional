@@ -63,8 +63,16 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
+  // Offset for protruding image
+  margin-top: calc(5rem + 3.125rem);
+  margin-bottom: calc(5rem + 3.125rem);
+
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;
+
+    // Offset for protruding image
+    margin-top: calc(2.825rem + 3.125rem);
+    margin-bottom: calc(2.825rem + 3.125rem);
   }
 `
 
@@ -187,6 +195,11 @@ const RightSide = styled.div`
       font-weight: ${theme.fonts.weights.medium};
 
       margin-bottom: 2rem;
+
+      @media (width < ${theme.mediaQueries.mobile}) {
+        font-size: ${theme.fonts.sizes.s};
+        line-height: 1.75rem;
+      }
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -209,7 +222,7 @@ const CtaLink = styled(Link)`
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
 
-    margin-right: 1.5rem;
+    margin-right: 0.75rem;
     background: linear-gradient(
       90deg,
       ${theme.colors.tertiary},
@@ -259,10 +272,14 @@ const MobileImage = styled.img`
   ${({ theme }) => css`
     display: none;
     width: 85%;
-    margin: auto;
+    margin: 0 2rem;
     z-index: 1;
     position: relative;
     border-radius: 1rem;
+    object-fit: cover;
+    max-width: 13rem;
+
+    aspect-ratio: 13/16;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
