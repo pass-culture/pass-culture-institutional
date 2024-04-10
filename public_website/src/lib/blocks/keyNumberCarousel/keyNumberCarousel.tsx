@@ -233,7 +233,7 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
-      padding-bottom: 1rem;
+      padding-bottom: 2.8rem;
     }
     display: none;
   `}
