@@ -2057,27 +2057,6 @@
     react-query "3.39.3"
     yup "0.32.9"
 
-"@strapi/plugin-i18n@4.17.0":
-  version "4.17.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.17.0.tgz#1169d8c7ca66f05e366dc7269a0c32c78aadd6fe"
-  integrity sha512-ZPPXUSOK0wWRgM7fqKGCuNQDI8Dz5ODsHDp7LZUOy+4Mhj4aQhn4speAOWLD4aDhx8JPZH8xoFf1bAIHzXCplg==
-  dependencies:
-    "@reduxjs/toolkit" "1.9.7"
-    "@strapi/design-system" "1.14.1"
-    "@strapi/helper-plugin" "4.17.0"
-    "@strapi/icons" "1.14.1"
-    "@strapi/utils" "4.17.0"
-    axios "1.6.0"
-    formik "2.4.0"
-    immer "9.0.19"
-    lodash "4.17.21"
-    prop-types "^15.8.1"
-    qs "6.11.1"
-    react-intl "6.4.1"
-    react-query "3.39.3"
-    react-redux "8.1.1"
-    yup "0.32.9"
-
 "@strapi/plugin-seo@^1.9.8":
   version "1.9.8"
   resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-1.9.8.tgz#44e9baec7c63f4f5de720215132aa677f9f6c9d1"
@@ -5417,9 +5396,9 @@ fn.name@1.x.x:
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
 follow-redirects@^1.15.0, follow-redirects@^1.15.4:
-  version "1.15.5"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.5.tgz#54d4d6d062c0fa7d9d17feb008461550e3ba8020"
-  integrity sha512-vSFWUON1B+yAw1VN4xMfxgn5fTUiaOzAJCKBwIIgT/+7CuGy9+r+5gITvP62j3RmaD5Ph65UaERdOSRGUzZtgw==
+  version "1.15.6"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
+  integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
 for-each@^0.3.3:
   version "0.3.3"
