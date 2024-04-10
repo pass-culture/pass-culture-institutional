@@ -6,6 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "next build",
+    "build:static": "NEXT_PUBLIC_EXPORT_MODE=true next build",
+    "build:server": "NEXT_PUBLIC_EXPORT_MODE=false next build",
     "dev": "next dev --turbo",
     "start": "next start",
     "test": "vitest",

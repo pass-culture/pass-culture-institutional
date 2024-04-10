@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   reactStrictMode: true,
   compiler: {
     styledComponents: true,
@@ -9,6 +8,10 @@ const nextConfig = {
     // reactRemoveProperties: true,
   },
   images: { unoptimized: true },
+}
+
+if (process.env.NEXT_PUBLIC_EXPORT_MODE === 'true') {
+  nextConfig.output = 'export'
 }
 
 module.exports = nextConfig
