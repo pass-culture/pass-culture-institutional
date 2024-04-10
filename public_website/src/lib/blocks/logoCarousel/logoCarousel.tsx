@@ -191,7 +191,9 @@ const StyledNavigationButtons = styled.div`
     }
 
     button:first-child {
-      transform: rotate(180deg);
+      svg {
+        transform: rotate(180deg);
+      }
     }
   `}
 `
