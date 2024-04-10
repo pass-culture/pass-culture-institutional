@@ -90,30 +90,18 @@ const Root = styled(ContentWrapper)`
       font-weight: ${({ theme }) => theme.fonts.weights.bold};
     }
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      p {
-        max-width: 90%;
-      }
-    }
-
     @media (width < ${theme.mediaQueries.mobile}) {
-      width: 90%;
-      max-width: 100%;
       padding-left: 1rem;
       padding-right: 1rem;
 
       h2 {
         font-size: 1.5rem;
         margin-bottom: 1.5rem;
-        max-width: 80%;
       }
 
       p,
       ul {
         padding-left: 0;
-      }
-      p {
-        max-width: 95%;
       }
     }
   `}
