@@ -159,6 +159,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
       display: block;
+      margin: 2.825rem auto;
     }
   `}
 `

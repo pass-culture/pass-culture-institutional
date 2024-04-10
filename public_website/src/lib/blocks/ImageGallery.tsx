@@ -142,6 +142,10 @@ export function ImageGallery(props: ImageGalleryProps) {
 
 const Root = styled.div`
   margin: 5rem 0;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin: 2.825rem auto;
+  }
 `
 
 const Rows = styled.div<{ $galleryIsShort: boolean }>`
