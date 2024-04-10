@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { APIResponse } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { Play } from '@/ui/components/icons/Play'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface VideoProps {
@@ -35,6 +36,7 @@ export function Video(props: VideoProps) {
             controls={true}
             height="100%"
             alt={props.alt}
+            playIcon={<Play />}
           />
         )}
         <p>{props.description}</p>
