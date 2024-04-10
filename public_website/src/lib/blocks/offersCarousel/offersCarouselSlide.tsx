@@ -41,7 +41,7 @@ export function OffersCarouselSlide({
         <Card>
           <StyledOffersHeader>
             <StyledOffersSurtitle>
-              <OutlinedText dilationRadius={3}>
+              <OutlinedText dilationRadius={3} blurDeviation={1.5}>
                 <span dangerouslySetInnerHTML={{ __html: surtitle }} />
               </OutlinedText>
             </StyledOffersSurtitle>
@@ -213,8 +213,17 @@ const StyledOffersContentWrapper = styled.div`
       text-align: center;
       font-size: ${theme.fonts.sizes['xl']};
     }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       gap: 0.5rem;
+
+      h3 {
+        font-size: ${theme.fonts.sizes['2xl']};
+      }
+
+      p {
+        font-size: ${theme.fonts.sizes['s']};
+      }
     }
   `}
 `
