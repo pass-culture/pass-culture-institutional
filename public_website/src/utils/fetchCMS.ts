@@ -10,13 +10,13 @@ export async function fetchCMS<T>(path: string) {
     const requestUrl = `${getStrapiURL(apiPath)}`
     const token = process.env['ID_TOKEN']
 
-    // if (
-    //   !requestUrl.includes('localhost') &&
-    //   !requestUrl.includes('testing') &&
-    //   !token
-    // ) {
-    //   throw new Error('Environnement variable ID_TOKEN not found')
-    // }
+    if (
+      !requestUrl.includes('localhost') &&
+      !requestUrl.includes('testing') &&
+      !token
+    ) {
+      throw new Error('Environnement variable ID_TOKEN not found')
+    }
 
     const mergedOptions = {
       headers: {
