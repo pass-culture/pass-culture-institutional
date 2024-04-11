@@ -41,12 +41,12 @@ export default function TeachersHelp({
         filteringProperty={data.attributes.faq.filteringProperty}
         limit={data.attributes.faq.limit}
       />
-      <StyledLatestNews
+      <LatestNews
         news={latestStudies}
         title={data.attributes.latestStudies.title}
         cta={data.attributes.latestStudies.cta}
       />
-      <StyledPushCTA
+      <DoublePushCTA
         title={data.attributes.cardText.title}
         text={data.attributes.cardText.text}
         image={data.attributes.cardText.image}
@@ -54,7 +54,7 @@ export default function TeachersHelp({
         secondCta={data.attributes.cardText.secondCta}
       />
 
-      <StyledSimplePushCTA
+      <SimplePushCta
         title={data.attributes.simplepushcta.title}
         surtitle={data.attributes.simplepushcta.surtitle}
         image={data.attributes.simplepushcta.image}
@@ -62,7 +62,7 @@ export default function TeachersHelp({
         icon={data.attributes.simplepushcta.icon}
       />
 
-      <StyledSocialMedia
+      <SocialMedia
         title={data.attributes.social.title}
         socialMediaLink={data.attributes.social.socialMediaLink}
       />
@@ -125,54 +125,10 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps<TeachersHelpProps>
 
 const StyledSpacer = styled.div`
+  margin-bottom: var(--module-spacing);
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-top: 5rem;
-    }
-  `}
-`
-const StyledPushCTA = styled(DoublePushCTA)`
-  ${({ theme }) => css`
-    margin-top: 12.5rem;
-    margin-bottom: 10rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 4.5rem 0;
-      margin-top: 13.125rem;
-    }
-  `}
-`
-
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
-
-const StyledSimplePushCTA = styled(SimplePushCta)`
-  ${({ theme }) => css`
-    margin-top: 12.5rem;
-    margin-bottom: 10rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 4.5rem 0;
-      margin-top: 13.125rem;
-    }
-  `}
-`
-
-const StyledLatestNews = styled(LatestNews)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 6rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
     }
   `}
 `

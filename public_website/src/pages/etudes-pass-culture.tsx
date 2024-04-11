@@ -23,6 +23,7 @@ export default function EtudesPassCulture({
   ressourcesData,
   etudesPassCultureListe,
 }: ListProps) {
+  console.log('🚀 ~ ressourcesData:', ressourcesData)
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])

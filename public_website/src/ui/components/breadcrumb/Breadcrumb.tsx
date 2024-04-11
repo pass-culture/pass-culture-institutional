@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
+import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
 
@@ -47,9 +48,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
 
   return (
     <Root
+      as="nav"
       aria-label="fil d’arianne"
       $isUnderHeader={props.isUnderHeader}
-      className={props.className}>
+      className={props.className}
+      $noMargin={props.isUnderHeader}>
       <ol>
         <ListItem>
           <StyledSimpleLink>
@@ -79,15 +82,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
   )
 }
 
-const Root = styled.nav<{ $isUnderHeader?: boolean }>`
+const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
   ${({ theme, $isUnderHeader }) => css`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       display: none;
     }
-
-    max-width: 90rem;
-    margin: 0 auto;
-    padding: 0 3.5rem;
 
     ol {
       display: flex;
@@ -108,7 +107,6 @@ const Root = styled.nav<{ $isUnderHeader?: boolean }>`
     ${$isUnderHeader &&
     css`
       transform: translateY(-10rem);
-      position: absolute;
 
       @media (max-width: ${theme.mediaQueries.tablet}) {
         transform: none;
