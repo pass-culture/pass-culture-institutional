@@ -30,8 +30,6 @@ export function ExperienceVideoCarouselSlide({
     setIsMounted(true)
   }, [])
 
-  console.log({ url, image })
-
   return (
     <Root
       index={slideIndex}
