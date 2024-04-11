@@ -27,8 +27,6 @@ import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SocialMedia } from './blocks/SocialMedia'
-import { Testimonies } from './blocks/Testimonies'
-import { TestimonyCarouselSlide } from './blocks/testimonyCaousel/testimonyCarouselSlide'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
@@ -59,12 +57,10 @@ const COMPONENTS: Record<
   'block.key-number': KeyNumber,
   'block.logos': Logos,
   'block.detailed-logos': DetailedLogos,
-  'block.testimonies': Testimonies,
   'block.experience-video-carousel': ExperienceVideoCarousel,
   'block.key-number-carousel': KeyNumberCarousel,
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
-  'block.testimony-carousel': TestimonyCarouselSlide,
   'block.image': Imageblock,
   'block.image-text': ImageText,
   'block.little-list': LittleList,

@@ -380,18 +380,6 @@ export interface BlockSpace extends Schema.Component {
   };
 }
 
-export interface BlockTestimonies extends Schema.Component {
-  collectionName: 'components_block_testimonies';
-  info: {
-    displayName: 'TestimoniesCarousel';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    items: Attribute.Component<'common.vertical-carousel-item', true>;
-  };
-}
-
 export interface BlockVerticalCarousel extends Schema.Component {
   collectionName: 'components_block_vertical_carousels';
   info: {
@@ -581,20 +569,6 @@ export interface CommonSimpleTextColumn extends Schema.Component {
   attributes: {
     title: Attribute.String & Attribute.Required;
     text: Attribute.Blocks & Attribute.Required;
-  };
-}
-
-export interface CommonTestimonyCarousel extends Schema.Component {
-  collectionName: 'components_block_testimony_carousels';
-  info: {
-    displayName: 'TestimonyCarouselItem';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    videoUrl: Attribute.Text & Attribute.Required;
-    image: Attribute.Media & Attribute.Required;
   };
 }
 
@@ -964,7 +938,6 @@ declare module '@strapi/types' {
       'block.simple-text-v2': BlockSimpleTextV2;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
-      'block.testimonies': BlockTestimonies;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
       'common.detailed-logo': CommonDetailedLogo;
@@ -979,7 +952,6 @@ declare module '@strapi/types' {
       'common.person': CommonPerson;
       'common.piled-card-item': CommonPiledCardItem;
       'common.simple-text-column': CommonSimpleTextColumn;
-      'common.testimony-carousel': CommonTestimonyCarousel;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'footer.legal-links': FooterLegalLinks;
       'footer.list': FooterList;
