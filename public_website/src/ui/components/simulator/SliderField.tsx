@@ -196,7 +196,7 @@ const Select = styled.select`
   font-size: ${({ theme }) => theme.fonts.sizes.s};
   font-weight: ${({ theme }) => theme.fonts.weights.bold};
   line-height: 2;
-
+  color: ${({ theme }) => theme.colors.black};
   appearance: none;
   border: none;
   border-radius: 1.25rem;
