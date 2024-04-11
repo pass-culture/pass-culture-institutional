@@ -47,11 +47,13 @@ const StyledLink = styled.div`
     background-color: ${theme.colors.lightBlue};
     border-radius: 0.3rem;
     padding: 0.5rem 1.4rem 0.3rem;
+    height: 100%;
   `}
 `
 
 const StyledImageSimple = styled.img`
-  object-fit: cover;
-  width: auto;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
   height: 6rem;
 `

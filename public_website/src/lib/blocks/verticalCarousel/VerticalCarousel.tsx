@@ -103,7 +103,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
       infinite={true}
       dragEnabled={false}
       step={1}>
-      <StyledHeading $noBottomMargin>
+      <StyledHeading $noMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledNavigationButtons
@@ -156,7 +156,11 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 }
 
 const StyledCarouselProvider = styled(CarouselProvider)`
-  margin-bottom: 5rem;
+  margin-bottom: var(--module-spacing);
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin-bottom: 2.825rem 0;
+  }
 `
 
 const StyledHeading = styled(ContentWrapper)`

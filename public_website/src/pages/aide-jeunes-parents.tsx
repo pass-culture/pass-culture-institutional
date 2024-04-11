@@ -1,7 +1,6 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
@@ -36,7 +35,7 @@ export default function Help({ helpData }: HelpProps) {
         filteringProperty={helpData.attributes.faq.filteringProperty}
         limit={helpData.attributes.faq.limit}
       />
-      <StyledPushCTA
+      <DoublePushCTA
         title={helpData.attributes.cardText.title}
         text={helpData.attributes.cardText.text}
         image={helpData.attributes.cardText.image}
@@ -44,7 +43,7 @@ export default function Help({ helpData }: HelpProps) {
         secondCta={helpData.attributes.cardText.secondCta}
       />
 
-      <StyledSimplePushCTA
+      <SimplePushCta
         title={helpData.attributes.simplepushcta.title}
         surtitle={helpData.attributes.simplepushcta.surtitle}
         image={helpData.attributes.simplepushcta.image}
@@ -52,7 +51,7 @@ export default function Help({ helpData }: HelpProps) {
         icon={helpData.attributes.simplepushcta.icon}
       />
 
-      <StyledSocialMedia
+      <SocialMedia
         title={helpData.attributes.social.title}
         socialMediaLink={helpData.attributes.social.socialMediaLink}
       />
@@ -95,38 +94,3 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<HelpProps>
-
-const StyledPushCTA = styled(DoublePushCTA)`
-  ${({ theme }) => css`
-    margin-top: 12.5rem;
-    margin-bottom: 10rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 4.5rem 0;
-      margin-top: 13.125rem;
-    }
-  `}
-`
-
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
-
-const StyledSimplePushCTA = styled(SimplePushCta)`
-  ${({ theme }) => css`
-    margin-top: 12.5rem;
-    margin-bottom: 10rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 4.5rem 0;
-      margin-top: 13.125rem;
-    }
-  `}
-`

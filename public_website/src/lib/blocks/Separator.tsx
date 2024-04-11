@@ -1,24 +1,27 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
+
 interface SeparatorTextProps {
   isActive: boolean | undefined
 }
 
 export function Separator(props: SeparatorTextProps) {
-  return <Root data-testid="separator">{props.isActive && <div />}</Root>
+  return (
+    <Root data-testid="separator" $noMargin>
+      {props.isActive && <div />}
+    </Root>
+  )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     text-align: center;
-    max-width: 80%;
-    margin: 0 auto;
     padding: 1.5rem;
 
     div {
       border-top: 1px solid ${theme.colors.gray};
-      margin: 0 auto;
       width: 100%;
     }
   `}

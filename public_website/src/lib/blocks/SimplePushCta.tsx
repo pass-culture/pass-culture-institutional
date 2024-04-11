@@ -20,7 +20,7 @@ interface PushCTAProps {
 export function SimplePushCta(props: PushCTAProps) {
   return (
     <Root className={props.className}>
-      <StyledContentWrapper>
+      <StyledContentWrapper $noMargin>
         <RightSide>
           {props.surtitle && (
             <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
@@ -73,7 +73,7 @@ const Root = styled.div`
     color: ${theme.colors.white};
     max-width: 90rem;
     margin: auto;
-    margin-top: 10rem;
+    margin-bottom: var(--module-spacing);
     border-radius: 2.5rem;
 
     @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
@@ -140,13 +140,24 @@ const Card = styled.div<{ $imageUrl?: string }>`
       padding: 0;
       margin: 0 auto;
     }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 23rem;
+      width: unset;
+      height: unset;
+    }
   `}
 `
 
 const RightSide = styled.div`
   ${({ theme }) => css`
-    padding: 10.25rem 0 6.25rem 0;
+    padding: 4rem 0 4rem 0;
     max-width: 35rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 
     h2 {
       margin-bottom: 1.25rem;
@@ -159,8 +170,12 @@ const RightSide = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      margin: 9rem 0 3rem 0;
+      margin: 9rem 0 0rem 0;
       padding-left: 0;
+      padding-top: 11rem;
+      padding-bottom: 0;
+
+      display: block;
       p {
         margin-top: 1rem;
       }
@@ -168,7 +183,6 @@ const RightSide = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 3rem 0 3rem 0;
-      padding-bottom: 2rem;
       margin-bottom: 0;
 
       p {

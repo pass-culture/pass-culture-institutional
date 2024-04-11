@@ -39,6 +39,7 @@ const Root = styled(ContentWrapper)`
 
       @media (width < ${theme.mediaQueries.mobile}) {
         font-size: ${theme.fonts.sizes.xl};
+        line-height: 1.75rem;
       }
     }
   `}

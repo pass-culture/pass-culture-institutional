@@ -36,7 +36,7 @@ export function KeyNumberCarouselSlide({
         </StyledIconWrapper>
         <StyledTextWrapper>
           <StyledTitle>{title}</StyledTitle>
-          <Typo.Body>{description}</Typo.Body>
+          <Description>{description}</Description>
         </StyledTextWrapper>
       </StyledWrapper>
     </Root>
@@ -73,6 +73,15 @@ const StyledWrapper = styled.div`
 const StyledTextWrapper = styled.div`
   display: block;
   position: relative;
+`
+
+const Description = styled(Typo.Body)`
+  font-size: ${(p) => p.theme.fonts.sizes['s']};
+  line-height: 1.75rem;
+
+  @media (max-width: ${(p) => p.theme.mediaQueries.mobile}) {
+    line-height: 1.1875rem;
+  }
 `
 
 const StyledIconWrapper = styled.div`

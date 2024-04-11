@@ -37,7 +37,7 @@ export function ImageText({
         <StyledContentImagetWrapper
           className="second"
           $imageOnRight={isImageRight}>
-          <ImageContainer>
+          <ImageContainer $imageOnRight={isImageRight}>
             <StyledImage
               src={getStrapiURL(image?.data.attributes.url)}
               alt={image?.data.attributes.alternativeText || ''}
@@ -108,7 +108,7 @@ const Root = styled.div`
       .right,
       .left {
         grid-template-columns: 1fr;
-        padding: 10rem 1.5rem 2.5rem;
+        padding: 0 1.5rem 0;
         grid-template-areas:
           'second'
           'first';
@@ -130,9 +130,6 @@ const StyledContentWrapper = styled(ContentWrapper)`
     display: grid;
     gap: 1.5rem;
 
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-
     .first {
       grid-area: first;
     }
@@ -150,8 +147,15 @@ const StyledContentWrapper = styled(ContentWrapper)`
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     font-weight: ${theme.fonts.weights.medium};
-    line-height: 2.25rem;
-    font-size: ${theme.fonts.sizes['xl']};
+    line-height: 2.125rem;
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      max-width: 100%;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      max-width: 80%;
+    }
+    font-size: ${theme.fonts.sizes['m']};
 
     display: flex;
     flex-direction: column;
@@ -217,28 +221,25 @@ const StyledHeading = styled(Typo.Heading2)`
   `}
 `
 
-const ImageContainer = styled.div`
-  transform: rotate(2deg);
-  aspect-ratio: 385.54/480.87;
-  max-width: 80%;
-  text-align: center;
+const ImageContainer = styled.div<{ $imageOnRight?: boolean }>`
+  ${({ theme, $imageOnRight }) => css`
+    transform: rotate(2deg);
+    aspect-ratio: 24/30;
+    max-width: 80%;
+    text-align: center;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      transform: rotate(${$imageOnRight ? '-5deg' : '5deg'});
+    }
+  `}
 `
 
 const StyledImage = styled.img`
-  ${({ theme }) => css`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
-    border-radius: 1.5rem;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 100%;
-    }
-    @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 80%;
-    }
-  `}
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
+  border-radius: 1.5rem;
 `
 
 const StyledIcon = styled(OutlinedText)`

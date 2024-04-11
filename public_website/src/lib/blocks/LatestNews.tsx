@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -88,10 +89,7 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
   )
 }
 
-const Root = styled.div`
-  padding: 1rem 1.5rem;
-  max-width: 80rem;
-  margin-inline: auto;
+const Root = styled(ContentWrapper)`
   display: flex;
   flex-direction: column;
 

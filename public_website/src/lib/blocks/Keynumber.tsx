@@ -38,6 +38,7 @@ const Root = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;
       padding: 0;
+      margin: 2.825rem auto;
     }
   `}
 `

@@ -141,7 +141,11 @@ export function ImageGallery(props: ImageGalleryProps) {
 }
 
 const Root = styled.div`
-  margin-bottom: 5rem;
+  margin-bottom: var(--module-spacing);
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin: 2.825rem auto;
+  }
 `
 
 const Rows = styled.div<{ $galleryIsShort: boolean }>`

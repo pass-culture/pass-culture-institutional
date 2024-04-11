@@ -100,7 +100,7 @@ export function OffersCarousel({
       dragEnabled={false}
       infinite={true}
       step={1}>
-      <StyledHeading $noBottomMargin>
+      <StyledHeading $noMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
         <StyledArrowButtonWrapper>
@@ -160,11 +160,14 @@ export function OffersCarousel({
 
 const StyledCarousel = styled(CarouselProvider)`
   ${({ theme }) => css`
+    margin-bottom: var(--module-spacing);
+
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;
     }
   `}
 `
+
 const StyledHeading = styled(ContentWrapper)`
   ${({ theme }) => css`
     display: flex;
@@ -268,14 +271,14 @@ const CtaLink = styled(Link)`
     line-height: 1.4;
     height: fit-content;
 
-    margin-right: 1.5rem;
     background: linear-gradient(
       90deg,
       ${theme.colors.tertiary},
       ${theme.colors.secondary}
     );
     color: ${theme.colors.white};
-    position: relative;
+    position: absolute;
+    right: 0;
     span {
       position: relative;
       z-index: 1;
@@ -313,10 +316,9 @@ const CtaLink = styled(Link)`
 
 const StyledArrowButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 50%;
-  align-self: end;
-  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
 `
 
 const MobileCtaWrapper = styled.div`

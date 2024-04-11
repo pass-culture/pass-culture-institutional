@@ -182,6 +182,14 @@ const GlobalStyles = createGlobalStyle`
   .carousel__slider-tray {
     transition: transform 0.2s ease-in;
   }
+
+  body {
+    --module-spacing: calc(5rem * 2);
+
+    @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+      --module-spacing: calc(2.825rem * 2);
+    }
+  }
 `
 
 export default GlobalStyles

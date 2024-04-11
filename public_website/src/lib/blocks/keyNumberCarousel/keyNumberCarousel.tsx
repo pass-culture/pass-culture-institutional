@@ -155,11 +155,12 @@ const StyledCarouselProvider = styled(CarouselProvider)`
 
     padding: 3.5rem 0;
     margin: auto;
-    margin-bottom: 5rem;
+    margin-bottom: var(--module-spacing);
 
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
       display: block;
+      margin: 2.825rem auto;
     }
   `}
 `
@@ -233,7 +234,7 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
-      padding-bottom: 1rem;
+      padding-bottom: 2.8rem;
     }
     display: none;
   `}
