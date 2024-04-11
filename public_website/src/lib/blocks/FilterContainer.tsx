@@ -323,6 +323,7 @@ const StyleSelectContent = styled.div`
 
       button {
         margin: 1.5rem 0;
+        color: ${theme.colors.black};
         font-weight: ${theme.fonts.weights.medium};
         display: flex;
         align-items: center;

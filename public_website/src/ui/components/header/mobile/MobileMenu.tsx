@@ -174,6 +174,7 @@ const StyledMobileMenuListItem = styled.li`
     }
 
     button {
+      color: ${theme.colors.black};
       align-items: center;
       display: flex;
       gap: 1.5rem;
