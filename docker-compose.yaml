@@ -1,5 +1,18 @@
 version: '3'
 services:
+  next_preview: 
+    build:
+      context: public_website
+      args:
+        network_mode: proxy
+    env_file:
+      - public_website/.env
+    environment:
+      ID_TOKEN: 'dummy_token'
+      NEXT_PUBLIC_BACKEND_API_URL: https://backend.testing.passculture.team
+    ports:
+      - 3000:3000
+
   cms:
     build:
       context: content_management_system 
@@ -8,6 +21,7 @@ services:
     env_file: content_management_system/.env
     environment:
       DATABASE_HOST: database
+      GCS_BUCKET_NAME: "fake" 
     depends_on:
       - database
 

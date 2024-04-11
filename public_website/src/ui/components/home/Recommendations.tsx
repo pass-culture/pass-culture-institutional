@@ -58,17 +58,8 @@ const Root = styled.div`
 `
 
 const StyledCarouselWrapper = styled.div`
-  ${({ theme }) => css`
-    width: 80%;
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      max-width: 90%;
-      width: 90%;
-    }
-    @media (width < ${theme.mediaQueries.mobile}) {
-      width: auto;
-      padding: 4rem 1.5rem 2rem;
-    }
-  `}
+  --module-spacing: none;
+  width: 100%;
 `
 
 const StyledCtaWrapper = styled.div`
