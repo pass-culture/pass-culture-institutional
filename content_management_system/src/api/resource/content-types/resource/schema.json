@@ -22,7 +22,8 @@
         "Dossier de presse",
         "Communiqué de presse",
         "Étude ritualisée",
-        "Étude ponctuelle"
+        "Étude ponctuelle",
+        "Ressource"
       ],
       "required": true
     },
@@ -34,12 +35,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "string",
