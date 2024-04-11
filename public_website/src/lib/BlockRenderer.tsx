@@ -3,7 +3,6 @@ import React, { ComponentProps } from 'react'
 import { CenteredText } from './blocks/CenteredText'
 import { DetailedLogos } from './blocks/DetailedLogos'
 import { DoublePushCTA } from './blocks/DoublePushCta'
-import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
@@ -53,7 +52,6 @@ const COMPONENTS: Record<
   'block.latest-news': LatestNews,
   'block.vertical-carousel': VerticalCarousel,
 
-  'block.experience-video': ExperienceVideo,
   'block.key-number': KeyNumber,
   'block.logos': Logos,
   'block.detailed-logos': DetailedLogos,

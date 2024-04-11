@@ -1,8 +1,7 @@
 {
-  "collectionName": "components_common_vertical_carousel_items",
+  "collectionName": "components_common_experience_video_carousel_items",
   "info": {
-    "displayName": "verticalCarouselItem",
-    "description": ""
+    "displayName": "ExperienceVideoCarouselItem"
   },
   "options": {},
   "attributes": {
@@ -16,7 +15,7 @@
     },
     "url": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "image": {
       "type": "media",

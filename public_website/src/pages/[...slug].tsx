@@ -52,6 +52,8 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.breadCrumbs.fils',
       'Blocks.breadCrumbs.parent',
       'Blocks.images',
+      'Blocks.carouselItems',
+      'Blocks.carouselItems.image',
       'seo',
       'seo.metaSocial',
       'seo.metaSocial.image',

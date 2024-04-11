@@ -59,7 +59,11 @@ export interface BlockExperienceVideoCarousel extends Schema.Component {
   };
   attributes: {
     title: Attribute.String;
-    items: Attribute.Component<'common.vertical-carousel-item', true>;
+    carouselItems: Attribute.Component<
+      'common.experience-video-carousel-item',
+      true
+    > &
+      Attribute.Required;
   };
 }
 
@@ -417,6 +421,19 @@ export interface CommonDetailedLogo extends Schema.Component {
     description: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
+  };
+}
+
+export interface CommonExperienceVideoCarouselItem extends Schema.Component {
+  collectionName: 'components_common_experience_video_carousel_items';
+  info: {
+    displayName: 'ExperienceVideoCarouselItem';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    image: Attribute.Media;
   };
 }
 
@@ -941,6 +958,7 @@ declare module '@strapi/types' {
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
       'common.detailed-logo': CommonDetailedLogo;
+      'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
       'common.filtre': CommonFiltre;
       'common.key-number-items': CommonKeyNumberItems;
       'common.link': CommonLink;
