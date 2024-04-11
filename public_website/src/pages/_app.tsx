@@ -3,7 +3,7 @@ import type { AppContext, AppProps } from 'next/app'
 import App from 'next/app'
 import { Montserrat } from 'next/font/google'
 import { stringify } from 'qs'
-import styled, { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
@@ -53,9 +53,9 @@ export default function MyApp({
           login={headerData.login}
           signup={headerData.signup}
         />
-        <Main id="main-content">
+        <main id="main-content">
           <Component {...pageProps} />
-        </Main>
+        </main>
         <Footer {...footerData} />
       </BreadcrumbContext.Provider>
     </ThemeProvider>
@@ -102,13 +102,3 @@ MyApp.getInitialProps = async (context: AppContext) => {
     footerData: footerData.data.attributes,
   }
 }
-
-const Main = styled.main`
-  /* display: flex;
-  flex-direction: column;
-  align-items: normal;
-
-  & > * {
-    width: 100%;
-  } */
-`
