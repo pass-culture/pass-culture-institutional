@@ -14,7 +14,7 @@ export type ExperienceVideoCarouselSlideProps = {
   image: APIResponse<'plugin::upload.file'> | null
   title: string
   description: string
-  url: string
+  url?: string
 }
 
 export function ExperienceVideoCarouselSlide({
@@ -37,17 +37,25 @@ export function ExperienceVideoCarouselSlide({
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledWrapper>
-        {image && isMounted && (
-          <StyledExperienceVideo
-            light={image ? getStrapiURL(image?.data.attributes.url) : true}
-            url={url}
-            width="100%"
-            controls={false}
-            height="100%"
-            alt={description}
-            playIcon={<StyledPlayIcon />}
-          />
-        )}
+        {image &&
+          isMounted &&
+          (url ? (
+            <StyledExperienceVideo
+              light={image ? getStrapiURL(image?.data.attributes.url) : true}
+              url={url}
+              width="100%"
+              controls={false}
+              height="100%"
+              alt={description}
+              playIcon={<StyledPlayIcon />}
+            />
+          ) : (
+            <StyledExperienceVideo
+              as="img"
+              src={getStrapiURL(image.data.attributes.url)}
+              alt=""
+            />
+          ))}
         <StyledTitle>{title}</StyledTitle>
         <Description>{description}</Description>
       </StyledWrapper>

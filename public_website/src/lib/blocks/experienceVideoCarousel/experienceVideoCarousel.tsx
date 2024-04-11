@@ -21,12 +21,12 @@ import { stripTags } from '@/utils/stripTags'
 
 type ExperienceVideoCarouselProps = {
   title: string
-  items: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
+  carouselItems: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
 }
 
 export function ExperienceVideoCarousel({
   title,
-  items,
+  carouselItems: items,
 }: ExperienceVideoCarouselProps) {
   const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title

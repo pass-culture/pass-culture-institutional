@@ -9,10 +9,12 @@
     "title": {
       "type": "string"
     },
-    "items": {
+    "carouselItems": {
+      "displayName": "ExperienceVideoCarouselItem",
       "type": "component",
       "repeatable": true,
-      "component": "common.vertical-carousel-item"
+      "component": "common.experience-video-carousel-item",
+      "required": true
     }
   }
 }

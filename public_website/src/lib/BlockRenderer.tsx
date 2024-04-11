@@ -3,7 +3,6 @@ import React, { ComponentProps } from 'react'
 import { CenteredText } from './blocks/CenteredText'
 import { DetailedLogos } from './blocks/DetailedLogos'
 import { DoublePushCTA } from './blocks/DoublePushCta'
-import { ExperienceVideo } from './blocks/ExperienceVideo'
 import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
@@ -27,8 +26,6 @@ import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SocialMedia } from './blocks/SocialMedia'
-import { Testimonies } from './blocks/Testimonies'
-import { TestimonyCarouselSlide } from './blocks/testimonyCaousel/testimonyCarouselSlide'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
@@ -55,16 +52,13 @@ const COMPONENTS: Record<
   'block.latest-news': LatestNews,
   'block.vertical-carousel': VerticalCarousel,
 
-  'block.experience-video': ExperienceVideo,
   'block.key-number': KeyNumber,
   'block.logos': Logos,
   'block.detailed-logos': DetailedLogos,
-  'block.testimonies': Testimonies,
   'block.experience-video-carousel': ExperienceVideoCarousel,
   'block.key-number-carousel': KeyNumberCarousel,
   'block.logo-carousel': LogoCarousel,
   'block.logo-carousel-slide': LogoCarouselSlide,
-  'block.testimony-carousel': TestimonyCarouselSlide,
   'block.image': Imageblock,
   'block.image-text': ImageText,
   'block.little-list': LittleList,
