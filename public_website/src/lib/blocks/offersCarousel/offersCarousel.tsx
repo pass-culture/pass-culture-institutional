@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer'
 import {
   ButtonBack,
   ButtonNext,
@@ -23,6 +24,7 @@ import { stripTags } from '@/utils/stripTags'
 type OffersVideoCarouselProps = {
   title: string
   items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
+  description?: BlocksContent
   cta: { Label: string; URL: string }
 }
 
@@ -30,6 +32,7 @@ export function OffersCarousel({
   title,
   items,
   cta,
+  description,
 }: OffersVideoCarouselProps) {
   const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
@@ -102,6 +105,8 @@ export function OffersCarousel({
       step={1}>
       <StyledHeading $noMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+
+        {description && <BlocksRenderer content={description} />}
 
         <StyledArrowButtonWrapper>
           <StyledNavigationButtons aria-label="Contrôles du carousel">
@@ -179,6 +184,15 @@ const StyledHeading = styled(ContentWrapper)`
     h2 {
       width: 60%;
       text-align: center;
+    }
+
+    p {
+      max-width: 40rem;
+    }
+
+    p a {
+      color: ${theme.colors.primary};
+      text-decoration: underline;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
