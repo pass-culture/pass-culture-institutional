@@ -1356,7 +1356,8 @@ export interface ApiResourceResource extends Schema.CollectionType {
         'Dossier de presse',
         'Communiqu\u00E9 de presse',
         '\u00C9tude ritualis\u00E9e',
-        '\u00C9tude ponctuelle'
+        '\u00C9tude ponctuelle',
+        'Ressource'
       ]
     > &
       Attribute.Required;

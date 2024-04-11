@@ -241,6 +241,7 @@ export interface BlockOffersCarousel extends Schema.Component {
     items: Attribute.Component<'common.offers-carousel-item', true> &
       Attribute.Required;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
+    description: Attribute.Blocks;
   };
 }
 

@@ -52,6 +52,7 @@ export function SocialMedia({
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2rem;
+    text-align: center;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.5rem;

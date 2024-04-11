@@ -21,6 +21,9 @@
       "repeatable": false,
       "component": "common.link",
       "required": true
+    },
+    "description": {
+      "type": "blocks"
     }
   }
 }

@@ -173,12 +173,12 @@ const StyledHomeGradient = styled.div`
       rgba(233 223 238 / 1) 0%,
       rgba(233 223 238 / 0) 100%
     );
-    padding: 8rem 0;
+    padding-top: 8rem;
     overflow: hidden;
     transform: translateY(-8rem);
+    --module-spacing: 0;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 8rem 0 0;
       transform: translateY(-7rem);
     }
   `}
