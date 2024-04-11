@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
@@ -145,6 +146,17 @@ export function Header({
       mobileMenuButtonRef.current?.focus()
     }
   }
+
+  // Close mobile menu on navigation
+  const currentPath = usePathname()
+  const [previousPath, setPreviousPath] = useState(currentPath)
+  useEffect(() => {
+    if (showMobileMenu && currentPath !== previousPath) {
+      setShowMobileMenu(false)
+      setPreviousPath(currentPath)
+      mobileMenuButtonRef.current?.focus()
+    }
+  }, [currentPath, showMobileMenu, previousPath])
 
   const Wrapper = showMobileMenu ? FocusTrap : React.Fragment
 
