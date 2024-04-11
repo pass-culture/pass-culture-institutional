@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { Button } from '../button/Button'
+import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
 import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
@@ -38,7 +39,7 @@ export function OfferSection({
     return offer.image?.url && offer.image.url !== ''
   })
   return (
-    <Root>
+    <Root as="article">
       <Typo.Heading2>{title}</Typo.Heading2>
       <Typo.Body>{description}</Typo.Body>
       <StyledOfferWrapper>
@@ -79,22 +80,15 @@ export function OfferSection({
   )
 }
 
-const Root = styled.article`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     position: relative;
-    width: 100%;
-    max-width: 90rem;
-    margin: 5rem auto;
 
-    h2 {
-      width: 40%;
-    }
     p {
       margin: 1.5rem 0;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      margin: 8.5rem 0;
       h2,
       p {
         width: 100%;

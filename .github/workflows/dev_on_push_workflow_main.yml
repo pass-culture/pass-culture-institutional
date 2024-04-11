@@ -40,7 +40,7 @@ jobs:
         run: cd content_management_system && yarn test:lint
       - name: Test typescript
         run: cd content_management_system && yarn test:types
-  build-image:
+  build-image-cms:
     uses: ./.github/workflows/reusable_docker_build.yml
     permissions:
       id-token: write
@@ -49,6 +49,18 @@ jobs:
       image: pc-institutional 
       push: true 
       context: content_management_system
+    secrets:
+      GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+      ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
+  build-image-public-site-preview:
+    uses: ./.github/workflows/reusable_docker_build.yml
+    permissions:
+      id-token: write
+      contents: write
+    with:
+      image: pc-institutional-public-site-preview
+      push: true 
+      context: public_website
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
