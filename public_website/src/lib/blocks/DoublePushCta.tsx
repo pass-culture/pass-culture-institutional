@@ -64,8 +64,8 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
 
 const StyledContentWrapper = styled(ContentWrapper)`
   // Offset for protruding image
-  margin-top: calc(5rem + 3.125rem);
-  margin-bottom: calc(5rem + 3.125rem);
+  padding-top: 3.125rem;
+  --module-spacing: calc(10rem + 3.125rem);
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;

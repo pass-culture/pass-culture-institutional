@@ -18,7 +18,8 @@ export function Logos({ logo }: LogoProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    padding: 6.25rem 0 7rem;
+    /* padding: 6.25rem 0 7rem; */
+    margin-bottom: var(--module-spacing);
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;

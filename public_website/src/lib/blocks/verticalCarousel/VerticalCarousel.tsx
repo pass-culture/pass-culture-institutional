@@ -156,7 +156,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 }
 
 const StyledCarouselProvider = styled(CarouselProvider)`
-  margin: 5rem 0;
+  margin-bottom: var(--module-spacing);
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-bottom: 2.825rem 0;

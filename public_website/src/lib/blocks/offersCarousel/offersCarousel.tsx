@@ -160,11 +160,14 @@ export function OffersCarousel({
 
 const StyledCarousel = styled(CarouselProvider)`
   ${({ theme }) => css`
+    margin-bottom: var(--module-spacing);
+
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;
     }
   `}
 `
+
 const StyledHeading = styled(ContentWrapper)`
   ${({ theme }) => css`
     display: flex;

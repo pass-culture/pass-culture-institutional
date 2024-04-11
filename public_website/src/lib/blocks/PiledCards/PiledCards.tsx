@@ -126,6 +126,7 @@ const StyledCarousel = styled(PiledCardsCarousel)`
 
 const ItemScrollSentinel = styled.li`
   margin-bottom: 8rem;
+  position: absolute;
 `
 
 const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
@@ -154,6 +155,7 @@ const StyledContentListItems = styled.li<{
     gap: 10rem;
 
     padding: 5rem;
+    margin-bottom: 8rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
       gap: 2rem;

@@ -20,7 +20,7 @@ interface PushCTAProps {
 export function SimplePushCta(props: PushCTAProps) {
   return (
     <Root className={props.className}>
-      <StyledContentWrapper>
+      <StyledContentWrapper $noMargin>
         <RightSide>
           {props.surtitle && (
             <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
@@ -73,8 +73,7 @@ const Root = styled.div`
     color: ${theme.colors.white};
     max-width: 90rem;
     margin: auto;
-    margin-top: 10rem;
-    margin-bottom: 10rem;
+    margin-bottom: var(--module-spacing);
     border-radius: 2.5rem;
 
     @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
