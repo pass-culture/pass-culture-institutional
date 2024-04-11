@@ -3,11 +3,16 @@ import { getStrapiURL } from './apiHelpers'
 type HttpResponse<T> = {
   data: T
 }
-
 export async function fetchCMS<T>(path: string) {
   try {
     const apiPath = `/api${path}`
-    const requestUrl = `${getStrapiURL(apiPath)}`
+    const sep = getStrapiURL(apiPath).includes('?') ? '&' : '?'
+    const requestUrl = `${getStrapiURL(apiPath)}${
+      process.env['NEXT_PUBLIC_PREVIEW_MODE'] === 'true'
+        ? `${sep}publicationState=preview`
+        : ''
+    }`
+
     const token = process.env['ID_TOKEN']
 
     if (
