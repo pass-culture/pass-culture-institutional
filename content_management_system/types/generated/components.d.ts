@@ -472,6 +472,8 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+    eventName: Attribute.String;
+    eventOrigin: Attribute.String;
   };
 }
 
