@@ -18,12 +18,7 @@
     },
     "category": {
       "type": "enumeration",
-      "enum": [
-        "Article",
-        "Évènement",
-        "Partenariat",
-        "Rencontre"
-      ],
+      "enum": ["Article", "Évènement", "Partenariat", "Rencontre"],
       "required": true
     },
     "date": {
@@ -34,9 +29,7 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "string",
@@ -99,11 +92,30 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.image",
-        "block.video",
-        "block.simple-text-v2",
+        "block.centered-text",
+        "block.header",
+        "block.social-media",
         "block.double-push-cta",
-        "block.social-media"
+        "block.image-text",
+        "block.image",
+        "block.little-list",
+        "block.separator",
+        "block.simple-push-cta",
+        "block.space",
+        "block.vertical-carousel",
+        "block.video",
+        "block.key-number-carousel",
+        "block.logos",
+        "block.latest-news",
+        "block.experience-video-carousel",
+        "block.offers-carousel",
+        "block.piled-cards",
+        "block.faq",
+        "block.detailed-logos",
+        "block.organization-chart",
+        "block.simple-text-v2",
+        "block.image-gallery",
+        "block.breadcrumb"
       ]
     },
     "seo": {
@@ -114,11 +126,7 @@
     "pageLocalisation": {
       "type": "customField",
       "customField": "plugin::multi-select.multi-select",
-      "options": [
-        "Jeunes et parents",
-        "Acteurs culturels",
-        "S’informer"
-      ]
+      "options": ["Jeunes et parents", "Acteurs culturels", "S’informer"]
     }
   }
 }
