@@ -38,12 +38,6 @@
       "repeatable": false,
       "component": "block.social-media"
     },
-    "offers": {
-      "type": "component",
-      "repeatable": false,
-      "component": "block.offers-section",
-      "required": true
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
