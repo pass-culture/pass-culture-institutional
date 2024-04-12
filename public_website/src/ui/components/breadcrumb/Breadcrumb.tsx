@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
+import chevron from './chevron.svg'
 
 interface BreadcrumbProps {
   isUnderHeader?: boolean
@@ -64,17 +65,19 @@ export function Breadcrumb(props: BreadcrumbProps) {
         </ListSeparator>
         <ListItem>
           <SelectWrapper $groupLabel={currentNavigationGroup.label}>
-            <Select
-              aria-current="page"
-              aria-label="Changer de page"
-              value={pathname}
-              onChange={handleOptionChange}>
-              {groupLinks.map((link) => (
-                <option key={link.Label} value={link.URL}>
-                  {link.Label}
-                </option>
-              ))}
-            </Select>
+            <SelectInnerWrapper data-currentlabel="Aide et support">
+              <Select
+                aria-current="page"
+                aria-label="Changer de page"
+                value={pathname}
+                onChange={handleOptionChange}>
+                {groupLinks.map((link) => (
+                  <option key={link.Label} value={link.URL}>
+                    {link.Label}
+                  </option>
+                ))}
+              </Select>
+            </SelectInnerWrapper>
           </SelectWrapper>
         </ListItem>
       </ol>
@@ -95,14 +98,9 @@ const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
       gap: 0.25rem 0.875rem;
     }
 
-    select {
-      border: none;
-      background: none;
-      color: ${theme.colors.black};
-      font-size: ${theme.fonts.sizes['2xs']};
-      font-weight: ${theme.fonts.weights.medium};
-      cursor: pointer;
-    }
+    color: ${theme.colors.black};
+    font-size: ${theme.fonts.sizes['2xs']};
+    font-weight: ${theme.fonts.weights.medium};
 
     ${$isUnderHeader &&
     css`
@@ -139,9 +137,41 @@ const StyledSimpleLink = styled.div`
   gap: 1.25rem;
 `
 
+const SelectInnerWrapper = styled.div`
+  display: inline-block;
+  padding: 0 0.25rem;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    content: attr(data-currentlabel);
+    color: transparent;
+    padding: 0 0.25rem;
+    font: inherit;
+
+    padding-right: 1.375rem;
+    background-image: url('${chevron.src}');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 0.5rem auto;
+
+    pointer-events: none;
+  }
+`
+
 const Select = styled.select`
   appearance: none;
-  padding: 0 0.25rem;
+  padding: 0;
+
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  font: inherit;
 `
 
 const SelectWrapper = styled.div<{ $groupLabel: string }>`
