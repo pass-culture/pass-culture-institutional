@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
@@ -17,6 +18,11 @@ export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
       <Seo metaData={props.data.attributes.seo} />
+      <Header
+        image={props.data.attributes.image}
+        icon=""
+        title={props.data.attributes.title}
+      />
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
@@ -56,6 +62,7 @@ export const getStaticProps = (async ({ params }) => {
         'seo',
         'seo.metaSocial',
         'seo.metaSocial.image',
+        'image',
       ],
       filters: {
         slug: {

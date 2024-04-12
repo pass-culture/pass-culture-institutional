@@ -762,30 +762,11 @@ export interface ApiEventEvent extends Schema.CollectionType {
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
     blocks: Attribute.DynamicZone<
       [
-        'block.centered-text',
-        'block.header',
-        'block.social-media',
-        'block.double-push-cta',
-        'block.image-text',
         'block.image',
-        'block.little-list',
-        'block.separator',
-        'block.simple-push-cta',
-        'block.space',
-        'block.vertical-carousel',
-        'block.video',
-        'block.key-number-carousel',
-        'block.logos',
-        'block.latest-news',
-        'block.experience-video-carousel',
-        'block.offers-carousel',
-        'block.piled-cards',
-        'block.faq',
-        'block.detailed-logos',
-        'block.organization-chart',
         'block.simple-text-v2',
-        'block.image-gallery',
-        'block.breadcrumb'
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1208,30 +1189,11 @@ export interface ApiNewsNews extends Schema.CollectionType {
       Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
-        'block.centered-text',
-        'block.header',
-        'block.social-media',
-        'block.double-push-cta',
-        'block.image-text',
         'block.image',
-        'block.little-list',
-        'block.separator',
-        'block.simple-push-cta',
-        'block.space',
-        'block.vertical-carousel',
-        'block.video',
-        'block.key-number-carousel',
-        'block.logos',
-        'block.latest-news',
-        'block.experience-video-carousel',
-        'block.offers-carousel',
-        'block.piled-cards',
-        'block.faq',
-        'block.detailed-logos',
-        'block.organization-chart',
         'block.simple-text-v2',
-        'block.image-gallery',
-        'block.breadcrumb'
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1297,30 +1259,11 @@ export interface ApiPagePage extends Schema.CollectionType {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
       [
-        'block.centered-text',
-        'block.header',
-        'block.social-media',
-        'block.double-push-cta',
-        'block.image-text',
         'block.image',
-        'block.little-list',
-        'block.separator',
-        'block.simple-push-cta',
-        'block.space',
-        'block.vertical-carousel',
-        'block.video',
-        'block.key-number-carousel',
-        'block.logos',
-        'block.latest-news',
-        'block.experience-video-carousel',
-        'block.offers-carousel',
-        'block.piled-cards',
-        'block.faq',
-        'block.detailed-logos',
-        'block.organization-chart',
         'block.simple-text-v2',
-        'block.image-gallery',
-        'block.breadcrumb'
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
