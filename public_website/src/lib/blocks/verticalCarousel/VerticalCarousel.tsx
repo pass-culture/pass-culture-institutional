@@ -51,7 +51,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 
   // Get the MQ in rem and convert it in pixels
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.5
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   /**
    * Remove unnecessary HTML attributes for a11y.
