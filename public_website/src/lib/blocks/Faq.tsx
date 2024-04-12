@@ -100,8 +100,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 1.5rem;
+    grid-template-columns: min-content 1fr;
+    gap: 12.5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
@@ -109,6 +109,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 1.5rem;
     }
   `}
 `
@@ -116,6 +117,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
+    min-width: 18rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.75rem;
     }
