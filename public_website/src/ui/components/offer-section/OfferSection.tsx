@@ -85,7 +85,7 @@ const Root = styled(ContentWrapper)`
     position: relative;
 
     p {
-      margin: 1.5rem 0;
+      margin-bottom: 1rem;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
