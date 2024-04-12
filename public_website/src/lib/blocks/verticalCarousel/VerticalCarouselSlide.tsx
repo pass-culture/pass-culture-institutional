@@ -53,9 +53,16 @@ export function VerticalCarouselSlide({
 
 const Root = styled(Slide)`
   ${({ theme }) => css`
-    margin: 0 1rem;
-    .inner {
-      @media (width < ${theme.mediaQueries.mobile}) {
+    /* margin: 0 1rem; */
+    &:not(:last-child) {
+      margin-right: 2rem;
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+      .inner {
         margin: 0;
       }
     }

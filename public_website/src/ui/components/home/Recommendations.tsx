@@ -30,9 +30,7 @@ export function Recommendations({
 
   return (
     <Root>
-      <StyledCarouselWrapper>
-        <VerticalCarousel title={title} items={verticalCarouselItems} />
-      </StyledCarouselWrapper>
+      <VerticalCarousel title={title} items={verticalCarouselItems} />
       <StyledCtaWrapper>
         <Button href={cta.URL}>{cta.Label}</Button>
       </StyledCtaWrapper>
@@ -47,19 +45,15 @@ const Root = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: end;
+
+    --module-spacing: none;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
       background-color: transparent;
       padding: 0;
     }
   `}
-`
-
-const StyledCarouselWrapper = styled.div`
-  --module-spacing: none;
-  width: 100%;
 `
 
 const StyledCtaWrapper = styled.div`
