@@ -111,10 +111,6 @@
       "required": true,
       "unique": true
     },
-    "path": {
-      "type": "string",
-      "required": true
-    },
     "blocks": {
       "type": "dynamiczone",
       "components": [

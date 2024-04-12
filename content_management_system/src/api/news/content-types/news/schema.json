@@ -40,7 +40,8 @@
     },
     "slug": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "localisation": {
       "type": "enumeration",
@@ -104,10 +105,6 @@
         "block.double-push-cta",
         "block.social-media"
       ]
-    },
-    "path": {
-      "type": "string",
-      "required": true
     },
     "seo": {
       "type": "component",

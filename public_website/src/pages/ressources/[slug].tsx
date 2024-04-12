@@ -36,7 +36,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.path,
+        slug: page.attributes.slug,
       },
     })),
     fallback: false,
@@ -48,33 +48,43 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
-  const queryParams = stringify({
-    populate: [
-      'blocks.image.image',
-      'blocks.socialMediaLink',
-      'blocks.image.image.data',
-      'blocks.content',
-      'blocks.items',
-      'blocks',
-      'news',
-      'blocks.logo.logo',
-      'blocks.cta',
-      'blocks.items.items',
-      'relatedRessources.cta',
-      'relatedRessources.category',
-      'blocks[0]',
-      'blocks.items.image',
-      'blocks.logo',
-      'blocks.columns',
-      'blocks.firstCta',
-      'blocks.secondCta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+  const queryParams = stringify(
+    {
+      populate: [
+        'blocks.image.image',
+        'blocks.socialMediaLink',
+        'blocks.image.image.data',
+        'blocks.content',
+        'blocks.items',
+        'blocks',
+        'news',
+        'blocks.logo.logo',
+        'blocks.cta',
+        'blocks.items.items',
+        'relatedRessources.cta',
+        'relatedRessources.category',
+        'blocks[0]',
+        'blocks.items.image',
+        'blocks.logo',
+        'blocks.columns',
+        'blocks.firstCta',
+        'blocks.secondCta',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
+      ],
+      filters: {
+        slug: {
+          $eqi: pagePath,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
 
-  const apiEndpoint = `/resources?${queryParams}&filters[path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/resources?${queryParams}`
 
   const response =
     await fetchCMS<APIResponseData<'api::resource.resource'>[]>(apiEndpoint)

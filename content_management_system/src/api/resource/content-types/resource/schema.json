@@ -35,11 +35,14 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "localisation": {
       "type": "enumeration",
@@ -92,10 +95,6 @@
         "Cinéma",
         "Offres numériques"
       ],
-      "required": true
-    },
-    "path": {
-      "type": "string",
       "required": true
     },
     "blocks": {

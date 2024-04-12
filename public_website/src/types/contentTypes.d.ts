@@ -760,7 +760,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     city: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
         'block.image',
@@ -1136,7 +1135,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    slug: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     localisation: Attribute.Enumeration<
       [
         'Aucune',
@@ -1197,7 +1196,6 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'block.social-media'
       ]
     >;
-    path: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
     pageLocalisation: Attribute.JSON &
       Attribute.CustomField<
@@ -1363,7 +1361,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    slug: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     localisation: Attribute.Enumeration<
       [
         'Aucune',
@@ -1415,7 +1413,6 @@ export interface ApiResourceResource extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
         'block.image',
