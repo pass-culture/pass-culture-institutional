@@ -1,6 +1,6 @@
 import { analyticsProvider, EventMap, eventMapKeys } from './analyticsProvider'
 
-export function isKeyOfEventMap(key: string): key is keyof EventMap {
+function isKeyOfEventMap(key: string): key is keyof EventMap {
   return key in eventMapKeys
 }
 

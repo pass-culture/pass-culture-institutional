@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, fireEvent, render, screen } from '..'
-import { homePageFixtures } from '../fixtures/home'
+import { homePageFixturesWithTracking } from '../fixtures/home'
 import { CMS_BASE_URL, jsonResponseOf } from '../handlers'
 import { server } from '../server'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
@@ -42,7 +42,9 @@ describe('Home page', () => {
         http.get(
           `${CMS_BASE_URL}/api/home`,
           () => {
-            return jsonResponseOf(homePageFixtures.homeDataWithTrackingOnCTAs)
+            return jsonResponseOf(
+              homePageFixturesWithTracking.homeDataWithTrackingOnCTAs
+            )
           },
           { once: true }
         )
