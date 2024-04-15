@@ -1258,11 +1258,30 @@ export interface ApiPagePage extends Schema.CollectionType {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
       [
-        'block.image',
-        'block.simple-text-v2',
-        'block.video',
+        'block.centered-text',
+        'block.header',
+        'block.social-media',
         'block.double-push-cta',
-        'block.social-media'
+        'block.image-text',
+        'block.image',
+        'block.little-list',
+        'block.separator',
+        'block.simple-push-cta',
+        'block.space',
+        'block.vertical-carousel',
+        'block.video',
+        'block.key-number-carousel',
+        'block.logos',
+        'block.latest-news',
+        'block.experience-video-carousel',
+        'block.offers-carousel',
+        'block.piled-cards',
+        'block.faq',
+        'block.detailed-logos',
+        'block.organization-chart',
+        'block.simple-text-v2',
+        'block.image-gallery',
+        'block.breadcrumb'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
