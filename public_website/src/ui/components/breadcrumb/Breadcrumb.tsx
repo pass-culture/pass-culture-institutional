@@ -6,7 +6,6 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
-import chevron from './chevron.svg'
 
 interface BreadcrumbProps {
   isUnderHeader?: boolean
@@ -41,6 +40,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
     ...currentNavigationGroup.megaMenu.secondaryListItems,
   ]
 
+  const currentLink = groupLinks.find(
+    (l) => l.URL.toLowerCase() === pathname.toLowerCase()
+  )
+
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     let selectedUrl = event.target.value
     selectedUrl = selectedUrl.startsWith('/') ? selectedUrl : '/' + selectedUrl
@@ -65,7 +68,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
         </ListSeparator>
         <ListItem>
           <SelectWrapper $groupLabel={currentNavigationGroup.label}>
-            <SelectInnerWrapper data-currentlabel="Aide et support">
+            <SelectInnerWrapper>
               <Select
                 aria-current="page"
                 aria-label="Changer de page"
@@ -77,6 +80,10 @@ export function Breadcrumb(props: BreadcrumbProps) {
                   </option>
                 ))}
               </Select>
+              <ChevronContainer aria-hidden="true">
+                {currentLink?.Label}
+                <ChevronDown />
+              </ChevronContainer>
             </SelectInnerWrapper>
           </SelectWrapper>
         </ListItem>
@@ -141,25 +148,28 @@ const SelectInnerWrapper = styled.div`
   display: inline-block;
   padding: 0 0.25rem;
   position: relative;
+`
 
-  &::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    content: '';
-    content: attr(data-currentlabel);
-    color: transparent;
-    padding: 0 0.25rem;
-    font: inherit;
+const ChevronContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  content: attr(data-currentlabel);
+  color: transparent;
+  padding-left: 0.25rem;
+  padding-right: 1rem;
+  font: inherit;
 
-    padding-right: 1.375rem;
-    background-image: url('${chevron.src}');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: 0.5rem auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 
-    pointer-events: none;
+  pointer-events: none;
+
+  svg {
+    width: 0.5rem;
   }
 `
 
