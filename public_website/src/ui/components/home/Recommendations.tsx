@@ -50,8 +50,9 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
-      background-color: transparent;
+      /* background-color: transparent; */
       padding: 0;
+      padding: 2.5rem 0 3.5rem;
     }
   `}
 `
@@ -64,7 +65,7 @@ const StyledCtaWrapper = styled.div`
     margin-top: 4rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 1rem;
+      margin-top: 2rem;
     }
   `}
 `

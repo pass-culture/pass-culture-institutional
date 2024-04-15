@@ -317,7 +317,7 @@ const StyledNavigation = styled.nav<{
       @media (width < ${theme.mediaQueries.largeDesktop}) {
         justify-content: space-between;
         gap: 0.5rem;
-        padding: 1rem;
+        padding: 1.75rem 2.5rem 1rem 1.5rem;
       }
 
       /* Only show logo + burger menu on mobile */

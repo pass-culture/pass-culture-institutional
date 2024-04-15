@@ -94,7 +94,6 @@ const Root = styled.div`
 
 const CardContainer = styled.div`
   position: relative;
-  z-index: 1;
   margin: -3.125rem 0 -3.125rem 5rem;
   max-width: 28rem;
 

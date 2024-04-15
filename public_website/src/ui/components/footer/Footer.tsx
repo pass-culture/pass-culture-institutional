@@ -105,8 +105,8 @@ const StyledLogos = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    align-items: center;
-    justify-items: start;
+    align-items: stretch;
+    justify-items: stretch;
     gap: 3.125rem 3.75rem;
 
     a:nth-child(2) img {
