@@ -1,11 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 export type FooterListProps = {
   title: string
-  listItems: { Label: string; URL: string }[]
+  listItems: CTA[]
 }
 
 export function FooterList({ title, listItems }: FooterListProps) {

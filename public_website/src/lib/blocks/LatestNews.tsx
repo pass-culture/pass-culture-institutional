@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { stringify } from 'querystring'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { APIResponseData } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -15,7 +16,7 @@ type LatestNewsProps = {
   news:
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
-  cta?: { Label: string; URL: string }
+  cta?: CTA
   className?: string
 }
 

@@ -6,11 +6,12 @@ import { Button } from '../../ui/components/button/Button'
 import { LinkFaq } from '../../ui/components/help/Link'
 import { Typo } from '../../ui/components/typographies'
 import arrowUrl from '../../ui/image/arrowd.svg'
+import { CTA } from '@/types/CTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
 type FaqProps = {
   title: string
-  cta: { Label: string; URL: string }
+  cta: CTA
   /** Category IDs separated by commas */
   categories: string | undefined
   /** Only questions with the given property set to true are displayed. */

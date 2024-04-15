@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -13,9 +14,9 @@ interface DoublePushCTAProps {
   title: string | TrustedHTML
   text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  firstCta: { Label: string; URL: string }
+  firstCta: CTA
 
-  secondCta: { Label: string; URL: string } | undefined
+  secondCta: CTA | undefined
   className?: string
   icon?: string
 }

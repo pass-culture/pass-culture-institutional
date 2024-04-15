@@ -7,6 +7,7 @@ import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 export type FooterProps = {
@@ -17,7 +18,7 @@ export type FooterProps = {
   Lists: {
     id: number
     Title: string
-    Links: { Label: string; URL: string }[]
+    Links: CTA[]
   }[]
 }
 

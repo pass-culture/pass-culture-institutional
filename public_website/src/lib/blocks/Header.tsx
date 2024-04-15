@@ -12,9 +12,10 @@ interface HeaderProps {
   text?: string
   image: APIResponse<'plugin::upload.file'> | null
   icon: string
-  cta?: { Label: string; URL: string }
+  cta?: CTA
 }
 
+import { CTA } from '@/types/CTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 
 export function Header(props: HeaderProps) {

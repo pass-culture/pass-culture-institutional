@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '../../../types/CTA'
 import { Button } from '../button/Button'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
@@ -11,7 +12,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 type HeroProps = {
   title: string
   subTitle: string
-  cta: { Label: string; URL: string; eventName?: string; eventOrigin?: string }
+  cta: CTA
   firstEmoji: string
   secondEmoji: string
   thirdEmoji: string

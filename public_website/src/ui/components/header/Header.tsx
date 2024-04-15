@@ -10,6 +10,7 @@ import { PassCulture } from '../icons/PassCulture'
 import { AccountDropdown, AccountItemProps } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 export type HeaderProps = {
@@ -29,13 +30,13 @@ type HeaderNavigationItemProps = {
   label: string
   megaMenu: {
     title: string
-    cta: { Label: string; URL: string }
+    cta: CTA
     bannerText?: string
-    primaryListItems: { Label: string; URL: string }[]
-    secondaryListItems: { Label: string; URL: string }[]
+    primaryListItems: CTA[]
+    secondaryListItems: CTA[]
     cardTitle: string
     cardDescription: string
-    cardLink: { Label: string; URL: string }
+    cardLink: CTA
     cardFirstEmoji: string
     cardSecondEmoji: string
   }

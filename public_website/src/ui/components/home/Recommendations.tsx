@@ -4,13 +4,14 @@ import styled, { css } from 'styled-components'
 import { VerticalCarousel } from '../../../lib/blocks/verticalCarousel/VerticalCarousel'
 import { Button } from '../button/Button'
 import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
+import { CTA } from '@/types/CTA'
 import { Offer } from '@/types/playlist'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
 type RecommendationsProps = {
   title: string
   recommendations: Offer[]
-  cta: { Label: string; URL: string }
+  cta: CTA
 }
 
 export function Recommendations({

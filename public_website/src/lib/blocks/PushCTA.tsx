@@ -3,6 +3,7 @@ import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
@@ -13,7 +14,7 @@ interface PushCTAProps {
   description?: string
   image: APIResponse<'plugin::upload.file'> | null
   qrCodeDescription: string
-  ctaLink: { Label: string; URL: string }
+  ctaLink: CTA
   qrCodeUrl: string
   className?: string
 }

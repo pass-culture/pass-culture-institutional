@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -12,7 +13,7 @@ type DetailedLogosProps = {
   logos: {
     title: string
     description: string
-    cta: { Label: string; URL: string }
+    cta: CTA
     image: APIResponse<'plugin::upload.file'> | null
   }[]
 }

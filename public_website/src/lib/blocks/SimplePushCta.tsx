@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
@@ -12,7 +13,7 @@ interface PushCTAProps {
   title: string | undefined
   surtitle: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  cta: { Label: string; URL: string } | undefined
+  cta: CTA | undefined
   icon: string | undefined
   className?: string
 }

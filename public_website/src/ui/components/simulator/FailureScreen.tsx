@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 import { Button } from '../button/Button'
 import { Typo } from '../typographies'
+import { CTA } from '@/types/CTA'
 
 interface FailureScreenProps {
   title: string
   text: string
-  ctaLink: { Label: string; URL: string }
+  ctaLink: CTA
 }
 
 export function FailureScreen(props: FailureScreenProps) {
