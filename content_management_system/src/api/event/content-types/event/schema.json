@@ -38,15 +38,11 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "category": {
       "type": "enumeration",
-      "enum": [
-        "Salon"
-      ],
+      "enum": ["Salon"],
       "required": true
     },
     "localisation": {
@@ -111,18 +107,14 @@
       "required": true,
       "unique": true
     },
-    "path": {
-      "type": "string",
-      "required": true
-    },
     "blocks": {
       "type": "dynamiczone",
       "components": [
         "block.image",
-        "block.video",
-        "block.social-media",
         "block.simple-text-v2",
-        "block.double-push-cta"
+        "block.video",
+        "block.double-push-cta",
+        "block.social-media"
       ]
     },
     "seo": {
@@ -132,10 +124,7 @@
     },
     "pageLocalisation": {
       "type": "customField",
-      "options": [
-        "Acteurs culturels",
-        "S’informer - presse"
-      ],
+      "options": ["Acteurs culturels", "S’informer - presse"],
       "customField": "plugin::multi-select.multi-select"
     }
   }

@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
@@ -16,6 +17,11 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
+      <Header
+        image={props.data.attributes.image}
+        icon=""
+        title={props.data.attributes.title}
+      />
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
@@ -36,7 +42,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.path,
+        slug: page.attributes.slug,
       },
     })),
     fallback: false,
@@ -48,33 +54,44 @@ export const getStaticPaths = (async () => {
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
-  const queryParams = stringify({
-    populate: [
-      'blocks.image.image',
-      'blocks.socialMediaLink',
-      'blocks.image.image.data',
-      'blocks.content',
-      'blocks.items',
-      'blocks',
-      'news',
-      'blocks.logo.logo',
-      'blocks.cta',
-      'blocks.items.items',
-      'relatedRessources.cta',
-      'relatedRessources.category',
-      'blocks[0]',
-      'blocks.items.image',
-      'blocks.logo',
-      'blocks.columns',
-      'blocks.firstCta',
-      'blocks.secondCta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+  const queryParams = stringify(
+    {
+      populate: [
+        'blocks.image.image',
+        'blocks.socialMediaLink',
+        'blocks.image.image.data',
+        'blocks.content',
+        'blocks.items',
+        'blocks',
+        'news',
+        'blocks.logo.logo',
+        'blocks.cta',
+        'blocks.items.items',
+        'relatedRessources.cta',
+        'relatedRessources.category',
+        'blocks[0]',
+        'blocks.items.image',
+        'blocks.logo',
+        'blocks.columns',
+        'blocks.firstCta',
+        'blocks.secondCta',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
+        'image',
+      ],
+      filters: {
+        slug: {
+          $eqi: pagePath,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
 
-  const apiEndpoint = `/resources?${queryParams}&filters[path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/resources?${queryParams}`
 
   const response =
     await fetchCMS<APIResponseData<'api::resource.resource'>[]>(apiEndpoint)

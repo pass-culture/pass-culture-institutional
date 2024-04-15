@@ -4,6 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
@@ -17,6 +18,11 @@ export default function CustomPage(props: CustomPageProps) {
   return (
     <React.Fragment>
       <Seo metaData={props.data.attributes.seo} />
+      <Header
+        image={props.data.attributes.image}
+        icon=""
+        title={props.data.attributes.title}
+      />
       {props.data.attributes.blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
@@ -30,35 +36,46 @@ export default function CustomPage(props: CustomPageProps) {
 }
 
 export const getStaticProps = (async ({ params }) => {
-  const queryParams = stringify({
-    populate: [
-      'blocks.image.image',
-      'blocks.socialMediaLink',
-      'blocks.image.image.data',
-      'blocks.content',
-      'blocks.items',
-      'blocks',
-      'news',
-      'blocks[0]',
-      'blocks.items.image',
-      'blocks.logo',
-      'blocks.logo.logo',
-      'relatedNews',
-      'relatedNews.cta',
-      'relatedNews.category',
-      'blocks.cta',
-      'blocks.items.items',
-      'blocks.columns',
-      'blocks.firstCta',
-      'blocks.secondCta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
   const pagePath = params?.['slug'] as string
+  const queryParams = stringify(
+    {
+      populate: [
+        'blocks.image.image',
+        'blocks.socialMediaLink',
+        'blocks.image.image.data',
+        'blocks.content',
+        'blocks.items',
+        'blocks',
+        'news',
+        'blocks[0]',
+        'blocks.items.image',
+        'blocks.logo',
+        'blocks.logo.logo',
+        'relatedNews',
+        'relatedNews.cta',
+        'relatedNews.category',
+        'blocks.cta',
+        'blocks.items.items',
+        'blocks.columns',
+        'blocks.firstCta',
+        'blocks.secondCta',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
+        'image',
+      ],
+      filters: {
+        slug: {
+          $eqi: pagePath,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
 
-  const apiEndpoint = `/news-list?${queryParams}&filters[path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/news-list?${queryParams}`
 
   const response =
     await fetchCMS<APIResponseData<'api::news.news'>[]>(apiEndpoint)
@@ -101,7 +118,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.path,
+        slug: page.attributes.slug,
       },
     })),
     fallback: false,

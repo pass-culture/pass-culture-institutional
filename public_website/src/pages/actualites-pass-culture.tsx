@@ -11,6 +11,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface ListProps {
@@ -222,15 +223,19 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled.div`
+const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
-    padding: 1rem 1.5rem;
-    margin-inline: auto;
-    max-width: 80rem;
+    --module-spacing: 0;
     margin-top: 4rem;
 
     h2 {
       margin-bottom: 4rem;
+      font-size: ${theme.fonts.sizes['8xl']};
+    }
+
+    h3 {
+      font-size: ${theme.fonts.sizes['6xl']};
+      color: ${theme.colors.secondary};
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -242,6 +247,11 @@ const StyledTitle = styled.div`
   `}
 `
 
+const StyledListItems = styled(ListItems)`
+  margin-top: 3rem;
+  --module-spacing: 0;
+`
+
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -250,10 +260,6 @@ const StyledSocialMedia = styled(SocialMedia)`
     margin-bottom: 5rem;
     margin-top: 6rem;
   `}
-`
-
-const StyledListItems = styled(ListItems)`
-  margin-bottom: 3rem;
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

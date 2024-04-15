@@ -157,6 +157,8 @@ const StyledOffersHeader = styled.div`
   align-self: center;
   width: 80%;
 
+  margin-bottom: 2.5rem;
+
   transform: rotate(-2.15deg);
   flex-shrink: 0;
   filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));

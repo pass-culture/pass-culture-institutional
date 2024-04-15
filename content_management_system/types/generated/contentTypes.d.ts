@@ -760,14 +760,13 @@ export interface ApiEventEvent extends Schema.CollectionType {
       Attribute.Required;
     city: Attribute.String & Attribute.Required;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
-    path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
         'block.image',
-        'block.video',
-        'block.social-media',
         'block.simple-text-v2',
-        'block.double-push-cta'
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1135,7 +1134,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    slug: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     localisation: Attribute.Enumeration<
       [
         'Aucune',
@@ -1190,13 +1189,12 @@ export interface ApiNewsNews extends Schema.CollectionType {
     blocks: Attribute.DynamicZone<
       [
         'block.image',
-        'block.video',
         'block.simple-text-v2',
+        'block.video',
         'block.double-push-cta',
         'block.social-media'
       ]
     >;
-    path: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
     pageLocalisation: Attribute.JSON &
       Attribute.CustomField<
@@ -1260,30 +1258,11 @@ export interface ApiPagePage extends Schema.CollectionType {
     Path: Attribute.String & Attribute.Required & Attribute.Unique;
     Blocks: Attribute.DynamicZone<
       [
-        'block.centered-text',
-        'block.header',
-        'block.social-media',
-        'block.double-push-cta',
-        'block.image-text',
         'block.image',
-        'block.little-list',
-        'block.separator',
-        'block.simple-push-cta',
-        'block.space',
-        'block.vertical-carousel',
-        'block.video',
-        'block.key-number-carousel',
-        'block.logos',
-        'block.latest-news',
-        'block.experience-video-carousel',
-        'block.offers-carousel',
-        'block.piled-cards',
-        'block.faq',
-        'block.detailed-logos',
-        'block.organization-chart',
         'block.simple-text-v2',
-        'block.image-gallery',
-        'block.breadcrumb'
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1362,7 +1341,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
       Attribute.Required;
     date: Attribute.DateTime & Attribute.Required;
     image: Attribute.Media & Attribute.Required;
-    slug: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     localisation: Attribute.Enumeration<
       [
         'Aucune',
@@ -1414,14 +1393,32 @@ export interface ApiResourceResource extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    path: Attribute.String & Attribute.Required;
     blocks: Attribute.DynamicZone<
       [
-        'block.image',
-        'block.simple-text-v2',
-        'block.video',
+        'block.centered-text',
+        'block.header',
+        'block.social-media',
         'block.double-push-cta',
-        'block.social-media'
+        'block.image-text',
+        'block.image',
+        'block.little-list',
+        'block.separator',
+        'block.simple-push-cta',
+        'block.space',
+        'block.vertical-carousel',
+        'block.video',
+        'block.key-number-carousel',
+        'block.logos',
+        'block.latest-news',
+        'block.experience-video-carousel',
+        'block.offers-carousel',
+        'block.piled-cards',
+        'block.faq',
+        'block.detailed-logos',
+        'block.organization-chart',
+        'block.simple-text-v2',
+        'block.image-gallery',
+        'block.breadcrumb'
       ]
     >;
     partnership: Attribute.Enumeration<

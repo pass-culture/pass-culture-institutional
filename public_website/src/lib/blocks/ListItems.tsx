@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { APIResponseData } from '@/types/strapi'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -55,11 +56,8 @@ export function ListItems({
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    padding: 1rem 1.5rem;
-    max-width: 80rem;
-    margin-inline: auto;
     display: flex;
     flex-direction: column;
 
@@ -78,7 +76,6 @@ const StyledList = styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    margin-bottom: 5rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
 

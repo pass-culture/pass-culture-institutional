@@ -56,31 +56,41 @@ export default function CustomPage(props: CustomPageProps) {
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
-  const query = stringify({
-    populate: [
-      'blocks.image.image',
-      'blocks',
-      'news',
-      'blocks[0]',
-      'blocks.items.image',
-      'blocks.logo',
-      'blocks.logo.logo',
-      'blocks.cta',
-      'blocks.socialMediaLink',
-      'blocks.image.image.data',
-      'blocks.content',
-      'blocks.items',
-      'blocks.items.items',
-      'blocks.columns',
-      'blocks.firstCta',
-      'blocks.secondCta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+  const query = stringify(
+    {
+      populate: [
+        'blocks.image.image',
+        'blocks',
+        'news',
+        'blocks[0]',
+        'blocks.items.image',
+        'blocks.logo',
+        'blocks.logo.logo',
+        'blocks.cta',
+        'blocks.socialMediaLink',
+        'blocks.image.image.data',
+        'blocks.content',
+        'blocks.items',
+        'blocks.items.items',
+        'blocks.columns',
+        'blocks.firstCta',
+        'blocks.secondCta',
+        'seo',
+        'seo.metaSocial',
+        'seo.metaSocial.image',
+      ],
+      filters: {
+        slug: {
+          $eqi: pagePath,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
 
-  const apiEndpoint = `/events?${query}&filters[path][$eqi]=${encodeURIComponent(pagePath)}`
+  const apiEndpoint = `/events?${query}`
 
   const responseQuery =
     await fetchCMS<APIResponseData<'api::event.event'>[]>(apiEndpoint)
@@ -122,7 +132,7 @@ export const getStaticPaths = (async () => {
   const result = {
     paths: response.data.map((page) => ({
       params: {
-        slug: page.attributes.path,
+        slug: page.attributes.slug,
       },
     })),
     fallback: false,

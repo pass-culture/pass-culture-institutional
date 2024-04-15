@@ -51,7 +51,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
 
   // Get the MQ in rem and convert it in pixels
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.5
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   /**
    * Remove unnecessary HTML attributes for a11y.
@@ -94,76 +94,80 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
   }
 
   return (
-    <StyledCarouselProvider
-      naturalSlideWidth={60}
-      naturalSlideHeight={75}
-      totalSlides={items.length}
-      visibleSlides={visibleSlides}
-      isIntrinsicHeight={true}
-      infinite={true}
-      dragEnabled={false}
-      step={1}>
-      <StyledHeading $noMargin>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+    <Root>
+      <ContentWrapper>
+        <CarouselProvider
+          naturalSlideWidth={60}
+          naturalSlideHeight={75}
+          totalSlides={items.length}
+          visibleSlides={visibleSlides}
+          isIntrinsicHeight={true}
+          infinite={true}
+          dragEnabled={false}
+          step={1}>
+          <StyledHeading>
+            <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        <StyledNavigationButtons
-          role="group"
-          aria-label="Contrôles du carousel">
-          <ButtonBack
-            aria-label="Élement précédent"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label="Élément suivant"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
-      </StyledHeading>
+            <StyledNavigationButtons
+              role="group"
+              aria-label="Contrôles du carousel">
+              <ButtonBack
+                aria-label="Élement précédent"
+                onClick={handleNavigationButtonClick}>
+                <ArrowRight />
+              </ButtonBack>
+              <ButtonNext
+                aria-label="Élément suivant"
+                onClick={handleNavigationButtonClick}>
+                <ArrowRight />
+              </ButtonNext>
+            </StyledNavigationButtons>
+          </StyledHeading>
 
-      <StyledSlider
-        role="region"
-        aria-label={stripTags(title)}
-        aria-roledescription="carrousel">
-        {items.map((item, index) => {
-          return (
-            <VerticalCarouselSlide
-              key={item.title}
-              slideIndex={index}
-              {...item}
-            />
-          )
-        })}
-      </StyledSlider>
+          <Slider
+            role="region"
+            aria-label={stripTags(title)}
+            aria-roledescription="carrousel">
+            {items.map((item, index) => {
+              return (
+                <VerticalCarouselSlide
+                  key={item.title}
+                  slideIndex={index}
+                  {...item}
+                />
+              )
+            })}
+          </Slider>
 
-      <StyledDots role="group" aria-label="Contrôles du carousel">
-        {items.map((item, index) => {
-          return (
-            <StyledDot
-              onClick={handleNavigationButtonClick}
-              key={item.title}
-              slide={index}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.title}`}
-            />
-          )
-        })}
-      </StyledDots>
-    </StyledCarouselProvider>
+          <StyledDots role="group" aria-label="Contrôles du carousel">
+            {items.map((item, index) => {
+              return (
+                <StyledDot
+                  onClick={handleNavigationButtonClick}
+                  key={item.title}
+                  slide={index}
+                  aria-label={`Afficher la diapositive ${index + 1} sur ${
+                    items.length
+                  } : ${item.title}`}
+                />
+              )
+            })}
+          </StyledDots>
+        </CarouselProvider>
+      </ContentWrapper>
+    </Root>
   )
 }
 
-const StyledCarouselProvider = styled(CarouselProvider)`
-  margin-bottom: var(--module-spacing);
+const Root = styled.div`
+  overflow: hidden;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-    margin-bottom: 2.825rem 0;
-  }
+  /* Fix control button shadows being clipped */
+  padding-top: 1rem;
+  margin-top: -1rem;
 `
 
-const StyledHeading = styled(ContentWrapper)`
+const StyledHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: end;
@@ -174,10 +178,6 @@ const StyledHeading = styled(ContentWrapper)`
       margin-bottom: 2.5rem;
     }
   `}
-`
-
-const StyledSlider = styled(Slider)`
-  overflow: hidden;
 `
 
 const StyledNavigationButtons = styled.div`
@@ -211,7 +211,9 @@ const StyledNavigationButtons = styled.div`
     }
 
     button:first-child {
-      transform: rotate(180deg);
+      svg {
+        transform: rotate(180deg);
+      }
     }
   `}
 `

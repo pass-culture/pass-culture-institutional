@@ -143,7 +143,6 @@ const StyledHeading = styled.div`
     display: flex;
     align-items: end;
     justify-content: center;
-    padding-right: 7rem;
     margin-top: 3rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
@@ -158,6 +157,10 @@ const StyledHeading = styled.div`
 
 const StyledSlider = styled(Slider)`
   overflow: hidden;
+
+  .carousel__slider-tray {
+    margin: auto;
+  }
 `
 
 const StyledNavigationButtons = styled.div`
