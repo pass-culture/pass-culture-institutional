@@ -13,7 +13,7 @@ export const onClickCTA = (cta: {
       origin: cta.eventOrigin,
     })
   } else {
-    // TODO: If the eventName is not in EventMap, do not send to Firebase and log to Sentry
+    // When Sentry is added to project: If the eventName is not in EventMap, do not send to Firebase and log to Sentry
     return undefined
   }
 }
