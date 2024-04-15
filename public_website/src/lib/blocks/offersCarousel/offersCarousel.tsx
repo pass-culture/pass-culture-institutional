@@ -93,6 +93,13 @@ export function OffersCarousel({
     }
   }
 
+  const descriptionIsEmpty =
+    !description ||
+    (description.length === 1 &&
+      description.at(0)?.children.at(0)?.type === 'text' &&
+      ((description.at(0)?.children.at(0) as { text: string })
+        ?.text as string) === '')
+
   return (
     <StyledCarousel
       naturalSlideWidth={60}
@@ -106,7 +113,7 @@ export function OffersCarousel({
       <StyledHeading $noMargin>
         <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
 
-        {description && <BlocksRenderer content={description} />}
+        {!descriptionIsEmpty && <BlocksRenderer content={description} />}
 
         <StyledArrowButtonWrapper>
           <StyledNavigationButtons aria-label="Contrôles du carousel">
@@ -196,7 +203,6 @@ const StyledHeading = styled(ContentWrapper)`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: 2.5rem;
       padding-right: 0;
     }
   `}
@@ -205,6 +211,10 @@ const StyledHeading = styled(ContentWrapper)`
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding: 2rem 0;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    padding: 3.5rem 0;
+  }
 
   .carousel__slider-tray {
     transition: transform 0.2s ease-in;
@@ -256,7 +266,6 @@ const StyledDots = styled.div`
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 2rem;
     }
   `}
 `
@@ -333,6 +342,10 @@ const StyledArrowButtonWrapper = styled.div`
   justify-content: center;
   position: relative;
   width: 100%;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    display: none;
+  }
 `
 
 const MobileCtaWrapper = styled.div`
