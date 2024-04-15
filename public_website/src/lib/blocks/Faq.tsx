@@ -2,11 +2,11 @@ import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
-import { Button } from '../../ui/components/button/Button'
 import { LinkFaq } from '../../ui/components/help/Link'
 import { Typo } from '../../ui/components/typographies'
 import arrowUrl from '../../ui/image/arrowd.svg'
 import { CTA } from '@/types/CTA'
+import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
 type FaqProps = {
@@ -75,9 +75,9 @@ export function Faq({
     <StyledContentWrapper>
       <StyledContentTextWrapper>
         {title && <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />}
-        {cta && <Button href={cta.URL}>{cta.Label}</Button>}
+        {cta && <ButtonWithCTA cta={cta} />}
       </StyledContentTextWrapper>
-      <StyledFaqtWrapper>
+      <StyledFaqWrapper>
         {filteredQuestions.map((faq) => (
           <StyledAccordion key={faq.id}>
             <summary
@@ -91,8 +91,8 @@ export function Faq({
             {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
           </StyledAccordion>
         ))}
-      </StyledFaqtWrapper>
-      {cta && <MobileCta href={cta.URL}>{cta.Label}</MobileCta>}
+      </StyledFaqWrapper>
+      {cta && <MobileCta cta={cta} />}
     </StyledContentWrapper>
   )
 }
@@ -140,7 +140,7 @@ const StyledContentTextWrapper = styled.div`
   `}
 `
 
-const StyledFaqtWrapper = styled.div``
+const StyledFaqWrapper = styled.div``
 
 const StyledAccordion = styled.details`
   ${({ theme }) => css`
@@ -209,7 +209,7 @@ const StyledAccordion = styled.details`
   `}
 `
 
-const MobileCta = styled(Button)`
+const MobileCta = styled(ButtonWithCTA)`
   display: none;
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     display: inline-block;

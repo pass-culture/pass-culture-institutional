@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
 import { CTA } from '@/types/CTA'
@@ -74,7 +74,7 @@ export function OfferSection({
         </StyledLastCard>
       </StyledOfferWrapper>
       <StyledBtnWrapper>
-        <Button href={cta.URL}>{cta.Label}</Button>
+        <ButtonWithCTA cta={cta} />
       </StyledBtnWrapper>
       {/* {TODO: ADD CARD AND TEMOIGNAGES VIDEO} */}
     </Root>

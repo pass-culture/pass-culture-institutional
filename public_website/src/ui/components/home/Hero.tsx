@@ -2,10 +2,9 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { CTA } from '../../../types/CTA'
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { onClickCTA } from '@/lib/analytics/helpers'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -59,9 +58,7 @@ export function Hero({
 
       <StyledSubTitle>{subTitle}</StyledSubTitle>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-      <StyledCta onClick={onClickCTA(cta)} href={cta.URL}>
-        {cta.Label}
-      </StyledCta>
+      <StyledCta cta={cta} />
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
         <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
@@ -182,7 +179,7 @@ const StyledHeading = styled(Typo.Heading1)`
   `}
 `
 
-const StyledCta = styled(Button)`
+const StyledCta = styled(ButtonWithCTA)`
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;

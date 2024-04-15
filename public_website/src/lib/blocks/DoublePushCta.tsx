@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
-import { Button } from '@/ui/components/button/Button'
+import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -50,12 +50,11 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             <span>{props.firstCta?.Label}</span>
           </CtaLink>
           {props.secondCta && (
-            <Button
-              href={props.secondCta.URL}
+            <ButtonWithCTA
               target="_blank"
-              variant="quaternary">
-              {props.secondCta.Label}
-            </Button>
+              variant="quaternary"
+              cta={props.secondCta}
+            />
           )}
         </RightSide>
       </Root>

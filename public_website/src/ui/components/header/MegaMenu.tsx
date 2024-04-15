@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import { CTA } from '@/types/CTA'
@@ -78,7 +78,7 @@ export function MegaMenu({
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
           <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
-          <Button href={data.cta.URL}>{data.cta.Label}</Button>
+          <ButtonWithCTA cta={data.cta} />
           {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
         </StyledMegaMenuHeading>
 
@@ -122,9 +122,7 @@ export function MegaMenu({
           </StyledMegaMenuCardHeading>
 
           <p>{data.cardDescription}</p>
-          <Button href={data.cardLink.URL} variant="secondary">
-            {data.cardLink.Label}
-          </Button>
+          <ButtonWithCTA cta={data.cardLink} variant="secondary" />
         </StyledMegaMenuCard>
       </StyledMegaMenu>
     </StyledMegaMenuWrapper>
