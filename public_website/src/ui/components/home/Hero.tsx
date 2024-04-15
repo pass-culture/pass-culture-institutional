@@ -11,7 +11,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 type HeroProps = {
   title: string
   subTitle: string
-  cta: { Label: string; URL: string; eventName: string; eventOrigin: string }
+  cta: { Label: string; URL: string; eventName?: string; eventOrigin?: string }
   firstEmoji: string
   secondEmoji: string
   thirdEmoji: string
