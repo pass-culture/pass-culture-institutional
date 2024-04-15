@@ -36,10 +36,10 @@ export function Video(props: VideoProps) {
             controls={true}
             height="100%"
             alt={props.alt}
-            playIcon={<Play />}
+            playIcon={<StyledPlay />}
           />
         )}
-        <p>{props.description}</p>
+        <Description>{props.description}</Description>
       </Root>
     </ContentWrapper>
   )
@@ -49,8 +49,7 @@ const Root = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 
     .react-player__preview {
       border-radius: 2rem;
@@ -61,7 +60,6 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;
-      gap: 1rem;
       padding: 0;
 
       img {
@@ -76,6 +74,12 @@ const Root = styled.div`
   `}
 `
 
+const Description = styled.p`
+  font-size: ${(p) => p.theme.fonts.sizes.s};
+  font-weight: 500;
+  line-height: 1.6;
+`
+
 const StyledVideo = styled(ReactPlayer)`
   ${({ theme }) => css`
     max-width: 100%;
@@ -85,4 +89,11 @@ const StyledVideo = styled(ReactPlayer)`
       border-radius: 1rem;
     }
   `}
+`
+
+const StyledPlay = styled(Play)`
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    width: 4rem;
+    height: 4rem;
+  }
 `

@@ -39,13 +39,21 @@ const Root = styled.div`
 
     img {
       border-radius: 2.5rem;
-      margin-bottom: 2rem;
       width: 100%;
       object-fit: cover;
     }
+
     figure {
       width: 100%;
       position: relative;
+
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -57,8 +65,9 @@ const Root = styled.div`
         width: 100%;
         border-radius: 1rem;
       }
+
       figure {
-        margin-bottom: 2rem;
+        gap: 1.5rem;
       }
 
       figcaption {
