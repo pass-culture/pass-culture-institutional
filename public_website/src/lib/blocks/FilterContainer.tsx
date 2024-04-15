@@ -171,7 +171,7 @@ export function FilterContainer({
                   {filtre.filtre}
                   <div className="wrapper">
                     <StyledRoundDiv>
-                      {clickedFilters[filtre.filtre]}
+                      {clickedFilters[filtre.filtre] ?? '0'}
                     </StyledRoundDiv>
                     <ArrowDown />
                   </div>
@@ -214,7 +214,7 @@ const Root = styled.div`
     display: flex;
     background-color: ${theme.colors.lightBlue};
     border-radius: 0.625rem;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
 
     @media (width < ${theme.mediaQueries.mobile}) {
       justify-content: space-between;
@@ -269,7 +269,7 @@ const StyledMobileSelectWrapper = styled.div`
       position: fixed;
       top: 0;
       left: 0;
-      background-color: ${theme.colors.secondary}80;
+      background-color: ${theme.colors.black}66;
       z-index: 10;
       align-items: flex-end;
       display: none;

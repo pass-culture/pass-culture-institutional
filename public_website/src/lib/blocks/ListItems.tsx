@@ -66,7 +66,7 @@ const Root = styled(ContentWrapper)`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 80%;
+      /* max-width: 80%; */
     }
   `}
 `
