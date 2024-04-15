@@ -153,8 +153,12 @@ export function Header({
   useEffect(() => {
     if (showMobileMenu && currentPath !== previousPath) {
       setShowMobileMenu(false)
+      document.body.removeAttribute('style')
       setPreviousPath(currentPath)
-      mobileMenuButtonRef.current?.focus()
+
+      setTimeout(() => {
+        mobileMenuButtonRef.current?.focus()
+      }, 1)
     }
   }, [currentPath, showMobileMenu, previousPath])
 
