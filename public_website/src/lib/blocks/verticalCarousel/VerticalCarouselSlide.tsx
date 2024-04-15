@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { Typo } from '../../../ui/components/typographies'
 import { APIResponseData } from '@/types/strapi'
+import { Play } from '@/ui/components/icons/Play'
 import { Link } from '@/ui/components/Link'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -33,7 +34,7 @@ export function VerticalCarouselSlide({
       innerClassName="inner"
       role="group"
       aria-roledescription="diapositive">
-      <StyledLink href={url}>
+      <div>
         {imageUrl && (
           <StyledImageWrapper>
             <Image
@@ -42,17 +43,22 @@ export function VerticalCarouselSlide({
               layout={'fill'}
               objectFit={'cover'}
             />
+            <PlayIcon />
           </StyledImageWrapper>
         )}
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle as={Link} href={url}>
+          {title}
+        </StyledTitle>
         <Typo.Body>{description}</Typo.Body>
-      </StyledLink>
+      </div>
     </Root>
   )
 }
 
 const Root = styled(Slide)`
   ${({ theme }) => css`
+    position: relative;
+
     &:not(:last-child) {
       margin-right: 2rem;
     }
@@ -72,11 +78,14 @@ const StyledTitle = styled(Typo.Heading3)`
   margin: 1.5rem 0 0.25rem;
   width: 90%;
   font-size: ${({ theme }) => theme.fonts.sizes['xl']};
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
 `
 
-const StyledLink = styled(Link)`
-  display: block;
-`
 const StyledImageWrapper = styled.div`
   width: 100%;
   border-radius: 0.5rem;
@@ -86,4 +95,12 @@ const StyledImageWrapper = styled.div`
   img {
     border-radius: 0.5rem;
   }
+`
+
+const PlayIcon = styled(Play)`
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 3.25rem;
+  height: 3.25rem;
 `
