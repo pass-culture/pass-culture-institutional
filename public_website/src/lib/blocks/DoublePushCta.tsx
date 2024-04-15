@@ -210,6 +210,7 @@ const RightSide = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-top: 12rem;
       margin-top: -10rem;
+      padding-inline: 1.3rem;
     }
   `}
 `
@@ -261,7 +262,7 @@ const CtaLink = styled(Link)`
     }
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       display: block;
       width: fit-content;
     }
