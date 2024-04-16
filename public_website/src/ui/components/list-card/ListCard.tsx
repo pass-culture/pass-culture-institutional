@@ -44,7 +44,6 @@ export function ListCard({
 
 const Root = styled.article`
   position: relative;
-  border: 2px solid red;
 `
 
 const StyledCardImage = styled(Image)`
