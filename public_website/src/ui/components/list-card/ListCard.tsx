@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
 import { Link } from '@/ui/components/Link'
@@ -43,9 +44,10 @@ export function ListCard({
 
 const Root = styled.article`
   position: relative;
+  border: 2px solid red;
 `
 
-const StyledCardImage = styled.img`
+const StyledCardImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   aspect-ratio: 395/318;

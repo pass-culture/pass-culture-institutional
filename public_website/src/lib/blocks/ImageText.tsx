@@ -183,7 +183,7 @@ const StyledContentTextWrapper = styled.div`
       p {
         font-size: ${theme.fonts.sizes['m']};
         width: 100%;
-        color: #000;
+        color: ${theme.colors.black};
         line-height: 2.125;
       }
   `}

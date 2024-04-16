@@ -50,7 +50,6 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
-      /* background-color: transparent; */
       padding: 0;
       padding: 2.5rem 0 3.5rem;
     }

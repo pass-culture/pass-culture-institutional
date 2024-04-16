@@ -214,7 +214,6 @@ const Root = styled.div`
     display: flex;
     background-color: ${theme.colors.lightBlue};
     border-radius: 0.625rem;
-    /* margin-top: 4rem; */
 
     @media (width < ${theme.mediaQueries.mobile}) {
       justify-content: space-between;
