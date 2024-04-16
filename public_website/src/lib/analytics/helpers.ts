@@ -4,7 +4,7 @@ function isKeyOfEventMap(key: string): key is keyof EventMap {
   return key in eventMapKeys
 }
 
-export const onClickCTA = (cta: {
+export const onClickAnalytics = (cta: {
   eventName?: string
   eventOrigin?: string
 }) => {

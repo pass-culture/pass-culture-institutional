@@ -7,7 +7,7 @@ import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
-import { onClickCTA } from '@/lib/analytics/helpers'
+import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
@@ -47,7 +47,7 @@ export function Footer({
             <AppBanner
               title={bannerText}
               url={storeUrl}
-              onClick={onClickCTA({
+              onClick={onClickAnalytics({
                 eventName: 'downloadApp',
                 eventOrigin: 'footer',
               })}

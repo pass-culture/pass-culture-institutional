@@ -5,7 +5,7 @@ import { AppBanner } from '../app-banner/AppBanner'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { onClickCTA } from '@/lib/analytics/helpers'
+import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
@@ -84,7 +84,7 @@ export function MegaMenu({
             <AppBanner
               title={data.bannerText}
               url="#"
-              onClick={onClickCTA({
+              onClick={onClickAnalytics({
                 eventName: 'downloadApp',
                 eventOrigin: 'menu',
               })}

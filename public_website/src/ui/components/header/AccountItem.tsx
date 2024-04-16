@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../icons/ArrowRight'
 import { OutlinedText } from '../OutlinedText'
-import { onClickCTA } from '@/lib/analytics/helpers'
+import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { Link } from '@/ui/components/Link'
 
 type AccountItemProps = {
@@ -25,7 +25,7 @@ export function AccountItem({
 }: AccountItemProps) {
   return (
     <StyledAccountItem>
-      <Link href={url} onClick={onClickCTA({ eventName, eventOrigin })}>
+      <Link href={url} onClick={onClickAnalytics({ eventName, eventOrigin })}>
         <StyledEmoji $color={color}>
           <OutlinedText dilationRadius={0} blurDeviation={1.5} shadow>
             {emoji}
