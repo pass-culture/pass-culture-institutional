@@ -5,6 +5,7 @@ import { AppBanner } from '../app-banner/AppBanner'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { onClickCTA } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
@@ -79,7 +80,16 @@ export function MegaMenu({
         <StyledMegaMenuHeading>
           <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
           <ButtonWithCTA cta={data.cta} />
-          {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
+          {data.bannerText && (
+            <AppBanner
+              title={data.bannerText}
+              url="#"
+              onClick={onClickCTA({
+                eventName: 'downloadApp',
+                eventOrigin: 'menu',
+              })}
+            />
+          )}
         </StyledMegaMenuHeading>
 
         <StyledMegaMenuLists>
