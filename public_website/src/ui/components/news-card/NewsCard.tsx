@@ -40,6 +40,11 @@ export function NewsCard({
 
 const Root = styled.article`
   position: relative;
+  width: 24rem;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    width: 75vw;
+  }
 `
 
 const StyledImage = styled(Image)`
@@ -48,7 +53,7 @@ const StyledImage = styled(Image)`
   object-fit: cover;
   aspect-ratio: 1.2;
   height: auto;
-  min-width: 100%;
+  width: 100%;
 `
 
 const StyledMeta = styled.p`

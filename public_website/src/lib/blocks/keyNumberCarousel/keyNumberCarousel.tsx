@@ -159,7 +159,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
 
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
-      display: block;
+      flex-direction: column;
       margin: 2.825rem auto;
     }
   `}
@@ -173,15 +173,21 @@ const StyledKeyCarouselHeading = styled.div`
     padding-left: 5rem;
     margin-bottom: 3rem;
     width: 30%;
+
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;
       margin-bottom: 2.5rem;
+      margin-top: 2.5rem;
       padding: 0;
     }
   `}
 `
 const StyledTitle = styled(Typo.Heading2)`
   margin: 1.5rem 0 0.25rem;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin: 0;
+  }
 `
 const StyledSlider = styled(Slider)`
   ${({ theme }) => css`

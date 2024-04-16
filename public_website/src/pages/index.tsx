@@ -180,6 +180,8 @@ const StyledHomeGradient = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       transform: translateY(-7rem);
+      padding-top: 7rem;
+      margin-bottom: -5rem;
     }
   `}
 `

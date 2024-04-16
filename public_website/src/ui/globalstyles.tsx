@@ -190,10 +190,6 @@ const GlobalStyles = createGlobalStyle`
       --module-spacing: calc(2.825rem * 2);
     }
   }
-
-  #__next {
-    overflow: hidden;
-  }
 `
 
 export default GlobalStyles

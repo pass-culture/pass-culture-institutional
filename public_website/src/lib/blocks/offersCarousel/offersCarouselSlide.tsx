@@ -41,14 +41,22 @@ export function OffersCarouselSlide({
         <Card>
           <StyledOffersHeader>
             <StyledOffersSurtitle>
-              <OutlinedText dilationRadius={3} blurDeviation={1.5}>
+              <OutlinedText dilationRadius={2} blurDeviation={1.5}>
                 <span dangerouslySetInnerHTML={{ __html: surtitle }} />
               </OutlinedText>
             </StyledOffersSurtitle>
-            <StyledFirstIcon shadow aria-hidden="true" dilationRadius={2}>
+            <StyledFirstIcon
+              shadow
+              aria-hidden="true"
+              dilationRadius={2}
+              blurDeviation={1.5}>
               {firstIcon}
             </StyledFirstIcon>
-            <StyledSecondIcon shadow aria-hidden="true" dilationRadius={2}>
+            <StyledSecondIcon
+              shadow
+              aria-hidden="true"
+              dilationRadius={2}
+              blurDeviation={1.5}>
               {secondIcon}
             </StyledSecondIcon>
           </StyledOffersHeader>
@@ -111,7 +119,7 @@ const Card = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 6rem 2rem;
   width: calc(100% - 4rem);
   height: 15rem;
@@ -120,6 +128,11 @@ const Card = styled.div`
   background: var(--card-background);
 
   box-shadow: ${theme.shadows.banner};
+
+  @media (width < ${theme.mediaQueries.mobile}) {
+    padding: 3rem 1rem;
+    width: calc(100% - 2rem);
+  }
 `
 
 const BackgroundLayer = styled.div`
@@ -171,6 +184,10 @@ const StyledFirstIcon = styled(OutlinedText)`
     left: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(-1rem, 2rem);
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
   `}
 `
 
@@ -181,6 +198,10 @@ const StyledSecondIcon = styled(OutlinedText)`
     right: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(1rem, -3rem);
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      display: none;
+    }
   `}
 `
 const StyledOffersSurtitle = styled.h2`

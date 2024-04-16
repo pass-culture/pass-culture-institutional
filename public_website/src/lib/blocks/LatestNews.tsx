@@ -111,6 +111,10 @@ const StyledList = styled.ul`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
 
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin-bottom: 2.25rem;
+  }
+
   > li {
     scroll-snap-align: center;
   }

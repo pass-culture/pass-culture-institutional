@@ -25,13 +25,7 @@ export function ListCard({
   return (
     <Root>
       {imageUrl && (
-        <StyledCardImage
-          src={imageUrl}
-          alt=""
-          width={385}
-          height={310}
-          layout="responsive"
-        />
+        <StyledCardImage src={imageUrl} alt="" width={385} height={310} />
       )}
       <StyledMeta id={`news-meta-${slug}`}>
         {category} - <span className="visually-hidden">Publié le</span>{' '}
@@ -50,14 +44,20 @@ export function ListCard({
 
 const Root = styled.article`
   position: relative;
+  border: 2px solid red;
 `
 
 const StyledCardImage = styled(Image)`
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   aspect-ratio: 395/318;
-  height: revert-layer !important;
+  width: 100%;
+  height: auto;
   object-fit: cover;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    aspect-ratio: 350 / 280;
+  }
 `
 
 const StyledMeta = styled.p`

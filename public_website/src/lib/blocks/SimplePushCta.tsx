@@ -54,21 +54,19 @@ const StyledContentWrapper = styled(ContentWrapper)`
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   position: relative;
+  width: 100%;
 
   @media (width < ${theme.mediaQueries.tablet}) {
     display: flex;
     justify-content: center;
     text-align: center;
   }
-
-  @media (width < ${theme.mediaQueries.mobile}) {
-    display: block;
-    text-align: center;
-  }
 `
 
 const Root = styled.div`
   ${({ theme }) => css`
+    --module-spacing: calc((5rem + 3.125rem) * 2);
+
     background-color: ${theme.colors.secondary};
     color: ${theme.colors.white};
     max-width: 90rem;
@@ -82,19 +80,22 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       max-width: 100%;
-      margin-top: 17rem;
+      margin-top: 28rem;
 
       display: flex;
       justify-content: center;
       border-radius: 0;
       text-align: center;
     }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-top: 18rem;
+    }
   `}
 `
 
 const CardContainer = styled.div`
   position: relative;
-  z-index: 1;
   margin: -3.125rem 0 -3.125rem 5rem;
   max-width: 28rem;
 
@@ -107,10 +108,10 @@ const CardContainer = styled.div`
   }
 
   @media (width < ${theme.mediaQueries.tablet}) {
-    margin: 0 auto;
+    margin: auto;
     position: absolute;
 
-    top: -16rem;
+    top: -19rem;
 
     min-width: 90%;
     min-height: 40%;
@@ -118,6 +119,10 @@ const CardContainer = styled.div`
     span {
       display: none;
     }
+  }
+
+  @media (width < ${theme.mediaQueries.mobile}) {
+    top: -7rem;
   }
 `
 
@@ -146,6 +151,12 @@ const Card = styled.div<{ $imageUrl?: string }>`
       width: unset;
       height: unset;
     }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      max-width: 16rem;
+      width: unset;
+      height: unset;
+    }
   `}
 `
 
@@ -170,7 +181,7 @@ const RightSide = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      margin: 9rem 0 0rem 0;
+      margin-bottom: 4rem;
       padding-left: 0;
       padding-top: 11rem;
       padding-bottom: 0;
@@ -182,7 +193,7 @@ const RightSide = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3rem 0 3rem 0;
+      margin: 3rem auto 3rem auto;
       margin-bottom: 0;
 
       p {

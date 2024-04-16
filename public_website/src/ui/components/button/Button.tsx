@@ -149,5 +149,4 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
 
 const InnerButton = styled.span`
   position: relative;
-  z-index: 1;
 `

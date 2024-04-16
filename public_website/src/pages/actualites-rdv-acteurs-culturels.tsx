@@ -407,10 +407,10 @@ export const getStaticProps = (async () => {
 const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
     --module-spacing: 0;
-    margin-top: 4rem;
+    margin-top: 3.5rem;
 
     h2 {
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       font-size: ${theme.fonts.sizes['8xl']};
     }
 
@@ -431,6 +431,10 @@ const StyledTitle = styled(ContentWrapper)`
 const StyledListItems = styled(ListItems)`
   margin-top: 3rem;
   --module-spacing: 0;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin-top: 1.5rem;
+  }
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`
@@ -446,6 +450,10 @@ const StyledSocialMedia = styled(SocialMedia)`
 const StyledeventListItems = styled(EventListItems)`
   margin-top: 3rem;
   margin-bottom: 3rem;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    margin-top: 1.5rem;
+  }
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

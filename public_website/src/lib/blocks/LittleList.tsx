@@ -101,13 +101,12 @@ const Column = styled.div`
 `
 
 const Description = styled(Typo.Body)`
-  font-size: 1.125rem;
+  font-size: ${(p) => p.theme.fonts.sizes.s};
 `
 
 const ColumnContent = styled.div`
   ${({ theme }) => css`
     display: flex;
-    width: fit-content;
     gap: 2rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       flex-direction: column;
@@ -159,6 +158,7 @@ const ColumnText = styled.div`
   ${({ theme }) => css`
     padding-bottom: 1.5rem;
     border-bottom: solid 1px ${theme.colors.black}20;
+    flex: 1;
 
     p:nth-child(1) {
       font-weight: ${theme.fonts.weights.bold};

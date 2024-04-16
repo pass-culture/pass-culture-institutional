@@ -22,7 +22,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;
-      padding: 4rem 1.5rem 2rem;
+      padding: 4rem 1.3rem 2rem;
     }
   `}
 `

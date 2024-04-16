@@ -56,8 +56,6 @@ export function ImageText({
 
 const Root = styled.div`
   ${({ theme }) => css`
-    overflow: hidden;
-
     .right {
       grid-template-columns: 1.5fr 1fr;
       grid-template-areas: 'first second';
@@ -115,8 +113,8 @@ const Root = styled.div`
 
         .IconRight,
         .IconLeft {
-          top: 1rem;
-          left: 2rem;
+          top: 2rem;
+          left: 0;
           z-index: 2;
         }
       }
@@ -140,6 +138,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       padding: calc(10rem + 10rem) 1.5rem 2.5rem;
+      gap: 3rem;
     }
   `}
 `
@@ -149,12 +148,6 @@ const StyledContentTextWrapper = styled.div`
     font-weight: ${theme.fonts.weights.medium};
     line-height: 2.125rem;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 100%;
-    }
-    @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 80%;
-    }
     font-size: ${theme.fonts.sizes['m']};
 
     display: flex;
@@ -186,9 +179,12 @@ const StyledContentTextWrapper = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 0;
 
+
       p {
         font-size: ${theme.fonts.sizes['m']};
         width: 100%;
+        color: ${theme.colors.black};
+        line-height: 2.125;
       }
   `}
 `
@@ -212,11 +208,11 @@ const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
 
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
-    max-width: 36rem;
     margin: 0 0 3rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 0 0 1rem;
+      line-height: 1.3;
     }
   `}
 `

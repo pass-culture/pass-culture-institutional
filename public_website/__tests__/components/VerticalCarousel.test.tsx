@@ -15,7 +15,7 @@ describe('header', () => {
   it('should render correct number of items', async () => {
     render(<VerticalCarousel {...verticalCarouselFixtures} />)
 
-    expect(screen.getAllByRole('heading', { level: 3 }).length).toEqual(
+    expect(screen.getAllByRole('link').length).toEqual(
       verticalCarouselFixtures.items.length
     )
   })

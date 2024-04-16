@@ -158,7 +158,7 @@ const StyledMobileMenuList = styled.ul<{ tabIndex: number }>`
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
-  padding: 0 1.5rem 2.5rem;
+  padding: 1rem 1.5rem 2.5rem;
 `
 
 const StyledMobileMenuListItem = styled.li`

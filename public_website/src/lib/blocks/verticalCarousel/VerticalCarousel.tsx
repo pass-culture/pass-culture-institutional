@@ -176,6 +176,8 @@ const StyledHeading = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
+      display: block;
+      text-align: center;
     }
   `}
 `

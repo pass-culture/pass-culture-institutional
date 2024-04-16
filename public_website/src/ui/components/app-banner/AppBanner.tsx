@@ -18,7 +18,6 @@ export function AppBanner({ title, url }: AppBannerProps) {
 
 const StyledAppBanner = styled(Link)`
   ${({ theme }) => css`
-    max-width: 300px;
     box-sizing: border-box;
     min-height: 156px;
     grid-column: 1 / -1;
@@ -33,7 +32,6 @@ const StyledAppBanner = styled(Link)`
     background-size:
       auto 100%,
       cover;
-    aspect-ratio: 300/156;
     background-repeat: no-repeat;
     box-shadow: ${theme.shadows.banner};
     display: flex;

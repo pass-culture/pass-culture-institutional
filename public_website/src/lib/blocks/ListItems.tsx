@@ -57,18 +57,12 @@ export function ListItems({
 }
 
 const Root = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    > a {
-      align-self: center;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 80%;
-    }
-  `}
+  > a {
+    align-self: center;
+  }
 `
 
 const StyledList = styled.ul`
