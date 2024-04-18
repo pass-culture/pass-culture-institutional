@@ -22,6 +22,14 @@ on:
         type: string
         description: GCP project to retrieve secrets from
         required: true
+      teleport_version:
+        type: string
+        required: true
+      teleport_proxy:
+        type: string
+        required: true
+      teleport_kubernetes_cluster:
+        type: string
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -75,15 +83,29 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
+      - name: Install Teleport
+        uses: teleport-actions/setup@v1
+        with:
+          version: ${{ inputs.teleport_version }}
+
+      - name: "Teleport Authentication"
+        uses: teleport-actions/auth-k8s@v1
+        with:
+          proxy: ${{ inputs.teleport_proxy }}
+          token: github-token
+          certificate-ttl: 1h
+          kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
+
       # Generate static site into dist folder
       - name: "Install dependencies and build"
         working-directory: public_website
         env:
-          NEXT_PUBLIC_STRAPI_API_URL: ${{ inputs.cms_url }}
+          NEXT_PUBLIC_STRAPI_API_URL: http://localhost:1337
           NEXT_PUBLIC_BACKEND_API_URL: ${{ inputs.backend_url }}
           ID_TOKEN: ${{ steps.auth.outputs.id_token }}
           SENTRY_TOKEN: ${{ steps.secrets.outputs.SENTRY_TOKEN }}
         run: |
+          kubectl port-forward --namespace site-instit-production service/site-instit-cms 1337:1337 &
           yarn install
           yarn build
 

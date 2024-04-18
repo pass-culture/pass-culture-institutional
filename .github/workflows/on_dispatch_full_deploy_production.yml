@@ -8,10 +8,10 @@ jobs:
     uses: ./.github/workflows/reusable_cms_deploy.yml
     with:
       environment: production 
-      workload_identity_provider_secret_name: passculture-cls-metier-prod/gcp_cls_metier_prod_workload_identity_provider 
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
       teleport_version: 13.4.4
-      teleport_proxy: teleport.passculture.team:443
-      teleport_kubernetes_cluster: passculture-metier-prod
+      teleport_proxy: teleport.cls.passculture.team:443
+      teleport_kubernetes_cluster: passculture-cls-metier-prod
       image_tag: ${{ github.sha }}
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
@@ -19,16 +19,18 @@ jobs:
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
 
   deploy-public-site-production:
+    uses: ./.github/workflows/reusable_public_site_deploy.yml
     needs:
       - deploy-cms-production
-    uses: ./.github/workflows/reusable_public_site_deploy.yml
     with:
       environment: production
-      workload_identity_provider_secret_name: passculture-cls-metier-prod/gcp_cls_metier_prod_workload_identity_provider 
-      cms_url: https://siteinstit-cms.production.passculture.team
-      backend_url: https://backend.passculture.team
+      teleport_version: 13.4.4
+      teleport_proxy: teleport.cls.passculture.team:443
+      teleport_kubernetes_cluster: passculture-cls-metier-prod
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
+      cms_url: https://siteinstit-cms.passculture.team
+      backend_url: https://backend.passculture.app
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
-      
