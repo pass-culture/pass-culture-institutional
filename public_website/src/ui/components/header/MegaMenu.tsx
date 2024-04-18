@@ -83,7 +83,7 @@ export function MegaMenu({
           {data.bannerText && (
             <AppBanner
               title={data.bannerText}
-              url="#"
+              url={data.cta.URL}
               onClick={onClickAnalytics({
                 eventName: 'downloadApp',
                 eventOrigin: 'menu',

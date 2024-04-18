@@ -19,6 +19,7 @@ import { PressePageFixtures } from './fixtures/presse'
 import { RessourcesEnseignatsPageFixtures } from './fixtures/ressourcesEnseignants'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { simulatorPageFixtures } from './fixtures/simulator'
+
 export const CMS_BASE_URL = 'http://localhost:1337'
 const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
 export const jsonResponseOf = <T>(data: T) => HttpResponse.json({ data })

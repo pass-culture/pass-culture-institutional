@@ -77,7 +77,7 @@ export function Faq({
         {title && <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />}
         {cta && <ButtonWithCTA cta={cta} />}
       </StyledContentTextWrapper>
-      <StyledFaqWrapper>
+      <div>
         {filteredQuestions.map((faq) => (
           <StyledAccordion key={faq.id}>
             <summary
@@ -91,7 +91,7 @@ export function Faq({
             {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
           </StyledAccordion>
         ))}
-      </StyledFaqWrapper>
+      </div>
       {cta && <MobileCta cta={cta} />}
     </StyledContentWrapper>
   )
@@ -139,8 +139,6 @@ const StyledContentTextWrapper = styled.div`
     }
   `}
 `
-
-const StyledFaqWrapper = styled.div``
 
 const StyledAccordion = styled.details`
   ${({ theme }) => css`
