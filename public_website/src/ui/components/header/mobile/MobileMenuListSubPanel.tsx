@@ -2,14 +2,15 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OutlinedText } from '../../OutlinedText'
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 type MobileMenuListSubPanelProps = {
-  primaryList: { Label: string; URL: string }[]
-  secondaryList: { Label: string; URL: string }[]
+  primaryList: CTA[]
+  secondaryList: CTA[]
   cardTitle: string
   cardDescription: string
-  cardLink: { Label: string; URL: string }
+  cardLink: CTA
   cardFirstEmoji: string
   cardSecondEmoji: string
 }

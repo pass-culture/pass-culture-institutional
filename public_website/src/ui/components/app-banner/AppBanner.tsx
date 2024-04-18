@@ -6,11 +6,12 @@ import { Link } from '@/ui/components/Link'
 type AppBannerProps = {
   title: string
   url: string
+  onClick?: () => void
 }
 
-export function AppBanner({ title, url }: AppBannerProps) {
+export function AppBanner({ title, url, onClick }: AppBannerProps) {
   return (
-    <StyledAppBanner href={url} target="_blank">
+    <StyledAppBanner href={url} target="_blank" onClick={onClick}>
       <p>{title}</p>
     </StyledAppBanner>
   )

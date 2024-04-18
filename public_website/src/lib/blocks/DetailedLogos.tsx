@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -12,7 +13,7 @@ type DetailedLogosProps = {
   logos: {
     title: string
     description: string
-    cta: { Label: string; URL: string }
+    cta: CTA
     image: APIResponse<'plugin::upload.file'> | null
   }[]
 }
@@ -23,30 +24,26 @@ export function DetailedLogos({ title, logos }: DetailedLogosProps) {
       <InnerWrapper>
         {title && <StyledHeading>{title}</StyledHeading>}
         <StyledList>
-          {logos.map((logo) => {
-            return (
-              <StyledListItem key={logo.title}>
-                {logo.image && (
-                  <StyledLogoImage
-                    src={logo.image?.data.attributes.url}
-                    alt=""
-                    width={logo.image?.data.attributes.width}
-                    height={logo.image?.data.attributes.height}
-                  />
-                )}
-                <StyledLogoHeading>{logo.title}</StyledLogoHeading>
-                <StyledLogoDescription>
-                  {logo.description}
-                </StyledLogoDescription>
-                <div>
-                  <StyledCta href={logo.cta.URL}>
-                    {logo.cta.Label}
-                    <span className="visually-hidden">sur {logo.title}</span>
-                  </StyledCta>
-                </div>
-              </StyledListItem>
-            )
-          })}
+          {logos.map((logo) => (
+            <StyledListItem key={logo.title}>
+              {logo.image && (
+                <StyledLogoImage
+                  src={logo.image.data.attributes.url}
+                  alt=""
+                  width={logo.image.data.attributes.width}
+                  height={logo.image.data.attributes.height}
+                />
+              )}
+              <StyledLogoHeading>{logo.title}</StyledLogoHeading>
+              <StyledLogoDescription>{logo.description}</StyledLogoDescription>
+              <div>
+                <StyledCta href={logo.cta.URL}>
+                  {logo.cta.Label}
+                  <span className="visually-hidden">sur {logo.title}</span>
+                </StyledCta>
+              </div>
+            </StyledListItem>
+          ))}
         </StyledList>
       </InnerWrapper>
     </ContentWrapper>

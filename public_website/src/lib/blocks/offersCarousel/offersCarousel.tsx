@@ -16,6 +16,7 @@ import {
   OffersCarouselSlideProps,
 } from './offersCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { CTA } from '@/types/CTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { getMediaQuery } from '@/utils/getMediaQuery'
@@ -25,7 +26,7 @@ type OffersVideoCarouselProps = {
   title: string
   items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
   description?: BlocksContent
-  cta: { Label: string; URL: string }
+  cta: CTA
 }
 
 export function OffersCarousel({

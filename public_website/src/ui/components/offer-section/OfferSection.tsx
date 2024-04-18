@@ -2,9 +2,10 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
+import { CTA } from '@/types/CTA'
 import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
@@ -14,10 +15,10 @@ type OfferProps = {
   title: string
   description: string
   offers: Offer[]
-  cta: { Label: string; URL: string }
+  cta: CTA
   firstCartTitle: string
   secondCartTitle: string
-  ctaCard: { Label: string; URL: string }
+  ctaCard: CTA
   descriptionCard: string
   firstIcon: string
   secondIcon: string
@@ -73,7 +74,7 @@ export function OfferSection({
         </StyledLastCard>
       </StyledOfferWrapper>
       <StyledBtnWrapper>
-        <Button href={cta.URL}>{cta.Label}</Button>
+        <ButtonWithCTA cta={cta} />
       </StyledBtnWrapper>
       {/* {TODO: ADD CARD AND TEMOIGNAGES VIDEO} */}
     </Root>

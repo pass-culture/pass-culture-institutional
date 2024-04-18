@@ -7,6 +7,7 @@ import { Calendar } from '../icons/Calendar'
 import { Clock } from '../icons/Clock'
 import { TargetBlank } from '../icons/TargeBlank'
 import { Link } from '../Link'
+import { CTA } from '@/types/CTA'
 import { formatDate } from '@/utils/formatDate'
 
 type ListCardProps = {
@@ -17,7 +18,7 @@ type ListCardProps = {
   startTime: string | Date
   endTime: string | Date
   city: string
-  cta: { Label: string; URL: string }
+  cta: CTA
   type?: string
 }
 

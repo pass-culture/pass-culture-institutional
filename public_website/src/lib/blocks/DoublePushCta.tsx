@@ -1,8 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
-import { Button } from '@/ui/components/button/Button'
+import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -13,9 +14,9 @@ interface DoublePushCTAProps {
   title: string | TrustedHTML
   text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
-  firstCta: { Label: string; URL: string }
+  firstCta: CTA
 
-  secondCta: { Label: string; URL: string } | undefined
+  secondCta: CTA | undefined
   className?: string
   icon?: string
 }
@@ -49,12 +50,11 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             <span>{props.firstCta?.Label}</span>
           </CtaLink>
           {props.secondCta && (
-            <Button
-              href={props.secondCta.URL}
+            <ButtonWithCTA
               target="_blank"
-              variant="quaternary">
-              {props.secondCta.Label}
-            </Button>
+              variant="quaternary"
+              cta={props.secondCta}
+            />
           )}
         </RightSide>
       </Root>

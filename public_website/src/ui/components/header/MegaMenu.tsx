@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 type MegaMenuProps = {
@@ -16,13 +18,13 @@ type MegaMenuProps = {
   labelId: string
   data: {
     title: string
-    cta: { Label: string; URL: string }
+    cta: CTA
     bannerText?: string
-    primaryListItems: { Label: string; URL: string }[]
-    secondaryListItems: { Label: string; URL: string }[]
+    primaryListItems: CTA[]
+    secondaryListItems: CTA[]
     cardTitle: string
     cardDescription: string
-    cardLink: { Label: string; URL: string }
+    cardLink: CTA
     cardFirstEmoji: string
     cardSecondEmoji: string
   }
@@ -77,8 +79,17 @@ export function MegaMenu({
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
           <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
-          <Button href={data.cta.URL}>{data.cta.Label}</Button>
-          {data.bannerText && <AppBanner title={data.bannerText} url="#" />}
+          <ButtonWithCTA cta={data.cta} />
+          {data.bannerText && (
+            <AppBanner
+              title={data.bannerText}
+              url={data.cta.URL}
+              onClick={onClickAnalytics({
+                eventName: 'downloadApp',
+                eventOrigin: 'menu',
+              })}
+            />
+          )}
         </StyledMegaMenuHeading>
 
         <StyledMegaMenuLists>
@@ -121,9 +132,7 @@ export function MegaMenu({
           </StyledMegaMenuCardHeading>
 
           <p>{data.cardDescription}</p>
-          <Button href={data.cardLink.URL} variant="secondary">
-            {data.cardLink.Label}
-          </Button>
+          <ButtonWithCTA cta={data.cardLink} variant="secondary" />
         </StyledMegaMenuCard>
       </StyledMegaMenu>
     </StyledMegaMenuWrapper>

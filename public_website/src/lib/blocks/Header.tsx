@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
-import { Button } from '@/ui/components/button/Button'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -12,9 +11,11 @@ interface HeaderProps {
   text?: string
   image: APIResponse<'plugin::upload.file'> | null
   icon: string
-  cta?: { Label: string; URL: string }
+  cta?: CTA
 }
 
+import { CTA } from '@/types/CTA'
+import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 
 export function Header(props: HeaderProps) {
@@ -26,7 +27,7 @@ export function Header(props: HeaderProps) {
           {props.text && <StyledText>{props.text}</StyledText>}
           {props.cta?.Label && props.cta?.URL && (
             <StyledBtnWrapper>
-              <Button href={props.cta.URL}>{props.cta.Label}</Button>
+              <ButtonWithCTA cta={props.cta} />
             </StyledBtnWrapper>
           )}
         </div>

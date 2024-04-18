@@ -1,17 +1,17 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
+import { CTA } from '../../../types/CTA'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 type HeroProps = {
   title: string
   subTitle: string
-  cta: { Label: string; URL: string }
+  cta: CTA
   firstEmoji: string
   secondEmoji: string
   thirdEmoji: string
@@ -33,9 +33,6 @@ export function Hero({
   sixthEmoji,
   images,
 }: HeroProps) {
-  const onClickCTA = () => {
-    analyticsProvider.logEvent('goToSignup', { origin: 'Home' })
-  }
   return (
     <Root>
       <StyledHeroBackground>
@@ -61,9 +58,7 @@ export function Hero({
 
       <StyledSubTitle>{subTitle}</StyledSubTitle>
       <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-      <StyledCta onClick={onClickCTA} href={cta.URL}>
-        {cta.Label}
-      </StyledCta>
+      <StyledCta cta={cta} />
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
         <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
@@ -184,7 +179,7 @@ const StyledHeading = styled(Typo.Heading1)`
   `}
 `
 
-const StyledCta = styled(Button)`
+const StyledCta = styled(ButtonWithCTA)`
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;

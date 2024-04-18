@@ -2,15 +2,16 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { VerticalCarousel } from '../../../lib/blocks/verticalCarousel/VerticalCarousel'
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
+import { CTA } from '@/types/CTA'
 import { Offer } from '@/types/playlist'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
 type RecommendationsProps = {
   title: string
   recommendations: Offer[]
-  cta: { Label: string; URL: string }
+  cta: CTA
 }
 
 export function Recommendations({
@@ -21,18 +22,18 @@ export function Recommendations({
   const verticalCarouselItems: Omit<
     VerticalCarouselSlideProps,
     'slideIndex'
-  >[] = recommendations.map((r) => ({
-    description: r.venue.commonName,
-    image: r.image?.url ?? null,
-    title: r.name,
-    url: getOfferUrl(r.id),
+  >[] = recommendations.map((recommendation) => ({
+    description: recommendation.venue.commonName,
+    image: recommendation.image?.url ?? null,
+    title: recommendation.name,
+    url: getOfferUrl(recommendation.id),
   }))
 
   return (
     <Root>
       <VerticalCarousel title={title} items={verticalCarouselItems} />
       <StyledCtaWrapper>
-        <Button href={cta.URL}>{cta.Label}</Button>
+        <ButtonWithCTA cta={cta} />
       </StyledCtaWrapper>
     </Root>
   )

@@ -1,13 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { Typo } from '../typographies'
+import { CTA } from '@/types/CTA'
 
 interface FailureScreenProps {
   title: string
   text: string
-  ctaLink: { Label: string; URL: string }
+  ctaLink: CTA
 }
 
 export function FailureScreen(props: FailureScreenProps) {
@@ -15,7 +16,7 @@ export function FailureScreen(props: FailureScreenProps) {
     <Root>
       <Title as="p" dangerouslySetInnerHTML={{ __html: props.title }} />
       <Text dangerouslySetInnerHTML={{ __html: props.text }} />
-      <Button href={props.ctaLink.URL}>{props.ctaLink.Label}</Button>
+      <ButtonWithCTA cta={props.ctaLink} />
     </Root>
   )
 }

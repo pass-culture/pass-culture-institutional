@@ -1,16 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { Link } from '../Link'
 import { Typo } from '../typographies'
+import { CTA } from '@/types/CTA'
 
 interface ResultScreenProps {
   title: string
   steps: string[]
-  ctaLink: { Label: string; URL: string }
+  ctaLink: CTA
   helpText: string
-  supportLink: { Label: string; URL: string }
+  supportLink: CTA
 }
 
 export function ResultScreen(props: ResultScreenProps) {
@@ -31,7 +32,7 @@ export function ResultScreen(props: ResultScreenProps) {
         ))}
       </Steps>
 
-      <Button href={props.ctaLink.URL}>{props.ctaLink.Label}</Button>
+      <ButtonWithCTA cta={props.ctaLink} />
 
       <HelpText>
         <span dangerouslySetInnerHTML={{ __html: props.helpText }} />

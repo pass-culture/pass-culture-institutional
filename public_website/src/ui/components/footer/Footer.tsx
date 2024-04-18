@@ -7,6 +7,8 @@ import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { useIsAndroid } from '@/hooks/useIsAndroid'
+import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
 export type FooterProps = {
@@ -17,7 +19,7 @@ export type FooterProps = {
   Lists: {
     id: number
     Title: string
-    Links: { Label: string; URL: string }[]
+    Links: CTA[]
   }[]
 }
 
@@ -42,7 +44,14 @@ export function Footer({
             <Link href="https://www.gouvernement.fr">
               <Gouvernement />
             </Link>
-            <AppBanner title={bannerText} url={storeUrl} />
+            <AppBanner
+              title={bannerText}
+              url={storeUrl}
+              onClick={onClickAnalytics({
+                eventName: 'downloadApp',
+                eventOrigin: 'footer',
+              })}
+            />
           </StyledLogos>
 
           <StyledLists>

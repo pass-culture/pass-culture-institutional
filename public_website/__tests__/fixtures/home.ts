@@ -322,6 +322,7 @@ export const homePageFixtures = {
       },
     },
   },
+
   latestStudies: [
     {
       id: 1,
@@ -434,4 +435,55 @@ export const homePageFixtures = {
       },
     },
   ],
+}
+
+export const homePageFixturesWithTracking = {
+  ...homePageFixtures,
+  homeDataWithTrackingOnCTAs: {
+    ...homePageFixtures.homeData,
+    attributes: {
+      ...homePageFixtures.homeData.attributes,
+      heroSection: {
+        ...homePageFixtures.homeData.attributes.heroSection,
+        cta: {
+          ...homePageFixtures.homeData.attributes.heroSection.cta,
+          eventName: 'testEvent',
+          eventOrigin: 'test',
+        },
+      },
+      eligibilitySection: {
+        ...homePageFixtures.homeData.attributes.eligibilitySection,
+        cardCta: {
+          ...homePageFixtures.homeData.attributes.eligibilitySection.cardCta,
+          eventName: 'testEvent',
+          eventOrigin: 'test',
+        },
+      },
+      CTASection: {
+        ...homePageFixtures.homeData.attributes.CTASection,
+        ctaLink: {
+          ...homePageFixtures.homeData.attributes.CTASection.ctaLink,
+          eventName: 'testEvent',
+          eventOrigin: 'test',
+        },
+      },
+      recommendationsSection: {
+        ...homePageFixtures.homeData.attributes.recommendationsSection,
+        cta: {
+          ...homePageFixtures.homeData.attributes.recommendationsSection.cta,
+          eventName: 'testEvent',
+          eventOrigin: 'test',
+        },
+      },
+      latestStudies: {
+        ...homePageFixtures.homeData.attributes.latestStudies,
+        cta: {
+          ...homePageFixtures.homeData.attributes.latestStudies.cta,
+
+          eventName: 'testEvent',
+          eventOrigin: 'test',
+        },
+      },
+    },
+  },
 }

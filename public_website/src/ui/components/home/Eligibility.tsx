@@ -1,16 +1,17 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { Button } from '../button/Button'
+import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { CTA } from '@/types/CTA'
 
 type EligibilityProps = {
   title: string
   items: { title: string; description: string; emoji: string }[]
   cardTitle: string
   cardDescription: string
-  cardCta: { Label: string; URL: string }
+  cardCta: CTA
   cardFirstEmoji: string
   cardSecondEmoji: string
 }
@@ -31,9 +32,7 @@ export function Eligibility({
           <span dangerouslySetInnerHTML={{ __html: cardTitle }} />
         </StyledCardHeading>
         <StyledCardDescription>{cardDescription}</StyledCardDescription>
-        <Button variant="tertiary" href={cardCta.URL}>
-          {cardCta.Label}
-        </Button>
+        <ButtonWithCTA variant="tertiary" cta={cardCta} />
         <StyledCardFirstEmoji
           as={OutlinedText}
           dilationRadius={1}
