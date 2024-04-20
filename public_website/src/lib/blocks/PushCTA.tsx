@@ -27,7 +27,7 @@ export function PushCTA(props: PushCTAProps) {
       <CardContainer>
         <Card
           $imageUrl={
-            props.image?.data.attributes.url &&
+            props.image?.data?.attributes.url &&
             getStrapiURL(props.image?.data.attributes.url)
           }>
           <QRCodeCard>
