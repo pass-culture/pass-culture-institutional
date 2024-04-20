@@ -472,8 +472,36 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.String;
-    eventOrigin: Attribute.String;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'testEvent'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
