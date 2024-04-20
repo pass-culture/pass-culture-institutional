@@ -47,10 +47,12 @@ export function Footer({
             <AppBanner
               title={bannerText}
               url={storeUrl}
-              onClick={onClickAnalytics({
-                eventName: 'downloadApp',
-                eventOrigin: 'footer',
-              })}
+              onClick={() =>
+                onClickAnalytics({
+                  eventName: 'downloadApp',
+                  eventOrigin: 'footer',
+                })
+              }
             />
           </StyledLogos>
 
