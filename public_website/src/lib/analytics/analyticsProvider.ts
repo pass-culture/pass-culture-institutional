@@ -40,24 +40,6 @@ export const eventMapKeys: { [K in keyof EventMap]: true } = {
   contactSupport: true,
 }
 
-export const eventMapOrigins = {
-  testOrigin: true,
-  header: true,
-  home: true,
-  'menu-young-people': true,
-  'get-your-credit': true,
-  simulator: true,
-  'menu-pros': true,
-  'essential-pros': true,
-  'how-to-propose-offers': true,
-  'menu-young-people-and-parents': true,
-  footer: true,
-  'help-young-people-and-parents': true,
-  parents: true,
-  'help-pros': true,
-  'help-teachers': true,
-}
-
 export enum eventOriginsEnum {
   header = 'header',
   home = 'home',

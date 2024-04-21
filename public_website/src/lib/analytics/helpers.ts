@@ -1,14 +1,29 @@
-import { analyticsProvider, EventMap, eventMapKeys } from './analyticsProvider'
+import {
+  analyticsProvider,
+  EventMap,
+  eventMapKeys,
+  eventOriginsEnum,
+} from './analyticsProvider'
 
-function isKeyOfEventMap(key: string): key is keyof EventMap {
-  return key in eventMapKeys
+function isEventNameInEventMap(eventName: string): eventName is keyof EventMap {
+  return eventName in eventMapKeys
+}
+function isOriginInEventMapOrigin(
+  origin: string
+): origin is EventMap[keyof EventMap]['origin'] {
+  return eventOriginsEnum[origin as keyof typeof eventOriginsEnum] !== undefined
 }
 
 export const onClickAnalytics = (cta: {
   eventName?: string
   eventOrigin?: string
 }) => {
-  if (cta.eventName && cta.eventOrigin && isKeyOfEventMap(cta.eventName)) {
+  if (
+    cta.eventName &&
+    isEventNameInEventMap(cta.eventName) &&
+    cta.eventOrigin &&
+    isOriginInEventMapOrigin(cta.eventOrigin)
+  ) {
     analyticsProvider.logEvent(cta.eventName, {
       origin: cta.eventOrigin,
     })
