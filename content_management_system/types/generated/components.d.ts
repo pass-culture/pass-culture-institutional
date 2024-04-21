@@ -677,6 +677,37 @@ export interface HeaderAccountItem extends Schema.Component {
     color: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignup',
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'testEvent'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
@@ -692,12 +723,44 @@ export interface HeaderLoginItems extends Schema.Component {
   collectionName: 'components_header_login_items';
   info: {
     displayName: 'loginItems';
+    description: '';
   };
   attributes: {
     label: Attribute.String & Attribute.Required;
     color: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignup',
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'testEvent'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
