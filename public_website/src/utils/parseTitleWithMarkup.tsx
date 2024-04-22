@@ -8,9 +8,9 @@ export const parseTitleWithMarkup = (
 
   const textWithMarkup = parts.map((part, index) => {
     if (index % 2 === 1) {
-      return <mark key={index}>{part}</mark>
+      return <mark key={part + index}>{part}</mark>
     } else {
-      return <span key={index}>{part}</span>
+      return <span key={part + index}>{part}</span>
     }
   })
 

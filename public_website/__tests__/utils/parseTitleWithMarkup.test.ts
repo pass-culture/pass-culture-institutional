@@ -5,7 +5,7 @@ import { parseTitleWithMarkup } from '@/utils/parseTitleWithMarkup'
 const title = 'I am a **text** in **bold** very beautiful'
 
 describe('parseTitleWithMarkup', () => {
-  const { textWithMarkup } = parseTitleWithMarkup(title)
+  const { textWithMarkup, accessibilityLabel } = parseTitleWithMarkup(title)
 
   it('should have 5 elements in textWithMarkup', () => {
     expect(textWithMarkup).toHaveLength(5)
@@ -34,8 +34,6 @@ describe('parseTitleWithMarkup', () => {
   })
 
   it('should parse text with markup correctly for accessibilityLabel', () => {
-    const { accessibilityLabel } = parseTitleWithMarkup(title)
-
     expect(accessibilityLabel).toEqual('I am a text in bold very beautiful')
   })
 })
