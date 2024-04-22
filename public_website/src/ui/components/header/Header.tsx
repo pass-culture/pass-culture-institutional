@@ -167,7 +167,9 @@ export function Header({
 
   return (
     <Wrapper>
-      <StyledHeader $showMegaMenu={activeMegaMenuId !== null}>
+      <StyledHeader
+        $showMegaMenu={activeMegaMenuId !== null}
+        $showMobileMenu={showMobileMenu}>
         <StyledHeaderContent>
           <StyledNavigation
             $showMobileMenu={showMobileMenu}
@@ -294,12 +296,26 @@ export function Header({
   )
 }
 
-const StyledHeader = styled.header<{ $showMegaMenu: boolean }>`
-  ${({ theme, $showMegaMenu }) => css`
+const StyledHeader = styled.header<{
+  $showMegaMenu: boolean
+  $showMobileMenu: boolean
+}>`
+  ${({ theme, $showMegaMenu, $showMobileMenu }) => css`
     position: relative;
     z-index: 1;
 
     background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      /* position: fixed;
+      inset: 0; */
+
+      ${$showMobileMenu &&
+      css`
+        position: fixed;
+        inset: 0;
+      `}
+    }
   `}
 `
 
