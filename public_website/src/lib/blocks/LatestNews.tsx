@@ -52,7 +52,9 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
 
   return (
     <Root className={className}>
-      <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+      <HeadingWrapper>
+        <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+      </HeadingWrapper>
       <StyledList>
         {newsData?.slice(0, 3).map((newsItem) => {
           return (
@@ -80,18 +82,25 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
           )
         })}
       </StyledList>
-      {cta && <ButtonWithCTA cta={cta} />}
+      <ContentWrapper>{cta && <ButtonWithCTA cta={cta} />}</ContentWrapper>
     </Root>
   )
 }
 
-const Root = styled(ContentWrapper)`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+
+  --module-spacing: 0;
 
   > a {
     align-self: center;
   }
+`
+
+const HeadingWrapper = styled(ContentWrapper)`
+  margin: 0;
 `
 
 const StyledHeading = styled(Typo.Heading2)`
@@ -119,5 +128,9 @@ const StyledList = styled.ul`
 
   > li {
     scroll-snap-align: center;
+  }
+
+  > li:first-child {
+    margin-left: 1.3rem;
   }
 `
