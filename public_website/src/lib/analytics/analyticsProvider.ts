@@ -11,7 +11,7 @@ export type EventMap = {
     origin:
       | 'header'
       | 'home'
-      | 'menu-young-people'
+      | 'menu-young-people-and-parents'
       | 'get-your-credit'
       | 'simulator'
   }
@@ -43,7 +43,6 @@ export const eventMapKeys: { [K in keyof EventMap]: true } = {
 export enum eventOriginsEnum {
   header = 'header',
   home = 'home',
-  'menu-young-people' = 'menu-young-people',
   'get-your-credit' = 'get-your-credit',
   simulator = 'simulator',
   'menu-pros' = 'menu-pros',
