@@ -25,7 +25,6 @@
     "eventName": {
       "type": "enumeration",
       "enum": [
-        "goToSignup",
         "goToSignUpNative",
         "goToSignUpPro",
         "goToLoginNative",
@@ -33,7 +32,7 @@
         "downloadApp",
         "goToFaqNative",
         "goToFaqPro",
-        "testEvent"
+        "contactSupport"
       ]
     },
     "eventOrigin": {
@@ -41,7 +40,6 @@
       "enum": [
         "header",
         "home",
-        "menu-young-people",
         "menu-young-people-and-parents",
         "menu-pros",
         "get-your-credit",

@@ -481,14 +481,13 @@ export interface CommonLink extends Schema.Component {
         'downloadApp',
         'goToFaqNative',
         'goToFaqPro',
-        'testEvent'
+        'contactSupport'
       ]
     >;
     eventOrigin: Attribute.Enumeration<
       [
         'header',
         'home',
-        'menu-young-people',
         'menu-young-people-and-parents',
         'menu-pros',
         'get-your-credit',
@@ -679,7 +678,6 @@ export interface HeaderAccountItem extends Schema.Component {
     url: Attribute.String & Attribute.Required;
     eventName: Attribute.Enumeration<
       [
-        'goToSignup',
         'goToSignUpNative',
         'goToSignUpPro',
         'goToLoginNative',
@@ -687,14 +685,13 @@ export interface HeaderAccountItem extends Schema.Component {
         'downloadApp',
         'goToFaqNative',
         'goToFaqPro',
-        'testEvent'
+        'contactSupport'
       ]
     >;
     eventOrigin: Attribute.Enumeration<
       [
         'header',
         'home',
-        'menu-young-people',
         'menu-young-people-and-parents',
         'menu-pros',
         'get-your-credit',
@@ -732,7 +729,6 @@ export interface HeaderLoginItems extends Schema.Component {
     url: Attribute.String & Attribute.Required;
     eventName: Attribute.Enumeration<
       [
-        'goToSignup',
         'goToSignUpNative',
         'goToSignUpPro',
         'goToLoginNative',
@@ -740,14 +736,13 @@ export interface HeaderLoginItems extends Schema.Component {
         'downloadApp',
         'goToFaqNative',
         'goToFaqPro',
-        'testEvent'
+        'contactSupport'
       ]
     >;
     eventOrigin: Attribute.Enumeration<
       [
         'header',
         'home',
-        'menu-young-people',
         'menu-young-people-and-parents',
         'menu-pros',
         'get-your-credit',

@@ -87,7 +87,7 @@ export function MegaMenu({
               onClick={() =>
                 onClickAnalytics({
                   eventName: 'downloadApp',
-                  eventOrigin: 'menu',
+                  eventOrigin: 'menu-young-people-and-parents',
                 })
               }
             />
