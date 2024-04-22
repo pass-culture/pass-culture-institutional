@@ -306,10 +306,7 @@ const StyledHeader = styled.header<{
 
     background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
 
-    @media (width < ${theme.mediaQueries.mobile}) {
-      /* position: fixed;
-      inset: 0; */
-
+    @media (width < ${theme.mediaQueries.tablet}) {
       ${$showMobileMenu &&
       css`
         position: fixed;
