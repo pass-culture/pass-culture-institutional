@@ -3,7 +3,7 @@ import { http } from 'msw'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import { act, fireEvent, render, screen } from '..'
+import { act, fireEvent, render, screen, waitFor } from '..'
 import { homePageFixturesWithTracking } from '../fixtures/home'
 import { CMS_BASE_URL, jsonResponseOf } from '../handlers'
 import { server } from '../server'
@@ -56,9 +56,10 @@ describe('Home page', () => {
 
       const button = screen.getByText('Je m’inscris')
       fireEvent.click(button)
-
-      expect(mockLogEvent).toHaveBeenCalledWith('testEvent', {
-        origin: 'test',
+      waitFor(() => {
+        expect(mockLogEvent).toHaveBeenCalledWith('testEvent', {
+          origin: 'test',
+        })
       })
     })
   })

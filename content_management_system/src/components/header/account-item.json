@@ -21,6 +21,39 @@
     "url": {
       "type": "string",
       "required": true
+    },
+    "eventName": {
+      "type": "enumeration",
+      "enum": [
+        "goToSignup",
+        "goToSignUpNative",
+        "goToSignUpPro",
+        "goToLoginNative",
+        "goToLoginPro",
+        "downloadApp",
+        "goToFaqNative",
+        "goToFaqPro",
+        "testEvent"
+      ]
+    },
+    "eventOrigin": {
+      "type": "enumeration",
+      "enum": [
+        "header",
+        "home",
+        "menu-young-people",
+        "menu-young-people-and-parents",
+        "menu-pros",
+        "get-your-credit",
+        "essential-pros",
+        "how-to-propose-offers",
+        "help-young-people-and-parents",
+        "help-pros",
+        "help-teachers",
+        "simulator",
+        "parents",
+        "footer"
+      ]
     }
   }
 }

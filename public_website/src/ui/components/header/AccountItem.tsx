@@ -25,7 +25,9 @@ export function AccountItem({
 }: AccountItemProps) {
   return (
     <StyledAccountItem>
-      <Link href={url} onClick={onClickAnalytics({ eventName, eventOrigin })}>
+      <Link
+        href={url}
+        onClick={() => onClickAnalytics({ eventName, eventOrigin })}>
         <StyledEmoji $color={color}>
           <OutlinedText dilationRadius={0} blurDeviation={1.5} shadow>
             {emoji}

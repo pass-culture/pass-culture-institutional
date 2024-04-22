@@ -9,7 +9,7 @@ type Props = {
 } & Omit<ComponentProps<typeof Button>, 'children' | 'href' | 'onClick'>
 
 export const ButtonWithCTA: FunctionComponent<Props> = ({ cta, ...props }) => (
-  <Button onClick={onClickAnalytics(cta)} href={cta.URL} {...props}>
+  <Button onClick={() => onClickAnalytics(cta)} href={cta.URL} {...props}>
     {cta.Label}
   </Button>
 )

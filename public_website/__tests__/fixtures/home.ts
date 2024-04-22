@@ -448,7 +448,7 @@ export const homePageFixturesWithTracking = {
         cta: {
           ...homePageFixtures.homeData.attributes.heroSection.cta,
           eventName: 'testEvent',
-          eventOrigin: 'test',
+          eventOrigin: 'testOrigin',
         },
       },
       eligibilitySection: {
@@ -456,7 +456,7 @@ export const homePageFixturesWithTracking = {
         cardCta: {
           ...homePageFixtures.homeData.attributes.eligibilitySection.cardCta,
           eventName: 'testEvent',
-          eventOrigin: 'test',
+          eventOrigin: 'testOrigin',
         },
       },
       CTASection: {
@@ -464,7 +464,7 @@ export const homePageFixturesWithTracking = {
         ctaLink: {
           ...homePageFixtures.homeData.attributes.CTASection.ctaLink,
           eventName: 'testEvent',
-          eventOrigin: 'test',
+          eventOrigin: 'testOrigin',
         },
       },
       recommendationsSection: {
@@ -472,7 +472,7 @@ export const homePageFixturesWithTracking = {
         cta: {
           ...homePageFixtures.homeData.attributes.recommendationsSection.cta,
           eventName: 'testEvent',
-          eventOrigin: 'test',
+          eventOrigin: 'testOrigin',
         },
       },
       latestStudies: {
@@ -481,7 +481,7 @@ export const homePageFixturesWithTracking = {
           ...homePageFixtures.homeData.attributes.latestStudies.cta,
 
           eventName: 'testEvent',
-          eventOrigin: 'test',
+          eventOrigin: 'testOrigin',
         },
       },
     },

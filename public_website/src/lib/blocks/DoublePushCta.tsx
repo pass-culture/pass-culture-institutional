@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { onClickAnalytics } from '../analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -46,7 +47,14 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
             <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
           )}
           {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
-          <CtaLink href={props.firstCta?.URL}>
+          <CtaLink
+            href={props.firstCta?.URL}
+            onClick={() => {
+              onClickAnalytics({
+                eventName: props.firstCta?.eventName,
+                eventOrigin: props.firstCta?.eventOrigin,
+              })
+            }}>
             <span>{props.firstCta?.Label}</span>
           </CtaLink>
           {props.secondCta && (
