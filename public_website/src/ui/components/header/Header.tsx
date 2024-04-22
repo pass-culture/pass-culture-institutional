@@ -167,7 +167,7 @@ export function Header({
 
   return (
     <Wrapper>
-      <StyledHeader>
+      <StyledHeader $showMegaMenu={activeMegaMenuId !== null}>
         <StyledHeaderContent>
           <StyledNavigation
             $showMobileMenu={showMobileMenu}
@@ -294,9 +294,13 @@ export function Header({
   )
 }
 
-const StyledHeader = styled.header`
-  position: relative;
-  z-index: 1;
+const StyledHeader = styled.header<{ $showMegaMenu: boolean }>`
+  ${({ theme, $showMegaMenu }) => css`
+    position: relative;
+    z-index: 1;
+
+    background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+  `}
 `
 
 const StyledHeaderContent = styled.div`
