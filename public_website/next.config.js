@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const { withSentryConfig } = require('@sentry/nextjs')
+
 const nextConfig = {
   output: 'export',
   reactStrictMode: true,
@@ -9,6 +12,15 @@ const nextConfig = {
     // reactRemoveProperties: true,
   },
   images: { unoptimized: true },
+  sentry: {},
 }
 
-module.exports = nextConfig
+const sentryWebpackPluginOptions = {
+  silent: true,
+  org: 'sentry',
+  project: 'institutional',
+  url: 'https://sentry.passculture.team/',
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+}
+
+export default withSentryConfig(nextConfig, sentryWebpackPluginOptions)
