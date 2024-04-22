@@ -16,8 +16,7 @@ describe('parseTitleWithMarkup', () => {
   })
 
   it('second element in textWithMarkup should be a <mark>', () => {
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    expect((textWithMarkup[1]?.type).target).toEqual('mark')
+    expect(textWithMarkup[1]?.type).toEqual('mark')
   })
 
   it('third element in textWithMarkup should be a <span>', () => {
@@ -25,8 +24,7 @@ describe('parseTitleWithMarkup', () => {
   })
 
   it('fourth element in textWithMarkup should be a <mark>', () => {
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    expect((textWithMarkup[3]?.type).target).toEqual('mark')
+    expect(textWithMarkup[3]?.type).toEqual('mark')
   })
 
   it('fifth element in textWithMarkup should be a <span>', () => {
