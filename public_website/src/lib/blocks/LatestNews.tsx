@@ -110,6 +110,7 @@ const StyledList = styled.ul`
   gap: 1.5rem;
   margin-bottom: 5rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
