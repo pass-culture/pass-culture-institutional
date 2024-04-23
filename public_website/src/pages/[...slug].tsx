@@ -1,6 +1,7 @@
 import React from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
+import styled from 'styled-components'
 
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Seo } from '@/lib/seo/seo'
@@ -13,17 +14,26 @@ interface CustomPageProps {
 
 export default function CustomPage(props: CustomPageProps) {
   return (
-    /* eslint-disable-next-line react/jsx-no-useless-fragment */
-    <React.Fragment>
+    <PageWrapper>
       {props.data.attributes.seo && (
         <Seo metaData={props.data.attributes.seo} />
       )}
       {props.data.attributes.Blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-    </React.Fragment>
+    </PageWrapper>
   )
 }
+
+const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    width: 100%;
+    box-sizing: border-box;
+  }
+`
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = (params?.['slug'] as string[]).join('/')
