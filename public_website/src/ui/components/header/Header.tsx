@@ -167,7 +167,9 @@ export function Header({
 
   return (
     <Wrapper>
-      <StyledHeader>
+      <StyledHeader
+        $showMegaMenu={activeMegaMenuId !== null}
+        $showMobileMenu={showMobileMenu}>
         <StyledHeaderContent>
           <StyledNavigation
             $showMobileMenu={showMobileMenu}
@@ -294,9 +296,24 @@ export function Header({
   )
 }
 
-const StyledHeader = styled.header`
-  position: relative;
-  z-index: 1;
+const StyledHeader = styled.header<{
+  $showMegaMenu: boolean
+  $showMobileMenu: boolean
+}>`
+  ${({ theme, $showMegaMenu, $showMobileMenu }) => css`
+    position: relative;
+    z-index: 1;
+
+    background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      ${$showMobileMenu &&
+      css`
+        position: fixed;
+        inset: 0;
+      `}
+    }
+  `}
 `
 
 const StyledHeaderContent = styled.div`
@@ -322,7 +339,7 @@ const StyledNavigation = styled.nav<{
       @media (width < ${theme.mediaQueries.largeDesktop}) {
         justify-content: space-between;
         gap: 0.5rem;
-        padding: 1.75rem 2.5rem 0 1.5rem;
+        padding: 1.75rem 2.5rem 1rem 1.5rem;
       }
 
       /* Only show logo + burger menu on mobile */

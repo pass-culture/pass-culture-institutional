@@ -234,14 +234,24 @@ const StyledTitle = styled(ContentWrapper)`
     }
 
     h3 {
+      margin-bottom: 3.5rem;
+
       font-size: ${theme.fonts.sizes['6xl']};
       color: ${theme.colors.secondary};
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
+      margin-top: 2rem;
+
       h2 {
         text-align: center;
-        font-size: ${theme.fonts.sizes['5xl']};
+        font-size: ${theme.fonts.sizes['4xl']};
+        margin-bottom: 2rem;
+      }
+
+      h3 {
+        font-size: ${theme.fonts.sizes['3xl']};
+        margin-bottom: 3rem;
       }
     }
   `}

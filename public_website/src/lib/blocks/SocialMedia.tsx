@@ -33,18 +33,32 @@ export function SocialMedia({
   socialMediaLink,
   className,
 }: SocialMediaProps) {
+  const sliceIndex = Math.ceil(socialMediaLink.length / 2)
+  const firstRow = socialMediaLink.slice(0, sliceIndex)
+  const secondRow = socialMediaLink.slice(sliceIndex)
   return (
     <ContentWrapper className={className}>
       <StyledHeading>{title}</StyledHeading>
-      <StyledList>
-        {socialMediaLink.map((link) => {
-          return (
-            <StyledListItem key={link.name}>
-              <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
-            </StyledListItem>
-          )
-        })}
-      </StyledList>
+      <Lists>
+        <StyledList>
+          {firstRow.map((link) => {
+            return (
+              <StyledListItem key={link.name}>
+                <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
+              </StyledListItem>
+            )
+          })}
+        </StyledList>
+        <StyledList>
+          {secondRow.map((link) => {
+            return (
+              <StyledListItem key={link.name}>
+                <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
+              </StyledListItem>
+            )
+          })}
+        </StyledList>
+      </Lists>
     </ContentWrapper>
   )
 }
@@ -117,4 +131,18 @@ const StyledListItem = styled.li`
       }
     }
   `}
+`
+
+const Lists = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    gap: 1rem;
+  }
 `

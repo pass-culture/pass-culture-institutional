@@ -52,46 +52,59 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
 
   return (
     <Root className={className}>
-      <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-      <StyledList>
-        {newsData?.slice(0, 3).map((newsItem) => {
-          return (
-            <li
-              key={
-                isModule
-                  ? `/actualite/${newsItem.attributes.slug}`
-                  : newsItem.attributes.slug
-              }>
-              <NewsCard
-                title={newsItem.attributes.title}
-                category={newsItem.attributes.category}
-                date={newsItem.attributes.date}
-                imageUrl={
-                  newsItem.attributes.image &&
-                  getStrapiURL(newsItem.attributes.image?.data.attributes.url)
-                }
-                slug={
+      <HeadingWrapper>
+        <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+      </HeadingWrapper>
+      <ListWrapper>
+        <StyledList>
+          {newsData?.slice(0, 3).map((newsItem) => {
+            return (
+              <li
+                key={
                   isModule
                     ? `/actualite/${newsItem.attributes.slug}`
                     : newsItem.attributes.slug
-                }
-              />
-            </li>
-          )
-        })}
-      </StyledList>
-      {cta && <ButtonWithCTA cta={cta} />}
+                }>
+                <NewsCard
+                  title={newsItem.attributes.title}
+                  category={newsItem.attributes.category}
+                  date={newsItem.attributes.date}
+                  imageUrl={
+                    newsItem.attributes.image &&
+                    getStrapiURL(newsItem.attributes.image?.data.attributes.url)
+                  }
+                  slug={
+                    isModule
+                      ? `/actualite/${newsItem.attributes.slug}`
+                      : newsItem.attributes.slug
+                  }
+                />
+              </li>
+            )
+          })}
+        </StyledList>
+      </ListWrapper>
+
+      <ContentWrapper>{cta && <ButtonWithCTA cta={cta} />}</ContentWrapper>
     </Root>
   )
 }
 
-const Root = styled(ContentWrapper)`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+
+  --module-spacing: 0;
 
   > a {
     align-self: center;
   }
+`
+
+const HeadingWrapper = styled(ContentWrapper)`
+  width: 100%;
+  box-sizing: border-box;
 `
 
 const StyledHeading = styled(Typo.Heading2)`
@@ -104,17 +117,23 @@ const StyledHeading = styled(Typo.Heading2)`
   `}
 `
 
-const StyledList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 5rem;
+const ListWrapper = styled(ContentWrapper)`
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  margin-bottom: 5rem;
+  width: 100%;
+  box-sizing: border-box;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-bottom: 2.25rem;
   }
+`
+
+const StyledList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
 
   > li {
     scroll-snap-align: center;

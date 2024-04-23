@@ -79,7 +79,7 @@ function getHoverBackgroundColor(variant?: ButtonVariants) {
       return 'rgba(46, 5, 146, 0.7)'
   }
 }
-const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
+const StyledButton = styled.button<{ $variant: ButtonVariants }>`
   ${({ theme, $variant }) => css`
     position: relative;
     cursor: pointer;
@@ -87,25 +87,19 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
       ? getVariantButtonBackground($variant)
       : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
 
-    ${$variant &&
-    $variant !== 'primary' &&
-    `border: 1px solid ${theme.colors.white};`}
+    ${$variant !== 'primary' && `border: 1px solid ${theme.colors.white};`}
 
-    ${$variant &&
-    $variant === 'quaternary' &&
-    `border: 1px solid ${theme.colors.purple};`}
+    ${$variant === 'quaternary' && `border: 1px solid ${theme.colors.purple};`}
     outline-offset: 2px;
     transition: all 0.4s ease-in-out;
     &:focus {
-      ${$variant &&
-      $variant === 'tertiary' &&
+      ${$variant === 'tertiary' &&
       `background:rgba(255,255,255,0);
         color:${theme.colors.white};`}
       ${$variant ? getFocusOutlineColor($variant) : ''}
     }
     &:hover {
-      ${$variant &&
-      $variant === 'tertiary' &&
+      ${$variant === 'tertiary' &&
       `background:rgba(255,255,255,0);
       color:${theme.colors.white};`}
       &::after {
@@ -136,7 +130,7 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
       ? theme.colors.secondary
       : theme.colors.white};
 
-    ${$variant && $variant === 'quaternary' && `color: ${theme.colors.purple};`}
+    ${$variant === 'quaternary' && `color: ${theme.colors.purple};`}
 
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.medium};
@@ -149,4 +143,5 @@ const StyledButton = styled.button<{ $variant?: ButtonVariants }>`
 
 const InnerButton = styled.span`
   position: relative;
+  z-index: 1;
 `

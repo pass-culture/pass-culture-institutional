@@ -78,6 +78,7 @@ const StyledTitle = styled(Typo.Heading3)`
   margin: 1.5rem 0 0.25rem;
   width: 90%;
   font-size: ${({ theme }) => theme.fonts.sizes['xl']};
+  display: block;
 
   &::after {
     content: '';
