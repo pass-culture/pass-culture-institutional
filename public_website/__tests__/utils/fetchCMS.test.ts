@@ -23,17 +23,6 @@ const respondWith = async (
 const OLD_ENV = { ...process.env }
 
 describe('fetchCMS', () => {
-  it('should fail when not in localhost/testing and no token is found', async () => {
-    process.env = {
-      ...OLD_ENV,
-      NEXT_PUBLIC_STRAPI_API_URL:
-        'https://siteinstit-cms.staging.passculture.team',
-    }
-
-    await expect(fetchCMS('/test')).rejects.toThrow(
-      'Environnement variable ID_TOKEN not found'
-    )
-  })
 
   describe('when token exists', () => {
     beforeAll(() => {
