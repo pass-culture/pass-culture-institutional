@@ -66,22 +66,24 @@ const StyledContentWrapper = styled(ContentWrapper)`
 
 const Root = styled.div`
   ${({ theme }) => css`
-    --module-spacing: calc((5rem + 3.125rem) * 2);
-
     background-color: ${theme.colors.secondary};
     color: ${theme.colors.white};
     max-width: 90rem;
     margin: auto;
-    margin-bottom: var(--module-spacing);
     border-radius: 2.5rem;
+
+    margin-top: calc(var(--module-margin) + 3.125rem);
+    margin-bottom: calc(var(--module-margin) + 3.125rem);
 
     @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
       max-width: 95%;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
+      margin-bottom: var(--module-margin);
+      margin-top: calc(var(--module-margin) + 19rem);
+
       max-width: 100%;
-      margin-top: 28rem;
 
       display: flex;
       justify-content: center;
@@ -90,7 +92,7 @@ const Root = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 18rem;
+      margin-top: calc(var(--module-margin) + 7rem);
     }
   `}
 `

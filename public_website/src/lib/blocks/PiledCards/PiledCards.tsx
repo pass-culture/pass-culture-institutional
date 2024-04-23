@@ -108,6 +108,8 @@ const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     color: ${theme.colors.white};
 
+    margin-bottom: calc(var(--module-margin) - 8rem);
+
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
     }
@@ -116,7 +118,8 @@ const Root = styled(ContentWrapper)`
 
 const StyledCarousel = styled(PiledCardsCarousel)`
   ${({ theme }) => css`
-    margin-bottom: 8rem;
+    margin-bottom: var(--module-margin);
+    margin-top: var(--module-margin);
 
     @media (width >= ${theme.mediaQueries.mobile}) {
       display: none;

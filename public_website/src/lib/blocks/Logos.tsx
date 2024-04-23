@@ -18,11 +18,13 @@ export function Logos({ logo }: LogoProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    margin-bottom: var(--module-spacing);
+    margin-bottom: var(--module-margin);
+    margin-top: var(--module-margin);
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background-color: transparent;
-      padding: 4rem 1.3rem 2rem;
+      padding-left: 1.3rem;
+      padding-right: 1.3rem;
     }
   `}
 `

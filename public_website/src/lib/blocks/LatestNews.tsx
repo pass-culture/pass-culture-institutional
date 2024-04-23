@@ -52,10 +52,10 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
 
   return (
     <Root className={className}>
-      <HeadingWrapper>
+      <HeadingWrapper $noMargin>
         <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
       </HeadingWrapper>
-      <ListWrapper>
+      <ListWrapper $noMargin>
         <StyledList>
           {newsData?.slice(0, 3).map((newsItem) => {
             return (
@@ -85,7 +85,9 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
         </StyledList>
       </ListWrapper>
 
-      <ContentWrapper>{cta && <ButtonWithCTA cta={cta} />}</ContentWrapper>
+      <ContentWrapper $noMargin>
+        {cta && <ButtonWithCTA cta={cta} />}
+      </ContentWrapper>
     </Root>
   )
 }

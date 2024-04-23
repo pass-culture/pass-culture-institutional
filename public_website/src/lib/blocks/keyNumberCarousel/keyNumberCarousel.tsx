@@ -155,7 +155,8 @@ const StyledCarouselProvider = styled(CarouselProvider)`
 
     padding: 3.5rem 0;
     margin: auto;
-    margin-bottom: var(--module-spacing);
+    margin-bottom: var(--module-margin);
+    margin-top: var(--module-margin);
 
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0 1rem;
