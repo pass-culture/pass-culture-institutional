@@ -1,4 +1,5 @@
 import React from 'react'
+import markdownit from 'markdown-it'
 import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
@@ -15,15 +16,21 @@ interface SimulatorProps {
   data: APIResponseData<'api::simulator.simulator'>
 }
 
+const md = markdownit({
+  html: true,
+  breaks: true,
+})
+
 export default function SimulatorPage(props: SimulatorProps) {
+  const title = md.render('Simulateur **tutut** d’éligibilité')
+
   return (
     <Root>
       {props.data.attributes.seo && (
         <Seo metaData={props.data.attributes.seo} />
       )}
-      <Title
-        dangerouslySetInnerHTML={{ __html: props.data.attributes.title }}
-      />
+      <Title>{title}</Title>
+
       <Description
         dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
       />
