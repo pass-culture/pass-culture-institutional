@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import type { AppContext, AppProps } from 'next/app'
 import App from 'next/app'
 import { Montserrat } from 'next/font/google'
 import { stringify } from 'qs'
 import { ThemeProvider } from 'styled-components'
 
+import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
@@ -27,6 +28,20 @@ export default function MyApp({
   headerData,
   footerData,
 }: MyAppProps) {
+  useEffect(() => {
+    analyticsProvider.init()
+  }, [])
+
+  const path =
+    typeof window !== 'undefined' ? window.location?.pathname : undefined
+  useEffect(() => {
+    if (path) {
+      analyticsProvider.logEvent('pageView', {
+        origin: path,
+      })
+    }
+  }, [path])
+
   const breadcrumbContextValue = useMemo(
     () => ({
       targetItems: headerData.targetItems,

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { CenteredText } from '@/lib/blocks/CenteredText'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
@@ -28,10 +27,6 @@ export default function Home({
   recommendationItems,
   latestStudies,
 }: HomeProps) {
-  useEffect(() => {
-    analyticsProvider.init()
-  }, [])
-
   return (
     <React.Fragment>
       {homeData.attributes.seo && <Seo metaData={homeData.attributes.seo} />}

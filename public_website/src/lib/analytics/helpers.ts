@@ -18,6 +18,11 @@ export const onClickAnalytics = (cta: {
   eventName?: string
   eventOrigin?: string
 }) => {
+  if (cta.eventName === 'pageView' && cta.eventOrigin) {
+    analyticsProvider.logEvent(cta.eventName, {
+      origin: cta.eventOrigin,
+    })
+  }
   if (
     cta.eventName &&
     isEventNameInEventMap(cta.eventName) &&
