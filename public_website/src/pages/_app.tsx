@@ -32,6 +32,16 @@ export default function MyApp({
     analyticsProvider.init()
   }, [])
 
+  const path =
+    typeof window !== 'undefined' ? window.location?.pathname : undefined
+  useEffect(() => {
+    if (path) {
+      analyticsProvider.logEvent('pageView', {
+        origin: path,
+      })
+    }
+  }, [path])
+
   const breadcrumbContextValue = useMemo(
     () => ({
       targetItems: headerData.targetItems,

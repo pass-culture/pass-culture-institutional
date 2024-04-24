@@ -26,6 +26,7 @@ export type EventMap = {
   }
   goToFaqPro: { origin: 'help-pros' }
   contactSupport: { origin: 'help-pros' | 'help-teachers' }
+  pageView: { origin: string }
 }
 
 export const eventMapKeys: { [K in keyof EventMap]: true } = {
@@ -38,6 +39,7 @@ export const eventMapKeys: { [K in keyof EventMap]: true } = {
   goToFaqNative: true,
   goToFaqPro: true,
   contactSupport: true,
+  pageView: true,
 }
 
 export enum eventOriginsEnum {
