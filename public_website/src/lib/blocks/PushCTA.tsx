@@ -2,6 +2,7 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
+import { onClickAnalytics } from '../analytics/helpers'
 import { theme } from '@/theme/theme'
 import { CTA } from '@/types/CTA'
 import { APIResponse } from '@/types/strapi'
@@ -49,7 +50,14 @@ export function PushCTA(props: PushCTAProps) {
         {props.description && (
           <p dangerouslySetInnerHTML={{ __html: props.description }} />
         )}
-        <CtaLink href={props.ctaLink.URL}>
+        <CtaLink
+          href={props.ctaLink.URL}
+          onClick={() =>
+            onClickAnalytics({
+              eventName: props.ctaLink.eventName,
+              eventOrigin: props.ctaLink.eventOrigin,
+            })
+          }>
           <span>{props.ctaLink.Label}</span>
         </CtaLink>
       </RightSide>
