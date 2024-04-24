@@ -141,7 +141,8 @@ export function ImageGallery(props: ImageGalleryProps) {
 }
 
 const Root = styled.div`
-  margin-bottom: var(--module-spacing);
+  margin-bottom: var(--module-margin);
+  margin-top: var(--module-margin);
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin: 2.825rem auto;
@@ -150,7 +151,7 @@ const Root = styled.div`
 
 const Rows = styled.div<{ $galleryIsShort: boolean }>`
   overflow: scroll;
-  padding: 1rem;
+  padding: 0 1rem;
 
   ${({ $galleryIsShort }) =>
     $galleryIsShort &&

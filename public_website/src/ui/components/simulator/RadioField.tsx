@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 import { OutlinedText } from '../OutlinedText'
@@ -13,8 +13,18 @@ interface RadioFieldProps {
 }
 
 export function RadioField(props: RadioFieldProps) {
+  const fieldsetRef = useRef<HTMLFieldSetElement>(null)
+
+  // On Safari (17.4), the fieldset height is glitched. This forces
+  // the recalculation of the height. Setting it "normally" using stylesheets doesnt work.
+  useEffect(() => {
+    setTimeout(() => {
+      fieldsetRef.current!.style.height = 'min-content'
+    }, 1)
+  }, [])
+
   return (
-    <Fieldset>
+    <Fieldset ref={fieldsetRef}>
       <Label as="legend">{props.title}</Label>
 
       <Choices>

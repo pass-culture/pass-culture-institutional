@@ -173,7 +173,8 @@ export function OffersCarousel({
 
 const StyledCarousel = styled(CarouselProvider)`
   ${({ theme }) => css`
-    margin-bottom: var(--module-spacing);
+    margin-bottom: var(--module-margin);
+    margin-top: var(--module-margin);
 
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;

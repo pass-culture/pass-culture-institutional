@@ -184,10 +184,11 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    --module-spacing: calc(5rem * 2);
+    --module-margin: 5rem;
+    --module-spacing: calc(var(--module-margin) * 2);
 
     @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-      --module-spacing: calc(2.825rem * 2);
+      --module-margin: 2.825rem;
     }
   }
 `

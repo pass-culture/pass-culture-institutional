@@ -18,7 +18,6 @@ export function Separator(props: SeparatorTextProps) {
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     text-align: center;
-    padding: 1.5rem;
 
     div {
       border-top: 1px solid ${theme.colors.gray};
