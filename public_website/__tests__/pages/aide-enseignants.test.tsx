@@ -10,7 +10,6 @@ describe('Help page - Teachers', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
-      ID_TOKEN: 'dummy_token',
       BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
   })

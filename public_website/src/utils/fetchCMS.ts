@@ -13,12 +13,9 @@ export async function fetchCMS<T>(path: string) {
         : ''
     }`
 
-    const token = process.env['ID_TOKEN']
-
     const mergedOptions = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
     }
 
