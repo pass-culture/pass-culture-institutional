@@ -18,7 +18,7 @@ export const parseText = (
       return (
         <span key={part + index}>
           {lines.map((line, lineIndex) => (
-            <React.Fragment key={lineIndex}>
+            <React.Fragment key={line + lineIndex}>
               {line}
               {lineIndex < lines.length - 1 && <br />}
             </React.Fragment>
