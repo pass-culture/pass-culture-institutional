@@ -28,8 +28,7 @@ export default function CustomPage(props: CustomPageProps) {
       ))}
       <StyledLatestNews
         news={props.latestStudies}
-        title="Les dernières
-            <mark>actualités</mark>"
+        title="Les dernières **actualités**"
       />
     </React.Fragment>
   )

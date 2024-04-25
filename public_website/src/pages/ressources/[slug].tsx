@@ -28,8 +28,7 @@ export default function CustomPage(props: CustomPageProps) {
       <Seo metaData={props.data.attributes.seo} />
       <StyledLatestNews
         news={props.latestStudies}
-        title="Les dernières
-            <mark>ressources</mark>"
+        title="Les dernières **ressources**"
       />
     </React.Fragment>
   )
