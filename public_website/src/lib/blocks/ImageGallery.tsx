@@ -50,6 +50,23 @@ function splitImages(images: ImageData[]): [ImageData[], ImageData[]] {
   return [firstRowImages, secondRowImages]
 }
 
+const ImageComponent: React.FC<{
+  image: ImageData
+}> = ({ image }) => (
+  <img
+    src={
+      (image.attributes.formats as ImageFormats)?.medium?.url ||
+      image.attributes.url
+    }
+    alt={image.attributes.alternativeText ?? ''}
+    width={image.attributes.width}
+    height={image.attributes.height}
+    fetchPriority="low"
+    loading={'lazy'}
+    decoding={'async'}
+  />
+)
+
 export function ImageGallery(props: ImageGalleryProps) {
   const [firstRow, secondRow] = useMemo(
     () => splitImages(props.images.data),
@@ -94,32 +111,12 @@ export function ImageGallery(props: ImageGalleryProps) {
         $galleryIsShort={!showScrollButtons}>
         <Row ref={rowElement}>
           {firstRow.map((image) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={image.id}
-              src={
-                (image.attributes.formats as ImageFormats)?.medium?.url ||
-                image.attributes.url
-              }
-              alt={image.attributes.alternativeText ?? ''}
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
+            <ImageComponent key={image.id} image={image} />
           ))}
         </Row>
         <Row>
           {secondRow.map((image) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={image.id}
-              src={
-                (image.attributes.formats as ImageFormats)?.medium?.url ||
-                image.attributes.url
-              }
-              alt={image.attributes.alternativeText ?? ''}
-              width={image.attributes.width}
-              height={image.attributes.height}
-            />
+            <ImageComponent key={image.id} image={image} />
           ))}
         </Row>
       </Rows>
