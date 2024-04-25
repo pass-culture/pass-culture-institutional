@@ -2,7 +2,7 @@ export const simulatorPageFixtures = {
   data: {
     id: 1,
     attributes: {
-      title: '<mark>Simulateur</mark> d&apos;éligibilité',
+      title: '**Simulateur** d’éligibilité',
       description:
         "Tu veux savoir si tu peux bénéficier du pass Culture, à combien tu as droit<br />\net comment débloquer ton crédit ? C'est par ici !",
       createdAt: '2024-02-26T14:20:21.352Z',
@@ -159,17 +159,17 @@ export const simulatorPageFixtures = {
       },
       amountScreen_16: {
         id: 2,
-        title: 'Bravo, tu as droit à <mark>30 €</mark>&nbsp; !',
+        title: 'Bravo, tu as droit à **30 €**&nbsp; !',
         text: 'Tu peux débloquer ton crédit tout au long de l’année de tes 16 ans.\n\nAprès activation, tu peux dépenser ton crédit jusqu’à la veille de tes 18 ans. Il sera cumulé avec les crédits accordés à tes 16 et 17 ans s’il n’est pas dépensé avant.',
       },
       amountScreen_17: {
         id: 3,
-        title: 'Bravo, tu as droit à <mark>30 €</mark>&nbsp; !',
+        title: 'Bravo, tu as droit à **30 €**&nbsp; !',
         text: 'Tu peux débloquer ton crédit tout au long de l’année de tes 16 ans.\n\nAprès activation, tu peux dépenser ton crédit jusqu’à la veille de tes 18 ans. Il sera cumulé avec les crédits accordés à tes 16 et 17 ans s’il n’est pas dépensé avant.',
       },
       amountScreen_18: {
         id: 4,
-        title: 'Bravo, tu as droit à <mark>300 €</mark>&nbsp; !',
+        title: 'Bravo, tu as droit à **300 €**&nbsp; !',
         text: 'dont 100 € en offres numériques (streaming, presse en ligne, …)\n\nTu as 1 an pour confirmer ton identité et débloquer ce crédit.\nAprès l’avoir débloqué, tu as 2 ans pour dépenser ton crédit.\nLa limite de 100 € est là pour t’encourager à tester des offres culturelles variées.\n',
       },
       socialMedias: {

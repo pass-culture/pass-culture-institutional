@@ -7,7 +7,7 @@ export const AideEnseignantsPageFixtures = {
       ...AideJeunesParentsPageFixtures.data.attributes,
       latestStudies: {
         id: 6,
-        title: 'Les dernières <mark>ressources</mark> réalisées',
+        title: 'Les dernières **ressources** réalisées',
         cta: {
           id: 424,
           Label: 'Voir toutes les études',

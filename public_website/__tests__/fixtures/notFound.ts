@@ -7,7 +7,7 @@ export const notFoundDataFixtures = {
       publishedAt: '2024-04-03T14:58:51.697Z',
       header: {
         id: 12,
-        title: 'Oops! Cette pagesemble <mark>introuvable</mark>',
+        title: 'Oops! Cette pagesemble **introuvable**',
         text: "Désolé, mais la page que vous recherchez n'existe pas. Il se peut qu'elle ait été déplacée, renommée ou supprimée. Nous vous invitons à retourner à notre page d'accueil.",
         icon: '💡',
         image: {

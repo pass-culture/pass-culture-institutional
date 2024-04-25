@@ -1,7 +1,7 @@
 const actusrdv = {
   id: 2,
   attributes: {
-    title: 'Les <mark>actualités</mark> et  prochains rendez-vous',
+    title: 'Les **actualités** et  prochains rendez-vous',
     buttonText: 'Afficher la suite',
     titleEventSection: 'Les prochains rendez-vous',
     createdAt: '2024-04-02T09:42:31.804Z',
