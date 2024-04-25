@@ -40,8 +40,8 @@ export function VerticalCarouselSlide({
             <Image
               src={getStrapiURL(imageUrl)}
               alt=""
-              layout={'fill'}
-              objectFit={'cover'}
+              layout="fill" // TODO: Fix deprecated use of "layout" (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
+              objectFit="cover" // TODO: Fix deprecated use of "objectFit": (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
             />
             <PlayIcon />
           </StyledImageWrapper>

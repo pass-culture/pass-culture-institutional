@@ -83,7 +83,7 @@ export function EventCard({
           alt=""
           width={385}
           height={310}
-          layout="responsive"
+          layout="responsive" // TODO: Fix deprecated use of "layout" (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
         />
       )}
     </Root>
