@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../../../ui/components/typographies'
 import { PiledCardItemsTheme } from './piled-card-items-theme'
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type PiledCardsCarouselSlideProps = {

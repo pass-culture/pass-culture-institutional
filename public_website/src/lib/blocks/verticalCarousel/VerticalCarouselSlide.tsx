@@ -3,10 +3,10 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../../../ui/components/typographies'
 import { APIResponseData } from '@/types/strapi'
 import { Play } from '@/ui/components/icons/Play'
 import { Link } from '@/ui/components/Link'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type VerticalCarouselSlideProps = {

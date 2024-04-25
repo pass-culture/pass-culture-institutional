@@ -8,10 +8,10 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
 import { LogoCarouselSlide } from './logoCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
 import { APIResponse } from '@/types/strapi'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
