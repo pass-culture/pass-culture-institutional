@@ -30,6 +30,11 @@ on:
         required: true
       teleport_kubernetes_cluster:
         type: string
+        required: true
+      namespace:
+        type: string
+        description: Namespace in which CMS is hosted
+        required: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -105,7 +110,7 @@ jobs:
           ID_TOKEN: ${{ steps.auth.outputs.id_token }}
           SENTRY_TOKEN: ${{ steps.secrets.outputs.SENTRY_TOKEN }}
         run: |
-          kubectl port-forward --namespace site-instit-production service/site-instit-cms 1337:1337 &
+          kubectl port-forward --namespace ${{ inputs.namespace }} service/site-instit-cms 1337:1337 &
           yarn install
           yarn build
 
