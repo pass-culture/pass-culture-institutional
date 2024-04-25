@@ -20,6 +20,7 @@ module.exports = {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'array-callback-return': 'error',
     'import/no-duplicates': ['error', { considerQueryString: true }],
+    '@next/next/no-img-element': 'off',
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-restricted-imports': [
       'error',
