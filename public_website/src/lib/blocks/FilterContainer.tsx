@@ -103,8 +103,8 @@ export function FilterContainer({
         <p>Filtres</p>
         <StyledRoundDiv>{numberOfFilters}</StyledRoundDiv>
       </StyledMobileFilterLabel>
-      {filtres?.map((filtre) => (
-        <div key={filtre.filtre}>
+      {filtres?.map((filtre, index) => (
+        <div key={filtre.filtre + index}>
           <label className="visually-hidden" htmlFor={filtre.filtre}>
             {filtre.filtre}
           </label>
@@ -115,18 +115,18 @@ export function FilterContainer({
             onChange={handleFilterChange}>
             <option value="">{filtre.filtre}</option>
             <option value="">Tout</option>
-            {filtre.value.map((value) => (
-              <option key={value} value={value}>
+            {filtre.value.map((value, index) => (
+              <option key={value + index} value={value}>
                 {value}
               </option>
             ))}
           </StyledSelect>
 
-          {filterValues[filtre.filtre]?.map((value) => {
+          {filterValues[filtre.filtre]?.map((value, index) => {
             if (value !== '') {
               return (
                 <StyledSelectButton
-                  key={value}
+                  key={value + index}
                   aria-label={value}
                   onClick={() => {
                     handleDetailChange(filtre.filtre, value)
@@ -165,8 +165,8 @@ export function FilterContainer({
             </StyledButton>
           </StyledMobileSelectHeader>
           <StyleSelectContent>
-            {filtres?.map((filtre) => (
-              <details key={filtre.filtre} open={false}>
+            {filtres?.map((filtre, index) => (
+              <details key={filtre.filtre + index} open={false}>
                 <summary>
                   {filtre.filtre}
                   <div className="wrapper">
@@ -184,7 +184,7 @@ export function FilterContainer({
                   <Tick />
                   Tout
                 </button>
-                {filtre.value.map((value) => (
+                {filtre.value.map((value, index) => (
                   <button
                     className={
                       filterValues[filtre.filtre]?.includes(value)
@@ -192,7 +192,7 @@ export function FilterContainer({
                         : ''
                     }
                     onClick={() => handleDetailChange(filtre.filtre, value)}
-                    key={value}>
+                    key={value + index}>
                     <Tick />
                     {value}
                   </button>
