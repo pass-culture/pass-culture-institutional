@@ -1,5 +1,5 @@
 import { http, HttpHandler } from 'msw'
-import { beforeAll, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import { testDataFixtures } from '../fixtures'
 import { server } from '../server'
@@ -20,67 +20,55 @@ const respondWith = async (
     statusText,
   })
 }
-const OLD_ENV = { ...process.env }
 
 describe('fetchCMS', () => {
-  it('should fail when not in localhost/testing and no token is found', async () => {
+  beforeEach(() => {
     process.env = {
-      ...OLD_ENV,
-      NEXT_PUBLIC_STRAPI_API_URL:
-        'https://siteinstit-cms.staging.passculture.team',
+      ...process.env,
+      NEXT_PUBLIC_BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
+  })
+
+  it('should pass', async () => {
+    const response = await fetchCMS('/test')
+
+    expect(response.data).toMatchObject(testDataFixtures)
+  })
+
+  it('should fail if response is not ok', async () => {
+    const statusCode = 500
+    const requestUrl = 'http://localhost:1337/api/test'
+    const responseResolver: HttpHandler = http.get(requestUrl, () =>
+      respondWith({}, statusCode)
+    )
+    server.use(responseResolver)
 
     await expect(fetchCMS('/test')).rejects.toThrow(
-      'Environnement variable ID_TOKEN not found'
+      `CMS returned a non-OK status: ${statusCode} on ${requestUrl}`
     )
   })
 
-  describe('when token exists', () => {
-    beforeAll(() => {
-      process.env = { ...OLD_ENV, ID_TOKEN: 'dummy_token' }
-    })
+  it('should fail if response is html', async () => {
+    const responseResolver: HttpHandler = http.get(
+      'http://localhost:1337/api/test',
+      () => respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
+    )
+    server.use(responseResolver)
 
-    it('should pass', async () => {
-      const response = await fetchCMS('/test')
+    await expect(fetchCMS('/test')).rejects.toThrow(
+      'Unexpected response. Content type received: text/html'
+    )
+  })
 
-      expect(response.data).toMatchObject(testDataFixtures)
-    })
+  it('should fail if the content-type is not specified', async () => {
+    const responseResolver: HttpHandler = http.get(
+      'http://localhost:1337/api/test',
+      () => respondWith({}, 200, 'OK', { 'content-type': '' })
+    )
+    server.use(responseResolver)
 
-    it('should fail if response is not ok', async () => {
-      const statusCode = 500
-      const requestUrl = 'http://localhost:1337/api/test'
-      const responseResolver: HttpHandler = http.get(requestUrl, () =>
-        respondWith({}, statusCode)
-      )
-      server.use(responseResolver)
-
-      await expect(fetchCMS('/test')).rejects.toThrow(
-        `CMS returned a non-OK status: ${statusCode} on ${requestUrl}`
-      )
-    })
-
-    it('should fail if response is html', async () => {
-      const responseResolver: HttpHandler = http.get(
-        'http://localhost:1337/api/test',
-        () => respondWith({}, 200, 'OK', { 'content-type': 'text/html' })
-      )
-      server.use(responseResolver)
-
-      await expect(fetchCMS('/test')).rejects.toThrow(
-        'Unexpected response. Content type received: text/html'
-      )
-    })
-
-    it('should fail if the content-type is not specified', async () => {
-      const responseResolver: HttpHandler = http.get(
-        'http://localhost:1337/api/test',
-        () => respondWith({}, 200, 'OK', { 'content-type': '' })
-      )
-      server.use(responseResolver)
-
-      await expect(fetchCMS('/test')).rejects.toThrow(
-        'Unexpected response. Content type received: '
-      )
-    })
+    await expect(fetchCMS('/test')).rejects.toThrow(
+      'Unexpected response. Content type received: '
+    )
   })
 })

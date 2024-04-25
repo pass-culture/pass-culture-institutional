@@ -8,7 +8,6 @@ describe('404', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
-      ID_TOKEN: 'dummy_token',
       NEXT_PUBLIC_BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
   })

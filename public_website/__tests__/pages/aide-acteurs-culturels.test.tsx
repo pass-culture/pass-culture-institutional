@@ -3,14 +3,15 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import CulturalActorsHelp, { getStaticProps } from '@/pages/aide-acteurs-culturels'
+import CulturalActorsHelp, {
+  getStaticProps,
+} from '@/pages/aide-acteurs-culturels'
 
 vi.mock('@/lib/analytics/analyticsProvider')
 describe('Help page - Cultural actors', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
-      ID_TOKEN: 'dummy_token',
       BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
   })

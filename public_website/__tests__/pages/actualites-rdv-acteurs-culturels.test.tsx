@@ -3,13 +3,14 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, render } from '..'
-import ListeActuCulturels, { getStaticProps } from '@/pages/actualites-rdv-acteurs-culturels'
+import ListeActuCulturels, {
+  getStaticProps,
+} from '@/pages/actualites-rdv-acteurs-culturels'
 
 describe('Actus rdv acteurs pass culture', () => {
   beforeEach(() => {
     process.env = {
       ...process.env,
-      ID_TOKEN: 'dummy_token',
       NEXT_PUBLIC_BACKEND_API_URL: 'http://dummy_localhost:5001',
     }
   })
