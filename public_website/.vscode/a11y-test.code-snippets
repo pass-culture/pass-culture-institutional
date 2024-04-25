@@ -15,7 +15,9 @@
       "    const { container } = render(<${1:PageName} />)",
       "",
       "    expect(await axe(container)).toHaveNoViolations()",
-      "  })",
+      "  },",
+      "  { timeout : 10000 }",
+      "  (",
       "})",
       ""
     ],

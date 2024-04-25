@@ -1,25 +1,5 @@
 # Full page test
 
-## Render test
-
-```tsx
-import React from 'react'
-import { describe, expect, it } from 'vitest'
-
-import Home from './index'
-import { render } from '@/tests'
-
-describe('Home page', () => {
-  it('should render the page', () => {
-    const { container } = render(<Home />)
-
-    expect(container).toMatchSnapshot()
-  })
-})
-```
-
----
-
 ## Accessibility
 
 Accessibility test should be on all **pages** or **modals**
@@ -37,7 +17,9 @@ describe('Home page', () => {
     const { container } = render(<Home />)
 
     expect(await axe(container)).toHaveNoViolations()
-  })
+  },
+  { timeout: 10000 }
+  )
 })
 ```
 

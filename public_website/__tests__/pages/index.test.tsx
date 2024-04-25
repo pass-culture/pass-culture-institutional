@@ -33,8 +33,9 @@ describe('Home page', () => {
       })
       expect(a11yResult).toHaveNoViolations()
     },
-    { timeout: 70000 }
+    { timeout: 30000 }
   )
+
   describe('when eventName is defined in the cta and exists in EventMap', () => {
     it('should trigger event when clicking on the button', async () => {
       server.use(
@@ -62,6 +63,7 @@ describe('Home page', () => {
       })
     })
   })
+
   describe("when eventName is undefined in the cta or doesn't exist in EventMap", () => {
     it('should not trigger any event when clicking on the button', async () => {
       vi.resetAllMocks()
