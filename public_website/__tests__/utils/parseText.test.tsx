@@ -31,7 +31,21 @@ describe('parseText', () => {
     expect(processedText[4]?.type).toEqual('span')
   })
 
-  it('should parse text with markup correctly for accessibilityLabel', () => {
+  it('should parse text without <br/> correctly for accessibilityLabel', () => {
     expect(accessibilityLabel).toEqual('I am a text in bold with line breaks')
+  })
+
+  it('should parse text with <br/> correctly', () => {
+    const textWithBr = 'Text with<br/>line breaks only'
+    const { processedText } = parseText(textWithBr)
+
+    const allTextWithBrInSpan = processedText[0]?.props
+    const firstPart = allTextWithBrInSpan.children[0].props?.children
+
+    expect(firstPart[0]).toEqual('Text with')
+    expect(firstPart[1].type).toEqual('br')
+
+    const lastPart = allTextWithBrInSpan.children[1].props?.children
+    expect(lastPart[0]).toEqual('line breaks only')
   })
 })
