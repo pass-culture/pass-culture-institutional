@@ -5,6 +5,7 @@ import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import { CTA } from '@/types/CTA'
+import { parseText } from '@/utils/parseText'
 
 type EligibilityProps = {
   title: string
@@ -29,7 +30,9 @@ export function Eligibility({
     <Root>
       <StyledCard>
         <StyledCardHeading>
-          <span dangerouslySetInnerHTML={{ __html: cardTitle }} />
+          <span aria-label={parseText(cardTitle).accessibilityLabel}>
+            {parseText(cardTitle).processedText}
+          </span>
         </StyledCardHeading>
         <StyledCardDescription>{cardDescription}</StyledCardDescription>
         <ButtonWithCTA variant="tertiary" cta={cardCta} />

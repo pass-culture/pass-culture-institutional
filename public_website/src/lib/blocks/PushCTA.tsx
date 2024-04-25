@@ -9,6 +9,7 @@ import { APIResponse } from '@/types/strapi'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { parseText } from '@/utils/parseText'
 
 interface PushCTAProps {
   title: string
@@ -46,9 +47,11 @@ export function PushCTA(props: PushCTAProps) {
         <BackgroundLayer />
       </CardContainer>
       <RightSide>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+        <Typo.Heading2>{props.title}</Typo.Heading2>
         {props.description && (
-          <p dangerouslySetInnerHTML={{ __html: props.description }} />
+          <p aria-label={parseText(props.description).accessibilityLabel}>
+            {parseText(props.description).processedText}
+          </p>
         )}
         <CtaLink
           href={props.ctaLink.URL}

@@ -55,7 +55,7 @@ export function MobileMenuListSubPanel({
         })}
       </StyledSubPanelList>
       <StyledSubPanelCard href={cardLink.URL}>
-        <OutlinedText innerAs={'p'}>{cardTitle}</OutlinedText>
+        <OutlinedText innerAs="p">{cardTitle}</OutlinedText>
         <p>{cardDescription}</p>
         <OutlinedText>{cardFirstEmoji}</OutlinedText>
         <OutlinedText>{cardSecondEmoji}</OutlinedText>

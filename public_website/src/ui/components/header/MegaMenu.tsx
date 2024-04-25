@@ -8,6 +8,7 @@ import { Typo } from '../typographies'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
+import { parseText } from '@/utils/parseText'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -78,7 +79,7 @@ export function MegaMenu({
     <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <Typo.Heading2 as={'p'}>{data.title}</Typo.Heading2>
+          <Typo.Heading2 as="p">{data.title}</Typo.Heading2>
           <ButtonWithCTA cta={data.cta} />
           {data.bannerText && (
             <AppBanner
@@ -101,8 +102,9 @@ export function MegaMenu({
                 <li key={item.Label}>
                   <Link
                     href={item.URL}
-                    dangerouslySetInnerHTML={{ __html: item.Label }}
-                  />
+                    aria-label={parseText(item.Label).accessibilityLabel}>
+                    {parseText(item.Label).processedText}
+                  </Link>
                 </li>
               )
             })}
@@ -113,8 +115,9 @@ export function MegaMenu({
                 <li key={item.Label}>
                   <Link
                     href={item.URL}
-                    dangerouslySetInnerHTML={{ __html: item.Label }}
-                  />
+                    aria-label={parseText(item.Label).accessibilityLabel}>
+                    {parseText(item.Label).processedText}
+                  </Link>
                 </li>
               )
             })}
@@ -123,7 +126,7 @@ export function MegaMenu({
 
         <StyledMegaMenuCard>
           <StyledMegaMenuCardHeading>
-            <OutlinedText innerAs={'p'}>{data.cardTitle}</OutlinedText>
+            <OutlinedText innerAs="p">{data.cardTitle}</OutlinedText>
 
             <OutlinedText dilationRadius={1} shadow aria-hidden="true">
               {data.cardFirstEmoji}

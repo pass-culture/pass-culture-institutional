@@ -5,6 +5,7 @@ import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { Link } from '../Link'
 import { Typo } from '../typographies'
 import { CTA } from '@/types/CTA'
+import { parseText } from '@/utils/parseText'
 
 interface ResultScreenProps {
   title: string
@@ -17,12 +18,8 @@ interface ResultScreenProps {
 export function ResultScreen(props: ResultScreenProps) {
   return (
     <Root>
-      <Title
-        as="p"
-        id="simulator-step-title"
-        dangerouslySetInnerHTML={{ __html: props.title }}
-      />
-
+      <Typo.Heading3>{props.title}</Typo.Heading3>
+      <Spacer />
       <Steps>
         {props.steps.map((step, i) => (
           <li key={step}>
@@ -35,7 +32,9 @@ export function ResultScreen(props: ResultScreenProps) {
       <ButtonWithCTA cta={props.ctaLink} />
 
       <HelpText>
-        <span dangerouslySetInnerHTML={{ __html: props.helpText }} />
+        <span aria-label={parseText(props.helpText).accessibilityLabel}>
+          {parseText(props.helpText).processedText}
+        </span>
         <Link href={props.ctaLink.URL}>{props.supportLink.Label}</Link>
       </HelpText>
     </Root>
@@ -50,7 +49,7 @@ const Root = styled.div`
   }
 `
 
-const Title = styled(Typo.Heading3)`
+const Spacer = styled.div`
   margin-bottom: 2rem;
 `
 

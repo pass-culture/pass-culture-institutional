@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
 import { OutlinedText } from '@/ui/components/OutlinedText'
+import { parseText } from '@/utils/parseText'
 
 type OffersCarouselSlideTheme =
   | 'purple'
@@ -42,7 +43,9 @@ export function OffersCarouselSlide({
           <StyledOffersHeader>
             <StyledOffersSurtitle>
               <OutlinedText dilationRadius={2} blurDeviation={1.5}>
-                <span dangerouslySetInnerHTML={{ __html: surtitle }} />
+                <span aria-label={parseText(surtitle).accessibilityLabel}>
+                  {parseText(surtitle).processedText}
+                </span>
               </OutlinedText>
             </StyledOffersSurtitle>
             <StyledFirstIcon

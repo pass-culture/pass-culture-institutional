@@ -23,11 +23,8 @@ export function LittleList(props: LittleListProps) {
     <Root>
       <Columns>
         <Column>
-          {props.title && (
-            <Typo.Heading2
-              dangerouslySetInnerHTML={{ __html: props.title }}></Typo.Heading2>
-          )}
-          <Description>{props.description}</Description>
+          {props.title && <Typo.Heading2>{props.title}</Typo.Heading2>}
+          {props.description && <Description>{props.description}</Description>}
         </Column>
 
         <Column as="ul">

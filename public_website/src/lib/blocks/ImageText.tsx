@@ -29,9 +29,7 @@ export function ImageText({
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledContentTextWrapper className="first">
-          {title && (
-            <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
-          )}
+          {title && <StyledHeading>{title}</StyledHeading>}
           <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper

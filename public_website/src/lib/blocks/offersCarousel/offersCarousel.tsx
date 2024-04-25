@@ -9,8 +9,6 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
-import { Typo } from '../../../ui/components/typographies'
 import {
   OffersCarouselSlide,
   OffersCarouselSlideProps,
@@ -18,7 +16,9 @@ import {
 import { MediaQueries } from '@/theme/media-queries'
 import { CTA } from '@/types/CTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Link } from '@/ui/components/Link'
+import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -112,7 +112,7 @@ export function OffersCarousel({
       infinite={true}
       step={1}>
       <StyledHeading $noMargin>
-        <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+        <Typo.Heading2>{title}</Typo.Heading2>
 
         {!descriptionIsEmpty && <BlocksRenderer content={description} />}
 

@@ -8,6 +8,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { parseText } from '@/utils/parseText'
 
 interface PushCTAProps {
   title: string | undefined
@@ -24,11 +25,15 @@ export function SimplePushCta(props: PushCTAProps) {
       <StyledContentWrapper $noMargin>
         <RightSide>
           {props.surtitle && (
-            <p dangerouslySetInnerHTML={{ __html: props.surtitle }} />
+            <p aria-label={parseText(props.surtitle).accessibilityLabel}>
+              {parseText(props.surtitle).processedText}
+            </p>
           )}
 
           {props.title && (
-            <Title dangerouslySetInnerHTML={{ __html: props.title }} />
+            <Title aria-label={parseText(props.title).accessibilityLabel}>
+              {parseText(props.title).processedText}
+            </Title>
           )}
           {props.cta && (
             <CtaLink href={props.cta.URL}>

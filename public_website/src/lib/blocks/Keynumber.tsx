@@ -14,7 +14,7 @@ export function KeyNumber({ title, items }: KeyNumberProps) {
     <Root>
       <StyledWrapper>
         <div>
-          <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+          <Typo.Heading2>{title}</Typo.Heading2>
         </div>
         <StyledCarouselWrapper>
           <KeyNumberCarousel title={title} items={items} />

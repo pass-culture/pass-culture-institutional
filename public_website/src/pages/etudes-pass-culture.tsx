@@ -183,11 +183,9 @@ export default function EtudesPassCulture({
       )}
       <StyledTitle>
         {etudesPassCultureListe.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: etudesPassCultureListe.attributes.title,
-            }}
-          />
+          <Typo.Heading2>
+            {etudesPassCultureListe.attributes.title}
+          </Typo.Heading2>
         )}
         <UnpaddedBreadcrumb />
         <FilterContainer

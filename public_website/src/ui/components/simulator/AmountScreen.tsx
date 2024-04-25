@@ -14,8 +14,9 @@ interface AmountScreenProps {
 export function AmountScreen(props: AmountScreenProps) {
   return (
     <Root>
-      <Title as="p" dangerouslySetInnerHTML={{ __html: props.title }} />
-      <Text dangerouslySetInnerHTML={{ __html: props.text }} />
+      <Typo.Heading3 as="p">{props.title}</Typo.Heading3>
+      <Spacer />
+      <Text>{props.text}</Text>
       <Button onClick={props.onNext}>Suivant</Button>
     </Root>
   )
@@ -29,7 +30,7 @@ const Root = styled.div`
   }
 `
 
-const Title = styled(Typo.Heading3)`
+const Spacer = styled.div`
   margin-bottom: 1.25rem;
 `
 

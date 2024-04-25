@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import 'rc-slider/assets/index.css'
 import { ChevronDown } from '../icons/ChevronDown'
 import { Label } from './Label'
+import { parseText } from '@/utils/parseText'
 
 interface SliderFieldProps {
   title: string
@@ -59,12 +60,36 @@ export function SliderField({
         max={19}
         step={1}
         marks={{
-          '14': <span dangerouslySetInnerHTML={{ __html: answers[0]! }} />,
-          '15': <span dangerouslySetInnerHTML={{ __html: answers[1]! }} />,
-          '16': <span dangerouslySetInnerHTML={{ __html: answers[2]! }} />,
-          '17': <span dangerouslySetInnerHTML={{ __html: answers[3]! }} />,
-          '18': <span dangerouslySetInnerHTML={{ __html: answers[4]! }} />,
-          '19': <span dangerouslySetInnerHTML={{ __html: answers[5]! }} />,
+          '14': (
+            <span aria-label={parseText(answers[0]!).accessibilityLabel}>
+              {parseText(answers[0]!).processedText}
+            </span>
+          ),
+          '15': (
+            <span aria-label={parseText(answers[1]!).accessibilityLabel}>
+              {parseText(answers[1]!).processedText}
+            </span>
+          ),
+          '16': (
+            <span aria-label={parseText(answers[2]!).accessibilityLabel}>
+              {parseText(answers[2]!).processedText}
+            </span>
+          ),
+          '17': (
+            <span aria-label={parseText(answers[3]!).accessibilityLabel}>
+              {parseText(answers[3]!).processedText}
+            </span>
+          ),
+          '18': (
+            <span aria-label={parseText(answers[4]!).accessibilityLabel}>
+              {parseText(answers[4]!).processedText}
+            </span>
+          ),
+          '19': (
+            <span aria-label={parseText(answers[5]!).accessibilityLabel}>
+              {parseText(answers[5]!).processedText}
+            </span>
+          ),
         }}
         included={false}
         ariaValueTextFormatterForHandle={valueTextFormatter}
@@ -80,8 +105,9 @@ export function SliderField({
             <option
               key={a}
               value={i}
-              dangerouslySetInnerHTML={{ __html: a! }}
-            />
+              aria-label={parseText(a!).accessibilityLabel}>
+              {parseText(a!).processedText}
+            </option>
           ))}
         </Select>
         <SelectIcon />

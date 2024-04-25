@@ -53,7 +53,7 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
   return (
     <Root className={className}>
       <HeadingWrapper $noMargin>
-        <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+        <StyledHeading>{title}</StyledHeading>
       </HeadingWrapper>
       <ListWrapper $noMargin>
         <StyledList>
