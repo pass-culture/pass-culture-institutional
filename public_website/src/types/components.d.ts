@@ -472,8 +472,35 @@ export interface CommonLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.String;
-    eventOrigin: Attribute.String;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
@@ -511,6 +538,35 @@ export interface CommonNotRequiredLink extends Schema.Component {
   attributes: {
     Label: Attribute.String & Attribute.Required;
     URL: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
@@ -649,6 +705,35 @@ export interface HeaderAccountItem extends Schema.Component {
     color: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
@@ -664,12 +749,42 @@ export interface HeaderLoginItems extends Schema.Component {
   collectionName: 'components_header_login_items';
   info: {
     displayName: 'loginItems';
+    description: '';
   };
   attributes: {
     label: Attribute.String & Attribute.Required;
     color: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
     url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
   };
 }
 
