@@ -13,20 +13,14 @@ interface ListProps {
 }
 
 export default function NotFound({ notData }: ListProps) {
+  const { title, text, image, icon, cta } = notData.attributes.header || {}
+
   return (
     <Root>
       {notData.attributes.seo && <Seo metaData={notData.attributes.seo} />}
-      {notData.attributes.header?.title &&
-        notData.attributes.header?.image &&
-        notData.attributes.header?.icon && (
-          <Header
-            title={notData.attributes.header?.title}
-            text={notData.attributes.header?.text}
-            image={notData.attributes.header?.image}
-            icon={notData.attributes.header.icon}
-            cta={notData.attributes.header.cta}
-          />
-        )}
+      {title && image && icon && (
+        <Header title={title} text={text} image={image} icon={icon} cta={cta} />
+      )}
     </Root>
   )
 }

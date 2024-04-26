@@ -20,6 +20,9 @@ export function Imageblock(props: ImageProps) {
             <img
               src={getStrapiURL(props.image.data.attributes.url)}
               alt={props.alt}
+              fetchPriority="low"
+              loading="lazy"
+              decoding="async"
             />
             <figcaption>{props.description}</figcaption>
           </figure>

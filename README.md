@@ -70,6 +70,12 @@ We also use snapshot testing, so when intended UI changes are made, be sure to u
 
 ### Content management system
 
+#### Sharing types between the front & back
+
+You can copy the types from Strapi to be used in Next. Once you have finished making changes to Strapi, run the command `yarn copytypes` from the root of the project. You can find more details on the implementation of this sharing feature in [this article](https://strapi.io/blog/improve-your-frontend-experience-with-strapi-types-and-type-script).
+
+#### Why aren't there any unit test on the CMS?
+
 No tests have been written yet. As of end of 2023, Strapi has not documented a satisfying way to implement unit testing. The [example provided in the Strapi documentation](https://docs.strapi.io/dev-docs/testing) does not respect the principle of [immutable infrastructure](https://www.digitalocean.com/community/tutorials/what-is-immutable-infrastructure).
 
 The Strapi documentation recommends to use a temp local file to host a SQLite database for unit testing. We would be using a different database instance from the one used in production. This means that we could successfully pass our unit tests but the server could be down in production.
