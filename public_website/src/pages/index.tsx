@@ -3,16 +3,16 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { CenteredText } from '@/lib/blocks/CenteredText'
-import { LatestNews } from '@/lib/blocks/LatestNews'
-import { PushCTA } from '@/lib/blocks/PushCTA'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
+import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
+import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
+import { SocialMedia as SocialMediaSection } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
 import { APIResponseData } from '@/types/strapi'
-import { Eligibility } from '@/ui/components/home/Eligibility'
-import { Hero } from '@/ui/components/home/Hero'
-import { Recommendations } from '@/ui/components/home/Recommendations'
+import { Eligibility as EligibilitySection } from '@/ui/components/home/Eligibility'
+import { Hero as HeroSection } from '@/ui/components/home/Hero'
+import { Recommendations as RecommendationsSection } from '@/ui/components/home/Recommendations'
 import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -31,7 +31,7 @@ export default function Home({
     <React.Fragment>
       {homeData.attributes.seo && <Seo metaData={homeData.attributes.seo} />}
       <StyledHomeGradient>
-        <Hero
+        <HeroSection
           title={homeData.attributes.heroSection.title}
           subTitle={homeData.attributes.heroSection.subTitle}
           cta={homeData.attributes.heroSection.cta}
@@ -49,13 +49,13 @@ export default function Home({
           }
         />
 
-        <CenteredText
+        <AboutSection
           title={homeData.attributes.aboutSection.title}
           description={homeData.attributes.aboutSection.description}
         />
       </StyledHomeGradient>
 
-      <Eligibility
+      <EligibilitySection
         title={homeData.attributes.eligibilitySection.title}
         items={homeData.attributes.eligibilitySection.items}
         cardTitle={homeData.attributes.eligibilitySection.cardTitle}
@@ -65,7 +65,7 @@ export default function Home({
         cardSecondEmoji={homeData.attributes.eligibilitySection.secondEmoji}
       />
 
-      <StyledPushCTA
+      <StyledCTASection
         title={homeData.attributes.CTASection.title}
         description={homeData.attributes.CTASection.description}
         image={homeData.attributes.CTASection.image}
@@ -75,7 +75,7 @@ export default function Home({
       />
 
       {recommendationItems.length > 0 && (
-        <Recommendations
+        <RecommendationsSection
           title={
             homeData.attributes.recommendationsSection.recommendations.title
           }
@@ -84,13 +84,13 @@ export default function Home({
         />
       )}
 
-      <StyledLatestNews
+      <StyledLatestStudiesSection
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
         cta={homeData.attributes.latestStudies.cta}
       />
 
-      <StyledSocialMedia
+      <StyledSocialMediaSection
         title={homeData.attributes.socialMediaSection.title}
         socialMediaLink={homeData.attributes.socialMediaSection.socialMediaLink}
       />
@@ -181,7 +181,7 @@ const StyledHomeGradient = styled.div`
   `}
 `
 
-const StyledPushCTA = styled(PushCTA)`
+const StyledCTASection = styled(CTASection)`
   ${({ theme }) => css`
     margin-top: 12.5rem;
     margin-bottom: 10rem;
@@ -192,7 +192,7 @@ const StyledPushCTA = styled(PushCTA)`
   `}
 `
 
-const StyledLatestNews = styled(LatestNews)`
+const StyledLatestStudiesSection = styled(LatestStudiesSection)`
   ${({ theme }) => css`
     margin-top: 6rem;
     margin-bottom: 6rem;
@@ -203,7 +203,7 @@ const StyledLatestNews = styled(LatestNews)`
   `}
 `
 
-const StyledSocialMedia = styled(SocialMedia)`
+const StyledSocialMediaSection = styled(SocialMediaSection)`
   ${({ theme }) => css`
     margin-top: 6rem;
     margin-bottom: 5rem;
