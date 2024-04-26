@@ -7,6 +7,7 @@ import styled, { css } from 'styled-components'
 
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { parseText } from '@/utils/parseText'
 
 interface SimpleTextV2Props {
   title?: string
@@ -21,22 +22,17 @@ interface SimpleTextV2Props {
 export function SimpleTextV2(props: SimpleTextV2Props) {
   return (
     <Root data-testid="simple-text">
-      {props.title && (
-        <StyledHeading2 dangerouslySetInnerHTML={{ __html: props.title }} />
-      )}
-
+      {props.title && <StyledHeading2>{props.title}</StyledHeading2>}
       <Content>
         <BlocksRenderer content={props.text} />
-
         {props.columns.length > 0 && (
           <Columns>
             {props.columns.map((col) => (
               <Column key={col.id}>
                 <ColumnTitle
-                  dangerouslySetInnerHTML={{
-                    __html: col.title,
-                  }}
-                />
+                  aria-label={parseText(col.title).accessibilityLabel}>
+                  {parseText(col.title).processedText}
+                </ColumnTitle>
                 <BlocksRenderer content={col.text} />
               </Column>
             ))}

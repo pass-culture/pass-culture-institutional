@@ -21,12 +21,8 @@ export default function SimulatorPage(props: SimulatorProps) {
       {props.data.attributes.seo && (
         <Seo metaData={props.data.attributes.seo} />
       )}
-      <Title
-        dangerouslySetInnerHTML={{ __html: props.data.attributes.title }}
-      />
-      <Description
-        dangerouslySetInnerHTML={{ __html: props.data.attributes.description }}
-      />
+      <Title>{props.data.attributes.title}</Title>
+      <Description>{props.data.attributes.description}</Description>
       <UnpaddedBreadcrumb />
 
       <StyledSimulator

@@ -25,11 +25,7 @@ export default function CustomPage(props: CustomPageProps) {
       ))}
 
       <StyledWrapper>
-        <StyledHeading
-          dangerouslySetInnerHTML={{
-            __html: 'Les dernières <mark>événements</mark>',
-          }}
-        />
+        <StyledHeading>Les derniers **événements**</StyledHeading>
 
         {props.related.length > 0 &&
           props.related.map((eventItem) => (

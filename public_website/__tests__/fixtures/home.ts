@@ -10,7 +10,7 @@ export const homePageFixtures = {
       heroSection: {
         id: 1,
         title:
-          'Profite du pass Culture pour  <mark>découvrir</mark> la culture autour de toi',
+          'Profite du pass Culture pour **découvrir** la culture autour de toi',
         subTitle: 'Tu as entre 15 et 20 ans ?',
         firstEmoji: '💻',
         secondEmoji: '🍿',
@@ -110,7 +110,7 @@ export const homePageFixtures = {
         id: 3,
         title: 'À propos',
         description:
-          'Les partenaires culturels du pass Culture te proposent des milliers d’offres, à réserver selon tes envies.Passe à l’action, <mark>rejoins le pass Culture !</mark>',
+          'Les partenaires culturels du pass Culture te proposent des milliers d’offres, à réserver selon tes envies.Passe à l’action, **rejoins le pass Culture !**',
       },
       eligibilitySection: {
         id: 1,
@@ -201,7 +201,7 @@ export const homePageFixtures = {
       },
       latestStudies: {
         id: 1,
-        title: 'Les dernières<br/>\n<mark>études</mark> réalisées',
+        title: 'Les dernières **études** réalisées',
         cta: {
           id: 117,
           Label: 'Voir toutes les études',

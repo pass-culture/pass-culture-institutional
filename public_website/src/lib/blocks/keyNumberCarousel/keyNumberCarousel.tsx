@@ -8,12 +8,12 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
 import {
   KeyNumberCarouselSlide,
   KeyNumberCarouselSlideProps,
 } from './keyNumberCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
@@ -95,7 +95,7 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
       infinite={true}
       step={1}>
       <StyledKeyCarouselHeading>
-        <StyledTitle dangerouslySetInnerHTML={{ __html: title }} />
+        <StyledTitle>{title}</StyledTitle>
 
         <StyledNavigationButtons aria-label="Contrôles du carousel">
           <ButtonBack

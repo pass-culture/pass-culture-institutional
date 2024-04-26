@@ -10,9 +10,10 @@ import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { parseText } from '@/utils/parseText'
 
 interface DoublePushCTAProps {
-  title: string | TrustedHTML
+  title: string
   text: string | undefined
   image: APIResponse<'plugin::upload.file'> | null | undefined
   firstCta: CTA
@@ -43,10 +44,12 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
           <OutlinedText shadow>{props.icon}</OutlinedText>
         </CardContainer>
         <RightSide>
-          {props.title && (
-            <Typo.Heading2 dangerouslySetInnerHTML={{ __html: props.title }} />
+          {props.title && <Typo.Heading2>{props.title}</Typo.Heading2>}
+          {props.text && (
+            <p aria-label={parseText(props.text).accessibilityLabel}>
+              {parseText(props.text).processedText}
+            </p>
           )}
-          {props.text && <p dangerouslySetInnerHTML={{ __html: props.text }} />}
           <CtaLink
             href={props.firstCta?.URL}
             onClick={() => {

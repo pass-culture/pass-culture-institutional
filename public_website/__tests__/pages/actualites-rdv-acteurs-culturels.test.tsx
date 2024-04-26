@@ -27,6 +27,6 @@ describe('Actus rdv acteurs pass culture', () => {
       })
       expect(a11yResult).toHaveNoViolations()
     },
-    { timeout: 20000 }
+    { timeout: 10000 }
   )
 })

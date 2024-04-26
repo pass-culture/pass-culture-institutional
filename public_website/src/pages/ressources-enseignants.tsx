@@ -153,11 +153,9 @@ export default function RessourcesEnseignants({
       )}
       <StyledTitle>
         {ressourcesEnseignantsListe.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: ressourcesEnseignantsListe.attributes.title,
-            }}
-          />
+          <Typo.Heading2>
+            {ressourcesEnseignantsListe.attributes.title}
+          </Typo.Heading2>
         )}
         <UnpaddedBreadcrumb />
         <FilterContainer

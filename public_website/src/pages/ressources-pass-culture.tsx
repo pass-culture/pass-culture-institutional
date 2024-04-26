@@ -153,11 +153,9 @@ export default function RessourcesPassCulture({
       )}
       <StyledTitle>
         {ressourcesPassCultureListe.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: ressourcesPassCultureListe.attributes.title,
-            }}
-          />
+          <Typo.Heading2>
+            {ressourcesPassCultureListe.attributes.title}
+          </Typo.Heading2>
         )}
         <UnpaddedBreadcrumb />
         <FilterContainer

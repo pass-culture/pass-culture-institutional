@@ -278,11 +278,7 @@ export default function ListeActuCulturels({
       )}
       <StyledTitle>
         {listeActuCulturel.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: listeActuCulturel.attributes.title,
-            }}
-          />
+          <Typo.Heading2>{listeActuCulturel.attributes.title}</Typo.Heading2>
         )}
 
         <UnpaddedBreadcrumb />
@@ -301,11 +297,9 @@ export default function ListeActuCulturels({
 
       <StyledTitle>
         {listeActuCulturel.attributes.titleEventSection && (
-          <Typo.Heading3
-            dangerouslySetInnerHTML={{
-              __html: listeActuCulturel.attributes.titleEventSection,
-            }}
-          />
+          <Typo.Heading3>
+            {listeActuCulturel.attributes.titleEventSection}
+          </Typo.Heading3>
         )}
         <FilterContainer
           filtres={eventFilters}

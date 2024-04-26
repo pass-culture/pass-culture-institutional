@@ -8,14 +8,14 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
-import { Typo } from '../../../ui/components/typographies'
 import {
   VerticalCarouselSlide,
   VerticalCarouselSlideProps,
 } from './VerticalCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
+import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -106,7 +106,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
           dragEnabled={false}
           step={1}>
           <StyledHeading>
-            <Typo.Heading2 dangerouslySetInnerHTML={{ __html: title }} />
+            <Typo.Heading2>{title}</Typo.Heading2>
 
             <StyledNavigationButtons
               role="group"

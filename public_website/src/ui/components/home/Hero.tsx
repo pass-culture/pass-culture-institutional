@@ -1,10 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { CTA } from '../../../types/CTA'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
+import { CTA } from '@/types/CTA'
 import { APIResponseData } from '@/types/strapi'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
@@ -57,7 +57,7 @@ export function Hero({
       </StyledHeroBackground>
 
       <StyledSubTitle>{subTitle}</StyledSubTitle>
-      <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />
+      <StyledHeading>{title}</StyledHeading>
       <StyledCta cta={cta} />
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">

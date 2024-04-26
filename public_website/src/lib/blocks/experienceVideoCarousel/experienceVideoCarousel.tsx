@@ -8,14 +8,14 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { ArrowRight } from '../../../ui/components/icons/ArrowRight'
-import { Typo } from '../../../ui/components/typographies'
 import {
   ExperienceVideoCarouselSlide,
   ExperienceVideoCarouselSlideProps,
 } from './experieneVideoCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { ArrowRight } from '@/ui/components/icons/ArrowRight'
+import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
@@ -104,7 +104,7 @@ export function ExperienceVideoCarousel({
         infinite={true}
         step={1}>
         <StyledHeading>
-          <StyledHeading2 dangerouslySetInnerHTML={{ __html: title }} />
+          <StyledHeading2>{title}</StyledHeading2>
 
           <StyledNavigationButtons aria-label="Contrôles du carousel">
             <ButtonBack

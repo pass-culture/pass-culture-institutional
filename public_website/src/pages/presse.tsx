@@ -277,11 +277,7 @@ export default function Presse({
       )}
       <StyledTitle>
         {presseListe.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: presseListe.attributes.title,
-            }}
-          />
+          <Typo.Heading2>{presseListe.attributes.title}</Typo.Heading2>
         )}
 
         <Breadcrumb />
@@ -301,11 +297,9 @@ export default function Presse({
 
       <StyledTitle>
         {presseListe.attributes.titleEventSection && (
-          <Typo.Heading3
-            dangerouslySetInnerHTML={{
-              __html: presseListe.attributes.titleEventSection,
-            }}
-          />
+          <Typo.Heading3>
+            {presseListe.attributes.titleEventSection}
+          </Typo.Heading3>
         )}
         <FilterContainer
           filtres={eventFilters}

@@ -121,9 +121,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         <Seo metaData={listejeune.attributes.seo} />
       )}
       <StyledTitle>
-        <Typo.Heading2
-          dangerouslySetInnerHTML={{ __html: listejeune.attributes.title }}
-        />
+        <Typo.Heading2>{listejeune.attributes.title}</Typo.Heading2>
 
         <UnpaddedBreadcrumb />
 

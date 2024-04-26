@@ -2,12 +2,13 @@ import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
-import { LinkFaq } from '../../ui/components/help/Link'
-import { Typo } from '../../ui/components/typographies'
-import arrowUrl from '../../ui/image/arrowd.svg'
 import { CTA } from '@/types/CTA'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { LinkFaq } from '@/ui/components/help/Link'
+import { Typo } from '@/ui/components/typographies'
+import arrowUrl from '@/ui/image/arrowd.svg'
+import { parseText } from '@/utils/parseText'
 
 type FaqProps = {
   title: string
@@ -74,23 +75,32 @@ export function Faq({
   return (
     <StyledContentWrapper>
       <StyledContentTextWrapper>
-        {title && <StyledHeading dangerouslySetInnerHTML={{ __html: title }} />}
+        {title && <StyledHeading>{title}</StyledHeading>}
         {cta && <ButtonWithCTA cta={cta} />}
       </StyledContentTextWrapper>
       <div>
-        {filteredQuestions.map((faq) => (
-          <StyledAccordion key={faq.id}>
-            <summary
-              dangerouslySetInnerHTML={{
-                __html: faq.title.replace(/\[.*?\]/g, ''),
-              }}></summary>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: cutFaqBody(faq.body),
-              }}></p>
-            {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
-          </StyledAccordion>
-        ))}
+        {filteredQuestions.map((faq) => {
+          const title = faq.title.replace(/\[.*?\]/g, '')
+          const body = cutFaqBody(faq.body)
+          const {
+            accessibilityLabel: summaryAccessibilityLabel,
+            processedText: summaryTextWithMarkup,
+          } = parseText(title)
+          const {
+            accessibilityLabel: textAccessibilityLabel,
+            processedText: textTextWithMarkup,
+          } = parseText(body)
+
+          return (
+            <StyledAccordion key={faq.id}>
+              <summary aria-label={summaryAccessibilityLabel}>
+                {summaryTextWithMarkup}
+              </summary>
+              <p aria-label={textAccessibilityLabel}>{textTextWithMarkup}</p>
+              {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
+            </StyledAccordion>
+          )
+        })}
       </div>
       {cta && <MobileCta cta={cta} />}
     </StyledContentWrapper>

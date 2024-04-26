@@ -129,11 +129,9 @@ export default function ListeActualitesPassCulture({
       )}
       <StyledTitle>
         {listeActualitesPassCulture.attributes.title && (
-          <Typo.Heading2
-            dangerouslySetInnerHTML={{
-              __html: listeActualitesPassCulture.attributes.title,
-            }}
-          />
+          <Typo.Heading2>
+            {listeActualitesPassCulture.attributes.title}
+          </Typo.Heading2>
         )}
         <UnpaddedBreadcrumb />
         <FilterContainer

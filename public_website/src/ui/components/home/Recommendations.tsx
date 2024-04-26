@@ -1,8 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { VerticalCarousel } from '../../../lib/blocks/verticalCarousel/VerticalCarousel'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
+import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
 import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
 import { CTA } from '@/types/CTA'
 import { Offer } from '@/types/playlist'

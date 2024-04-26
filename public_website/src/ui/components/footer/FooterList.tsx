@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
+import { parseText } from '@/utils/parseText'
 
 export type FooterListProps = {
   title: string
@@ -19,8 +20,9 @@ export function FooterList({ title, listItems }: FooterListProps) {
             <li key={anchor.Label}>
               <Link
                 href={anchor.URL}
-                dangerouslySetInnerHTML={{ __html: anchor.Label }}
-              />
+                aria-label={parseText(anchor.Label).accessibilityLabel}>
+                {parseText(anchor.Label).processedText}
+              </Link>
             </li>
           )
         })}

@@ -3,10 +3,10 @@ import ReactPlayer from 'react-player/youtube'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../../../ui/components/typographies'
 import { theme } from '@/theme/theme'
 import { APIResponse } from '@/types/strapi'
 import { Play } from '@/ui/components/icons/Play'
+import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 export type ExperienceVideoCarouselSlideProps = {

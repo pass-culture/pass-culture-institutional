@@ -94,6 +94,7 @@ export function ImageGallery(props: ImageGalleryProps) {
         $galleryIsShort={!showScrollButtons}>
         <Row ref={rowElement}>
           {firstRow.map((image) => (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={image.id}
               src={
@@ -108,6 +109,7 @@ export function ImageGallery(props: ImageGalleryProps) {
         </Row>
         <Row>
           {secondRow.map((image) => (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={image.id}
               src={

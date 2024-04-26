@@ -2,8 +2,8 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { Typo } from '../../../ui/components/typographies'
 import { OutlinedText } from '@/ui/components/OutlinedText'
+import { Typo } from '@/ui/components/typographies'
 
 export type KeyNumberCarouselSlideProps = {
   slideIndex: number
