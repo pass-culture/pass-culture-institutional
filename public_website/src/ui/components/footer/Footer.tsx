@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
-import { Gouvernement } from '../icons/Gouvernement'
+import { FrenchRepublic } from '../icons/FrenchRepublic'
 import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
@@ -38,7 +38,7 @@ export function Footer({
               <PassCulture />
             </Link>
             <Link href="https://www.gouvernement.fr">
-              <Gouvernement />
+              <FrenchRepublic />
             </Link>
             <AppBanner
               title={bannerText}
