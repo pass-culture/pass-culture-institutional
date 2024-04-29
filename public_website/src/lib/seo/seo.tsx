@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { usePathname } from 'next/navigation'
 
 import { FacebookMeta } from './facebookMeta'
 import { XMeta } from './xMeta'
@@ -10,6 +11,7 @@ interface SeoProps {
 }
 
 export function Seo(props: SeoProps) {
+  const path = usePathname()
   return (
     <React.Fragment>
       <Head>
@@ -33,9 +35,14 @@ export function Seo(props: SeoProps) {
         {props.metaData?.keywords && (
           <meta name="keywords" content={props.metaData.keywords} />
         )}
-        {props.metaData?.canonicalURL && (
-          <link rel="canonical" href={props.metaData.canonicalURL} />
-        )}
+        <link
+          rel="canonical"
+          href={
+            props.metaData?.canonicalURL
+              ? props.metaData.canonicalURL
+              : process.env['NEXT_PUBLIC_APP_URL'] + path
+          }
+        />
       </Head>
       {props.metaData &&
         props.metaData.metaSocial &&
