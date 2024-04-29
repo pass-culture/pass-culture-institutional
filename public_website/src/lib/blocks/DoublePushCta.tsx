@@ -93,11 +93,8 @@ const Root = styled.div`
     position: relative;
     margin: 0 -3.4rem;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: block;
-
-      border-radius: 0;
-
       position: relative;
       padding-top: 25.125rem;
       margin: 0;
@@ -132,7 +129,7 @@ const CardContainer = styled.div`
       transform: rotate(-7deg);
     }
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin: 0 auto;
       position: absolute;
 
@@ -174,7 +171,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
     aspect-ratio: 510/634.64;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       width: 80%;
       aspect-ratio: 338/233;
       padding: 0;
@@ -209,7 +206,7 @@ const RightSide = styled.div`
       }
     }
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding: 2rem;
       max-width: none;
     }
@@ -267,7 +264,7 @@ const CtaLink = styled(Link)`
       pointer-events: none;
       z-index: 0;
     }
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin-right: 0;
       margin-bottom: 1.25rem;
       display: block;
