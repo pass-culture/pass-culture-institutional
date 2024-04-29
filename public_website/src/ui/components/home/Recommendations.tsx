@@ -31,7 +31,11 @@ export function Recommendations({
 
   return (
     <Root>
-      <VerticalCarousel title={title} items={verticalCarouselItems} />
+      <VerticalCarousel
+        title={title}
+        items={verticalCarouselItems}
+        hidePlayIcon
+      />
       <StyledCtaWrapper>
         <ButtonWithCTA cta={cta} />
       </StyledCtaWrapper>
