@@ -50,7 +50,7 @@ const Root = styled.li`
   grid-template-areas: 'circle surtitle' 'circle title';
   align-items: center;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     display: block;
 
     ${Title}, ${Surtitle} {

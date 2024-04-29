@@ -25,7 +25,7 @@ export function FailureScreen(props: FailureScreenProps) {
 const Root = styled.div`
   padding: 6rem 3rem 2.5rem 4rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     padding: 1rem 1.5rem 2.5rem 1.5rem;
   }
 `

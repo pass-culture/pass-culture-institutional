@@ -274,7 +274,7 @@ const TopEmoji = styled(OutlinedText)`
   z-index: 1;
   transform: translateY(-50%) rotate(-16.81deg);
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     display: none;
   }
 `
@@ -287,7 +287,7 @@ const BottomEmoji = styled(OutlinedText)`
   z-index: 1;
   transform: translateY(50%) rotate(8.56deg);
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     display: none;
   }
 `
@@ -304,7 +304,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
   grid-template-columns: 21rem 1fr;
   grid-template-rows: auto 1fr;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     display: block;
     min-height: 30rem;
   }
@@ -320,7 +320,7 @@ const Steps = styled.ol`
   flex-direction: column;
   gap: 0.75rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     flex-direction: row;
     padding: 2rem 1.5rem;
   }
@@ -340,7 +340,7 @@ const StepSeparator = styled.li`
     border-radius: 0.0625rem;
   }
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     height: 0;
     width: 2.25rem;
 
@@ -363,7 +363,7 @@ const BackContainer = styled.div`
   margin-top: 4rem;
   padding: 0 4rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
     padding: 0 1.5rem;
     margin-top: 0;
   }

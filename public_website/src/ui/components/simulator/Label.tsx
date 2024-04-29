@@ -9,7 +9,7 @@ export const Label = styled.label`
     border-bottom: 1px solid ${theme.colors.primary}33; // 20% opacity
     padding-bottom: 2.5rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       padding-bottom: 1.5rem;
     }
   `}
