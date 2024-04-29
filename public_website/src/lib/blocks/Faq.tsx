@@ -114,7 +114,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
     grid-template-columns: min-content 1fr;
     gap: 12.5rem;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       grid-template-columns: 1fr;
       text-align: center;
       display: flex;
@@ -129,7 +129,7 @@ const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
     min-width: 18rem;
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin-bottom: 1.75rem;
     }
   `}
@@ -137,12 +137,12 @@ const StyledHeading = styled(Typo.Heading2)`
 
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding-left: 0;
     }
 
     a {
-      @media (width < ${theme.mediaQueries.tablet}) {
+      @media (width < ${theme.mediaQueries.largeDesktop}) {
         padding-left: 0;
         display: none;
       }
@@ -206,7 +206,7 @@ const StyledAccordion = styled.details`
       margin-bottom: 2rem;
     }
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       text-align: left;
 
       padding-bottom: 2rem;
@@ -220,7 +220,7 @@ const StyledAccordion = styled.details`
 
 const MobileCta = styled(ButtonWithCTA)`
   display: none;
-  @media (width < ${(p) => p.theme.mediaQueries.tablet}) {
+  @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     display: inline-block;
   }
 `
