@@ -116,7 +116,7 @@ const StyledAccountDropdown = styled.div<{
       display: flex;
       flex-direction: column;
       gap: 2rem;
-      [aria-hidden] {
+      > [aria-hidden] {
         border-top: 1px solid rgba(0, 0, 0, 0.1);
       }
       &::after {
