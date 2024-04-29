@@ -233,6 +233,7 @@ const StyledSelect = styled.select`
     background-color: transparent;
     font-weight: ${theme.fonts.weights.bold};
     text-transform: uppercase;
+    appearance: none;
 
     &::after {
       color: ${theme.colors.tertiary};
