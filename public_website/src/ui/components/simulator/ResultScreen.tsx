@@ -44,7 +44,7 @@ export function ResultScreen(props: ResultScreenProps) {
 const Root = styled.div`
   padding: 6rem 3rem 2.5rem 4rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     padding: 1rem 1.5rem 2.5rem 1.5rem;
   }
 `

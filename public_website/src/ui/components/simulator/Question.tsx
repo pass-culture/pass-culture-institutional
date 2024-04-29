@@ -53,7 +53,7 @@ const Form = styled.form`
   padding: 4rem;
   padding-top: 6.5rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     padding: 1rem 2rem;
     gap: 1.5rem;
   }

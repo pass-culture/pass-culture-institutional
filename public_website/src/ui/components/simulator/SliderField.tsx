@@ -121,7 +121,7 @@ const Field = styled.div`
   flex-direction: column;
   gap: 2.5rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     gap: 1.5rem;
   }
 `
@@ -129,7 +129,7 @@ const Field = styled.div`
 const Slider = styled(BaseSlider)`
   padding-bottom: 4rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     display: none;
   }
 
@@ -211,7 +211,7 @@ const SelectWrapper = styled.div`
   position: relative;
   display: none;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     display: initial;
   }
 `
@@ -237,7 +237,7 @@ const SelectIcon = styled(ChevronDown)`
     transform: translateY(-50%);
     right: 1rem;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       right: 2.2rem;
     }
   `}

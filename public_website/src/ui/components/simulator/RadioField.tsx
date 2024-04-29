@@ -62,7 +62,7 @@ const Fieldset = styled.fieldset`
     width: 100%;
     margin-bottom: 2.5rem;
 
-    @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+    @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
       margin-bottom: 1.5rem;
     }
   }
@@ -73,7 +73,7 @@ const Choices = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.tablet}) {
+  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
