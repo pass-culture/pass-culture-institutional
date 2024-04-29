@@ -81,7 +81,7 @@ const Root = styled(Slide)`
       padding: 1rem;
       margin-right: 1rem;
 
-      @media (width < ${theme.mediaQueries.mobile}) {
+      @media (width < ${theme.mediaQueries.tablet}) {
         margin-right: 1rem;
         margin-left: 1rem;
       }
@@ -132,7 +132,7 @@ const Card = styled.div`
 
   box-shadow: ${theme.shadows.banner};
 
-  @media (width < ${theme.mediaQueries.mobile}) {
+  @media (width < ${theme.mediaQueries.tablet}) {
     padding: 3rem 1rem;
     width: calc(100% - 2rem);
   }
@@ -188,7 +188,7 @@ const StyledFirstIcon = styled(OutlinedText)`
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(-1rem, 2rem);
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
     }
   `}
@@ -202,7 +202,7 @@ const StyledSecondIcon = styled(OutlinedText)`
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(1rem, -3rem);
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
     }
   `}
@@ -240,7 +240,7 @@ const StyledOffersContentWrapper = styled.div`
       font-size: ${theme.fonts.sizes['xl']};
     }
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       gap: 0.5rem;
 
       h3 {

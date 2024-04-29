@@ -55,7 +55,7 @@ export function OffersCarousel({
   }, [])
 
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.2
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.TABLET) ? 1 : 3.2
 
   useEffect(() => {
     const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
@@ -176,7 +176,7 @@ const StyledCarousel = styled(CarouselProvider)`
     margin-bottom: var(--module-margin);
     margin-top: var(--module-margin);
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       width: 100%;
     }
   `}
@@ -204,7 +204,7 @@ const StyledHeading = styled(ContentWrapper)`
       text-decoration: underline;
     }
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       padding-right: 0;
     }
   `}
@@ -214,7 +214,7 @@ const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding: 2rem 0;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+  @media (width < ${(p) => p.theme.mediaQueries.tablet}) {
     padding: 3.5rem 0;
   }
 
@@ -229,7 +229,7 @@ const StyledNavigationButtons = styled.div`
     gap: 0.375rem;
     align-items: center;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: none;
     }
 
@@ -263,7 +263,7 @@ const StyledDots = styled.div`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -345,7 +345,7 @@ const StyledArrowButtonWrapper = styled.div`
   position: relative;
   width: 100%;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+  @media (width < ${(p) => p.theme.mediaQueries.tablet}) {
     display: none;
   }
 `
