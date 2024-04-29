@@ -56,6 +56,14 @@
     "cardSecondEmoji": {
       "type": "string",
       "required": true
+    },
+    "bannerAndroidUrl": {
+      "type": "string",
+      "required": false
+    },
+    "bannerIosUrl": {
+      "type": "string",
+      "required": false
     }
   }
 }

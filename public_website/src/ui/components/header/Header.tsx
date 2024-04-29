@@ -32,6 +32,8 @@ type HeaderNavigationItemProps = {
     title: string
     cta: CTA
     bannerText?: string
+    bannerAndroidUrl?: string
+    bannerIosUrl?: string
     primaryListItems: CTA[]
     secondaryListItems: CTA[]
     cardTitle: string

@@ -6,7 +6,6 @@ import { Gouvernement } from '../icons/Gouvernement'
 import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
-import { useIsAndroid } from '@/hooks/useIsAndroid'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
@@ -30,9 +29,6 @@ export function Footer({
   LegalLinks,
   Lists,
 }: FooterProps) {
-  const isAndroid = useIsAndroid()
-  const storeUrl = isAndroid ? PlayStoreUrl : AppStoreUrl
-
   return (
     <StyledFooter id="footer">
       <StyledContentContainer>
@@ -46,7 +42,8 @@ export function Footer({
             </Link>
             <AppBanner
               title={bannerText}
-              url={storeUrl}
+              androidUrl={AppStoreUrl}
+              iosUrl={PlayStoreUrl}
               onClick={() =>
                 onClickAnalytics({
                   eventName: 'downloadApp',
