@@ -164,6 +164,7 @@ const StyledAccordion = styled.details`
       display: block;
       position: relative;
       padding-right: 4rem;
+      cursor: pointer;
     }
 
     summary::after {
