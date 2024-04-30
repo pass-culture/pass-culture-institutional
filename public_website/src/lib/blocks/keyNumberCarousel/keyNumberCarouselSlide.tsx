@@ -53,6 +53,7 @@ const Root = styled(Slide)`
       aspect-ratio: 2.8;
       @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 0;
+        margin: 1rem;
       }
     }
   `}

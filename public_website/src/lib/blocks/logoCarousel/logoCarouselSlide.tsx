@@ -34,7 +34,7 @@ const Root = styled(Slide)`
     .inner {
       margin-right: 1rem;
 
-      @media (width < ${theme.mediaQueries.mobile}) {
+      @media (width < ${theme.mediaQueries.tablet}) {
         margin-right: 0;
       }
     }

@@ -15,6 +15,7 @@ export type VerticalCarouselSlideProps = {
   title: string
   description: string
   url: string
+  hidePlayIcon?: boolean
 }
 
 export function VerticalCarouselSlide({
@@ -23,6 +24,7 @@ export function VerticalCarouselSlide({
   title,
   description,
   url,
+  hidePlayIcon,
 }: VerticalCarouselSlideProps) {
   const imageUrl =
     typeof image === 'string' ? image : image?.data?.attributes.url
@@ -43,7 +45,7 @@ export function VerticalCarouselSlide({
               layout="fill" // TODO: Fix deprecated use of "layout" (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
               objectFit="cover" // TODO: Fix deprecated use of "objectFit": (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
             />
-            <PlayIcon />
+            {!hidePlayIcon && <PlayIcon />}
           </StyledImageWrapper>
         )}
         <StyledTitle as={Link} href={url}>

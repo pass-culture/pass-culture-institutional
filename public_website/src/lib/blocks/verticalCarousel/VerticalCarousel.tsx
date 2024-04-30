@@ -22,9 +22,14 @@ import { stripTags } from '@/utils/stripTags'
 export type VerticalCarouselProps = {
   title: string
   items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
+  hidePlayIcon?: boolean
 }
 
-export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
+export function VerticalCarousel({
+  title,
+  items,
+  hidePlayIcon,
+}: VerticalCarouselProps) {
   items = items.filter((item) => {
     return item.image && item.image !== ''
   })
@@ -134,6 +139,7 @@ export function VerticalCarousel({ title, items }: VerticalCarouselProps) {
                   key={item.title}
                   slideIndex={index}
                   {...item}
+                  hidePlayIcon={hidePlayIcon}
                 />
               )
             })}

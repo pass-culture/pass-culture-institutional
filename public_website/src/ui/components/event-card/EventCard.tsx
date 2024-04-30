@@ -191,6 +191,7 @@ const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: flex;
     gap: 0.5rem;
+    align-items: center;
     width: fit-content;
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};

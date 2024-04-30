@@ -87,8 +87,17 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
-  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>('/pages')
-
+  const query = stringify(
+    {
+      pagination: {
+        limit: 100,
+      },
+    },
+    { encodeValuesOnly: true }
+  )
+  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>(
+    `/pages?${query}`
+  )
   const result = {
     paths: response.data.map((page) => ({
       params: {

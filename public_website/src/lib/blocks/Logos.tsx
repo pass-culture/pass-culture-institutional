@@ -21,7 +21,7 @@ const Root = styled.div`
     margin-bottom: var(--module-margin);
     margin-top: var(--module-margin);
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.tablet}) {
       background-color: transparent;
       padding-left: 1.3rem;
       padding-right: 1.3rem;

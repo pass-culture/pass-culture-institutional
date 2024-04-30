@@ -55,7 +55,9 @@ export function OffersCarousel({
   }, [])
 
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 3.2
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.LARGE_DESKTOP)
+      ? 1
+      : 3.2
 
   useEffect(() => {
     const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
@@ -176,7 +178,7 @@ const StyledCarousel = styled(CarouselProvider)`
     margin-bottom: var(--module-margin);
     margin-top: var(--module-margin);
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       width: 100%;
     }
   `}
@@ -204,7 +206,7 @@ const StyledHeading = styled(ContentWrapper)`
       text-decoration: underline;
     }
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding-right: 0;
     }
   `}
@@ -214,7 +216,7 @@ const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding: 2rem 0;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+  @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     padding: 3.5rem 0;
   }
 
@@ -229,7 +231,7 @@ const StyledNavigationButtons = styled.div`
     gap: 0.375rem;
     align-items: center;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
 
@@ -263,7 +265,7 @@ const StyledDots = styled.div`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -333,7 +335,7 @@ const CtaLink = styled(Link)`
     padding: 1rem 1.75rem;
     border-radius: 100px;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
   `}
@@ -345,7 +347,7 @@ const StyledArrowButtonWrapper = styled.div`
   position: relative;
   width: 100%;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+  @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     display: none;
   }
 `
@@ -354,7 +356,7 @@ const MobileCtaWrapper = styled.div`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -367,7 +369,7 @@ const MobileCtaLink = styled(Link)`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: inline-block;
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.semiBold};

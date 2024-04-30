@@ -821,6 +821,8 @@ export interface HeaderMegaMenu extends Schema.Component {
     bannerText: Attribute.String;
     cardFirstEmoji: Attribute.String & Attribute.Required;
     cardSecondEmoji: Attribute.String & Attribute.Required;
+    bannerAndroidUrl: Attribute.String;
+    bannerIosUrl: Attribute.String;
   };
 }
 

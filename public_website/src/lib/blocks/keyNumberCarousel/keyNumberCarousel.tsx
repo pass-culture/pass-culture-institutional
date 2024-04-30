@@ -159,7 +159,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     margin-top: var(--module-margin);
 
     @media (max-width: ${theme.mediaQueries.mobile}) {
-      padding: 0 1rem;
+      padding: 0;
       flex-direction: column;
       margin: 2.825rem auto;
     }
@@ -179,7 +179,8 @@ const StyledKeyCarouselHeading = styled.div`
       width: 100%;
       margin-bottom: 2.5rem;
       margin-top: 2.5rem;
-      padding: 0;
+      padding: 0 1rem;
+      box-sizing: border-box;
     }
   `}
 `

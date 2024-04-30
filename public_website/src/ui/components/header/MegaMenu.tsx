@@ -21,6 +21,8 @@ type MegaMenuProps = {
     title: string
     cta: CTA
     bannerText?: string
+    bannerAndroidUrl?: string
+    bannerIosUrl?: string
     primaryListItems: CTA[]
     secondaryListItems: CTA[]
     cardTitle: string
@@ -81,10 +83,11 @@ export function MegaMenu({
         <StyledMegaMenuHeading>
           <Typo.Heading2 as="p">{data.title}</Typo.Heading2>
           <ButtonWithCTA cta={data.cta} />
-          {data.bannerText && (
+          {data.bannerText && data.bannerAndroidUrl && data.bannerIosUrl && (
             <AppBanner
               title={data.bannerText}
-              url={data.cta.URL}
+              androidUrl={data.bannerAndroidUrl}
+              iosUrl={data.bannerIosUrl}
               onClick={() =>
                 onClickAnalytics({
                   eventName: 'downloadApp',

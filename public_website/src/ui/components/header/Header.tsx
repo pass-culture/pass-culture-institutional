@@ -32,6 +32,8 @@ type HeaderNavigationItemProps = {
     title: string
     cta: CTA
     bannerText?: string
+    bannerAndroidUrl?: string
+    bannerIosUrl?: string
     primaryListItems: CTA[]
     secondaryListItems: CTA[]
     cardTitle: string
@@ -306,7 +308,7 @@ const StyledHeader = styled.header<{
 
     background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       ${$showMobileMenu &&
       css`
         position: fixed;
@@ -344,7 +346,7 @@ const StyledNavigation = styled.nav<{
 
       /* Only show logo + burger menu on mobile */
       li:not(:first-child, :last-child) {
-        @media (width < ${theme.mediaQueries.tablet}) {
+        @media (width < ${theme.mediaQueries.largeDesktop}) {
           display: none;
         }
       }
@@ -441,7 +443,7 @@ const StyledMobileMenuListItem = styled.li`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: block;
     }
   `}

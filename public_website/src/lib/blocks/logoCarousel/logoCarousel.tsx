@@ -40,7 +40,9 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
   }, [])
 
   const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 6
+    screenWidth && screenWidth < getMediaQuery(MediaQueries.LARGE_DESKTOP)
+      ? 1
+      : 6
 
   useEffect(() => {
     const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
@@ -147,9 +149,6 @@ const StyledHeading = styled.div`
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding-right: 0;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
       margin-top: 2.5rem;
     }
   `}
@@ -169,7 +168,7 @@ const StyledNavigationButtons = styled.div`
     align-items: center;
     gap: 0.375rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
 
@@ -205,7 +204,7 @@ const StyledDots = styled.div`
   ${({ theme }) => css`
     display: none;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: flex;
       align-items: center;
       justify-content: center;
