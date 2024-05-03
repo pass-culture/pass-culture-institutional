@@ -39,8 +39,8 @@ export function OutlinedText(props: OutlinedTextProps) {
 
   const {
     color = [1, 1, 1],
-    blurDeviation = 2.5,
-    dilationRadius = 1,
+    blurDeviation = 1,
+    dilationRadius = 6,
     shadow,
     innerAs,
     className,

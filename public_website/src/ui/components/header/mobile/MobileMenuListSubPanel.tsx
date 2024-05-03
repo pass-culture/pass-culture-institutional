@@ -55,7 +55,9 @@ export function MobileMenuListSubPanel({
         })}
       </StyledSubPanelList>
       <StyledSubPanelCard href={cardLink.URL}>
-        <OutlinedText innerAs="p">{cardTitle}</OutlinedText>
+        <StyledSubPanelCardTitle className="SubPanel__title" innerAs="p">
+          {cardTitle}
+        </StyledSubPanelCardTitle>
         <p>{cardDescription}</p>
         <OutlinedText>{cardFirstEmoji}</OutlinedText>
         <OutlinedText>{cardSecondEmoji}</OutlinedText>
@@ -76,6 +78,12 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
       font-weight: ${theme.fonts.weights.semiBold};
       line-height: 0.95;
     }
+  `}
+`
+
+const StyledSubPanelCardTitle = styled(OutlinedText)`
+  ${({ theme }) => css`
+    color: ${theme.colors.secondary} !important;
   `}
 `
 
