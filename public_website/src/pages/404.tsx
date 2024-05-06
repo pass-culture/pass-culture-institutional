@@ -28,8 +28,8 @@ export default function NotFound({ notData }: ListProps) {
 export const getStaticProps = (async () => {
   const query = stringify({
     populate: [
-      'header.image',
       'header',
+      'header.image',
       'header.cta',
       'seo',
       'seo.metaSocial',

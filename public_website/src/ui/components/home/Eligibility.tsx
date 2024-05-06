@@ -38,13 +38,13 @@ export function Eligibility({
         <ButtonWithCTA variant="tertiary" cta={cardCta} />
         <StyledCardFirstEmoji
           as={OutlinedText}
-          dilationRadius={1}
+          dilationRadius={2}
           aria-hidden="true">
           {cardFirstEmoji}
         </StyledCardFirstEmoji>
         <StyledCardSecondEmoji
           as={OutlinedText}
-          dilationRadius={1}
+          dilationRadius={2}
           aria-hidden="true">
           {cardSecondEmoji}
         </StyledCardSecondEmoji>

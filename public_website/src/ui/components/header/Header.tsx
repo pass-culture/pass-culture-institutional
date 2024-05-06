@@ -188,6 +188,7 @@ export function Header({
                   <React.Fragment key={el.label}>
                     <StyledNavigationItem>
                       <button
+                        // @ts-expect-error //main pull
                         ref={(el) => (megaMenuButtonRefs.current[i] = el)}
                         id={`mega-menu-button-${i}`}
                         aria-controls={`mega-menu-${i}`}

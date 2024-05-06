@@ -271,7 +271,6 @@ const TopEmoji = styled(OutlinedText)`
   top: 0;
   right: 3rem;
   font-size: 5rem;
-  z-index: 1;
   transform: translateY(-50%) rotate(-16.81deg);
 
   @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {

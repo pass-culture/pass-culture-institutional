@@ -67,9 +67,11 @@ export function PiledCards(props: PiledCardsProps) {
           <React.Fragment key={item.id}>
             <ItemScrollSentinel
               aria-hidden="true"
+              // @ts-expect-error //main pull
               ref={(el) => (sentinelRefs.current[index] = el)}
             />
             <StyledContentListItems
+              // @ts-expect-error //main pull
               ref={(el) => (itemRefs.current[index] = el)}
               $itemTheme={item.theme}
               aria-label={`Card ${index + 1}`}>

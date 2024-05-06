@@ -131,10 +131,10 @@ export function MegaMenu({
           <StyledMegaMenuCardHeading>
             <OutlinedText innerAs="p">{data.cardTitle}</OutlinedText>
 
-            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+            <OutlinedText dilationRadius={2} shadow aria-hidden="true">
               {data.cardFirstEmoji}
             </OutlinedText>
-            <OutlinedText dilationRadius={1} shadow aria-hidden="true">
+            <OutlinedText dilationRadius={2} shadow aria-hidden="true">
               {data.cardSecondEmoji}
             </OutlinedText>
           </StyledMegaMenuCardHeading>

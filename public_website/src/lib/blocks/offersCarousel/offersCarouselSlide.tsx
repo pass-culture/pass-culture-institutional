@@ -42,7 +42,7 @@ export function OffersCarouselSlide({
         <Card>
           <StyledOffersHeader>
             <StyledOffersSurtitle>
-              <OutlinedText dilationRadius={2} blurDeviation={1.5}>
+              <OutlinedText dilationRadius={6} blurDeviation={1}>
                 <span aria-label={parseText(surtitle).accessibilityLabel}>
                   {parseText(surtitle).processedText}
                 </span>

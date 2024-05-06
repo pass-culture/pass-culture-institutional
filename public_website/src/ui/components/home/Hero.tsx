@@ -36,22 +36,22 @@ export function Hero({
   return (
     <Root>
       <StyledHeroBackground>
-        <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledFirstEmoji as={OutlinedText} dilationRadius={2} shadow>
           {firstEmoji}
         </StyledFirstEmoji>
-        <StyledSecondEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledSecondEmoji as={OutlinedText} dilationRadius={2} shadow>
           {secondEmoji}
         </StyledSecondEmoji>
-        <StyledThirdEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledThirdEmoji as={OutlinedText} dilationRadius={2} shadow>
           {thirdEmoji}
         </StyledThirdEmoji>
-        <StyledFourthEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledFourthEmoji as={OutlinedText} dilationRadius={2} shadow>
           {fourthEmoji}
         </StyledFourthEmoji>
-        <StyledFifthEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledFifthEmoji as={OutlinedText} dilationRadius={2} shadow>
           {fifthEmoji}
         </StyledFifthEmoji>
-        <StyledSixthEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledSixthEmoji as={OutlinedText} dilationRadius={2} shadow>
           {sixthEmoji}
         </StyledSixthEmoji>
       </StyledHeroBackground>
@@ -61,10 +61,10 @@ export function Hero({
       <StyledCta cta={cta} />
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
-        <StyledFirstEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledFirstEmoji as={OutlinedText} dilationRadius={2} shadow>
           {firstEmoji}
         </StyledFirstEmoji>
-        <StyledSecondEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledSecondEmoji as={OutlinedText} dilationRadius={2} shadow>
           {secondEmoji}
         </StyledSecondEmoji>
         {images && (
@@ -77,7 +77,7 @@ export function Hero({
       </StyledCircle>
 
       <StyledCircle $index={2} $width="64rem" aria-hidden="true">
-        <StyledThirdEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledThirdEmoji as={OutlinedText} dilationRadius={2} shadow>
           {thirdEmoji}
         </StyledThirdEmoji>
         {images && (
@@ -90,7 +90,7 @@ export function Hero({
       </StyledCircle>
 
       <StyledCircle $index={3} $width="80rem" aria-hidden="true">
-        <StyledFourthEmoji as={OutlinedText} dilationRadius={1} shadow>
+        <StyledFourthEmoji as={OutlinedText} dilationRadius={2} shadow>
           {fourthEmoji}
         </StyledFourthEmoji>
         {images && (
