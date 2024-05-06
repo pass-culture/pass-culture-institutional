@@ -245,6 +245,7 @@ const StyledMegaMenuCardHeading = styled.div`
       color: ${theme.colors.secondary};
       transform: rotate(-2deg);
       z-index: 1;
+      word-break: break-word;
     }
 
     span {
