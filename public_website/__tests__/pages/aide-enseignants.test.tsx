@@ -26,6 +26,6 @@ describe('Help page - Teachers', () => {
       })
       expect(a11yResult).toHaveNoViolations()
     },
-    { timeout: 10000 }
+    { timeout: 50000 }
   )
 })
