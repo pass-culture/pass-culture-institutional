@@ -93,6 +93,12 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
   `}
 `
 
+const StyledSubPanelCardTitle = styled(OutlinedText)`
+  ${({ theme }) => css`
+    color: ${theme.colors.secondary} !important;
+  `}
+`
+
 const StyledSubPanelCard = styled(Link)`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
@@ -132,11 +138,5 @@ const StyledSubPanelCard = styled(Link)`
         transform: rotate(10deg);
       }
     }
-  `}
-`
-
-const StyledSubPanelCardTitle = styled(OutlinedText)`
-  ${({ theme }) => css`
-    color: ${theme.colors.secondary} !important;
   `}
 `
