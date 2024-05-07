@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OutlinedText } from '../../OutlinedText'
@@ -26,9 +26,13 @@ export function MobileMenuListSubPanel({
 }: MobileMenuListSubPanelProps) {
   // Focus list on mount
   const listRef = useRef<HTMLUListElement>(null)
-
+  const [visible, setVisible] = useState(false)
   useEffect(() => {
     listRef.current?.focus()
+
+    setTimeout(() => {
+      setVisible(true)
+    }, 0.0000001)
   }, [])
 
   return (
@@ -55,11 +59,19 @@ export function MobileMenuListSubPanel({
         })}
       </StyledSubPanelList>
       <StyledSubPanelCard href={cardLink.URL}>
-        <StyledSubPanelCardTitle className="SubPanel__title" innerAs="p">
+        {!visible && <div className="trigger"></div>}
+
+        <StyledSubPanelCardTitle
+          blurDeviation={2}
+          className="SubPanel__title"
+          innerAs="p">
           {cardTitle}
         </StyledSubPanelCardTitle>
-        <p>{cardDescription}</p>
-        <OutlinedText>{cardFirstEmoji}</OutlinedText>
+
+        <p className="SubPanel__description">{cardDescription}</p>
+        <OutlinedText blurDeviation={2} dilationRadius={5}>
+          {cardFirstEmoji}
+        </OutlinedText>
         <OutlinedText>{cardSecondEmoji}</OutlinedText>
       </StyledSubPanelCard>
     </div>
@@ -81,12 +93,6 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
   `}
 `
 
-const StyledSubPanelCardTitle = styled(OutlinedText)`
-  ${({ theme }) => css`
-    color: ${theme.colors.secondary} !important;
-  `}
-`
-
 const StyledSubPanelCard = styled(Link)`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
@@ -97,19 +103,22 @@ const StyledSubPanelCard = styled(Link)`
     padding-right: 30%;
     position: relative;
 
-    p:first-child {
+    .SubPanel__title {
       font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.black};
       margin-bottom: 1.5rem;
-      color: ${theme.colors.secondary};
+      color: white;
     }
 
-    p:nth-child(2) {
+    .SubPanel__description {
       color: ${theme.colors.white};
       font-size: ${theme.fonts.sizes.m};
       font-weight: ${theme.fonts.weights.semiBold};
     }
 
+    .trigger {
+      height: 0.1px;
+    }
     span {
       font-size: 2.5rem;
       position: absolute;
@@ -123,5 +132,11 @@ const StyledSubPanelCard = styled(Link)`
         transform: rotate(10deg);
       }
     }
+  `}
+`
+
+const StyledSubPanelCardTitle = styled(OutlinedText)`
+  ${({ theme }) => css`
+    color: ${theme.colors.secondary} !important;
   `}
 `
