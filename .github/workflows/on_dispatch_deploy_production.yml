@@ -8,7 +8,7 @@ jobs:
     uses: ./.github/workflows/reusable_public_site_deploy.yml
     with:
       environment: production
-      teleport_version: 13.4.4
+      teleport_version: 15.2.5
       teleport_proxy: teleport.cls.passculture.team:443
       teleport_kubernetes_cluster: passculture-cls-metier-prod
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
