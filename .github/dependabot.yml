@@ -4,44 +4,38 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     commit-message:
       prefix: "chore:"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-    reviewers:
-      - "Lucasbeneston"
 
   - package-ecosystem: "npm"
     directory: "/public_website"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     commit-message:
       prefix: "chore:"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-    reviewers:
-      - "Lucasbeneston"
 
   - package-ecosystem: "npm"
     directory: "/content_management_system"
     schedule:
       interval: "daily"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     commit-message:
       prefix: "chore:"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-    reviewers:
-      - "Lucasbeneston"
 
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
-    open-pull-requests-limit: 3
+    open-pull-requests-limit: 2
     schedule:
       interval: "daily"
     commit-message:
@@ -49,5 +43,3 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
-    reviewers:
-      - "Lucasbeneston"
