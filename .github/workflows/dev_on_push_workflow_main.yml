@@ -41,7 +41,7 @@ jobs:
       - name: Test typescript
         run: cd content_management_system && yarn test:types
   build-image-cms:
-    uses: ./.github/workflows/reusable_docker_build.yml
+    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
     permissions:
       id-token: write
       contents: write
@@ -53,7 +53,7 @@ jobs:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
   build-image-public-site-preview:
-    uses: ./.github/workflows/reusable_docker_build.yml
+    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
     permissions:
       id-token: write
       contents: write
