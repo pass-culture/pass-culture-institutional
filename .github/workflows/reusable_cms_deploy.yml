@@ -2,6 +2,10 @@ name: Deploy public site
 on:
   workflow_call:
     inputs:
+      project_id:
+        type: string
+        description: GCP Project id to use 
+        required: true
       environment:
         type: string
         description: Environment to deploy
@@ -101,9 +105,9 @@ jobs:
           environment: ${{ inputs.environment }}
           app_name: site-instit 
           app_version: ${{ inputs.image_tag }}
-          registry_workload_identity_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
-          registry_service_account_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_deploy-service-account
-          api_token_github_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_github_token
+          registry_workload_identity_secret_name: ${{ inputs.secrets_project_id }}/${{ inputs.workload_identity_provider_secret_name }}
+          registry_service_account_secret_name: ${{ inputs.project_id }}/passculture-institutional_${{ inputs.environment }}-service-account
+          api_token_github_secret_name: ${{ inputs.project_id }}/passculture-institutional_${{ inputs.environment }}_github_token
           chart_values_repository: pass-culture/infrastructure
           chart_values_repository_ref: main
           helmfile_path: helm/site-instit
