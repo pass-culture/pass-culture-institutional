@@ -95,11 +95,26 @@ jobs:
           certificate-ttl: 1h
           kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
 
+      - name: "Generate and push rendered manifests"
+        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v2.0.0
+        with:
+          environment: ${{ inputs.environment }}
+          app_name: site-instit 
+          app_version: ${{ inputs.image_tag }}
+          registry_workload_identity_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
+          registry_service_account_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_deploy-service-account
+          api_token_github_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_github_token
+          chart_values_repository: pass-culture/infrastructure
+          chart_values_repository_ref: main
+          helmfile_path: helm/site-instit
+          additional_args: deployment.image.tag=${{ inputs.image_tag }}
+
       - name: Sync argoCD application 
-        run: |
-          kubectl config set-context --current --namespace=argocd
-          argocd app set site-instit-${{ inputs.environment }} --core --plugin-env "ARGS=--set deployment.image.tag=${{ inputs.image_tag }}"
-          argocd app wait site-instit-${{ inputs.environment }} --core --sync --health --timeout 180
+        uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.1.0
+        with:
+          app_name: site-instit-${{ inputs.environment }}
+          teleport_proxy: ${{ inputs.teleport_proxy }} 
+          teleport_kubernetes_cluster: ${{ inputs.teleport_kubernetes_cluster }} 
 
   notification:
     name: "Notification"
