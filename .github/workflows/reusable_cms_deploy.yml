@@ -96,7 +96,7 @@ jobs:
           kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
 
       - name: "Generate and push rendered manifests"
-        uses: pass-culture/common-workflows/actions/render-push-manifests@BSR-fix-non-values-repository-render-manifest
+        uses: pass-culture/common-workflows/actions/render-push-manifests@main
         with:
           environment: ${{ inputs.environment }}
           app_name: site-instit 
@@ -110,8 +110,11 @@ jobs:
           additional_args: deployment.image.tag=${{ inputs.image_tag }}
 
       - name: Sync argoCD application 
-        run: |
-          kubectl config set-context --current --namespace=argocd
+        uses: pass-culture/common-workflows/actions/argocd-sync@PC-30159-argocd-sync-action
+        with:
+          app_name: site-instit-${{ inputs.environment }}
+          teleport_proxy: ${{ inputs.teleport_proxy }} 
+          teleport_kubernetes_cluster: ${{ inputs.teleport_kubernetes_cluster }} 
 
   notification:
     name: "Notification"
