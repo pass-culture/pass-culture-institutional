@@ -2,6 +2,10 @@ name: Deploy public site
 on:
   workflow_call:
     inputs:
+      project_id:
+        type: string
+        description: GCP Project id to use 
+        required: true
       environment:
         type: string
         description: Environment to deploy
@@ -65,6 +69,20 @@ jobs:
             INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
+      - name: "Generate and push rendered manifests"
+        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v2.0.0
+        with:
+          environment: ${{ inputs.environment }}
+          app_name: site-instit 
+          app_version: ${{ inputs.image_tag }}
+          registry_workload_identity_secret_name: ${{ inputs.workload_identity_provider_secret_name }}
+          registry_service_account_secret_name: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
+          api_token_github_secret_name: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_github_token
+          chart_values_repository: pass-culture/infrastructure
+          chart_values_repository_ref: main
+          helmfile_path: helm/site-instit
+          additional_args: deployment.image.tag=${{ inputs.image_tag }}
+
       - name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v2'
         with:
@@ -74,40 +92,6 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
 
-      - name: Install Kubectl
-        uses: azure/setup-kubectl@v3
-
-      - name: Install Teleport
-        uses: teleport-actions/setup@v1
-        with:
-          version: ${{ inputs.teleport_version }}
-
-      - name: Setup ArgoCD CLI 
-        uses: imajeetyadav/argocd-cli@v1
-        with:
-          version: ${{ inputs.argocd_version }}
-
-      - name: "Teleport Authentication"
-        uses: teleport-actions/auth-k8s@v1
-        with:
-          proxy: ${{ inputs.teleport_proxy }}
-          token: github-token
-          certificate-ttl: 1h
-          kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
-
-      - name: "Generate and push rendered manifests"
-        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v2.0.0
-        with:
-          environment: ${{ inputs.environment }}
-          app_name: site-instit 
-          app_version: ${{ inputs.image_tag }}
-          registry_workload_identity_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
-          registry_service_account_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_deploy-service-account
-          api_token_github_secret_name: passculture-cls-metier-ehp/passculture-institutional_testing_github_token
-          chart_values_repository: pass-culture/infrastructure
-          chart_values_repository_ref: main
-          helmfile_path: helm/site-instit
-          additional_args: deployment.image.tag=${{ inputs.image_tag }}
 
       - name: Sync argoCD application 
         uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.1.0

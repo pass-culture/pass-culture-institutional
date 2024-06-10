@@ -10,6 +10,7 @@ jobs:
   deploy-cms-testing:
     uses: ./.github/workflows/reusable_cms_deploy.yml
     with:
+      project_id: passculture-cls-metier-ehp
       environment: testing
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
       teleport_version: 13.4.4
