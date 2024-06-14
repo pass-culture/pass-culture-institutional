@@ -41,7 +41,7 @@ export function ExperienceVideoCarouselSlide({
           isMounted &&
           (url ? (
             <StyledExperienceVideo
-              light={image ? getStrapiURL(image?.data.attributes.url) : true}
+              light={image ? getStrapiURL(image?.data?.attributes?.url) : true}
               url={url}
               width="100%"
               controls={false}
@@ -52,7 +52,7 @@ export function ExperienceVideoCarouselSlide({
           ) : (
             <StyledExperienceVideo
               as="img"
-              src={getStrapiURL(image.data.attributes.url)}
+              src={getStrapiURL(image?.data?.attributes?.url)}
               alt=""
             />
           ))}
