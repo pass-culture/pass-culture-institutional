@@ -9,6 +9,7 @@ import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
+import { useRouter } from 'next/router'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -42,8 +43,9 @@ export function MegaMenu({
   labelId,
   data,
 }: MegaMenuProps) {
-  const megaMenuRef = useRef<HTMLDivElement>(null)
-
+  const megaMenuRef = useRef<HTMLDivElement | null>(null)
+  const router = useRouter()
+  const path = router?.asPath
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
       const openButtonElement = getOpenButtonEl()
@@ -104,6 +106,7 @@ export function MegaMenu({
               return (
                 <li key={item.Label}>
                   <Link
+                    className={path == item.URL.trim() ? 'active' : ''}
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -117,6 +120,7 @@ export function MegaMenu({
               return (
                 <li key={item.Label}>
                   <Link
+                    className={path == item.URL.trim() ? 'active' : ''}
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -209,6 +213,9 @@ const StyledMegaMenuLists = styled.div`
       opacity: 0.9;
 
       &:hover {
+        text-decoration: underline;
+      }
+      &.active {
         text-decoration: underline;
       }
     }

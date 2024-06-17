@@ -13,6 +13,8 @@ import { MobileMenu } from './mobile/MobileMenu'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 
+import { useRouter } from 'next/router'
+
 export type HeaderProps = {
   targetItems: HeaderNavigationItemProps[]
   aboutItems: HeaderNavigationItemProps[]
@@ -27,6 +29,7 @@ export type HeaderProps = {
 }
 
 type HeaderNavigationItemProps = {
+  id: number
   label: string
   megaMenu: {
     title: string
@@ -44,6 +47,30 @@ type HeaderNavigationItemProps = {
   }
 }
 
+const findCollectionIdByPath = (
+  path: string,
+  collections: HeaderNavigationItemProps[]
+): number | null => {
+  for (const collection of collections) {
+    const { megaMenu } = collection
+    if (megaMenu.primaryListItems) {
+      for (const item of megaMenu.primaryListItems) {
+        if (item.URL.trim() === path) {
+          return collection.id
+        }
+      }
+    }
+    if (megaMenu.secondaryListItems) {
+      for (const item of megaMenu.secondaryListItems) {
+        if (item.URL.trim() === path) {
+          return collection.id
+        }
+      }
+    }
+  }
+  return null
+}
+
 export function Header({
   targetItems,
   aboutItems,
@@ -51,10 +78,14 @@ export function Header({
   signup,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
+  const router = useRouter()
+ 
 
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const navItems = [...targetItems, ...aboutItems]
+  const activeId = findCollectionIdByPath(router?.asPath, navItems)
+ 
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
@@ -194,7 +225,9 @@ export function Header({
                         aria-controls={`mega-menu-${i}`}
                         aria-expanded={i === activeMegaMenuId}
                         className={
-                          i === activeMegaMenuId ? 'mega-menu-active' : ''
+                          i === activeMegaMenuId || activeId === i + 1
+                            ? 'mega-menu-active'
+                            : ''
                         }
                         onClick={() => toggleMegaMenu(i)}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
