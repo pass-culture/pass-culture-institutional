@@ -91,7 +91,7 @@ export function SliderField({
             </span>
           ),
         }}
-        included={false}
+        included
         ariaValueTextFormatterForHandle={valueTextFormatter}
         value={(answer ?? 0) + 14}
         onChange={handleChange}
@@ -181,9 +181,12 @@ const Slider = styled(BaseSlider)`
   .rc-slider-dot {
     opacity: 0;
   }
+  .rc-slider-track {
+    background-color: ${({ theme }) => theme.colors.primary};
+    height: 0.5rem;
+  }
 
   .rc-slider-rail {
-    background-color: ${({ theme }) => theme.colors.primary};
     height: 0.5rem;
   }
 

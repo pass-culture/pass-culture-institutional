@@ -1606,6 +1606,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    push: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
