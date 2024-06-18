@@ -226,7 +226,7 @@ const CtaLink = styled(Link)`
     &:hover {
       background: ${`rgba(255, 255, 255, 0.20);`};
     }
-    &:focus {
+    &:active {
       outline: 2px solid ${theme.colors.white};
     }
     color: ${theme.colors.white};

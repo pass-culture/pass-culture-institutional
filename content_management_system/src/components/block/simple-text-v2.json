@@ -8,7 +8,7 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "text": {
       "type": "blocks",
