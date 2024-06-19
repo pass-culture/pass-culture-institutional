@@ -352,7 +352,7 @@ export interface BlockSimpleTextV2 extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String;
+    title: Attribute.String & Attribute.Required;
     text: Attribute.Blocks & Attribute.Required;
     columns: Attribute.Component<'common.simple-text-column', true> &
       Attribute.SetMinMax<{
@@ -641,6 +641,7 @@ export interface CommonSimpleTextColumn extends Schema.Component {
   collectionName: 'components_common_simple_text_columns';
   info: {
     displayName: 'Simple Text Column';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
