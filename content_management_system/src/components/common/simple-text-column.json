@@ -1,7 +1,8 @@
 {
   "collectionName": "components_common_simple_text_columns",
   "info": {
-    "displayName": "Simple Text Column"
+    "displayName": "Simple Text Column",
+    "description": ""
   },
   "options": {},
   "attributes": {
