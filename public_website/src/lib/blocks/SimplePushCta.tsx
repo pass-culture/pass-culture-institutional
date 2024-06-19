@@ -44,8 +44,8 @@ export function SimplePushCta(props: PushCTAProps) {
         <CardContainer>
           <Card
             $imageUrl={
-              props.image?.data.attributes.url &&
-              getStrapiURL(props.image?.data.attributes.url)
+              props.image?.data?.attributes?.url &&
+              getStrapiURL(props.image?.data?.attributes?.url)
             }></Card>
           <OutlinedText>{props.icon}</OutlinedText>
         </CardContainer>

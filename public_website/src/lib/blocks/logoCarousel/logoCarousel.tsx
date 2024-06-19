@@ -100,7 +100,7 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
         {items?.map((item, index) => {
           return (
             <LogoCarouselSlide
-              key={item.logo?.data.attributes.alternativeText}
+              key={item.logo?.data?.attributes?.alternativeText}
               slideIndex={index}
               {...item}
               image={item.logo}
@@ -127,11 +127,11 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
           return (
             <StyledDot
               onClick={handleNavigationButtonClick}
-              key={item.logo?.data.attributes.alternativeText}
+              key={item.logo?.data?.attributes?.alternativeText}
               slide={index}
               aria-label={`Afficher la diapositive ${index + 1} sur ${
                 items.length
-              } : ${item.logo?.data.attributes.alternativeText}`}
+              } : ${item.logo?.data?.attributes?.alternativeText}`}
             />
           )
         })}

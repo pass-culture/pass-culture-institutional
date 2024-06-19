@@ -28,8 +28,8 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
     <StyledContentWrapper>
       <MobileImage
         src={
-          props.image?.data.attributes.url &&
-          getStrapiURL(props.image?.data.attributes.url)
+          props.image?.data?.attributes?.url &&
+          getStrapiURL(props.image?.data?.attributes?.url)
         }
         alt=""
       />
@@ -37,8 +37,8 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
         <CardContainer>
           <Card
             $imageUrl={
-              props.image?.data.attributes.url &&
-              getStrapiURL(props.image?.data.attributes.url)
+              props.image?.data?.attributes?.url &&
+              getStrapiURL(props.image?.data?.attributes?.url)
             }></Card>
 
           <OutlinedText shadow>{props.icon}</OutlinedText>

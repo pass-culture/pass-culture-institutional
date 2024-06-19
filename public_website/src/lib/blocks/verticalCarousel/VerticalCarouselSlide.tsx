@@ -27,7 +27,7 @@ export function VerticalCarouselSlide({
   hidePlayIcon,
 }: VerticalCarouselSlideProps) {
   const imageUrl =
-    typeof image === 'string' ? image : image?.data?.attributes.url
+    typeof image === 'string' ? image : image?.data?.attributes?.url
 
   return (
     <Root

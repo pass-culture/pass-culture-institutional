@@ -37,8 +37,8 @@ export function ImageText({
           $imageOnRight={isImageRight}>
           <ImageContainer $imageOnRight={isImageRight}>
             <StyledImage
-              src={getStrapiURL(image?.data.attributes.url)}
-              alt={image?.data.attributes.alternativeText || ''}
+              src={getStrapiURL(image?.data?.attributes?.url)}
+              alt={image?.data?.attributes?.alternativeText || ''}
             />
             {icon && (
               <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>

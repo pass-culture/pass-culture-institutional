@@ -28,10 +28,10 @@ export function DetailedLogos({ title, logos }: DetailedLogosProps) {
             <StyledListItem key={logo.title}>
               {logo.image && (
                 <StyledLogoImage
-                  src={logo.image.data.attributes.url}
+                  src={logo?.image?.data?.attributes?.url}
                   alt=""
-                  width={logo.image.data.attributes.width}
-                  height={logo.image.data.attributes.height}
+                  width={logo?.image?.data?.attributes?.width}
+                  height={logo?.image?.data?.attributes?.height}
                 />
               )}
               <StyledLogoHeading>{logo.title}</StyledLogoHeading>

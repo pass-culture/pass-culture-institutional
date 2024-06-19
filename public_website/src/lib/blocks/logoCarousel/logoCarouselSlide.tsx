@@ -17,13 +17,13 @@ export function LogoCarouselSlide({
   return (
     <Root
       index={slideIndex}
-      key={image?.data.attributes.alternativeText}
+      key={image?.data?.attributes?.alternativeText}
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledLink>
         <StyledImageSimple
-          alt={image?.data.attributes.alternativeText}
-          src={getStrapiURL(image?.data.attributes.url)}></StyledImageSimple>
+          alt={image?.data?.attributes?.alternativeText}
+          src={getStrapiURL(image?.data?.attributes?.url)}></StyledImageSimple>
       </StyledLink>
     </Root>
   )
