@@ -92,7 +92,7 @@ const StyledButton = styled.button<{ $variant: ButtonVariants }>`
     ${$variant === 'quaternary' && `border: 1px solid ${theme.colors.purple};`}
     outline-offset: 2px;
     transition: all 0.4s ease-in-out;
-    &:focus {
+    &:active {
       ${$variant === 'tertiary' &&
       `background:rgba(255,255,255,0);
         color:${theme.colors.white};`}
