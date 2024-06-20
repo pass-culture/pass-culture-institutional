@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { default as BaseSlider } from 'rc-slider'
 import type { AriaValueFormat } from 'rc-slider/lib/interface'
 import styled, { css } from 'styled-components'
@@ -22,6 +22,8 @@ export function SliderField({
   title,
   answer,
 }: SliderFieldProps) {
+  const [isClient, setIsClient] = useState<boolean>(false)
+
   const valueTextFormatter: AriaValueFormat = useCallback(
     (value: number) => {
       if (value <= 14) {
@@ -48,6 +50,10 @@ export function SliderField({
     },
     [onChange]
   )
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   return (
     <Field>
@@ -91,25 +97,27 @@ export function SliderField({
             </span>
           ),
         }}
-        included={false}
+        included
         ariaValueTextFormatterForHandle={valueTextFormatter}
         value={(answer ?? 0) + 14}
         onChange={handleChange}
       />
       <SelectWrapper>
-        <Select
-          id="question-field"
-          value={answer}
-          onChange={(e) => onChange(Number(e.target.value))}>
-          {answers.map((a, i) => (
-            <option
-              key={a}
-              value={i}
-              aria-label={parseText(a!).accessibilityLabel}>
-              {parseText(a!).processedText}
-            </option>
-          ))}
-        </Select>
+        {isClient && (
+          <Select
+            id="question-field"
+            value={answer}
+            onChange={(e) => onChange(Number(e.target.value))}>
+            {answers.map((a: string, i: number) => (
+              <option
+                key={a}
+                value={i}
+                aria-label={parseText(a).accessibilityLabel}>
+                {parseText(a).processedText}
+              </option>
+            ))}
+          </Select>
+        )}
         <SelectIcon />
       </SelectWrapper>
     </Field>
@@ -157,7 +165,6 @@ const Slider = styled(BaseSlider)`
       background-color: ${({ theme }) => theme.colors.primary};
       opacity: 0.1;
     }
-
     &:last-of-type {
       width: max-content;
       transform: translateX(-100%) !important;
@@ -167,7 +174,6 @@ const Slider = styled(BaseSlider)`
         right: 0;
       }
     }
-
     &:first-of-type {
       width: max-content;
       transform: translateX(0) !important;
@@ -177,16 +183,17 @@ const Slider = styled(BaseSlider)`
       }
     }
   }
-
   .rc-slider-dot {
     opacity: 0;
   }
 
   .rc-slider-rail {
+    height: 0.5rem;
+  }
+  .rc-slider-track {
     background-color: ${({ theme }) => theme.colors.primary};
     height: 0.5rem;
   }
-
   .rc-slider-handle {
     background-color: ${({ theme }) => theme.colors.primary};
     width: 2rem;
@@ -218,7 +225,6 @@ const SelectWrapper = styled.div`
 
 const Select = styled.select`
   padding: 1.25rem 1.875rem;
-
   font-size: ${({ theme }) => theme.fonts.sizes.s};
   font-weight: ${({ theme }) => theme.fonts.weights.bold};
   line-height: 2;
