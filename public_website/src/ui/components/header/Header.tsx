@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/router'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
@@ -90,11 +89,11 @@ export function Header({
   signup,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
-  const router = useRouter()
+  const router = usePathname()
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const navItems = [...targetItems, ...aboutItems]
-  const activeId = findCollectionIdByPath(router?.asPath, navItems)
+  const activeId = findCollectionIdByPath(router, navItems)
 
   // Set active menu on hover and if asPath is including in navItems
   const isActive = (i: number): string =>

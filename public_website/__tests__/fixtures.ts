@@ -34,6 +34,7 @@ export const headerDataFixtures: HeaderProps = {
           URL: '#',
         },
       },
+      id: 0,
     },
   ],
   aboutItems: [
@@ -66,6 +67,7 @@ export const headerDataFixtures: HeaderProps = {
           URL: '#',
         },
       },
+      id: 0,
     },
   ],
   login: {
