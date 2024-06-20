@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/router'
 import styled, { css } from 'styled-components'
 
 import { FocusTrap } from '../../../hooks/useFocusTrap'
@@ -12,6 +13,7 @@ import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
+import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export type HeaderProps = {
   targetItems: HeaderNavigationItemProps[]
@@ -27,6 +29,7 @@ export type HeaderProps = {
 }
 
 type HeaderNavigationItemProps = {
+  id: number
   label: string
   megaMenu: {
     title: string
@@ -43,6 +46,42 @@ type HeaderNavigationItemProps = {
     cardSecondEmoji: string
   }
 }
+/**
+ *
+ *
+ * @param {CTA[]} items
+ * @param {string} path
+ * @return {*}  {boolean}
+ */
+const findInMenu = (items: CTA[], str: string): boolean => {
+  for (const item of items) {
+    if (isStringAreEquals(item.URL, str)) return true
+  }
+  return false
+}
+/**
+ *
+ *
+ * @param {string} path
+ * @param {HeaderNavigationItemProps[]} collections
+ * @return {*}  {(number | null)}
+ */
+const findCollectionIdByPath = (
+  path: string,
+  collections: HeaderNavigationItemProps[]
+): number | null => {
+  for (const collection of collections) {
+    const { megaMenu } = collection
+    if (megaMenu.primaryListItems) {
+      if (findInMenu(megaMenu.primaryListItems, path)) return collection.id
+    }
+    if (megaMenu.secondaryListItems) {
+      if (findInMenu(megaMenu.secondaryListItems, path)) return collection.id
+    }
+  }
+
+  return null
+}
 
 export function Header({
   targetItems,
@@ -51,10 +90,15 @@ export function Header({
   signup,
 }: HeaderProps) {
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
-
+  const router = useRouter()
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const navItems = [...targetItems, ...aboutItems]
+  const activeId = findCollectionIdByPath(router?.asPath, navItems)
+
+  // Set active menu on hover and if asPath is including in navItems
+  const isActive = (i: number): string =>
+    i === activeMegaMenuId || activeId === i + 1 ? 'mega-menu-active' : ''
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number) {
@@ -193,9 +237,7 @@ export function Header({
                         id={`mega-menu-button-${i}`}
                         aria-controls={`mega-menu-${i}`}
                         aria-expanded={i === activeMegaMenuId}
-                        className={
-                          i === activeMegaMenuId ? 'mega-menu-active' : ''
-                        }
+                        className={isActive(i)}
                         onClick={() => toggleMegaMenu(i)}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
                         onMouseEnter={() => toggleMegaMenu(i)}>

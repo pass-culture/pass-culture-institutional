@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
@@ -9,6 +10,7 @@ import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { CTA } from '@/types/CTA'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
+import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 type MegaMenuProps = {
   onBlur: () => void
@@ -43,6 +45,7 @@ export function MegaMenu({
   data,
 }: MegaMenuProps) {
   const megaMenuRef = useRef<HTMLDivElement>(null)
+  const path = useRouter().asPath
 
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
@@ -104,6 +107,9 @@ export function MegaMenu({
               return (
                 <li key={item.Label}>
                   <Link
+                    className={
+                      isStringAreEquals(path, item.URL) ? 'active' : ''
+                    }
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -117,6 +123,9 @@ export function MegaMenu({
               return (
                 <li key={item.Label}>
                   <Link
+                    className={
+                      isStringAreEquals(path, item.URL.trim()) ? 'active' : ''
+                    }
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -207,7 +216,9 @@ const StyledMegaMenuLists = styled.div`
       font-weight: ${theme.fonts.weights.semiBold};
       color: ${theme.colors.black};
       opacity: 0.9;
-
+      &.active {
+        text-decoration: underline;
+      }
       &:hover {
         text-decoration: underline;
       }
