@@ -124,7 +124,7 @@ export function MegaMenu({
                 <li key={item.Label}>
                   <Link
                     className={
-                      isStringAreEquals(path, item.URL.trim()) ? 'active' : ''
+                      isStringAreEquals(path, item.URL) ? 'active' : ''
                     }
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
