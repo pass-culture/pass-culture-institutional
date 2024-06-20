@@ -44,8 +44,8 @@ export function SimplePushCta(props: PushCTAProps) {
         <CardContainer>
           <Card
             $imageUrl={
-              props.image?.data.attributes.url &&
-              getStrapiURL(props.image?.data.attributes.url)
+              props.image?.data?.attributes?.url &&
+              getStrapiURL(props.image?.data?.attributes?.url)
             }></Card>
           <OutlinedText>{props.icon}</OutlinedText>
         </CardContainer>
@@ -226,7 +226,7 @@ const CtaLink = styled(Link)`
     &:hover {
       background: ${`rgba(255, 255, 255, 0.20);`};
     }
-    &:focus {
+    &:active {
       outline: 2px solid ${theme.colors.white};
     }
     color: ${theme.colors.white};

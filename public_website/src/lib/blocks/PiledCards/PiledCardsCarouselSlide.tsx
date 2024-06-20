@@ -25,7 +25,7 @@ export function VerticalCarouselSlide({
   theme,
 }: PiledCardsCarouselSlideProps) {
   const imageUrl =
-    typeof image === 'string' ? image : image?.data.attributes.url
+    typeof image === 'string' ? image : image?.data?.attributes?.url
 
   const [descriptionIsOpen, setDescriptionIsOpen] = useState(false)
 

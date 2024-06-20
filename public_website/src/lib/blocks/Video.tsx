@@ -28,7 +28,7 @@ export function Video(props: VideoProps) {
           <StyledVideo
             light={
               props.image
-                ? getStrapiURL(props.image?.data.attributes.url)
+                ? getStrapiURL(props.image?.data?.attributes?.url)
                 : true
             }
             url={props.url}

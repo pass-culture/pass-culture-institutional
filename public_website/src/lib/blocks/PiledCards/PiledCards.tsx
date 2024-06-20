@@ -77,8 +77,8 @@ export function PiledCards(props: PiledCardsProps) {
               aria-label={`Card ${index + 1}`}>
               <StyledImageWrapper>
                 <StyledImage
-                  src={item.image?.data.attributes.url}
-                  alt={item.image?.data.attributes.alternativeText}
+                  src={item.image?.data?.attributes?.url}
+                  alt={item.image?.data?.attributes?.alternativeText}
                 />
                 <StyledFirstEmoji aria-hidden="true">
                   <OutlinedText blurDeviation={1}>
