@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
 import { AppBanner } from '../app-banner/AppBanner'
@@ -45,7 +45,7 @@ export function MegaMenu({
   data,
 }: MegaMenuProps) {
   const megaMenuRef = useRef<HTMLDivElement>(null)
-  const path = useRouter().asPath
+  const path = usePathname()
 
   function onClickOutside(e: MouseEvent) {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
