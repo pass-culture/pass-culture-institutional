@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
+import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 interface BreadcrumbProps {
   isUnderHeader?: boolean
@@ -21,13 +22,15 @@ export function Breadcrumb(props: BreadcrumbProps) {
     return null
   }
 
-  const currentNavigationGroup = headerData?.targetItems.find(
+  const allItems = [...headerData.targetItems, ...headerData.aboutItems]
+
+  const currentNavigationGroup = allItems.find(
     (x) =>
-      x.megaMenu.primaryListItems.some(
-        (y) => y.URL.toLowerCase() === pathname.toLowerCase()
+      x.megaMenu.primaryListItems.some((y) =>
+        isStringAreEquals(y.URL, pathname)
       ) ||
-      x.megaMenu.secondaryListItems.some(
-        (y) => y.URL.toLowerCase() === pathname.toLowerCase()
+      x.megaMenu.secondaryListItems.some((y) =>
+        isStringAreEquals(y.URL, pathname)
       )
   )
 
@@ -40,11 +43,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
     ...currentNavigationGroup.megaMenu.secondaryListItems,
   ]
 
-  const currentLink = groupLinks.find(
-    (l) => l.URL.toLowerCase() === pathname.toLowerCase()
-  )
+  const currentLink = groupLinks.find((y) => isStringAreEquals(y.URL, pathname))
 
-  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOptionChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
     let selectedUrl = event.target.value
     selectedUrl = selectedUrl.startsWith('/') ? selectedUrl : '/' + selectedUrl
     router.push(selectedUrl)

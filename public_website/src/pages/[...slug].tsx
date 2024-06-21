@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
@@ -13,14 +14,26 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  const { seo, Blocks } = props.data.attributes
+
   return (
     <PageWrapper>
-      {props.data.attributes.seo && (
-        <Seo metaData={props.data.attributes.seo} />
-      )}
-      {props.data.attributes.Blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      ))}
+      {seo && <Seo metaData={seo} />}
+      {Blocks?.map((block, index) => {
+        const blockContent = (
+          <BlockRenderer
+            key={`${block.__component}_${block.id}`}
+            block={block}
+          />
+        )
+        return index === 1 ? (
+          <React.Fragment key={`${block.__component}_${block.id}`}>
+            <Breadcrumb isUnderHeader /> {blockContent}
+          </React.Fragment>
+        ) : (
+          blockContent
+        )
+      })}
     </PageWrapper>
   )
 }
