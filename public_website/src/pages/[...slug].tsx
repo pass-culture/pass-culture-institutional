@@ -18,7 +18,7 @@ export default function CustomPage(props: CustomPageProps) {
 
   return (
     <PageWrapper>
-      {seo && <Seo metaData={props.data.attributes.seo} />}
+      {seo && <Seo metaData={seo} />}
 
       {Blocks?.map((block, index) => {
         return index === 1 ? (
