@@ -48,6 +48,9 @@ const Root = styled(ContentWrapper)`
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
 
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+
     h2 {
       font-size: 2.5rem;
       margin-bottom: 2rem;

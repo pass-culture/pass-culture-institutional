@@ -35,6 +35,7 @@ export const theme = {
     sticker: `${Shadows.STICKER} ${Colors.GRAY}`,
     banner: `${Shadows.STICKER} ${Colors.GRAY}`,
     contai: `${Shadows.STICKER} ${Colors.GRAY}`,
+    buttonCircular: `${Shadows.CARROUSEL_BUTTON} ${Colors.DARK_GRAY}`,
   },
   fonts: {
     sizes: {

@@ -214,7 +214,7 @@ const StyledHeading = styled(ContentWrapper)`
 
 const StyledSlider = styled(Slider)`
   overflow: hidden;
-  padding: 2rem 0;
+  padding: 3.125rem 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     padding: 3.5rem 0;
@@ -241,7 +241,7 @@ const StyledNavigationButtons = styled.div`
         filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
       }
       background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.popover};
+      box-shadow: ${theme.shadows.buttonCircular};
       border-radius: 50%;
       align-items: center;
       display: flex;

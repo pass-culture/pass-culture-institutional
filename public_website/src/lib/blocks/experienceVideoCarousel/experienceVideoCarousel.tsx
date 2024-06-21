@@ -182,7 +182,7 @@ const StyledNavigationButtons = styled.div`
 
     button {
       background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.popover};
+      box-shadow: ${theme.shadows.buttonCircular};
       transition: all 0.3s ease-in-out;
       border-radius: 50%;
       align-items: center;

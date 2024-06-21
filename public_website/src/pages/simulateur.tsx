@@ -58,7 +58,7 @@ const Root = styled.div`
 
 const Title = styled(Typo.Heading1)`
   margin-bottom: 1.75rem;
-
+  padding-top: 1.75rem;
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     text-align: center;
   }

@@ -256,7 +256,7 @@ const StyledTitle = styled(ContentWrapper)`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  margin-top: -3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

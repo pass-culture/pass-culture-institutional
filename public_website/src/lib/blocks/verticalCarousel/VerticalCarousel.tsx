@@ -200,7 +200,7 @@ const StyledNavigationButtons = styled.div`
 
     button {
       background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.popover};
+      box-shadow: ${theme.shadows.buttonCircular};
       &:hover {
         box-shadow: none;
         filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));

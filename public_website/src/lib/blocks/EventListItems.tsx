@@ -96,7 +96,7 @@ const StyledList = styled.ul`
 
 const LoadMoreButton = styled.button`
   ${({ theme }) => css`
-    margin-top: 1rem;
+    margin-top: 1.875rem;
     margin-inline: auto;
 
     background: linear-gradient(
