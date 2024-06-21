@@ -19,21 +19,19 @@ export default function CustomPage(props: CustomPageProps) {
   return (
     <PageWrapper>
       {seo && <Seo metaData={seo} />}
-
       {Blocks?.map((block, index) => {
-        return index === 1 ? (
-          <React.Fragment key={`${block.__component}_${block.id}`}>
-            <Breadcrumb isUnderHeader />
-            <BlockRenderer
-              key={`${block.__component}_${block.id}`}
-              block={block}
-            />
-          </React.Fragment>
-        ) : (
+        const blockContent = (
           <BlockRenderer
             key={`${block.__component}_${block.id}`}
             block={block}
           />
+        )
+        return index === 1 ? (
+          <React.Fragment key={`${block.__component}_${block.id}`}>
+            <Breadcrumb isUnderHeader /> {blockContent}
+          </React.Fragment>
+        ) : (
+          blockContent
         )
       })}
     </PageWrapper>
