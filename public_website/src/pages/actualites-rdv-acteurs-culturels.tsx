@@ -18,6 +18,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   newsRDVData: APIResponseData<'api::news.news'>[]
@@ -98,12 +99,7 @@ export default function ListeActuCulturels({
     setOriginalEventRdvLocalisation(eventLACLoc)
     setEventSecteur(eventLACSec)
     setOriginalEventSecteur(eventLACSec)
-
     setEventData(eventsData)
-    // let uniqueEventCategories = []
-    // let uniqueEventLocalisations = []
-    // let uniqueEventSecteurs = []
-
     setCategory(cat)
     setLocalisation(loc)
     setOriginalRdvCategory(cat)
@@ -203,9 +199,7 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-      <Separator
-        isActive={separator && separator.isActive ? separator.isActive : false}
-      />
+      <Separator isActive={separatorIsActive(separator)} />
 
       <StyledTitle>
         {titleEventSection && (
@@ -226,9 +220,7 @@ export default function ListeActuCulturels({
         events={eventData}
         buttonText={buttonText}
       />
-      <Separator
-        isActive={separator && separator.isActive ? separator.isActive : false}
-      />
+      <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>

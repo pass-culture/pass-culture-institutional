@@ -17,6 +17,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
@@ -105,9 +106,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         />
       </StyledTitle>
       <StyledListItems type="actualite" news={data} buttonText={buttonText} />
-      <Separator
-        isActive={separator && separator.isActive ? separator.isActive : false}
-      />
+      <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
