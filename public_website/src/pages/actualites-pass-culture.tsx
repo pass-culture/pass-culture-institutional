@@ -15,6 +15,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { setFilter } from '@/utils/filterOptions'
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
   listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
@@ -115,10 +116,10 @@ export default function ListeActualitesPassCulture({
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
+        setFilter(setCategory, originalCategory, value)
         break
       case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
+        setFilter(setLocalisation, originalLocalisation, value)
         break
       default:
         break
