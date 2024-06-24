@@ -117,6 +117,8 @@ export default function ListeActuCulturels({
     let uniqueSecteurs = []
 
     const eventFiltres = filtres?.map((filtre) => {
+      const defaultValue = { ...filtre, value: [] }
+
       switch (filtre.filtre) {
         case "Secteur d'activités":
           uniqueEventSecteurs = Array.from(
@@ -143,7 +145,7 @@ export default function ListeActuCulturels({
             value: uniqueEventLocalisations,
           }
         default:
-          return { ...filtre, value: [] }
+          return defaultValue
       }
     })
 
@@ -267,7 +269,9 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-      <Separator {...separator} />
+      <Separator
+        isActive={separator && separator.isActive ? separator.isActive : false}
+      />
 
       <StyledTitle>
         {titleEventSection && (
@@ -288,7 +292,9 @@ export default function ListeActuCulturels({
         events={eventData}
         buttonText={buttonText}
       />
-      <Separator {...separator} />
+      <Separator
+        isActive={separator && separator.isActive ? separator.isActive : false}
+      />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>

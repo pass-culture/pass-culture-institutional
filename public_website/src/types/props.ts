@@ -14,3 +14,6 @@ export type SocialMediaProps = {
   socialMediaLink: { name: string; url: string }[]
   className?: string
 }
+export interface SeparatorTextProps {
+  isActive: boolean | undefined
+}

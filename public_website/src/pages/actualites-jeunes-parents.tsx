@@ -59,6 +59,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     let uniqueLocalisations = []
 
     const filtresOption = filtres?.map((filtre) => {
+      const defaultValue = { ...filtre, value: [] }
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -77,7 +78,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
             value: uniqueLocalisations,
           }
         default:
-          return { ...filtre, value: [] }
+          return defaultValue
       }
     })
 
@@ -130,7 +131,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         />
       </StyledTitle>
       <StyledListItems type="actualite" news={data} buttonText={buttonText} />
-      <Separator {...separator} />
+      <Separator
+        isActive={separator && separator.isActive ? separator.isActive : false}
+      />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>

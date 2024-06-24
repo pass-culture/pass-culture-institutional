@@ -1,12 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { SeparatorTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-
-interface SeparatorTextProps {
-  isActive?: boolean | undefined
-  id?: number | undefined
-}
 
 export function Separator(props: SeparatorTextProps) {
   const { isActive } = props

@@ -61,6 +61,7 @@ export default function ListeActualitesPassCulture({
     let uniqueCategories = []
 
     const filtresOption = filtres?.map((filtre) => {
+      const defaultValue = { ...filtre, value: [] }
       switch (filtre.filtre) {
         case 'Localisation':
           uniqueLocalisations = Array.from(
@@ -81,7 +82,7 @@ export default function ListeActualitesPassCulture({
             value: uniqueCategories,
           }
         default:
-          return { ...filtre, value: [] }
+          return defaultValue
       }
     })
 
@@ -134,7 +135,9 @@ export default function ListeActualitesPassCulture({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-      <Separator {...separator} />
+      <Separator
+        isActive={separator && separator.isActive ? separator.isActive : false}
+      />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
