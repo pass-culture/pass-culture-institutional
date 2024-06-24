@@ -114,16 +114,18 @@ export default function ListeActualitesPassCulture({
   }
 
   const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setFilter(setCategory, originalCategory, value)
-        break
-      case 'Localisation':
-        setFilter(setLocalisation, originalLocalisation, value)
-        break
-      default:
-        break
+    let callback = null
+    let originalValue: string[] = []
+    if (name === 'Catégorie') {
+      callback = setCategory
+      originalValue = originalCategory
     }
+    if (name === 'Localisation') {
+      callback = setLocalisation
+      originalValue = originalLocalisation
+    }
+
+    if (callback) setFilter(callback, originalValue, value)
   }
 
   useEffect(() => {
