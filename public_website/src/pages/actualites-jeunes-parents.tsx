@@ -3,11 +3,12 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
@@ -15,7 +16,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { setFilter } from '@/utils/filterOptions'
+
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
@@ -84,19 +85,6 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setFilter(setCategory, originalCategory, value)
-        break
-      case 'Localisation':
-        setFilter(setLocalisation, originalLocalisation, value)
-        break
-      default:
-        break
-    }
-  }
-
   const fetchData = async () => {
     const newsQuery = stringify({
       sort: ['date:desc'],
@@ -133,9 +121,12 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       <StyledTitle>
         <Typo.Heading2>{title}</Typo.Heading2>
         <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalCategory}
+          originalLocalisation={originalLocalisation}
+          data={filters}
         />
       </StyledTitle>
       <StyledListItems type="actualite" news={data} buttonText={buttonText} />

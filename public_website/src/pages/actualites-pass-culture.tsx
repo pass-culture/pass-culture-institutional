@@ -3,11 +3,12 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
@@ -15,7 +16,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { setFilter } from '@/utils/filterOptions'
+
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
   listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
@@ -112,22 +113,7 @@ export default function ListeActualitesPassCulture({
 
     setData(news.data)
   }
-
-  const handleFilterChange = (name: string, value: string[]) => {
-    let callback = null
-    let originalValue: string[] = []
-    if (name === 'Catégorie') {
-      callback = setCategory
-      originalValue = originalCategory
-    }
-    if (name === 'Localisation') {
-      callback = setLocalisation
-      originalValue = originalLocalisation
-    }
-
-    if (callback) setFilter(callback, originalValue, value)
-  }
-
+  // IN THIS PAGE NO FILTER SECTEUR ADDED !
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -139,9 +125,12 @@ export default function ListeActualitesPassCulture({
       <StyledTitle>
         {title && <Typo.Heading2>{title}</Typo.Heading2>}
         <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalCategory}
+          originalLocalisation={originalLocalisation}
+          data={filters}
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
