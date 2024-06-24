@@ -4,13 +4,16 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
 interface SeparatorTextProps {
-  isActive: boolean | undefined
+  isActive?: boolean | undefined
+  id?: number | undefined
 }
 
 export function Separator(props: SeparatorTextProps) {
+  const { isActive } = props
+
   return (
     <Root data-testid="separator" $noMargin>
-      {props.isActive && <div />}
+      {isActive && <div />}
     </Root>
   )
 }

@@ -130,7 +130,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
         />
       </StyledTitle>
       <StyledListItems type="actualite" news={data} buttonText={buttonText} />
-      <Separator isActive={separator?.isActive} />
+      <Separator {...separator} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>

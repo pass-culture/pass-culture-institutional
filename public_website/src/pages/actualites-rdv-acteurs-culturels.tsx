@@ -4,7 +4,7 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
@@ -17,7 +17,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
-import { setFilter } from '@/utils/filterOptions'
+
 interface ListProps {
   newsRDVData: APIResponseData<'api::news.news'>[]
   listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
@@ -239,22 +239,6 @@ export default function ListeActuCulturels({
     setEventData(events.data)
   }
 
-  const handleEventFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setFilter(setEventRdvCategory, originalEventRdvCategory, value)
-        break
-      case 'Localisation':
-        setFilter(setEventRdvLocalisation, originalEventRdvLocalisation, value)
-        break
-      case "Secteur d'activités":
-        setFilter(setEventSecteur, originalEventSecteur, value)
-        break
-      default:
-        break
-    }
-  }
-
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -283,15 +267,20 @@ export default function ListeActuCulturels({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-      <Separator isActive={separator?.isActive} />
+      <Separator {...separator} />
 
       <StyledTitle>
         {titleEventSection && (
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
-        <FilterContainer
-          filtres={eventFilters}
-          onFilterChange={handleEventFilterChange}
+        <FilterOption
+          setCategory={setEventRdvCategory}
+          originalCategory={originalEventRdvCategory}
+          setLocalisation={setEventRdvLocalisation}
+          originalLocalisation={originalEventRdvLocalisation}
+          setSecteur={setEventSecteur}
+          originalSecteur={originalEventSecteur}
+          data={eventFilters}
         />
       </StyledTitle>
       <StyledeventListItems
@@ -299,7 +288,7 @@ export default function ListeActuCulturels({
         events={eventData}
         buttonText={buttonText}
       />
-      <Separator isActive={separator?.isActive} />
+      <Separator {...separator} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>

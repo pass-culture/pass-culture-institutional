@@ -134,7 +134,7 @@ export default function ListeActualitesPassCulture({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-      <Separator isActive={separator?.isActive} />
+      <Separator {...separator} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
