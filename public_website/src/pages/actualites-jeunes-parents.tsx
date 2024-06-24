@@ -20,6 +20,16 @@ interface ListProps {
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    aide,
+    socialMediaSection,
+    filtres,
+  } = listejeune.attributes
+
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -45,7 +55,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     let uniqueCategories = []
     let uniqueLocalisations = []
 
-    const filtres = listejeune.attributes?.filtres?.map((filtre) => {
+    const filtresOption = filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -68,7 +78,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       }
     })
 
-    if (filtres) setFilters(filtres)
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -117,11 +127,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 
   return (
     <React.Fragment>
-      {listejeune.attributes.seo && (
-        <Seo metaData={listejeune.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        <Typo.Heading2>{listejeune.attributes.title}</Typo.Heading2>
+        <Typo.Heading2>{title}</Typo.Heading2>
 
         <UnpaddedBreadcrumb />
 
@@ -130,30 +138,24 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
           onFilterChange={handleFilterChange}
         />
       </StyledTitle>
-      <StyledListItems
-        type="actualite"
-        news={data}
-        buttonText={listejeune.attributes.buttonText}
-      />
+      <StyledListItems type="actualite" news={data} buttonText={buttonText} />
 
-      <Separator isActive={listejeune.attributes.separator?.isActive} />
+      <Separator isActive={separator?.isActive} />
 
       <SimplePushCta
-        title={listejeune.attributes.aide?.title}
-        image={listejeune.attributes.aide?.image}
-        cta={listejeune.attributes.aide?.cta}
-        surtitle={listejeune.attributes.aide?.surtitle}
-        icon={listejeune.attributes.aide?.icon}
+        title={aide?.title}
+        image={aide?.image}
+        cta={aide?.cta}
+        surtitle={aide?.surtitle}
+        icon={aide?.icon}
       />
 
-      {listejeune.attributes.socialMediaSection &&
-        listejeune.attributes.socialMediaSection.title &&
-        listejeune.attributes.socialMediaSection.socialMediaLink && (
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={listejeune.attributes.socialMediaSection.title}
-            socialMediaLink={
-              listejeune.attributes.socialMediaSection.socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>

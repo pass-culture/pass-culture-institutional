@@ -23,6 +23,15 @@ export default function ListeActualitesPassCulture({
   newsActuPassData,
   listeActualitesPassCulture,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    aide,
+    socialMediaSection,
+    filtres,
+  } = listeActualitesPassCulture.attributes
   const cat = Array.from(
     new Set(newsActuPassData.map((item) => item.attributes.category))
   )
@@ -48,34 +57,32 @@ export default function ListeActualitesPassCulture({
     let uniqueLocalisations = []
     let uniqueCategories = []
 
-    const filtres = listeActualitesPassCulture.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Localisation':
-            uniqueLocalisations = Array.from(
-              new Set(
-                newsActuPassData.map((item) => item.attributes.localisation)
-              )
+    const filtresOption = filtres?.map((filtre) => {
+      switch (filtre.filtre) {
+        case 'Localisation':
+          uniqueLocalisations = Array.from(
+            new Set(
+              newsActuPassData.map((item) => item.attributes.localisation)
             )
-            return {
-              ...filtre,
-              value: uniqueLocalisations,
-            }
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(newsActuPassData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
+          )
+          return {
+            ...filtre,
+            value: uniqueLocalisations,
+          }
+        case 'Catégorie':
+          uniqueCategories = Array.from(
+            new Set(newsActuPassData.map((item) => item.attributes.category))
+          )
+          return {
+            ...filtre,
+            value: uniqueCategories,
+          }
+        default:
+          return { ...filtre, value: [] }
       }
-    )
+    })
 
-    if (filtres) setFilters(filtres)
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -124,51 +131,33 @@ export default function ListeActualitesPassCulture({
 
   return (
     <React.Fragment>
-      {listeActualitesPassCulture.attributes.seo && (
-        <Seo metaData={listeActualitesPassCulture.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {listeActualitesPassCulture.attributes.title && (
-          <Typo.Heading2>
-            {listeActualitesPassCulture.attributes.title}
-          </Typo.Heading2>
-        )}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
         <UnpaddedBreadcrumb />
         <FilterContainer
           filtres={filters}
           onFilterChange={handleFilterChange}
         />
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="actualite"
-        buttonText={listeActualitesPassCulture.attributes.buttonText}
-      />
+      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
 
-      <Separator
-        isActive={listeActualitesPassCulture.attributes.separator?.isActive}
-      />
+      <Separator isActive={separator?.isActive} />
 
       <SimplePushCta
-        title={listeActualitesPassCulture.attributes.aide?.title}
-        image={listeActualitesPassCulture.attributes.aide?.image}
-        cta={listeActualitesPassCulture.attributes.aide?.cta}
-        surtitle={listeActualitesPassCulture.attributes.aide?.surtitle}
-        icon={listeActualitesPassCulture.attributes.aide?.icon}
+        title={aide?.title}
+        image={aide?.image}
+        cta={aide?.cta}
+        surtitle={aide?.surtitle}
+        icon={aide?.icon}
       />
 
-      {listeActualitesPassCulture.attributes.socialMediaSection &&
-        listeActualitesPassCulture.attributes.socialMediaSection.title &&
-        listeActualitesPassCulture.attributes.socialMediaSection
-          .socialMediaLink && (
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={
-              listeActualitesPassCulture.attributes.socialMediaSection.title
-            }
-            socialMediaLink={
-              listeActualitesPassCulture.attributes.socialMediaSection
-                .socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>

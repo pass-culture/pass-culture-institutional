@@ -15,6 +15,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { setFilter } from '@/utils/filterOptions'
 interface ListProps {
   newsRDVData: APIResponseData<'api::news.news'>[]
   listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
@@ -230,13 +231,13 @@ export default function ListeActuCulturels({
   const handleFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setCategory(value[0] === '' ? originalRdvCategory : value)
+        setFilter(setCategory, originalRdvCategory, value)
         break
       case 'Localisation':
-        setLocalisation(value[0] === '' ? originalRdvLocalisation : value)
+        setFilter(setLocalisation, originalRdvLocalisation, value)
         break
       case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalRdvSecteur : value)
+        setFilter(setSecteur, originalRdvSecteur, value)
         break
       default:
         break
@@ -246,15 +247,13 @@ export default function ListeActuCulturels({
   const handleEventFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
-        setEventRdvCategory(value[0] === '' ? originalEventRdvCategory : value)
+        setFilter(setEventRdvCategory, originalEventRdvCategory, value)
         break
       case 'Localisation':
-        setEventRdvLocalisation(
-          value[0] === '' ? originalEventRdvLocalisation : value
-        )
+        setFilter(setEventRdvLocalisation, originalEventRdvLocalisation, value)
         break
       case "Secteur d'activités":
-        setEventSecteur(value[0] === '' ? originalEventSecteur : value)
+        setFilter(setEventSecteur, originalEventSecteur, value)
         break
       default:
         break
