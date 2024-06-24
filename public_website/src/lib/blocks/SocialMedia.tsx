@@ -23,17 +23,15 @@ const SOCIAL_ICONS: { [key: string]: React.JSX.Element } = {
   linkedin: <LinkedIn />,
 }
 
-export function SocialMedia({
-  title,
-  socialMediaLink,
-  className,
-}: SocialMediaProps) {
+export function SocialMedia(props: SocialMediaProps) {
+  const { socialMediaLink = [], title, className } = props
+
   const sliceIndex = Math.ceil(socialMediaLink.length / 2)
   const firstRow = socialMediaLink.slice(0, sliceIndex)
   const secondRow = socialMediaLink.slice(sliceIndex)
   return (
     <ContentWrapper className={className}>
-      <StyledHeading>{title}</StyledHeading>
+      {title && <StyledHeading>{title}</StyledHeading>}
       <Lists>
         <StyledList>
           {firstRow.map((link) => {
