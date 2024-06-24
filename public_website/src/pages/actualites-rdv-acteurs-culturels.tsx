@@ -36,7 +36,7 @@ export default function ListeActuCulturels({
     separator,
     titleEventSection,
     aide,
-    socialMediaSection,
+    socialMediaSection = [],
     filtres,
   } = listeActuCulturel.attributes
 

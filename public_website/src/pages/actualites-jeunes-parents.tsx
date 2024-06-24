@@ -27,7 +27,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     buttonText,
     separator,
     aide,
-    socialMediaSection,
+    socialMediaSection = [],
     filtres,
   } = listejeune.attributes
 

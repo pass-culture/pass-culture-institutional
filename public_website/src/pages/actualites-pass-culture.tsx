@@ -30,7 +30,7 @@ export default function ListeActualitesPassCulture({
     buttonText,
     separator,
     aide,
-    socialMediaSection,
+    socialMediaSection = [],
     filtres,
   } = listeActualitesPassCulture.attributes
   const cat = Array.from(
