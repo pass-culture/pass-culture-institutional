@@ -16,6 +16,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
@@ -57,35 +58,7 @@ export default function ListeActualitesPassCulture({
     setOriginalCategory(cat)
 
     setData(newsActuPassData)
-    let uniqueLocalisations = []
-    let uniqueCategories = []
-
-    const filtresOption = filtres?.map((filtre) => {
-      const defaultValue = { ...filtre, value: [] }
-      switch (filtre.filtre) {
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(
-              newsActuPassData.map((item) => item.attributes.localisation)
-            )
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsActuPassData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        default:
-          return defaultValue
-      }
-    })
-
+    const filtresOption = filterByAttribute(filtres, newsActuPassData)
     if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

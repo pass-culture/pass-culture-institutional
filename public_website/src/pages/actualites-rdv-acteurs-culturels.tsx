@@ -17,11 +17,11 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
   newsRDVData: APIResponseData<'api::news.news'>[]
   listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-
   eventsData: APIResponseData<'api::event.event'>[]
 }
 
@@ -100,9 +100,9 @@ export default function ListeActuCulturels({
     setOriginalEventSecteur(eventLACSec)
 
     setEventData(eventsData)
-    let uniqueEventCategories = []
-    let uniqueEventLocalisations = []
-    let uniqueEventSecteurs = []
+    // let uniqueEventCategories = []
+    // let uniqueEventLocalisations = []
+    // let uniqueEventSecteurs = []
 
     setCategory(cat)
     setLocalisation(loc)
@@ -112,74 +112,8 @@ export default function ListeActuCulturels({
     setOriginalRdvSecteur(sec)
 
     setData(newsRDVData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
-
-    const eventFiltres = filtres?.map((filtre) => {
-      const defaultValue = { ...filtre, value: [] }
-
-      switch (filtre.filtre) {
-        case "Secteur d'activités":
-          uniqueEventSecteurs = Array.from(
-            new Set(eventsData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventSecteurs,
-          }
-        case 'Catégorie':
-          uniqueEventCategories = Array.from(
-            new Set(eventsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventCategories,
-          }
-        case 'Localisation':
-          uniqueEventLocalisations = Array.from(
-            new Set(eventsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventLocalisations,
-          }
-        default:
-          return defaultValue
-      }
-    })
-
-    const newsFiltres = filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
-
+    const newsFiltres = filterByAttribute(filtres, newsRDVData)
+    const eventFiltres = filterByAttribute(filtres, eventsData)
     if (newsFiltres) setNewsRdvFilters(newsFiltres)
     if (eventFiltres) setEventFilters(eventFiltres)
     // eslint-disable-next-line react-hooks/exhaustive-deps

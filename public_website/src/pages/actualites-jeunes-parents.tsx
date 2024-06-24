@@ -16,6 +16,7 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
@@ -53,35 +54,8 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     setLocalisation(loc)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
-
     setData(newsData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-
-    const filtresOption = filtres?.map((filtre) => {
-      const defaultValue = { ...filtre, value: [] }
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        default:
-          return defaultValue
-      }
-    })
-
+    const filtresOption = filterByAttribute(filtres, newsData)
     if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
