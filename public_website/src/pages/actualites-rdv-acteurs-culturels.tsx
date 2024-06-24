@@ -9,6 +9,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
@@ -238,21 +239,6 @@ export default function ListeActuCulturels({
     setEventData(events.data)
   }
 
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setFilter(setCategory, originalRdvCategory, value)
-        break
-      case 'Localisation':
-        setFilter(setLocalisation, originalRdvLocalisation, value)
-        break
-      case "Secteur d'activités":
-        setFilter(setSecteur, originalRdvSecteur, value)
-        break
-      default:
-        break
-    }
-  }
   const handleEventFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
@@ -286,10 +272,14 @@ export default function ListeActuCulturels({
         {title && <Typo.Heading2>{title}</Typo.Heading2>}
 
         <UnpaddedBreadcrumb />
-
-        <FilterContainer
-          filtres={newsRdvFilters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalRdvCategory}
+          originalLocalisation={originalRdvLocalisation}
+          originalSecteur={originalRdvSecteur}
+          setSecteur={setSecteur}
+          data={newsRdvFilters}
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
