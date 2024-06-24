@@ -286,6 +286,7 @@ export default function ListeActuCulturels({
         {title && <Typo.Heading2>{title}</Typo.Heading2>}
 
         <UnpaddedBreadcrumb />
+
         <FilterContainer
           filtres={newsRdvFilters}
           onFilterChange={handleFilterChange}
