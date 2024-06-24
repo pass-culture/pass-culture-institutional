@@ -10,6 +10,7 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
+import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -28,6 +29,17 @@ export default function ListeActuCulturels({
   listeActuCulturel,
   eventsData,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    titleEventSection,
+    aide,
+    socialMediaSection,
+    filtres,
+  } = listeActuCulturel.attributes
+
   const cat = Array.from(
     new Set(newsRDVData.map((item) => item.attributes.category))
   )
@@ -103,40 +115,38 @@ export default function ListeActuCulturels({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const eventFiltres = listeActuCulturel.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case "Secteur d'activités":
-            uniqueEventSecteurs = Array.from(
-              new Set(eventsData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventSecteurs,
-            }
-          case 'Catégorie':
-            uniqueEventCategories = Array.from(
-              new Set(eventsData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventCategories,
-            }
-          case 'Localisation':
-            uniqueEventLocalisations = Array.from(
-              new Set(eventsData.map((item) => item.attributes.localisation))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventLocalisations,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
+    const eventFiltres = filtres?.map((filtre) => {
+      switch (filtre.filtre) {
+        case "Secteur d'activités":
+          uniqueEventSecteurs = Array.from(
+            new Set(eventsData.map((item) => item.attributes.secteur))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventSecteurs,
+          }
+        case 'Catégorie':
+          uniqueEventCategories = Array.from(
+            new Set(eventsData.map((item) => item.attributes.category))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventCategories,
+          }
+        case 'Localisation':
+          uniqueEventLocalisations = Array.from(
+            new Set(eventsData.map((item) => item.attributes.localisation))
+          )
+          return {
+            ...filtre,
+            value: uniqueEventLocalisations,
+          }
+        default:
+          return { ...filtre, value: [] }
       }
-    )
+    })
 
-    const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
+    const newsFiltres = filtres?.map((filtre) => {
       switch (filtre.filtre) {
         case 'Catégorie':
           uniqueCategories = Array.from(
@@ -167,7 +177,7 @@ export default function ListeActuCulturels({
       }
     })
 
-    if (filtres) setNewsRdvFilters(filtres)
+    if (newsFiltres) setNewsRdvFilters(newsFiltres)
     if (eventFiltres) setEventFilters(eventFiltres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -243,7 +253,6 @@ export default function ListeActuCulturels({
         break
     }
   }
-
   const handleEventFilterChange = (name: string, value: string[]) => {
     switch (name) {
       case 'Catégorie':
@@ -272,13 +281,9 @@ export default function ListeActuCulturels({
 
   return (
     <React.Fragment>
-      {listeActuCulturel.attributes.seo && (
-        <Seo metaData={listeActuCulturel.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {listeActuCulturel.attributes.title && (
-          <Typo.Heading2>{listeActuCulturel.attributes.title}</Typo.Heading2>
-        )}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
 
         <UnpaddedBreadcrumb />
         <FilterContainer
@@ -286,19 +291,12 @@ export default function ListeActuCulturels({
           onFilterChange={handleFilterChange}
         />
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="actualite"
-        buttonText={listeActuCulturel.attributes.buttonText}
-      />
-
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
+      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      <Separator isActive={separator?.isActive} />
 
       <StyledTitle>
-        {listeActuCulturel.attributes.titleEventSection && (
-          <Typo.Heading3>
-            {listeActuCulturel.attributes.titleEventSection}
-          </Typo.Heading3>
+        {titleEventSection && (
+          <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
         <FilterContainer
           filtres={eventFilters}
@@ -308,27 +306,11 @@ export default function ListeActuCulturels({
       <StyledeventListItems
         type="evenement/"
         events={eventData}
-        buttonText={listeActuCulturel.attributes.buttonText}
+        buttonText={buttonText}
       />
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
-
-      <SimplePushCta
-        title={listeActuCulturel.attributes.aide?.title}
-        image={listeActuCulturel.attributes.aide?.image}
-        cta={listeActuCulturel.attributes.aide?.cta}
-        surtitle={listeActuCulturel.attributes.aide?.surtitle}
-        icon={listeActuCulturel.attributes.aide?.icon}
-      />
-      {listeActuCulturel.attributes.socialMediaSection &&
-        listeActuCulturel.attributes.socialMediaSection.title &&
-        listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={listeActuCulturel.attributes.socialMediaSection.title}
-            socialMediaLink={
-              listeActuCulturel.attributes.socialMediaSection.socialMediaLink
-            }
-          />
-        )}
+      <Separator isActive={separator?.isActive} />
+      <SimplePushCta {...(aide as PushCTAProps)} />
+      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
   )
 }

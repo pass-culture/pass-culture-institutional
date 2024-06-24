@@ -9,6 +9,7 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
+import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -141,25 +142,9 @@ export default function ListeActualitesPassCulture({
         />
       </StyledTitle>
       <StyledListItems news={data} type="actualite" buttonText={buttonText} />
-
       <Separator isActive={separator?.isActive} />
-
-      <SimplePushCta
-        title={aide?.title}
-        image={aide?.image}
-        cta={aide?.cta}
-        surtitle={aide?.surtitle}
-        icon={aide?.icon}
-      />
-
-      {socialMediaSection &&
-        socialMediaSection.title &&
-        socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={socialMediaSection.title}
-            socialMediaLink={socialMediaSection.socialMediaLink}
-          />
-        )}
+      <SimplePushCta {...(aide as PushCTAProps)} />
+      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
   )
 }

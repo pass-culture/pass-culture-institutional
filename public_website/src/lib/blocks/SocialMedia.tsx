@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { SocialMediaProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Facebook } from '@/ui/components/icons/social-media/facebook'
 import { Instagram } from '@/ui/components/icons/social-media/instagram'
@@ -11,12 +12,6 @@ import { X } from '@/ui/components/icons/social-media/x'
 import { YouTube } from '@/ui/components/icons/social-media/youtube'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
-
-type SocialMediaProps = {
-  title: string
-  socialMediaLink: { name: string; url: string }[]
-  className?: string
-}
 
 const SOCIAL_ICONS: { [key: string]: React.JSX.Element } = {
   x: <X />,
