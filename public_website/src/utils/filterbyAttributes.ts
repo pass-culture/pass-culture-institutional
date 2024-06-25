@@ -12,7 +12,6 @@ export const filterByAttribute = (filtres: Filtre, data: Data) => {
   const _filtres = structuredClone(filtres)
   const _data = structuredClone(data)
 
-  // Fonction pour obtenir les valeurs uniques d'un attribut
   const uniqueValue = <
     T extends
       | APIResponseData<'api::event.event'>
