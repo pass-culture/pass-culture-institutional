@@ -9,25 +9,41 @@ type Data =
   | APIResponseData<'api::news.news'>[]
 
 export const filterByAttribute = (filtres: Filtre, data: Data) => {
-  const _filtres = filtres
-  const _data = data
+  const _filtres = structuredClone(filtres)
+  const _data = structuredClone(data)
+
+  // Fonction pour obtenir les valeurs uniques d'un attribut
+  const uniqueValue = <
+    T extends
+      | APIResponseData<'api::event.event'>
+      | APIResponseData<'api::news.news'>,
+  >(
+    data: T[],
+    attribute: (item: T) => string
+  ): string[] => {
+    return Array.from(new Set(data.map(attribute)))
+  }
 
   return _filtres?.map((filtre) => {
-    let uniqueValue: string[] = []
+    let uniqueValues: string[] = []
+
     switch (filtre.filtre) {
       case "Secteur d'activités":
-        uniqueValue = Array.from(
-          new Set(_data.map((item) => item.attributes.secteur))
+        uniqueValues = uniqueValue(
+          _data as APIResponseData<'api::event.event'>[],
+          (item) => item.attributes.secteur
         )
         break
       case 'Catégorie':
-        uniqueValue = Array.from(
-          new Set(_data.map((item) => item.attributes.category))
+        uniqueValues = uniqueValue(
+          _data as APIResponseData<'api::news.news'>[],
+          (item) => item.attributes.category
         )
         break
       case 'Localisation':
-        uniqueValue = Array.from(
-          new Set(_data.map((item) => item.attributes.localisation))
+        uniqueValues = uniqueValue(
+          _data as APIResponseData<'api::news.news'>[],
+          (item) => item.attributes.localisation
         )
         break
       default:
@@ -36,7 +52,7 @@ export const filterByAttribute = (filtres: Filtre, data: Data) => {
 
     return {
       ...filtre,
-      value: uniqueValue,
+      value: uniqueValues,
     }
   })
 }
