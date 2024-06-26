@@ -1,6 +1,6 @@
 import { APIResponseData } from '@/types/strapi'
 
-type Filtre = { id: number; filtre: string }[] | undefined
+type Filtre = { filtre: string }[] | undefined
 
 type Data =
   | APIResponseData<'api::event.event'>[]
