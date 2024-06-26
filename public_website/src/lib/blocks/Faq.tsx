@@ -128,7 +128,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
-    min-width: 18rem;
+    min-width: 20rem;
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin-bottom: 1.75rem;
     }
@@ -186,6 +186,7 @@ const StyledAccordion = styled.details`
 
     p {
       margin-top: 1rem;
+      line-height: 2.125rem;
     }
 
     button {

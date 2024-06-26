@@ -1,16 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { SeparatorTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
-interface SeparatorTextProps {
-  isActive: boolean | undefined
-}
-
 export function Separator(props: SeparatorTextProps) {
+  const { isActive } = props
+
   return (
     <Root data-testid="separator" $noMargin>
-      {props.isActive && <div />}
+      {isActive && <div />}
     </Root>
   )
 }

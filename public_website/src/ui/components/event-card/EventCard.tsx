@@ -67,6 +67,7 @@ export function EventCard({
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
+        {/* ICI LA REDIRECTION SUR LES TAGS ACTU NE FONCTIONNE PAS À CAUSE DU PARAMÈTRES TYPES (VÉRIFIER SON RÔLES CAR OP SI TYPE SUP) */}
         {type
           ? cta?.URL && (
               <CtaLink href={type + cta.URL} target="_blank">
@@ -202,6 +203,15 @@ const CtaLink = styled(Link)`
     padding: 1rem 1.75rem;
     border-radius: 100px;
     border: 1px solid ${theme.colors.white};
+
+    outline-offset: 2px;
+    transition: background 0.3s ease-in-out;
+    &:hover {
+      background: ${`rgba(255, 255, 255, 0.20);`};
+    }
+    &:active {
+      outline: 2px solid ${theme.colors.white};
+    }
 
     @media (width < ${theme.mediaQueries.tablet}) {
       margin: auto;

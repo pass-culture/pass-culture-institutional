@@ -3,17 +3,22 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
+
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
   listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
@@ -23,6 +28,15 @@ export default function ListeActualitesPassCulture({
   newsActuPassData,
   listeActualitesPassCulture,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    aide,
+    socialMediaSection = [],
+    filtres,
+  } = listeActualitesPassCulture.attributes
   const cat = Array.from(
     new Set(newsActuPassData.map((item) => item.attributes.category))
   )
@@ -45,37 +59,8 @@ export default function ListeActualitesPassCulture({
     setOriginalCategory(cat)
 
     setData(newsActuPassData)
-    let uniqueLocalisations = []
-    let uniqueCategories = []
-
-    const filtres = listeActualitesPassCulture.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Localisation':
-            uniqueLocalisations = Array.from(
-              new Set(
-                newsActuPassData.map((item) => item.attributes.localisation)
-              )
-            )
-            return {
-              ...filtre,
-              value: uniqueLocalisations,
-            }
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(newsActuPassData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
-      }
-    )
-
-    if (filtres) setFilters(filtres)
+    const filtresOption = filterByAttribute(filtres, newsActuPassData)
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -103,20 +88,7 @@ export default function ListeActualitesPassCulture({
 
     setData(news.data)
   }
-
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      default:
-        break
-    }
-  }
-
+  // IN THIS PAGE NO FILTER SECTEUR ADDED !
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -124,53 +96,22 @@ export default function ListeActualitesPassCulture({
 
   return (
     <React.Fragment>
-      {listeActualitesPassCulture.attributes.seo && (
-        <Seo metaData={listeActualitesPassCulture.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {listeActualitesPassCulture.attributes.title && (
-          <Typo.Heading2>
-            {listeActualitesPassCulture.attributes.title}
-          </Typo.Heading2>
-        )}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
         <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalCategory}
+          originalLocalisation={originalLocalisation}
+          data={filters}
         />
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="actualite"
-        buttonText={listeActualitesPassCulture.attributes.buttonText}
-      />
-
-      <Separator
-        isActive={listeActualitesPassCulture.attributes.separator?.isActive}
-      />
-
-      <SimplePushCta
-        title={listeActualitesPassCulture.attributes.aide?.title}
-        image={listeActualitesPassCulture.attributes.aide?.image}
-        cta={listeActualitesPassCulture.attributes.aide?.cta}
-        surtitle={listeActualitesPassCulture.attributes.aide?.surtitle}
-        icon={listeActualitesPassCulture.attributes.aide?.icon}
-      />
-
-      {listeActualitesPassCulture.attributes.socialMediaSection &&
-        listeActualitesPassCulture.attributes.socialMediaSection.title &&
-        listeActualitesPassCulture.attributes.socialMediaSection
-          .socialMediaLink && (
-          <StyledSocialMedia
-            title={
-              listeActualitesPassCulture.attributes.socialMediaSection.title
-            }
-            socialMediaLink={
-              listeActualitesPassCulture.attributes.socialMediaSection
-                .socialMediaLink
-            }
-          />
-        )}
+      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      <Separator isActive={separatorIsActive(separator)} />
+      <SimplePushCta {...(aide as PushCTAProps)} />
+      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
   )
 }
@@ -256,7 +197,7 @@ const StyledTitle = styled(ContentWrapper)`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  margin-top: -3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

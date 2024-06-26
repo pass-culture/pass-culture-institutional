@@ -2,52 +2,59 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import { PushCTAProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { parseText } from '@/utils/parseText'
 
-interface PushCTAProps {
-  title: string | undefined
-  surtitle: string | undefined
-  image: APIResponse<'plugin::upload.file'> | null | undefined
-  cta: CTA | undefined
-  icon: string | undefined
-  className?: string
+const SimplePushCtaTitle = (props: { title: string }) => {
+  const { title } = props
+
+  return (
+    <Title aria-label={parseText(title).accessibilityLabel}>
+      {parseText(title).processedText}
+    </Title>
+  )
+}
+const SimplePushCtaSurTitle = (props: { surtitle: string }) => {
+  const { surtitle } = props
+  return (
+    <p aria-label={parseText(surtitle).accessibilityLabel}>
+      {parseText(surtitle).processedText}
+    </p>
+  )
+}
+const SimplePushCtaLink = (props: { Label: string; URL: string }) => {
+  const { URL, Label } = props
+  return (
+    <CtaLink href={URL}>
+      <span>{Label}</span>
+    </CtaLink>
+  )
+}
+const SimplePushCtaCard = (props: { url: string }) => {
+  const { url } = props
+  return <Card $imageUrl={getStrapiURL(url)} />
 }
 
 export function SimplePushCta(props: PushCTAProps) {
+  const { className, surtitle, title, cta, image, icon } = props
+
   return (
-    <Root className={props.className}>
+    <Root className={className}>
       <StyledContentWrapper $noMargin>
         <RightSide>
-          {props.surtitle && (
-            <p aria-label={parseText(props.surtitle).accessibilityLabel}>
-              {parseText(props.surtitle).processedText}
-            </p>
-          )}
-
-          {props.title && (
-            <Title aria-label={parseText(props.title).accessibilityLabel}>
-              {parseText(props.title).processedText}
-            </Title>
-          )}
-          {props.cta && (
-            <CtaLink href={props.cta.URL}>
-              <span>{props.cta.Label}</span>
-            </CtaLink>
-          )}
+          {surtitle && <SimplePushCtaSurTitle surtitle={surtitle} />}
+          {title && <SimplePushCtaTitle title={title} />}
+          {cta && <SimplePushCtaLink {...cta} />}
         </RightSide>
         <CardContainer>
-          <Card
-            $imageUrl={
-              props.image?.data?.attributes?.url &&
-              getStrapiURL(props.image?.data?.attributes?.url)
-            }></Card>
-          <OutlinedText>{props.icon}</OutlinedText>
+          {image?.data?.attributes?.url && (
+            <SimplePushCtaCard {...image.data.attributes} />
+          )}
+          <OutlinedText>{icon}</OutlinedText>
         </CardContainer>
       </StyledContentWrapper>
     </Root>

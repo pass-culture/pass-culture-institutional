@@ -3,23 +3,38 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
+
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    aide,
+    socialMediaSection = [],
+    filtres,
+  } = listejeune.attributes
+
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
   )
@@ -40,50 +55,11 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     setLocalisation(loc)
     setOriginalCategory(cat)
     setOriginalLocalisation(loc)
-
     setData(newsData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-
-    const filtres = listejeune.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
-
-    if (filtres) setFilters(filtres)
+    const filtresOption = filterByAttribute(filtres, newsData)
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      default:
-        break
-    }
-  }
 
   const fetchData = async () => {
     const newsQuery = stringify({
@@ -117,45 +93,22 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 
   return (
     <React.Fragment>
-      {listejeune.attributes.seo && (
-        <Seo metaData={listejeune.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        <Typo.Heading2>{listejeune.attributes.title}</Typo.Heading2>
-
+        <Typo.Heading2>{title}</Typo.Heading2>
         <UnpaddedBreadcrumb />
-
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalCategory}
+          originalLocalisation={originalLocalisation}
+          data={filters}
         />
       </StyledTitle>
-      <StyledListItems
-        type="actualite"
-        news={data}
-        buttonText={listejeune.attributes.buttonText}
-      />
-
-      <Separator isActive={listejeune.attributes.separator?.isActive} />
-
-      <SimplePushCta
-        title={listejeune.attributes.aide?.title}
-        image={listejeune.attributes.aide?.image}
-        cta={listejeune.attributes.aide?.cta}
-        surtitle={listejeune.attributes.aide?.surtitle}
-        icon={listejeune.attributes.aide?.icon}
-      />
-
-      {listejeune.attributes.socialMediaSection &&
-        listejeune.attributes.socialMediaSection.title &&
-        listejeune.attributes.socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={listejeune.attributes.socialMediaSection.title}
-            socialMediaLink={
-              listejeune.attributes.socialMediaSection.socialMediaLink
-            }
-          />
-        )}
+      <StyledListItems type="actualite" news={data} buttonText={buttonText} />
+      <Separator isActive={separatorIsActive(separator)} />
+      <SimplePushCta {...(aide as PushCTAProps)} />
+      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
   )
 }
@@ -241,7 +194,7 @@ const StyledTitle = styled(ContentWrapper)`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  margin-top: -3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

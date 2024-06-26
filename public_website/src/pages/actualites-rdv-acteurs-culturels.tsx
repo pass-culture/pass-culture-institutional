@@ -4,21 +4,25 @@ import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
+
 interface ListProps {
   newsRDVData: APIResponseData<'api::news.news'>[]
   listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-
   eventsData: APIResponseData<'api::event.event'>[]
 }
 
@@ -27,6 +31,17 @@ export default function ListeActuCulturels({
   listeActuCulturel,
   eventsData,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    separator,
+    titleEventSection,
+    aide,
+    socialMediaSection = [],
+    filtres,
+  } = listeActuCulturel.attributes
+
   const cat = Array.from(
     new Set(newsRDVData.map((item) => item.attributes.category))
   )
@@ -84,12 +99,7 @@ export default function ListeActuCulturels({
     setOriginalEventRdvLocalisation(eventLACLoc)
     setEventSecteur(eventLACSec)
     setOriginalEventSecteur(eventLACSec)
-
     setEventData(eventsData)
-    let uniqueEventCategories = []
-    let uniqueEventLocalisations = []
-    let uniqueEventSecteurs = []
-
     setCategory(cat)
     setLocalisation(loc)
     setOriginalRdvCategory(cat)
@@ -98,75 +108,9 @@ export default function ListeActuCulturels({
     setOriginalRdvSecteur(sec)
 
     setData(newsRDVData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
-
-    const eventFiltres = listeActuCulturel.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case "Secteur d'activités":
-            uniqueEventSecteurs = Array.from(
-              new Set(eventsData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventSecteurs,
-            }
-          case 'Catégorie':
-            uniqueEventCategories = Array.from(
-              new Set(eventsData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventCategories,
-            }
-          case 'Localisation':
-            uniqueEventLocalisations = Array.from(
-              new Set(eventsData.map((item) => item.attributes.localisation))
-            )
-            return {
-              ...filtre,
-              value: uniqueEventLocalisations,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
-      }
-    )
-
-    const filtres = listeActuCulturel.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(newsRDVData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
-
-    if (filtres) setNewsRdvFilters(filtres)
+    const newsFiltres = filterByAttribute(filtres, newsRDVData)
+    const eventFiltres = filterByAttribute(filtres, eventsData)
+    if (newsFiltres) setNewsRdvFilters(newsFiltres)
     if (eventFiltres) setEventFilters(eventFiltres)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -227,40 +171,6 @@ export default function ListeActuCulturels({
     setEventData(events.data)
   }
 
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalRdvCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalRdvLocalisation : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalRdvSecteur : value)
-        break
-      default:
-        break
-    }
-  }
-
-  const handleEventFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setEventRdvCategory(value[0] === '' ? originalEventRdvCategory : value)
-        break
-      case 'Localisation':
-        setEventRdvLocalisation(
-          value[0] === '' ? originalEventRdvLocalisation : value
-        )
-        break
-      case "Secteur d'activités":
-        setEventSecteur(value[0] === '' ? originalEventSecteur : value)
-        break
-      default:
-        break
-    }
-  }
-
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -273,63 +183,46 @@ export default function ListeActuCulturels({
 
   return (
     <React.Fragment>
-      {listeActuCulturel.attributes.seo && (
-        <Seo metaData={listeActuCulturel.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {listeActuCulturel.attributes.title && (
-          <Typo.Heading2>{listeActuCulturel.attributes.title}</Typo.Heading2>
-        )}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
 
         <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={newsRdvFilters}
-          onFilterChange={handleFilterChange}
+        <FilterOption
+          setCategory={setCategory}
+          setLocalisation={setLocalisation}
+          originalCategory={originalRdvCategory}
+          originalLocalisation={originalRdvLocalisation}
+          originalSecteur={originalRdvSecteur}
+          setSecteur={setSecteur}
+          data={newsRdvFilters}
         />
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="actualite"
-        buttonText={listeActuCulturel.attributes.buttonText}
-      />
-
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
+      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      <Separator isActive={separatorIsActive(separator)} />
 
       <StyledTitle>
-        {listeActuCulturel.attributes.titleEventSection && (
-          <Typo.Heading3>
-            {listeActuCulturel.attributes.titleEventSection}
-          </Typo.Heading3>
+        {titleEventSection && (
+          <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
-        <FilterContainer
-          filtres={eventFilters}
-          onFilterChange={handleEventFilterChange}
+        <FilterOption
+          setCategory={setEventRdvCategory}
+          originalCategory={originalEventRdvCategory}
+          setLocalisation={setEventRdvLocalisation}
+          originalLocalisation={originalEventRdvLocalisation}
+          setSecteur={setEventSecteur}
+          originalSecteur={originalEventSecteur}
+          data={eventFilters}
         />
       </StyledTitle>
       <StyledeventListItems
         type="evenement/"
         events={eventData}
-        buttonText={listeActuCulturel.attributes.buttonText}
+        buttonText={buttonText}
       />
-      <Separator isActive={listeActuCulturel.attributes.separator?.isActive} />
-
-      <SimplePushCta
-        title={listeActuCulturel.attributes.aide?.title}
-        image={listeActuCulturel.attributes.aide?.image}
-        cta={listeActuCulturel.attributes.aide?.cta}
-        surtitle={listeActuCulturel.attributes.aide?.surtitle}
-        icon={listeActuCulturel.attributes.aide?.icon}
-      />
-      {listeActuCulturel.attributes.socialMediaSection &&
-        listeActuCulturel.attributes.socialMediaSection.title &&
-        listeActuCulturel.attributes.socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={listeActuCulturel.attributes.socialMediaSection.title}
-            socialMediaLink={
-              listeActuCulturel.attributes.socialMediaSection.socialMediaLink
-            }
-          />
-        )}
+      <Separator isActive={separatorIsActive(separator)} />
+      <SimplePushCta {...(aide as PushCTAProps)} />
+      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
     </React.Fragment>
   )
 }
@@ -433,7 +326,7 @@ const StyledTitle = styled(ContentWrapper)`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  margin-top: -3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

@@ -208,7 +208,7 @@ const StyledNavigationButtons = styled.div`
     align-items: center;
     button {
       background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.popover};
+      box-shadow: ${theme.shadows.buttonCircular};
       border-radius: 50%;
       display: flex;
       align-items: center;
