@@ -1,6 +1,6 @@
-version: '3'
+version: "3"
 services:
-  next_preview: 
+  next_preview:
     build:
       context: public_website
       args:
@@ -8,28 +8,27 @@ services:
     env_file:
       - public_website/.env
     environment:
-      ID_TOKEN: 'dummy_token'
-      NEXT_PUBLIC_BACKEND_API_URL: https://backend.testing.passculture.team
+      ID_TOKEN: "dummy_token"
+      NEXT_PUBLIC_BACKEND_API_URL: https://backend.passculture.app
     ports:
       - 3000:3000
 
   cms:
     build:
-      context: content_management_system 
+      context: content_management_system
     ports:
       - 1337:1337
     env_file: content_management_system/.env
     environment:
       DATABASE_HOST: database
-      GCS_BUCKET_NAME: "fake" 
+      GCS_BUCKET_NAME: "fake"
     depends_on:
       - database
 
   database:
-    image: 'postgres:16.0'
+    image: "postgres:16.0"
     ports:
       - 5432:5432
     env_file: content_management_system/.env
     volumes:
       - ./data/:/var/lib/postgresql/data/
-
