@@ -3,17 +3,19 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
@@ -48,10 +50,8 @@ export default function RessourcesEnseignants({
   )
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
+
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
@@ -61,46 +61,11 @@ export default function RessourcesEnseignants({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalLocalisation(loc)
-    setOriginalCategory(cat)
     setSecteur(sec)
-    setOriginalSecteur(sec)
 
     setData(resourceREData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
 
-    const filtresOption = filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(resourceREData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(resourceREData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(resourceREData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
+    const filtresOption = filterByAttribute(filtres, resourceREData)
     if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -133,22 +98,6 @@ export default function RessourcesEnseignants({
     setData(news.data)
   }
 
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
-        break
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      default:
-        break
-    }
-  }
-
   useEffect(() => {
     fetchDataRessourcesEnseignants()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,9 +115,14 @@ export default function RessourcesEnseignants({
       {hasData > 0 && (
         <React.Fragment>
           <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-            <FilterContainer
-              filtres={filters}
-              onFilterChange={handleFilterChange}
+            <FilterOption
+              setCategory={setCategory}
+              setLocalisation={setLocalisation}
+              originalCategory={category}
+              originalLocalisation={localisation}
+              setSecteur={setSecteur}
+              originalSecteur={secteur}
+              data={filters}
             />
           </ContentWrapper>
 
