@@ -102,25 +102,25 @@ export const getStaticProps = (async ({ params }) => {
     return { notFound: true }
   }
 
-  // const eventQuery = stringify({
-  //   sort: ['date:desc'],
-  //   populate: ['image', 'cta'],
-  //   pagination: {},
-  //   filter: {
-  //     pageLocalisation: {
-  //       $containsi: 'S’informer - presse',
-  //     },
-  //   },
-  // })
+  const eventQuery = stringify({
+    sort: ['date:desc'],
+    populate: ['image', 'cta'],
+    pagination: {},
+    filter: {
+      pageLocalisation: {
+        $containsi: 'S’informer - presse',
+      },
+    },
+  })
 
-  // const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-  //   `/events?${eventQuery}`
-  // )
+  const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
+    `/events?${eventQuery}`
+  )
 
   return {
     props: {
       data: response.data[0]!,
-      // eventsData: events.data,
+      eventsData: events.data,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>

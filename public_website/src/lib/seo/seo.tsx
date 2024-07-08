@@ -37,11 +37,7 @@ export function Seo(props: SeoProps) {
         {keywords && <meta name="keywords" content={keywords} />}
         <link
           rel="canonical"
-          href={
-            canonicalURL
-              ? canonicalURL
-              : process.env['NEXT_PUBLIC_APP_URL'] + path
-          }
+          href={canonicalURL || process.env['NEXT_PUBLIC_APP_URL'] + path}
         />
       </Head>
       {metaSocial?.map((social) => (

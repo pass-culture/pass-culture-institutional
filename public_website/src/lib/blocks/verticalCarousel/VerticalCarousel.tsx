@@ -100,7 +100,7 @@ export function VerticalCarousel({
 
   const isNavigation = (): boolean => {
     if (items.length) return true
-    return true
+    return false
   }
 
   return (
