@@ -7,6 +7,10 @@ on:
     tags: "**"
   pull_request:
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
   fetch_secrets:
     runs-on: ubuntu-latest
@@ -58,7 +62,7 @@ jobs:
       - name: Test typescript
         run: cd content_management_system && yarn test:types
   build-image-cms:
-    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
+    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@BSR-fix-docker-image-variables
     needs:
       - fetch_secrets
     permissions:
@@ -73,7 +77,7 @@ jobs:
       ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
       COSIGN_KMS_KEY: ${{ needs.fetch_secrets.outputs.cosign_kms_key }}
   build-image-public-site-preview:
-    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
+    uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@BSR-fix-docker-image-variables
     needs:
       - fetch_secrets
     permissions:
