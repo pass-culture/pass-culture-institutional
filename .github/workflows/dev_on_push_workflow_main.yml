@@ -63,7 +63,7 @@ jobs:
           COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
     - name: build image
       id: 'build'
-      uses: pass-culture/common-workflows/actions/build-docker-image@BSR-fix-docker-image-variables
+      uses: pass-culture/common-workflows/actions/build-docker-image@main
       with:
         image: pc-institutional 
         push: true 
@@ -89,7 +89,7 @@ jobs:
           COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
     - name: build image
       id: 'build'
-      uses: pass-culture/common-workflows/actions/build-docker-image@BSR-fix-docker-image-variables
+      uses: pass-culture/common-workflows/actions/build-docker-image@main
       with:
         image: pc-institutional-public-site-preview
         push: true 
