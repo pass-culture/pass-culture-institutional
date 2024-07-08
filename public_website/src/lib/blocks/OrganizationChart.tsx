@@ -2,25 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import { OrganizationChartProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 
-type OrganizationChartProps = {
-  title?: string
-  description: string
-  people: {
-    name: string
-    position: string
-    image: APIResponse<'plugin::upload.file'> | null
-  }[]
-}
+export function OrganizationChart(props: OrganizationChartProps) {
+  const { title, description, people } = props
 
-export function OrganizationChart({
-  title,
-  description,
-  people,
-}: OrganizationChartProps) {
   return (
     <ContentWrapper>
       {title && <StyledHeading>{title}</StyledHeading>}

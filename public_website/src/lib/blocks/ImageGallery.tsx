@@ -61,7 +61,7 @@ const ImageComponent: React.FC<{
     alt={image.attributes.alternativeText ?? ''}
     width={image.attributes.width}
     height={image.attributes.height}
-    fetchPriority="low"
+    // fetchPriority="low"
     loading="lazy"
     decoding="async"
   />

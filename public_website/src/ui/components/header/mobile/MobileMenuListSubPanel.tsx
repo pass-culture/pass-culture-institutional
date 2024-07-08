@@ -88,7 +88,7 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
     li {
       font-size: ${theme.fonts.sizes.xl};
       font-weight: ${theme.fonts.weights.semiBold};
-      line-height: 0.95;
+      line-height: ${theme.fonts.sizes['4xl']};
     }
   `}
 `

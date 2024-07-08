@@ -5,18 +5,22 @@ import styled, { css } from 'styled-components'
 
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ImageText } from '@/lib/blocks/ImageText'
 import { ListItems } from '@/lib/blocks/ListItems'
+import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   resourcesData: APIResponseData<'api::resource.resource'>[]
@@ -29,6 +33,19 @@ export default function Presse({
   presseListe,
   eventsData,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    titleEventSection,
+    texteImage,
+    pushCta,
+    aide,
+    socialMediaSection,
+    separator,
+    filtres,
+  } = presseListe.attributes
+
   const cat = Array.from(
     new Set(resourcesData.map((item) => item.attributes.category))
   )
@@ -53,22 +70,12 @@ export default function Presse({
     new Set(eventsData.map((item) => item.attributes.secteur))
   )
   const [category, setCategory] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [eventCategory, setEventCategory] = useState<string[]>([])
-  const [originalEventCategory, setOriginalEventCategory] = useState<string[]>(
-    []
-  )
   const [eventLocalisation, setEventLocalisation] = useState<string[]>([])
-  const [originalEventLocalisation, setOriginalEventLocalisation] = useState<
-    string[]
-  >([])
   const [eventSecteur, setEventSecteur] = useState<string[]>([])
-  const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
@@ -83,92 +90,20 @@ export default function Presse({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalCategory(cat)
-    setOriginalLocalisation(loc)
     setSecteur(sec)
-    setOriginalSecteur(sec)
 
     setEventCategory(eventCat)
     setEventLocalisation(eventLoc)
-    setOriginalEventCategory(eventCat)
-    setOriginalEventLocalisation(eventLoc)
     setEventSecteur(eventSec)
-    setOriginalEventSecteur(eventSec)
 
     setData(resourcesData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
 
     setEventData(eventsData)
-    let uniqueEventCategories = []
-    let uniqueEventLocalisations = []
-    let uniqueEventSecteurs = []
 
-    const filtres = presseListe.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueCategories = Array.from(
-            new Set(resourcesData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueCategories,
-          }
-        case "Secteur d'activités":
-          uniqueSecteurs = Array.from(
-            new Set(resourcesData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueSecteurs,
-          }
-        case 'Localisation':
-          uniqueLocalisations = Array.from(
-            new Set(resourcesData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueLocalisations,
-          }
+    const filtresOption = filterByAttribute(filtres, resourcesData)
+    if (filtresOption) setFilters(filtresOption)
 
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
-
-    const eventFiltres = presseListe.attributes?.filtres?.map((filtre) => {
-      switch (filtre.filtre) {
-        case 'Catégorie':
-          uniqueEventCategories = Array.from(
-            new Set(eventsData.map((item) => item.attributes.category))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventCategories,
-          }
-        case 'Localisation':
-          uniqueEventLocalisations = Array.from(
-            new Set(eventsData.map((item) => item.attributes.localisation))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventLocalisations,
-          }
-        case "Secteur d'activités":
-          uniqueEventSecteurs = Array.from(
-            new Set(eventsData.map((item) => item.attributes.secteur))
-          )
-          return {
-            ...filtre,
-            value: uniqueEventSecteurs,
-          }
-        default:
-          return { ...filtre, value: [] }
-      }
-    })
-    if (filtres) setFilters(filtres)
-    if (eventFiltres) setEventFilters(eventFiltres)
+    if (filtresOption) setEventFilters(filtresOption)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -189,7 +124,7 @@ export default function Presse({
           $eqi: secteur,
         },
         pageLocalisation: {
-          $containsi: 'S’informer - presse',
+          // $containsi: 'S’informer - presse',
         },
       },
     })
@@ -227,38 +162,6 @@ export default function Presse({
 
     setEventData(events.data)
   }
-  const handleEventFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setEventCategory(value[0] === '' ? originalEventCategory : value)
-        break
-      case 'Localisation':
-        setEventLocalisation(
-          value[0] === '' ? originalEventLocalisation : value
-        )
-        break
-      case "Secteur d'activités":
-        setEventSecteur(value[0] === '' ? originalEventSecteur : value)
-        break
-      default:
-        break
-    }
-  }
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
-        break
-      default:
-        break
-    }
-  }
 
   useEffect(() => {
     fetchData()
@@ -270,81 +173,108 @@ export default function Presse({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventCategory, eventLocalisation, eventSecteur])
 
+  const hasData = data.length
+  const hasEventData = eventData.length
+
   return (
     <React.Fragment>
-      {presseListe.attributes.seo && (
-        <Seo metaData={presseListe.attributes.seo} />
+      {seo && <Seo metaData={seo} />}
+      <StyledTitle>
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
+      </StyledTitle>
+      <ContentWrapper $noMargin>
+        <UnpaddedBreadcrumb />
+      </ContentWrapper>
+
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+        <FilterOption
+          setCategory={setCategory}
+          originalCategory={category}
+          setLocalisation={setLocalisation}
+          originalLocalisation={localisation}
+          setSecteur={setSecteur}
+          originalSecteur={secteur}
+          data={filters}
+        />
+      </ContentWrapper>
+      {hasData > 0 ? (
+        <StyledListItems
+          news={data}
+          type="ressources"
+          buttonText={buttonText}
+        />
+      ) : (
+        <NoResult />
       )}
+
+      <Separator isActive={separatorIsActive(separator)} />
+      {/* BLOC EVENTS / RENDEZ-VOUS */}
       <StyledTitle>
-        {presseListe.attributes.title && (
-          <Typo.Heading2>{presseListe.attributes.title}</Typo.Heading2>
+        {titleEventSection && (
+          <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
-
-        <Breadcrumb />
-
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
-        />
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="ressources"
-        buttonText={presseListe.attributes.buttonText}
-      />
 
-      <Separator isActive={presseListe.attributes.separator?.isActive} />
-
-      <StyledTitle>
-        {presseListe.attributes.titleEventSection && (
-          <Typo.Heading3>
-            {presseListe.attributes.titleEventSection}
-          </Typo.Heading3>
-        )}
-        <FilterContainer
-          filtres={eventFilters}
-          onFilterChange={handleEventFilterChange}
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+        <FilterOption
+          setCategory={setEventCategory}
+          originalCategory={eventCat}
+          setLocalisation={setEventLocalisation}
+          originalLocalisation={eventLocalisation}
+          setSecteur={setEventSecteur}
+          originalSecteur={eventSecteur}
+          data={eventFilters}
         />
-      </StyledTitle>
-      <StyledeventListItems
-        type="evenement/"
-        events={eventData}
-        buttonText={presseListe.attributes.buttonText}
-      />
-      <Separator isActive={presseListe.attributes.separator?.isActive} />
+        {/* <FilterContainer
+              filtres={eventFilters}
+              onFilterChange={handleEventFilterChange}
+            /> */}
+      </ContentWrapper>
+
+      {hasEventData > 0 ? (
+        <StyledeventListItems
+          type="evenement"
+          events={eventData}
+          buttonText={buttonText}
+        />
+      ) : (
+        <NoResult />
+      )}
+
+      <Separator isActive={separatorIsActive(separator)} />
       <ImageText
-        title={presseListe.attributes.texteImage.title}
-        image={presseListe.attributes.texteImage.image}
-        text={presseListe.attributes.texteImage.text}
-        icon={presseListe.attributes.texteImage.icon}
-        isImageRight={presseListe.attributes.texteImage.isImageRight}
+        title={texteImage.title}
+        image={texteImage.image}
+        text={texteImage.text}
+        icon={texteImage.icon}
+        isImageRight={texteImage.isImageRight}
       />
 
       <DoublePushCTA
-        title={presseListe.attributes.pushCta.title}
-        image={presseListe.attributes.pushCta.image}
-        firstCta={presseListe.attributes.pushCta.firstCta}
-        secondCta={presseListe.attributes.pushCta.secondCta}
-        text={presseListe.attributes.pushCta.text}
-        icon={presseListe.attributes.pushCta.icon}
+        title={pushCta.title}
+        image={pushCta.image}
+        firstCta={pushCta.firstCta}
+        secondCta={pushCta.secondCta}
+        text={pushCta.text}
+        icon={pushCta.icon}
       />
       <StyledSimplePushCta>
-        <SimplePushCta
-          title={presseListe.attributes.aide?.title}
-          image={presseListe.attributes.aide?.image}
-          cta={presseListe.attributes.aide?.cta}
-          surtitle={presseListe.attributes.aide?.surtitle}
-          icon={presseListe.attributes.aide?.icon}
-        />
+        {aide && (
+          <SimplePushCta
+            title={aide.title}
+            image={aide.image}
+            cta={aide.cta}
+            surtitle={aide.surtitle}
+            icon={aide.icon}
+          />
+        )}
       </StyledSimplePushCta>
-      {presseListe.attributes.socialMediaSection &&
-        presseListe.attributes.socialMediaSection.title &&
-        presseListe.attributes.socialMediaSection.socialMediaLink && (
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={presseListe.attributes.socialMediaSection.title}
-            socialMediaLink={
-              presseListe.attributes.socialMediaSection.socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -457,7 +387,9 @@ const StyledTitle = styled(ContentWrapper)`
     }
   `}
 `
-
+const UnpaddedBreadcrumb = styled(Breadcrumb)`
+  padding: 0;
+`
 const StyledListItems = styled(ListItems)`
   margin-top: 3rem;
   --module-spacing: 0;

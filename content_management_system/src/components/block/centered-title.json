@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_block_centered_titles",
+  "info": {
+    "displayName": "Centered Title"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

@@ -11,8 +11,10 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   resourceREData: APIResponseData<'api::resource.resource'>[]
@@ -23,6 +25,16 @@ export default function RessourcesEnseignants({
   resourceREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    aide,
+    socialMediaSection,
+    separator,
+    filtres,
+  } = ressourcesEnseignantsListe.attributes
+
   const cat = Array.from(
     new Set(resourceREData.map((item) => item.attributes.category))
   )
@@ -59,41 +71,37 @@ export default function RessourcesEnseignants({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = ressourcesEnseignantsListe.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(resourceREData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
-          case 'Localisation':
-            uniqueLocalisations = Array.from(
-              new Set(
-                resourceREData.map((item) => item.attributes.localisation)
-              )
-            )
-            return {
-              ...filtre,
-              value: uniqueLocalisations,
-            }
-          case "Secteur d'activités":
-            uniqueSecteurs = Array.from(
-              new Set(resourceREData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueSecteurs,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
+    const filtresOption = filtres?.map((filtre) => {
+      switch (filtre.filtre) {
+        case 'Catégorie':
+          uniqueCategories = Array.from(
+            new Set(resourceREData.map((item) => item.attributes.category))
+          )
+          return {
+            ...filtre,
+            value: uniqueCategories,
+          }
+        case 'Localisation':
+          uniqueLocalisations = Array.from(
+            new Set(resourceREData.map((item) => item.attributes.localisation))
+          )
+          return {
+            ...filtre,
+            value: uniqueLocalisations,
+          }
+        case "Secteur d'activités":
+          uniqueSecteurs = Array.from(
+            new Set(resourceREData.map((item) => item.attributes.secteur))
+          )
+          return {
+            ...filtre,
+            value: uniqueSecteurs,
+          }
+        default:
+          return { ...filtre, value: [] }
       }
-    )
-    if (filtres) setFilters(filtres)
+    })
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -113,7 +121,7 @@ export default function RessourcesEnseignants({
           $eqi: localisation,
         },
         pageLocalisation: {
-          $containsi: 'S’informer - ressources',
+          // $containsi: 'S’informer - ressources',
         },
       },
     })
@@ -146,53 +154,50 @@ export default function RessourcesEnseignants({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
 
+  const hasData = data.length
+
   return (
     <React.Fragment>
-      {ressourcesEnseignantsListe.attributes.seo && (
-        <Seo metaData={ressourcesEnseignantsListe.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {ressourcesEnseignantsListe.attributes.title && (
-          <Typo.Heading2>
-            {ressourcesEnseignantsListe.attributes.title}
-          </Typo.Heading2>
-        )}
-        <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
-        />
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="ressources"
-        buttonText={ressourcesEnseignantsListe.attributes.buttonText}
-      />
+      <UnpaddedBreadcrumb />
+      {hasData > 0 && (
+        <React.Fragment>
+          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+            <FilterContainer
+              filtres={filters}
+              onFilterChange={handleFilterChange}
+            />
+          </ContentWrapper>
 
-      <Separator
-        isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
-      />
+          <StyledListItems
+            news={data}
+            type="ressources"
+            buttonText={buttonText}
+          />
+        </React.Fragment>
+      )}
 
-      <SimplePushCta
-        title={ressourcesEnseignantsListe.attributes.aide?.title}
-        image={ressourcesEnseignantsListe.attributes.aide?.image}
-        cta={ressourcesEnseignantsListe.attributes.aide?.cta}
-        surtitle={ressourcesEnseignantsListe.attributes.aide?.surtitle}
-        icon={ressourcesEnseignantsListe.attributes.aide?.icon}
-      />
+      <Separator isActive={separatorIsActive(separator)} />
 
-      {ressourcesEnseignantsListe.attributes.socialMediaSection &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection
-          .socialMediaLink && (
+      {aide && (
+        <SimplePushCta
+          title={aide.title}
+          image={aide.image}
+          cta={aide.cta}
+          surtitle={aide.surtitle}
+          icon={aide.icon}
+        />
+      )}
+
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={
-              ressourcesEnseignantsListe.attributes.socialMediaSection.title
-            }
-            socialMediaLink={
-              ressourcesEnseignantsListe.attributes.socialMediaSection
-                .socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -251,7 +256,7 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled.div`
+const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
     margin-inline: auto;
     padding: 1rem 1.5rem;

@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  Dot,
   Slider,
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  ExperienceVideoCarouselSlide,
-  ExperienceVideoCarouselSlideProps,
-} from './experieneVideoCarouselSlide'
+import { ExperienceVideoCarouselSlide } from './experieneVideoCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
+import { StyledDot } from '@/theme/style'
+import { ExperienceVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type ExperienceVideoCarouselProps = {
-  title: string
-  carouselItems: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
-}
+const MEDIA_QUERY_MOBILE = getMediaQuery(MediaQueries.MOBILE)
 
 export function ExperienceVideoCarousel({
   title,
+  isLandscape,
   carouselItems: items,
 }: ExperienceVideoCarouselProps) {
   const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
@@ -33,23 +30,20 @@ export function ExperienceVideoCarousel({
   )}"]`
   const EXPERIENCE_VIDEO_SLIDES_SELECTOR =
     '[aria-roledescription="diapositive"]'
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
 
-  const [screenWidth, setScreenWidth] = useState<number>()
+  const setVisibleSlide = (): number => {
+    if (width < MEDIA_QUERY_MOBILE) return 1
+    if (isLandscape) return 2
+    return 4
+  }
 
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
+  const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
+  const isNavShowing = (): boolean => {
+    if (TOTAL_SLIDES > visibleSlides) return true
+    return false
+  }
 
   useEffect(() => {
     const carouselEl = document.querySelector(
@@ -77,7 +71,7 @@ export function ExperienceVideoCarousel({
     })
   }
 
-  function handleExperienceVideoNavigationButtonClick() {
+  function handleExperienceVideoNavigationButtonClick(): void {
     const carouselEl = document.querySelector(
       EXPERIENCE_VIDEO_CAROUSEL_SELECTOR
     )
@@ -92,41 +86,46 @@ export function ExperienceVideoCarousel({
     }
   }
 
+  const visibleSlides = setVisibleSlide()
+
   return (
     <ContentWrapper>
       <CarouselProvider
         naturalSlideWidth={60}
         naturalSlideHeight={75}
         visibleSlides={visibleSlides}
-        totalSlides={items.length}
-        isIntrinsicHeight={true}
+        totalSlides={TOTAL_SLIDES}
+        isIntrinsicHeight
         dragEnabled={false}
-        infinite={true}
+        infinite
         step={1}>
         <StyledHeading>
           <StyledHeading2>{title}</StyledHeading2>
-
-          <StyledNavigationButtons aria-label="Contrôles du carousel">
-            <ButtonBack
-              onClick={handleExperienceVideoNavigationButtonClick}
-              aria-label="Élement précédent">
-              <ArrowRight />
-            </ButtonBack>
-            <ButtonNext
-              aria-label="Élément suivant"
-              onClick={handleExperienceVideoNavigationButtonClick}>
-              <ArrowRight />
-            </ButtonNext>
-          </StyledNavigationButtons>
+          {isNavShowing() && (
+            <StyledNavigationButtons aria-label="Contrôles du carousel">
+              <ButtonBack
+                onClick={handleExperienceVideoNavigationButtonClick}
+                aria-label="Élement précédent">
+                <ArrowRight />
+              </ButtonBack>
+              <ButtonNext
+                aria-label="Élément suivant"
+                onClick={handleExperienceVideoNavigationButtonClick}>
+                <ArrowRight />
+              </ButtonNext>
+            </StyledNavigationButtons>
+          )}
         </StyledHeading>
 
         <StyledSlider
+          classNameAnimation="customCarrouselAnimation"
           aria-label={stripTags(title)}
           aria-roledescription="carrousel">
-          {items.map((item, index) => {
+          {items?.map((item, index) => {
             return (
               <ExperienceVideoCarouselSlide
-                key={item.title}
+                isLandscape={isLandscape}
+                key={`${item.title}_${index}`}
                 slideIndex={index}
                 {...item}
               />
@@ -134,20 +133,22 @@ export function ExperienceVideoCarousel({
           })}
         </StyledSlider>
 
-        <StyledDots aria-label="Contrôles du carousel">
-          {items.map((item, index) => {
-            return (
-              <StyledDot
-                onClick={handleExperienceVideoNavigationButtonClick}
-                slide={index}
-                key={item.title}
-                aria-label={`Afficher la diapositive ${index + 1} sur ${
-                  items.length
-                } : ${item.title}`}
-              />
-            )
-          })}
-        </StyledDots>
+        {isNavShowing() && (
+          <StyledDots aria-label="Contrôles du carousel">
+            {items?.map((item, index) => {
+              return (
+                <StyledDot
+                  onClick={handleExperienceVideoNavigationButtonClick}
+                  slide={index}
+                  key={item.title}
+                  aria-label={`Afficher la diapositive ${index + 1} sur ${
+                    items.length
+                  } : ${item.title}`}
+                />
+              )
+            })}
+          </StyledDots>
+        )}
       </CarouselProvider>
     </ContentWrapper>
   )
@@ -209,7 +210,6 @@ const StyledNavigationButtons = styled.div`
 const StyledDots = styled.div`
   ${({ theme }) => css`
     display: none;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       display: flex;
       justify-content: center;
@@ -219,27 +219,12 @@ const StyledDots = styled.div`
     }
   `}
 `
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    border-radius: 50%;
-    height: 0.875rem;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      opacity: 1;
-      background-color: ${theme.colors.secondary};
-    }
-  `}
-`
-
 const StyledHeading2 = styled(Typo.Heading2)`
   ${({ theme }) => css`
     max-width: 50%;
     @media (width < ${theme.mediaQueries.mobile}) {
       max-width: 100%;
+      text-align: center;
     }
   `}
 `

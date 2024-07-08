@@ -5,38 +5,26 @@ import styled, { css } from 'styled-components'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
-import { CTA } from '@/types/CTA'
-import { Offer } from '@/types/playlist'
+import { BaseTextProps, OfferProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
-type OfferProps = {
-  title: string
-  description: string
-  offers: Offer[]
-  cta: CTA
-  firstCartTitle: string
-  secondCartTitle: string
-  ctaCard: CTA
-  descriptionCard: string
-  firstIcon: string
-  secondIcon: string
-}
+export function OfferSection(props: OfferProps & BaseTextProps) {
+  const {
+    title,
+    description,
+    offers,
+    cta,
+    firstCartTitle,
+    secondCartTitle,
+    ctaCard,
+    descriptionCard,
+    firstIcon,
+    secondIcon,
+  } = props
 
-export function OfferSection({
-  title,
-  description,
-  offers,
-  cta,
-  firstCartTitle,
-  secondCartTitle,
-  ctaCard,
-  descriptionCard,
-  firstIcon,
-  secondIcon,
-}: OfferProps) {
-  offers = offers.filter((offer) => {
+  const offersOptions = offers.filter((offer) => {
     return offer.image?.url && offer.image.url !== ''
   })
   return (
@@ -44,7 +32,7 @@ export function OfferSection({
       <Typo.Heading2>{title}</Typo.Heading2>
       <Typo.Body>{description}</Typo.Body>
       <StyledOfferWrapper>
-        {offers.slice(0, 7).map((offer) => (
+        {offersOptions?.slice(0, 7).map((offer) => (
           <div key={offer.id}>
             <StyledLink href={getOfferUrl(offer.id)}>
               {offer.image?.url && (
@@ -132,6 +120,7 @@ const StyledImage = styled(Image)`
     object-fit: cover;
     width: 100%;
     height: auto;
+    height: 25rem;
   `}
 `
 const StyledCardDescription = styled(Typo.Body)`
@@ -159,8 +148,7 @@ const StyledLastCard = styled.div`
     );
     border-radius: 0.5rem;
     color: ${theme.colors.white}!important;
-
-    height: 31.5rem;
+    height: 25rem;
     display: flex;
     align-items: center;
     position: relative;

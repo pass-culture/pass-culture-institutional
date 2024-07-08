@@ -11,12 +11,15 @@ interface CenteredTextProps {
 }
 
 export function CenteredText(props: CenteredTextProps) {
+  const { title, description } = props
   return (
     <Root data-testid="centered-text">
-      {props.title && <Typo.Heading2>{props.title}</Typo.Heading2>}
-      <p aria-label={parseText(props.description).accessibilityLabel}>
-        {parseText(props.description).processedText}
-      </p>
+      {title && <Typo.Heading2>{title}</Typo.Heading2>}
+      {description && (
+        <p aria-label={parseText(description).accessibilityLabel}>
+          {parseText(description).processedText}
+        </p>
+      )}
     </Root>
   )
 }

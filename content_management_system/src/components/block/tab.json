@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_tab",
+  "info": {
+    "displayName": "tab"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "block": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.image-text"
+    }
+  }
+}

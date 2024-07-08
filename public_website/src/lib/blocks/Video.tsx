@@ -2,20 +2,12 @@ import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import { VideoProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Play } from '@/ui/components/icons/Play'
-import { getStrapiURL } from '@/utils/apiHelpers'
-
-interface VideoProps {
-  description?: string
-  url?: string
-  alt?: string
-  image?: APIResponse<'plugin::upload.file'> | null
-}
 
 export function Video(props: VideoProps) {
-  const [isMounted, setIsMounted] = useState(false)
+  const { description, url, alt } = props
+  const [isMounted, setIsMounted] = useState<boolean>(false)
 
   useEffect(() => {
     setIsMounted(true)
@@ -23,40 +15,34 @@ export function Video(props: VideoProps) {
 
   return (
     <ContentWrapper>
-      <Root suppressHydrationWarning={true}>
-        {isMounted && (
+      <Root suppressHydrationWarning $noMargin>
+        {isMounted && url && (
           <StyledVideo
-            light={
-              props.image
-                ? getStrapiURL(props.image?.data?.attributes?.url)
-                : true
-            }
-            url={props.url}
+            url={url}
             width="100%"
-            controls={true}
+            controls
             height="100%"
-            alt={props.alt}
-            playIcon={<StyledPlay />}
+            alt={alt}
           />
         )}
-        <Description>{props.description}</Description>
+        {description && <Description>{description}</Description>}
       </Root>
     </ContentWrapper>
   )
 }
 
-const Root = styled.div`
-  ${({ theme }) => css`
+const Root = styled.div<{ $noMargin?: boolean }>`
+  ${({ theme, $noMargin }) => css`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
 
-    .react-player__preview {
-      border-radius: 2rem;
-      aspect-ratio: 16 / 9;
-    }
-
-    padding: 0 8.5%;
+    ${$noMargin &&
+    css`
+      padding: 0;
+    `}
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;
@@ -84,16 +70,17 @@ const StyledVideo = styled(ReactPlayer)`
   ${({ theme }) => css`
     max-width: 100%;
     aspect-ratio: 16 / 9;
-    border-radius: 2.5rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
     @media (width < ${theme.mediaQueries.mobile}) {
-      border-radius: 1rem;
+      border-radius: 0.25rem;
     }
   `}
 `
 
-const StyledPlay = styled(Play)`
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-    width: 4rem;
-    height: 4rem;
-  }
-`
+// const StyledPlay = styled(Play)`
+//   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+//     width: 4rem;
+//     height: 4rem;
+//   }
+// `

@@ -7,6 +7,7 @@ import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
@@ -28,7 +29,9 @@ export default function CustomPage(props: CustomPageProps) {
         )
         return index === 1 ? (
           <React.Fragment key={`${block.__component}_${block.id}`}>
-            <Breadcrumb isUnderHeader /> {blockContent}
+            <Breadcrumb isUnderHeader />
+            <span id="target-anchor-scroll">{blockContent}</span>
+            <ButtonScrollTo noTranslate />
           </React.Fragment>
         ) : (
           blockContent
@@ -67,6 +70,7 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.items.items',
       'Blocks.socialMediaLink',
       'Blocks.columns',
+      'Blocks.video',
       'Blocks.people',
       'Blocks.people.image',
       'Blocks.logos.cta',
@@ -77,6 +81,12 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.images',
       'Blocks.carouselItems',
       'Blocks.carouselItems.image',
+      'Blocks.QRCode',
+      'Blocks.tabs',
+      'Blocks.tab',
+      'Blocks.tab.block',
+      'Blocks.tab.block.image',
+      'Blocks.centered.title',
       'seo',
       'seo.metaSocial',
       'seo.metaSocial.image',
@@ -92,9 +102,25 @@ export const getStaticProps = (async ({ params }) => {
     return { notFound: true }
   }
 
+  // const eventQuery = stringify({
+  //   sort: ['date:desc'],
+  //   populate: ['image', 'cta'],
+  //   pagination: {},
+  //   filter: {
+  //     pageLocalisation: {
+  //       $containsi: 'S’informer - presse',
+  //     },
+  //   },
+  // })
+
+  // const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
+  //   `/events?${eventQuery}`
+  // )
+
   return {
     props: {
       data: response.data[0]!,
+      // eventsData: events.data,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>

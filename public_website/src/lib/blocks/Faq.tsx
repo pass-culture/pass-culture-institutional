@@ -2,23 +2,13 @@ import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
-import { CTA } from '@/types/CTA'
+import { FaqProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { LinkFaq } from '@/ui/components/help/Link'
 import { Typo } from '@/ui/components/typographies'
 import arrowUrl from '@/ui/image/arrowd.svg'
 import { parseText } from '@/utils/parseText'
-
-type FaqProps = {
-  title: string
-  cta: CTA
-  /** Category IDs separated by commas */
-  categories: string | undefined
-  /** Only questions with the given property set to true are displayed. */
-  filteringProperty: string
-  limit: number
-}
 
 /** Filter questions based on the wanted categories and flag */
 function filterFaqQuestions(
@@ -50,15 +40,11 @@ function filterFaqQuestions(
   return filteredQuestions.slice(0, limit)
 }
 
-export function Faq({
-  title,
-  cta,
-  categories,
-  filteringProperty,
-  limit,
-}: FaqProps) {
+export function Faq(props: FaqProps) {
+  const { title, cta, categories, filteringProperty, limit } = props
+
   /** Extract plain text from html and cut it at 600 characters */
-  const cutFaqBody = (body: string) => {
+  const cutFaqBody = (body: string): string => {
     const plainText = body.replace(/<[^>]*>/g, '')
     if (plainText.length > 200) {
       return plainText.substring(0, 600) + '...'
@@ -73,41 +59,46 @@ export function Faq({
   )
 
   return (
-    <StyledContentWrapper>
-      <StyledContentTextWrapper>
-        {title && <StyledHeading>{title}</StyledHeading>}
-        {cta && <ButtonWithCTA cta={cta} />}
-      </StyledContentTextWrapper>
-      <div>
-        {filteredQuestions.map((faq) => {
-          const title = faq.title.replace(/\[.*?\]/g, '')
-          const body = cutFaqBody(faq.body)
-          const {
-            accessibilityLabel: summaryAccessibilityLabel,
-            processedText: summaryTextWithMarkup,
-          } = parseText(title)
-          const {
-            accessibilityLabel: textAccessibilityLabel,
-            processedText: textTextWithMarkup,
-          } = parseText(body)
+    <ContentWrapper>
+      {title && <StyledHeading>{title}</StyledHeading>}
+      <StyledContentWrapper>
+        <StyledContentTextWrapper>
+          {cta && <ButtonWithCTA cta={cta} />}
+        </StyledContentTextWrapper>
+        <div>
+          {filteredQuestions?.map((faq) => {
+            const title = faq.title.replace(/\[.*?\]/g, '')
+            const body = cutFaqBody(faq.body)
+            const {
+              accessibilityLabel: summaryAccessibilityLabel,
+              processedText: summaryTextWithMarkup,
+            } = parseText(title)
+            const {
+              accessibilityLabel: textAccessibilityLabel,
+              processedText: textTextWithMarkup,
+            } = parseText(body)
 
-          return (
-            <StyledAccordion key={faq.id}>
-              <summary aria-label={summaryAccessibilityLabel}>
-                {summaryTextWithMarkup}
-              </summary>
-              <p aria-label={textAccessibilityLabel}>{textTextWithMarkup}</p>
-              {faq.url && <LinkFaq href={faq.html_url} text="Voir le detail" />}
-            </StyledAccordion>
-          )
-        })}
-      </div>
-      {cta && <MobileCta cta={cta} />}
-    </StyledContentWrapper>
+            return (
+              <StyledAccordion key={faq.id}>
+                <summary aria-label={summaryAccessibilityLabel}>
+                  {summaryTextWithMarkup}
+                </summary>
+                <p aria-label={textAccessibilityLabel}>{textTextWithMarkup}</p>
+                {faq.url && (
+                  <LinkFaq href={faq.html_url} text="Voir le detail" />
+                )}
+              </StyledAccordion>
+            )
+          })}
+        </div>
+
+        {cta && <MobileCta cta={cta} />}
+      </StyledContentWrapper>
+    </ContentWrapper>
   )
 }
 
-const StyledContentWrapper = styled(ContentWrapper)`
+const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     position: relative;
     display: grid;
@@ -128,7 +119,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2.5rem;
-    min-width: 20rem;
+    min-width: 21rem;
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin-bottom: 1.75rem;
     }
@@ -172,7 +163,6 @@ const StyledAccordion = styled.details`
       right: 2rem;
       top: 50%;
       position: absolute;
-      transform: translateY(-50%);
       line-height: 0;
     }
 

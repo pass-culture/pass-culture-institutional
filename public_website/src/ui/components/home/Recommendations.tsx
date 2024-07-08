@@ -4,21 +4,11 @@ import styled, { css } from 'styled-components'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
 import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
-import { CTA } from '@/types/CTA'
-import { Offer } from '@/types/playlist'
+import { RecommendationsProps } from '@/types/props'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
-type RecommendationsProps = {
-  title: string
-  recommendations: Offer[]
-  cta: CTA
-}
-
-export function Recommendations({
-  title,
-  recommendations,
-  cta,
-}: RecommendationsProps) {
+export function Recommendations(props: RecommendationsProps) {
+  const { title, recommendations, cta } = props
   const verticalCarouselItems: Omit<
     VerticalCarouselSlideProps,
     'slideIndex'

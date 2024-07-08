@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_block_columns_texts",
+  "info": {
+    "displayName": "Columns Text",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "video": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.video"
+    },
+    "columns": {
+      "type": "component",
+      "repeatable": true,
+      "component": "common.simple-text-column"
+    }
+  }
+}

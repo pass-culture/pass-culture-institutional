@@ -42,6 +42,16 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "experience": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.experience-video-carousel"
+    },
+    "offres_culturelles": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.offers-carousel"
     }
   }
 }

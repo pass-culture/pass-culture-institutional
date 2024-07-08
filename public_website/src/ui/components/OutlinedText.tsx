@@ -34,7 +34,7 @@ interface OutlinedTextProps {
 export function OutlinedText(props: OutlinedTextProps) {
   const filterId = useId()
 
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState<boolean>(false)
   useEffect(() => setMounted(true), [])
 
   const {
@@ -108,6 +108,7 @@ export function OutlinedText(props: OutlinedTextProps) {
 
 const Root = styled.span<{ $filterId: string }>`
   filter: url(#${({ $filterId }) => $filterId});
+  color: #000000;
 `
 
 const Svg = styled.svg`

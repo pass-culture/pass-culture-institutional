@@ -1,15 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { APIResponse } from '@/types/strapi'
+import { BaseTextProps, XMetaProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-interface XMetaProps {
-  title: string
-  description: string
-  image: APIResponse<'plugin::upload.file'> | null | undefined
-}
-export function XMeta(props: XMetaProps) {
+export function XMeta(props: XMetaProps & BaseTextProps) {
   return (
     <Head>
       <meta

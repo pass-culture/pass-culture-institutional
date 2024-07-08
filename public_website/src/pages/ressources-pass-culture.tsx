@@ -11,6 +11,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
 
@@ -23,6 +24,15 @@ export default function RessourcesPassCulture({
   ressourcesData,
   ressourcesPassCultureListe,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    etudes,
+    socialMediaSection,
+    separator,
+    filtres,
+  } = ressourcesPassCultureListe.attributes
   const cat = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.category))
   )
@@ -59,41 +69,37 @@ export default function RessourcesPassCulture({
     let uniqueLocalisations = []
     let uniqueSecteurs = []
 
-    const filtres = ressourcesPassCultureListe.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(ressourcesData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
-          case 'Localisation':
-            uniqueLocalisations = Array.from(
-              new Set(
-                ressourcesData.map((item) => item.attributes.localisation)
-              )
-            )
-            return {
-              ...filtre,
-              value: uniqueLocalisations,
-            }
-          case "Secteur d'activités":
-            uniqueSecteurs = Array.from(
-              new Set(ressourcesData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueSecteurs,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
+    const filtresOptions = filtres?.map((filtre) => {
+      switch (filtre.filtre) {
+        case 'Catégorie':
+          uniqueCategories = Array.from(
+            new Set(ressourcesData.map((item) => item.attributes.category))
+          )
+          return {
+            ...filtre,
+            value: uniqueCategories,
+          }
+        case 'Localisation':
+          uniqueLocalisations = Array.from(
+            new Set(ressourcesData.map((item) => item.attributes.localisation))
+          )
+          return {
+            ...filtre,
+            value: uniqueLocalisations,
+          }
+        case "Secteur d'activités":
+          uniqueSecteurs = Array.from(
+            new Set(ressourcesData.map((item) => item.attributes.secteur))
+          )
+          return {
+            ...filtre,
+            value: uniqueSecteurs,
+          }
+        default:
+          return { ...filtre, value: [] }
       }
-    )
-    if (filtres) setFilters(filtres)
+    })
+    if (filtresOptions) setFilters(filtresOptions)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -146,53 +152,50 @@ export default function RessourcesPassCulture({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
 
+  const hasData = data.length
+
   return (
     <React.Fragment>
-      {ressourcesPassCultureListe.attributes.seo && (
-        <Seo metaData={ressourcesPassCultureListe.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {ressourcesPassCultureListe.attributes.title && (
-          <Typo.Heading2>
-            {ressourcesPassCultureListe.attributes.title}
-          </Typo.Heading2>
-        )}
-        <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
-        />
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="ressources"
-        buttonText={ressourcesPassCultureListe.attributes.buttonText}
-      />
+      <UnpaddedBreadcrumb />
+      {hasData > 0 && (
+        <React.Fragment>
+          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+            <FilterContainer
+              filtres={filters}
+              onFilterChange={handleFilterChange}
+            />
+          </ContentWrapper>
 
-      <Separator
-        isActive={ressourcesPassCultureListe.attributes.separator?.isActive}
-      />
+          <StyledListItems
+            news={data}
+            type="ressources"
+            buttonText={buttonText}
+          />
+        </React.Fragment>
+      )}
 
-      <SimplePushCta
-        title={ressourcesPassCultureListe.attributes.etudes?.title}
-        image={ressourcesPassCultureListe.attributes.etudes?.image}
-        cta={ressourcesPassCultureListe.attributes.etudes?.cta}
-        surtitle={ressourcesPassCultureListe.attributes.etudes?.surtitle}
-        icon={ressourcesPassCultureListe.attributes.etudes?.icon}
-      />
+      <Separator isActive={separator?.isActive} />
 
-      {ressourcesPassCultureListe.attributes.socialMediaSection &&
-        ressourcesPassCultureListe.attributes.socialMediaSection.title &&
-        ressourcesPassCultureListe.attributes.socialMediaSection
-          .socialMediaLink && (
+      {etudes && (
+        <SimplePushCta
+          title={etudes.title}
+          image={etudes.image}
+          cta={etudes.cta}
+          surtitle={etudes.surtitle}
+          icon={etudes.icon}
+        />
+      )}
+
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={
-              ressourcesPassCultureListe.attributes.socialMediaSection.title
-            }
-            socialMediaLink={
-              ressourcesPassCultureListe.attributes.socialMediaSection
-                .socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -250,7 +253,7 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled.div`
+const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
     padding: 1rem 1.5rem;
     max-width: 80rem;
@@ -271,7 +274,7 @@ const StyledTitle = styled.div`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  margin-top: -3rem;
 `
 const StyledSocialMedia = styled(SocialMedia)`
   ${({ theme }) => css`

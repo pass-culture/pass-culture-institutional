@@ -120,9 +120,6 @@ const StyledHeading = styled(Typo.Heading2)`
 `
 
 const ListWrapper = styled(ContentWrapper)`
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
   margin-bottom: 5rem;
   width: 100%;
   box-sizing: border-box;
@@ -133,11 +130,15 @@ const ListWrapper = styled(ContentWrapper)`
 `
 
 const StyledList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-
-  > li {
-    scroll-snap-align: center;
-  }
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    > li {
+      scroll-snap-align: center;
+    }
+  `}
 `

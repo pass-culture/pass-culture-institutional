@@ -18,7 +18,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "firstIcon": {
       "type": "string"
@@ -28,7 +30,14 @@
     },
     "theme": {
       "type": "enumeration",
-      "enum": ["purple", "yellow", "magenta", "orange", "green"],
+      "enum": [
+        "purple",
+        "yellow",
+        "magenta",
+        "orange",
+        "green",
+        "blue"
+      ],
       "required": true,
       "default": "purple"
     }

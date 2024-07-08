@@ -12,6 +12,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface TeachersHelpProps {
@@ -23,48 +24,55 @@ export default function TeachersHelp({
   data,
   latestStudies,
 }: TeachersHelpProps) {
+  const { seo, heroSection, faq, cardText, simplepushcta, social } =
+    data.attributes
+
   return (
     <React.Fragment>
-      {data.attributes.seo && <Seo metaData={data.attributes.seo} />}
+      {seo && <Seo metaData={seo} />}
       <Header
-        title={data.attributes?.heroSection?.title}
-        text={data.attributes?.heroSection?.text}
-        icon={data.attributes.heroSection.icon}
-        image={data.attributes.heroSection.image}
+        title={heroSection?.title}
+        text={heroSection?.text}
+        icon={heroSection.icon}
+        image={heroSection.image}
       />
       <Breadcrumb isUnderHeader />
+      <ButtonScrollTo noTranslate />
       <StyledSpacer />
-      <Faq
-        title={data.attributes.faq.title}
-        cta={data.attributes.faq.cta}
-        categories={data.attributes.faq.categories}
-        filteringProperty={data.attributes.faq.filteringProperty}
-        limit={data.attributes.faq.limit}
-      />
+      <span id="target-anchor-scroll">
+        <Faq
+          title={faq.title}
+          cta={faq.cta}
+          categories={faq.categories}
+          filteringProperty={faq.filteringProperty}
+          limit={faq.limit}
+        />
+      </span>
       <LatestNews
         news={latestStudies}
         title={data.attributes.latestStudies.title}
         cta={data.attributes.latestStudies.cta}
       />
       <DoublePushCTA
-        title={data.attributes.cardText.title}
-        text={data.attributes.cardText.text}
-        image={data.attributes.cardText.image}
-        firstCta={data.attributes.cardText.firstCta}
-        secondCta={data.attributes.cardText.secondCta}
+        title={cardText.title}
+        text={cardText.text}
+        image={cardText.image}
+        firstCta={cardText.firstCta}
+        secondCta={cardText.secondCta}
+        icon={cardText.icon}
       />
 
       <SimplePushCta
-        title={data.attributes.simplepushcta.title}
-        surtitle={data.attributes.simplepushcta.surtitle}
-        image={data.attributes.simplepushcta.image}
-        cta={data.attributes.simplepushcta.cta}
-        icon={data.attributes.simplepushcta.icon}
+        title={simplepushcta.title}
+        surtitle={simplepushcta.surtitle}
+        image={simplepushcta.image}
+        cta={simplepushcta.cta}
+        icon={simplepushcta.icon}
       />
 
       <SocialMedia
-        title={data.attributes.social.title}
-        socialMediaLink={data.attributes.social.socialMediaLink}
+        title={social.title}
+        socialMediaLink={social.socialMediaLink}
       />
     </React.Fragment>
   )
@@ -128,7 +136,8 @@ const StyledSpacer = styled.div`
   margin-bottom: var(--module-spacing);
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding-top: 5rem;
+      padding-top: 0;
+      margin-bottom: 0;
     }
   `}
 `

@@ -7,6 +7,7 @@ import { ExperienceVideoCarousel } from './blocks/experienceVideoCarousel/experi
 import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
+import { HeaderWithQRCode } from './blocks/HeaderWithQRCode'
 import { Imageblock } from './blocks/Image'
 import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
@@ -25,7 +26,9 @@ import { PushCTA } from './blocks/PushCTA'
 import { Separator } from './blocks/Separator'
 import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
+import { SimpleTextWithMedia } from './blocks/SimpleTextWithMedia'
 import { SocialMedia } from './blocks/SocialMedia'
+import TabSimpleText from './blocks/tabs/TabSimpleText'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
@@ -51,7 +54,6 @@ const COMPONENTS: Record<
   'block.social-media': SocialMedia,
   'block.latest-news': LatestNews,
   'block.vertical-carousel': VerticalCarousel,
-
   'block.key-number': KeyNumber,
   'block.logos': Logos,
   'block.detailed-logos': DetailedLogos,
@@ -75,6 +77,10 @@ const COMPONENTS: Record<
   'block.simple-text-v2': SimpleTextV2,
   'block.image-gallery': ImageGallery,
   'block.breadcrumb': Breadcrumb,
+  'block.header-with-q-rcode': HeaderWithQRCode,
+  'block.columns-text': SimpleTextWithMedia,
+  'block.centered-title': CenteredText,
+  'block.tabs': TabSimpleText,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

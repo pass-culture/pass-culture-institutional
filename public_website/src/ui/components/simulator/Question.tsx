@@ -52,14 +52,18 @@ const Form = styled.form`
   align-items: stretch;
   padding: 4rem;
   padding-top: 6.5rem;
+  justify-content: space-around;
 
   @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     padding: 1rem 2rem;
     gap: 1.5rem;
   }
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    height: calc(30rem - 6.5rem);
+  }
 `
 
 const SubmitContainer = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: start;
 `

@@ -1,36 +1,22 @@
 import React from 'react'
-import {
-  type BlocksContent,
-  BlocksRenderer,
-} from '@strapi/blocks-react-renderer'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import { ImageTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-type HeroProps = {
-  title?: string
-  text: BlocksContent
-  image?: APIResponse<'plugin::upload.file'> | null
-  icon?: string
-  isImageRight?: boolean
-}
 
-export function ImageText({
-  title,
-  text,
-  image,
-  icon,
-  isImageRight,
-}: HeroProps) {
+export function ImageText(props: ImageTextProps) {
+  const { title, text, image, icon, isImageRight } = props
+
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledContentTextWrapper className="first">
           {title && <StyledHeading>{title}</StyledHeading>}
-          <BlocksRenderer content={text} />
+          {text && <BlocksRenderer content={text} />}
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"

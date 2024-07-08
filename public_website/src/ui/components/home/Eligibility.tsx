@@ -80,7 +80,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
-      margin: 3rem auto 4.5rem;
+      margin: 0rem auto 4.5rem;
     }
   `}
 `
@@ -169,7 +169,7 @@ const StyledListContainer = styled.div`
 const StyledListHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     && {
-      font-size: ${theme.fonts.sizes['4xl']};
+      font-size: ${theme.fonts.sizes['2xl']};
       margin-bottom: 1.5rem;
     }
   `}

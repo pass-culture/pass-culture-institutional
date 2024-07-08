@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
+import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
@@ -37,6 +38,7 @@ export default function ListeActualitesPassCulture({
     socialMediaSection = [],
     filtres,
   } = listeActualitesPassCulture.attributes
+
   const cat = Array.from(
     new Set(newsActuPassData.map((item) => item.attributes.category))
   )
@@ -94,12 +96,19 @@ export default function ListeActualitesPassCulture({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation])
 
+  const hasData = data.length
+
   return (
     <React.Fragment>
       {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}{' '}
+      </StyledTitle>
+      <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
+      </ContentWrapper>
+
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
           setCategory={setCategory}
           setLocalisation={setLocalisation}
@@ -107,8 +116,13 @@ export default function ListeActualitesPassCulture({
           originalLocalisation={originalLocalisation}
           data={filters}
         />
-      </StyledTitle>
-      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      </ContentWrapper>
+      {hasData ? (
+        <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      ) : (
+        <NoResult />
+      )}
+
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />

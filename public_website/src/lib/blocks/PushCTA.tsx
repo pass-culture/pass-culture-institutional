@@ -4,64 +4,64 @@ import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import { PushCTAProps, QRCodeProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { parseText } from '@/utils/parseText'
 
-interface PushCTAProps {
-  title: string
-  description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  qrCodeDescription: string
-  ctaLink: CTA
-  qrCodeUrl: string
-  className?: string
-}
-
-export function PushCTA(props: PushCTAProps) {
+export function PushCTA(props: PushCTAProps & QRCodeProps) {
   const { SVG: QrCode } = useQRCode()
-
+  const {
+    className = '',
+    title,
+    description,
+    icon,
+    ctaLink,
+    qrCodeDescription,
+    image,
+    qrCodeUrl,
+  } = props
   return (
-    <Root className={props.className}>
+    <Root className={className}>
       <CardContainer>
         <Card
           $imageUrl={
-            props.image?.data?.attributes?.url &&
-            getStrapiURL(props.image?.data?.attributes?.url)
+            image?.data?.attributes?.url &&
+            getStrapiURL(image?.data?.attributes?.url)
           }>
           <QRCodeCard>
             <QrCode
-              text={props.qrCodeUrl}
+              text={qrCodeUrl}
               options={{
                 width: 100,
                 margin: 2,
                 color: { dark: theme.colors.secondary },
               }}
             />
-            <p>{props.qrCodeDescription}</p>
+            <p>{qrCodeDescription}</p>
           </QRCodeCard>
         </Card>
         <BackgroundLayer />
+        <OutlinedText>{icon}</OutlinedText>
       </CardContainer>
       <RightSide>
-        <Typo.Heading2>{props.title}</Typo.Heading2>
-        {props.description && (
-          <p aria-label={parseText(props.description).accessibilityLabel}>
-            {parseText(props.description).processedText}
+        <Typo.Heading2>{title}</Typo.Heading2>
+        {description && (
+          <p aria-label={parseText(description).accessibilityLabel}>
+            {parseText(description).processedText}
           </p>
         )}
         <CtaLink
-          href={props.ctaLink.URL}
+          href={ctaLink.URL}
           onClick={() =>
             onClickAnalytics({
-              eventName: props.ctaLink.eventName,
-              eventOrigin: props.ctaLink.eventOrigin,
+              eventName: ctaLink.eventName,
+              eventOrigin: ctaLink.eventOrigin,
             })
           }>
-          <span>{props.ctaLink.Label}</span>
+          <span>{ctaLink.Label}</span>
         </CtaLink>
       </RightSide>
     </Root>

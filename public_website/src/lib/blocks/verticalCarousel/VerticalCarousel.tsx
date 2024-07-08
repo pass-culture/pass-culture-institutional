@@ -3,7 +3,6 @@ import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  Dot,
   Slider,
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
@@ -13,6 +12,7 @@ import {
   VerticalCarouselSlideProps,
 } from './VerticalCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
+import { StyledDot } from '@/theme/style'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
@@ -98,6 +98,11 @@ export function VerticalCarousel({
     }
   }
 
+  const isNavigation = (): boolean => {
+    if (items.length) return true
+    return true
+  }
+
   return (
     <Root>
       <ContentWrapper>
@@ -107,29 +112,32 @@ export function VerticalCarousel({
           totalSlides={items.length}
           visibleSlides={visibleSlides}
           isIntrinsicHeight={true}
-          infinite={true}
-          dragEnabled={false}
+          infinite
+          dragEnabled
           step={1}>
-          <StyledHeading>
-            <Typo.Heading2>{title}</Typo.Heading2>
+          {isNavigation() && (
+            <StyledHeading>
+              <Typo.Heading2>{title}</Typo.Heading2>
 
-            <StyledNavigationButtons
-              role="group"
-              aria-label="Contrôles du carousel">
-              <ButtonBack
-                aria-label="Élement précédent"
-                onClick={handleNavigationButtonClick}>
-                <ArrowRight />
-              </ButtonBack>
-              <ButtonNext
-                aria-label="Élément suivant"
-                onClick={handleNavigationButtonClick}>
-                <ArrowRight />
-              </ButtonNext>
-            </StyledNavigationButtons>
-          </StyledHeading>
+              <StyledNavigationButtons
+                role="group"
+                aria-label="Contrôles du carousel">
+                <ButtonBack
+                  aria-label="Élement précédent"
+                  onClick={handleNavigationButtonClick}>
+                  <ArrowRight />
+                </ButtonBack>
+                <ButtonNext
+                  aria-label="Élément suivant"
+                  onClick={handleNavigationButtonClick}>
+                  <ArrowRight />
+                </ButtonNext>
+              </StyledNavigationButtons>
+            </StyledHeading>
+          )}
 
-          <Slider
+          <StyledSlider
+            classNameAnimation="customCarrouselAnimation"
             role="region"
             aria-label={stripTags(title)}
             aria-roledescription="carrousel">
@@ -143,7 +151,7 @@ export function VerticalCarousel({
                 />
               )
             })}
-          </Slider>
+          </StyledSlider>
 
           <StyledDots role="group" aria-label="Contrôles du carousel">
             {items.map((item, index) => {
@@ -172,6 +180,7 @@ const Root = styled.div`
   padding-top: 1rem;
   margin-top: -1rem;
 `
+const StyledSlider = styled(Slider)``
 
 const StyledHeading = styled.div`
   ${({ theme }) => css`
@@ -236,21 +245,6 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
-    }
-  `}
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    height: 0.875rem;
-    border-radius: 50%;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      background-color: ${theme.colors.secondary};
-      opacity: 1;
     }
   `}
 `

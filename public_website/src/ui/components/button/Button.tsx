@@ -62,7 +62,7 @@ function getFocusOutlineColor(variant?: ButtonVariants) {
   switch (variant) {
     case 'secondary':
     case 'tertiary':
-      return `outline: 2px solid${theme.colors.white}`
+      return `outline: 2px solid ${theme.colors.white}`
     default:
       return `outline: 2px solid ${theme.colors.primary}`
   }

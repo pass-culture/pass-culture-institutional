@@ -2,26 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { ListCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 
-type ListCardProps = {
-  title: string
-  category: string
-  date: Date | string
-  imageUrl: string | null
-  slug: string
-  type: string
-}
+export function ListCard(props: ListCardProps) {
+  const { title, category, date, imageUrl, slug, type } = props
 
-export function ListCard({
-  title,
-  category,
-  date,
-  imageUrl,
-  slug,
-  type,
-}: ListCardProps) {
   return (
     <Root>
       {imageUrl && (
@@ -33,7 +20,7 @@ export function ListCard({
       </StyledMeta>
       <StyledCardTitle>
         <StyledCardLink
-          href={type + '/' + slug}
+          href={type?.trim() + '/' + slug}
           aria-describedby={`news-meta-${slug}`}>
           {title}
         </StyledCardLink>

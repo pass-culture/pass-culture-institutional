@@ -1,8 +1,8 @@
 import { createContext } from 'react'
 
-import { HeaderProps } from '../header/Header'
+import { HeaderMenuProps } from '@/types/props'
 
-type BreadcrumbContextData = Pick<HeaderProps, 'aboutItems' | 'targetItems'>
+type BreadcrumbContextData = Pick<HeaderMenuProps, 'aboutItems' | 'targetItems'>
 
 export const BreadcrumbContext = createContext<BreadcrumbContextData | null>(
   null

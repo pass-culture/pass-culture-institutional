@@ -15,19 +15,17 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  const { image, title, seo, blocks } = props.data.attributes
+  const { latestStudies } = props
   return (
     <React.Fragment>
-      <Header
-        image={props.data.attributes.image}
-        icon=""
-        title={props.data.attributes.title}
-      />
-      {props.data.attributes.blocks?.map((block) => (
+      <Header image={image} icon="" title={title} />
+      {blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-      <Seo metaData={props.data.attributes.seo} />
+      <Seo metaData={seo} />
       <StyledLatestNews
-        news={props.latestStudies}
+        news={latestStudies}
         title="Les dernières **ressources**"
       />
     </React.Fragment>

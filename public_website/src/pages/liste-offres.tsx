@@ -1,76 +1,112 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
+import styled, { css } from 'styled-components'
 
+import { ExperienceVideoCarousel } from '@/lib/blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Header } from '@/lib/blocks/Header'
+import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
+import { ListProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
-
-interface ListProps {
-  offerListe: APIResponseData<'api::liste-offre.liste-offre'>
-  offerItems: Offer[]
-}
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
+  const {
+    seo,
+    separator,
+    hero,
+    offres,
+    socialMediaSection,
+    question,
+    experience,
+    offres_culturelles,
+  } = offerListe.attributes
+
+  const isExperiences = (): boolean => {
+    if (experience && experience?.carouselItems.length > 0) return true
+    return false
+  }
+
   return (
     <React.Fragment>
-      {offerListe.attributes.seo && (
-        <Seo metaData={offerListe.attributes.seo} />
+      {seo && <Seo metaData={seo} />}
+      {hero && hero.title && hero.icon && (
+        <Header
+          title={hero.title}
+          text={hero.text}
+          image={hero.image}
+          icon={hero.icon}
+        />
       )}
-      {offerListe.attributes.hero &&
-        offerListe.attributes.hero.title &&
-        offerListe.attributes.hero.icon && (
-          <Header
-            title={offerListe.attributes.hero.title}
-            text={offerListe.attributes.hero.text}
-            image={offerListe.attributes.hero.image}
-            icon={offerListe.attributes.hero.icon}
-          />
-        )}
 
       <Breadcrumb isUnderHeader />
+      <ButtonScrollTo noTranslate />
+      <span id="target-anchor-scroll">
+        <OfferSection
+          title={offres.title}
+          description={offres.description}
+          offers={offerItems}
+          cta={offres.cta}
+          firstCartTitle={offres.firstCartTitle}
+          secondCartTitle={offres.secondCartTitle}
+          descriptionCard={offres.descritptionCard}
+          ctaCard={offres.ctaCard}
+          firstIcon={offres.firstIcon}
+          secondIcon={offres.secondIcon}
+        />
+      </span>
+      <Separator isActive={separatorIsActive(separator)} />
+      <WhiteSpace space={0} />
 
-      <OfferSection
-        title={offerListe.attributes.offres.title}
-        description={offerListe.attributes.offres.description}
-        offers={offerItems}
-        cta={offerListe.attributes.offres.cta}
-        firstCartTitle={offerListe.attributes.offres.firstCartTitle}
-        secondCartTitle={offerListe.attributes.offres.secondCartTitle}
-        descriptionCard={offerListe.attributes.offres.descritptionCard}
-        ctaCard={offerListe.attributes.offres.ctaCard}
-        firstIcon={offerListe.attributes.offres.firstIcon}
-        secondIcon={offerListe.attributes.offres.secondIcon}
-      />
-
-      {offerListe.attributes.separator && (
-        <Separator isActive={offerListe.attributes.separator.isActive} />
+      {offres_culturelles && (
+        <OffersCarousel
+          title={offres_culturelles.title}
+          items={offres_culturelles.items}
+          cta={{
+            Label: offres_culturelles?.cta?.Label,
+            URL: offres_culturelles?.cta?.URL,
+            eventName: offres_culturelles?.cta?.eventName,
+            eventOrigin: offres_culturelles?.cta?.eventOrigin,
+          }}
+        />
       )}
 
-      <SimplePushCta
-        title={offerListe.attributes.question?.title}
-        surtitle={offerListe.attributes.question?.surtitle}
-        icon={offerListe.attributes.question?.icon}
-        image={offerListe.attributes.question?.image}
-        cta={offerListe.attributes.question?.cta}
-      />
-      {offerListe.attributes.socialMediaSection?.title &&
-        offerListe.attributes.socialMediaSection?.socialMediaLink && (
-          <SocialMedia
-            title={offerListe.attributes.socialMediaSection?.title}
-            socialMediaLink={
-              offerListe.attributes.socialMediaSection?.socialMediaLink
-            }
+      {isExperiences() && experience?.title && (
+        <StyledBackgroundExperienceVideoCarousel>
+          <ExperienceVideoCarousel
+            title={experience?.title}
+            carouselItems={experience.carouselItems}
+            isLandscape={experience.isLandscape}
           />
-        )}
+        </StyledBackgroundExperienceVideoCarousel>
+      )}
+
+      {question && (
+        <SimplePushCta
+          title={question.title}
+          surtitle={question.surtitle}
+          icon={question.icon}
+          image={question.image}
+          cta={question.cta}
+        />
+      )}
+      {socialMediaSection?.title && socialMediaSection?.socialMediaLink && (
+        <SocialMedia
+          title={socialMediaSection?.title}
+          socialMediaLink={socialMediaSection?.socialMediaLink}
+        />
+      )}
     </React.Fragment>
   )
 }
@@ -92,6 +128,11 @@ export const getStaticProps = (async () => {
       'seo',
       'seo.metaSocial',
       'seo.metaSocial.image',
+      'experience',
+      'experience.carouselItems',
+      'offres_culturelles',
+      'offres_culturelles.cta',
+      'offres_culturelles.items',
     ],
   })
   const { data } = await fetchCMS<
@@ -110,3 +151,12 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<ListProps>
+
+const StyledBackgroundExperienceVideoCarousel = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.lightBlue};
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0rem 1rem 0rem;
+  `}
+`

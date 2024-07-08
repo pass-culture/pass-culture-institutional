@@ -17,18 +17,26 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  const { seo, blocks } = props.data.attributes
+  const { related } = props
+
+  const hasEvents = (): boolean => {
+    if (related && related.length > 0) return true
+    return false
+  }
+
   return (
     <React.Fragment>
-      <Seo metaData={props.data.attributes.seo} />
-      {props.data.attributes.blocks?.map((block) => (
+      <Seo metaData={seo} />
+      {blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
 
       <StyledWrapper>
         <StyledHeading>Les derniers **événements**</StyledHeading>
 
-        {props.related.length > 0 &&
-          props.related.map((eventItem) => (
+        {hasEvents() ? (
+          related?.map((eventItem) => (
             <EventCard
               key={eventItem.attributes.slug}
               title={eventItem.attributes.title}
@@ -42,8 +50,12 @@ export default function CustomPage(props: CustomPageProps) {
               endTime={eventItem.attributes.endTime}
               city={eventItem.attributes.city}
               cta={eventItem.attributes.cta}
+              type=""
             />
-          ))}
+          ))
+        ) : (
+          <p>Aucun évènements</p>
+        )}
       </StyledWrapper>
     </React.Fragment>
   )

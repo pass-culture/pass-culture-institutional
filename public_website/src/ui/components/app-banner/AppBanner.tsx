@@ -1,28 +1,41 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { useIsAndroid } from '@/hooks/useIsAndroid'
+import { useOS } from '@/hooks/useOS'
 import { Link } from '@/ui/components/Link'
 
 type AppBannerProps = {
-  title: string
-  androidUrl: string
-  iosUrl: string
+  title?: string
+  androidUrl?: string
+  defaultUrl?: string
+  iosUrl?: string
   onClick?: () => void
 }
 
 export function AppBanner({
   title,
   androidUrl,
+  defaultUrl,
   iosUrl,
   onClick,
 }: AppBannerProps) {
-  const isAndroid = useIsAndroid()
-  const url = isAndroid ? androidUrl : iosUrl
+  const isAndroid = useOS().isAndroid
+  const isIos = useOS().isIos
+
+  const setUrl = (): string | undefined => {
+    if (isIos) return iosUrl
+    if (isAndroid) return androidUrl
+    return defaultUrl
+  }
+
+  const url = setUrl()
+
   return (
-    <StyledAppBanner href={url} target="_blank" onClick={onClick}>
-      <p>{title}</p>
-    </StyledAppBanner>
+    url && (
+      <StyledAppBanner href={url} target="_blank" onClick={onClick}>
+        <p>{title}</p>
+      </StyledAppBanner>
+    )
   )
 }
 

@@ -2,23 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import { DetailedLogosProps } from '@/types/props'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 
-type DetailedLogosProps = {
-  title?: string
-  logos: {
-    title: string
-    description: string
-    cta: CTA
-    image: APIResponse<'plugin::upload.file'> | null
-  }[]
-}
-
-export function DetailedLogos({ title, logos }: DetailedLogosProps) {
+export function DetailedLogos(props: DetailedLogosProps) {
+  const { title, logos = [] } = props
   return (
     <ContentWrapper>
       <InnerWrapper>

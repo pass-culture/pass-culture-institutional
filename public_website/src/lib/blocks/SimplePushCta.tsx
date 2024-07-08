@@ -54,7 +54,7 @@ export function SimplePushCta(props: PushCTAProps) {
           {image?.data?.attributes?.url && (
             <SimplePushCtaCard {...image.data.attributes} />
           )}
-          <OutlinedText>{icon}</OutlinedText>
+          {icon && <OutlinedText>{icon}</OutlinedText>}
         </CardContainer>
       </StyledContentWrapper>
     </Root>
@@ -83,7 +83,6 @@ const Root = styled.div`
     max-width: 90rem;
     margin: auto;
     border-radius: 2.5rem;
-
     margin-top: calc(var(--module-margin) + 3.125rem);
     margin-bottom: calc(var(--module-margin) + 3.125rem);
 
@@ -177,7 +176,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
 const RightSide = styled.div`
   ${({ theme }) => css`
-    padding: 4rem 0 4rem 0;
+    padding: 4rem 0 4rem 2rem;
     max-width: 35rem;
 
     display: flex;
@@ -212,7 +211,7 @@ const RightSide = styled.div`
       margin-bottom: 0;
 
       p {
-        margin: 0;
+        margin-bottom: 1.25rem;
         font-size: ${theme.fonts.sizes.s};
       }
     }

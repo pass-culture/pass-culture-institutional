@@ -48,12 +48,12 @@ const StyledMobileFooterList = styled.details`
       padding: 1rem 0;
     }
 
-    summary img {
-      transform: rotate(180deg);
+    summary svg {
+      transform: rotate(0deg);
     }
 
-    &[open] summary img {
-      transform: none;
+    &[open] summary svg {
+      transform: rotate(180deg);
     }
 
     li {

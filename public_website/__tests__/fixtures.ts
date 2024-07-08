@@ -1,15 +1,16 @@
 import { Offer, Tag } from '@/types/playlist'
-import { HeaderProps } from '@/ui/components/header/Header'
+import { HeaderMenuProps } from '@/types/props'
 
 export const testDataFixtures = { message: 'Hello World!' }
 
-export const headerDataFixtures: HeaderProps = {
+export const headerDataFixtures: HeaderMenuProps = {
   targetItems: [
     {
       label: 'Target item 1',
       megaMenu: {
         title: 'Mega menu 1',
         cardTitle: 'CardTitle 1',
+        bannerDefaultUrl: '',
         cardDescription: 'CardDescription 1',
         cardFirstEmoji: '🌴',
         cardSecondEmoji: '🦊',
@@ -42,6 +43,7 @@ export const headerDataFixtures: HeaderProps = {
       label: 'Target item 2',
       megaMenu: {
         title: 'Mega menu 2',
+        bannerDefaultUrl: '',
         cardTitle: 'CardTitle 2',
         cardDescription: 'CardDescription 2',
         cardFirstEmoji: '🎭',

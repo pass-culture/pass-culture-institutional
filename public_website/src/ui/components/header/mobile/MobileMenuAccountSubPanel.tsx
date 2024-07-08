@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
-import { AccountItemProps } from '../AccountDropdown'
 import { AccountItem } from '../AccountItem'
+import { AccountItemDropdownProps } from '@/types/props'
 
 type MobileMenuAccountSubPanelProps = {
-  items: AccountItemProps[]
+  items: AccountItemDropdownProps[]
 }
 
 export function MobileMenuAccountSubPanel({

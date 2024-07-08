@@ -10,6 +10,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 interface HelpProps {
@@ -17,43 +18,51 @@ interface HelpProps {
 }
 
 export default function Help({ helpData }: HelpProps) {
+  const { seo, heroSection, faq, cardText, simplepushcta, social } =
+    helpData.attributes
+
   return (
     <React.Fragment>
-      {helpData.attributes.seo && <Seo metaData={helpData.attributes.seo} />}
+      {seo && <Seo metaData={seo} />}
       <Header
-        title={helpData.attributes?.heroSection?.title}
-        text={helpData.attributes.heroSection.text}
-        icon={helpData.attributes.heroSection.icon}
-        image={helpData.attributes.heroSection.image}
+        title={heroSection.title}
+        text={heroSection?.text}
+        icon={heroSection.icon}
+        icon2={heroSection?.icon2}
+        image={heroSection.image}
       />
 
       <Breadcrumb isUnderHeader />
-      <Faq
-        title={helpData.attributes.faq.title}
-        cta={helpData.attributes.faq.cta}
-        categories={helpData.attributes.faq.categories}
-        filteringProperty={helpData.attributes.faq.filteringProperty}
-        limit={helpData.attributes.faq.limit}
-      />
+      <ButtonScrollTo noTranslate />
+      <span id="target-anchor-scroll">
+        <Faq
+          title={faq.title}
+          cta={faq.cta}
+          categories={faq.categories}
+          filteringProperty={faq.filteringProperty}
+          limit={faq.limit}
+        />
+      </span>
       <DoublePushCTA
-        title={helpData.attributes.cardText.title}
-        text={helpData.attributes.cardText.text}
-        image={helpData.attributes.cardText.image}
-        firstCta={helpData.attributes.cardText.firstCta}
-        secondCta={helpData.attributes.cardText.secondCta}
+        title={cardText.title}
+        text={cardText.text}
+        image={cardText.image}
+        firstCta={cardText.firstCta}
+        secondCta={cardText.secondCta}
+        icon={cardText.icon}
       />
 
       <SimplePushCta
-        title={helpData.attributes.simplepushcta.title}
-        surtitle={helpData.attributes.simplepushcta.surtitle}
-        image={helpData.attributes.simplepushcta.image}
-        cta={helpData.attributes.simplepushcta.cta}
-        icon={helpData.attributes.simplepushcta.icon}
+        title={simplepushcta.title}
+        surtitle={simplepushcta.surtitle}
+        image={simplepushcta.image}
+        cta={simplepushcta.cta}
+        icon={simplepushcta.icon}
       />
 
       <SocialMedia
-        title={helpData.attributes.social.title}
-        socialMediaLink={helpData.attributes.social.socialMediaLink}
+        title={social.title}
+        socialMediaLink={social.socialMediaLink}
       />
     </React.Fragment>
   )

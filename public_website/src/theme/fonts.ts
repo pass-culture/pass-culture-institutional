@@ -8,7 +8,7 @@ export enum FontSizes {
   '2XL' = '1.25rem', // 20px
   '3XL' = '1.375rem', // 22px
   '4XL' = '1.625rem', // 26px
-  '5XL' = '2.1875rem', // 35px
+  '5XL' = '1.875rem', // 30px
   '6XL' = '2.5rem', // 40px
   '7XL' = '2.875rem', // 46px
   '8XL' = '3.5rem', // 56px

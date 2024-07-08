@@ -1061,6 +1061,8 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
     seo: Attribute.Component<'shared.seo'>;
+    experience: Attribute.Component<'block.experience-video-carousel'>;
+    offres_culturelles: Attribute.Component<'block.offers-carousel'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1201,6 +1203,8 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'plugin::multi-select.multi-select',
         ['Jeunes et parents', 'Acteurs culturels', 'S\u2019informer']
       >;
+    aboveTitle: Attribute.String;
+    emoji: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1281,7 +1285,11 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.organization-chart',
         'block.simple-text-v2',
         'block.image-gallery',
-        'block.breadcrumb'
+        'block.breadcrumb',
+        'block.header-with-q-rcode',
+        'block.columns-text',
+        'block.centered-title',
+        'block.tabs'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1606,6 +1614,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    offres: Attribute.Component<'block.simple-push-cta'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

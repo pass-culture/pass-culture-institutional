@@ -8,45 +8,33 @@ import { Clock } from '../icons/Clock'
 import { TargetBlank } from '../icons/TargeBlank'
 import { Link } from '../Link'
 import { CTA } from '@/types/CTA'
+import { ListCardProps } from '@/types/props'
+import { convertTime } from '@/utils/convertTime'
 import { formatDate } from '@/utils/formatDate'
 
-type ListCardProps = {
-  title: string
-  category: string
-  date: Date | string
-  imageUrl: string | null | undefined
-  startTime: string | Date
-  endTime: string | Date
-  city: string
-  cta: CTA
-  type?: string
-}
+export function EventCard(
+  props: Omit<
+    ListCardProps & {
+      startTime: string | Date
+      endTime: string | Date
+      city: string
+      cta: CTA
+    },
+    'slug'
+  >
+) {
+  const {
+    title,
+    category,
+    date,
+    imageUrl,
+    startTime,
+    endTime,
+    city,
+    cta,
+    type,
+  } = props
 
-export function EventCard({
-  title,
-  category,
-  date,
-  imageUrl,
-  startTime,
-  endTime,
-  city,
-  cta,
-  type,
-}: ListCardProps) {
-  const convertTime = (time: string | Date) => {
-    let timeString: string
-
-    if (typeof time === 'string') {
-      timeString = time
-    } else {
-      const splitTime = time?.toISOString().split('T')[1]
-      timeString = ''
-      if (splitTime) timeString = splitTime
-    }
-
-    const timeArray = timeString.split(':')
-    return `${timeArray[0]}h${timeArray[1]}`
-  }
   return (
     <Root>
       <StyledContentWrapper>
@@ -67,10 +55,9 @@ export function EventCard({
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
-        {/* ICI LA REDIRECTION SUR LES TAGS ACTU NE FONCTIONNE PAS À CAUSE DU PARAMÈTRES TYPES (VÉRIFIER SON RÔLES CAR OP SI TYPE SUP) */}
         {type
           ? cta?.URL && (
-              <CtaLink href={type + cta.URL} target="_blank">
+              <CtaLink href={cta.URL} target="_blank">
                 <TargetBlank />
                 {cta.Label}
               </CtaLink>
@@ -122,13 +109,13 @@ const StyledContentWrapper = styled.div`
     flex-direction: column;
     align-self: center;
     padding-right: 1rem;
+    box-sizing: border-box;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      padding-right: 0;
       padding-left: 1rem;
       align-self: start;
-      padding-right: 3rem;
-      width: 80%;
+      padding-right: 1rem;
+      width: 100%;
     }
   `}
 `

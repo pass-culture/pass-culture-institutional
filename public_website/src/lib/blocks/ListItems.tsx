@@ -1,39 +1,39 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import { LatestNewsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-type LatestNewsProps = {
-  news:
-    | APIResponseData<'api::news.news'>[]
-    | APIResponseData<'api::resource.resource'>[]
-  className?: string
-  type: string
-  buttonText?: string
-}
+export function ListItems(
+  props: Omit<
+    LatestNewsProps & {
+      type: string
+      news:
+        | APIResponseData<'api::news.news'>[]
+        | APIResponseData<'api::resource.resource'>[]
+    },
+    'events'
+  >
+) {
+  const { news, className, buttonText, type } = props
+  const [visibleItems, setVisibleItems] = useState<number>(9)
 
-export function ListItems({
-  news,
-  className,
-  buttonText,
-  type,
-}: LatestNewsProps) {
-  const [visibleItems, setVisibleItems] = useState(9)
-
-  const loadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const loadMore = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
     setVisibleItems((prevVisibleItems) =>
       Math.min(prevVisibleItems + 9, news.length)
     )
   }
 
+  const isVisible = (): boolean => visibleItems < news.length
+
   return (
-    <Root className={className}>
+    <Root $noMargin $marginBottom={2} $marginTop={2} className={className}>
       <StyledList>
-        {news.slice(0, visibleItems).map((newsItem) => (
+        {news?.slice(0, visibleItems).map((newsItem) => (
           <li key={newsItem.attributes.slug}>
             <ListCard
               type={type}
@@ -49,7 +49,7 @@ export function ListItems({
           </li>
         ))}
       </StyledList>
-      {visibleItems < news.length && (
+      {isVisible() && (
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
       )}
     </Root>
@@ -70,8 +70,6 @@ const StyledList = styled.ul`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
 
     > li {
       scroll-snap-align: center;
@@ -81,6 +79,7 @@ const StyledList = styled.ul`
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;
       grid-template-columns: repeat(1, 1fr);
+      margin: 1rem auto;
     }
   `}
 `
