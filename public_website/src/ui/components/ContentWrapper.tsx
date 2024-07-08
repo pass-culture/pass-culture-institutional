@@ -11,18 +11,24 @@ export const ContentWrapper = styled.div<{
       margin-top: 0;
     }
   `}
-  ${(p) =>
-    !p.$noMargin
-      ? `
-      margin-top: var(--module-margin);
-      margin-bottom: var(--module-margin);
+  ${(p) => {
+    if (!p.$noMargin) {
+      return `
+    margin-top: var(--module-margin);
+    margin-bottom: var(--module-margin);
     `
-      : p.$marginTop && p.$marginBottom
-        ? `margin-top: ${p.$marginTop}rem;
-          margin-bottom: ${p.$marginBottom}rem;`
-        : `
-     margin-top: 0;
-     margin-bottom: 0;`}
+    } else if (p.$marginTop && p.$marginBottom) {
+      return `
+    margin-top: ${p.$marginTop}rem;
+    margin-bottom: ${p.$marginBottom}rem;
+    `
+    } else {
+      return `
+    margin-top: 0;
+    margin-bottom: 0;
+    `
+    }
+  }}
 
   max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
   padding-left: 1.3rem;

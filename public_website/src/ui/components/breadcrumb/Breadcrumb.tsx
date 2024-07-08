@@ -50,7 +50,6 @@ export function Breadcrumb(props: BreadcrumbProps) {
   }
 
   const openDropdown = (index: number): void => {
-    // TODO update dynamic position top/bottom
     setIsOpen(index)
   }
 

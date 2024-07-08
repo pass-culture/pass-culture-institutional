@@ -32,7 +32,7 @@ export const CustomSelect = styled.div<{
     cursor: pointer;
     height: 100%;
 
-    .select-dropdown {
+    ul {
       position: absolute;
       list-style: none;
       width: 300px;
