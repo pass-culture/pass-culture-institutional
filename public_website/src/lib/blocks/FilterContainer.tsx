@@ -139,31 +139,34 @@ export function FilterContainer(props: FiltersProps) {
           </CustomSelectButton>
 
           {checkIfOpen(index) && (
-            <ul
+            <span
               role="listbox"
-              id={filtre.filtre}
               aria-labelledby={filtre.filtre}
-              aria-multiselectable="true"
-              className="select-dropdown">
-              {filtre.value.map((value, index) => (
-                <li
-                  aria-selected={checkIsSelcted(filtre.filtre, value)}
-                  role="option"
-                  aria-hidden="true"
-                  tabIndex={-1}
-                  key={value + index}
-                  onClick={(): void => handleFilterChange(filtre.filtre, value)}
-                  value={value}>
+              aria-multiselectable="true">
+              <ul id={filtre.filtre}>
+                {filtre.value.map((value, index) => (
                   <span
-                    style={{
-                      opacity: checkIsSelcted(filtre.filtre, value) ? 1 : 0,
-                    }}>
-                    <Check />
+                    aria-selected={checkIsSelcted(filtre.filtre, value)}
+                    role="option"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    key={value + index}
+                    onClick={(): void =>
+                      handleFilterChange(filtre.filtre, value)
+                    }>
+                    <li>
+                      <span
+                        style={{
+                          opacity: checkIsSelcted(filtre.filtre, value) ? 1 : 0,
+                        }}>
+                        <Check />
+                      </span>
+                      {value}
+                    </li>
                   </span>
-                  {value}
-                </li>
-              ))}
-            </ul>
+                ))}
+              </ul>
+            </span>
           )}
           {filterValues[filtre.filtre]?.map((value, index) => {
             if (value !== '') {

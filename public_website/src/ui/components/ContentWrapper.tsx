@@ -19,7 +19,7 @@ export const ContentWrapper = styled.div<{
     `
       : p.$marginTop && p.$marginBottom
         ? `margin-top: ${p.$marginTop}rem;
-    margin-bottom: ${p.$marginBottom}rem;`
+          margin-bottom: ${p.$marginBottom}rem;`
         : `
      margin-top: 0;
      margin-bottom: 0;`}

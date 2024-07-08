@@ -77,10 +77,3 @@ const StyledVideo = styled(ReactPlayer)`
     }
   `}
 `
-
-// const StyledPlay = styled(Play)`
-//   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-//     width: 4rem;
-//     height: 4rem;
-//   }
-// `

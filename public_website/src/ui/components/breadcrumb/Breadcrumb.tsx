@@ -16,7 +16,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
   const [isOpen, setIsOpen] = useState<number>(-1)
-  // const [hasDirection, setDirection] = useState<string>('')
+
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
 
@@ -96,38 +96,37 @@ export function Breadcrumb(props: BreadcrumbProps) {
                     <ChevronDown />
                   </WrapperChevron>
                 </CustomSelectButton>
-                <span aria-hidden="true" data-trigger="multiselect"></span>
                 {checkIfOpen(0) && (
-                  <ul
-                    ref={dropdownRef}
+                  <span
                     id="select-dropdown"
                     role="listbox"
-                    aria-label="Liste URL"
-                    className="select-dropdown">
-                    {groupLinks.map((link) =>
-                      link?.Label.trim() ? (
-                        <span
-                          aria-selected="false"
-                          role="option"
-                          aria-hidden="true"
-                          tabIndex={-1}
-                          key={link.Label}>
-                          <li>
-                            <Link
-                              href={link.URL}
-                              onClick={(): void =>
-                                onClickAnalytics({
-                                  eventName: link.eventName,
-                                  eventOrigin: link.eventOrigin,
-                                })
-                              }>
-                              <span>{link.Label.trim()}</span>
-                            </Link>
-                          </li>
-                        </span>
-                      ) : null
-                    )}
-                  </ul>
+                    aria-label="Liste URL">
+                    <ul ref={dropdownRef} className="select-dropdown">
+                      {groupLinks.map((link) =>
+                        link?.Label.trim() ? (
+                          <span
+                            aria-selected="false"
+                            role="option"
+                            aria-hidden="true"
+                            tabIndex={-1}
+                            key={link.Label}>
+                            <li>
+                              <Link
+                                href={link.URL}
+                                onClick={(): void =>
+                                  onClickAnalytics({
+                                    eventName: link.eventName,
+                                    eventOrigin: link.eventOrigin,
+                                  })
+                                }>
+                                <span>{link.Label.trim()}</span>
+                              </Link>
+                            </li>
+                          </span>
+                        ) : null
+                      )}
+                    </ul>
+                  </span>
                 )}
               </CustomSelect>
             </SelectInnerWrapper>

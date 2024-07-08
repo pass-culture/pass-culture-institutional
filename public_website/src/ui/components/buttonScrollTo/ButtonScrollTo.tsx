@@ -10,7 +10,7 @@ import { ArrowDown } from '../icons/ArrowDown'
 const ButtonScrollTo = (props: { noTranslate: boolean }) => {
   const { noTranslate } = props
   const prevScrollPos = useRef<number>(0)
-  const [isVisible, setisVisible] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(true)
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -24,11 +24,10 @@ const ButtonScrollTo = (props: { noTranslate: boolean }) => {
     const toggleVisibility = () => {
       const currentScrollPos = window.scrollY
 
-      // Button is displayed after scrolling for 500 pixels
       if (currentScrollPos > 10) {
-        setisVisible(false)
+        setIsVisible(false)
       } else {
-        setisVisible(true)
+        setIsVisible(true)
       }
 
       prevScrollPos.current = currentScrollPos
