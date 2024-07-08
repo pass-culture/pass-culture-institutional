@@ -10,7 +10,7 @@ import { ArrowDown } from '../icons/ArrowDown'
 const ButtonScrollTo = (props: { noTranslate: boolean }) => {
   const { noTranslate } = props
   const prevScrollPos = useRef<number>(0)
-  const [isVisible, setisVisible] = useState<boolean>(true)
+  const [isVisible, setisVisible] = useState<boolean>(false)
   const handleClick = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {

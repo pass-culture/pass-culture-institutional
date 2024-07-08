@@ -106,24 +106,25 @@ export function Breadcrumb(props: BreadcrumbProps) {
                     className="select-dropdown">
                     {groupLinks.map((link) =>
                       link?.Label.trim() ? (
-                        <li
+                        <span
                           aria-selected="false"
                           role="option"
                           aria-hidden="true"
                           tabIndex={-1}
-                          key={link.Label}
-                          value={link.URL}>
-                          <Link
-                            href={link.URL}
-                            onClick={(): void =>
-                              onClickAnalytics({
-                                eventName: link.eventName,
-                                eventOrigin: link.eventOrigin,
-                              })
-                            }>
-                            <span>{link.Label.trim()}</span>
-                          </Link>
-                        </li>
+                          key={link.Label}>
+                          <li>
+                            <Link
+                              href={link.URL}
+                              onClick={(): void =>
+                                onClickAnalytics({
+                                  eventName: link.eventName,
+                                  eventOrigin: link.eventOrigin,
+                                })
+                              }>
+                              <span>{link.Label.trim()}</span>
+                            </Link>
+                          </li>
+                        </span>
                       ) : null
                     )}
                   </ul>
