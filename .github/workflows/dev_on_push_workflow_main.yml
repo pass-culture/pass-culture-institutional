@@ -8,6 +8,23 @@ on:
   pull_request:
 
 jobs:
+  fetch_secrets:
+    runs-on: ubuntu-latest
+    outputs:
+      cosign_kms_key: ${{ steps.secrets.outputs.COSIGN_KMS_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Authentification to Google to get secret
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+      - name: Get Secret
+        id: 'secrets'
+        uses: 'google-github-actions/get-secretmanager-secrets@v2'
+        with:
+          secrets: |-
+            COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
   run_public_website_tests:
     runs-on: ubuntu-latest
     steps:
@@ -42,6 +59,8 @@ jobs:
         run: cd content_management_system && yarn test:types
   build-image-cms:
     uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
+    needs:
+      - fetch_secrets
     permissions:
       id-token: write
       contents: write
@@ -52,8 +71,11 @@ jobs:
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
+      COSIGN_KMS_KEY: ${{ needs.fetch_secrets.outputs.cosign_kms_key }}
   build-image-public-site-preview:
     uses: pass-culture/common-workflows/.github/workflows/build-docker-image.yml@main
+    needs:
+      - fetch_secrets
     permissions:
       id-token: write
       contents: write
@@ -64,4 +86,5 @@ jobs:
     secrets:
       GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
       ARTIFACT_REGISTRY_SERVICE_ACCOUNT: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
+      COSIGN_KMS_KEY: ${{ needs.fetch_secrets.outputs.cosign_kms_key }}
 
