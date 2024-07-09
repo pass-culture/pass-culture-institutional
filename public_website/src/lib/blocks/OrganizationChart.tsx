@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { OrganizationChartProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
@@ -9,10 +10,13 @@ import { isRenderable } from '@/utils/isRenderable'
 
 export function OrganizationChart(props: OrganizationChartProps) {
   const { title, description, people } = props
-  const TITLE = title && isRenderable(title)
+
   return (
     <ContentWrapper>
-      {TITLE && <StyledHeading>{title}</StyledHeading>}
+      <BlockRendererWithCondition condition={isRenderable(title)}>
+        <StyledHeading>{title as string}</StyledHeading>
+      </BlockRendererWithCondition>
+
       <StyledDescription>{description}</StyledDescription>
       <StyledList>
         {people?.map((person) => {

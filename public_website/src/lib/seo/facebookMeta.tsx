@@ -7,7 +7,7 @@ import { isRenderable } from '@/utils/isRenderable'
 
 export function FacebookMeta(props: FacebookMetaProps & BaseTextProps) {
   const { title, description, image } = props
-  const URL = isRenderable(image?.data.attributes.url)
+  const url = isRenderable(image?.data.attributes.url)
   return (
     <Head>
       <meta key="og:title" property="og:title" content={title} />
@@ -16,7 +16,7 @@ export function FacebookMeta(props: FacebookMetaProps & BaseTextProps) {
         property="og:description"
         content={description}
       />
-      {image && URL && (
+      {image && url && (
         <meta
           key="og:image"
           property="og:image"

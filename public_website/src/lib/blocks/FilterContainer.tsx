@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import {
   CustomSelect,
   CustomSelectButton,
@@ -104,8 +105,7 @@ export function FilterContainer(props: FiltersProps) {
   }
 
   const checkIsSelected = (key: string, value: string): boolean => {
-    if (filterValues[key]?.includes(value)) return true
-    return false
+    return !!filterValues[key]?.includes(value)
   }
 
   return (
@@ -137,8 +137,7 @@ export function FilterContainer(props: FiltersProps) {
               <ChevronDown />
             </WrapperChevron>
           </CustomSelectButton>
-
-          {checkIfOpen(index) && (
+          <BlockRendererWithCondition condition={checkIfOpen(index)}>
             <span
               role="listbox"
               aria-labelledby={filtre.filtre}
@@ -169,7 +168,7 @@ export function FilterContainer(props: FiltersProps) {
                 ))}
               </ul>
             </span>
-          )}
+          </BlockRendererWithCondition>
           {filterValues[filtre.filtre]?.map((value, index) => {
             if (value !== '') {
               return (

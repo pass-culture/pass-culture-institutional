@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
 import { LittleListProps } from '@/types/props'
@@ -9,6 +10,7 @@ import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import arrowUrl from '@/ui/image/arrowd.svg'
 import { getMediaQuery } from '@/utils/getMediaQuery'
+import { isRenderable } from '@/utils/isRenderable'
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
 export function LittleList(props: LittleListProps) {
@@ -38,8 +40,12 @@ export function LittleList(props: LittleListProps) {
     <Root>
       <Columns>
         <Column>
-          {title && <Typo.Heading2>{title}</Typo.Heading2>}
-          {description && <Description>{description}</Description>}
+          <BlockRendererWithCondition condition={isRenderable(title)}>
+            <Typo.Heading2>{title as string}</Typo.Heading2>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(description)}>
+            <Description>{description as string}</Description>
+          </BlockRendererWithCondition>
         </Column>
 
         <Column as="ul">

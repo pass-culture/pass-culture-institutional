@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   ButtonBack,
   ButtonNext,
@@ -8,6 +8,8 @@ import {
 import styled, { css } from 'styled-components'
 
 import { VerticalCarouselSlide } from './VerticalCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
 import { VerticalCarouselProps } from '@/types/props'
@@ -27,25 +29,8 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
     title
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-
-  // Computed the number of visible slides depending on screen width
-  const [screenWidth, setScreenWidth] = useState<number>()
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
-
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  // Get the MQ in rem and convert it in pixels
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
+  const visibleSlides = width < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   /**
    * Remove unnecessary HTML attributes for a11y.
@@ -104,7 +89,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
           infinite
           dragEnabled
           step={1}>
-          {isNavigation() && (
+          <BlockRendererWithCondition condition={isNavigation()}>
             <StyledHeading>
               <Typo.Heading2>{title}</Typo.Heading2>
 
@@ -123,7 +108,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
                 </ButtonNext>
               </StyledNavigationButtons>
             </StyledHeading>
-          )}
+          </BlockRendererWithCondition>
 
           <StyledSlider
             classNameAnimation="customCarrouselAnimation"

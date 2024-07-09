@@ -2,12 +2,14 @@ import React, { useMemo } from 'react'
 import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { FaqProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { LinkFaq } from '@/ui/components/help/Link'
 import { Typo } from '@/ui/components/typographies'
 import arrowUrl from '@/ui/image/arrowd.svg'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 /** Filter questions based on the wanted categories and flag */
@@ -60,10 +62,10 @@ export function Faq(props: FaqProps) {
 
   return (
     <ContentWrapper>
-      {title && <StyledHeading>{title}</StyledHeading>}
+      <StyledHeading>{title}</StyledHeading>
       <StyledContentWrapper>
         <StyledContentTextWrapper>
-          {cta && <ButtonWithCTA cta={cta} />}
+          <ButtonWithCTA cta={cta} />
         </StyledContentTextWrapper>
         <div>
           {filteredQuestions?.map((faq) => {
@@ -84,9 +86,9 @@ export function Faq(props: FaqProps) {
                   {summaryTextWithMarkup}
                 </summary>
                 <p aria-label={textAccessibilityLabel}>{textTextWithMarkup}</p>
-                {faq.url && (
+                <BlockRendererWithCondition condition={isRenderable(faq.url)}>
                   <LinkFaq href={faq.html_url} text="Voir le detail" />
-                )}
+                </BlockRendererWithCondition>
               </StyledAccordion>
             )
           })}

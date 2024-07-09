@@ -3,9 +3,11 @@ import ReactPlayer from 'react-player/youtube'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
 import { ExperienceVideoCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function ExperienceVideoCarouselSlide(
   props: ExperienceVideoCarouselSlideProps
@@ -25,7 +27,7 @@ export function ExperienceVideoCarouselSlide(
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledWrapper>
-        {isMounted && url ? (
+        <BlockRendererWithCondition condition={isMounted && isRenderable(url)}>
           <StyledExperienceVideo
             url={url}
             width="100%"
@@ -33,7 +35,7 @@ export function ExperienceVideoCarouselSlide(
             height={isLandscape ? '100%' : 470}
             alt={description}
           />
-        ) : null}
+        </BlockRendererWithCondition>
         <StyledTitle>{title}</StyledTitle>
         <Description>{description}</Description>
       </StyledWrapper>

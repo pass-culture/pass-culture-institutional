@@ -8,7 +8,8 @@ import { isRenderable } from '@/utils/isRenderable'
 
 export function Imageblock(props: ImageProps) {
   const { image, description } = props
-  const DESCRIPTION = description && isRenderable(description)
+  const caption_description = description && isRenderable(description)
+
   return (
     <ContentWrapper>
       <Root>
@@ -21,7 +22,7 @@ export function Imageblock(props: ImageProps) {
             loading="lazy"
             decoding="async"
           />
-          {DESCRIPTION && <figcaption>{description}</figcaption>}
+          {caption_description && <figcaption>{description}</figcaption>}
         </figure>
       </Root>
     </ContentWrapper>

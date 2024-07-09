@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { VideoProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { isRenderable } from '@/utils/isRenderable'
@@ -21,7 +22,7 @@ export function Video(props: VideoProps) {
   return (
     <ContentWrapper>
       <Root suppressHydrationWarning $noMargin>
-        {renderVideo() && (
+        <BlockRendererWithCondition condition={renderVideo()}>
           <StyledVideo
             url={url}
             width="100%"
@@ -29,8 +30,10 @@ export function Video(props: VideoProps) {
             height="100%"
             alt={alt}
           />
-        )}
-        {isRenderable(description) && <Description>{description}</Description>}
+        </BlockRendererWithCondition>
+        <BlockRendererWithCondition condition={isRenderable(description)}>
+          <Description>{description}</Description>
+        </BlockRendererWithCondition>
       </Root>
     </ContentWrapper>
   )

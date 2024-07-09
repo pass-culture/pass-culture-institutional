@@ -14,7 +14,6 @@ export const isRenderable = (
     value !== undefined &&
     value !== null &&
     value !== false &&
-    value !== 0 &&
     !Number.isNaN(value) &&
     value !== ''
   )

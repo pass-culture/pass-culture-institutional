@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -10,6 +11,7 @@ import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function DoublePushCTA(
@@ -29,64 +31,55 @@ export function DoublePushCTA(
     secondCta,
   } = props
 
+  const image_url = image?.data?.attributes?.url
+
   return (
     <StyledContentWrapper>
-      {image?.data?.attributes?.url && (
-        <MobileImage
-          src={
-            image?.data?.attributes?.url &&
-            getStrapiURL(image.data.attributes.url)
-          }
-          alt=""
-        />
-      )}
-      <Root className={className}>
-        {image?.data?.attributes?.url && (
-          <CardContainer>
-            <Card
-              $imageUrl={
-                image?.data?.attributes?.url &&
-                getStrapiURL(image.data.attributes.url)
-              }
-            />
+      <BlockRendererWithCondition condition={isRenderable(image_url)}>
+        <MobileImage src={getStrapiURL(image_url as string)} alt="" />
+      </BlockRendererWithCondition>
 
+      <Root className={className}>
+        <BlockRendererWithCondition condition={isRenderable(image_url)}>
+          <CardContainer>
+            <Card $imageUrl={getStrapiURL(image_url)} />
             <OutlinedText shadow>{icon}</OutlinedText>
           </CardContainer>
-        )}
+        </BlockRendererWithCondition>
         <RightSide>
-          {title && <Typo.Heading2>{title}</Typo.Heading2>}
-          {text && (
-            <p aria-label={parseText(text).accessibilityLabel}>
-              {parseText(text).processedText}
+          <Typo.Heading2>{title}</Typo.Heading2>
+          <BlockRendererWithCondition condition={isRenderable(text)}>
+            <p aria-label={parseText(text as string).accessibilityLabel}>
+              {parseText(text as string).processedText}
             </p>
-          )}
-          {firstCta && (
-            <CtaContainer>
+          </BlockRendererWithCondition>
+
+          <CtaContainer>
+            <span>
+              <CtaLink
+                href={firstCta.URL}
+                onClick={(): void => {
+                  firstCta?.eventName && firstCta?.eventOrigin
+                    ? onClickAnalytics({
+                        eventName: firstCta?.eventName,
+                        eventOrigin: firstCta?.eventOrigin,
+                      })
+                    : void 0
+                }}>
+                <span>{firstCta.Label}</span>
+              </CtaLink>
+            </span>
+            <BlockRendererWithCondition
+              condition={isRenderable(secondCta?.URL)}>
               <span>
-                <CtaLink
-                  href={firstCta.URL}
-                  onClick={(): void => {
-                    firstCta?.eventName && firstCta?.eventOrigin
-                      ? onClickAnalytics({
-                          eventName: firstCta?.eventName,
-                          eventOrigin: firstCta?.eventOrigin,
-                        })
-                      : void 0
-                  }}>
-                  <span>{firstCta.Label}</span>
-                </CtaLink>
+                <ButtonWithCTA
+                  target="_blank"
+                  variant="quaternary"
+                  cta={secondCta as CTA}
+                />
               </span>
-              {secondCta && (
-                <span>
-                  <ButtonWithCTA
-                    target="_blank"
-                    variant="quaternary"
-                    cta={secondCta}
-                  />
-                </span>
-              )}
-            </CtaContainer>
-          )}
+            </BlockRendererWithCondition>
+          </CtaContainer>
         </RightSide>
       </Root>
     </StyledContentWrapper>

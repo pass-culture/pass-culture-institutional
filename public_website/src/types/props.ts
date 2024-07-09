@@ -182,6 +182,17 @@ export type HeaderProps = {
   icon2?: string
   cta?: CTA
 }
+export interface HeaderWithQRCodeProps {
+  title: string
+  text?: string
+  image: APIResponse<'plugin::upload.file'> | null
+  icon: string
+  cta?: CTA
+  QRCode: {
+    URL: string
+    Label: string
+  }
+}
 
 export type ExperienceVideoCarouselProps = {
   title: string

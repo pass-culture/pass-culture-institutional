@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { LatestEventsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -49,9 +50,9 @@ export function ListItems(
           </li>
         ))}
       </StyledList>
-      {isVisible() && buttonText && (
+      <BlockRendererWithCondition condition={isVisible()}>
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
-      )}
+      </BlockRendererWithCondition>
     </Root>
   )
 }

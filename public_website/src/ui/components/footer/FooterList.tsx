@@ -11,7 +11,7 @@ export function FooterList(props: FooterListProps) {
     <StyledFooterList>
       <h3>{title}</h3>
       <ul>
-        {listItems.map((anchor) => {
+        {listItems?.map((anchor) => {
           return (
             <li key={anchor.Label}>
               <Link

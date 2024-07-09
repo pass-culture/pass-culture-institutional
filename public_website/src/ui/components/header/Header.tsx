@@ -11,6 +11,7 @@ import { AccountDropdown } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { CTA } from '@/types/CTA'
 import { HeaderMenuProps, HeaderNavigationItemProps } from '@/types/props'
@@ -225,7 +226,9 @@ export function Header(props: HeaderMenuProps) {
                         onMouseEnter={() => toggleMegaMenu(i)}>
                         {el.label}
                       </button>
-                      {i === activeMegaMenuId && (
+
+                      <BlockRendererWithCondition
+                        condition={i === activeMegaMenuId}>
                         <MegaMenu
                           getOpenButtonEl={() =>
                             megaMenuButtonRefs.current[i] ?? null
@@ -237,11 +240,13 @@ export function Header(props: HeaderMenuProps) {
                           onKeyDown={(e): void => onMegaMenuKeyDown(e, i)}
                           onMouseLeave={(): void => setActiveMegaMenuId(null)}
                         />
-                      )}
+                      </BlockRendererWithCondition>
                     </StyledNavigationItem>
-                    {i === targetItems.length - 1 && (
+
+                    <BlockRendererWithCondition
+                      condition={i === targetItems.length - 1}>
                       <StyledNavigationItem aria-hidden="true" />
-                    )}
+                    </BlockRendererWithCondition>
                   </React.Fragment>
                 )
               })}

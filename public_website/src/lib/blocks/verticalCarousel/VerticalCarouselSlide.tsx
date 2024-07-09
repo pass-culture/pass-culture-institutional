@@ -3,11 +3,13 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { VerticalCarouselSlideProps } from '@/types/props'
 import { Play } from '@/ui/components/icons/Play'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
   const { slideIndex, image, title, description, url, hidePlayIcon } = props
@@ -22,7 +24,7 @@ export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
       role="group"
       aria-roledescription="diapositive">
       <div>
-        {imageUrl && (
+        <BlockRendererWithCondition condition={isRenderable(imageUrl)}>
           <StyledImageWrapper>
             <Image
               src={getStrapiURL(imageUrl)}
@@ -32,7 +34,7 @@ export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
             />
             {!hidePlayIcon && <PlayIcon />}
           </StyledImageWrapper>
-        )}
+        </BlockRendererWithCondition>
         <StyledTitle as={Link} href={url}>
           {title}
         </StyledTitle>

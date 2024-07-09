@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components'
 
 import { KeyNumberCarouselSlide } from './keyNumberCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
 import { KeyNumberCarouselProps } from '@/types/props'
@@ -88,7 +89,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
       <StyledKeyCarouselHeading>
         <StyledTitle>{title}</StyledTitle>
 
-        {isNavShowing() && (
+        <BlockRendererWithCondition condition={isNavShowing()}>
           <StyledNavigationButtons aria-label="Contrôles du carousel">
             <ButtonBack
               onClick={handleKeyNumberNavigationButtonClick}
@@ -101,7 +102,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
               <ArrowRight />
             </ButtonNext>
           </StyledNavigationButtons>
-        )}
+        </BlockRendererWithCondition>
       </StyledKeyCarouselHeading>
 
       <StyledSlider
@@ -123,7 +124,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
         })}
       </StyledSlider>
 
-      {isNavShowing() && (
+      <BlockRendererWithCondition condition={isNavShowing()}>
         <StyledDots aria-label="Contrôles du carousel">
           {items?.map((item, index) => {
             return (
@@ -138,7 +139,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
             )
           })}
         </StyledDots>
-      )}
+      </BlockRendererWithCondition>
     </StyledCarouselProvider>
   )
 }

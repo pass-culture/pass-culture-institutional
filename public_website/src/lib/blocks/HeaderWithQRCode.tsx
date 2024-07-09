@@ -2,65 +2,55 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
-import { APIResponse } from '@/types/strapi'
-import { Typo } from '@/ui/components/typographies'
-import { getStrapiURL } from '@/utils/apiHelpers'
-
-interface HeaderProps {
-  title: string
-  text?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  icon: string
-  cta?: CTA
-  QRCode: {
-    URL: string
-    Label: string
-  }
-}
-
 import { CTA } from '@/types/CTA'
+import { HeaderWithQRCodeProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
+import { Typo } from '@/ui/components/typographies'
+import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
-export function HeaderWithQRCode(props: HeaderProps) {
+export function HeaderWithQRCode(props: HeaderWithQRCodeProps) {
   const { text, title, cta, image, icon, QRCode } = props
 
   const { SVG: QrCode } = useQRCode()
+  const img_url = image?.data?.attributes?.url
   return (
     <Root>
       <StyledContentWrapper>
         <div>
-          {title && <StyledHeading>{title}</StyledHeading>}
-          {text && <StyledText>{text}</StyledText>}
-          {cta?.Label && cta?.URL && (
+          <StyledHeading>{title}</StyledHeading>
+          <BlockRendererWithCondition condition={isRenderable(text)}>
+            <StyledText>{text}</StyledText>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
             <StyledBtnWrapper>
-              <ButtonWithCTA cta={cta} />
+              <ButtonWithCTA cta={cta as CTA} />
             </StyledBtnWrapper>
-          )}
+          </BlockRendererWithCondition>
         </div>
-        <CardContainer>
-          <Card
-            $imageUrl={
-              image?.data?.attributes?.url &&
-              getStrapiURL(image?.data?.attributes?.url)
-            }>
-            <OutlinedText shadow>{icon}</OutlinedText>
-            <QRCodeCard>
-              <QrCode
-                text={QRCode.URL}
-                options={{
-                  width: 100,
-                  margin: 2,
-                  color: { dark: theme.colors.secondary },
-                }}
-              />
-              <p>{QRCode.Label}</p>
-            </QRCodeCard>
-          </Card>
+        <BlockRendererWithCondition condition={isRenderable(img_url)}>
+          <CardContainer>
+            <Card $imageUrl={getStrapiURL(img_url as string)}>
+              <OutlinedText shadow>{icon}</OutlinedText>
+              <QRCodeCard>
+                <QrCode
+                  text={QRCode.URL}
+                  options={{
+                    width: 100,
+                    margin: 2,
+                    color: { dark: theme.colors.secondary },
+                  }}
+                />
+                <p>{QRCode.Label}</p>
+              </QRCodeCard>
+            </Card>
 
-          <BackgroundLayer />
-        </CardContainer>
+            <BackgroundLayer />
+          </CardContainer>
+        </BlockRendererWithCondition>
       </StyledContentWrapper>
     </Root>
   )

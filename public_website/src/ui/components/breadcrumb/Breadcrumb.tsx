@@ -7,8 +7,10 @@ import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CustomSelect, CustomSelectButton, WrapperChevron } from '@/theme/style'
 import { BreadcrumbProps } from '@/types/props'
+import { isRenderable } from '@/utils/isRenderable'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export function Breadcrumb(props: BreadcrumbProps) {
@@ -43,9 +45,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
       : []
   }, [currentNavigationGroup])
 
-  const currentLink = groupLinks.find(
-    (l) => l.URL.trim().toLowerCase() === pathname.trim().toLowerCase()
-  )
+  const currentLink = groupLinks.find((l) => isStringAreEquals(l.URL, pathname))
 
   const checkIfOpen = (index: number): boolean => {
     return isOpen === index
@@ -85,63 +85,69 @@ export function Breadcrumb(props: BreadcrumbProps) {
     )
   }, [groupLinks])
 
+  const label = currentNavigationGroup?.label
+
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  return isMounted && currentNavigationGroup ? (
-    <Root
-      as="nav"
-      aria-label="fil d’arianne"
-      $isUnderHeader={isUnderHeader}
-      className={className}
-      $noMargin={isUnderHeader}>
-      <ol>
-        <ListItem>
-          <StyledSimpleLink>
-            <Link href="/">Accueil</Link>
-          </StyledSimpleLink>
-        </ListItem>
-        <ListSeparator aria-hidden="true">
-          <ChevronDown />
-        </ListSeparator>
-        <ListItem>
-          <SelectWrapper $groupLabel={currentNavigationGroup.label}>
-            <SelectInnerWrapper>
-              <CustomSelect
-                onMouseLeave={(): void => setIsOpen(-1)}
-                $isInBreadcrumb>
-                <CustomSelectButton
-                  role="combobox"
-                  onClick={(): void => {
-                    openDropdown(0)
-                  }}
-                  $isInBreadcrumb
-                  aria-labelledby="Naviguez"
-                  aria-label="Naviguez"
-                  aria-haspopup="listbox"
-                  aria-expanded={checkIfOpen(0)}
-                  aria-controls="select-dropdown">
-                  {currentLink?.Label}
-                  <WrapperChevron $isOpen={checkIfOpen(0)}>
-                    <ChevronDown />
-                  </WrapperChevron>
-                </CustomSelectButton>
-                {checkIfOpen(0) && (
-                  <span
-                    id="select-dropdown"
-                    role="listbox"
-                    aria-label="Liste URL">
-                    {memoizeUL}
-                  </span>
-                )}
-              </CustomSelect>
-            </SelectInnerWrapper>
-          </SelectWrapper>
-        </ListItem>
-      </ol>
-    </Root>
-  ) : null
+  return (
+    <BlockRendererWithCondition condition={isMounted}>
+      <Root
+        as="nav"
+        aria-label="fil d’arianne"
+        $isUnderHeader={isUnderHeader}
+        className={className}
+        $noMargin={isUnderHeader}>
+        <ol>
+          <ListItem>
+            <StyledSimpleLink>
+              <Link href="/">Accueil</Link>
+            </StyledSimpleLink>
+          </ListItem>
+          <ListSeparator aria-hidden="true">
+            <ChevronDown />
+          </ListSeparator>
+          <ListItem>
+            <BlockRendererWithCondition condition={isRenderable(label)}>
+              <SelectWrapper $groupLabel={label as string}>
+                <SelectInnerWrapper>
+                  <CustomSelect
+                    onMouseLeave={(): void => setIsOpen(-1)}
+                    $isInBreadcrumb>
+                    <CustomSelectButton
+                      role="combobox"
+                      onClick={(): void => {
+                        openDropdown(0)
+                      }}
+                      $isInBreadcrumb
+                      aria-labelledby="Naviguez"
+                      aria-label="Naviguez"
+                      aria-haspopup="listbox"
+                      aria-expanded={checkIfOpen(0)}
+                      aria-controls="select-dropdown">
+                      {currentLink?.Label}
+                      <WrapperChevron $isOpen={checkIfOpen(0)}>
+                        <ChevronDown />
+                      </WrapperChevron>
+                    </CustomSelectButton>
+                    <BlockRendererWithCondition condition={checkIfOpen(0)}>
+                      <span
+                        id="select-dropdown"
+                        role="listbox"
+                        aria-label="Liste URL">
+                        {memoizeUL}
+                      </span>
+                    </BlockRendererWithCondition>
+                  </CustomSelect>
+                </SelectInnerWrapper>
+              </SelectWrapper>
+            </BlockRendererWithCondition>
+          </ListItem>
+        </ol>
+      </Root>
+    </BlockRendererWithCondition>
+  )
 }
 
 const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`

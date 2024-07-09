@@ -7,6 +7,7 @@ import { Calendar } from '../icons/Calendar'
 import { Clock } from '../icons/Clock'
 import { TargetBlank } from '../icons/TargeBlank'
 import { Link } from '../Link'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
 import { ListCardProps } from '@/types/props'
 import { convertTime } from '@/utils/convertTime'
@@ -36,11 +37,11 @@ export function EventCard(
     type,
   } = props
 
-  const IMAGE_URL = imageUrl && isRenderable(imageUrl)
-  const TYPE = type && isRenderable(type)
+  const imageUrlProps = isRenderable(imageUrl)
+  const typeProps = isRenderable(type)
 
-  const renderCTA = () => {
-    if (TYPE)
+  const renderCTA = (): React.ReactNode => {
+    if (typeProps)
       return (
         <CtaLink href={cta.URL} target="_blank">
           <TargetBlank />
@@ -74,15 +75,15 @@ export function EventCard(
         {renderCTA()}
       </StyledContentWrapper>
 
-      {IMAGE_URL && (
+      <BlockRendererWithCondition condition={imageUrlProps}>
         <StyledCardImage
-          src={imageUrl}
+          src={imageUrl as string}
           alt=""
           width={385}
           height={310}
           layout="responsive" // TODO: Fix deprecated use of "layout" (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
         />
-      )}
+      </BlockRendererWithCondition>
     </Root>
   )
 }

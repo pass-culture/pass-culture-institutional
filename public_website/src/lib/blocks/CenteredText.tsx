@@ -1,16 +1,20 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { BaseTextWithOptionTitleProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function CenteredText(props: BaseTextWithOptionTitleProps) {
   const { title, description } = props
   return (
     <Root data-testid="centered-text">
-      {!!title && <Typo.Heading2>{title}</Typo.Heading2>}
+      <BlockRendererWithCondition condition={isRenderable(title)}>
+        <Typo.Heading2>{title as string}</Typo.Heading2>
+      </BlockRendererWithCondition>
       <p aria-label={parseText(description).accessibilityLabel}>
         {parseText(description).processedText}
       </p>

@@ -3,6 +3,7 @@ import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
 import { PushCTAProps, QRCodeProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
@@ -25,15 +26,13 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
     qrCodeUrl,
   } = props
 
-  const IMAGE =
-    image?.data?.attributes?.url && isRenderable(image?.data?.attributes?.url)
-  const ICON = icon && isRenderable(icon)
-  const DESCRIPTION = description && isRenderable(description)
+  const image_props = image?.data?.attributes?.url
+
   return (
     <Root className={className}>
-      {IMAGE && (
+      <BlockRendererWithCondition condition={isRenderable(image_props)}>
         <CardContainer>
-          <Card $imageUrl={getStrapiURL(image.data.attributes.url)}>
+          <Card $imageUrl={getStrapiURL(image_props)}>
             <QRCodeCard>
               <QrCode
                 text={qrCodeUrl}
@@ -47,16 +46,18 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
             </QRCodeCard>
           </Card>
           <BackgroundLayer />
-          {ICON && <OutlinedText>{icon}</OutlinedText>}
+          <BlockRendererWithCondition condition={isRenderable(icon)}>
+            <OutlinedText>{icon}</OutlinedText>
+          </BlockRendererWithCondition>
         </CardContainer>
-      )}
+      </BlockRendererWithCondition>
       <RightSide>
         <Typo.Heading2>{title}</Typo.Heading2>
-        {DESCRIPTION && (
-          <p aria-label={parseText(description).accessibilityLabel}>
-            {parseText(description).processedText}
+        <BlockRendererWithCondition condition={isRenderable(description)}>
+          <p aria-label={parseText(description as string).accessibilityLabel}>
+            {parseText(description as string).processedText}
           </p>
-        )}
+        </BlockRendererWithCondition>
         <CtaLink
           href={ctaLink.URL}
           onClick={() =>

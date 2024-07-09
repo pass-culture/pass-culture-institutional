@@ -2,9 +2,11 @@ import React from 'react'
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { SimpleTextV2Props } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function SimpleTextV2(props: SimpleTextV2Props) {
@@ -15,7 +17,10 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
   }
   return (
     <Root data-testid="simple-text">
-      {title && <StyledHeading2>{title}</StyledHeading2>}
+      <BlockRendererWithCondition condition={isRenderable(title)}>
+        <StyledHeading2>{title as string}</StyledHeading2>
+      </BlockRendererWithCondition>
+
       <Content>
         <BlocksRenderer content={text} />
         {isRenderColumns() && (

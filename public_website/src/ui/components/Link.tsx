@@ -4,7 +4,9 @@ import NextLink from 'next/link'
 import { LinkProps } from '@/types/props'
 
 export function Link(props: LinkProps) {
-  const external = !props.href?.startsWith('/')
+  const { href } = props
+
+  const external = !href?.startsWith('/')
 
   return (
     <NextLink

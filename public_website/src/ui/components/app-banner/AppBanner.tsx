@@ -2,8 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { useOS } from '@/hooks/useOS'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { AppBannerProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function AppBanner(props: AppBannerProps) {
   const { title, androidUrl, defaultUrl, iosUrl, onClick } = props
@@ -19,11 +21,11 @@ export function AppBanner(props: AppBannerProps) {
   const url = setUrl()
 
   return (
-    url && (
-      <StyledAppBanner href={url} target="_blank" onClick={onClick}>
+    <BlockRendererWithCondition condition={isRenderable(url)}>
+      <StyledAppBanner href={url as string} target="_blank" onClick={onClick}>
         <p>{title}</p>
       </StyledAppBanner>
-    )
+    </BlockRendererWithCondition>
   )
 }
 

@@ -12,8 +12,8 @@ describe('isRenderable', () => {
   it('should return false for false', () => {
     expect(isRenderable(false)).toBe(false)
   })
-  it('should return false for 0', () => {
-    expect(isRenderable(0)).toBe(false)
+  it('should return true for 0', () => {
+    expect(isRenderable(0)).toBe(true)
   })
   it('should return false for NaN', () => {
     expect(isRenderable(NaN)).toBe(false)
@@ -33,7 +33,7 @@ describe('isRenderable', () => {
   it('should return true for true', () => {
     expect(isRenderable(true)).toBe(true)
   })
-  it('should return true for true', () => {
+  it('should return false for array length 0', () => {
     expect(isRenderable([].length > 0)).toBe(false)
   })
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { ImageTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -12,33 +13,34 @@ import { isRenderable } from '@/utils/isRenderable'
 export function ImageText(props: ImageTextProps) {
   const { title, text, image, icon, isImageRight = false } = props
 
-  const TITLE = title && isRenderable(title)
-  const ICON = icon && isRenderable(icon)
-  const IMAGE = image?.data && isRenderable(image?.data?.attributes?.url)
+  const image_props = image?.data?.attributes?.url
 
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledContentTextWrapper className="first">
-          {TITLE && <StyledHeading>{title}</StyledHeading>}
+          <BlockRendererWithCondition condition={isRenderable(title)}>
+            <StyledHeading>{title as string}</StyledHeading>
+          </BlockRendererWithCondition>
+
           <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"
           $imageOnRight={isImageRight}>
-          {IMAGE && (
+          <BlockRendererWithCondition condition={isRenderable(image_props)}>
             <ImageContainer $imageOnRight={isImageRight}>
               <StyledImage
-                src={getStrapiURL(image.data.attributes.url)}
+                src={getStrapiURL(image_props)}
                 alt={image?.data?.attributes?.alternativeText ?? ''}
               />
-              {ICON && (
+              <BlockRendererWithCondition condition={isRenderable(icon)}>
                 <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
                   {icon}
                 </StyledIcon>
-              )}
+              </BlockRendererWithCondition>
             </ImageContainer>
-          )}
+          </BlockRendererWithCondition>
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>

@@ -2,14 +2,19 @@ import React from 'react'
 
 import { AppBanner } from '../app-banner/AppBanner'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { BannerProps } from '@/types/props'
+import { isRenderable } from '@/utils/isRenderable'
 
 const HeaderBanner = (props: BannerProps) => {
   const { bannerText, bannerAndroidUrl, bannerDefaultUrl, bannerIosUrl } = props
 
   const isRenderBanner = (): boolean => {
-    if (bannerText && bannerAndroidUrl && bannerIosUrl) return true
-    return false
+    return (
+      isRenderable(bannerText) &&
+      isRenderable(bannerAndroidUrl) &&
+      isRenderable(bannerIosUrl)
+    )
   }
 
   const trackEvent = (): void => {
@@ -19,15 +24,17 @@ const HeaderBanner = (props: BannerProps) => {
     })
   }
 
-  return isRenderBanner() ? (
-    <AppBanner
-      title={bannerText}
-      androidUrl={bannerAndroidUrl}
-      iosUrl={bannerIosUrl}
-      defaultUrl={bannerDefaultUrl}
-      onClick={trackEvent}
-    />
-  ) : null
+  return (
+    <BlockRendererWithCondition condition={isRenderBanner()}>
+      <AppBanner
+        title={bannerText}
+        androidUrl={bannerAndroidUrl}
+        iosUrl={bannerIosUrl}
+        defaultUrl={bannerDefaultUrl}
+        onClick={trackEvent}
+      />
+    </BlockRendererWithCondition>
+  )
 }
 
 export default HeaderBanner

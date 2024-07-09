@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { LatestEventsProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { EventCard } from '@/ui/components/event-card/EventCard'
@@ -16,6 +17,11 @@ export function EventListItems(props: LatestEventsProps) {
       Math.min(prevVisibleItems + 2, events.length)
     )
   }
+
+  const isMoreButton = (): boolean => {
+    return visibleItems < events.length
+  }
+
   return (
     <Root className={className}>
       <StyledList>
@@ -39,9 +45,9 @@ export function EventListItems(props: LatestEventsProps) {
             </li>
           ))}
       </StyledList>
-      {visibleItems < events.length && (
+      <BlockRendererWithCondition condition={isMoreButton()}>
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
-      )}
+      </BlockRendererWithCondition>
     </Root>
   )
 }

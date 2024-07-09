@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { stringify } from 'querystring'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { CTA } from '@/types/CTA'
 import { LatestNewsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -10,6 +12,7 @@ import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function LatestNews(props: LatestNewsProps) {
   const { title, news, cta, className } = props
@@ -19,7 +22,7 @@ export function LatestNews(props: LatestNewsProps) {
     | null
   >(null)
 
-  const [isModule, setIsModule] = useState(true)
+  const [isModule, setIsModule] = useState<boolean>(true)
   useEffect(() => {
     const fetchLatestStudies = async () => {
       if (!news) {
@@ -78,7 +81,9 @@ export function LatestNews(props: LatestNewsProps) {
       </ListWrapper>
 
       <ContentWrapper $noMargin>
-        {cta && <ButtonWithCTA cta={cta} />}
+        <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
+          <ButtonWithCTA cta={cta as CTA} />
+        </BlockRendererWithCondition>
       </ContentWrapper>
     </Root>
   )

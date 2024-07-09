@@ -27,7 +27,7 @@ export function Footer(props: FooterProps) {
               title={bannerText}
               androidUrl={AppStoreUrl}
               iosUrl={PlayStoreUrl}
-              onClick={() =>
+              onClick={(): void =>
                 onClickAnalytics({
                   eventName: 'downloadApp',
                   eventOrigin: 'footer',

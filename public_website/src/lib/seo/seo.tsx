@@ -10,48 +10,48 @@ import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export function Seo(props: SeoProps) {
   const { metaData } = props
-  const META_TITLE = metaData?.metaTitle && isRenderable(metaData?.metaTitle)
-  const META_DESCRIPTION =
+  const meta_title = metaData?.metaTitle && isRenderable(metaData?.metaTitle)
+  const meta_description =
     metaData?.metaDescription && isRenderable(metaData?.metaDescription)
-  const META_ROBOTS = metaData?.metaRobots && isRenderable(metaData?.metaRobots)
-  const STRUCTURE_DATA =
+  const meta_robots = metaData?.metaRobots && isRenderable(metaData?.metaRobots)
+  const structure_data =
     metaData?.structuredData &&
     isRenderable(JSON.stringify(metaData?.structuredData))
-  const META_VIEWPORT =
+  const meta_viewport =
     metaData?.metaViewport && isRenderable(metaData?.metaViewport)
-  const KEYWORDS = metaData?.keywords && isRenderable(metaData?.keywords)
-  const METASOCIAL = metaData?.metaSocial
-  const CANONICA_URL =
+  const keywords = metaData?.keywords && isRenderable(metaData?.keywords)
+  const meta_social = metaData?.metaSocial
+  const canonica_url =
     metaData?.canonicalURL && isRenderable(metaData?.canonicalURL)
-  const PATH = usePathname()
+  const path = usePathname()
 
   const setCanonicaURL = (): string => {
-    if (CANONICA_URL && metaData?.canonicalURL) {
+    if (canonica_url && metaData?.canonicalURL) {
       return metaData.canonicalURL
     }
-    return process.env['NEXT_PUBLIC_APP_URL'] + PATH
+    return process.env['NEXT_PUBLIC_APP_URL'] + path
   }
 
   return (
     <React.Fragment>
       <Head>
-        {META_TITLE && <title>{metaData.metaTitle}</title>}
-        {META_DESCRIPTION && (
+        {meta_title && <title>{metaData.metaTitle}</title>}
+        {meta_description && (
           <meta name="description" content={metaData.metaDescription} />
         )}
-        {META_ROBOTS && <meta name="robots" content={metaData.metaRobots} />}
-        {STRUCTURE_DATA && (
+        {meta_robots && <meta name="robots" content={metaData.metaRobots} />}
+        {structure_data && (
           <script type="application/ld+json">
             {JSON.stringify(metaData.structuredData)}
           </script>
         )}
-        {META_VIEWPORT && (
+        {meta_viewport && (
           <meta name="viewport" content={metaData.metaViewport} />
         )}
-        {KEYWORDS && <meta name="keywords" content={metaData.keywords} />}
+        {keywords && <meta name="keywords" content={metaData.keywords} />}
         <link rel="canonical" href={setCanonicaURL()} />
       </Head>
-      {METASOCIAL?.map((social) => (
+      {meta_social?.map((social) => (
         <React.Fragment key={social.title}>
           {isStringAreEquals(social.socialNetwork, 'Facebook') && (
             <FacebookMeta

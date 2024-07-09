@@ -14,7 +14,7 @@ export function FooterMobileList(props: FooterListProps) {
         <ChevronDown />
       </summary>
       <ul>
-        {listItems.map((anchor) => {
+        {listItems?.map((anchor) => {
           return (
             <li key={anchor.Label}>
               <Link href={anchor.URL}>{anchor.Label}</Link>

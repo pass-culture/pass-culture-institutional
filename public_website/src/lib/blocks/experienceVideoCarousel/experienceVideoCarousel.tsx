@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components'
 
 import { ExperienceVideoCarouselSlide } from './experieneVideoCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
 import { ExperienceVideoCarouselProps } from '@/types/props'
@@ -97,7 +98,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
         step={1}>
         <StyledHeading>
           <StyledHeading2>{title}</StyledHeading2>
-          {isNavShowing() && (
+          <BlockRendererWithCondition condition={isNavShowing()}>
             <StyledNavigationButtons aria-label="Contrôles du carousel">
               <ButtonBack
                 onClick={handleExperienceVideoNavigationButtonClick}
@@ -110,7 +111,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
                 <ArrowRight />
               </ButtonNext>
             </StyledNavigationButtons>
-          )}
+          </BlockRendererWithCondition>
         </StyledHeading>
 
         <StyledSlider
@@ -129,7 +130,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
           })}
         </StyledSlider>
 
-        {isNavShowing() && (
+        <BlockRendererWithCondition condition={isNavShowing()}>
           <StyledDots aria-label="Contrôles du carousel">
             {items?.map((item, index) => {
               return (
@@ -144,7 +145,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
               )
             })}
           </StyledDots>
-        )}
+        </BlockRendererWithCondition>
       </CarouselProvider>
     </ContentWrapper>
   )

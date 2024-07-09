@@ -11,6 +11,7 @@ import styled, { css } from 'styled-components'
 
 import { OffersCarouselSlide } from './offersCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { OffersVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -18,6 +19,7 @@ import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
+import { isRenderable } from '@/utils/isRenderable'
 import { stripTags } from '@/utils/stripTags'
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
@@ -95,7 +97,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
         {!descriptionIsEmpty && <BlocksRenderer content={description} />}
 
         <StyledArrowButtonWrapper>
-          {isNavShowing() && (
+          <BlockRendererWithCondition condition={isNavShowing()}>
             <StyledNavigationButtons aria-label="Contrôles du carousel">
               <ButtonBack
                 onClick={handleExperienceVideoNavigationButtonClick}
@@ -108,12 +110,12 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
                 <ArrowRight />
               </ButtonNext>
             </StyledNavigationButtons>
-          )}
-          {cta && (
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
             <CtaLink href={cta.URL}>
               <span>{cta.Label}</span>
             </CtaLink>
-          )}
+          </BlockRendererWithCondition>
         </StyledArrowButtonWrapper>
       </StyledHeading>
 

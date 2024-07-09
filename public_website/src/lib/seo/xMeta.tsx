@@ -7,7 +7,7 @@ import { isRenderable } from '@/utils/isRenderable'
 
 export function XMeta(props: XMetaProps & BaseTextProps) {
   const { title, description, image } = props
-  const URL = isRenderable(image?.data.attributes.url)
+  const url = isRenderable(image?.data.attributes.url)
   return (
     <Head>
       <meta key="twitter:title" property="twitter:title" content={title} />
@@ -17,7 +17,7 @@ export function XMeta(props: XMetaProps & BaseTextProps) {
         property="twitter:description"
         content={description}
       />
-      {image && URL && (
+      {image && url && (
         <meta
           property="twitter:image"
           content={getStrapiURL(image.data.attributes.url)}

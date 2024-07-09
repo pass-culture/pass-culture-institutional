@@ -9,6 +9,7 @@ import styled, { css } from 'styled-components'
 
 import { LogoCarouselSlide } from './logoCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
 import { LogoCarouselProps } from '@/types/props'
@@ -94,7 +95,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
         })}
       </StyledSlider>
 
-      {isNavShowing() && (
+      <BlockRendererWithCondition condition={isNavShowing()}>
         <StyledHeading>
           <StyledNavigationButtons aria-label="Contrôles du carousel">
             <ButtonBack
@@ -109,8 +110,6 @@ export function LogoCarousel(props: LogoCarouselProps) {
             </ButtonNext>
           </StyledNavigationButtons>
         </StyledHeading>
-      )}
-      {isNavShowing() && (
         <StyledDots aria-label="Contrôles du carousel">
           {items?.map((item, index) => {
             return (
@@ -127,7 +126,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
             )
           })}
         </StyledDots>
-      )}
+      </BlockRendererWithCondition>
     </CarouselProvider>
   )
 }
