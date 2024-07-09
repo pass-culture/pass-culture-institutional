@@ -11,6 +11,7 @@ import { CTA } from '@/types/CTA'
 import { ListCardProps } from '@/types/props'
 import { convertTime } from '@/utils/convertTime'
 import { formatDate } from '@/utils/formatDate'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function EventCard(
   props: Omit<
@@ -35,6 +36,21 @@ export function EventCard(
     type,
   } = props
 
+  const IMAGE_URL = imageUrl && isRenderable(imageUrl)
+  const TYPE = type && isRenderable(type)
+
+  const renderCTA = () => {
+    if (TYPE)
+      return (
+        <CtaLink href={cta.URL} target="_blank">
+          <TargetBlank />
+          {cta.Label}
+        </CtaLink>
+      )
+
+    return <CtaLink href={cta.URL}>{cta.Label}</CtaLink>
+  }
+
   return (
     <Root>
       <StyledContentWrapper>
@@ -55,17 +71,10 @@ export function EventCard(
             <Clock /> {convertTime(startTime)}
           </p>
         </StyledTimeWrapper>
-        {type
-          ? cta?.URL && (
-              <CtaLink href={cta.URL} target="_blank">
-                <TargetBlank />
-                {cta.Label}
-              </CtaLink>
-            )
-          : cta?.URL && <CtaLink href={cta.URL}>{cta.Label}</CtaLink>}
+        {renderCTA()}
       </StyledContentWrapper>
 
-      {imageUrl && (
+      {IMAGE_URL && (
         <StyledCardImage
           src={imageUrl}
           alt=""

@@ -22,7 +22,6 @@ const TabSimpleText = (props: TabSimpleTextProps) => {
     const tabToSelect =
       selectedTab === lastTabInRound ? firstTabInRound : nextTab
     setSelectedTab(tabToSelect)
-    // tabValues[tabToSelect].ref.current.focus()
   }
   const handleKeyPress = (event: { key: string }): void => {
     const tabCount = Object.keys(tab).length

@@ -4,15 +4,8 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import { ExperienceVideoCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
-
-export type ExperienceVideoCarouselSlideProps = {
-  slideIndex: number
-  title: string
-  description: string
-  url?: string
-  isLandscape?: boolean
-}
 
 export function ExperienceVideoCarouselSlide(
   props: ExperienceVideoCarouselSlideProps

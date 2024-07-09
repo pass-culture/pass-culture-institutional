@@ -4,15 +4,16 @@ import styled, { css } from 'styled-components'
 import { AccountItem } from './AccountItem'
 import { AccountDropdownProps } from '@/types/props'
 
-export function AccountDropdown({
-  items,
-  openButtonElement,
-  labelId,
-  align,
-  onKeyDown,
-  onBlur,
-  onMouseLeave,
-}: AccountDropdownProps) {
+export function AccountDropdown(props: AccountDropdownProps) {
+  const {
+    items,
+    openButtonElement,
+    labelId,
+    align,
+    onKeyDown,
+    onBlur,
+    onMouseLeave,
+  } = props
   const accountDropdownRef = useRef<HTMLDivElement | null>(null)
 
   function onEscape(e: KeyboardEvent) {

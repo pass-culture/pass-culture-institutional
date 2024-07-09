@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import {
   ButtonBack,
   ButtonNext,
@@ -9,13 +9,10 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  OffersCarouselSlide,
-  OffersCarouselSlideProps,
-} from './offersCarouselSlide'
+import { OffersCarouselSlide } from './offersCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
-import { CTA } from '@/types/CTA'
+import { OffersVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Link } from '@/ui/components/Link'
@@ -23,19 +20,9 @@ import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type OffersVideoCarouselProps = {
-  title: string
-  items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
-  description?: BlocksContent
-  cta: CTA
-}
 const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
-export function OffersCarousel({
-  title,
-  items,
-  cta,
-  description,
-}: OffersVideoCarouselProps) {
+export function OffersCarousel(props: OffersVideoCarouselProps) {
+  const { title, items, cta, description } = props
   const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -46,8 +33,7 @@ export function OffersCarousel({
   const visibleSlides = width < MEDIA_QUERY ? 1 : 3.2
 
   const isNavShowing = (): boolean => {
-    if (TOTAL_SLIDES > visibleSlides) return true
-    return false
+    return TOTAL_SLIDES > visibleSlides
   }
 
   useEffect(() => {

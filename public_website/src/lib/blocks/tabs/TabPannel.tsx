@@ -27,9 +27,6 @@ const StyledTabPanelSection = styled.section<{
   $isHidden?: boolean
 }>`
   margin: 0.5rem;
-  // border: none;
-  // border-bottom: 0.25rem solid red;
-  // font-size: 1.5rem;
   cursor: pointer;
   ${(p) => (p.$isHidden ? 'display:none' : 'display:block')}
 `

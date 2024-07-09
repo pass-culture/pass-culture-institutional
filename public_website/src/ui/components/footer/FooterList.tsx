@@ -1,16 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { CTA } from '@/types/CTA'
+import { FooterListProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
 
-export type FooterListProps = {
-  title: string
-  listItems: CTA[]
-}
-
-export function FooterList({ title, listItems }: FooterListProps) {
+export function FooterList(props: FooterListProps) {
+  const { title, listItems } = props
   return (
     <StyledFooterList>
       <h3>{title}</h3>

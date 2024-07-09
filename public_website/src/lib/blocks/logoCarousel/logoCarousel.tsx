@@ -11,18 +11,15 @@ import { LogoCarouselSlide } from './logoCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
-import { APIResponse } from '@/types/strapi'
+import { LogoCarouselProps } from '@/types/props'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type LogoCarouselProps = {
-  items: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
-}
-
 const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function LogoCarousel({ items }: LogoCarouselProps) {
+export function LogoCarousel(props: LogoCarouselProps) {
+  const { items } = props
   const LOGO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     'title'
   )}"]`
@@ -55,8 +52,7 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
   }
 
   const isNavShowing = (): boolean => {
-    if (TOTAL_SLIDES > visibleSlides) return true
-    return false
+    return TOTAL_SLIDES > visibleSlides
   }
 
   function handleNavigationButtonClick() {

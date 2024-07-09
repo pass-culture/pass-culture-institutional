@@ -2,13 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { LogoCarousel } from './logoCarousel/logoCarousel'
-import { APIResponse } from '@/types/strapi'
+import { LogoProps } from '@/types/props'
 
-type LogoProps = {
-  logo: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
-}
+export function Logos(props: LogoProps) {
+  const { logo } = props
 
-export function Logos({ logo }: LogoProps) {
   return (
     <Root>
       <LogoCarousel items={logo} />

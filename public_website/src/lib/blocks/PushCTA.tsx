@@ -9,6 +9,7 @@ import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function PushCTA(props: PushCTAProps & QRCodeProps) {
@@ -23,32 +24,35 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
     image,
     qrCodeUrl,
   } = props
+
+  const IMAGE =
+    image?.data?.attributes?.url && isRenderable(image?.data?.attributes?.url)
+  const ICON = icon && isRenderable(icon)
+  const DESCRIPTION = description && isRenderable(description)
   return (
     <Root className={className}>
-      <CardContainer>
-        <Card
-          $imageUrl={
-            image?.data?.attributes?.url &&
-            getStrapiURL(image?.data?.attributes?.url)
-          }>
-          <QRCodeCard>
-            <QrCode
-              text={qrCodeUrl}
-              options={{
-                width: 100,
-                margin: 2,
-                color: { dark: theme.colors.secondary },
-              }}
-            />
-            <p>{qrCodeDescription}</p>
-          </QRCodeCard>
-        </Card>
-        <BackgroundLayer />
-        <OutlinedText>{icon}</OutlinedText>
-      </CardContainer>
+      {IMAGE && (
+        <CardContainer>
+          <Card $imageUrl={getStrapiURL(image.data.attributes.url)}>
+            <QRCodeCard>
+              <QrCode
+                text={qrCodeUrl}
+                options={{
+                  width: 100,
+                  margin: 2,
+                  color: { dark: theme.colors.secondary },
+                }}
+              />
+              <p>{qrCodeDescription}</p>
+            </QRCodeCard>
+          </Card>
+          <BackgroundLayer />
+          {ICON && <OutlinedText>{icon}</OutlinedText>}
+        </CardContainer>
+      )}
       <RightSide>
         <Typo.Heading2>{title}</Typo.Heading2>
-        {description && (
+        {DESCRIPTION && (
           <p aria-label={parseText(description).accessibilityLabel}>
             {parseText(description).processedText}
           </p>

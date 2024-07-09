@@ -1,22 +1,24 @@
+import React, { AnchorHTMLAttributes, ReactNode } from 'react'
 import { type BlocksContent } from '@strapi/blocks-react-renderer'
 import { AppProps } from 'next/app'
+import { LinkProps as NextLinkProps } from 'next/link'
 
 import { CTA } from './CTA'
 import { Offer } from './playlist'
 import { APIResponse, APIResponseData } from './strapi'
-import { ExperienceVideoCarouselSlideProps } from '@/lib/blocks/experienceVideoCarousel/experieneVideoCarouselSlide'
 import { PiledCardItemsTheme } from '@/lib/blocks/PiledCards/piled-card-items-theme'
-import { FooterProps } from '@/ui/components/footer/Footer'
 
 export type BaseTextProps = {
   title: string
   description: string
 }
-
+export type BaseTextWithOptionTitleProps = {
+  title?: string
+  description: string
+}
 export type XMetaProps = {
   image: APIResponse<'plugin::upload.file'> | null | undefined
 }
-
 export type SeoProps = {
   metaData: APIResponseData<'api::page.page'>['attributes']['seo'] | null
 }
@@ -186,7 +188,75 @@ export type ExperienceVideoCarouselProps = {
   isLandscape?: boolean
   carouselItems: Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
 }
+export type ExperienceVideoCarouselSlideProps = {
+  slideIndex: number
+  title: string
+  description: string
+  url?: string
+  isLandscape?: boolean
+}
 
+export type KeyNumberCarouselProps = {
+  title: string
+  items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
+}
+export type KeyNumberCarouselSlideProps = {
+  slideIndex: number
+  title: string
+  description: string
+  firstEmoji: string
+  secondEmoji: string
+  thirdEmoji: string
+}
+
+export type KeyNumberProps = {
+  title: string
+  items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
+}
+
+export type LogoCarouselProps = {
+  items: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
+}
+export type LogoCarouselSlideProps = {
+  slideIndex: number
+  image: APIResponse<'plugin::upload.file'> | undefined | null
+}
+
+export type OffersVideoCarouselProps = {
+  title: string
+  items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
+  description?: BlocksContent
+  cta: CTA
+}
+export type OffersCarouselSlideTheme =
+  | 'purple'
+  | 'yellow'
+  | 'magenta'
+  | 'orange'
+  | 'green'
+
+export type OffersCarouselSlideProps = {
+  slideIndex: number
+  title: string
+  surtitle: string
+  firstIcon: string
+  secondIcon: string
+  text: string
+  theme: OffersCarouselSlideTheme
+}
+export type VerticalCarouselProps = {
+  title: string
+  items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
+  hidePlayIcon?: boolean
+}
+export type VerticalCarouselSlideProps = {
+  slideIndex: number
+  image: string | { data: APIResponseData<'plugin::upload.file'> | null } | null
+  title: string
+  description: string
+  url: string
+  hidePlayIcon?: boolean
+}
 export type ListProps = {
   offerListe: APIResponseData<'api::liste-offre.liste-offre'>
   offerItems: Offer[]
@@ -241,11 +311,19 @@ export type DetailedLogosProps = {
   }[]
 }
 
-export type LatestNewsProps = {
+export type LatestEventsProps = {
   events: APIResponseData<'api::event.event'>[]
   className?: string
   buttonText?: string
   type?: string
+}
+export type LatestNewsProps = {
+  title: string
+  news:
+    | APIResponseData<'api::news.news'>[]
+    | APIResponseData<'api::resource.resource'>[]
+  cta?: CTA
+  className?: string
 }
 export type OrganizationChartProps = {
   title?: string
@@ -307,4 +385,88 @@ export type NewsCardProps = {
 
 export type WhiteSpaceProps = {
   space?: number
+}
+export type LogoProps = {
+  logo: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
+}
+export type AppBannerProps = {
+  title?: string
+  androidUrl?: string
+  defaultUrl?: string
+  iosUrl?: string
+  onClick?: () => void
+}
+export type FooterProps = {
+  PlayStoreUrl: string
+  AppStoreUrl: string
+  bannerText: string
+  LegalLinks: { Label: string; URL: string; id: number }[]
+  Lists: {
+    id: number
+    Title: string
+    Links: CTA[]
+  }[]
+}
+export type FooterListProps = {
+  title: string
+  listItems: CTA[]
+}
+
+export type MobileMenuAccountSubPanelProps = {
+  items: AccountItemDropdownProps[]
+}
+export type MobileMenuListSubPanelProps = {
+  primaryList: CTA[]
+  secondaryList: CTA[]
+  cardTitle: string
+  cardDescription: string
+  cardLink: CTA
+  cardFirstEmoji: string
+  cardSecondEmoji: string
+}
+export type MobileMenuSubPanelProps = {
+  onClose: () => void
+  title: string
+  children: React.ReactNode
+}
+
+export type ButtonProps = {
+  href: string
+  target?: '_blank'
+  text: string
+}
+
+export type EligibilityProps = {
+  title: string
+  items: { title: string; description: string; emoji: string }[]
+  cardTitle: string
+  cardDescription: string
+  cardCta: CTA
+  cardFirstEmoji: string
+  cardSecondEmoji: string
+}
+
+export type LinkProps = {
+  href: string
+  children?: ReactNode
+} & NextLinkProps &
+  AnchorHTMLAttributes<HTMLAnchorElement>
+
+export type ImageProps = {
+  description?: string
+  image: APIResponse<'plugin::upload.file'>
+  alt: string
+}
+
+type ContentItem = {
+  id: number
+  text: string
+  description: string | null
+  firstEmoji: string
+  secondEmoji: string
+}
+export type LittleListProps = {
+  title?: string
+  description?: string
+  content?: ContentItem[]
 }

@@ -32,7 +32,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     buttonText,
     separator,
     aide,
-    socialMediaSection = [],
+    socialMediaSection,
     filtres,
   } = listejeune.attributes
 
@@ -92,7 +92,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation])
 
-  const hasData = data.length
+  const hasData = data.length > 0
 
   return (
     <React.Fragment>
@@ -119,7 +119,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       )}
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
+      {socialMediaSection && (
+        <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
+      )}
     </React.Fragment>
   )
 }

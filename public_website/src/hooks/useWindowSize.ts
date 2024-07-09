@@ -21,7 +21,7 @@ export const useWindowSize = (
   })
   const debouncedSetWindowSize = useDebounceCallback(
     setWindowSize,
-    options.debounceDelay as number
+    options.debounceDelay ?? 0
   )
   const handleSize = (): void => {
     const setSize = options.debounceDelay

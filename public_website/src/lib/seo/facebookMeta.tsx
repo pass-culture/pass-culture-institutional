@@ -3,21 +3,26 @@ import Head from 'next/head'
 
 import { BaseTextProps, FacebookMetaProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function FacebookMeta(props: FacebookMetaProps & BaseTextProps) {
+  const { title, description, image } = props
+  const URL = isRenderable(image?.data.attributes.url)
   return (
     <Head>
-      <meta key="og:title" property="og:title" content={props.title} />
+      <meta key="og:title" property="og:title" content={title} />
       <meta
         key="og:description"
         property="og:description"
-        content={props.description}
+        content={description}
       />
-      <meta
-        key="og:image"
-        property="og:image"
-        content={getStrapiURL(props.image?.data.attributes.url)}
-      />
+      {image && URL && (
+        <meta
+          key="og:image"
+          property="og:image"
+          content={getStrapiURL(image.data.attributes.url)}
+        />
+      )}
     </Head>
   )
 }

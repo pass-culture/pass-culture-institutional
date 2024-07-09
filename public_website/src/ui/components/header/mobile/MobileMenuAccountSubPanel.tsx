@@ -2,15 +2,12 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AccountItem } from '../AccountItem'
-import { AccountItemDropdownProps } from '@/types/props'
+import { MobileMenuAccountSubPanelProps } from '@/types/props'
 
-type MobileMenuAccountSubPanelProps = {
-  items: AccountItemDropdownProps[]
-}
-
-export function MobileMenuAccountSubPanel({
-  items,
-}: MobileMenuAccountSubPanelProps) {
+export function MobileMenuAccountSubPanel(
+  props: MobileMenuAccountSubPanelProps
+) {
+  const { items } = props
   // Focus list on mount
   const accountListRef = useRef<HTMLUListElement>(null)
 

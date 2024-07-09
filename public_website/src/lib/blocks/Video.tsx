@@ -4,10 +4,15 @@ import styled, { css } from 'styled-components'
 
 import { VideoProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function Video(props: VideoProps) {
   const { description, url, alt } = props
   const [isMounted, setIsMounted] = useState<boolean>(false)
+
+  const renderVideo = (): boolean => {
+    return isMounted && isRenderable(url)
+  }
 
   useEffect(() => {
     setIsMounted(true)
@@ -16,7 +21,7 @@ export function Video(props: VideoProps) {
   return (
     <ContentWrapper>
       <Root suppressHydrationWarning $noMargin>
-        {isMounted && url && (
+        {renderVideo() && (
           <StyledVideo
             url={url}
             width="100%"
@@ -25,7 +30,7 @@ export function Video(props: VideoProps) {
             alt={alt}
           />
         )}
-        {description && <Description>{description}</Description>}
+        {isRenderable(description) && <Description>{description}</Description>}
       </Root>
     </ContentWrapper>
   )

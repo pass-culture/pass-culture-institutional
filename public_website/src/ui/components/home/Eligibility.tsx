@@ -4,28 +4,19 @@ import styled, { css } from 'styled-components'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { CTA } from '@/types/CTA'
+import { EligibilityProps } from '@/types/props'
 import { parseText } from '@/utils/parseText'
 
-type EligibilityProps = {
-  title: string
-  items: { title: string; description: string; emoji: string }[]
-  cardTitle: string
-  cardDescription: string
-  cardCta: CTA
-  cardFirstEmoji: string
-  cardSecondEmoji: string
-}
-
-export function Eligibility({
-  title,
-  items,
-  cardTitle,
-  cardDescription,
-  cardCta,
-  cardFirstEmoji,
-  cardSecondEmoji,
-}: EligibilityProps) {
+export function Eligibility(props: EligibilityProps) {
+  const {
+    title,
+    items,
+    cardTitle,
+    cardDescription,
+    cardCta,
+    cardFirstEmoji,
+    cardSecondEmoji,
+  } = props
   return (
     <Root>
       <StyledCard>

@@ -5,16 +5,17 @@ import styled, { css } from 'styled-components'
 import { OrganizationChartProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function OrganizationChart(props: OrganizationChartProps) {
   const { title, description, people } = props
-
+  const TITLE = title && isRenderable(title)
   return (
     <ContentWrapper>
-      {title && <StyledHeading>{title}</StyledHeading>}
+      {TITLE && <StyledHeading>{title}</StyledHeading>}
       <StyledDescription>{description}</StyledDescription>
       <StyledList>
-        {people.map((person) => {
+        {people?.map((person) => {
           return (
             <StyledPerson key={person.name}>
               {person.image && (

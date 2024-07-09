@@ -3,29 +3,14 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { APIResponseData } from '@/types/strapi'
+import { VerticalCarouselSlideProps } from '@/types/props'
 import { Play } from '@/ui/components/icons/Play'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export type VerticalCarouselSlideProps = {
-  slideIndex: number
-  image: string | { data: APIResponseData<'plugin::upload.file'> | null } | null
-  title: string
-  description: string
-  url: string
-  hidePlayIcon?: boolean
-}
-
-export function VerticalCarouselSlide({
-  slideIndex,
-  image,
-  title,
-  description,
-  url,
-  hidePlayIcon,
-}: VerticalCarouselSlideProps) {
+export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
+  const { slideIndex, image, title, description, url, hidePlayIcon } = props
   const imageUrl =
     typeof image === 'string' ? image : image?.data?.attributes?.url
 

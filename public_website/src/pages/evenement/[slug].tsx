@@ -21,7 +21,7 @@ export default function CustomPage(props: CustomPageProps) {
   const { related } = props
 
   const hasEvents = (): boolean => {
-    return related && related.length > 0
+    return related?.length > 0
   }
 
   return (

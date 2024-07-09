@@ -3,35 +3,16 @@ import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { theme } from '@/theme/theme'
+import {
+  OffersCarouselSlideProps,
+  OffersCarouselSlideTheme,
+} from '@/types/props'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { parseText } from '@/utils/parseText'
 
-type OffersCarouselSlideTheme =
-  | 'purple'
-  | 'yellow'
-  | 'magenta'
-  | 'orange'
-  | 'green'
-
-export type OffersCarouselSlideProps = {
-  slideIndex: number
-  title: string
-  surtitle: string
-  firstIcon: string
-  secondIcon: string
-  text: string
-  theme: OffersCarouselSlideTheme
-}
-
-export function OffersCarouselSlide({
-  slideIndex,
-  title,
-  surtitle,
-  firstIcon,
-  secondIcon,
-  text,
-  theme,
-}: OffersCarouselSlideProps) {
+export function OffersCarouselSlide(props: OffersCarouselSlideProps) {
+  const { slideIndex, title, surtitle, firstIcon, secondIcon, text, theme } =
+    props
   return (
     <Root
       index={slideIndex}

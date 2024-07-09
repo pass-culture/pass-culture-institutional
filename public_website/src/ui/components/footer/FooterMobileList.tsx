@@ -3,9 +3,10 @@ import styled, { css } from 'styled-components'
 
 import { ChevronDown } from '../icons/ChevronDown'
 import { Link } from '../Link'
-import { FooterListProps } from './FooterList'
+import { FooterListProps } from '@/types/props'
 
-export function FooterMobileList({ title, listItems }: FooterListProps) {
+export function FooterMobileList(props: FooterListProps) {
+  const { title, listItems } = props
   return (
     <StyledMobileFooterList>
       <summary>

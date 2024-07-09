@@ -51,7 +51,7 @@ export function SocialMedia(props: SocialMediaProps) {
 
   return (
     <ContentWrapper className={className}>
-      {title && <StyledHeading>{title}</StyledHeading>}
+      <StyledHeading {...{ accessibilityLabel: title }}>{title}</StyledHeading>
       <Lists>
         {renderFirstRow(firstRow)}
         {renderFirstRow(secondRow)}

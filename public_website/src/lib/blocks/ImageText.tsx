@@ -7,31 +7,38 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function ImageText(props: ImageTextProps) {
-  const { title, text, image, icon, isImageRight } = props
+  const { title, text, image, icon, isImageRight = false } = props
+
+  const TITLE = title && isRenderable(title)
+  const ICON = icon && isRenderable(icon)
+  const IMAGE = image?.data && isRenderable(image?.data?.attributes?.url)
 
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledContentTextWrapper className="first">
-          {title && <StyledHeading>{title}</StyledHeading>}
-          {text && <BlocksRenderer content={text} />}
+          {TITLE && <StyledHeading>{title}</StyledHeading>}
+          <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"
           $imageOnRight={isImageRight}>
-          <ImageContainer $imageOnRight={isImageRight}>
-            <StyledImage
-              src={getStrapiURL(image?.data?.attributes?.url)}
-              alt={image?.data?.attributes?.alternativeText || ''}
-            />
-            {icon && (
-              <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
-                {icon}
-              </StyledIcon>
-            )}
-          </ImageContainer>
+          {IMAGE && (
+            <ImageContainer $imageOnRight={isImageRight}>
+              <StyledImage
+                src={getStrapiURL(image.data.attributes.url)}
+                alt={image?.data?.attributes?.alternativeText ?? ''}
+              />
+              {ICON && (
+                <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+                  {icon}
+                </StyledIcon>
+              )}
+            </ImageContainer>
+          )}
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>

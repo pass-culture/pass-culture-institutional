@@ -2,26 +2,19 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { KeyNumberCarouselSlideProps } from '@/types/props'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
-export type KeyNumberCarouselSlideProps = {
-  slideIndex: number
-  title: string
-  description: string
-  firstEmoji: string
-  secondEmoji: string
-  thirdEmoji: string
-}
-
-export function KeyNumberCarouselSlide({
-  slideIndex,
-  title,
-  description,
-  firstEmoji,
-  secondEmoji,
-  thirdEmoji,
-}: KeyNumberCarouselSlideProps) {
+export function KeyNumberCarouselSlide(props: KeyNumberCarouselSlideProps) {
+  const {
+    slideIndex,
+    title,
+    description,
+    firstEmoji,
+    secondEmoji,
+    thirdEmoji,
+  } = props
   return (
     <Root
       index={slideIndex}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { LatestNewsProps } from '@/types/props'
+import { LatestEventsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
@@ -9,7 +9,7 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 
 export function ListItems(
   props: Omit<
-    LatestNewsProps & {
+    LatestEventsProps & {
       type: string
       news:
         | APIResponseData<'api::news.news'>[]
@@ -49,7 +49,7 @@ export function ListItems(
           </li>
         ))}
       </StyledList>
-      {isVisible() && (
+      {isVisible() && buttonText && (
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
       )}
     </Root>

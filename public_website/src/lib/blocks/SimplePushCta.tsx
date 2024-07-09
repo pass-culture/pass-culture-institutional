@@ -7,6 +7,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 const SimplePushCtaTitle = (props: { title: string }) => {
@@ -42,19 +43,23 @@ const SimplePushCtaCard = (props: { url: string }) => {
 export function SimplePushCta(props: PushCTAProps) {
   const { className, surtitle, title, cta, image, icon } = props
 
+  const SUR_TITLE = surtitle && isRenderable(surtitle)
+  const TITLE = title && isRenderable(title)
+  const IMAGE =
+    image?.data?.attributes?.url && isRenderable(image?.data?.attributes?.url)
+  const ICON = icon && isRenderable(icon)
+
   return (
     <Root className={className}>
       <StyledContentWrapper $noMargin>
         <RightSide>
-          {surtitle && <SimplePushCtaSurTitle surtitle={surtitle} />}
-          {title && <SimplePushCtaTitle title={title} />}
+          {SUR_TITLE && <SimplePushCtaSurTitle surtitle={surtitle} />}
+          {TITLE && <SimplePushCtaTitle title={title} />}
           {cta && <SimplePushCtaLink {...cta} />}
         </RightSide>
         <CardContainer>
-          {image?.data?.attributes?.url && (
-            <SimplePushCtaCard {...image.data.attributes} />
-          )}
-          {icon && <OutlinedText>{icon}</OutlinedText>}
+          {IMAGE && <SimplePushCtaCard {...image.data.attributes} />}
+          {ICON && <OutlinedText>{icon}</OutlinedText>}
         </CardContainer>
       </StyledContentWrapper>
     </Root>

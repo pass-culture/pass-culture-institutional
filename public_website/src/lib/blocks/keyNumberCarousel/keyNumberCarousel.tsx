@@ -7,24 +7,19 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  KeyNumberCarouselSlide,
-  KeyNumberCarouselSlideProps,
-} from './keyNumberCarouselSlide'
+import { KeyNumberCarouselSlide } from './keyNumberCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
+import { KeyNumberCarouselProps } from '@/types/props'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type KeyNumberCarouselProps = {
-  title: string
-  items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
-}
 const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
-export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
+export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
+  const { title, items } = props
   const KEY_NUMBER_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -39,8 +34,7 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
 
   const isNavShowing = (): boolean => {
     const visibleKeySlides = getvisibleKeySlides()
-    if (TOTAL_SLIDES > visibleKeySlides) return true
-    return false
+    return TOTAL_SLIDES > visibleKeySlides
   }
 
   useEffect(() => {

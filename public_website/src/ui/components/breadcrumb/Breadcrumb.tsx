@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
@@ -34,12 +34,14 @@ export function Breadcrumb(props: BreadcrumbProps) {
       )
   )
 
-  const groupLinks = currentNavigationGroup
-    ? [
-        ...currentNavigationGroup.megaMenu.primaryListItems,
-        ...currentNavigationGroup.megaMenu.secondaryListItems,
-      ]
-    : []
+  const groupLinks = useMemo(() => {
+    return currentNavigationGroup
+      ? [
+          ...currentNavigationGroup.megaMenu.primaryListItems,
+          ...currentNavigationGroup.megaMenu.secondaryListItems,
+        ]
+      : []
+  }, [currentNavigationGroup])
 
   const currentLink = groupLinks.find(
     (l) => l.URL.trim().toLowerCase() === pathname.trim().toLowerCase()
@@ -52,6 +54,36 @@ export function Breadcrumb(props: BreadcrumbProps) {
   const openDropdown = (index: number): void => {
     setIsOpen(index)
   }
+
+  const memoizeUL = useMemo(() => {
+    return (
+      <ul ref={dropdownRef} className="select-dropdown">
+        {groupLinks.map((link) =>
+          link?.Label.trim() ? (
+            <span
+              aria-selected="false"
+              role="option"
+              aria-hidden="true"
+              tabIndex={-1}
+              key={link.Label}>
+              <li>
+                <Link
+                  href={link.URL}
+                  onClick={(): void =>
+                    onClickAnalytics({
+                      eventName: link.eventName,
+                      eventOrigin: link.eventOrigin,
+                    })
+                  }>
+                  <span>{link.Label.trim()}</span>
+                </Link>
+              </li>
+            </span>
+          ) : null
+        )}
+      </ul>
+    )
+  }, [groupLinks])
 
   useEffect(() => {
     setIsMounted(true)
@@ -100,31 +132,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
                     id="select-dropdown"
                     role="listbox"
                     aria-label="Liste URL">
-                    <ul ref={dropdownRef} className="select-dropdown">
-                      {groupLinks.map((link) =>
-                        link?.Label.trim() ? (
-                          <span
-                            aria-selected="false"
-                            role="option"
-                            aria-hidden="true"
-                            tabIndex={-1}
-                            key={link.Label}>
-                            <li>
-                              <Link
-                                href={link.URL}
-                                onClick={(): void =>
-                                  onClickAnalytics({
-                                    eventName: link.eventName,
-                                    eventOrigin: link.eventOrigin,
-                                  })
-                                }>
-                                <span>{link.Label.trim()}</span>
-                              </Link>
-                            </li>
-                          </span>
-                        ) : null
-                      )}
-                    </ul>
+                    {memoizeUL}
                   </span>
                 )}
               </CustomSelect>

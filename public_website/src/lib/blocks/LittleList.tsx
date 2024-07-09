@@ -3,24 +3,13 @@ import styled, { css } from 'styled-components'
 
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
+import { LittleListProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import arrowUrl from '@/ui/image/arrowd.svg'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 
-interface ContentItem {
-  id: number
-  text: string
-  description: string | null
-  firstEmoji: string
-  secondEmoji: string
-}
-interface LittleListProps {
-  title?: string
-  description?: string
-  content?: ContentItem[]
-}
 const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
 export function LittleList(props: LittleListProps) {
   const { title, description, content } = props
@@ -40,8 +29,7 @@ export function LittleList(props: LittleListProps) {
   }
 
   const isOpen = (index: number): boolean => {
-    if (collectionRefsOpened.includes(index)) return true
-    return false
+    return collectionRefsOpened.includes(index)
   }
 
   const isMobile = width <= MEDIA_QUERY

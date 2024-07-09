@@ -31,24 +31,28 @@ export function DoublePushCTA(
 
   return (
     <StyledContentWrapper>
-      <MobileImage
-        src={
-          image?.data?.attributes?.url &&
-          getStrapiURL(image?.data?.attributes?.url)
-        }
-        alt=""
-      />
+      {image?.data?.attributes?.url && (
+        <MobileImage
+          src={
+            image?.data?.attributes?.url &&
+            getStrapiURL(image.data.attributes.url)
+          }
+          alt=""
+        />
+      )}
       <Root className={className}>
-        <CardContainer>
-          <Card
-            $imageUrl={
-              image?.data?.attributes?.url &&
-              getStrapiURL(image?.data?.attributes?.url)
-            }
-          />
+        {image?.data?.attributes?.url && (
+          <CardContainer>
+            <Card
+              $imageUrl={
+                image?.data?.attributes?.url &&
+                getStrapiURL(image.data.attributes.url)
+              }
+            />
 
-          <OutlinedText shadow>{icon}</OutlinedText>
-        </CardContainer>
+            <OutlinedText shadow>{icon}</OutlinedText>
+          </CardContainer>
+        )}
         <RightSide>
           {title && <Typo.Heading2>{title}</Typo.Heading2>}
           {text && (
@@ -90,7 +94,6 @@ export function DoublePushCTA(
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
-  // Offset for protruding image
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
 

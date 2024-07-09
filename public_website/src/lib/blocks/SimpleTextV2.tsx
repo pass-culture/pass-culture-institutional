@@ -10,12 +10,15 @@ import { parseText } from '@/utils/parseText'
 export function SimpleTextV2(props: SimpleTextV2Props) {
   const { columns, title, text } = props
 
+  const isRenderColumns = (): boolean => {
+    return columns?.length > 0
+  }
   return (
     <Root data-testid="simple-text">
       {title && <StyledHeading2>{title}</StyledHeading2>}
       <Content>
         <BlocksRenderer content={text} />
-        {columns?.length > 0 && (
+        {isRenderColumns() && (
           <Columns>
             {columns?.map((col) => (
               <Column key={col.id}>

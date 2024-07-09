@@ -13,7 +13,6 @@ const FilterOption = (props: {
   originalSecteur?: string[]
   setPartner?: Dispatch<SetStateAction<string[]>>
   originalPartner?: string[]
-
   data: Filter[] | undefined
 }) => {
   const {
@@ -28,7 +27,7 @@ const FilterOption = (props: {
     data,
   } = props
 
-  const handleFilterChange = (name: string, value: string[]) => {
+  const handleFilterChange = (name: string, value: string[]): void => {
     switch (name) {
       case Options.Category:
         if (setCategory && originalCategory)

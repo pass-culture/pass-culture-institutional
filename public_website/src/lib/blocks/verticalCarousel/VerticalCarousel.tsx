@@ -7,30 +7,19 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  VerticalCarouselSlide,
-  VerticalCarouselSlideProps,
-} from './VerticalCarouselSlide'
+import { VerticalCarouselSlide } from './VerticalCarouselSlide'
 import { MediaQueries } from '@/theme/media-queries'
 import { StyledDot } from '@/theme/style'
+import { VerticalCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-export type VerticalCarouselProps = {
-  title: string
-  items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
-  hidePlayIcon?: boolean
-}
-
-export function VerticalCarousel({
-  title,
-  items,
-  hidePlayIcon,
-}: VerticalCarouselProps) {
-  items = items.filter((item) => {
+export function VerticalCarousel(props: VerticalCarouselProps) {
+  const { title, items, hidePlayIcon } = props
+  const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
   })
 
@@ -99,9 +88,9 @@ export function VerticalCarousel({
   }
 
   const isNavigation = (): boolean => {
-    if (items.length) return true
-    return false
+    return itemsFilter.length > 0
   }
+  const TOTAL_SLIDE = itemsFilter.length
 
   return (
     <Root>
@@ -109,9 +98,9 @@ export function VerticalCarousel({
         <CarouselProvider
           naturalSlideWidth={60}
           naturalSlideHeight={75}
-          totalSlides={items.length}
+          totalSlides={TOTAL_SLIDE}
           visibleSlides={visibleSlides}
-          isIntrinsicHeight={true}
+          isIntrinsicHeight
           infinite
           dragEnabled
           step={1}>

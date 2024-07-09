@@ -1,25 +1,19 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { BaseTextWithOptionTitleProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { parseText } from '@/utils/parseText'
 
-interface CenteredTextProps {
-  title?: string
-  description: string
-}
-
-export function CenteredText(props: CenteredTextProps) {
+export function CenteredText(props: BaseTextWithOptionTitleProps) {
   const { title, description } = props
   return (
     <Root data-testid="centered-text">
-      {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      {description && (
-        <p aria-label={parseText(description).accessibilityLabel}>
-          {parseText(description).processedText}
-        </p>
-      )}
+      {!!title && <Typo.Heading2>{title}</Typo.Heading2>}
+      <p aria-label={parseText(description).accessibilityLabel}>
+        {parseText(description).processedText}
+      </p>
     </Root>
   )
 }

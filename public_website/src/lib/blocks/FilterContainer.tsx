@@ -103,7 +103,7 @@ export function FilterContainer(props: FiltersProps) {
     return isOpen === index
   }
 
-  const checkIsSelcted = (key: string, value: string): boolean => {
+  const checkIsSelected = (key: string, value: string): boolean => {
     if (filterValues[key]?.includes(value)) return true
     return false
   }
@@ -146,7 +146,7 @@ export function FilterContainer(props: FiltersProps) {
               <ul id={filtre.filtre}>
                 {filtre.value.map((value, index) => (
                   <span
-                    aria-selected={checkIsSelcted(filtre.filtre, value)}
+                    aria-selected={checkIsSelected(filtre.filtre, value)}
                     role="option"
                     aria-hidden="true"
                     tabIndex={-1}
@@ -157,7 +157,9 @@ export function FilterContainer(props: FiltersProps) {
                     <li>
                       <span
                         style={{
-                          opacity: checkIsSelcted(filtre.filtre, value) ? 1 : 0,
+                          opacity: checkIsSelected(filtre.filtre, value)
+                            ? 1
+                            : 0,
                         }}>
                         <Check />
                       </span>
@@ -233,7 +235,7 @@ export function FilterContainer(props: FiltersProps) {
                 {filtre.value.map((value, index) => (
                   <button
                     className={
-                      checkIsSelcted(filtre.filtre, value) ? 'active' : ''
+                      checkIsSelected(filtre.filtre, value) ? 'active' : ''
                     }
                     onClick={(): void =>
                       handleDetailChange(filtre.filtre, value)

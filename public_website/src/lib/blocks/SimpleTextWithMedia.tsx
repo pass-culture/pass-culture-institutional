@@ -10,11 +10,16 @@ import { parseText } from '@/utils/parseText'
 
 export function SimpleTextWithMedia(props: SimpleTextWithMediaProps) {
   const { columns, title, video } = props
+
+  const isRenderColumns = (): boolean => {
+    return columns?.length > 0
+  }
+
   return (
     <Root data-testid="simple-text-with-media">
       {title && <StyledHeading2>{title}</StyledHeading2>}
       <Content>
-        {columns?.length > 0 && (
+        {isRenderColumns() && (
           <Columns>
             {columns?.map((col) => (
               <Column key={col.id}>

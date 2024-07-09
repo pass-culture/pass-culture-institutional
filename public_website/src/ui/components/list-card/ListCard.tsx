@@ -5,13 +5,15 @@ import styled, { css } from 'styled-components'
 import { ListCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function ListCard(props: ListCardProps) {
   const { title, category, date, imageUrl, slug, type } = props
 
+  const IMAGE_URL = imageUrl && isRenderable(imageUrl)
   return (
     <Root>
-      {imageUrl && (
+      {IMAGE_URL && (
         <StyledCardImage src={imageUrl} alt="" width={385} height={310} />
       )}
       <StyledMeta id={`news-meta-${slug}`}>

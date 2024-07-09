@@ -173,8 +173,8 @@ export default function Presse({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventCategory, eventLocalisation, eventSecteur])
 
-  const hasData = data.length
-  const hasEventData = eventData.length
+  const hasData = data.length > 0
+  const hasEventData = eventData.length > 0
 
   return (
     <React.Fragment>
@@ -197,7 +197,7 @@ export default function Presse({
           data={filters}
         />
       </ContentWrapper>
-      {hasData > 0 ? (
+      {hasData ? (
         <StyledListItems
           news={data}
           type="ressources"
@@ -225,13 +225,9 @@ export default function Presse({
           originalSecteur={eventSecteur}
           data={eventFilters}
         />
-        {/* <FilterContainer
-              filtres={eventFilters}
-              onFilterChange={handleEventFilterChange}
-            /> */}
       </ContentWrapper>
 
-      {hasEventData > 0 ? (
+      {hasEventData ? (
         <StyledeventListItems
           type="evenement"
           events={eventData}

@@ -7,14 +7,8 @@ import { onClickAnalytics } from '@/lib/analytics/helpers'
 import { AccountItemDropdownProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-export function AccountItem({
-  color,
-  url,
-  emoji,
-  label,
-  eventName,
-  eventOrigin,
-}: AccountItemDropdownProps) {
+export function AccountItem(props: AccountItemDropdownProps) {
+  const { color, url, emoji, label, eventName, eventOrigin } = props
   return (
     <StyledAccountItem>
       <Link

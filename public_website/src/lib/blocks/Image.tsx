@@ -1,32 +1,28 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import { ImageProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getStrapiURL } from '@/utils/apiHelpers'
-interface ImageProps {
-  description?: string
-  image: APIResponse<'plugin::upload.file'>
-  alt: string
-}
+import { isRenderable } from '@/utils/isRenderable'
 
 export function Imageblock(props: ImageProps) {
+  const { image, description } = props
+  const DESCRIPTION = description && isRenderable(description)
   return (
     <ContentWrapper>
       <Root>
-        {props.image && (
-          <figure>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={getStrapiURL(props.image.data.attributes.url)}
-              alt={props.alt}
-              // fetchPriority="low"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>{props.description}</figcaption>
-          </figure>
-        )}
+        <figure>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={getStrapiURL(image.data.attributes.url)}
+            alt={props.alt}
+            // fetchPriority="low"
+            loading="lazy"
+            decoding="async"
+          />
+          {DESCRIPTION && <figcaption>{description}</figcaption>}
+        </figure>
       </Root>
     </ContentWrapper>
   )

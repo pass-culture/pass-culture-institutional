@@ -3,8 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
-import { VerticalCarouselSlideProps } from '@/lib/blocks/verticalCarousel/VerticalCarouselSlide'
-import { RecommendationsProps } from '@/types/props'
+import { RecommendationsProps, VerticalCarouselSlideProps } from '@/types/props'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
 export function Recommendations(props: RecommendationsProps) {

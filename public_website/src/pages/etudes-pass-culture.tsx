@@ -109,7 +109,7 @@ export default function EtudesPassCulture({
     setData(news.data)
   }
 
-  const hasData = data.length
+  const hasData = data.length > 0
 
   return (
     <React.Fragment>
@@ -133,7 +133,7 @@ export default function EtudesPassCulture({
             data={filters}
           />
         </ContentWrapper>
-        {hasData > 0 ? (
+        {hasData ? (
           <StyledListItems
             news={data}
             type="ressources"

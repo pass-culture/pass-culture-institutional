@@ -35,7 +35,7 @@ export default function ListeActualitesPassCulture({
     buttonText,
     separator,
     aide,
-    socialMediaSection = [],
+    socialMediaSection,
     filtres,
   } = listeActualitesPassCulture.attributes
 
@@ -96,13 +96,13 @@ export default function ListeActualitesPassCulture({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation])
 
-  const hasData = data.length
+  const hasData = data.length > 0
 
   return (
     <React.Fragment>
       {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}{' '}
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
       </StyledTitle>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
@@ -125,7 +125,9 @@ export default function ListeActualitesPassCulture({
 
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
+      {socialMediaSection && (
+        <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
+      )}
     </React.Fragment>
   )
 }

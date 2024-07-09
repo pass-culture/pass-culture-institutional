@@ -1,20 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { ButtonProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-type ButtonProps = {
-  href: string
-  target?: '_blank'
-  text: string
-}
-
 export function LinkFaq({ href, target, text }: ButtonProps) {
+  const isTarget = (): boolean => target === '_blank'
+
   return (
     <StyledButton href={href} target={target}>
-      {target === '_blank' && (
-        <span className="visually-hidden">Publié le</span>
-      )}
+      {isTarget() && <span className="visually-hidden">Publié le</span>}
       {text}
     </StyledButton>
   )

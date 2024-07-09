@@ -2,28 +2,19 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OutlinedText } from '../../OutlinedText'
-import { CTA } from '@/types/CTA'
+import { MobileMenuListSubPanelProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-type MobileMenuListSubPanelProps = {
-  primaryList: CTA[]
-  secondaryList: CTA[]
-  cardTitle: string
-  cardDescription: string
-  cardLink: CTA
-  cardFirstEmoji: string
-  cardSecondEmoji: string
-}
-
-export function MobileMenuListSubPanel({
-  primaryList,
-  secondaryList,
-  cardTitle,
-  cardDescription,
-  cardLink,
-  cardFirstEmoji,
-  cardSecondEmoji,
-}: MobileMenuListSubPanelProps) {
+export function MobileMenuListSubPanel(props: MobileMenuListSubPanelProps) {
+  const {
+    primaryList,
+    secondaryList,
+    cardTitle,
+    cardDescription,
+    cardLink,
+    cardFirstEmoji,
+    cardSecondEmoji,
+  } = props
   // Focus list on mount
   const listRef = useRef<HTMLUListElement>(null)
   const [visible, setVisible] = useState(false)

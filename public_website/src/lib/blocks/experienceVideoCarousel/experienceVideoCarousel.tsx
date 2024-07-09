@@ -20,11 +20,8 @@ import { stripTags } from '@/utils/stripTags'
 
 const MEDIA_QUERY_MOBILE = getMediaQuery(MediaQueries.MOBILE)
 
-export function ExperienceVideoCarousel({
-  title,
-  isLandscape,
-  carouselItems: items,
-}: ExperienceVideoCarouselProps) {
+export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
+  const { title, isLandscape, carouselItems: items } = props
   const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -41,8 +38,7 @@ export function ExperienceVideoCarousel({
   const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
   const isNavShowing = (): boolean => {
-    if (TOTAL_SLIDES > visibleSlides) return true
-    return false
+    return TOTAL_SLIDES > visibleSlides
   }
 
   useEffect(() => {

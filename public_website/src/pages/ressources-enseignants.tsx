@@ -103,7 +103,7 @@ export default function RessourcesEnseignants({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
 
-  const hasData = data.length
+  const hasData = data.length > 0
 
   return (
     <React.Fragment>
@@ -112,7 +112,7 @@ export default function RessourcesEnseignants({
         {title && <Typo.Heading2>{title}</Typo.Heading2>}
       </StyledTitle>
       <UnpaddedBreadcrumb />
-      {hasData > 0 && (
+      {hasData && (
         <React.Fragment>
           <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
             <FilterOption

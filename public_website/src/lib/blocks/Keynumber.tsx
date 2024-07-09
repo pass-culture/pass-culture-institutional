@@ -2,14 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { KeyNumberCarousel } from './keyNumberCarousel/keyNumberCarousel'
-import { KeyNumberCarouselSlideProps } from './keyNumberCarousel/keyNumberCarouselSlide'
+import { KeyNumberProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
-type KeyNumberProps = {
-  title: string
-  items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
-}
 
-export function KeyNumber({ title, items }: KeyNumberProps) {
+export function KeyNumber(props: KeyNumberProps) {
+  const { title, items } = props
   return (
     <Root>
       <StyledWrapper>

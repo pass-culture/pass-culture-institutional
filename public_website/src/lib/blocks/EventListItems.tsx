@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { LatestNewsProps } from '@/types/props'
+import { LatestEventsProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function EventListItems(props: LatestNewsProps) {
+export function EventListItems(props: LatestEventsProps) {
   const { events, className, buttonText, type } = props
   const [visibleItems, setVisibleItems] = useState<number>(2)
 

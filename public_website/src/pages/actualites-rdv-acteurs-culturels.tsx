@@ -182,8 +182,8 @@ export default function ListeActuCulturels({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventRdvCategory, eventRdvLocalisation, eventSecteur])
 
-  const hasData = data.length
-  const hasEventData = eventData.length
+  const hasData = data.length > 0
+  const hasEventData = eventData.length > 0
 
   return (
     <React.Fragment>

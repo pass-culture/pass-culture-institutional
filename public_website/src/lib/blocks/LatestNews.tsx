@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { stringify } from 'querystring'
 import styled, { css } from 'styled-components'
 
-import { CTA } from '@/types/CTA'
+import { LatestNewsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -11,16 +11,8 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { fetchCMS } from '@/utils/fetchCMS'
 
-type LatestNewsProps = {
-  title: string
-  news:
-    | APIResponseData<'api::news.news'>[]
-    | APIResponseData<'api::resource.resource'>[]
-  cta?: CTA
-  className?: string
-}
-
-export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
+export function LatestNews(props: LatestNewsProps) {
+  const { title, news, cta, className } = props
   const [newsData, setNewsData] = useState<
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]

@@ -2,18 +2,11 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import { LogoCarouselSlideProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-type LogoCarouselSlideProps = {
-  slideIndex: number
-  image: APIResponse<'plugin::upload.file'> | undefined | null
-}
-
-export function LogoCarouselSlide({
-  slideIndex,
-  image,
-}: LogoCarouselSlideProps) {
+export function LogoCarouselSlide(props: LogoCarouselSlideProps) {
+  const { slideIndex, image } = props
   return (
     <Root
       index={slideIndex}

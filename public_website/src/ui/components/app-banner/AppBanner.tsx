@@ -2,23 +2,11 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { useOS } from '@/hooks/useOS'
+import { AppBannerProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-type AppBannerProps = {
-  title?: string
-  androidUrl?: string
-  defaultUrl?: string
-  iosUrl?: string
-  onClick?: () => void
-}
-
-export function AppBanner({
-  title,
-  androidUrl,
-  defaultUrl,
-  iosUrl,
-  onClick,
-}: AppBannerProps) {
+export function AppBanner(props: AppBannerProps) {
+  const { title, androidUrl, defaultUrl, iosUrl, onClick } = props
   const isAndroid = useOS().isAndroid
   const isIos = useOS().isIos
 
