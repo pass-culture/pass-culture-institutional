@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { EventListItems } from '@/lib/blocks/EventListItems'
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
+import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
@@ -181,13 +182,20 @@ export default function ListeActuCulturels({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventRdvCategory, eventRdvLocalisation, eventSecteur])
 
+  const hasData = data.length > 0
+  const hasEventData = eventData.length > 0
+
   return (
     <React.Fragment>
       {seo && <Seo metaData={seo} />}
       <StyledTitle>
         {title && <Typo.Heading2>{title}</Typo.Heading2>}
-
+      </StyledTitle>
+      <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
+      </ContentWrapper>
+
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
           setCategory={setCategory}
           setLocalisation={setLocalisation}
@@ -197,14 +205,21 @@ export default function ListeActuCulturels({
           setSecteur={setSecteur}
           data={newsRdvFilters}
         />
-      </StyledTitle>
-      <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      </ContentWrapper>
+
+      {hasData ? (
+        <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      ) : (
+        <NoResult />
+      )}
       <Separator isActive={separatorIsActive(separator)} />
 
       <StyledTitle>
         {titleEventSection && (
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
-        )}
+        )}{' '}
+      </StyledTitle>
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
           setCategory={setEventRdvCategory}
           originalCategory={originalEventRdvCategory}
@@ -214,12 +229,16 @@ export default function ListeActuCulturels({
           originalSecteur={originalEventSecteur}
           data={eventFilters}
         />
-      </StyledTitle>
-      <StyledeventListItems
-        type="evenement/"
-        events={eventData}
-        buttonText={buttonText}
-      />
+      </ContentWrapper>
+      {hasEventData ? (
+        <StyledeventListItems
+          type="evenement/"
+          events={eventData}
+          buttonText={buttonText}
+        />
+      ) : (
+        <NoResult />
+      )}
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
       <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
@@ -326,7 +345,7 @@ const StyledTitle = styled(ContentWrapper)`
 `
 
 const StyledListItems = styled(ListItems)`
-  margin-top: -3rem;
+  margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

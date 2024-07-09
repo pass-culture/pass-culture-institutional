@@ -18,7 +18,12 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "icon": {
       "type": "string",
@@ -28,6 +33,12 @@
       "type": "component",
       "repeatable": false,
       "component": "common.link"
+    },
+    "icon2": {
+      "type": "string"
+    },
+    "aboveTitle": {
+      "type": "string"
     }
   }
 }

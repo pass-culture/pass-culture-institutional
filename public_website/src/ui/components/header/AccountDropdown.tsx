@@ -2,34 +2,19 @@ import React, { Ref, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AccountItem } from './AccountItem'
+import { AccountDropdownProps } from '@/types/props'
 
-export type AccountItemProps = {
-  label: string
-  url: string
-  color: string
-  emoji: string
-}
-
-type AccountDropdownProps = {
-  items: AccountItemProps[]
-  openButtonElement: HTMLButtonElement | null
-  labelId: string
-  align?: 'left' | 'right'
-  onKeyDown: () => void
-  onBlur: () => void
-  onMouseLeave: () => void
-}
-
-export function AccountDropdown({
-  items,
-  openButtonElement,
-  labelId,
-  align,
-  onKeyDown,
-  onBlur,
-  onMouseLeave,
-}: AccountDropdownProps) {
-  const accountDropdownRef = useRef<HTMLDivElement>(null)
+export function AccountDropdown(props: AccountDropdownProps) {
+  const {
+    items,
+    openButtonElement,
+    labelId,
+    align,
+    onKeyDown,
+    onBlur,
+    onMouseLeave,
+  } = props
+  const accountDropdownRef = useRef<HTMLDivElement | null>(null)
 
   function onEscape(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -37,7 +22,7 @@ export function AccountDropdown({
     }
   }
 
-  function onClickOutside(e: MouseEvent) {
+  function onClickOutside(e: MouseEvent): void {
     if (!accountDropdownRef.current?.contains(e.target as HTMLElement)) {
       if (openButtonElement !== (e.target as HTMLElement)) {
         onBlur()
@@ -89,7 +74,11 @@ const StyledAccountDropdown = styled.div<{
 }>`
   ${({ theme, $align }) => css`
     position: absolute;
-    top: calc(100% + 2rem);
+    top: calc(100% + 2.9rem);
+    ${$align === 'right' &&
+    `
+     top: calc(100% + 2rem);
+     `}
     left: 50%;
     transform: translateX(-50%);
     width: max-content;

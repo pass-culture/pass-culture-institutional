@@ -3,31 +3,19 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { CARD_BACKGROUNDS } from './const'
 import { PiledCardItemsTheme } from './piled-card-items-theme'
-import { theme } from '@/theme/theme'
-import { APIResponse } from '@/types/strapi'
+import { PiledCardsCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export type PiledCardsCarouselSlideProps = {
-  slideIndex: number
-  image: string | APIResponse<'plugin::upload.file'> | null
-  title: string
-  description: string
-  theme: PiledCardItemsTheme
-}
-
-export function VerticalCarouselSlide({
-  slideIndex,
-  image,
-  title,
-  description,
-  theme,
-}: PiledCardsCarouselSlideProps) {
+export function VerticalCarouselSlide(props: PiledCardsCarouselSlideProps) {
+  const { slideIndex, image, title, description, theme } = props
   const imageUrl =
     typeof image === 'string' ? image : image?.data?.attributes?.url
 
-  const [descriptionIsOpen, setDescriptionIsOpen] = useState(false)
+  const [descriptionIsOpen, setDescriptionIsOpen] = useState<boolean>(false)
+  const URL = getStrapiURL(imageUrl)
 
   return (
     <Root
@@ -38,14 +26,7 @@ export function VerticalCarouselSlide({
       aria-roledescription="diapositive"
       $slideTheme={theme}>
       <div>
-        {imageUrl && (
-          <StyledImage
-            src={getStrapiURL(imageUrl)}
-            alt=""
-            width={270}
-            height={330}
-          />
-        )}
+        {imageUrl && <StyledImage src={URL} alt="" width={270} height={330} />}
         <StyledTitle>{title}</StyledTitle>
 
         {descriptionIsOpen ? (
@@ -53,21 +34,13 @@ export function VerticalCarouselSlide({
         ) : (
           <ShowMoreButton
             as="button"
-            onClick={() => setDescriptionIsOpen(true)}>
+            onClick={(): void => setDescriptionIsOpen(true)}>
             Voir plus
           </ShowMoreButton>
         )}
       </div>
     </Root>
   )
-}
-
-const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
-  purple: theme.uniqueColors.purple,
-  yellow: `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
-  magenta: `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
-  orange: `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
-  green: theme.uniqueColors.green,
 }
 
 const Root = styled(Slide)<{ $slideTheme: PiledCardItemsTheme }>`

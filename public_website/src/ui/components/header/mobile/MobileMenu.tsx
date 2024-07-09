@@ -3,12 +3,13 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../../button/Button'
 import { ChevronRight } from '../../icons/ChevronRight'
-import { HeaderProps } from '../Header'
+import HeaderBanner from '../HeaderBanner'
 import { MobileMenuAccountSubPanel } from './MobileMenuAccountSubPanel'
 import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
+import { BannerProps, HeaderMenuProps } from '@/types/props'
 
-type MobileMenuProps = HeaderProps & {
+type MobileMenuProps = HeaderMenuProps & {
   onKeyDown: (e: KeyboardEvent) => void
 }
 
@@ -18,7 +19,8 @@ export function MobileMenu({
   aboutItems,
   login,
   signup,
-}: MobileMenuProps) {
+  banner,
+}: MobileMenuProps & { banner: BannerProps }) {
   const navItems = [...targetItems, ...aboutItems]
 
   const [subPanelType, setSubPanelType] = useState<
@@ -123,7 +125,14 @@ export function MobileMenu({
                 </React.Fragment>
               )
             })}
+            <HeaderBanner
+              bannerAndroidUrl={banner.bannerAndroidUrl}
+              bannerDefaultUrl={banner.bannerDefaultUrl}
+              bannerIosUrl={banner.bannerIosUrl}
+              bannerText={banner.bannerText}
+            />
           </StyledMobileMenuList>
+
           <StyledMobileMenuFooter>
             <li>
               <button onClick={() => openSubPanel('login')}>
@@ -144,7 +153,11 @@ export function MobileMenu({
 
 const StyledMobileMenuWrapper = styled.div`
   ${({ theme }) => css`
-    background: ${theme.colors.white};
+    background: linear-gradient(
+      to bottom,
+      ${theme.colors.lightBlue},
+      ${theme.colors.white}
+    );
     position: fixed;
     inset: 6rem 0px 0px;
     overflow: auto;

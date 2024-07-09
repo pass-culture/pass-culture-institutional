@@ -2,24 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { NewsCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 
-type NewsCardProps = {
-  title: string
-  category: string
-  date: Date | string
-  imageUrl: string | null
-  slug: string
-}
+export function NewsCard(props: NewsCardProps) {
+  const { title, category, date, imageUrl, slug } = props
 
-export function NewsCard({
-  title,
-  category,
-  date,
-  imageUrl,
-  slug,
-}: NewsCardProps) {
   return (
     <Root>
       {imageUrl && (
@@ -39,12 +28,18 @@ export function NewsCard({
 }
 
 const Root = styled.article`
-  position: relative;
-  width: 24rem;
+  ${({ theme }) => css`
+    position: relative;
+    // width: 24rem;
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-    width: 75vw;
-  }
+    max-width: 24rem;
+    width: 100%;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      //  width: 75vw;
+      width: 100%;
+      max-width: 100%;
+    }
+  `}
 `
 
 const StyledImage = styled(Image)`

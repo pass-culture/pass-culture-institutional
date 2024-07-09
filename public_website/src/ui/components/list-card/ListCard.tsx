@@ -2,29 +2,18 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { ListCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
+import { isRenderable } from '@/utils/isRenderable'
 
-type ListCardProps = {
-  title: string
-  category: string
-  date: Date | string
-  imageUrl: string | null
-  slug: string
-  type: string
-}
+export function ListCard(props: ListCardProps) {
+  const { title, category, date, imageUrl, slug, type } = props
 
-export function ListCard({
-  title,
-  category,
-  date,
-  imageUrl,
-  slug,
-  type,
-}: ListCardProps) {
+  const IMAGE_URL = imageUrl && isRenderable(imageUrl)
   return (
     <Root>
-      {imageUrl && (
+      {IMAGE_URL && (
         <StyledCardImage src={imageUrl} alt="" width={385} height={310} />
       )}
       <StyledMeta id={`news-meta-${slug}`}>
@@ -33,7 +22,7 @@ export function ListCard({
       </StyledMeta>
       <StyledCardTitle>
         <StyledCardLink
-          href={type + '/' + slug}
+          href={type?.trim() + '/' + slug}
           aria-describedby={`news-meta-${slug}`}>
           {title}
         </StyledCardLink>

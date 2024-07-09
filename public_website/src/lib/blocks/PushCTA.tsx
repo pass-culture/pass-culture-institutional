@@ -3,65 +3,70 @@ import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import { PushCTAProps, QRCodeProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
+import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-interface PushCTAProps {
-  title: string
-  description?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  qrCodeDescription: string
-  ctaLink: CTA
-  qrCodeUrl: string
-  className?: string
-}
-
-export function PushCTA(props: PushCTAProps) {
+export function PushCTA(props: PushCTAProps & QRCodeProps) {
   const { SVG: QrCode } = useQRCode()
+  const {
+    className = '',
+    title,
+    description,
+    icon,
+    ctaLink,
+    qrCodeDescription,
+    image,
+    qrCodeUrl,
+  } = props
+
+  const image_props = image?.data?.attributes?.url
 
   return (
-    <Root className={props.className}>
-      <CardContainer>
-        <Card
-          $imageUrl={
-            props.image?.data?.attributes?.url &&
-            getStrapiURL(props.image?.data?.attributes?.url)
-          }>
-          <QRCodeCard>
-            <QrCode
-              text={props.qrCodeUrl}
-              options={{
-                width: 100,
-                margin: 2,
-                color: { dark: theme.colors.secondary },
-              }}
-            />
-            <p>{props.qrCodeDescription}</p>
-          </QRCodeCard>
-        </Card>
-        <BackgroundLayer />
-      </CardContainer>
+    <Root className={className}>
+      <BlockRendererWithCondition condition={isRenderable(image_props)}>
+        <CardContainer>
+          <Card $imageUrl={getStrapiURL(image_props)}>
+            <QRCodeCard>
+              <QrCode
+                text={qrCodeUrl}
+                options={{
+                  width: 100,
+                  margin: 2,
+                  color: { dark: theme.colors.secondary },
+                }}
+              />
+              <p>{qrCodeDescription}</p>
+            </QRCodeCard>
+          </Card>
+          <BackgroundLayer />
+          <BlockRendererWithCondition condition={isRenderable(icon)}>
+            <OutlinedText>{icon}</OutlinedText>
+          </BlockRendererWithCondition>
+        </CardContainer>
+      </BlockRendererWithCondition>
       <RightSide>
-        <Typo.Heading2>{props.title}</Typo.Heading2>
-        {props.description && (
-          <p aria-label={parseText(props.description).accessibilityLabel}>
-            {parseText(props.description).processedText}
+        <Typo.Heading2>{title}</Typo.Heading2>
+        <BlockRendererWithCondition condition={isRenderable(description)}>
+          <p aria-label={parseText(description as string).accessibilityLabel}>
+            {parseText(description as string).processedText}
           </p>
-        )}
+        </BlockRendererWithCondition>
         <CtaLink
-          href={props.ctaLink.URL}
+          href={ctaLink.URL}
           onClick={() =>
             onClickAnalytics({
-              eventName: props.ctaLink.eventName,
-              eventOrigin: props.ctaLink.eventOrigin,
+              eventName: ctaLink.eventName,
+              eventOrigin: ctaLink.eventOrigin,
             })
           }>
-          <span>{props.ctaLink.Label}</span>
+          <span>{ctaLink.Label}</span>
         </CtaLink>
       </RightSide>
     </Root>

@@ -4,3 +4,4 @@ export type PiledCardItemsTheme =
   | 'magenta'
   | 'orange'
   | 'green'
+  | 'blue'

@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
@@ -16,35 +17,65 @@ interface SimulatorProps {
 }
 
 export default function SimulatorPage(props: SimulatorProps) {
+  const {
+    seo,
+    title,
+    description,
+    ageQuestion,
+    nationnalityQuestion,
+    residencyQuestion,
+    successScreen,
+    failureScreen,
+    tooYoungScreen,
+    steps,
+    amountScreen_15,
+    amountScreen_16,
+    amountScreen_17,
+    amountScreen_18,
+    tooOldScreen,
+    topEmoji,
+    bottomEmoji,
+    socialMedias,
+    offres,
+  } = props.data.attributes
+
   return (
     <Root>
-      {props.data.attributes.seo && (
-        <Seo metaData={props.data.attributes.seo} />
-      )}
-      <Title>{props.data.attributes.title}</Title>
-      <Description>{props.data.attributes.description}</Description>
+      {seo && <Seo metaData={seo} />}
+      <Title>{title}</Title>
+      <Description>{description}</Description>
       <UnpaddedBreadcrumb />
 
       <StyledSimulator
-        ageQuestion={props.data.attributes.ageQuestion}
-        nationnalityQuestion={props.data.attributes.nationnalityQuestion}
-        residencyQuestion={props.data.attributes.residencyQuestion}
-        successScreen={props.data.attributes.successScreen}
-        failureScreen={props.data.attributes.failureScreen}
-        tooYoungScreen={props.data.attributes.tooYoungScreen}
-        steps={props.data.attributes.steps.map((s) => s.step)}
-        amountScreen15={props.data.attributes.amountScreen_15}
-        amountScreen16={props.data.attributes.amountScreen_16}
-        amountScreen17={props.data.attributes.amountScreen_17}
-        amountScreen18={props.data.attributes.amountScreen_18}
-        tooOldScreen={props.data.attributes.tooOldScreen}
-        topEmoji={props.data.attributes.topEmoji}
-        bottomEmoji={props.data.attributes.bottomEmoji}
+        ageQuestion={ageQuestion}
+        nationnalityQuestion={nationnalityQuestion}
+        residencyQuestion={residencyQuestion}
+        successScreen={successScreen}
+        failureScreen={failureScreen}
+        tooYoungScreen={tooYoungScreen}
+        steps={steps.map((s) => s.step)}
+        amountScreen15={amountScreen_15}
+        amountScreen16={amountScreen_16}
+        amountScreen17={amountScreen_17}
+        amountScreen18={amountScreen_18}
+        tooOldScreen={tooOldScreen}
+        topEmoji={topEmoji}
+        bottomEmoji={bottomEmoji}
       />
 
+      {offres && (
+        <SimplePushCta
+          title={offres.title}
+          surtitle={offres.surtitle}
+          image={offres.image}
+          cta={offres.cta}
+          icon={offres.icon}
+        />
+      )}
+
       <SocialMedia
-        title={props.data.attributes.socialMedias.title}
-        socialMediaLink={props.data.attributes.socialMedias.socialMediaLink}
+        title={socialMedias.title}
+        socialMediaLink={socialMedias.socialMediaLink}
       />
     </Root>
   )
@@ -111,6 +142,9 @@ export const getStaticProps = (async () => {
         'seo',
         'seo.metaSocial',
         'seo.metaSocial.image',
+        'offres',
+        'offres.cta',
+        'offres.image',
       ],
     },
     { encodeValuesOnly: true }

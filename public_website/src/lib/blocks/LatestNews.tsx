@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { stringify } from 'querystring'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
+import { LatestNewsProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -10,24 +12,17 @@ import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { isRenderable } from '@/utils/isRenderable'
 
-type LatestNewsProps = {
-  title: string
-  news:
-    | APIResponseData<'api::news.news'>[]
-    | APIResponseData<'api::resource.resource'>[]
-  cta?: CTA
-  className?: string
-}
-
-export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
+export function LatestNews(props: LatestNewsProps) {
+  const { title, news, cta, className } = props
   const [newsData, setNewsData] = useState<
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
     | null
   >(null)
 
-  const [isModule, setIsModule] = useState(true)
+  const [isModule, setIsModule] = useState<boolean>(true)
   useEffect(() => {
     const fetchLatestStudies = async () => {
       if (!news) {
@@ -86,7 +81,9 @@ export function LatestNews({ title, news, cta, className }: LatestNewsProps) {
       </ListWrapper>
 
       <ContentWrapper $noMargin>
-        {cta && <ButtonWithCTA cta={cta} />}
+        <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
+          <ButtonWithCTA cta={cta as CTA} />
+        </BlockRendererWithCondition>
       </ContentWrapper>
     </Root>
   )
@@ -120,9 +117,6 @@ const StyledHeading = styled(Typo.Heading2)`
 `
 
 const ListWrapper = styled(ContentWrapper)`
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
   margin-bottom: 5rem;
   width: 100%;
   box-sizing: border-box;
@@ -133,11 +127,15 @@ const ListWrapper = styled(ContentWrapper)`
 `
 
 const StyledList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-
-  > li {
-    scroll-snap-align: center;
-  }
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    > li {
+      scroll-snap-align: center;
+    }
+  `}
 `

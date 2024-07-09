@@ -1,28 +1,28 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { APIResponse } from '@/types/strapi'
+import { BaseTextProps, FacebookMetaProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
-interface FacebookMetaProps {
-  title: string
-  description: string
-  image: APIResponse<'plugin::upload.file'> | null | undefined
-}
-export function FacebookMeta(props: FacebookMetaProps) {
+export function FacebookMeta(props: FacebookMetaProps & BaseTextProps) {
+  const { title, description, image } = props
+  const url = isRenderable(image?.data.attributes.url)
   return (
     <Head>
-      <meta key="og:title" property="og:title" content={props.title} />
+      <meta key="og:title" property="og:title" content={title} />
       <meta
         key="og:description"
         property="og:description"
-        content={props.description}
+        content={description}
       />
-      <meta
-        key="og:image"
-        property="og:image"
-        content={getStrapiURL(props.image?.data.attributes.url)}
-      />
+      {image && url && (
+        <meta
+          key="og:image"
+          property="og:image"
+          content={getStrapiURL(image.data.attributes.url)}
+        />
+      )}
     </Head>
   )
 }

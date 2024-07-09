@@ -1,15 +1,18 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
+import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-const SimplePushCtaTitle = (props: { title: string }) => {
+const SimplePushCtaTitle = (props: { title: string }): React.ReactNode => {
   const { title } = props
 
   return (
@@ -18,7 +21,9 @@ const SimplePushCtaTitle = (props: { title: string }) => {
     </Title>
   )
 }
-const SimplePushCtaSurTitle = (props: { surtitle: string }) => {
+const SimplePushCtaSurTitle = (props: {
+  surtitle: string
+}): React.ReactNode => {
   const { surtitle } = props
   return (
     <p aria-label={parseText(surtitle).accessibilityLabel}>
@@ -26,7 +31,10 @@ const SimplePushCtaSurTitle = (props: { surtitle: string }) => {
     </p>
   )
 }
-const SimplePushCtaLink = (props: { Label: string; URL: string }) => {
+const SimplePushCtaLink = (props: {
+  Label: string
+  URL: string
+}): React.ReactNode => {
   const { URL, Label } = props
   return (
     <CtaLink href={URL}>
@@ -34,27 +42,36 @@ const SimplePushCtaLink = (props: { Label: string; URL: string }) => {
     </CtaLink>
   )
 }
-const SimplePushCtaCard = (props: { url: string }) => {
+const SimplePushCtaCard = (props: { url: string }): React.ReactNode => {
   const { url } = props
   return <Card $imageUrl={getStrapiURL(url)} />
 }
 
 export function SimplePushCta(props: PushCTAProps) {
   const { className, surtitle, title, cta, image, icon } = props
+  const image_props = image?.data?.attributes?.url
 
   return (
     <Root className={className}>
       <StyledContentWrapper $noMargin>
         <RightSide>
-          {surtitle && <SimplePushCtaSurTitle surtitle={surtitle} />}
-          {title && <SimplePushCtaTitle title={title} />}
-          {cta && <SimplePushCtaLink {...cta} />}
+          <BlockRendererWithCondition condition={isRenderable(surtitle)}>
+            <SimplePushCtaSurTitle surtitle={surtitle as string} />
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(title)}>
+            <SimplePushCtaTitle title={title} />
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
+            <SimplePushCtaLink {...(cta as CTA)} />
+          </BlockRendererWithCondition>
         </RightSide>
         <CardContainer>
-          {image?.data?.attributes?.url && (
-            <SimplePushCtaCard {...image.data.attributes} />
-          )}
-          <OutlinedText>{icon}</OutlinedText>
+          <BlockRendererWithCondition condition={isRenderable(image_props)}>
+            <SimplePushCtaCard url={image_props as string} />
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(icon)}>
+            <OutlinedText>{icon}</OutlinedText>
+          </BlockRendererWithCondition>
         </CardContainer>
       </StyledContentWrapper>
     </Root>
@@ -83,7 +100,6 @@ const Root = styled.div`
     max-width: 90rem;
     margin: auto;
     border-radius: 2.5rem;
-
     margin-top: calc(var(--module-margin) + 3.125rem);
     margin-bottom: calc(var(--module-margin) + 3.125rem);
 
@@ -177,7 +193,7 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
 const RightSide = styled.div`
   ${({ theme }) => css`
-    padding: 4rem 0 4rem 0;
+    padding: 4rem 0 4rem 2rem;
     max-width: 35rem;
 
     display: flex;
@@ -212,7 +228,7 @@ const RightSide = styled.div`
       margin-bottom: 0;
 
       p {
-        margin: 0;
+        margin-bottom: 1.25rem;
         font-size: ${theme.fonts.sizes.s};
       }
     }

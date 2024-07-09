@@ -15,7 +15,8 @@ interface HeadingProps {
 }
 
 const Heading1: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
-  const { processedText, accessibilityLabel } = parseText(children)
+  const { processedText, accessibilityLabel = 'aria-label' } =
+    parseText(children)
   return (
     <StyledHeading1 as={as} aria-label={accessibilityLabel} {...rest}>
       {processedText}
@@ -31,7 +32,9 @@ const StyledHeading1 = styled.h1(({ theme }) => ({
 }))
 
 const Heading2: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
-  const { processedText, accessibilityLabel } = parseText(children)
+  const { processedText, accessibilityLabel = 'aria-label' } =
+    parseText(children)
+
   return (
     <StyledHeading2 as={as} aria-label={accessibilityLabel} {...rest}>
       {processedText}
@@ -49,7 +52,8 @@ const StyledHeading2 = styled.h2(({ theme }) => {
 })
 
 const Heading3: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
-  const { processedText, accessibilityLabel } = parseText(children)
+  const { processedText, accessibilityLabel = 'aria-label' } =
+    parseText(children)
   return (
     <StyledHeading3 as={as} aria-label={accessibilityLabel} {...rest}>
       {processedText}
@@ -67,7 +71,8 @@ const StyledHeading3 = styled.h3(({ theme }) => {
 })
 
 const Body: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
-  const { processedText, accessibilityLabel } = parseText(children)
+  const { processedText, accessibilityLabel = 'aria-label' } =
+    parseText(children)
   return (
     <StyledBody as={as} aria-label={accessibilityLabel} {...rest}>
       {processedText}

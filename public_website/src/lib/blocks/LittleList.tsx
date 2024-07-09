@@ -1,44 +1,75 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import { MediaQueries } from '@/theme/media-queries'
+import { LittleListProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
+import arrowUrl from '@/ui/image/arrowd.svg'
+import { getMediaQuery } from '@/utils/getMediaQuery'
+import { isRenderable } from '@/utils/isRenderable'
 
-interface ContentItem {
-  id: number
-  text: string
-  description: string | null
-  firstEmoji: string
-  secondEmoji: string
-}
-interface LittleListProps {
-  title?: string
-  description?: string
-  content?: ContentItem[]
-}
-
+const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
 export function LittleList(props: LittleListProps) {
+  const { title, description, content } = props
+  const [collectionRefsOpened, setCollectionRefsOpened] = useState<number[]>([])
+
+  const { width = 0 } = useWindowSize({ debounceDelay: 500 })
+
+  const clickHandler = (index: number): void => {
+    const _collectionIndex = structuredClone(collectionRefsOpened)
+    if (_collectionIndex.includes(index)) {
+      const atIndex = _collectionIndex.findIndex((item) => item === index)
+      _collectionIndex.splice(atIndex, 1)
+    } else {
+      _collectionIndex.push(index)
+    }
+    setCollectionRefsOpened(_collectionIndex)
+  }
+
+  const isOpen = (index: number): boolean => {
+    return collectionRefsOpened.includes(index)
+  }
+
+  const isMobile = width <= MEDIA_QUERY
+
   return (
     <Root>
       <Columns>
         <Column>
-          {props.title && <Typo.Heading2>{props.title}</Typo.Heading2>}
-          {props.description && <Description>{props.description}</Description>}
+          <BlockRendererWithCondition condition={isRenderable(title)}>
+            <Typo.Heading2>{title as string}</Typo.Heading2>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(description)}>
+            <Description>{description as string}</Description>
+          </BlockRendererWithCondition>
         </Column>
 
         <Column as="ul">
-          {props.content?.map((item) => (
+          {content?.map((item, index) => (
             <ColumnContent key={item.id} as="li">
               <ColumnEmoji>
                 <OutlinedText shadow>{item.firstEmoji}</OutlinedText>
                 <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
               </ColumnEmoji>
-
-              <ColumnText>
-                <p>{item.text}</p>
-                {item.description && <p>{item.description}</p>}
-              </ColumnText>
+              {isMobile ? (
+                <ColumnText
+                  className={isOpen(index) ? 'open' : ''}
+                  onClick={() => clickHandler(index)}>
+                  <p>{item.text}</p>
+                  {isOpen(index)
+                    ? item.description && <p>{item.description}</p>
+                    : null}
+                </ColumnText>
+              ) : (
+                <ColumnText>
+                  <p>{item.text}</p>
+                  <p>{item.description}</p>
+                </ColumnText>
+              )}
             </ColumnContent>
           ))}
         </Column>
@@ -160,6 +191,26 @@ const ColumnText = styled.div`
     p:nth-child(1) {
       font-weight: ${theme.fonts.weights.bold};
       line-height: 2;
+      position: relative;
+      padding-right: 4rem;
+      cursor: pointer;
+    }
+
+    p:nth-child(1)::after {
+      content: url('${arrowUrl.src}');
+      right: 2rem;
+      top: 50%;
+      position: absolute;
+      transform: translateY(-50%);
+      line-height: 0;
+      display: none;
+      @media (width < ${theme.mediaQueries.mobile}) {
+        display: block;
+      }
+    }
+
+    &.open p:nth-child(1)::after {
+      transform: rotate(180deg);
     }
 
     p:nth-child(2) {

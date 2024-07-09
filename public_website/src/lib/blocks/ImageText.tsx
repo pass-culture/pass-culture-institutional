@@ -1,51 +1,46 @@
 import React from 'react'
-import {
-  type BlocksContent,
-  BlocksRenderer,
-} from '@strapi/blocks-react-renderer'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
-import { APIResponse } from '@/types/strapi'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { ImageTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-type HeroProps = {
-  title?: string
-  text: BlocksContent
-  image?: APIResponse<'plugin::upload.file'> | null
-  icon?: string
-  isImageRight?: boolean
-}
+import { isRenderable } from '@/utils/isRenderable'
 
-export function ImageText({
-  title,
-  text,
-  image,
-  icon,
-  isImageRight,
-}: HeroProps) {
+export function ImageText(props: ImageTextProps) {
+  const { title, text, image, icon, isImageRight = false } = props
+
+  const image_props = image?.data?.attributes?.url
+
   return (
     <Root>
       <StyledContentWrapper className={isImageRight ? 'right' : 'left'}>
         <StyledContentTextWrapper className="first">
-          {title && <StyledHeading>{title}</StyledHeading>}
+          <BlockRendererWithCondition condition={isRenderable(title)}>
+            <StyledHeading>{title as string}</StyledHeading>
+          </BlockRendererWithCondition>
+
           <BlocksRenderer content={text} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"
           $imageOnRight={isImageRight}>
-          <ImageContainer $imageOnRight={isImageRight}>
-            <StyledImage
-              src={getStrapiURL(image?.data?.attributes?.url)}
-              alt={image?.data?.attributes?.alternativeText || ''}
-            />
-            {icon && (
-              <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
-                {icon}
-              </StyledIcon>
-            )}
-          </ImageContainer>
+          <BlockRendererWithCondition condition={isRenderable(image_props)}>
+            <ImageContainer $imageOnRight={isImageRight}>
+              <StyledImage
+                src={getStrapiURL(image_props)}
+                alt={image?.data?.attributes?.alternativeText ?? ''}
+              />
+              <BlockRendererWithCondition condition={isRenderable(icon)}>
+                <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>
+                  {icon}
+                </StyledIcon>
+              </BlockRendererWithCondition>
+            </ImageContainer>
+          </BlockRendererWithCondition>
         </StyledContentImagetWrapper>
       </StyledContentWrapper>
     </Root>

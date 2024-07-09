@@ -3,16 +3,20 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Filter, FilterContainer } from '@/lib/blocks/FilterContainer'
+import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { fetchCMS } from '@/utils/fetchCMS'
+import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   resourceREData: APIResponseData<'api::resource.resource'>[]
@@ -23,6 +27,16 @@ export default function RessourcesEnseignants({
   resourceREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
+  const {
+    seo,
+    title,
+    buttonText,
+    aide,
+    socialMediaSection,
+    separator,
+    filtres,
+  } = ressourcesEnseignantsListe.attributes
+
   const cat = Array.from(
     new Set(resourceREData.map((item) => item.attributes.category))
   )
@@ -36,10 +50,8 @@ export default function RessourcesEnseignants({
   )
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
+
   const [secteur, setSecteur] = useState<string[]>([])
-  const [originalSecteur, setOriginalSecteur] = useState<string[]>([])
 
   const [filters, setFilters] = useState<Filter[]>([])
   const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
@@ -49,51 +61,12 @@ export default function RessourcesEnseignants({
   useEffect(() => {
     setCategory(cat)
     setLocalisation(loc)
-    setOriginalLocalisation(loc)
-    setOriginalCategory(cat)
     setSecteur(sec)
-    setOriginalSecteur(sec)
 
     setData(resourceREData)
-    let uniqueCategories = []
-    let uniqueLocalisations = []
-    let uniqueSecteurs = []
 
-    const filtres = ressourcesEnseignantsListe.attributes?.filtres?.map(
-      (filtre) => {
-        switch (filtre.filtre) {
-          case 'Catégorie':
-            uniqueCategories = Array.from(
-              new Set(resourceREData.map((item) => item.attributes.category))
-            )
-            return {
-              ...filtre,
-              value: uniqueCategories,
-            }
-          case 'Localisation':
-            uniqueLocalisations = Array.from(
-              new Set(
-                resourceREData.map((item) => item.attributes.localisation)
-              )
-            )
-            return {
-              ...filtre,
-              value: uniqueLocalisations,
-            }
-          case "Secteur d'activités":
-            uniqueSecteurs = Array.from(
-              new Set(resourceREData.map((item) => item.attributes.secteur))
-            )
-            return {
-              ...filtre,
-              value: uniqueSecteurs,
-            }
-          default:
-            return { ...filtre, value: [] }
-        }
-      }
-    )
-    if (filtres) setFilters(filtres)
+    const filtresOption = filterByAttribute(filtres, resourceREData)
+    if (filtresOption) setFilters(filtresOption)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -113,7 +86,7 @@ export default function RessourcesEnseignants({
           $eqi: localisation,
         },
         pageLocalisation: {
-          $containsi: 'S’informer - ressources',
+          // $containsi: 'S’informer - ressources',
         },
       },
     })
@@ -125,74 +98,60 @@ export default function RessourcesEnseignants({
     setData(news.data)
   }
 
-  const handleFilterChange = (name: string, value: string[]) => {
-    switch (name) {
-      case 'Localisation':
-        setLocalisation(value[0] === '' ? originalLocalisation : value)
-        break
-      case "Secteur d'activités":
-        setSecteur(value[0] === '' ? originalSecteur : value)
-        break
-      case 'Catégorie':
-        setCategory(value[0] === '' ? originalCategory : value)
-        break
-      default:
-        break
-    }
-  }
-
   useEffect(() => {
     fetchDataRessourcesEnseignants()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, localisation, secteur])
 
+  const hasData = data.length > 0
+
   return (
     <React.Fragment>
-      {ressourcesEnseignantsListe.attributes.seo && (
-        <Seo metaData={ressourcesEnseignantsListe.attributes.seo} />
-      )}
+      {seo && <Seo metaData={seo} />}
       <StyledTitle>
-        {ressourcesEnseignantsListe.attributes.title && (
-          <Typo.Heading2>
-            {ressourcesEnseignantsListe.attributes.title}
-          </Typo.Heading2>
-        )}
-        <UnpaddedBreadcrumb />
-        <FilterContainer
-          filtres={filters}
-          onFilterChange={handleFilterChange}
-        />
+        {title && <Typo.Heading2>{title}</Typo.Heading2>}
       </StyledTitle>
-      <StyledListItems
-        news={data}
-        type="ressources"
-        buttonText={ressourcesEnseignantsListe.attributes.buttonText}
-      />
+      <UnpaddedBreadcrumb />
+      {hasData && (
+        <React.Fragment>
+          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+            <FilterOption
+              setCategory={setCategory}
+              setLocalisation={setLocalisation}
+              originalCategory={category}
+              originalLocalisation={localisation}
+              setSecteur={setSecteur}
+              originalSecteur={secteur}
+              data={filters}
+            />
+          </ContentWrapper>
 
-      <Separator
-        isActive={ressourcesEnseignantsListe.attributes.separator?.isActive}
-      />
+          <StyledListItems
+            news={data}
+            type="ressources"
+            buttonText={buttonText}
+          />
+        </React.Fragment>
+      )}
 
-      <SimplePushCta
-        title={ressourcesEnseignantsListe.attributes.aide?.title}
-        image={ressourcesEnseignantsListe.attributes.aide?.image}
-        cta={ressourcesEnseignantsListe.attributes.aide?.cta}
-        surtitle={ressourcesEnseignantsListe.attributes.aide?.surtitle}
-        icon={ressourcesEnseignantsListe.attributes.aide?.icon}
-      />
+      <Separator isActive={separatorIsActive(separator)} />
 
-      {ressourcesEnseignantsListe.attributes.socialMediaSection &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection.title &&
-        ressourcesEnseignantsListe.attributes.socialMediaSection
-          .socialMediaLink && (
+      {aide && (
+        <SimplePushCta
+          title={aide.title}
+          image={aide.image}
+          cta={aide.cta}
+          surtitle={aide.surtitle}
+          icon={aide.icon}
+        />
+      )}
+
+      {socialMediaSection &&
+        socialMediaSection.title &&
+        socialMediaSection.socialMediaLink && (
           <StyledSocialMedia
-            title={
-              ressourcesEnseignantsListe.attributes.socialMediaSection.title
-            }
-            socialMediaLink={
-              ressourcesEnseignantsListe.attributes.socialMediaSection
-                .socialMediaLink
-            }
+            title={socialMediaSection.title}
+            socialMediaLink={socialMediaSection.socialMediaLink}
           />
         )}
     </React.Fragment>
@@ -251,7 +210,7 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled.div`
+const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
     margin-inline: auto;
     padding: 1rem 1.5rem;

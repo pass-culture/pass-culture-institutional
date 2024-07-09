@@ -1,36 +1,31 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
+import { CARD_BACKGROUNDS } from './const'
 import { PiledCardItemsTheme } from './piled-card-items-theme'
 import { PiledCardsCarousel } from './PiledCardsCarousel'
-import { PiledCardsCarouselSlideProps } from './PiledCardsCarouselSlide'
-import { theme } from '@/theme/theme'
-import { APIResponse } from '@/types/strapi'
+import { PiledCardsCarouselSlideProps, PiledCardsProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { ArrowDown } from '@/ui/components/icons/ArrowDown'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
-interface Item {
-  id: number
-  title: string
-  description: string
-  firstIcon: string
-  secondIcon: string
-  image: APIResponse<'plugin::upload.file'> | null
-  theme: PiledCardItemsTheme
-}
-
-interface PiledCardsProps {
-  items: Item[]
-  accessibleTitle: string
-}
+type Direction = 'top' | 'bottom'
 
 export function PiledCards(props: PiledCardsProps) {
+  const { items } = props
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const sentinelRefs = useRef<(HTMLLIElement | null)[]>([])
+  const refTop = useRef<number[]>([])
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
+    refTop.current = []
+    window.scrollTo({ top: 0 })
+    for (const element of itemRefs.current) {
+      const posY = element?.offsetTop
+      if (posY) refTop.current.push(posY)
+    }
+    const setScrcoll = (): void => {
       for (let i = 0; i < itemRefs.current.length; i++) {
         const itemEl = itemRefs.current[i]
         const sentinelEl = sentinelRefs.current[i]
@@ -40,7 +35,6 @@ export function PiledCards(props: PiledCardsProps) {
           0,
           Math.min(256, itemEl.offsetTop - sentinelEl.offsetTop - 128)
         )
-
         const ratio = (256 - d) / 256
         const easedValue = ratio * ratio
 
@@ -49,21 +43,71 @@ export function PiledCards(props: PiledCardsProps) {
 
         itemEl.style.transform = `scale(${scale})`
       }
-    })
+    }
+    window.addEventListener('scroll', setScrcoll)
+    return () => window.removeEventListener('scroll', setScrcoll)
   }, [])
 
+  const ScrollTo = (index: number, direction: Direction): void => {
+    const y =
+      direction === 'bottom'
+        ? refTop.current[index + 1]
+        : refTop.current[index - 1]
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+
+  const renderNav = (index: number): React.ReactNode => {
+    if (index === 0)
+      return (
+        <StyledButton
+          type="button"
+          aria-label="Slide suivante"
+          onClick={(): void => ScrollTo(index, 'bottom')}>
+          <ArrowDown />
+        </StyledButton>
+      )
+    if (index === items.length - 1) {
+      return (
+        <StyledButton
+          type="button"
+          aria-label="Slide précendente"
+          $isReverse
+          onClick={(): void => ScrollTo(index, 'top')}>
+          <ArrowDown />
+        </StyledButton>
+      )
+    }
+    return (
+      <React.Fragment>
+        <StyledButton
+          type="button"
+          aria-label="Slide suivante"
+          onClick={(): void => ScrollTo(index, 'bottom')}>
+          <ArrowDown />
+        </StyledButton>
+        <StyledButton
+          type="button"
+          aria-label="Slide précendente"
+          $isReverse
+          onClick={(): void => ScrollTo(index, 'top')}>
+          <ArrowDown />
+        </StyledButton>
+      </React.Fragment>
+    )
+  }
+
   const carouselItems = useMemo(() => {
-    const items: PiledCardsCarouselSlideProps[] = props.items.map((it, i) => ({
+    const itemsPiles: PiledCardsCarouselSlideProps[] = items.map((it, i) => ({
       slideIndex: i,
       ...it,
     }))
-    return items
-  }, [props.items])
+    return itemsPiles
+  }, [items])
 
   return (
     <React.Fragment>
       <Root>
-        {props.items.map((item, index) => (
+        {items?.map((item, index) => (
           <React.Fragment key={item.id}>
             <ItemScrollSentinel
               aria-hidden="true"
@@ -93,9 +137,12 @@ export function PiledCards(props: PiledCardsProps) {
               </StyledImageWrapper>
 
               <StyledContentTextWrapper>
-                <p>{(index + 1).toString().padStart(2, '0')}</p>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+                <div>
+                  <p>{(index + 1).toString().padStart(2, '0')}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+                <StyledNavWrapper>{renderNav(index)}</StyledNavWrapper>
               </StyledContentTextWrapper>
             </StyledContentListItems>
           </React.Fragment>
@@ -109,9 +156,7 @@ export function PiledCards(props: PiledCardsProps) {
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     color: ${theme.colors.white};
-
     margin-bottom: calc(var(--module-margin) - 8rem);
-
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
     }
@@ -132,33 +177,25 @@ const StyledCarousel = styled(PiledCardsCarousel)`
 const ItemScrollSentinel = styled.li`
   margin-bottom: 8rem;
   position: absolute;
+  list-style: none;
 `
-
-const CARD_BACKGROUNDS: Record<PiledCardItemsTheme, string> = {
-  purple: theme.uniqueColors.purple,
-  yellow: `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
-  magenta: `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
-  orange: `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
-  green: theme.uniqueColors.green,
-}
 
 const StyledContentListItems = styled.li<{
   $itemTheme: PiledCardItemsTheme
 }>`
   ${({ $itemTheme, theme }) => css`
     transform-origin: center top;
-
+    position: relative;
+    list-style: none;
     background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 30rem;
     border-radius: 2rem;
     box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
     position: sticky;
     top: 2rem;
-
     display: grid;
     grid-template-columns: 1fr 1.5fr;
-    gap: 10rem;
-
+    gap: 5rem;
     padding: 5rem;
     margin-bottom: 8rem;
 
@@ -171,9 +208,10 @@ const StyledContentListItems = styled.li<{
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
     overflow: hidden;
 
     h3 {
@@ -183,7 +221,43 @@ const StyledContentTextWrapper = styled.div`
 
     p {
       width: 80%;
-      line-height: 2.5;
+      line-height: 2.125rem;
+    }
+  `}
+`
+const StyledNavWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  top: 3rem;
+  position: relative;
+  padding: 1rem;
+`
+
+const StyledButton = styled.button<{ $isReverse?: boolean }>`
+  ${({ theme, $isReverse }) => css`
+    width: 3.4375rem;
+    height: 3.4375rem;
+    max-width: 3.4375rem;
+    max-height: 3.4375rem;
+    min-width: 3.4375rem;
+    min-height: 3.4375rem;
+    background-color: ${theme.colors.secondary};
+    position: relative;
+    border-radius: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    outline-offset: 2px;
+    z-index: 1000;
+    ${$isReverse && 'transform: rotate(180deg);'}
+    &:hover {
+      background-color: ${theme.uniqueColors.blueDark};
+    }
+    &:active {
+      outline: 2px solid ${theme.colors.secondary};
     }
   `}
 `

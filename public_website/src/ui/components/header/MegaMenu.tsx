@@ -1,39 +1,13 @@
 import React, { useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
-import { AppBanner } from '../app-banner/AppBanner'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { onClickAnalytics } from '@/lib/analytics/helpers'
-import { CTA } from '@/types/CTA'
+import HeaderBanner from './HeaderBanner'
+import { MegaMenuProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
-import { isStringAreEquals } from '@/utils/stringAreEquals'
-
-type MegaMenuProps = {
-  onBlur: () => void
-  onKeyDown: (e: KeyboardEvent) => void
-  onMouseLeave: () => void
-  getOpenButtonEl: () => HTMLButtonElement | null
-  id: string
-  labelId: string
-  data: {
-    title: string
-    cta: CTA
-    bannerText?: string
-    bannerAndroidUrl?: string
-    bannerIosUrl?: string
-    primaryListItems: CTA[]
-    secondaryListItems: CTA[]
-    cardTitle: string
-    cardDescription: string
-    cardLink: CTA
-    cardFirstEmoji: string
-    cardSecondEmoji: string
-  }
-}
 
 export function MegaMenu({
   onBlur,
@@ -44,10 +18,24 @@ export function MegaMenu({
   labelId,
   data,
 }: MegaMenuProps) {
-  const megaMenuRef = useRef<HTMLDivElement>(null)
-  const path = usePathname()
+  const {
+    cta,
+    title,
+    bannerText,
+    bannerAndroidUrl,
+    bannerDefaultUrl,
+    bannerIosUrl,
+    primaryListItems,
+    secondaryListItems,
+    cardTitle,
+    cardFirstEmoji,
+    cardSecondEmoji,
+    cardDescription,
+    cardLink,
+  } = data
+  const megaMenuRef = useRef<HTMLDivElement | null>(null)
 
-  function onClickOutside(e: MouseEvent) {
+  function onClickOutside(e: MouseEvent): void {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
       const openButtonElement = getOpenButtonEl()
       if (openButtonElement !== (e.target as HTMLElement)) {
@@ -67,14 +55,15 @@ export function MegaMenu({
 
   useEffect(() => {
     const megaMenuElement = megaMenuRef.current
-    megaMenuElement?.addEventListener('keydown', (e: KeyboardEvent) =>
+    megaMenuElement?.addEventListener('keydown', (e: KeyboardEvent): void =>
       onKeyDown(e)
     )
     window?.addEventListener('click', onClickOutside)
 
     return () => {
-      megaMenuElement?.removeEventListener('keydown', (e: KeyboardEvent) =>
-        onKeyDown(e)
+      megaMenuElement?.removeEventListener(
+        'keydown',
+        (e: KeyboardEvent): void => onKeyDown(e)
       )
       window?.removeEventListener('click', onClickOutside)
     }
@@ -84,32 +73,22 @@ export function MegaMenu({
     <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
-          <Typo.Heading2 as="p">{data.title}</Typo.Heading2>
-          <ButtonWithCTA cta={data.cta} />
-          {data.bannerText && data.bannerAndroidUrl && data.bannerIosUrl && (
-            <AppBanner
-              title={data.bannerText}
-              androidUrl={data.bannerAndroidUrl}
-              iosUrl={data.bannerIosUrl}
-              onClick={() =>
-                onClickAnalytics({
-                  eventName: 'downloadApp',
-                  eventOrigin: 'menu-young-people-and-parents',
-                })
-              }
-            />
-          )}
+          <Typo.Heading2 as="p">{title}</Typo.Heading2>
+          <ButtonWithCTA cta={cta} />
+          <HeaderBanner
+            bannerAndroidUrl={bannerAndroidUrl}
+            bannerDefaultUrl={bannerDefaultUrl}
+            bannerIosUrl={bannerIosUrl}
+            bannerText={bannerText}
+          />
         </StyledMegaMenuHeading>
 
         <StyledMegaMenuLists>
           <ul>
-            {data.primaryListItems.map((item) => {
+            {primaryListItems?.map((item) => {
               return (
                 <li key={item.Label}>
                   <Link
-                    className={
-                      isStringAreEquals(path, item.URL) ? 'active' : ''
-                    }
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -119,13 +98,10 @@ export function MegaMenu({
             })}
           </ul>
           <ul>
-            {data.secondaryListItems.map((item) => {
+            {secondaryListItems?.map((item) => {
               return (
                 <li key={item.Label}>
                   <Link
-                    className={
-                      isStringAreEquals(path, item.URL) ? 'active' : ''
-                    }
                     href={item.URL}
                     aria-label={parseText(item.Label).accessibilityLabel}>
                     {parseText(item.Label).processedText}
@@ -138,18 +114,18 @@ export function MegaMenu({
 
         <StyledMegaMenuCard>
           <StyledMegaMenuCardHeading>
-            <OutlinedText innerAs="p">{data.cardTitle}</OutlinedText>
+            <OutlinedText innerAs="p">{cardTitle}</OutlinedText>
 
             <OutlinedText dilationRadius={2} shadow aria-hidden="true">
-              {data.cardFirstEmoji}
+              {cardFirstEmoji}
             </OutlinedText>
             <OutlinedText dilationRadius={2} shadow aria-hidden="true">
-              {data.cardSecondEmoji}
+              {cardSecondEmoji}
             </OutlinedText>
           </StyledMegaMenuCardHeading>
 
-          <p>{data.cardDescription}</p>
-          <ButtonWithCTA cta={data.cardLink} variant="secondary" />
+          <p>{cardDescription}</p>
+          <ButtonWithCTA cta={cardLink} variant="secondary" />
         </StyledMegaMenuCard>
       </StyledMegaMenu>
     </StyledMegaMenuWrapper>
@@ -216,9 +192,6 @@ const StyledMegaMenuLists = styled.div`
       font-weight: ${theme.fonts.weights.semiBold};
       color: ${theme.colors.black};
       opacity: 0.9;
-      &.active {
-        text-decoration: underline;
-      }
       &:hover {
         text-decoration: underline;
       }

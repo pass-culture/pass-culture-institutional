@@ -4,30 +4,16 @@ import styled, { css } from 'styled-components'
 import { ArrowRight } from '../icons/ArrowRight'
 import { OutlinedText } from '../OutlinedText'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { AccountItemDropdownProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-type AccountItemProps = {
-  color: string
-  url: string
-  emoji: string
-  label: string
-  eventName?: string
-  eventOrigin?: string
-}
-
-export function AccountItem({
-  color,
-  url,
-  emoji,
-  label,
-  eventName,
-  eventOrigin,
-}: AccountItemProps) {
+export function AccountItem(props: AccountItemDropdownProps) {
+  const { color, url, emoji, label, eventName, eventOrigin } = props
   return (
     <StyledAccountItem>
       <Link
         href={url}
-        onClick={() => onClickAnalytics({ eventName, eventOrigin })}>
+        onClick={(): void => onClickAnalytics({ eventName, eventOrigin })}>
         <StyledEmoji $color={color}>
           <OutlinedText dilationRadius={0} blurDeviation={1.5} shadow>
             {emoji}

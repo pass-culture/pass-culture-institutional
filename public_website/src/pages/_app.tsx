@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import type { AppContext, AppProps } from 'next/app'
+import type { AppContext } from 'next/app'
 import App from 'next/app'
 import { Montserrat } from 'next/font/google'
 import { stringify } from 'qs'
@@ -7,20 +7,16 @@ import { ThemeProvider } from 'styled-components'
 
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
+import { FooterProps, MyAppProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
-import { Footer, FooterProps } from '@/ui/components/footer/Footer'
-import { Header, HeaderProps } from '@/ui/components/header/Header'
+import { Footer } from '@/ui/components/footer/Footer'
+import { Header } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })
-
-type MyAppProps = AppProps & {
-  headerData: HeaderProps
-  footerData: FooterProps
-}
 
 export default function MyApp({
   Component,

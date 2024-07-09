@@ -1,48 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  Dot,
   Slider,
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { LogoCarouselSlide } from './logoCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { APIResponse } from '@/types/strapi'
+import { StyledDot } from '@/theme/style'
+import { LogoCarouselProps } from '@/types/props'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type LogoCarouselProps = {
-  items: { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
-}
+const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function LogoCarousel({ items }: LogoCarouselProps) {
+export function LogoCarousel(props: LogoCarouselProps) {
+  const { items } = props
   const LOGO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     'title'
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const { width = 0 } = useWindowSize({ debounceDelay: 200 })
+  const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
-  const [screenWidth, setScreenWidth] = useState<number>()
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
-
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.LARGE_DESKTOP)
-      ? 1
-      : 6
+  const visibleSlides = width < MEDIA_QUERY ? 1 : 6
 
   useEffect(() => {
     const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
@@ -66,6 +52,10 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
     })
   }
 
+  const isNavShowing = (): boolean => {
+    return TOTAL_SLIDES > visibleSlides
+  }
+
   function handleNavigationButtonClick() {
     const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
@@ -77,65 +67,66 @@ export function LogoCarousel({ items }: LogoCarouselProps) {
     }
   }
 
-  const [total, setTotal] = useState<number>(0)
-
-  useEffect(() => {
-    if (items) {
-      setTotal(items.length)
-    }
-  }, [items])
   return (
     <CarouselProvider
       naturalSlideWidth={60}
       naturalSlideHeight={75}
-      totalSlides={total}
+      totalSlides={TOTAL_SLIDES}
       visibleSlides={visibleSlides}
-      isIntrinsicHeight={true}
-      infinite={true}
+      isIntrinsicHeight
+      infinite
       dragEnabled={false}
       step={1}>
       <StyledSlider
+        classNameAnimation="customCarrouselAnimation"
         aria-label={stripTags('title')}
         aria-roledescription="carrousel">
         {items?.map((item, index) => {
           return (
-            <LogoCarouselSlide
-              key={item.logo?.data?.attributes?.alternativeText}
-              slideIndex={index}
-              {...item}
-              image={item.logo}
-            />
+            item.logo && (
+              <LogoCarouselSlide
+                key={item.logo.data.attributes.hash}
+                slideIndex={index}
+                {...item}
+                image={item.logo}
+              />
+            )
           )
         })}
       </StyledSlider>
-      <StyledHeading>
-        <StyledNavigationButtons aria-label="Contrôles du carousel">
-          <ButtonBack
-            aria-label="Élement précédent"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label="Élément suivant"
-            onClick={handleNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
-      </StyledHeading>
-      <StyledDots aria-label="Contrôles du carousel">
-        {items?.map((item, index) => {
-          return (
-            <StyledDot
-              onClick={handleNavigationButtonClick}
-              key={item.logo?.data?.attributes?.alternativeText}
-              slide={index}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.logo?.data?.attributes?.alternativeText}`}
-            />
-          )
-        })}
-      </StyledDots>
+
+      <BlockRendererWithCondition condition={isNavShowing()}>
+        <StyledHeading>
+          <StyledNavigationButtons aria-label="Contrôles du carousel">
+            <ButtonBack
+              aria-label="Élement précédent"
+              onClick={handleNavigationButtonClick}>
+              <ArrowRight />
+            </ButtonBack>
+            <ButtonNext
+              aria-label="Élément suivant"
+              onClick={handleNavigationButtonClick}>
+              <ArrowRight />
+            </ButtonNext>
+          </StyledNavigationButtons>
+        </StyledHeading>
+        <StyledDots aria-label="Contrôles du carousel">
+          {items?.map((item, index) => {
+            return (
+              item.logo && (
+                <StyledDot
+                  onClick={handleNavigationButtonClick}
+                  key={item.logo.data.attributes.hash}
+                  slide={index}
+                  aria-label={`Afficher la diapositive ${index + 1} sur ${
+                    items.length
+                  } : ${item.logo?.data?.attributes?.alternativeText}`}
+                />
+              )
+            )
+          })}
+        </StyledDots>
+      </BlockRendererWithCondition>
     </CarouselProvider>
   )
 }
@@ -210,21 +201,6 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
-    }
-  `}
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    height: 0.875rem;
-    border-radius: 50%;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      background-color: ${theme.colors.secondary};
-      opacity: 1;
     }
   `}
 `

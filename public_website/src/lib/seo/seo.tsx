@@ -4,68 +4,73 @@ import { usePathname } from 'next/navigation'
 
 import { FacebookMeta } from './facebookMeta'
 import { XMeta } from './xMeta'
-import { APIResponseData } from '@/types/strapi'
-
-interface SeoProps {
-  metaData: APIResponseData<'api::page.page'>['attributes']['seo']
-}
+import { SeoProps } from '@/types/props'
+import { isRenderable } from '@/utils/isRenderable'
+import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export function Seo(props: SeoProps) {
+  const { metaData } = props
+  const meta_title = metaData?.metaTitle && isRenderable(metaData?.metaTitle)
+  const meta_description =
+    metaData?.metaDescription && isRenderable(metaData?.metaDescription)
+  const meta_robots = metaData?.metaRobots && isRenderable(metaData?.metaRobots)
+  const structure_data =
+    metaData?.structuredData &&
+    isRenderable(JSON.stringify(metaData?.structuredData))
+  const meta_viewport =
+    metaData?.metaViewport && isRenderable(metaData?.metaViewport)
+  const keywords = metaData?.keywords && isRenderable(metaData?.keywords)
+  const meta_social = metaData?.metaSocial
+  const canonica_url =
+    metaData?.canonicalURL && isRenderable(metaData?.canonicalURL)
   const path = usePathname()
+
+  const setCanonicaURL = (): string => {
+    if (canonica_url && metaData?.canonicalURL) {
+      return metaData.canonicalURL
+    }
+    return process.env['NEXT_PUBLIC_APP_URL'] + path
+  }
+
   return (
     <React.Fragment>
       <Head>
-        {props.metaData?.metaTitle && (
-          <title>{props.metaData?.metaTitle}</title>
+        {meta_title && <title>{metaData.metaTitle}</title>}
+        {meta_description && (
+          <meta name="description" content={metaData.metaDescription} />
         )}
-        {props.metaData?.metaDescription && (
-          <meta name="description" content={props.metaData.metaDescription} />
-        )}
-        {props.metaData?.metaRobots && (
-          <meta name="robots" content={props.metaData.metaRobots} />
-        )}
-        {props.metaData?.structuredData && (
+        {meta_robots && <meta name="robots" content={metaData.metaRobots} />}
+        {structure_data && (
           <script type="application/ld+json">
-            {JSON.stringify(props.metaData?.structuredData)}
+            {JSON.stringify(metaData.structuredData)}
           </script>
         )}
-        {props.metaData?.metaViewport && (
-          <meta name="viewport" content={props.metaData?.metaViewport} />
+        {meta_viewport && (
+          <meta name="viewport" content={metaData.metaViewport} />
         )}
-        {props.metaData?.keywords && (
-          <meta name="keywords" content={props.metaData.keywords} />
-        )}
-        <link
-          rel="canonical"
-          href={
-            props.metaData?.canonicalURL
-              ? props.metaData.canonicalURL
-              : process.env['NEXT_PUBLIC_APP_URL'] + path
-          }
-        />
+        {keywords && <meta name="keywords" content={metaData.keywords} />}
+        <link rel="canonical" href={setCanonicaURL()} />
       </Head>
-      {props.metaData &&
-        props.metaData.metaSocial &&
-        props.metaData.metaSocial.map((social) => (
-          <React.Fragment key={social.title}>
-            {social.socialNetwork === 'Facebook' && (
-              <FacebookMeta
-                key={social.title}
-                title={social.title}
-                description={social.description}
-                image={social.image}
-              />
-            )}
-            {social.socialNetwork === 'X' && (
-              <XMeta
-                key={social.title}
-                title={social.title}
-                description={social.description}
-                image={social.image}
-              />
-            )}
-          </React.Fragment>
-        ))}
+      {meta_social?.map((social) => (
+        <React.Fragment key={social.title}>
+          {isStringAreEquals(social.socialNetwork, 'Facebook') && (
+            <FacebookMeta
+              key={social.title}
+              title={social.title}
+              description={social.description}
+              image={social.image}
+            />
+          )}
+          {isStringAreEquals(social.socialNetwork, 'X') && (
+            <XMeta
+              key={social.title}
+              title={social.title}
+              description={social.description}
+              image={social.image}
+            />
+          )}
+        </React.Fragment>
+      ))}
     </React.Fragment>
   )
 }

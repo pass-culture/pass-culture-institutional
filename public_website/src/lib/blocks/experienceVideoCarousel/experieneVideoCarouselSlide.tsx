@@ -3,28 +3,17 @@ import ReactPlayer from 'react-player/youtube'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
-import { APIResponse } from '@/types/strapi'
-import { Play } from '@/ui/components/icons/Play'
+import { ExperienceVideoCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
-import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
-export type ExperienceVideoCarouselSlideProps = {
-  slideIndex: number
-  image: APIResponse<'plugin::upload.file'> | null
-  title: string
-  description: string
-  url?: string
-}
-
-export function ExperienceVideoCarouselSlide({
-  slideIndex,
-  image,
-  title,
-  description,
-  url,
-}: ExperienceVideoCarouselSlideProps) {
-  const [isMounted, setIsMounted] = useState(false)
+export function ExperienceVideoCarouselSlide(
+  props: ExperienceVideoCarouselSlideProps
+) {
+  const { slideIndex, isLandscape = true, title, description, url } = props
+  const [isMounted, setIsMounted] = useState<boolean>(false)
 
   useEffect(() => {
     setIsMounted(true)
@@ -32,30 +21,21 @@ export function ExperienceVideoCarouselSlide({
 
   return (
     <Root
+      $isLandscape
       index={slideIndex}
       key={title}
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledWrapper>
-        {image &&
-          isMounted &&
-          (url ? (
-            <StyledExperienceVideo
-              light={image ? getStrapiURL(image?.data?.attributes?.url) : true}
-              url={url}
-              width="100%"
-              controls={false}
-              height="100%"
-              alt={description}
-              playIcon={<StyledPlayIcon />}
-            />
-          ) : (
-            <StyledExperienceVideo
-              as="img"
-              src={getStrapiURL(image?.data?.attributes?.url)}
-              alt=""
-            />
-          ))}
+        <BlockRendererWithCondition condition={isMounted && isRenderable(url)}>
+          <StyledExperienceVideo
+            url={url}
+            width="100%"
+            controls
+            height={isLandscape ? '100%' : 470}
+            alt={description}
+          />
+        </BlockRendererWithCondition>
         <StyledTitle>{title}</StyledTitle>
         <Description>{description}</Description>
       </StyledWrapper>
@@ -63,27 +43,32 @@ export function ExperienceVideoCarouselSlide({
   )
 }
 
-const Root = styled(Slide)`
-  ${({ theme }) => css`
-    .inner {
+const Root = styled(Slide)<{ $isLandscape?: boolean }>`
+  ${($isLandscape) => css`
+    min-width: ${$isLandscape ? '285px;' : '100%;'}
+      ${({ theme }) => css`
+    .inner 
       margin-right: 1rem;
+       margin-left: 1rem;
+    
       .react-player__preview {
-        border-radius: 1rem;
+        border-radius: 0.8125rem;
       }
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }
     }
+  `};
   `}
 `
 
 const StyledExperienceVideo = styled(ReactPlayer)`
-  border-radius: 0.5rem;
+  border-radius: 0.8125rem;
   object-fit: cover;
   width: 100%;
   height: auto;
-
-  aspect-ratio: 1.5;
+  aspect-ratio: 1.7;
+  overflow: hidden;
 `
 const StyledTitle = styled(Typo.Heading3)`
   ${({ theme }) => css`
@@ -108,30 +93,5 @@ const StyledWrapper = styled.div`
     left: 1rem;
     bottom: 8rem;
     z-index: 15;
-  }
-`
-
-const StyledPlayIcon = styled(Play)`
-  ${({ theme }) => css`
-    position: absolute;
-    left: 2rem;
-    bottom: 9rem;
-    z-index: 15;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      scale: 0.5;
-      left: 0;
-
-      bottom: 6rem;
-    }
-  `}
-  transition: all 0.3s ease-in-out;
-  border-radius: 50%;
-  outline-offset: 3px;
-  &:hover {
-    box-shadow: -4px 8px 24px 0px rgba(80, 80, 80, 0.25);
-  }
-  &:focus {
-    outline: 2px solid ${theme.colors.primary};
   }
 `

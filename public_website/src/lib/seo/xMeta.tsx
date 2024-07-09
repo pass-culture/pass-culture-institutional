@@ -1,32 +1,28 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { APIResponse } from '@/types/strapi'
+import { BaseTextProps, XMetaProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
-interface XMetaProps {
-  title: string
-  description: string
-  image: APIResponse<'plugin::upload.file'> | null | undefined
-}
-export function XMeta(props: XMetaProps) {
+export function XMeta(props: XMetaProps & BaseTextProps) {
+  const { title, description, image } = props
+  const url = isRenderable(image?.data.attributes.url)
   return (
     <Head>
-      <meta
-        key="twitter:title"
-        property="twitter:title"
-        content={props.title}
-      />
+      <meta key="twitter:title" property="twitter:title" content={title} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta
         key="twitter:description"
         property="twitter:description"
-        content={props.description}
+        content={description}
       />
-      <meta
-        property="twitter:image"
-        content={getStrapiURL(props.image?.data.attributes.url)}
-      />
+      {image && url && (
+        <meta
+          property="twitter:image"
+          content={getStrapiURL(image.data.attributes.url)}
+        />
+      )}
     </Head>
   )
 }

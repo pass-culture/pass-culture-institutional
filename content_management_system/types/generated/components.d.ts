@@ -23,6 +23,29 @@ export interface BlockCenteredText extends Schema.Component {
   };
 }
 
+export interface BlockCenteredTitle extends Schema.Component {
+  collectionName: 'components_block_centered_titles';
+  info: {
+    displayName: 'Centered Title';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface BlockColumnsText extends Schema.Component {
+  collectionName: 'components_block_columns_texts';
+  info: {
+    displayName: 'Columns Text';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    video: Attribute.Component<'block.video'>;
+    columns: Attribute.Component<'common.simple-text-column', true>;
+  };
+}
+
 export interface BlockDetailedLogos extends Schema.Component {
   collectionName: 'components_block_detailed_logos';
   info: {
@@ -64,6 +87,7 @@ export interface BlockExperienceVideoCarousel extends Schema.Component {
       true
     > &
       Attribute.Required;
+    isLandscape: Attribute.Boolean & Attribute.DefaultTo<true>;
   };
 }
 
@@ -81,6 +105,21 @@ export interface BlockFaq extends Schema.Component {
   };
 }
 
+export interface BlockHeaderWithQRcode extends Schema.Component {
+  collectionName: 'components_block_header_with_q_rcodes';
+  info: {
+    displayName: 'HeaderWithQRcode';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    text: Attribute.Text;
+    image: Attribute.Media & Attribute.Required;
+    icon: Attribute.String;
+    QRCode: Attribute.Component<'common.link'>;
+  };
+}
+
 export interface BlockHeader extends Schema.Component {
   collectionName: 'components_block_headers';
   info: {
@@ -93,6 +132,8 @@ export interface BlockHeader extends Schema.Component {
     image: Attribute.Media & Attribute.Required;
     icon: Attribute.String & Attribute.Required;
     cta: Attribute.Component<'common.link'>;
+    icon2: Attribute.String;
+    aboveTitle: Attribute.String;
   };
 }
 
@@ -385,6 +426,28 @@ export interface BlockSpace extends Schema.Component {
   };
 }
 
+export interface BlockTab extends Schema.Component {
+  collectionName: 'components_block_tab';
+  info: {
+    displayName: 'tab';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    block: Attribute.Component<'block.image-text'>;
+  };
+}
+
+export interface BlockTabs extends Schema.Component {
+  collectionName: 'components_block_tabs';
+  info: {
+    displayName: 'Tabs';
+    description: '';
+  };
+  attributes: {
+    tab: Attribute.Component<'block.tab', true>;
+  };
+}
+
 export interface BlockVerticalCarousel extends Schema.Component {
   collectionName: 'components_block_vertical_carousels';
   info: {
@@ -630,7 +693,7 @@ export interface CommonPiledCardItem extends Schema.Component {
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
     theme: Attribute.Enumeration<
-      ['purple', 'yellow', 'magenta', 'orange', 'green']
+      ['purple', 'yellow', 'magenta', 'orange', 'green', 'blue']
     > &
       Attribute.Required &
       Attribute.DefaultTo<'purple'>;
@@ -644,7 +707,7 @@ export interface CommonSimpleTextColumn extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
   };
 }
@@ -824,6 +887,7 @@ export interface HeaderMegaMenu extends Schema.Component {
     cardSecondEmoji: Attribute.String & Attribute.Required;
     bannerAndroidUrl: Attribute.String;
     bannerIosUrl: Attribute.String;
+    bannerDefaultUrl: Attribute.String;
   };
 }
 
@@ -1051,10 +1115,13 @@ declare module '@strapi/types' {
     export interface Components {
       'block.breadcrumb': BlockBreadcrumb;
       'block.centered-text': BlockCenteredText;
+      'block.centered-title': BlockCenteredTitle;
+      'block.columns-text': BlockColumnsText;
       'block.detailed-logos': BlockDetailedLogos;
       'block.double-push-cta': BlockDoublePushCta;
       'block.experience-video-carousel': BlockExperienceVideoCarousel;
       'block.faq': BlockFaq;
+      'block.header-with-q-rcode': BlockHeaderWithQRcode;
       'block.header': BlockHeader;
       'block.image-gallery': BlockImageGallery;
       'block.image-text': BlockImageText;
@@ -1076,6 +1143,8 @@ declare module '@strapi/types' {
       'block.simple-text-v2': BlockSimpleTextV2;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
+      'block.tab': BlockTab;
+      'block.tabs': BlockTabs;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
       'common.detailed-logo': CommonDetailedLogo;

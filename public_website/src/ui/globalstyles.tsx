@@ -177,10 +177,16 @@ const GlobalStyles = createGlobalStyle`
     background-repeat: no-repeat;
     color: inherit;
   }
+  
+  #main-content{
+  position: relative;
+  z-index:1
+  }
 
-  /* Add transition to carousels */
-  .carousel__slider-tray {
-    transition: transform 0.2s ease-in;
+ .customCarrouselAnimation {
+    transition: transform 0.5s;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform;
   }
 
   body {
@@ -191,6 +197,10 @@ const GlobalStyles = createGlobalStyle`
       --module-margin: 2.825rem;
     }
   }
+
+  #target-anchor-scroll {
+  scroll-margin-top: 1.25rem;
+}
 `
 
 export default GlobalStyles

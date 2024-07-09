@@ -1,24 +1,14 @@
 import React, { useEffect } from 'react'
-import { CarouselProvider, Dot, Slider } from 'pure-react-carousel'
-import styled, { css } from 'styled-components'
+import { CarouselProvider, Slider } from 'pure-react-carousel'
+import styled from 'styled-components'
 
-import {
-  PiledCardsCarouselSlideProps,
-  VerticalCarouselSlide,
-} from './PiledCardsCarouselSlide'
+import { VerticalCarouselSlide } from './PiledCardsCarouselSlide'
+import { StyledDot } from '@/theme/style'
+import { PiledCardsCarouselProps } from '@/types/props'
 import { stripTags } from '@/utils/stripTags'
 
-type PiledCardsCarouselProps = {
-  title: string
-  items: Omit<PiledCardsCarouselSlideProps, 'slideIndex'>[]
-  className?: string
-}
-
-export function PiledCardsCarousel({
-  title,
-  items,
-  className,
-}: PiledCardsCarouselProps) {
+export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
+  const { title, items, className } = props
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
@@ -58,7 +48,7 @@ export function PiledCardsCarousel({
   }
 
   // Remove attributes when clicking "previous", "next" and dots buttons
-  function handleNavigationButtonClick() {
+  function handleNavigationButtonClick(): void {
     const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
 
@@ -82,6 +72,7 @@ export function PiledCardsCarousel({
       className={className}>
       <StyledSlider
         role="region"
+        classNameAnimation="customCarrouselAnimation"
         aria-label={stripTags(title)}
         aria-roledescription="carrousel">
         {items.map((item, index) => {
@@ -124,19 +115,4 @@ const StyledDots = styled.div`
   justify-content: center;
   gap: 0.5rem;
   margin-top: 2rem;
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    height: 0.875rem;
-    border-radius: 50%;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      background-color: ${theme.colors.secondary};
-      opacity: 1;
-    }
-  `}
 `

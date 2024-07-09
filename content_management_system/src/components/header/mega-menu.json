@@ -64,6 +64,10 @@
     "bannerIosUrl": {
       "type": "string",
       "required": false
+    },
+    "bannerDefaultUrl": {
+      "type": "string",
+      "required": false
     }
   }
 }

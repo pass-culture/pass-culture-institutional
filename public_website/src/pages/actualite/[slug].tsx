@@ -8,6 +8,7 @@ import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface CustomPageProps {
   data: APIResponseData<'api::news.news'>
@@ -15,17 +16,15 @@ interface CustomPageProps {
 }
 
 export default function CustomPage(props: CustomPageProps) {
+  const { seo, image, title, blocks, aboveTitle } = props.data.attributes
   return (
     <React.Fragment>
-      <Seo metaData={props.data.attributes.seo} />
-      <Header
-        image={props.data.attributes.image}
-        icon=""
-        title={props.data.attributes.title}
-      />
-      {props.data.attributes.blocks?.map((block) => (
+      <Seo metaData={seo} />
+      <Header image={image} icon="" title={title} aboveTitle={aboveTitle} />
+      {blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
+      <Breadcrumb isUnderHeader />
       <StyledLatestNews
         news={props.latestStudies}
         title="Les dernières **actualités**"

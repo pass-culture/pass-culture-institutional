@@ -18,7 +18,12 @@
     },
     "category": {
       "type": "enumeration",
-      "enum": ["Article", "Évènement", "Partenariat", "Rencontre"],
+      "enum": [
+        "Article",
+        "Évènement",
+        "Partenariat",
+        "Rencontre"
+      ],
       "required": true
     },
     "date": {
@@ -29,7 +34,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "string",
@@ -107,7 +114,17 @@
     "pageLocalisation": {
       "type": "customField",
       "customField": "plugin::multi-select.multi-select",
-      "options": ["Jeunes et parents", "Acteurs culturels", "S’informer"]
+      "options": [
+        "Jeunes et parents",
+        "Acteurs culturels",
+        "S’informer"
+      ]
+    },
+    "aboveTitle": {
+      "type": "string"
+    },
+    "emoji": {
+      "type": "string"
     }
   }
 }

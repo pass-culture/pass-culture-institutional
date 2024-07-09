@@ -1,38 +1,38 @@
 import React from 'react'
-import {
-  type BlocksContent,
-  BlocksRenderer,
-} from '@strapi/blocks-react-renderer'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { SimpleTextV2Props } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-interface SimpleTextV2Props {
-  title?: string
-  text: BlocksContent
-  columns: {
-    id: number
-    title: string
-    text: BlocksContent
-  }[]
-}
-
 export function SimpleTextV2(props: SimpleTextV2Props) {
+  const { columns, title, text } = props
+
+  const isRenderColumns = (): boolean => {
+    return columns?.length > 0
+  }
   return (
     <Root data-testid="simple-text">
-      {props.title && <StyledHeading2>{props.title}</StyledHeading2>}
+      <BlockRendererWithCondition condition={isRenderable(title)}>
+        <StyledHeading2>{title as string}</StyledHeading2>
+      </BlockRendererWithCondition>
+
       <Content>
-        <BlocksRenderer content={props.text} />
-        {props.columns.length > 0 && (
+        <BlocksRenderer content={text} />
+        {isRenderColumns() && (
           <Columns>
-            {props.columns.map((col) => (
+            {columns?.map((col) => (
               <Column key={col.id}>
-                <ColumnTitle
-                  aria-label={parseText(col.title).accessibilityLabel}>
-                  {parseText(col.title).processedText}
-                </ColumnTitle>
+                {col.title && (
+                  <ColumnTitle
+                    aria-label={parseText(col.title).accessibilityLabel}>
+                    {parseText(col.title).processedText}
+                  </ColumnTitle>
+                )}
                 <BlocksRenderer content={col.text} />
               </Column>
             ))}
@@ -58,8 +58,8 @@ const Root = styled(ContentWrapper)`
     }
 
     ul {
-      list-style-type: disc;
-      padding-left: 2rem;
+      list-style-type: none;
+      padding-left: 0 rem;
       list-style-position: inside;
     }
 
@@ -92,6 +92,7 @@ const Root = styled(ContentWrapper)`
     @media (width < ${theme.mediaQueries.mobile}) {
       padding-left: 1rem;
       padding-right: 1rem;
+      margin-bottom: 0;
 
       h2 {
         font-size: 1.5rem;

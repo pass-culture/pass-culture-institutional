@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer'
+import React, { useEffect, useMemo } from 'react'
+import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import {
   ButtonBack,
   ButtonNext,
@@ -9,55 +9,34 @@ import {
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  OffersCarouselSlide,
-  OffersCarouselSlideProps,
-} from './offersCarouselSlide'
+import { OffersCarouselSlide } from './offersCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { CTA } from '@/types/CTA'
+import { OffersVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
+import { isRenderable } from '@/utils/isRenderable'
 import { stripTags } from '@/utils/stripTags'
 
-type OffersVideoCarouselProps = {
-  title: string
-  items: Omit<OffersCarouselSlideProps, 'slideIndex'>[]
-  description?: BlocksContent
-  cta: CTA
-}
-
-export function OffersCarousel({
-  title,
-  items,
-  cta,
-  description,
-}: OffersVideoCarouselProps) {
+const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
+export function OffersCarousel(props: OffersVideoCarouselProps) {
+  const { title, items, cta, description } = props
   const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
   const OFFERS_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const { width = 0 } = useWindowSize({ debounceDelay: 200 })
+  const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
-  const [screenWidth, setScreenWidth] = useState<number>()
+  const visibleSlides = width < MEDIA_QUERY ? 1 : 3.2
 
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
-
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.LARGE_DESKTOP)
-      ? 1
-      : 3.2
+  const isNavShowing = (): boolean => {
+    return TOTAL_SLIDES > visibleSlides
+  }
 
   useEffect(() => {
     const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
@@ -100,18 +79,17 @@ export function OffersCarousel({
     !description ||
     (description.length === 1 &&
       description.at(0)?.children.at(0)?.type === 'text' &&
-      ((description.at(0)?.children.at(0) as { text: string })
-        ?.text as string) === '')
+      (description.at(0)?.children.at(0) as { text: string })?.text === '')
 
   return (
     <StyledCarousel
       naturalSlideWidth={60}
       naturalSlideHeight={75}
       visibleSlides={visibleSlides}
-      totalSlides={items.length}
-      isIntrinsicHeight={true}
-      dragEnabled={false}
-      infinite={true}
+      totalSlides={TOTAL_SLIDES}
+      isIntrinsicHeight
+      dragEnabled
+      infinite
       step={1}>
       <StyledHeading $noMargin>
         <Typo.Heading2>{title}</Typo.Heading2>
@@ -119,25 +97,30 @@ export function OffersCarousel({
         {!descriptionIsEmpty && <BlocksRenderer content={description} />}
 
         <StyledArrowButtonWrapper>
-          <StyledNavigationButtons aria-label="Contrôles du carousel">
-            <ButtonBack
-              onClick={handleExperienceVideoNavigationButtonClick}
-              aria-label="Élement précédent">
-              <ArrowRight />
-            </ButtonBack>
-            <ButtonNext
-              aria-label="Élément suivant"
-              onClick={handleExperienceVideoNavigationButtonClick}>
-              <ArrowRight />
-            </ButtonNext>
-          </StyledNavigationButtons>
-          <CtaLink href={cta.URL}>
-            <span>{cta.Label}</span>
-          </CtaLink>
+          <BlockRendererWithCondition condition={isNavShowing()}>
+            <StyledNavigationButtons aria-label="Contrôles du carousel">
+              <ButtonBack
+                onClick={handleExperienceVideoNavigationButtonClick}
+                aria-label="Élement précédent">
+                <ArrowRight />
+              </ButtonBack>
+              <ButtonNext
+                aria-label="Élément suivant"
+                onClick={handleExperienceVideoNavigationButtonClick}>
+                <ArrowRight />
+              </ButtonNext>
+            </StyledNavigationButtons>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
+            <CtaLink href={cta.URL}>
+              <span>{cta.Label}</span>
+            </CtaLink>
+          </BlockRendererWithCondition>
         </StyledArrowButtonWrapper>
       </StyledHeading>
 
       <StyledSlider
+        classNameAnimation="customCarrouselAnimation"
         aria-label={stripTags(title)}
         aria-roledescription="carrousel">
         {items.map((item, index) => {
@@ -151,24 +134,27 @@ export function OffersCarousel({
         })}
       </StyledSlider>
 
-      <StyledDots aria-label="Contrôles du carousel">
-        {items.map((item, index) => {
-          return (
-            <StyledDot
-              onClick={handleExperienceVideoNavigationButtonClick}
-              slide={index}
-              key={item.title}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.title}`}
-            />
-          )
-        })}
-      </StyledDots>
-
-      <MobileCtaWrapper>
-        <MobileCtaLink href={cta?.URL}>{cta?.Label}</MobileCtaLink>
-      </MobileCtaWrapper>
+      {isNavShowing() && (
+        <StyledDots aria-label="Contrôles du carousel">
+          {items.map((item, index) => {
+            return (
+              <StyledDot
+                onClick={handleExperienceVideoNavigationButtonClick}
+                slide={index}
+                key={item.title}
+                aria-label={`Afficher la diapositive ${index + 1} sur ${
+                  items.length
+                } : ${item.title}`}
+              />
+            )
+          })}
+        </StyledDots>
+      )}
+      {cta && (
+        <MobileCtaWrapper>
+          <MobileCtaLink href={cta.URL}>{cta.Label}</MobileCtaLink>
+        </MobileCtaWrapper>
+      )}
     </StyledCarousel>
   )
 }
@@ -237,7 +223,6 @@ const StyledNavigationButtons = styled.div`
 
     button {
       &:hover {
-        box-shadow: none;
         filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
       }
       background-color: ${theme.colors.white};
@@ -249,6 +234,7 @@ const StyledNavigationButtons = styled.div`
       width: 3.625rem;
       height: 3.625rem;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
       transition: all 0.3s ease-in-out;
       &:focus {
         outline: 2px solid ${theme.colors.primary};
@@ -277,8 +263,10 @@ const StyledDots = styled.div`
 const StyledDot = styled(Dot)`
   ${({ theme }) => css`
     width: 0.875rem;
+    min-width: 0.875rem;
     border-radius: 50%;
     height: 0.875rem;
+    min-height: 0.875rem;
     opacity: 0.22;
     background-color: ${theme.colors.black};
 

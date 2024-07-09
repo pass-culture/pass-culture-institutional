@@ -2,18 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../../icons/ArrowRight'
+import { MobileMenuSubPanelProps } from '@/types/props'
 
-type MobileMenuSubPanelProps = {
-  onClose: () => void
-  title: string
-  children: React.ReactNode
-}
-
-export function MobileMenuSubPanel({
-  onClose,
-  title,
-  children,
-}: MobileMenuSubPanelProps) {
+export function MobileMenuSubPanel(props: MobileMenuSubPanelProps) {
+  const { onClose, title, children } = props
   return (
     <StyledMobileMenuSubPanel>
       <button onClick={onClose}>

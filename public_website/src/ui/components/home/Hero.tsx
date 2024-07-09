@@ -1,38 +1,27 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import ButtonScrollTo from '../buttonScrollTo/ButtonScrollTo'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { CTA } from '@/types/CTA'
-import { APIResponseData } from '@/types/strapi'
+import { HeroProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-type HeroProps = {
-  title: string
-  subTitle: string
-  cta: CTA
-  firstEmoji: string
-  secondEmoji: string
-  thirdEmoji: string
-  fourthEmoji: string
-  fifthEmoji: string
-  sixthEmoji: string
-  images: APIResponseData<'plugin::upload.file'>[] | null
-}
+export function Hero(props: HeroProps) {
+  const {
+    title,
+    subTitle,
+    cta,
+    firstEmoji,
+    secondEmoji,
+    thirdEmoji,
+    fourthEmoji,
+    fifthEmoji,
+    sixthEmoji,
+    images,
+  } = props
 
-export function Hero({
-  title,
-  subTitle,
-  cta,
-  firstEmoji,
-  secondEmoji,
-  thirdEmoji,
-  fourthEmoji,
-  fifthEmoji,
-  sixthEmoji,
-  images,
-}: HeroProps) {
   return (
     <Root>
       <StyledHeroBackground>
@@ -59,6 +48,7 @@ export function Hero({
       <StyledSubTitle>{subTitle}</StyledSubTitle>
       <StyledHeading>{title}</StyledHeading>
       <StyledCta cta={cta} />
+      <ButtonScrollTo noTranslate={false} />
 
       <StyledCircle $index={1} $width="40rem" aria-hidden="true">
         <StyledFirstEmoji as={OutlinedText} dilationRadius={2} shadow>
@@ -126,7 +116,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 0 auto 0;
-      padding: 0 1.5rem 5rem;
+      padding: 0 1.5rem 3.75rem;
     }
   `}
 `

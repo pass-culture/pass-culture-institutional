@@ -2,26 +2,19 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { KeyNumberCarouselSlideProps } from '@/types/props'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
-export type KeyNumberCarouselSlideProps = {
-  slideIndex: number
-  title: string
-  description: string
-  firstEmoji: string
-  secondEmoji: string
-  thirdEmoji: string
-}
-
-export function KeyNumberCarouselSlide({
-  slideIndex,
-  title,
-  description,
-  firstEmoji,
-  secondEmoji,
-  thirdEmoji,
-}: KeyNumberCarouselSlideProps) {
+export function KeyNumberCarouselSlide(props: KeyNumberCarouselSlideProps) {
+  const {
+    slideIndex,
+    title,
+    description,
+    firstEmoji,
+    secondEmoji,
+    thirdEmoji,
+  } = props
   return (
     <Root
       index={slideIndex}
@@ -50,10 +43,13 @@ const Root = styled(Slide)`
       padding: 2rem 3rem;
       background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
-      aspect-ratio: 2.8;
+      min-height: 300px;
+      box-sizing: border-box;
+      height: 100%;
+      //  aspect-ratio: 2.8;
       @media (max-width: ${theme.mediaQueries.mobile}) {
-        margin-right: 0;
-        margin: 1rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
       }
     }
   `}

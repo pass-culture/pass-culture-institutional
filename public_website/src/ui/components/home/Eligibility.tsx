@@ -4,28 +4,19 @@ import styled, { css } from 'styled-components'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { CTA } from '@/types/CTA'
+import { EligibilityProps } from '@/types/props'
 import { parseText } from '@/utils/parseText'
 
-type EligibilityProps = {
-  title: string
-  items: { title: string; description: string; emoji: string }[]
-  cardTitle: string
-  cardDescription: string
-  cardCta: CTA
-  cardFirstEmoji: string
-  cardSecondEmoji: string
-}
-
-export function Eligibility({
-  title,
-  items,
-  cardTitle,
-  cardDescription,
-  cardCta,
-  cardFirstEmoji,
-  cardSecondEmoji,
-}: EligibilityProps) {
+export function Eligibility(props: EligibilityProps) {
+  const {
+    title,
+    items,
+    cardTitle,
+    cardDescription,
+    cardCta,
+    cardFirstEmoji,
+    cardSecondEmoji,
+  } = props
   return (
     <Root>
       <StyledCard>
@@ -80,7 +71,7 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
-      margin: 3rem auto 4.5rem;
+      margin: 0rem auto 4.5rem;
     }
   `}
 `
@@ -169,7 +160,7 @@ const StyledListContainer = styled.div`
 const StyledListHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     && {
-      font-size: ${theme.fonts.sizes['4xl']};
+      font-size: ${theme.fonts.sizes['2xl']};
       margin-bottom: 1.5rem;
     }
   `}

@@ -7,28 +7,11 @@ import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
-import { CTA } from '@/types/CTA'
+import { FooterProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-export type FooterProps = {
-  PlayStoreUrl: string
-  AppStoreUrl: string
-  bannerText: string
-  LegalLinks: { Label: string; URL: string; id: number }[]
-  Lists: {
-    id: number
-    Title: string
-    Links: CTA[]
-  }[]
-}
-
-export function Footer({
-  PlayStoreUrl,
-  AppStoreUrl,
-  bannerText,
-  LegalLinks,
-  Lists,
-}: FooterProps) {
+export function Footer(props: FooterProps) {
+  const { PlayStoreUrl, AppStoreUrl, bannerText, LegalLinks, Lists } = props
   return (
     <StyledFooter id="footer">
       <StyledContentContainer>
@@ -44,7 +27,7 @@ export function Footer({
               title={bannerText}
               androidUrl={AppStoreUrl}
               iosUrl={PlayStoreUrl}
-              onClick={() =>
+              onClick={(): void =>
                 onClickAnalytics({
                   eventName: 'downloadApp',
                   eventOrigin: 'footer',
@@ -54,7 +37,7 @@ export function Footer({
           </StyledLogos>
 
           <StyledLists>
-            {Lists.map((list) => (
+            {Lists?.map((list) => (
               <React.Fragment key={list.id}>
                 <FooterList title={list.Title} listItems={list.Links} />
                 <FooterMobileList title={list.Title} listItems={list.Links} />
@@ -62,7 +45,7 @@ export function Footer({
             ))}
           </StyledLists>
           <StyledLegalLinks>
-            {LegalLinks.map((link) => {
+            {LegalLinks?.map((link) => {
               return (
                 <li key={link.id}>
                   <Link href={link.URL}>{link.Label}</Link>

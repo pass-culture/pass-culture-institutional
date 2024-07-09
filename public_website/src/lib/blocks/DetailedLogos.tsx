@@ -2,27 +2,21 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
-import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { DetailedLogosProps } from '@/types/props'
 import { Button } from '@/ui/components/button/Button'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { isRenderable } from '@/utils/isRenderable'
 
-type DetailedLogosProps = {
-  title?: string
-  logos: {
-    title: string
-    description: string
-    cta: CTA
-    image: APIResponse<'plugin::upload.file'> | null
-  }[]
-}
-
-export function DetailedLogos({ title, logos }: DetailedLogosProps) {
+export function DetailedLogos(props: DetailedLogosProps) {
+  const { title, logos = [] } = props
   return (
     <ContentWrapper>
       <InnerWrapper>
-        {title && <StyledHeading>{title}</StyledHeading>}
+        <BlockRendererWithCondition condition={isRenderable(title)}>
+          <StyledHeading>{title as string}</StyledHeading>
+        </BlockRendererWithCondition>
         <StyledList>
           {logos.map((logo) => (
             <StyledListItem key={logo.title}>

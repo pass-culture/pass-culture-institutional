@@ -1,36 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  Dot,
   Slider,
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  VerticalCarouselSlide,
-  VerticalCarouselSlideProps,
-} from './VerticalCarouselSlide'
+import { VerticalCarouselSlide } from './VerticalCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
+import { StyledDot } from '@/theme/style'
+import { VerticalCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-export type VerticalCarouselProps = {
-  title: string
-  items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
-  hidePlayIcon?: boolean
-}
-
-export function VerticalCarousel({
-  title,
-  items,
-  hidePlayIcon,
-}: VerticalCarouselProps) {
-  items = items.filter((item) => {
+export function VerticalCarousel(props: VerticalCarouselProps) {
+  const { title, items, hidePlayIcon } = props
+  const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
   })
 
@@ -38,25 +29,8 @@ export function VerticalCarousel({
     title
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-
-  // Computed the number of visible slides depending on screen width
-  const [screenWidth, setScreenWidth] = useState<number>()
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth)
-
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  // Get the MQ in rem and convert it in pixels
-  const visibleSlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
+  const visibleSlides = width < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
 
   /**
    * Remove unnecessary HTML attributes for a11y.
@@ -98,38 +72,46 @@ export function VerticalCarousel({
     }
   }
 
+  const isNavigation = (): boolean => {
+    return itemsFilter.length > 0
+  }
+  const TOTAL_SLIDE = itemsFilter.length
+
   return (
     <Root>
       <ContentWrapper>
         <CarouselProvider
           naturalSlideWidth={60}
           naturalSlideHeight={75}
-          totalSlides={items.length}
+          totalSlides={TOTAL_SLIDE}
           visibleSlides={visibleSlides}
-          isIntrinsicHeight={true}
-          infinite={true}
-          dragEnabled={false}
+          isIntrinsicHeight
+          infinite
+          dragEnabled
           step={1}>
-          <StyledHeading>
-            <Typo.Heading2>{title}</Typo.Heading2>
+          <BlockRendererWithCondition condition={isNavigation()}>
+            <StyledHeading>
+              <Typo.Heading2>{title}</Typo.Heading2>
 
-            <StyledNavigationButtons
-              role="group"
-              aria-label="Contrôles du carousel">
-              <ButtonBack
-                aria-label="Élement précédent"
-                onClick={handleNavigationButtonClick}>
-                <ArrowRight />
-              </ButtonBack>
-              <ButtonNext
-                aria-label="Élément suivant"
-                onClick={handleNavigationButtonClick}>
-                <ArrowRight />
-              </ButtonNext>
-            </StyledNavigationButtons>
-          </StyledHeading>
+              <StyledNavigationButtons
+                role="group"
+                aria-label="Contrôles du carousel">
+                <ButtonBack
+                  aria-label="Élement précédent"
+                  onClick={handleNavigationButtonClick}>
+                  <ArrowRight />
+                </ButtonBack>
+                <ButtonNext
+                  aria-label="Élément suivant"
+                  onClick={handleNavigationButtonClick}>
+                  <ArrowRight />
+                </ButtonNext>
+              </StyledNavigationButtons>
+            </StyledHeading>
+          </BlockRendererWithCondition>
 
-          <Slider
+          <StyledSlider
+            classNameAnimation="customCarrouselAnimation"
             role="region"
             aria-label={stripTags(title)}
             aria-roledescription="carrousel">
@@ -143,7 +125,7 @@ export function VerticalCarousel({
                 />
               )
             })}
-          </Slider>
+          </StyledSlider>
 
           <StyledDots role="group" aria-label="Contrôles du carousel">
             {items.map((item, index) => {
@@ -172,6 +154,7 @@ const Root = styled.div`
   padding-top: 1rem;
   margin-top: -1rem;
 `
+const StyledSlider = styled(Slider)``
 
 const StyledHeading = styled.div`
   ${({ theme }) => css`
@@ -236,21 +219,6 @@ const StyledDots = styled.div`
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
-    }
-  `}
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    height: 0.875rem;
-    border-radius: 50%;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      background-color: ${theme.colors.secondary};
-      opacity: 1;
     }
   `}
 `

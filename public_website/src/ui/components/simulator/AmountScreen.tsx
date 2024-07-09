@@ -7,7 +7,6 @@ import { Typo } from '../typographies'
 interface AmountScreenProps {
   title: string
   text: string
-
   onNext: () => void
 }
 

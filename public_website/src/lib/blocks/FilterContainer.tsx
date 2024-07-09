@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import {
+  CustomSelect,
+  CustomSelectButton,
+  StyledSelectButton,
+  WrapperChevron,
+} from '@/theme/style'
 import { Button } from '@/ui/components/button/Button'
-import { ArrowDown } from '@/ui/components/icons/ArrowDown'
+import { Check } from '@/ui/components/icons/Check'
+import { ChevronDown } from '@/ui/components/icons/ChevronDown'
 import { Cross } from '@/ui/components/icons/Cross'
 import { Plus } from '@/ui/components/icons/Plus'
 import { Tick } from '@/ui/components/icons/Tick'
@@ -23,15 +31,11 @@ type FiltersProps = {
 type FilterValues = { [key: string]: string[] }
 type FilterClicked = { [key: string]: number }
 
-export function FilterContainer({
-  className,
-  filtres,
-  onFilterChange,
-}: FiltersProps) {
+export function FilterContainer(props: FiltersProps) {
+  const { className, filtres, onFilterChange } = props
   const [isVisible, setIsVisible] = useState<boolean>(false)
-
+  const [isOpen, setIsOpen] = useState<number>(-1)
   const [numberOfFilters, setNumberOfFilters] = useState<number>(0)
-
   const initialState: FilterValues = {}
   const numberOfFilterss: FilterClicked = {}
 
@@ -52,16 +56,15 @@ export function FilterContainer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtres])
 
-  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = event.target
-
+  const handleFilterChange = (name: string, value: string): void => {
+    setIsOpen(-1)
     checkValue(name, value)
   }
-  const handleDetailChange = (filter: string, value: string) => {
+  const handleDetailChange = (filter: string, value: string): void => {
     checkValue(filter, value)
   }
 
-  const checkValue = (name: string, value: string) => {
+  const checkValue = (name: string, value: string): void => {
     const filterState = filterValues[name]
 
     const newFilterValues = { ...filterValues }
@@ -97,6 +100,14 @@ export function FilterContainer({
     }
   }
 
+  const checkIfOpen = (index: number): boolean => {
+    return isOpen === index
+  }
+
+  const checkIsSelected = (key: string, value: string): boolean => {
+    return !!filterValues[key]?.includes(value)
+  }
+
   return (
     <Root className={className}>
       <StyledMobileFilterLabel>
@@ -104,31 +115,67 @@ export function FilterContainer({
         <StyledRoundDiv>{numberOfFilters}</StyledRoundDiv>
       </StyledMobileFilterLabel>
       {filtres?.map((filtre, index) => (
-        <div key={filtre.filtre + index}>
-          <label className="visually-hidden" htmlFor={filtre.filtre}>
+        <CustomSelect
+          onMouseLeave={(): void => setIsOpen(-1)}
+          key={filtre.filtre + index}
+          $isInBreadcrumb={false}>
+          <CustomSelectButton
+            role="combobox"
+            onClick={(): void => {
+              filtre.value.length && setIsOpen(index)
+            }}
+            tabIndex={0}
+            aria-owns={filtre.filtre}
+            aria-autocomplete="none"
+            aria-labelledby="Sélectionnez"
+            aria-label="Sélectionnez"
+            aria-haspopup="listbox"
+            aria-expanded={checkIfOpen(index)}
+            aria-controls="listbox">
             {filtre.filtre}
-          </label>
-          <StyledSelect
-            id={filtre.filtre}
-            name={filtre.filtre}
-            aria-label={filtre.filtre}
-            onChange={handleFilterChange}>
-            <option value="">{filtre.filtre}</option>
-            <option value="">Tout</option>
-            {filtre.value.map((value, index) => (
-              <option key={value + index} value={value}>
-                {value}
-              </option>
-            ))}
-          </StyledSelect>
-
+            <WrapperChevron $isOpen={checkIfOpen(index)}>
+              <ChevronDown />
+            </WrapperChevron>
+          </CustomSelectButton>
+          <BlockRendererWithCondition condition={checkIfOpen(index)}>
+            <span
+              role="listbox"
+              aria-labelledby={filtre.filtre}
+              aria-multiselectable="true">
+              <ul id={filtre.filtre}>
+                {filtre.value.map((value, index) => (
+                  <span
+                    aria-selected={checkIsSelected(filtre.filtre, value)}
+                    role="option"
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    key={value + index}
+                    onClick={(): void =>
+                      handleFilterChange(filtre.filtre, value)
+                    }>
+                    <li>
+                      <span
+                        style={{
+                          opacity: checkIsSelected(filtre.filtre, value)
+                            ? 1
+                            : 0,
+                        }}>
+                        <Check />
+                      </span>
+                      {value}
+                    </li>
+                  </span>
+                ))}
+              </ul>
+            </span>
+          </BlockRendererWithCondition>
           {filterValues[filtre.filtre]?.map((value, index) => {
             if (value !== '') {
               return (
                 <StyledSelectButton
                   key={value + index}
                   aria-label={value}
-                  onClick={() => {
+                  onClick={(): void => {
                     handleDetailChange(filtre.filtre, value)
                   }}>
                   {value} <Cross />
@@ -137,13 +184,13 @@ export function FilterContainer({
             }
             return null
           })}
-        </div>
+        </CustomSelect>
       ))}
 
       <StyledButton
         aria-label={isVisible ? 'Afficher les filtres' : 'Cacher les filtres'}
-        onClick={() => {
-          setIsVisible(!isVisible)
+        onClick={(): void => {
+          setIsVisible((isVisible) => !isVisible)
         }}>
         <Plus />
       </StyledButton>
@@ -158,7 +205,7 @@ export function FilterContainer({
               aria-label={
                 isVisible ? 'Afficher les filtres' : 'Cacher les filtres'
               }
-              onClick={() => {
+              onClick={(): void => {
                 setIsVisible(!isVisible)
               }}>
               <Plus />
@@ -173,7 +220,7 @@ export function FilterContainer({
                     <StyledRoundDiv>
                       {clickedFilters[filtre.filtre] ?? '0'}
                     </StyledRoundDiv>
-                    <ArrowDown />
+                    <ChevronDown />
                   </div>
                 </summary>
                 <button
@@ -187,11 +234,11 @@ export function FilterContainer({
                 {filtre.value.map((value, index) => (
                   <button
                     className={
-                      filterValues[filtre.filtre]?.includes(value)
-                        ? 'active'
-                        : ''
+                      checkIsSelected(filtre.filtre, value) ? 'active' : ''
                     }
-                    onClick={() => handleDetailChange(filtre.filtre, value)}
+                    onClick={(): void =>
+                      handleDetailChange(filtre.filtre, value)
+                    }
                     key={value + index}>
                     <Tick />
                     {value}
@@ -209,7 +256,6 @@ export function FilterContainer({
 const Root = styled.div`
   ${({ theme }) => css`
     padding: 1rem 1.5rem;
-    max-width: 80rem;
     margin-inline: auto;
     display: flex;
     background-color: ${theme.colors.lightBlue};
@@ -221,29 +267,6 @@ const Root = styled.div`
   `}
 `
 
-const StyledSelect = styled.select`
-  ${({ theme }) => css`
-    padding: 0 2rem 0 2rem;
-    margin-right: 2rem;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    border: none;
-    border-left: solid 1px ${theme.colors.black}20;
-    background-color: transparent;
-    font-weight: ${theme.fonts.weights.bold};
-    text-transform: uppercase;
-    appearance: none;
-
-    &::after {
-      color: ${theme.colors.tertiary};
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
-    }
-  `}
-`
 const StyledButton = styled(Button)`
   ${({ theme }) => css`
     display: none;
@@ -426,25 +449,6 @@ const StyledRoundDiv = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-  `}
-`
-const StyledSelectButton = styled.button`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.secondary};
-    color: ${theme.colors.white};
-    padding: 0.5rem 1rem;
-
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-
-    border-radius: 1.25rem;
-    margin-top: 1rem;
-    margin-left: 1rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
     }
   `}
 `

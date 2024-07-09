@@ -1,31 +1,27 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { APIResponseData } from '@/types/strapi'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { LatestEventsProps } from '@/types/props'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-type LatestNewsProps = {
-  events: APIResponseData<'api::event.event'>[]
-  className?: string
-  buttonText?: string
-  type?: string
-}
+export function EventListItems(props: LatestEventsProps) {
+  const { events, className, buttonText, type } = props
+  const [visibleItems, setVisibleItems] = useState<number>(2)
 
-export function EventListItems({
-  events,
-  className,
-  buttonText,
-  type,
-}: LatestNewsProps) {
-  const [visibleItems, setVisibleItems] = useState(2)
-
-  const loadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const loadMore = (e: React.MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault()
     setVisibleItems((prevVisibleItems) =>
       Math.min(prevVisibleItems + 2, events.length)
     )
   }
+
+  const isMoreButton = (): boolean => {
+    return visibleItems < events.length
+  }
+
   return (
     <Root className={className}>
       <StyledList>
@@ -49,29 +45,23 @@ export function EventListItems({
             </li>
           ))}
       </StyledList>
-      {visibleItems < events.length && (
+      <BlockRendererWithCondition condition={isMoreButton()}>
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
-      )}
+      </BlockRendererWithCondition>
     </Root>
   )
 }
 
-const Root = styled.div`
-  ${({ theme }) => css`
-    padding: 1rem 1.5rem;
-    max-width: 80rem;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
+const Root = styled(ContentWrapper)`
+  padding: 1rem 1.5rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
 
-    > a {
-      align-self: center;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      padding: 1rem auto;
-    }
-  `}
+  > a {
+    align-self: center;
+  }
 `
 
 const StyledList = styled.ul`
@@ -80,8 +70,6 @@ const StyledList = styled.ul`
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
     margin-bottom: 5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
 
     > li {
       scroll-snap-align: center;

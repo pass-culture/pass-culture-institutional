@@ -29,28 +29,32 @@ export function SocialMedia(props: SocialMediaProps) {
   const sliceIndex = Math.ceil(socialMediaLink.length / 2)
   const firstRow = socialMediaLink.slice(0, sliceIndex)
   const secondRow = socialMediaLink.slice(sliceIndex)
+
+  const renderFirstRow = (
+    collection: {
+      name: string
+      url: string
+    }[]
+  ) => {
+    return (
+      <StyledList>
+        {collection?.map((link) => {
+          return (
+            <StyledListItem key={link.name}>
+              <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
+            </StyledListItem>
+          )
+        })}
+      </StyledList>
+    )
+  }
+
   return (
     <ContentWrapper className={className}>
-      {title && <StyledHeading>{title}</StyledHeading>}
+      <StyledHeading {...{ accessibilityLabel: title }}>{title}</StyledHeading>
       <Lists>
-        <StyledList>
-          {firstRow.map((link) => {
-            return (
-              <StyledListItem key={link.name}>
-                <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
-              </StyledListItem>
-            )
-          })}
-        </StyledList>
-        <StyledList>
-          {secondRow.map((link) => {
-            return (
-              <StyledListItem key={link.name}>
-                <Link href={link.url}>{SOCIAL_ICONS[link.name]}</Link>
-              </StyledListItem>
-            )
-          })}
-        </StyledList>
+        {renderFirstRow(firstRow)}
+        {renderFirstRow(secondRow)}
       </Lists>
     </ContentWrapper>
   )
@@ -93,6 +97,12 @@ const StyledListItem = styled.li`
       background: ${theme.colors.secondary};
       transform: rotate(4deg);
 
+      outline-offset: 2px;
+
+      &:active {
+        outline: 2px solid ${theme.colors.secondary};
+      }
+
       svg {
         max-width: 2rem;
         max-height: 2rem;
@@ -108,10 +118,10 @@ const StyledListItem = styled.li`
       transform: rotate(-35deg);
       filter: brightness(0.8);
     }
-    &:focus {
-      outline: 2px solid ${theme.colors.primary};
-    }
-    outline-offset: 2px;
+    // &:focus {
+    //   outline: 2px solid ${theme.colors.secondary};
+    // }
+
     @media (width < ${theme.mediaQueries.mobile}) {
       a {
         height: 3.25rem;

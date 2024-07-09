@@ -1,46 +1,49 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
-import { APIResponse } from '@/types/strapi'
-import { Typo } from '@/ui/components/typographies'
-import { getStrapiURL } from '@/utils/apiHelpers'
-
-interface HeaderProps {
-  title: string
-  text?: string
-  image: APIResponse<'plugin::upload.file'> | null
-  icon: string
-  cta?: CTA
-}
-
 import { CTA } from '@/types/CTA'
+import { HeaderProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
+import { Typo } from '@/ui/components/typographies'
+import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 
 export function Header(props: HeaderProps) {
+  const { text, title, cta, image, icon, icon2, aboveTitle } = props
+  const img_url = image?.data?.attributes?.url
   return (
     <Root>
       <StyledContentWrapper>
         <div>
-          <StyledHeading>{props.title}</StyledHeading>
-          {props.text && <StyledText>{props.text}</StyledText>}
-          {props.cta?.Label && props.cta?.URL && (
+          <BlockRendererWithCondition condition={isRenderable(aboveTitle)}>
+            <StyledAboveHeading>{aboveTitle}</StyledAboveHeading>
+          </BlockRendererWithCondition>
+          <StyledHeading>{title}</StyledHeading>
+          <BlockRendererWithCondition condition={isRenderable(text)}>
+            <StyledText>{text}</StyledText>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
             <StyledBtnWrapper>
-              <ButtonWithCTA cta={props.cta} />
+              <ButtonWithCTA cta={cta as CTA} />
             </StyledBtnWrapper>
-          )}
+          </BlockRendererWithCondition>
         </div>
-        <CardContainer>
-          <Card
-            $imageUrl={
-              props.image?.data?.attributes?.url &&
-              getStrapiURL(props.image?.data.attributes.url)
-            }>
-            <OutlinedText shadow>{props.icon}</OutlinedText>
-          </Card>
-          <BackgroundLayer />
-        </CardContainer>
+        <BlockRendererWithCondition condition={isRenderable(img_url)}>
+          <CardContainer>
+            <Card $imageUrl={getStrapiURL(img_url as string)}>
+              <BlockRendererWithCondition condition={isRenderable(icon)}>
+                <OutlinedText shadow>{icon}</OutlinedText>
+              </BlockRendererWithCondition>
+              <BlockRendererWithCondition condition={isRenderable(icon2)}>
+                <OutlinedText shadow>{icon2}</OutlinedText>
+              </BlockRendererWithCondition>
+            </Card>
+            <BackgroundLayer />
+          </CardContainer>
+        </BlockRendererWithCondition>
       </StyledContentWrapper>
     </Root>
   )
@@ -55,7 +58,6 @@ const Root = styled.div`
     );
 
     transform: translateY(-8rem);
-    margin-bottom: -8rem;
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -114,13 +116,33 @@ const StyledHeading = styled(Typo.Heading1)`
   `}
 `
 
+const StyledAboveHeading = styled.div`
+  ${({ theme }) => css`
+    max-width: 35rem;
+    margin: 0 0 1rem;
+    font-size: ${theme.fonts.sizes['2xl']};
+    color: ${theme.colors.secondary};
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      max-width: 100%;
+    }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      text-align: center;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      font-size: ${theme.fonts.sizes['xl']};
+      margin-bottom: 1.5rem;
+    }
+  `}
+`
+
 const StyledText = styled.p`
   ${({ theme }) => css`
     max-width: 43rem;
     margin: 0 0 2rem;
 
     color: #000;
-    font-size: ${theme.fonts.sizes.s};
+    font-size: ${theme.fonts.sizes.m};
     font-weight: ${theme.fonts.weights.medium};
     line-height: 1.875rem;
 
@@ -169,13 +191,21 @@ const Card = styled.div<{ $imageUrl?: string }>`
     aspect-ratio: 290 / 360;
     position: relative;
 
-    span {
+    span:nth-child(1) {
       font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
 
       bottom: 30%;
       right: -5%;
       transform: rotate(-15deg);
+    }
+    span:nth-child(2) {
+      font-size: ${theme.fonts.sizes['8xl']};
+      position: absolute;
+
+      top: 15%;
+      left: -5%;
+      transform: rotate(15deg);
     }
   `}
 `
@@ -195,8 +225,13 @@ const BackgroundLayer = styled.div`
 `
 
 const StyledBtnWrapper = styled.div`
-  @media (width < ${theme.mediaQueries.tablet}) {
-    display: flex;
-    justify-content: center;
-  }
+  margin-bottom: 2rem;
+  ${({ theme }) => css`
+    @media (width < ${theme.mediaQueries.tablet}) {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      width: 100%;
+    }
+  `}
 `

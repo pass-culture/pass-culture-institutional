@@ -1,28 +1,31 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { useIsAndroid } from '@/hooks/useIsAndroid'
+import { useOS } from '@/hooks/useOS'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
+import { AppBannerProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
+import { isRenderable } from '@/utils/isRenderable'
 
-type AppBannerProps = {
-  title: string
-  androidUrl: string
-  iosUrl: string
-  onClick?: () => void
-}
+export function AppBanner(props: AppBannerProps) {
+  const { title, androidUrl, defaultUrl, iosUrl, onClick } = props
+  const isAndroid = useOS().isAndroid
+  const isIos = useOS().isIos
 
-export function AppBanner({
-  title,
-  androidUrl,
-  iosUrl,
-  onClick,
-}: AppBannerProps) {
-  const isAndroid = useIsAndroid()
-  const url = isAndroid ? androidUrl : iosUrl
+  const setUrl = (): string | undefined => {
+    if (isIos) return iosUrl
+    if (isAndroid) return androidUrl
+    return defaultUrl
+  }
+
+  const url = setUrl()
+
   return (
-    <StyledAppBanner href={url} target="_blank" onClick={onClick}>
-      <p>{title}</p>
-    </StyledAppBanner>
+    <BlockRendererWithCondition condition={isRenderable(url)}>
+      <StyledAppBanner href={url as string} target="_blank" onClick={onClick}>
+        <p>{title}</p>
+      </StyledAppBanner>
+    </BlockRendererWithCondition>
   )
 }
 

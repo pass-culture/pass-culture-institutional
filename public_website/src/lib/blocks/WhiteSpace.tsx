@@ -1,12 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-interface WhiteSpaceProps {
-  space?: number
-}
+import { WhiteSpaceProps } from '@/types/props'
 
 export function WhiteSpace(props: WhiteSpaceProps) {
-  return <Spacer $height={props.space}></Spacer>
+  const { space } = props
+  return <Spacer $height={space}></Spacer>
 }
 
 const Spacer = styled.div<{ $height?: number }>`

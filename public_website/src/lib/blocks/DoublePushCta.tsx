@@ -2,71 +2,84 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
+import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
-import { APIResponse } from '@/types/strapi'
+import { PushCTAProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-interface DoublePushCTAProps {
-  title: string
-  text: string | undefined
-  image: APIResponse<'plugin::upload.file'> | null | undefined
-  firstCta: CTA
+export function DoublePushCTA(
+  props: PushCTAProps & {
+    text: string | undefined
+    firstCta: CTA
+    secondCta: CTA | undefined
+  }
+) {
+  const {
+    className = '',
+    title,
+    icon,
+    image,
+    text,
+    firstCta,
+    secondCta,
+  } = props
 
-  secondCta: CTA | undefined
-  className?: string
-  icon?: string
-}
+  const image_url = image?.data?.attributes?.url
 
-export function DoublePushCTA(props: DoublePushCTAProps) {
   return (
     <StyledContentWrapper>
-      <MobileImage
-        src={
-          props.image?.data?.attributes?.url &&
-          getStrapiURL(props.image?.data?.attributes?.url)
-        }
-        alt=""
-      />
-      <Root className={props.className}>
-        <CardContainer>
-          <Card
-            $imageUrl={
-              props.image?.data?.attributes?.url &&
-              getStrapiURL(props.image?.data?.attributes?.url)
-            }></Card>
+      <BlockRendererWithCondition condition={isRenderable(image_url)}>
+        <MobileImage src={getStrapiURL(image_url as string)} alt="" />
+      </BlockRendererWithCondition>
 
-          <OutlinedText shadow>{props.icon}</OutlinedText>
-        </CardContainer>
+      <Root className={className}>
+        <BlockRendererWithCondition condition={isRenderable(image_url)}>
+          <CardContainer>
+            <Card $imageUrl={getStrapiURL(image_url)} />
+            <OutlinedText shadow>{icon}</OutlinedText>
+          </CardContainer>
+        </BlockRendererWithCondition>
         <RightSide>
-          {props.title && <Typo.Heading2>{props.title}</Typo.Heading2>}
-          {props.text && (
-            <p aria-label={parseText(props.text).accessibilityLabel}>
-              {parseText(props.text).processedText}
+          <Typo.Heading2>{title}</Typo.Heading2>
+          <BlockRendererWithCondition condition={isRenderable(text)}>
+            <p aria-label={parseText(text as string).accessibilityLabel}>
+              {parseText(text as string).processedText}
             </p>
-          )}
-          <CtaLink
-            href={props.firstCta?.URL}
-            onClick={() => {
-              onClickAnalytics({
-                eventName: props.firstCta?.eventName,
-                eventOrigin: props.firstCta?.eventOrigin,
-              })
-            }}>
-            <span>{props.firstCta?.Label}</span>
-          </CtaLink>
-          {props.secondCta && (
-            <ButtonWithCTA
-              target="_blank"
-              variant="quaternary"
-              cta={props.secondCta}
-            />
-          )}
+          </BlockRendererWithCondition>
+
+          <CtaContainer>
+            <span>
+              <CtaLink
+                href={firstCta.URL}
+                onClick={(): void => {
+                  firstCta?.eventName && firstCta?.eventOrigin
+                    ? onClickAnalytics({
+                        eventName: firstCta?.eventName,
+                        eventOrigin: firstCta?.eventOrigin,
+                      })
+                    : void 0
+                }}>
+                <span>{firstCta.Label}</span>
+              </CtaLink>
+            </span>
+            <BlockRendererWithCondition
+              condition={isRenderable(secondCta?.URL)}>
+              <span>
+                <ButtonWithCTA
+                  target="_blank"
+                  variant="quaternary"
+                  cta={secondCta as CTA}
+                />
+              </span>
+            </BlockRendererWithCondition>
+          </CtaContainer>
         </RightSide>
       </Root>
     </StyledContentWrapper>
@@ -74,7 +87,6 @@ export function DoublePushCTA(props: DoublePushCTAProps) {
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
-  // Offset for protruding image
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
 
@@ -103,16 +115,17 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
-
       border-radius: 0;
-
       position: relative;
       padding: 0;
       margin-top: 0;
     }
   `}
 `
-
+const CtaContainer = styled.div`
+  display: flex;
+  gap: 0.625rem;
+`
 const CardContainer = styled.div`
   ${({ theme }) => css`
     position: relative;
@@ -188,6 +201,9 @@ const RightSide = styled.div`
   ${({ theme }) => css`
     padding: 6.25rem 0;
     max-width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     h2 {
       margin-bottom: 1.25rem;

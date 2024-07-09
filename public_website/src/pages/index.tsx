@@ -9,6 +9,7 @@ import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
 import { SocialMedia as SocialMediaSection } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
+import { HomeProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Eligibility as EligibilitySection } from '@/ui/components/home/Eligibility'
 import { Hero as HeroSection } from '@/ui/components/home/Hero'
@@ -16,71 +17,74 @@ import { Recommendations as RecommendationsSection } from '@/ui/components/home/
 import { fetchBackend } from '@/utils/fetchBackend'
 import { fetchCMS } from '@/utils/fetchCMS'
 
-interface HomeProps {
-  homeData: APIResponseData<'api::home.home'>
-  recommendationItems: Offer[]
-  latestStudies: APIResponseData<'api::resource.resource'>[]
-}
-
 export default function Home({
   homeData,
   recommendationItems,
   latestStudies,
 }: HomeProps) {
+  const {
+    seo,
+    heroSection,
+    aboutSection,
+    eligibilitySection,
+    CTASection,
+    recommendationsSection,
+    socialMediaSection,
+  } = homeData.attributes
+
   return (
     <React.Fragment>
-      {homeData.attributes.seo && <Seo metaData={homeData.attributes.seo} />}
+      {seo && <Seo metaData={seo} />}
       <StyledHomeGradient>
         <HeroSection
-          title={homeData.attributes.heroSection.title}
-          subTitle={homeData.attributes.heroSection.subTitle}
-          cta={homeData.attributes.heroSection.cta}
-          firstEmoji={homeData.attributes.heroSection.firstEmoji}
-          secondEmoji={homeData.attributes.heroSection.secondEmoji}
-          thirdEmoji={homeData.attributes.heroSection.thirdEmoji}
-          fourthEmoji={homeData.attributes.heroSection.fourthEmoji}
-          fifthEmoji={homeData.attributes.heroSection.fifthEmoji}
-          sixthEmoji={homeData.attributes.heroSection.sixthEmoji}
+          title={heroSection.title}
+          subTitle={heroSection.subTitle}
+          cta={heroSection.cta}
+          firstEmoji={heroSection.firstEmoji}
+          secondEmoji={heroSection.secondEmoji}
+          thirdEmoji={heroSection.thirdEmoji}
+          fourthEmoji={heroSection.fourthEmoji}
+          fifthEmoji={heroSection.fifthEmoji}
+          sixthEmoji={heroSection.sixthEmoji}
           images={
             // There seem to be a bug with the `strapi.ts` helper file.
             // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
-            homeData.attributes.heroSection.images
+            heroSection.images
               ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
           }
         />
-
-        <AboutSection
-          title={homeData.attributes.aboutSection.title}
-          description={homeData.attributes.aboutSection.description}
-        />
+        <span id="target-anchor-scroll">
+          <AboutSection
+            title={aboutSection.title}
+            description={aboutSection.description}
+          />
+        </span>
       </StyledHomeGradient>
 
       <EligibilitySection
-        title={homeData.attributes.eligibilitySection.title}
-        items={homeData.attributes.eligibilitySection.items}
-        cardTitle={homeData.attributes.eligibilitySection.cardTitle}
-        cardDescription={homeData.attributes.eligibilitySection.cardDescription}
-        cardCta={homeData.attributes.eligibilitySection.cardCta}
-        cardFirstEmoji={homeData.attributes.eligibilitySection.firstEmoji}
-        cardSecondEmoji={homeData.attributes.eligibilitySection.secondEmoji}
+        title={eligibilitySection.title}
+        items={eligibilitySection.items}
+        cardTitle={eligibilitySection.cardTitle}
+        cardDescription={eligibilitySection.cardDescription}
+        cardCta={eligibilitySection.cardCta}
+        cardFirstEmoji={eligibilitySection.firstEmoji}
+        cardSecondEmoji={eligibilitySection.secondEmoji}
       />
 
       <StyledCTASection
-        title={homeData.attributes.CTASection.title}
-        description={homeData.attributes.CTASection.description}
-        image={homeData.attributes.CTASection.image}
-        ctaLink={homeData.attributes.CTASection.ctaLink}
-        qrCodeDescription={homeData.attributes.CTASection.qrCodeDescription}
-        qrCodeUrl={homeData.attributes.CTASection.qrCodeUrl}
+        title={CTASection.title}
+        description={CTASection.description}
+        image={CTASection.image}
+        ctaLink={CTASection.ctaLink}
+        qrCodeDescription={CTASection.qrCodeDescription}
+        qrCodeUrl={CTASection.qrCodeUrl}
       />
 
       {recommendationItems.length > 0 && (
         <RecommendationsSection
-          title={
-            homeData.attributes.recommendationsSection.recommendations.title
-          }
+          title={recommendationsSection.recommendations.title}
           recommendations={recommendationItems}
-          cta={homeData.attributes.recommendationsSection.cta}
+          cta={recommendationsSection.cta}
         />
       )}
 
@@ -91,8 +95,8 @@ export default function Home({
       />
 
       <StyledSocialMediaSection
-        title={homeData.attributes.socialMediaSection.title}
-        socialMediaLink={homeData.attributes.socialMediaSection.socialMediaLink}
+        title={socialMediaSection.title}
+        socialMediaLink={socialMediaSection.socialMediaLink}
       />
     </React.Fragment>
   )

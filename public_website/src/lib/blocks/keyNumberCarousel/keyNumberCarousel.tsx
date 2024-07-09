@@ -1,51 +1,42 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  Dot,
   Slider,
 } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import {
-  KeyNumberCarouselSlide,
-  KeyNumberCarouselSlideProps,
-} from './keyNumberCarouselSlide'
+import { KeyNumberCarouselSlide } from './keyNumberCarouselSlide'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
+import { StyledDot } from '@/theme/style'
+import { KeyNumberCarouselProps } from '@/types/props'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Typo } from '@/ui/components/typographies'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-type KeyNumberCarouselProps = {
-  title: string
-  items: Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
-}
-
-export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
+const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
+export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
+  const { title, items } = props
   const KEY_NUMBER_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
   const KEY_NUMBER_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
+  const { width = 0 } = useWindowSize({ debounceDelay: 200 })
+  const TOTAL_SLIDES = useMemo(() => items.length, [items])
+  const getvisibleKeySlides = (): number => {
+    if (width < MEDIA_QUERY) return 1.2
+    if (items.length > 2) return 2.2
+    return 2
+  }
 
-  const [screenWidth, setScreenWidth] = useState<number>()
-
-  useEffect(() => {
-    const handleKeyNumberCarouselResize = () =>
-      setScreenWidth(window.innerWidth)
-
-    handleKeyNumberCarouselResize()
-
-    window.addEventListener('resize', handleKeyNumberCarouselResize)
-
-    return () => {
-      window.removeEventListener('resize', handleKeyNumberCarouselResize)
-    }
-  }, [])
-
-  const visibleKeySlides =
-    screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 2
+  const isNavShowing = (): boolean => {
+    const visibleKeySlides = getvisibleKeySlides()
+    return TOTAL_SLIDES > visibleKeySlides
+  }
 
   useEffect(() => {
     const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
@@ -71,7 +62,7 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
     })
   }
 
-  function handleKeyNumberNavigationButtonClick() {
+  function handleKeyNumberNavigationButtonClick(): void {
     const carouselEl = document.querySelector(KEY_NUMBER_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(
       KEY_NUMBER_SLIDES_SELECTOR
@@ -83,38 +74,42 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
       }, 1)
     }
   }
+  const visibleKeySlides = getvisibleKeySlides()
 
   return (
     <StyledCarouselProvider
       naturalSlideHeight={75}
       naturalSlideWidth={60}
-      totalSlides={items.length}
+      totalSlides={TOTAL_SLIDES}
       visibleSlides={visibleKeySlides}
-      isIntrinsicHeight={true}
-      dragEnabled={false}
-      infinite={true}
+      isIntrinsicHeight
+      dragEnabled
+      infinite
       step={1}>
       <StyledKeyCarouselHeading>
         <StyledTitle>{title}</StyledTitle>
 
-        <StyledNavigationButtons aria-label="Contrôles du carousel">
-          <ButtonBack
-            onClick={handleKeyNumberNavigationButtonClick}
-            aria-label="Élement précédent">
-            <ArrowRight />
-          </ButtonBack>
-          <ButtonNext
-            aria-label="Élément suivant"
-            onClick={handleKeyNumberNavigationButtonClick}>
-            <ArrowRight />
-          </ButtonNext>
-        </StyledNavigationButtons>
+        <BlockRendererWithCondition condition={isNavShowing()}>
+          <StyledNavigationButtons aria-label="Contrôles du carousel">
+            <ButtonBack
+              onClick={handleKeyNumberNavigationButtonClick}
+              aria-label="Élement précédent">
+              <ArrowRight />
+            </ButtonBack>
+            <ButtonNext
+              aria-label="Élément suivant"
+              onClick={handleKeyNumberNavigationButtonClick}>
+              <ArrowRight />
+            </ButtonNext>
+          </StyledNavigationButtons>
+        </BlockRendererWithCondition>
       </StyledKeyCarouselHeading>
 
       <StyledSlider
+        classNameAnimation="customCarrouselAnimation"
         aria-label={stripTags(title)}
-        aria-roledescription="carrousel">
-        {items.map((item, index) => {
+        aria-roledescription="carousel">
+        {items?.map((item, index) => {
           return (
             <KeyNumberCarouselSlide
               key={item.title}
@@ -129,20 +124,22 @@ export function KeyNumberCarousel({ title, items }: KeyNumberCarouselProps) {
         })}
       </StyledSlider>
 
-      <StyledDots aria-label="Contrôles du carousel">
-        {items.map((item, index) => {
-          return (
-            <StyledDot
-              onClick={handleKeyNumberNavigationButtonClick}
-              slide={index}
-              key={item.title}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.title}`}
-            />
-          )
-        })}
-      </StyledDots>
+      <BlockRendererWithCondition condition={isNavShowing()}>
+        <StyledDots aria-label="Contrôles du carousel">
+          {items?.map((item, index) => {
+            return (
+              <StyledDot
+                onClick={handleKeyNumberNavigationButtonClick}
+                slide={index}
+                key={item.title}
+                aria-label={`Afficher la diapositive ${index + 1} sur ${
+                  items.length
+                } : ${item.title}`}
+              />
+            )
+          })}
+        </StyledDots>
+      </BlockRendererWithCondition>
     </StyledCarouselProvider>
   )
 }
@@ -151,7 +148,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
   ${({ theme }) => css`
     display: flex;
     justify-content: space-between;
-    background-color: ${theme.colors.secondary}20;
+    background-color: ${theme.colors.lightBlue};
 
     padding: 3.5rem 0;
     margin: auto;
@@ -161,7 +158,7 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0;
       flex-direction: column;
-      margin: 2.825rem auto;
+      margin: 0 auto;
     }
   `}
 `
@@ -245,19 +242,5 @@ const StyledDots = styled.div`
       padding-bottom: 2.8rem;
     }
     display: none;
-  `}
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    height: 0.875rem;
-    width: 0.875rem;
-    opacity: 0.22;
-    border-radius: 50%;
-    background-color: ${theme.colors.black};
-    &[disabled] {
-      background-color: ${theme.colors.secondary};
-      opacity: 1;
-    }
   `}
 `

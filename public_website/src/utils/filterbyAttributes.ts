@@ -1,21 +1,39 @@
 import { APIResponseData } from '@/types/strapi'
 
+export enum Options {
+  Secteur = "Secteur d'activités",
+  Category = 'Catégorie',
+  Localisation = 'Localisation',
+  Partenariat = 'Partenariat',
+}
+
 type Filtre = { filtre: string }[] | undefined
 
 type Data =
   | APIResponseData<'api::event.event'>[]
   | APIResponseData<'api::news.news'>[]
+  | APIResponseData<'api::resource.resource'>[]
 type AttributeGetter = (
-  item: APIResponseData<'api::event.event'> | APIResponseData<'api::news.news'>
+  item:
+    | APIResponseData<'api::event.event'>
+    | APIResponseData<'api::news.news'>
+    | APIResponseData<'api::resource.resource'>
 ) => string
 const filterMappings: { [key: string]: AttributeGetter } = {
-  "Secteur d'activités": (item) => item.attributes.secteur,
-  // eslint-disable-next-line prettier/prettier
-  "Catégorie": (item) => item.attributes.category,
-  // eslint-disable-next-line prettier/prettier
-  "Localisation": (item) => item.attributes.localisation,
+  [Options.Secteur]: (item) => item.attributes.secteur,
+  [Options.Category]: (item) => item.attributes.category,
+  [Options.Localisation]: (item) => item.attributes.localisation,
+  [Options.Partenariat]: (item) => item.attributes.category,
 }
-export const filterByAttribute = (filtres: Filtre, data: Data) => {
+export const filterByAttribute = (
+  filtres: Filtre,
+  data: Data
+):
+  | {
+      value: string[]
+      filtre: string
+    }[]
+  | undefined => {
   if (!filtres) return undefined
 
   const _filtres = structuredClone(filtres)

@@ -3,9 +3,10 @@ import styled, { css } from 'styled-components'
 
 import { ChevronDown } from '../icons/ChevronDown'
 import { Link } from '../Link'
-import { FooterListProps } from './FooterList'
+import { FooterListProps } from '@/types/props'
 
-export function FooterMobileList({ title, listItems }: FooterListProps) {
+export function FooterMobileList(props: FooterListProps) {
+  const { title, listItems } = props
   return (
     <StyledMobileFooterList>
       <summary>
@@ -13,7 +14,7 @@ export function FooterMobileList({ title, listItems }: FooterListProps) {
         <ChevronDown />
       </summary>
       <ul>
-        {listItems.map((anchor) => {
+        {listItems?.map((anchor) => {
           return (
             <li key={anchor.Label}>
               <Link href={anchor.URL}>{anchor.Label}</Link>
@@ -48,12 +49,12 @@ const StyledMobileFooterList = styled.details`
       padding: 1rem 0;
     }
 
-    summary img {
-      transform: rotate(180deg);
+    summary svg {
+      transform: rotate(0deg);
     }
 
-    &[open] summary img {
-      transform: none;
+    &[open] summary svg {
+      transform: rotate(180deg);
     }
 
     li {

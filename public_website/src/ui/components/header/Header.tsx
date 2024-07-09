@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
@@ -7,44 +7,18 @@ import { Button } from '../button/Button'
 import { Burger } from '../icons/Burger'
 import { Close } from '../icons/Close'
 import { PassCulture } from '../icons/PassCulture'
-import { AccountDropdown, AccountItemProps } from './AccountDropdown'
+import { AccountDropdown } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
+import { useWindowSize } from '@/hooks/useWindowSize'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
+import { MediaQueries } from '@/theme/media-queries'
 import { CTA } from '@/types/CTA'
+import { HeaderMenuProps, HeaderNavigationItemProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
+import { getMediaQuery } from '@/utils/getMediaQuery'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
 
-export type HeaderProps = {
-  targetItems: HeaderNavigationItemProps[]
-  aboutItems: HeaderNavigationItemProps[]
-  login: {
-    buttonLabel: string
-    items: AccountItemProps[]
-  }
-  signup: {
-    buttonLabel: string
-    items: AccountItemProps[]
-  }
-}
-
-type HeaderNavigationItemProps = {
-  id: number
-  label: string
-  megaMenu: {
-    title: string
-    cta: CTA
-    bannerText?: string
-    bannerAndroidUrl?: string
-    bannerIosUrl?: string
-    primaryListItems: CTA[]
-    secondaryListItems: CTA[]
-    cardTitle: string
-    cardDescription: string
-    cardLink: CTA
-    cardFirstEmoji: string
-    cardSecondEmoji: string
-  }
-}
 /**
  *
  *
@@ -82,25 +56,25 @@ const findCollectionIdByPath = (
   return null
 }
 
-export function Header({
-  targetItems,
-  aboutItems,
-  login,
-  signup,
-}: HeaderProps) {
-  const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
-  const router = usePathname()
-  const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
+const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-  const navItems = [...targetItems, ...aboutItems]
-  const activeId = findCollectionIdByPath(router, navItems)
+export function Header(props: HeaderMenuProps) {
+  const { targetItems, aboutItems, login, signup } = props
+  const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
+  const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const [activeId, setActiveId] = useState<number | null>(null)
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
+  const navItems = useMemo(
+    () => [...targetItems, ...aboutItems],
+    [aboutItems, targetItems]
+  )
 
   // Set active menu on hover and if asPath is including in navItems
   const isActive = (i: number): string =>
     i === activeMegaMenuId || activeId === i + 1 ? 'mega-menu-active' : ''
 
   // Toggle mega menu panel
-  function toggleMegaMenu(id: number) {
+  function toggleMegaMenu(id: number): void {
     setActiveMegaMenuId(id === activeMegaMenuId ? null : id)
     setLoginDropdownOpen(false)
     setSignupDropdownOpen(false)
@@ -110,7 +84,7 @@ export function Header({
   function onMegaMenuKeyDown(
     e: KeyboardEvent | React.KeyboardEvent,
     i: number
-  ) {
+  ): void {
     if (e.key === 'Escape') {
       setActiveMegaMenuId(null)
       megaMenuButtonRefs.current[i]?.focus()
@@ -118,62 +92,62 @@ export function Header({
   }
 
   // Close mega menu on click outside of it or on links inside
-  function onMegaMenuBlur() {
+  function onMegaMenuBlur(): void {
     if (activeMegaMenuId !== null) {
       setActiveMegaMenuId(null)
     }
   }
 
   // Close login dropdown + focus open button on "Escape"
-  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false)
-  const loginButtonRef = useRef<HTMLButtonElement>(null)
+  const [loginDropdownOpen, setLoginDropdownOpen] = useState<boolean>(false)
+  const loginButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  function onLoginDropdownKeyDown() {
+  function onLoginDropdownKeyDown(): void {
     setLoginDropdownOpen(false)
     loginButtonRef.current?.focus()
   }
 
   // Close login dropdown on click outside of it or on links inside
-  function onLoginDropdownBlur() {
+  function onLoginDropdownBlur(): void {
     if (loginDropdownOpen) {
       setLoginDropdownOpen(false)
     }
   }
 
   // On mouse over, close everything except login dropdown
-  function onLoginDropdownMouseEnter() {
+  function onLoginDropdownMouseEnter(): void {
     setLoginDropdownOpen(!loginDropdownOpen)
     setSignupDropdownOpen(false)
     setActiveMegaMenuId(null)
   }
 
   // Close signup dropdown + focus open button on "Escape"
-  const [signupDropdownOpen, setSignupDropdownOpen] = useState(false)
-  const signupButtonRef = useRef<HTMLButtonElement>(null)
+  const [signupDropdownOpen, setSignupDropdownOpen] = useState<boolean>(false)
+  const signupButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  function onSignupDropdownKeyDown() {
+  function onSignupDropdownKeyDown(): void {
     setSignupDropdownOpen(false)
     signupButtonRef.current?.focus()
   }
 
   // Close signup dropdown on click outside of it or on links inside
-  function onSignupDropdownBlur() {
+  function onSignupDropdownBlur(): void {
     if (signupDropdownOpen) {
       setSignupDropdownOpen(false)
     }
   }
 
   // On mouse over, close everything except signup dropdown
-  function onSignupDropdownMouseEnter() {
+  function onSignupDropdownMouseEnter(): void {
     setSignupDropdownOpen(!signupDropdownOpen)
     setLoginDropdownOpen(false)
     setActiveMegaMenuId(null)
   }
 
   // Toggle mobile menu + disable scroll on body
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-  function toggleMobileMenu() {
-    setShowMobileMenu(!showMobileMenu)
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  function toggleMobileMenu(): void {
+    setShowMobileMenu((showMobileMenu): boolean => !showMobileMenu)
     showMobileMenu
       ? document.body.removeAttribute('style')
       : document.body.setAttribute('style', 'overflow: hidden')
@@ -184,9 +158,9 @@ export function Header({
   }
 
   // Close mobile menu + focus burger button on "Escape"
-  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null)
+  const mobileMenuButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  function onMobileMenuKeyDown(e: KeyboardEvent) {
+  function onMobileMenuKeyDown(e: KeyboardEvent): void {
     if (e.key === 'Escape') {
       setShowMobileMenu(false)
       mobileMenuButtonRef.current?.focus()
@@ -195,7 +169,7 @@ export function Header({
 
   // Close mobile menu on navigation
   const currentPath = usePathname()
-  const [previousPath, setPreviousPath] = useState(currentPath)
+  const [previousPath, setPreviousPath] = useState<string>(currentPath)
   useEffect(() => {
     if (showMobileMenu && currentPath !== previousPath) {
       setShowMobileMenu(false)
@@ -207,6 +181,16 @@ export function Header({
       }, 1)
     }
   }, [currentPath, showMobileMenu, previousPath])
+
+  useEffect(() => {
+    const activeId = findCollectionIdByPath(currentPath, navItems)
+    setActiveId(activeId)
+  }, [currentPath, navItems, previousPath])
+
+  // We need to close mobile menu if we resize the window
+  useEffect(() => {
+    if (width > MEDIA_QUERY) setShowMobileMenu(false)
+  }, [width])
 
   const Wrapper = showMobileMenu ? FocusTrap : React.Fragment
 
@@ -242,7 +226,9 @@ export function Header({
                         onMouseEnter={() => toggleMegaMenu(i)}>
                         {el.label}
                       </button>
-                      {i === activeMegaMenuId && (
+
+                      <BlockRendererWithCondition
+                        condition={i === activeMegaMenuId}>
                         <MegaMenu
                           getOpenButtonEl={() =>
                             megaMenuButtonRefs.current[i] ?? null
@@ -251,14 +237,16 @@ export function Header({
                           id={`mega-menu-${i}`}
                           data={el.megaMenu}
                           onBlur={onMegaMenuBlur}
-                          onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
-                          onMouseLeave={() => setActiveMegaMenuId(null)}
+                          onKeyDown={(e): void => onMegaMenuKeyDown(e, i)}
+                          onMouseLeave={(): void => setActiveMegaMenuId(null)}
                         />
-                      )}
+                      </BlockRendererWithCondition>
                     </StyledNavigationItem>
-                    {i === targetItems.length - 1 && (
+
+                    <BlockRendererWithCondition
+                      condition={i === targetItems.length - 1}>
                       <StyledNavigationItem aria-hidden="true" />
-                    )}
+                    </BlockRendererWithCondition>
                   </React.Fragment>
                 )
               })}
@@ -270,7 +258,7 @@ export function Header({
                   aria-controls="account-menu"
                   aria-expanded={loginDropdownOpen}
                   className={loginDropdownOpen ? 'mega-menu-active' : ''}
-                  onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
+                  onClick={(): void => setLoginDropdownOpen(!loginDropdownOpen)}
                   onMouseEnter={onLoginDropdownMouseEnter}>
                   {login.buttonLabel}
                 </button>
@@ -281,7 +269,7 @@ export function Header({
                     labelId="login-dropdown"
                     onKeyDown={onLoginDropdownKeyDown}
                     onBlur={onLoginDropdownBlur}
-                    onMouseLeave={() =>
+                    onMouseLeave={(): void =>
                       setLoginDropdownOpen(!loginDropdownOpen)
                     }
                   />
@@ -294,7 +282,9 @@ export function Header({
                   id="signup-dropdown"
                   aria-controls="account-menu"
                   aria-expanded={signupDropdownOpen}
-                  onClick={() => setSignupDropdownOpen(!signupDropdownOpen)}
+                  onClick={(): void =>
+                    setSignupDropdownOpen(!signupDropdownOpen)
+                  }
                   onMouseEnter={onSignupDropdownMouseEnter}>
                   {signup.buttonLabel}
                 </Button>
@@ -306,7 +296,7 @@ export function Header({
                     align="right"
                     onKeyDown={onSignupDropdownKeyDown}
                     onBlur={onSignupDropdownBlur}
-                    onMouseLeave={() =>
+                    onMouseLeave={(): void =>
                       setSignupDropdownOpen(!signupDropdownOpen)
                     }
                   />
@@ -330,7 +320,13 @@ export function Header({
                 aboutItems={aboutItems}
                 login={login}
                 signup={signup}
-                onKeyDown={(e) => onMobileMenuKeyDown(e)}
+                onKeyDown={(e: KeyboardEvent) => onMobileMenuKeyDown(e)}
+                banner={{
+                  bannerDefaultUrl: targetItems[0]?.megaMenu?.bannerDefaultUrl,
+                  bannerAndroidUrl: targetItems[0]?.megaMenu?.bannerAndroidUrl,
+                  bannerIosUrl: targetItems[0]?.megaMenu?.bannerIosUrl,
+                  bannerText: targetItems[0]?.megaMenu?.bannerText,
+                }}
               />
             )}
           </StyledNavigation>
@@ -346,7 +342,7 @@ const StyledHeader = styled.header<{
 }>`
   ${({ theme, $showMegaMenu, $showMobileMenu }) => css`
     position: relative;
-    z-index: 1;
+    z-index: 100;
 
     background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
 
@@ -355,6 +351,7 @@ const StyledHeader = styled.header<{
       css`
         position: fixed;
         inset: 0;
+        z-index: 100;
       `}
     }
   `}
@@ -373,7 +370,7 @@ const StyledNavigation = styled.nav<{
     background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
 
     > ul {
-      background: ${$showMobileMenu ? theme.colors.white : 'none'};
+      background: ${$showMobileMenu ? theme.colors.lightBlue : 'none'};
       display: flex;
       align-items: center;
       gap: 1.5rem;
