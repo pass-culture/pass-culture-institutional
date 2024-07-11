@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_block_tabs_image_texts",
+  "info": {
+    "displayName": "TabsImageText"
+  },
+  "options": {},
+  "attributes": {
+    "tab": {
+      "displayName": "TabLittleList",
+      "type": "component",
+      "repeatable": true,
+      "component": "block.tab-image-text"
+    }
+  }
+}

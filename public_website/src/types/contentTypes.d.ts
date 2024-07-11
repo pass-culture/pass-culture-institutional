@@ -1289,7 +1289,10 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.header-with-q-rcode',
         'block.columns-text',
         'block.centered-title',
-        'block.tabs'
+        'block.tabs-simple-text',
+        'block.tabs-push-grey-cta',
+        'block.tabs-little-list',
+        'block.tabs-image-text'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;

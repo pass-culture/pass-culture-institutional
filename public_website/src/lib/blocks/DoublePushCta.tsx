@@ -16,9 +16,9 @@ import { parseText } from '@/utils/parseText'
 
 export function DoublePushCTA(
   props: PushCTAProps & {
-    text: string | undefined
+    text?: string
     firstCta: CTA
-    secondCta: CTA | undefined
+    secondCta?: CTA
   }
 ) {
   const {

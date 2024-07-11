@@ -6,9 +6,7 @@ export interface BlockBreadcrumb extends Schema.Component {
     displayName: 'Breadcrumbs';
     description: '';
   };
-  attributes: {
-    isUnderHeader: Attribute.Boolean & Attribute.DefaultTo<false>;
-  };
+  attributes: {};
 }
 
 export interface BlockCenteredText extends Schema.Component {
@@ -426,10 +424,10 @@ export interface BlockSpace extends Schema.Component {
   };
 }
 
-export interface BlockTab extends Schema.Component {
-  collectionName: 'components_block_tab';
+export interface BlockTabImageText extends Schema.Component {
+  collectionName: 'components_block_tab_image_texts';
   info: {
-    displayName: 'tab';
+    displayName: 'TabImageText';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
@@ -437,14 +435,77 @@ export interface BlockTab extends Schema.Component {
   };
 }
 
-export interface BlockTabs extends Schema.Component {
-  collectionName: 'components_block_tabs';
+export interface BlockTabLittleList extends Schema.Component {
+  collectionName: 'components_block_tab_little_lists';
   info: {
-    displayName: 'Tabs';
+    displayName: 'TabLittleList';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    block: Attribute.Component<'block.little-list'>;
+  };
+}
+
+export interface BlockTabPushGreyCta extends Schema.Component {
+  collectionName: 'components_block_tab_push_grey_ctas';
+  info: {
+    displayName: 'TabPushGreyCTA';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    block: Attribute.Component<'block.double-push-cta'>;
+  };
+}
+
+export interface BlockTabSimpleText extends Schema.Component {
+  collectionName: 'components_block_tab_simple_texts';
+  info: {
+    displayName: 'TabSimpleText';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    block: Attribute.Component<'block.simple-text-v2'>;
+  };
+}
+
+export interface BlockTabsImageText extends Schema.Component {
+  collectionName: 'components_block_tabs_image_texts';
+  info: {
+    displayName: 'TabsImageText';
+  };
+  attributes: {
+    tab: Attribute.Component<'block.tab-image-text', true>;
+  };
+}
+
+export interface BlockTabsLittleList extends Schema.Component {
+  collectionName: 'components_block_tabs_little_lists';
+  info: {
+    displayName: 'TabsLittleList';
+  };
+  attributes: {
+    tab: Attribute.Component<'block.tab-little-list', true>;
+  };
+}
+
+export interface BlockTabsPushGreyCta extends Schema.Component {
+  collectionName: 'components_block_tabs_push_grey_ctas';
+  info: {
+    displayName: 'TabsPushGreyCTA';
     description: '';
   };
   attributes: {
-    tab: Attribute.Component<'block.tab', true>;
+    tab: Attribute.Component<'block.tab-push-grey-cta', true>;
+  };
+}
+
+export interface BlockTabsSimpleText extends Schema.Component {
+  collectionName: 'components_block_tabs_simple_texts';
+  info: {
+    displayName: 'TabsSimpleText';
+  };
+  attributes: {
+    tab: Attribute.Component<'block.tab-simple-text', true>;
   };
 }
 
@@ -1143,8 +1204,14 @@ declare module '@strapi/types' {
       'block.simple-text-v2': BlockSimpleTextV2;
       'block.social-media': BlockSocialMedia;
       'block.space': BlockSpace;
-      'block.tab': BlockTab;
-      'block.tabs': BlockTabs;
+      'block.tab-image-text': BlockTabImageText;
+      'block.tab-little-list': BlockTabLittleList;
+      'block.tab-push-grey-cta': BlockTabPushGreyCta;
+      'block.tab-simple-text': BlockTabSimpleText;
+      'block.tabs-image-text': BlockTabsImageText;
+      'block.tabs-little-list': BlockTabsLittleList;
+      'block.tabs-push-grey-cta': BlockTabsPushGreyCta;
+      'block.tabs-simple-text': BlockTabsSimpleText;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.video': BlockVideo;
       'common.detailed-logo': CommonDetailedLogo;

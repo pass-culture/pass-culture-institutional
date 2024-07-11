@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
-import { ImageText } from '../ImageText'
 import Tab from './Tab'
 import TabPanel from './TabPannel'
-import { TabSimpleTextProps } from '@/types/props'
+import { TabImageTextProps, TabPushGreyProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
-const TabSimpleText = (props: TabSimpleTextProps) => {
-  const { tab } = props
+const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
+  const { tab, children } = props
   const [selectedTab, setSelectedTab] = useState<number>(0)
   const handleClick = (index: number): void => {
     setSelectedTab(index)
@@ -37,6 +36,23 @@ const TabSimpleText = (props: TabSimpleTextProps) => {
       handleNextTab(first, next, tabCount)
     }
   }
+  const renderChildrenWithProps = (
+    child: ReactNode,
+    props: (Partial<unknown> & React.Attributes) | undefined
+  ) => {
+    return React.cloneElement(child as React.ReactElement, props)
+  }
+  const tabPanels = useMemo(() => {
+    return tab?.map((item, index: number) => (
+      <TabPanel
+        key={item.id}
+        tabId={`TabPanel_${index}`}
+        tabIndex={index}
+        selectedTab={selectedTab}>
+        {renderChildrenWithProps(children, { ...item.block })}
+      </TabPanel>
+    ))
+  }, [tab, children, selectedTab])
 
   return (
     <React.Fragment>
@@ -60,22 +76,12 @@ const TabSimpleText = (props: TabSimpleTextProps) => {
           })}
         </StyledTabUl>
       </ContentWrapper>
-      {tab?.map((item, index: number) => {
-        return (
-          <TabPanel
-            key={item.id}
-            tabId={`TabPanel_${index}`}
-            tabIndex={index}
-            selectedTab={selectedTab}>
-            <ImageText {...item?.block} />
-          </TabPanel>
-        )
-      })}
+      {tabPanels}
     </React.Fragment>
   )
 }
 
-export default TabSimpleText
+export default Tabs
 
 const StyledTabUl = styled.ul`
   display: flex;

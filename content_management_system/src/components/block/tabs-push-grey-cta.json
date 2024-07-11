@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_block_tabs_push_grey_ctas",
+  "info": {
+    "displayName": "TabsPushGreyCTA",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "tab": {
+      "displayName": "TabPushGreyCTA",
+      "type": "component",
+      "repeatable": true,
+      "component": "block.tab-push-grey-cta"
+    }
+  }
+}

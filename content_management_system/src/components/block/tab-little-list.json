@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_tab_little_lists",
+  "info": {
+    "displayName": "TabLittleList"
+  },
+  "options": {},
+  "attributes": {
+   "title": {
+      "type": "string",
+      "required": true
+    },
+    "block": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.little-list"
+    }
+  }
+}
