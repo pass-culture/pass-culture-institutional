@@ -184,6 +184,8 @@ export function Header(props: HeaderMenuProps) {
 
   useEffect(() => {
     const activeId = findCollectionIdByPath(currentPath, navItems)
+    // eslint-disable-next-line no-console
+    console.log(currentPath, navItems, previousPath, activeId)
     setActiveId(activeId)
   }, [currentPath, navItems, previousPath])
 

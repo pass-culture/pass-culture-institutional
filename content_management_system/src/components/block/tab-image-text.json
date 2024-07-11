@@ -1,7 +1,7 @@
 {
-  "collectionName": "components_block_tab",
+  "collectionName": "components_block_tab_image_texts",
   "info": {
-    "displayName": "tab"
+    "displayName": "TabImageText"
   },
   "options": {},
   "attributes": {

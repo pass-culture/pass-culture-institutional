@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_tab_simple_texts",
+  "info": {
+    "displayName": "TabSimpleText"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "block": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-text-v2"
+    }
+  }
+}

@@ -45,11 +45,44 @@ export type HeroProps = {
   sixthEmoji: string
   images: APIResponseData<'plugin::upload.file'>[] | null
 }
-export type TabSimpleTextProps = {
+export type TabImageTextProps = {
   id: number
+  children: React.ReactNode
   tab: {
     title: string
     block: ImageTextProps & { text: string }[]
+    id: number
+  }[]
+}
+export type TabSimpleTextProps = {
+  id: number
+  children: React.ReactNode
+  tab: {
+    title: string
+    block: SimpleTextV2Props & { text: string }[]
+    id: number
+  }[]
+}
+export type TabSimpleListProps = {
+  id: number
+  children: React.ReactNode
+  tab: {
+    title: string
+    block: LittleListProps & { text: string }[]
+    id: number
+  }[]
+}
+export type TabPushGreyProps = {
+  id: number
+  children: React.ReactNode
+  tab: {
+    title: string
+    block: PushCTAProps &
+      {
+        text?: string
+        firstCta: CTA
+        secondCta?: CTA
+      }[]
     id: number
   }[]
 }
@@ -182,7 +215,7 @@ export type HeaderProps = {
   icon2?: string
   cta?: CTA
 }
-export interface HeaderWithQRCodeProps {
+export type HeaderWithQRCodeProps = {
   title: string
   text?: string
   image: APIResponse<'plugin::upload.file'> | null

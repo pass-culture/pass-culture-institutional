@@ -28,7 +28,10 @@ import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SimpleTextWithMedia } from './blocks/SimpleTextWithMedia'
 import { SocialMedia } from './blocks/SocialMedia'
-import TabSimpleText from './blocks/tabs/TabSimpleText'
+import TabsImageText from './blocks/tabs/TabsImageText'
+import TabsPushGreyCta from './blocks/tabs/TabsPushGreyCta'
+import TabsLittleList from './blocks/tabs/TabsSimpleList'
+import TabsSimpleText from './blocks/tabs/TabsSimpleText'
 import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
@@ -80,7 +83,10 @@ const COMPONENTS: Record<
   'block.header-with-q-rcode': HeaderWithQRCode,
   'block.columns-text': SimpleTextWithMedia,
   'block.centered-title': CenteredText,
-  'block.tabs': TabSimpleText,
+  'block.tabs-image-text': TabsImageText,
+  'block.tabs-simple-text': TabsSimpleText,
+  'block.tabs-little-list': TabsLittleList,
+  'block.tabs-push-grey-cta': TabsPushGreyCta,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {
