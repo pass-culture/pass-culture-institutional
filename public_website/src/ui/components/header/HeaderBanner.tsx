@@ -7,7 +7,12 @@ import { BannerProps } from '@/types/props'
 import { isRenderable } from '@/utils/isRenderable'
 
 const HeaderBanner = (props: BannerProps) => {
-  const { bannerText, bannerAndroidUrl, bannerDefaultUrl, bannerIosUrl } = props
+  const {
+    bannerText,
+    bannerAndroidUrl,
+    bannerDefaultUrl = '',
+    bannerIosUrl,
+  } = props
 
   const isRenderBanner = (): boolean => {
     return (
