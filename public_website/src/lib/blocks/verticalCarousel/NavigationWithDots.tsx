@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useCallback, useMemo } from 'react'
+import styled from 'styled-components'
 
 import { StyledDot } from '@/theme/style'
 import { VerticalCarouselSlideProps } from '@/types/props'
@@ -12,13 +12,15 @@ const NavigationWithDots = (props: {
 }) => {
   const { items, carrouselSelector, slidesSelector } = props
 
+  const handleNavigation = useCallback(() => {
+    handleNavigationButtonClick(carrouselSelector, slidesSelector)
+  }, [carrouselSelector, slidesSelector])
+
   const renderDot = useMemo(() => {
     return items?.map((item, index) => {
       return (
         <StyledDot
-          onClick={() => {
-            handleNavigationButtonClick(carrouselSelector, slidesSelector)
-          }}
+          onClick={handleNavigation}
           key={item.title}
           slide={index}
           aria-label={`Afficher la diapositive ${index + 1} sur ${
@@ -40,15 +42,10 @@ const NavigationWithDots = (props: {
 export default NavigationWithDots
 
 const StyledDots = styled.div`
-  ${({ theme }) => css`
-    display: none;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
       margin-top: 2rem;
     }
-  `}
 `

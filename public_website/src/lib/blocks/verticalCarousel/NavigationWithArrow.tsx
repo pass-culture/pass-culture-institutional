@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { ButtonBack, ButtonNext } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
@@ -13,20 +13,16 @@ const NavigationWithArrow = (props: {
   // If we use a props infinite, arrow navifation are not disabled, so we can use CarouselContext if we need for disabling button with infinite
   //const carouselContext = useContext(CarouselContext)
 
+  const handleNavigation = useCallback(() => {
+    handleNavigationButtonClick(carrouselSelector, slidesSelector)
+  }, [carrouselSelector, slidesSelector])
+
   return (
     <StyledNavigationButtons role="group" aria-label="Contrôles du carousel">
-      <ButtonBack
-        aria-label="Élement précédent"
-        onClick={() =>
-          handleNavigationButtonClick(carrouselSelector, slidesSelector)
-        }>
+      <ButtonBack aria-label="Élement précédent" onClick={handleNavigation}>
         <ArrowRight />
       </ButtonBack>
-      <ButtonNext
-        aria-label="Élément suivant"
-        onClick={() =>
-          handleNavigationButtonClick(carrouselSelector, slidesSelector)
-        }>
+      <ButtonNext aria-label="Élément suivant" onClick={handleNavigation}>
         <ArrowRight />
       </ButtonNext>
     </StyledNavigationButtons>
@@ -39,10 +35,6 @@ const StyledNavigationButtons = styled.div`
     display: flex;
     align-items: center;
     gap: 0.375rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
-    }
 
     button {
       background-color: ${theme.colors.white};

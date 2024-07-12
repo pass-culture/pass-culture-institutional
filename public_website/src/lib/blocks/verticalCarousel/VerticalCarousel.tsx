@@ -71,10 +71,12 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
           <BlockRendererWithCondition condition={isNavigation()}>
             <StyledHeading>
               <Typo.Heading2>{title}</Typo.Heading2>
-              <NavigationWithArrow
-                carrouselSelector={CAROUSEL_SELECTOR}
-                slidesSelector={SLIDES_SELECTOR}
-              />
+              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+                <NavigationWithArrow
+                  carrouselSelector={CAROUSEL_SELECTOR}
+                  slidesSelector={SLIDES_SELECTOR}
+                />
+              </BlockRendererWithCondition>
             </StyledHeading>
           </BlockRendererWithCondition>
 
@@ -94,11 +96,14 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
               )
             })}
           </StyledSlider>
-          <NavigationWithDots
-            items={items}
-            carrouselSelector={CAROUSEL_SELECTOR}
-            slidesSelector={SLIDES_SELECTOR}
-          />
+          <BlockRendererWithCondition
+            condition={isNavigation() && width < MOBILE_WIDTH}>
+            <NavigationWithDots
+              items={items}
+              carrouselSelector={CAROUSEL_SELECTOR}
+              slidesSelector={SLIDES_SELECTOR}
+            />
+          </BlockRendererWithCondition>
         </CarouselProvider>
       </ContentWrapper>
     </Root>
