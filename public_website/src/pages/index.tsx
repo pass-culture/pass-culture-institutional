@@ -3,6 +3,7 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
 import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
 import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
@@ -80,13 +81,13 @@ export default function Home({
         qrCodeUrl={CTASection.qrCodeUrl}
       />
 
-      {recommendationItems.length > 0 && (
+      <BlockRendererWithCondition condition={recommendationItems.length > 0}>
         <RecommendationsSection
           title={recommendationsSection.recommendations.title}
           recommendations={recommendationItems}
           cta={recommendationsSection.cta}
         />
-      )}
+      </BlockRendererWithCondition>
 
       <StyledLatestStudiesSection
         news={latestStudies}
