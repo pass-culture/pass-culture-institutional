@@ -436,7 +436,7 @@ export type LogoProps = {
 export type AppBannerProps = {
   title?: string
   androidUrl?: string
-  defaultUrl?: string
+  defaultUrl: string
   iosUrl?: string
   onClick?: () => void
 }
@@ -444,6 +444,7 @@ export type FooterProps = {
   PlayStoreUrl: string
   AppStoreUrl: string
   bannerText: string
+  bannerDefaultUrl: string
   LegalLinks: { Label: string; URL: string; id: number }[]
   Lists: {
     id: number

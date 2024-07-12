@@ -11,7 +11,15 @@ import { FooterProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
 export function Footer(props: FooterProps) {
-  const { PlayStoreUrl, AppStoreUrl, bannerText, LegalLinks, Lists } = props
+  const {
+    PlayStoreUrl,
+    AppStoreUrl,
+    bannerText,
+    LegalLinks,
+    Lists,
+    bannerDefaultUrl = '',
+  } = props
+
   return (
     <StyledFooter id="footer">
       <StyledContentContainer>
@@ -27,6 +35,7 @@ export function Footer(props: FooterProps) {
               title={bannerText}
               androidUrl={AppStoreUrl}
               iosUrl={PlayStoreUrl}
+              defaultUrl={bannerDefaultUrl}
               onClick={(): void =>
                 onClickAnalytics({
                   eventName: 'downloadApp',

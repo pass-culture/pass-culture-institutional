@@ -810,6 +810,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
     Lists: Attribute.Component<'footer.list', true>;
     bannerText: Attribute.String;
     LegalLinks: Attribute.Component<'common.link', true>;
+    bannerDefaultUrl: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
