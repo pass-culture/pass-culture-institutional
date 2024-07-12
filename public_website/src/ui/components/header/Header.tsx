@@ -37,23 +37,34 @@ const findInMenu = (items: CTA[], str: string): boolean => {
  *
  * @param {string} path
  * @param {HeaderNavigationItemProps[]} collections
- * @return {*}  {(number | null)}
+ * @return {*}  {(number)}
  */
 const findCollectionIdByPath = (
   path: string,
   collections: HeaderNavigationItemProps[]
-): number | null => {
+): number => {
   for (const collection of collections) {
     const { megaMenu } = collection
-    if (megaMenu.primaryListItems) {
-      if (findInMenu(megaMenu.primaryListItems, path)) return collection.id
-    }
-    if (megaMenu.secondaryListItems) {
-      if (findInMenu(megaMenu.secondaryListItems, path)) return collection.id
+
+    if (megaMenu.primaryListItems.length > 0) {
+      if (findInMenu(megaMenu.primaryListItems, path)) {
+        const index = collections.findIndex(
+          (item) => item.label === collection.label
+        )
+        return index
+      }
+      if (megaMenu.secondaryListItems.length > 0) {
+        if (findInMenu(megaMenu.secondaryListItems, path)) {
+          const index = collections.findIndex(
+            (item) => item.label === collection.label
+          )
+          return index
+        }
+      }
     }
   }
 
-  return null
+  return -1
 }
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
@@ -71,7 +82,7 @@ export function Header(props: HeaderMenuProps) {
 
   // Set active menu on hover and if asPath is including in navItems
   const isActive = (i: number): string =>
-    i === activeMegaMenuId || activeId === i + 1 ? 'mega-menu-active' : ''
+    i === activeMegaMenuId || activeId === i ? 'mega-menu-active' : ''
 
   // Toggle mega menu panel
   function toggleMegaMenu(id: number): void {
@@ -184,8 +195,7 @@ export function Header(props: HeaderMenuProps) {
 
   useEffect(() => {
     const activeId = findCollectionIdByPath(currentPath, navItems)
-    // eslint-disable-next-line no-console
-    console.log(currentPath, navItems, previousPath, activeId)
+
     setActiveId(activeId)
   }, [currentPath, navItems, previousPath])
 

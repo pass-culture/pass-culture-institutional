@@ -19,4 +19,4 @@ const BlockRendererWithCondition = ({
   return <ConditionalRender condition={condition}>{children}</ConditionalRender>
 }
 
-export default BlockRendererWithCondition
+export default React.memo(BlockRendererWithCondition)
