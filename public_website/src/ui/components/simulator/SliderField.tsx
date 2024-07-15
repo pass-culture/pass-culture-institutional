@@ -1,11 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { default as BaseSlider } from 'rc-slider'
 import type { AriaValueFormat } from 'rc-slider/lib/interface'
 import styled, { css } from 'styled-components'
 
 import 'rc-slider/assets/index.css'
+import { Check } from '../icons/Check'
 import { ChevronDown } from '../icons/ChevronDown'
 import { Label } from './Label'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
+import { CustomSelect, CustomSelectButton, WrapperChevron } from '@/theme/style'
 import { parseText } from '@/utils/parseText'
 
 interface SliderFieldProps {
@@ -23,7 +26,9 @@ export function SliderField({
   answer,
 }: SliderFieldProps) {
   const [isClient, setIsClient] = useState<boolean>(false)
-
+  const [isOpen, setIsOpen] = useState<number>(-1)
+  const dropdownRef = useRef<HTMLUListElement | null>(null)
+  const [age, setAge] = useState<string>('-15 ans')
   const valueTextFormatter: AriaValueFormat = useCallback(
     (value: number) => {
       if (value <= 14) {
@@ -46,10 +51,59 @@ export function SliderField({
       if (typeof value !== 'number') {
         throw new Error('Unexpected slider value type')
       }
-      onChange(value - 14)
+      if (value - 14 < 0) {
+        if (answers[value]) {
+          setAge(answers[value] as string)
+          onChange(value)
+        }
+      }
+      if (answers[value - 14]) {
+        setAge(answers[value - 14] as string)
+        onChange(value - 14)
+      }
+
+      setIsOpen(-1)
     },
-    [onChange]
+    [answers, onChange]
   )
+
+  const memoizeUL = useMemo(() => {
+    return (
+      <ul id="question-field" ref={dropdownRef} className="select-dropdown">
+        {answers.map((a: string, i: number) => (
+          <span
+            aria-selected="false"
+            role="option"
+            aria-hidden="true"
+            tabIndex={-1}
+            onClick={(): void => handleChange(i)}
+            key={a}>
+            <li aria-label={parseText(a).accessibilityLabel}>
+              <span
+                aria-hidden="true"
+                style={{
+                  opacity: a === age ? 1 : 0,
+                }}>
+                <Check />
+              </span>
+              {parseText(a).processedText}
+            </li>
+          </span>
+        ))}
+      </ul>
+    )
+  }, [age, answers, handleChange])
+
+  const checkIfOpen = useCallback(
+    (index: number) => {
+      return isOpen === index
+    },
+    [isOpen]
+  )
+
+  const openDropdown = useCallback((index: number) => {
+    setIsOpen(index)
+  }, [])
 
   useEffect(() => {
     setIsClient(true)
@@ -104,21 +158,33 @@ export function SliderField({
       />
       <SelectWrapper>
         {isClient && (
-          <Select
-            id="question-field"
-            value={answer}
-            onChange={(e) => onChange(Number(e.target.value))}>
-            {answers.map((a: string, i: number) => (
-              <option
-                key={a}
-                value={i}
-                aria-label={parseText(a).accessibilityLabel}>
-                {parseText(a).processedText}
-              </option>
-            ))}
-          </Select>
+          <CustomSelect
+            onMouseLeave={(): void => setIsOpen(-1)}
+            $isInBreadcrumb>
+            <CustomSelectButton
+              role="combobox"
+              onClick={(): void => {
+                openDropdown(0)
+              }}
+              $isInBreadcrumb
+              aria-labelledby="Naviguez"
+              aria-label="Naviguez"
+              aria-haspopup="listbox"
+              aria-expanded={checkIfOpen(0)}
+              aria-controls="select-dropdown">
+              {age}
+              <WrapperChevron $isOpen={checkIfOpen(0)}>
+                <ChevronDown />
+              </WrapperChevron>
+            </CustomSelectButton>
+            <BlockRendererWithCondition condition={checkIfOpen(0)}>
+              <span id="select-dropdown" role="listbox" aria-label="Liste URL">
+                {memoizeUL}
+              </span>
+            </BlockRendererWithCondition>
+          </CustomSelect>
         )}
-        <SelectIcon />
+        <SelectIcon $isOpen={checkIfOpen(0)} />
       </SelectWrapper>
     </Field>
   )
@@ -221,27 +287,36 @@ const SelectWrapper = styled.div`
   @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     display: initial;
   }
-`
+  div:first-child {
+    @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+      display: block;
+    }
+  }
 
-const Select = styled.select`
-  padding: 1.25rem 1.875rem;
-  font-size: ${({ theme }) => theme.fonts.sizes.s};
-  font-weight: ${({ theme }) => theme.fonts.weights.bold};
-  line-height: 2;
-  color: ${({ theme }) => theme.colors.black};
-  appearance: none;
-  border: none;
-  border-radius: 1.25rem;
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  width: 100%;
-`
+  [role='combobox'] {
+    padding: 1.25rem 1.875rem;
+    background-color: ${({ theme }) => theme.colors.lightGray};
+    font-weight: ${({ theme }) => theme.fonts.weights.bold};
+    font-size: ${({ theme }) => theme.fonts.sizes.s};
+    border-radius: 1.25rem;
+    width: 100%;
+    min-height: auto;
+    box-sizing: border-box;
 
-const SelectIcon = styled(ChevronDown)`
-  ${({ theme }) => css`
+    span:first-child {
+      display: none;
+    }
+  }
+`
+const SelectIcon = styled(ChevronDown)<{ $isOpen: boolean }>`
+  ${({ theme, $isOpen }) => css`
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     right: 1rem;
+    transition: all 0.3s ease-in-out;
+    ${$isOpen
+      ? 'transform:  translateY(-50%) rotate(180deg);'
+      : 'translateY(-50%) transform: rotate(0deg);'}
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       right: 2.2rem;
