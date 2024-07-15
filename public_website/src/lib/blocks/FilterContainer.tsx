@@ -155,6 +155,7 @@ export function FilterContainer(props: FiltersProps) {
                     }>
                     <li>
                       <span
+                        aria-hidden="true"
                         style={{
                           opacity: checkIsSelected(filtre.filtre, value)
                             ? 1

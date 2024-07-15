@@ -28,7 +28,7 @@ export const CustomSelect = styled.div<{
     width: 100%;
     max-width: 100%;
     font-size: 1.15rem;
-    color: #000;
+    color: ${theme.colors.black};
     cursor: pointer;
     height: 100%;
 
