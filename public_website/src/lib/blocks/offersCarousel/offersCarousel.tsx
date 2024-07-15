@@ -1,12 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
-import { BlocksRenderer } from '@strapi/blocks-react-renderer'
-import {
-  ButtonBack,
-  ButtonNext,
-  CarouselProvider,
-  Dot,
-  Slider,
-} from 'pure-react-carousel'
+import { BlocksContent, BlocksRenderer } from '@strapi/blocks-react-renderer'
+import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { OffersCarouselSlide } from './offersCarouselSlide'
@@ -15,28 +9,38 @@ import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { OffersVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 import { Link } from '@/ui/components/Link'
+import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
+import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
 import { Typo } from '@/ui/components/typographies'
+import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { isRenderable } from '@/utils/isRenderable'
 import { stripTags } from '@/utils/stripTags'
 
-const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
+const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
+const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
+
 export function OffersCarousel(props: OffersVideoCarouselProps) {
   const { title, items, cta, description } = props
   const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
   )}"]`
   const OFFERS_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-  const { width = 0 } = useWindowSize({ debounceDelay: 200 })
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
   const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
-  const visibleSlides = width < MEDIA_QUERY ? 1 : 3.2
+  const getvisibleSlides = useMemo(() => {
+    if (width < MOBILE_WIDTH) return 1
+    if (width < LARGE_DESKTOP_WIDTH) return 2
+    return 3.2
+  }, [width])
 
-  const isNavShowing = (): boolean => {
-    return TOTAL_SLIDES > visibleSlides
-  }
+  const isNavShowing = useMemo(() => {
+    const visibleKeySlides = getvisibleSlides
+
+    return TOTAL_SLIDES > visibleKeySlides
+  }, [TOTAL_SLIDES, getvisibleSlides])
 
   useEffect(() => {
     const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
@@ -45,35 +49,11 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
     )
 
     if (carouselEl && carouselSlidesEl) {
-      cleanExperienceSlideAttributes(carouselEl, carouselSlidesEl)
+      cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
   }, [OFFERS_CAROUSEL_SELECTOR])
 
-  function cleanExperienceSlideAttributes(
-    carouselEl: Element,
-    slidesEl: NodeListOf<Element>
-  ) {
-    carouselEl?.removeAttribute('aria-live')
-    carouselEl?.removeAttribute('tabindex')
-
-    slidesEl.forEach((slideEl) => {
-      slideEl.removeAttribute('aria-selected')
-      slideEl.removeAttribute('tabindex')
-    })
-  }
-
-  function handleExperienceVideoNavigationButtonClick() {
-    const carouselEl = document.querySelector(OFFERS_CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(
-      OFFERS_SLIDES_SELECTOR
-    )
-
-    if (carouselEl && carouselSlidesEl) {
-      setTimeout(() => {
-        cleanExperienceSlideAttributes(carouselEl, carouselSlidesEl)
-      }, 1)
-    }
-  }
+  const visibleSlides = getvisibleSlides
 
   const descriptionIsEmpty =
     !description ||
@@ -89,27 +69,23 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       totalSlides={TOTAL_SLIDES}
       isIntrinsicHeight
       dragEnabled
-      infinite
+      infinite={false}
       step={1}>
       <StyledHeading $noMargin>
         <Typo.Heading2>{title}</Typo.Heading2>
 
-        {!descriptionIsEmpty && <BlocksRenderer content={description} />}
+        <BlockRendererWithCondition condition={!descriptionIsEmpty}>
+          <BlocksRenderer content={description as BlocksContent} />
+        </BlockRendererWithCondition>
 
         <StyledArrowButtonWrapper>
-          <BlockRendererWithCondition condition={isNavShowing()}>
-            <StyledNavigationButtons aria-label="Contrôles du carousel">
-              <ButtonBack
-                onClick={handleExperienceVideoNavigationButtonClick}
-                aria-label="Élement précédent">
-                <ArrowRight />
-              </ButtonBack>
-              <ButtonNext
-                aria-label="Élément suivant"
-                onClick={handleExperienceVideoNavigationButtonClick}>
-                <ArrowRight />
-              </ButtonNext>
-            </StyledNavigationButtons>
+          <BlockRendererWithCondition condition={isNavShowing}>
+            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+              <NavigationWithArrow
+                carrouselSelector={OFFERS_CAROUSEL_SELECTOR}
+                slidesSelector={OFFERS_SLIDES_SELECTOR}
+              />
+            </BlockRendererWithCondition>
           </BlockRendererWithCondition>
           <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
             <CtaLink href={cta.URL}>
@@ -126,35 +102,28 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
         {items.map((item, index) => {
           return (
             <OffersCarouselSlide
-              key={item.title}
+              key={`${item.title}_${index}`}
               slideIndex={index}
               {...item}
             />
           )
         })}
       </StyledSlider>
+      <BlockRendererWithCondition
+        condition={isNavShowing && width < MOBILE_WIDTH}>
+        <NavigationWithDots
+          items={items}
+          carrouselSelector={OFFERS_CAROUSEL_SELECTOR}
+          slidesSelector={OFFERS_SLIDES_SELECTOR}
+          carouselName="OFFERS_CAROUSEL"
+        />
+      </BlockRendererWithCondition>
 
-      {isNavShowing() && (
-        <StyledDots aria-label="Contrôles du carousel">
-          {items.map((item, index) => {
-            return (
-              <StyledDot
-                onClick={handleExperienceVideoNavigationButtonClick}
-                slide={index}
-                key={item.title}
-                aria-label={`Afficher la diapositive ${index + 1} sur ${
-                  items.length
-                } : ${item.title}`}
-              />
-            )
-          })}
-        </StyledDots>
-      )}
-      {cta && (
+      <BlockRendererWithCondition condition={isRenderable(cta.Label)}>
         <MobileCtaWrapper>
           <MobileCtaLink href={cta.URL}>{cta.Label}</MobileCtaLink>
         </MobileCtaWrapper>
-      )}
+      </BlockRendererWithCondition>
     </StyledCarousel>
   )
 }
@@ -205,76 +174,6 @@ const StyledSlider = styled(Slider)`
   @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     padding: 3.5rem 0;
   }
-
-  .carousel__slider-tray {
-    transition: transform 0.2s ease-in;
-  }
-`
-
-const StyledNavigationButtons = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    gap: 0.375rem;
-    align-items: center;
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: none;
-    }
-
-    button {
-      &:hover {
-        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
-      }
-      background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.buttonCircular};
-      border-radius: 50%;
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      width: 3.625rem;
-      height: 3.625rem;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      transition: all 0.3s ease-in-out;
-      &:focus {
-        outline: 2px solid ${theme.colors.primary};
-      }
-    }
-
-    button:first-child {
-      transform: rotate(180deg);
-    }
-  `}
-`
-
-const StyledDots = styled.div`
-  ${({ theme }) => css`
-    display: none;
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-    }
-  `}
-`
-
-const StyledDot = styled(Dot)`
-  ${({ theme }) => css`
-    width: 0.875rem;
-    min-width: 0.875rem;
-    border-radius: 50%;
-    height: 0.875rem;
-    min-height: 0.875rem;
-    opacity: 0.22;
-    background-color: ${theme.colors.black};
-
-    &[disabled] {
-      opacity: 1;
-      background-color: ${theme.colors.secondary};
-    }
-  `}
 `
 
 const CtaLink = styled(Link)`
@@ -334,10 +233,6 @@ const StyledArrowButtonWrapper = styled.div`
   justify-content: center;
   position: relative;
   width: 100%;
-
-  @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
-    display: none;
-  }
 `
 
 const MobileCtaWrapper = styled.div`

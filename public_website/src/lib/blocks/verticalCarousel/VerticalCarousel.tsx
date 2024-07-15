@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import NavigationWithArrow from './NavigationWithArrow'
-import NavigationWithDots from './NavigationWithDots'
+import NavigationWithArrow from '../../../ui/components/nav-carousel/NavigationWithArrow'
+import NavigationWithDots from '../../../ui/components/nav-carousel/NavigationWithDots'
 import { VerticalCarouselSlide } from './VerticalCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
@@ -23,6 +23,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
   const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
   })
+  const TOTAL_SLIDES = useMemo(() => itemsFilter.length, [itemsFilter])
 
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     title
@@ -30,17 +31,19 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
 
-  const setVisibleSlide = (): number => {
+  const getvisibleSlides = useMemo(() => {
     if (width < MOBILE_WIDTH) return 2
     if (width < LARGE_DESKTOP_WIDTH) return 3
     return 4
-  }
+  }, [width])
 
-  const visibleSlides = setVisibleSlide()
-  const isNavigation = (): boolean => {
-    return itemsFilter.length > 0
-  }
-  const TOTAL_SLIDE = itemsFilter.length
+  const isNavShowing = useMemo(() => {
+    const visibleKeySlides = getvisibleSlides
+    return TOTAL_SLIDES > visibleKeySlides
+  }, [TOTAL_SLIDES, getvisibleSlides])
+
+  const visibleSlides = getvisibleSlides
+
   /**
    * Remove unnecessary HTML attributes for a11y.
    * PR #469 will improve that: https://github.com/express-labs/pure-react-carousel/pull/469
@@ -62,13 +65,13 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
         <CarouselProvider
           naturalSlideWidth={60}
           naturalSlideHeight={75}
-          totalSlides={TOTAL_SLIDE}
+          totalSlides={TOTAL_SLIDES}
           visibleSlides={visibleSlides}
           isIntrinsicHeight
           infinite={false}
           dragEnabled
           step={1}>
-          <BlockRendererWithCondition condition={isNavigation()}>
+          <BlockRendererWithCondition condition={isNavShowing}>
             <StyledHeading>
               <Typo.Heading2>{title}</Typo.Heading2>
               <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
@@ -88,7 +91,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
             {items?.map((item, index) => {
               return (
                 <VerticalCarouselSlide
-                  key={item.title}
+                  key={`${item.title}_${index}`}
                   slideIndex={index}
                   {...item}
                   hidePlayIcon={hidePlayIcon}
@@ -97,11 +100,12 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
             })}
           </StyledSlider>
           <BlockRendererWithCondition
-            condition={isNavigation() && width < MOBILE_WIDTH}>
+            condition={isNavShowing && width < MOBILE_WIDTH}>
             <NavigationWithDots
               items={items}
               carrouselSelector={CAROUSEL_SELECTOR}
               slidesSelector={SLIDES_SELECTOR}
+              carouselName="VERTICAL_CAROUSEL"
             />
           </BlockRendererWithCondition>
         </CarouselProvider>

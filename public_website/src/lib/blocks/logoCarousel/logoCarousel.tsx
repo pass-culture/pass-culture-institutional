@@ -1,23 +1,20 @@
 import React, { useEffect, useMemo } from 'react'
-import {
-  ButtonBack,
-  ButtonNext,
-  CarouselProvider,
-  Slider,
-} from 'pure-react-carousel'
+import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { LogoCarouselSlide } from './logoCarouselSlide'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { StyledDot } from '@/theme/style'
 import { LogoCarouselProps } from '@/types/props'
-import { ArrowRight } from '@/ui/components/icons/ArrowRight'
+import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
+import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
+import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { stripTags } from '@/utils/stripTags'
 
-const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
+const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
+const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
 export function LogoCarousel(props: LogoCarouselProps) {
   const { items } = props
@@ -25,10 +22,19 @@ export function LogoCarousel(props: LogoCarouselProps) {
     'title'
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-  const { width = 0 } = useWindowSize({ debounceDelay: 200 })
+  const { width = 0 } = useWindowSize({ debounceDelay: 50 })
   const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
-  const visibleSlides = width < MEDIA_QUERY ? 1 : 6
+  const getvisibleSlides = useMemo(() => {
+    if (width < MOBILE_WIDTH) return 1
+    if (width < LARGE_DESKTOP_WIDTH) return 3
+    return 6
+  }, [width])
+
+  const isNavShowing = useMemo(() => {
+    const visibleKeySlides = getvisibleSlides
+    return TOTAL_SLIDES > visibleKeySlides
+  }, [TOTAL_SLIDES, getvisibleSlides])
 
   useEffect(() => {
     const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
@@ -39,33 +45,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
     }
   }, [LOGO_CAROUSEL_SELECTOR])
 
-  function cleanSlideAttributes(
-    carouselEl: Element,
-    slidesEl: NodeListOf<Element>
-  ) {
-    carouselEl?.removeAttribute('tabindex')
-    carouselEl?.removeAttribute('aria-live')
-
-    slidesEl.forEach((slideEl) => {
-      slideEl.removeAttribute('tabindex')
-      slideEl.removeAttribute('aria-selected')
-    })
-  }
-
-  const isNavShowing = (): boolean => {
-    return TOTAL_SLIDES > visibleSlides
-  }
-
-  function handleNavigationButtonClick() {
-    const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
-
-    if (carouselEl && carouselSlidesEl) {
-      setTimeout(() => {
-        cleanSlideAttributes(carouselEl, carouselSlidesEl)
-      }, 1)
-    }
-  }
+  const visibleSlides = getvisibleSlides
 
   return (
     <CarouselProvider
@@ -74,7 +54,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
       totalSlides={TOTAL_SLIDES}
       visibleSlides={visibleSlides}
       isIntrinsicHeight
-      infinite
+      infinite={false}
       dragEnabled={false}
       step={1}>
       <StyledSlider
@@ -85,7 +65,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
           return (
             item.logo && (
               <LogoCarouselSlide
-                key={item.logo.data.attributes.hash}
+                key={`${item.logo.data.attributes.hash}_${index}`}
                 slideIndex={index}
                 {...item}
                 image={item.logo}
@@ -95,37 +75,24 @@ export function LogoCarousel(props: LogoCarouselProps) {
         })}
       </StyledSlider>
 
-      <BlockRendererWithCondition condition={isNavShowing()}>
+      <BlockRendererWithCondition condition={isNavShowing}>
         <StyledHeading>
-          <StyledNavigationButtons aria-label="Contrôles du carousel">
-            <ButtonBack
-              aria-label="Élement précédent"
-              onClick={handleNavigationButtonClick}>
-              <ArrowRight />
-            </ButtonBack>
-            <ButtonNext
-              aria-label="Élément suivant"
-              onClick={handleNavigationButtonClick}>
-              <ArrowRight />
-            </ButtonNext>
-          </StyledNavigationButtons>
+          <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+            <NavigationWithArrow
+              carrouselSelector={LOGO_CAROUSEL_SELECTOR}
+              slidesSelector={SLIDES_SELECTOR}
+            />
+          </BlockRendererWithCondition>
         </StyledHeading>
-        <StyledDots aria-label="Contrôles du carousel">
-          {items?.map((item, index) => {
-            return (
-              item.logo && (
-                <StyledDot
-                  onClick={handleNavigationButtonClick}
-                  key={item.logo.data.attributes.hash}
-                  slide={index}
-                  aria-label={`Afficher la diapositive ${index + 1} sur ${
-                    items.length
-                  } : ${item.logo?.data?.attributes?.alternativeText}`}
-                />
-              )
-            )
-          })}
-        </StyledDots>
+        <BlockRendererWithCondition
+          condition={isNavShowing && width < MOBILE_WIDTH}>
+          <NavigationWithDots
+            items={items}
+            carrouselSelector={LOGO_CAROUSEL_SELECTOR}
+            slidesSelector={SLIDES_SELECTOR}
+            carouselName="LOGO_CAROUSEL"
+          />
+        </BlockRendererWithCondition>
       </BlockRendererWithCondition>
     </CarouselProvider>
   )
@@ -151,56 +118,4 @@ const StyledSlider = styled(Slider)`
   .carousel__slider-tray {
     margin: auto;
   }
-`
-
-const StyledNavigationButtons = styled.div`
-  ${({ theme }) => css`
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: none;
-    }
-
-    button {
-      background-color: ${theme.colors.white};
-      box-shadow: ${theme.shadows.buttonCircular};
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 3.625rem;
-      width: 3.625rem;
-      cursor: pointer;
-      &:hover {
-        filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.15));
-        box-shadow: none;
-      }
-      transition: all 0.3s ease-in-out;
-      &:focus {
-        outline: 2px solid ${theme.colors.primary};
-      }
-    }
-
-    button:first-child {
-      svg {
-        transform: rotate(180deg);
-      }
-    }
-  `}
-`
-
-const StyledDots = styled.div`
-  ${({ theme }) => css`
-    display: none;
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-  `}
 `
