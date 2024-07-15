@@ -30,8 +30,9 @@ const NavigationWithDots = (props: {
     | { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
   carrouselSelector: string
   slidesSelector: string
+  carouselName: string
 }) => {
-  const { items, carrouselSelector, slidesSelector } = props
+  const { items, carrouselSelector, slidesSelector, carouselName } = props
 
   const handleNavigation = useCallback(() => {
     handleNavigationButtonClick(carrouselSelector, slidesSelector)
@@ -52,11 +53,11 @@ const NavigationWithDots = (props: {
 
   const renderDot = useMemo(() => {
     return items?.map((item, index) => {
-      const key = getTitle(item, `DOT_${index}`)
+      const key = getTitle(item, `${carouselName}_${index}`)
       return (
         <StyledDot
           onClick={handleNavigation}
-          key={`${key}_${index}`}
+          key={key}
           slide={index}
           aria-label={`Afficher la diapositive ${index + 1} sur ${
             items.length

@@ -97,6 +97,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
           items={items}
           carrouselSelector={KEY_NUMBER_CAROUSEL_SELECTOR}
           slidesSelector={KEY_NUMBER_SLIDES_SELECTOR}
+          carouselName="KEY_NUMBER_CAROUSEL"
         />
       </BlockRendererWithCondition>
     </StyledCarouselProvider>

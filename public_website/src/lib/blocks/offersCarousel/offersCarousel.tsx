@@ -115,6 +115,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
           items={items}
           carrouselSelector={OFFERS_CAROUSEL_SELECTOR}
           slidesSelector={OFFERS_SLIDES_SELECTOR}
+          carouselName="OFFERS_CAROUSEL"
         />
       </BlockRendererWithCondition>
 

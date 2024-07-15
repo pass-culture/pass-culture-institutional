@@ -73,6 +73,7 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
           items={items}
           carrouselSelector={CAROUSEL_SELECTOR}
           slidesSelector={SLIDES_SELECTOR}
+          carouselName="PILED_CARDS_CAROUSEL"
         />
       </BlockRendererWithCondition>
     </CarouselProvider>

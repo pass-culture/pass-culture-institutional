@@ -105,6 +105,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
               items={items}
               carrouselSelector={CAROUSEL_SELECTOR}
               slidesSelector={SLIDES_SELECTOR}
+              carouselName="VERTICAL_CAROUSEL"
             />
           </BlockRendererWithCondition>
         </CarouselProvider>

@@ -90,6 +90,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
             items={items}
             carrouselSelector={LOGO_CAROUSEL_SELECTOR}
             slidesSelector={SLIDES_SELECTOR}
+            carouselName="LOGO_CAROUSEL"
           />
         </BlockRendererWithCondition>
       </BlockRendererWithCondition>

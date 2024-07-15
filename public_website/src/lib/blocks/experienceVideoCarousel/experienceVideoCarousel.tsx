@@ -97,6 +97,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
             items={items}
             carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
             slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+            carouselName="EXPERIENCE_VIDEO_CAROUSEL"
           />
         </BlockRendererWithCondition>
       </CarouselProvider>
