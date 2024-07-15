@@ -36,8 +36,6 @@ export function LogoCarousel(props: LogoCarouselProps) {
     return TOTAL_SLIDES > visibleKeySlides
   }, [TOTAL_SLIDES, getvisibleSlides])
 
-  const visibleSlides = getvisibleSlides
-
   useEffect(() => {
     const carouselEl = document.querySelector(LOGO_CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
@@ -46,6 +44,8 @@ export function LogoCarousel(props: LogoCarouselProps) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
   }, [LOGO_CAROUSEL_SELECTOR])
+
+  const visibleSlides = getvisibleSlides
 
   return (
     <CarouselProvider
