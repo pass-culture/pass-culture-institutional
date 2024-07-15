@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled from 'styled-components'
 
 import { VerticalCarouselSlide } from './PiledCardsCarouselSlide'
-import { StyledDot } from '@/theme/style'
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { PiledCardsCarouselProps } from '@/types/props'
+import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
+import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { stripTags } from '@/utils/stripTags'
 
 export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
@@ -13,11 +15,16 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
     title
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
-
+  const TOTAL_SLIDES = useMemo(() => items.length, [items])
   // Get the MQ in rem and convert it in pixels
   // const visibleSlides =
   //   screenWidth && screenWidth < getMediaQuery(MediaQueries.MOBILE) ? 1 : 4
-  const visibleSlides = 1
+  const getvisibleSlides = 1
+
+  const isNavShowing = useMemo(() => {
+    const visibleKeySlides = getvisibleSlides
+    return TOTAL_SLIDES > visibleKeySlides
+  }, [TOTAL_SLIDES, getvisibleSlides])
 
   /**
    * Remove unnecessary HTML attributes for a11y.
@@ -34,37 +41,12 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
     }
   }, [CAROUSEL_SELECTOR])
 
-  function cleanSlideAttributes(
-    carouselEl: Element,
-    slidesEl: NodeListOf<Element>
-  ) {
-    carouselEl?.removeAttribute('tabindex')
-    carouselEl?.removeAttribute('aria-live')
-
-    slidesEl.forEach((slideEl) => {
-      slideEl.removeAttribute('tabindex')
-      slideEl.removeAttribute('aria-selected')
-    })
-  }
-
-  // Remove attributes when clicking "previous", "next" and dots buttons
-  function handleNavigationButtonClick(): void {
-    const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
-    const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
-
-    if (carouselEl && carouselSlidesEl) {
-      setTimeout(() => {
-        cleanSlideAttributes(carouselEl, carouselSlidesEl)
-      }, 1)
-    }
-  }
-
   return (
     <CarouselProvider
       naturalSlideWidth={340}
       naturalSlideHeight={475}
       totalSlides={items.length}
-      visibleSlides={visibleSlides}
+      visibleSlides={getvisibleSlides}
       isIntrinsicHeight={true}
       infinite={true}
       dragEnabled={false}
@@ -78,7 +60,7 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
         {items.map((item, index) => {
           return (
             <VerticalCarouselSlide
-              key={item.title}
+              key={`${item.title}_${index}`}
               slideIndex={index}
               {...item}
             />
@@ -86,20 +68,13 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
         })}
       </StyledSlider>
 
-      <StyledDots role="group" aria-label="Contrôles du carousel">
-        {items.map((item, index) => {
-          return (
-            <StyledDot
-              onClick={handleNavigationButtonClick}
-              key={item.title}
-              slide={index}
-              aria-label={`Afficher la diapositive ${index + 1} sur ${
-                items.length
-              } : ${item.title}`}
-            />
-          )
-        })}
-      </StyledDots>
+      <BlockRendererWithCondition condition={isNavShowing}>
+        <NavigationWithDots
+          items={items}
+          carrouselSelector={CAROUSEL_SELECTOR}
+          slidesSelector={SLIDES_SELECTOR}
+        />
+      </BlockRendererWithCondition>
     </CarouselProvider>
   )
 }
@@ -107,12 +82,4 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
 const StyledSlider = styled(Slider)`
   overflow: hidden;
   padding-left: 1rem;
-`
-
-const StyledDots = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
 `
