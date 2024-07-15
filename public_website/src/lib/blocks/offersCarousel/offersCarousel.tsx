@@ -36,8 +36,6 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
     return 3.2
   }, [width])
 
-  const visibleSlides = getvisibleSlides
-
   const isNavShowing = useMemo(() => {
     const visibleKeySlides = getvisibleSlides
 
@@ -54,6 +52,8 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       cleanSlideAttributes(carouselEl, carouselSlidesEl)
     }
   }, [OFFERS_CAROUSEL_SELECTOR])
+
+  const visibleSlides = getvisibleSlides
 
   const descriptionIsEmpty =
     !description ||
