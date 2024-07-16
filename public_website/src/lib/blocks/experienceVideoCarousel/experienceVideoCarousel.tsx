@@ -77,21 +77,23 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
             </BlockRendererWithCondition>
           </StyledHeading>
 
-          <StyledSlider
-            classNameAnimation="customCarrouselAnimation"
-            aria-label={stripTags(title)}
-            aria-roledescription="carrousel">
-            {items?.map((item, index) => {
-              return (
-                <ExperienceVideoCarouselSlide
-                  isLandscape={isLandscape}
-                  key={`${item.title}_${index}`}
-                  slideIndex={index}
-                  {...item}
-                />
-              )
-            })}
-          </StyledSlider>
+          <BlockRendererWithCondition condition={items && items.length > 0}>
+            <StyledSlider
+              classNameAnimation="customCarrouselAnimation"
+              aria-label={stripTags(title)}
+              aria-roledescription="carrousel">
+              {items?.map((item, index) => {
+                return (
+                  <ExperienceVideoCarouselSlide
+                    isLandscape={isLandscape}
+                    key={`${item.title}_${index}`}
+                    slideIndex={index}
+                    {...item}
+                  />
+                )
+              })}
+            </StyledSlider>
+          </BlockRendererWithCondition>
 
           <BlockRendererWithCondition condition={isNavShowing}>
             <NavigationWithDots

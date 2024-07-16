@@ -61,7 +61,7 @@ export function PiledCards(props: PiledCardsProps) {
       return (
         <StyledButton
           type="button"
-          aria-label="Slide suivante"
+          aria-label="Diapositive suivante"
           onClick={(): void => ScrollTo(index, 'bottom')}>
           <ArrowDown />
         </StyledButton>
@@ -70,7 +70,7 @@ export function PiledCards(props: PiledCardsProps) {
       return (
         <StyledButton
           type="button"
-          aria-label="Slide précédente"
+          aria-label="Diapositive précédente"
           $isReverse
           onClick={(): void => ScrollTo(index, 'top')}>
           <ArrowDown />
@@ -81,14 +81,14 @@ export function PiledCards(props: PiledCardsProps) {
       <React.Fragment>
         <StyledButton
           type="button"
-          aria-label="Slide précédente"
+          aria-label="Diapositive précédente"
           $isReverse
           onClick={(): void => ScrollTo(index, 'top')}>
           <ArrowDown />
         </StyledButton>
         <StyledButton
           type="button"
-          aria-label="Slide suivante"
+          aria-label="Diapositive suivante"
           onClick={(): void => ScrollTo(index, 'bottom')}>
           <ArrowDown />
         </StyledButton>
