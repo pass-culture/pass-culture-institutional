@@ -184,12 +184,14 @@ const GlobalStyles = createGlobalStyle`
   }
 
  .customCarrouselAnimation {
-    transition: transform 0.5s;
-    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: transform 0.5s!important;
+    transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1)!important;
     will-change: transform;
   }
 
+ 
   body {
+
     --module-margin: 5rem;
     --module-spacing: calc(var(--module-margin) * 2);
 
