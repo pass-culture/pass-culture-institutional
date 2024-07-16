@@ -69,6 +69,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       totalSlides={TOTAL_SLIDES}
       isIntrinsicHeight
       dragEnabled
+      touchEnabled
       infinite={false}
       step={1}>
       <StyledHeading $noMargin>
@@ -97,6 +98,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
 
       <StyledSlider
         classNameAnimation="customCarrouselAnimation"
+        preventVerticalScrollOnTouch
         aria-label={stripTags(title)}
         aria-roledescription="carrousel">
         {items.map((item, index) => {
