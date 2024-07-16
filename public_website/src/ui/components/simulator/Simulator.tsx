@@ -305,7 +305,7 @@ const Inner = styled.div<{ $showingResult: boolean }>`
 
   @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
     display: block;
-    min-height: 30rem;
+    min-height: 41rem;
   }
 `
 

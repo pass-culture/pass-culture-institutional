@@ -70,6 +70,7 @@ export function SliderField({
   const memoizeUL = useMemo(() => {
     return (
       <ul id="question-field" ref={dropdownRef} className="select-dropdown">
+        <Separator />
         {answers.map((a: string, i: number) => (
           <span
             aria-selected="false"
@@ -156,7 +157,7 @@ export function SliderField({
         value={(answer ?? 0) + 14}
         onChange={handleChange}
       />
-      <SelectWrapper>
+      <SelectWrapper $isOpen={checkIfOpen(0)}>
         {isClient && (
           <CustomSelect
             onMouseLeave={(): void => setIsOpen(-1)}
@@ -199,6 +200,12 @@ const Field = styled.div`
     gap: 1.5rem;
   }
 `
+const Separator = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
+`
 
 const Slider = styled(BaseSlider)`
   padding-bottom: 4rem;
@@ -224,7 +231,6 @@ const Slider = styled(BaseSlider)`
       top: 0;
       left: 50%;
       transform: translateY(-1rem);
-
       height: 1rem;
       width: 1px;
 
@@ -280,33 +286,51 @@ const Slider = styled(BaseSlider)`
   }
 `
 
-const SelectWrapper = styled.div`
-  position: relative;
-  display: none;
+const SelectWrapper = styled.div<{ $isOpen: boolean }>`
+  ${({ theme, $isOpen }) => css`
+    position: relative;
+    display: none;
 
-  @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
-    display: initial;
-  }
-  div:first-child {
-    @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-      display: block;
+    @media (width < ${({ theme }) => theme.mediaQueries.largeDesktop}) {
+      display: initial;
     }
-  }
-
-  [role='combobox'] {
-    padding: 1.25rem 1.875rem;
-    background-color: ${({ theme }) => theme.colors.lightGray};
-    font-weight: ${({ theme }) => theme.fonts.weights.bold};
-    font-size: ${({ theme }) => theme.fonts.sizes.s};
-    border-radius: 1.25rem;
-    width: 100%;
-    min-height: auto;
-    box-sizing: border-box;
-
-    span:first-child {
-      display: none;
+    div:first-child {
+      @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+        display: block;
+      }
     }
-  }
+    .select-dropdown {
+      width: 100%;
+      box-sizing: border-box;
+      top: 100%;
+      box-shadow: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      font-weight: bold;
+    }
+
+    [role='combobox'] {
+      padding: 1.25rem 1.875rem;
+      background-color: ${theme.colors.lightGray};
+      font-weight: ${theme.fonts.weights.bold};
+      font-size: ${theme.fonts.sizes.s};
+      border-top-left-radius: 1.25rem;
+      border-top-right-radius: 1.25rem;
+      width: 100%;
+      min-height: auto;
+      box-sizing: border-box;
+      ${$isOpen
+        ? 'border-bottom-left-radius: 0;'
+        : 'border-bottom-left-radius: 1.25rem;'}
+
+      ${$isOpen
+        ? 'border-bottom-right-radius: 0;'
+        : 'border-bottom-right-radius: 1.25rem;'}
+      span:first-child {
+        display: none;
+      }
+    }
+  `}
 `
 const SelectIcon = styled(ChevronDown)<{ $isOpen: boolean }>`
   ${({ theme, $isOpen }) => css`
