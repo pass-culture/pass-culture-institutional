@@ -54,56 +54,62 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
   }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
 
   return (
-    <ContentWrapper>
-      <CarouselProvider
-        naturalSlideWidth={60}
-        naturalSlideHeight={75}
-        visibleSlides={visibleSlides}
-        totalSlides={TOTAL_SLIDES}
-        isIntrinsicHeight
-        dragEnabled={false}
-        infinite={false}
-        step={1}>
-        <StyledHeading>
-          <StyledHeading2>{title}</StyledHeading2>
-          <BlockRendererWithCondition condition={isNavShowing}>
-            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
-              <NavigationWithArrow
-                carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-                slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-              />
+    <StylesContainer>
+      <ContentWrapper>
+        <CarouselProvider
+          naturalSlideWidth={60}
+          naturalSlideHeight={75}
+          visibleSlides={visibleSlides}
+          totalSlides={TOTAL_SLIDES}
+          isIntrinsicHeight
+          dragEnabled={false}
+          infinite={false}
+          step={1}>
+          <StyledHeading>
+            <StyledHeading2>{title}</StyledHeading2>
+            <BlockRendererWithCondition condition={isNavShowing}>
+              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+                <NavigationWithArrow
+                  carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+                  slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+                />
+              </BlockRendererWithCondition>
             </BlockRendererWithCondition>
+          </StyledHeading>
+
+          <StyledSlider
+            classNameAnimation="customCarrouselAnimation"
+            aria-label={stripTags(title)}
+            aria-roledescription="carrousel">
+            {items?.map((item, index) => {
+              return (
+                <ExperienceVideoCarouselSlide
+                  isLandscape={isLandscape}
+                  key={`${item.title}_${index}`}
+                  slideIndex={index}
+                  {...item}
+                />
+              )
+            })}
+          </StyledSlider>
+
+          <BlockRendererWithCondition condition={isNavShowing}>
+            <NavigationWithDots
+              items={items}
+              carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+              slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+              carouselName="EXPERIENCE_VIDEO_CAROUSEL"
+            />
           </BlockRendererWithCondition>
-        </StyledHeading>
-
-        <StyledSlider
-          classNameAnimation="customCarrouselAnimation"
-          aria-label={stripTags(title)}
-          aria-roledescription="carrousel">
-          {items?.map((item, index) => {
-            return (
-              <ExperienceVideoCarouselSlide
-                isLandscape={isLandscape}
-                key={`${item.title}_${index}`}
-                slideIndex={index}
-                {...item}
-              />
-            )
-          })}
-        </StyledSlider>
-
-        <BlockRendererWithCondition condition={isNavShowing}>
-          <NavigationWithDots
-            items={items}
-            carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-            slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-            carouselName="EXPERIENCE_VIDEO_CAROUSEL"
-          />
-        </BlockRendererWithCondition>
-      </CarouselProvider>
-    </ContentWrapper>
+        </CarouselProvider>
+      </ContentWrapper>
+    </StylesContainer>
   )
 }
+
+const StylesContainer = styled.section`
+  background: linear-gradient(360deg, rgba(255, 255, 255, 0), #f5f2fa);
+`
 
 const StyledHeading = styled.div`
   ${({ theme }) => css`

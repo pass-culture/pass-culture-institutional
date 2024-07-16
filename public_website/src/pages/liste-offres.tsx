@@ -3,6 +3,7 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { ExperienceVideoCarousel } from '@/lib/blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Header } from '@/lib/blocks/Header'
 import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
@@ -12,7 +13,7 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
-import { ListProps } from '@/types/props'
+import { ExperienceVideoCarouselSlideProps, ListProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
@@ -32,11 +33,6 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
     experience,
     offres_culturelles,
   } = offerListe.attributes
-
-  const isExperiences = (): boolean => {
-    if (experience && experience?.carouselItems.length > 0) return true
-    return false
-  }
 
   return (
     <React.Fragment>
@@ -82,15 +78,21 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
         />
       )}
 
-      {isExperiences() && experience?.title && (
+      <BlockRendererWithCondition
+        condition={!!experience && experience.carouselItems.length > 0}>
         <StyledBackgroundExperienceVideoCarousel>
           <ExperienceVideoCarousel
-            title={experience?.title}
-            carouselItems={experience.carouselItems}
-            isLandscape={experience.isLandscape}
+            title={experience?.title as string}
+            carouselItems={
+              experience?.carouselItems as Omit<
+                ExperienceVideoCarouselSlideProps,
+                'slideIndex'
+              >[]
+            }
+            isLandscape={experience?.isLandscape}
           />
         </StyledBackgroundExperienceVideoCarousel>
-      )}
+      </BlockRendererWithCondition>
 
       {question && (
         <SimplePushCta

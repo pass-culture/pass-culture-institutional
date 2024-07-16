@@ -74,7 +74,8 @@ const Root = styled(ContentWrapper)`
     position: relative;
 
     p {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5625rem;
+      margin-bottom: 2.8125rem;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
@@ -189,6 +190,7 @@ const StyledOffersSurtitle = styled(OutlinedText)`
     }
   `}
 `
+
 const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
@@ -202,6 +204,13 @@ const CtaLink = styled(Link)`
     padding: 1rem 1.75rem;
     border-radius: 100px;
     border: 1px solid ${theme.colors.white};
+
+    &:hover {
+      background: ${`rgba(255, 255, 255, 0.20);`};
+    }
+    &:active {
+      outline: 2px solid ${theme.colors.white};
+    }
 
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-right: 0;

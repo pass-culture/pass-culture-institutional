@@ -110,6 +110,7 @@ export function OutlinedText(props: OutlinedTextProps) {
 const Root = styled.span<{ $filterId: string }>`
   filter: url(#${({ $filterId }) => $filterId});
   color: #000000;
+  pointer-events: none;
 `
 
 const Svg = styled.svg`

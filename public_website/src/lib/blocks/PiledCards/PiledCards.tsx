@@ -70,7 +70,7 @@ export function PiledCards(props: PiledCardsProps) {
       return (
         <StyledButton
           type="button"
-          aria-label="Slide précendente"
+          aria-label="Slide précédente"
           $isReverse
           onClick={(): void => ScrollTo(index, 'top')}>
           <ArrowDown />
@@ -81,15 +81,15 @@ export function PiledCards(props: PiledCardsProps) {
       <React.Fragment>
         <StyledButton
           type="button"
-          aria-label="Slide suivante"
-          onClick={(): void => ScrollTo(index, 'bottom')}>
+          aria-label="Slide précédente"
+          $isReverse
+          onClick={(): void => ScrollTo(index, 'top')}>
           <ArrowDown />
         </StyledButton>
         <StyledButton
           type="button"
-          aria-label="Slide précendente"
-          $isReverse
-          onClick={(): void => ScrollTo(index, 'top')}>
+          aria-label="Slide suivante"
+          onClick={(): void => ScrollTo(index, 'bottom')}>
           <ArrowDown />
         </StyledButton>
       </React.Fragment>
@@ -229,7 +229,6 @@ const StyledNavWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  top: 3rem;
   position: relative;
   padding: 1rem;
 `
@@ -242,7 +241,7 @@ const StyledButton = styled.button<{ $isReverse?: boolean }>`
     max-height: 3.4375rem;
     min-width: 3.4375rem;
     min-height: 3.4375rem;
-    background-color: ${theme.colors.secondary};
+    background-color: transparent;
     position: relative;
     border-radius: 100%;
     cursor: pointer;
@@ -252,10 +251,26 @@ const StyledButton = styled.button<{ $isReverse?: boolean }>`
     border: 1px solid white;
     outline-offset: 2px;
     z-index: 1000;
-    ${$isReverse && 'transform: rotate(180deg);'}
-    &:hover {
-      background-color: ${theme.uniqueColors.blueDark};
+    transform: translateY(0) rotate(0deg);
+    ${$isReverse && 'transform:translateY(0) rotate(180deg);'}
+
+    svg {
+      will-change: transform;
+      transition: transform 0.2s linear;
     }
+    ${$isReverse &&
+    `&:hover {
+      svg {
+        transform: translateY(-5px) rotate(0deg);
+      }
+    }`}
+
+    &:hover {
+      svg {
+        transform: translateY(5px) rotate(0deg);
+      }
+    }
+
     &:active {
       outline: 2px solid ${theme.colors.secondary};
     }
