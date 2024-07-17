@@ -95,7 +95,8 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
             </StyledSlider>
           </BlockRendererWithCondition>
 
-          <BlockRendererWithCondition condition={isNavShowing}>
+          <BlockRendererWithCondition
+            condition={isNavShowing && width < MOBILE_WIDTH}>
             <NavigationWithDots
               items={items}
               carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
