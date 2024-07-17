@@ -51,6 +51,20 @@ const Root = styled(ContentWrapper)`
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
 
+    img {
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+      object-fit: cover;
+      aspect-ratio: 1.2;
+      max-width: 37.5rem;
+      display: block;
+      margin: 0 auto;
+      height: auto;
+      width: 100%;
+      margin-top: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
     h2 {
       font-size: 2.5rem;
       margin-bottom: 2rem;
