@@ -32,7 +32,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="fr">
         <Head>
           <link rel="manifest" href="/site.webmanifest" />
           <link
