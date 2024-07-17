@@ -21,10 +21,11 @@ export default function CustomPage(props: CustomPageProps) {
     <React.Fragment>
       <Seo metaData={seo} />
       <Header image={image} icon="" title={title} aboveTitle={aboveTitle} />
+      <Breadcrumb isUnderHeader />
       {blocks?.map((block) => (
         <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
       ))}
-      <Breadcrumb isUnderHeader />
+
       <StyledLatestNews
         news={props.latestStudies}
         title="Les dernières **actualités**"
