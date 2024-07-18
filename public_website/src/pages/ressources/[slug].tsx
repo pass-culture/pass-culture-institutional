@@ -3,6 +3,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { Resources } from '@/domain/resources/resources.output'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
@@ -88,12 +89,9 @@ export const getStaticProps = (async ({ params }) => {
     }
   )
 
-  const apiEndpoint = `/resources?${queryParams}`
+  const response = await Resources.getResources(queryParams)
 
-  const response =
-    await fetchCMS<APIResponseData<'api::resource.resource'>[]>(apiEndpoint)
-
-  if (response.data.length === 0) {
+  if (response.length === 0) {
     return { notFound: true }
   }
 
@@ -105,21 +103,20 @@ export const getStaticProps = (async ({ params }) => {
     },
     filters: {
       title: {
-        $ne: response.data[0]!.attributes.title,
+        $ne: response[0]!.attributes.title,
       },
       category: {
-        $eqi: response.data[0]!.attributes.category,
+        $eqi: response[0]!.attributes.category,
       },
     },
   })
-  const latestStudies = await fetchCMS<
-    APIResponseData<'api::resource.resource'>[]
-  >(`/resources?${latestStudiesQuery}`)
+
+  const latestResources = await Resources.getResources(latestStudiesQuery)
 
   return {
     props: {
-      data: response.data[0]!,
-      latestStudies: latestStudies.data,
+      data: response[0]!,
+      latestStudies: latestResources,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>

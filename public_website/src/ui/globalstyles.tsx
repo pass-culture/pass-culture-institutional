@@ -191,7 +191,8 @@ const GlobalStyles = createGlobalStyle`
 
  
   body {
-
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
     --module-margin: 5rem;
     --module-spacing: calc(var(--module-margin) * 2);
 

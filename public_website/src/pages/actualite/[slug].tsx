@@ -3,6 +3,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { News } from '@/domain/news/news.output'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
@@ -10,6 +11,7 @@ import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
+
 interface CustomPageProps {
   data: APIResponseData<'api::news.news'>
   latestStudies: APIResponseData<'api::news.news'>[]
@@ -74,16 +76,12 @@ export const getStaticProps = (async ({ params }) => {
     }
   )
 
-  const apiEndpoint = `/news-list?${queryParams}`
+  const actu = await News.getNews(queryParams)
 
-  const response =
-    await fetchCMS<APIResponseData<'api::news.news'>[]>(apiEndpoint)
-
-  if (response.data.length === 0) {
+  if (actu.length === 0) {
     return { notFound: true }
   }
-
-  const latestStudiesQuery = stringify({
+  const latestActuQuery = stringify({
     sort: ['date:desc'],
     populate: ['image'],
     pagination: {
@@ -91,21 +89,19 @@ export const getStaticProps = (async ({ params }) => {
     },
     filters: {
       category: {
-        $eqi: response.data[0]!.attributes.category,
+        $eqi: actu[0]!.attributes.category,
       },
       title: {
-        $ne: response.data[0]!.attributes.title,
+        $ne: actu[0]!.attributes.title,
       },
     },
   })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
+  const latestActu = await News.getNews(latestActuQuery)
 
   return {
     props: {
-      data: response.data[0]!,
-      latestStudies: latestStudies.data,
+      data: actu[0]!,
+      latestStudies: latestActu,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
