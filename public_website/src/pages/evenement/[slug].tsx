@@ -3,6 +3,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { Events } from '@/domain/events/events.output'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
@@ -97,12 +98,9 @@ export const getStaticProps = (async ({ params }) => {
     }
   )
 
-  const apiEndpoint = `/events?${query}`
+  const responseQuery = await Events.getEvents(query)
 
-  const responseQuery =
-    await fetchCMS<APIResponseData<'api::event.event'>[]>(apiEndpoint)
-
-  if (responseQuery.data.length === 0) {
+  if (responseQuery.length === 0) {
     return { notFound: true }
   }
 
@@ -113,21 +111,20 @@ export const getStaticProps = (async ({ params }) => {
     },
     filters: {
       category: {
-        $eqi: responseQuery.data[0]!.attributes.category,
+        $eqi: responseQuery[0]!.attributes.category,
       },
       title: {
-        $ne: responseQuery.data[0]!.attributes.title,
+        $ne: responseQuery[0]!.attributes.title,
       },
     },
   })
-  const latestStudies = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-    `/events?${relatedQuery}`
-  )
+
+  const latestEvents = await Events.getEvents(relatedQuery)
 
   return {
     props: {
-      data: responseQuery.data[0]!,
-      related: latestStudies.data,
+      data: latestEvents[0]!,
+      related: latestEvents,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
