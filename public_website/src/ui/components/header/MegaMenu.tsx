@@ -8,6 +8,7 @@ import HeaderBanner from './HeaderBanner'
 import { MegaMenuProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
+import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export function MegaMenu({
   onBlur,
@@ -69,6 +70,14 @@ export function MegaMenu({
     }
   })
 
+  const primaryListItemsWithoutSimulator = React.useMemo(
+    () =>
+      primaryListItems.filter(
+        (item) => !isStringAreEquals(item.Label, 'simulateur')
+      ),
+    [primaryListItems]
+  )
+
   return (
     <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
@@ -85,7 +94,7 @@ export function MegaMenu({
 
         <StyledMegaMenuLists>
           <ul>
-            {primaryListItems?.map((item) => {
+            {primaryListItemsWithoutSimulator?.map((item) => {
               return (
                 <li key={item.Label}>
                   <Link

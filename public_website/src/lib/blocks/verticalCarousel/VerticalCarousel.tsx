@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import NavigationWithArrow from '../../../ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '../../../ui/components/nav-carousel/NavigationWithDots'
 import { VerticalCarouselSlide } from './VerticalCarouselSlide'
+import useLockBodyScroll from '@/hooks/useLockBodyScroll'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
@@ -20,6 +21,10 @@ const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
 export function VerticalCarousel(props: VerticalCarouselProps) {
   const { title, items, hidePlayIcon } = props
+
+  const [isScroll, setIsSctoll] = useState<boolean>(false)
+  useLockBodyScroll(isScroll)
+
   const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
   })
@@ -70,6 +75,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
           isIntrinsicHeight
           infinite={false}
           dragEnabled
+          touchEnabled
           step={1}>
           <BlockRendererWithCondition condition={isNavShowing}>
             <StyledHeading>
@@ -84,6 +90,8 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
           </BlockRendererWithCondition>
 
           <StyledSlider
+            onTouchStart={(): void => setIsSctoll(true)}
+            onTouchEnd={(): void => setIsSctoll(false)}
             classNameAnimation="customCarrouselAnimation"
             role="region"
             aria-label={stripTags(title)}

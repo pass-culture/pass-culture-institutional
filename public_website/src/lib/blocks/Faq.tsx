@@ -62,9 +62,9 @@ export function Faq(props: FaqProps) {
 
   return (
     <ContentWrapper>
-      <StyledHeading>{title}</StyledHeading>
       <StyledContentWrapper>
         <StyledContentTextWrapper>
+          <StyledHeading>{title}</StyledHeading>
           <ButtonWithCTA cta={cta} />
         </StyledContentTextWrapper>
         <div>
