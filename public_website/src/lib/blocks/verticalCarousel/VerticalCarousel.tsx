@@ -22,8 +22,8 @@ const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 export function VerticalCarousel(props: VerticalCarouselProps) {
   const { title, items, hidePlayIcon } = props
 
-  const [isScroll, setIsSctoll] = useState<boolean>(false)
-  useLockBodyScroll(isScroll)
+  const [hasScroll, setHasScroll] = useState<boolean>(false)
+  useLockBodyScroll(hasScroll)
 
   const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
@@ -90,8 +90,8 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
           </BlockRendererWithCondition>
 
           <StyledSlider
-            onTouchStart={(): void => setIsSctoll(true)}
-            onTouchEnd={(): void => setIsSctoll(false)}
+            onTouchStart={(): void => setHasScroll(true)}
+            onTouchEnd={(): void => setHasScroll(false)}
             classNameAnimation="customCarrouselAnimation"
             role="region"
             aria-label={stripTags(title)}
