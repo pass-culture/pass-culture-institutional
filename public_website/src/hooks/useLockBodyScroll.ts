@@ -5,16 +5,12 @@ function useLockBodyScroll(lock: boolean = true) {
     if (typeof document === 'undefined') {
       return
     }
+    const setOverFlowBody = () =>
+      (document.body.style.overflow = lock ? 'hidden' : '')
 
-    const originalStyle = window.getComputedStyle(document.body).overflow
-    if (lock) {
-      document.body.style.overflow = 'hidden'
-    }
-
+    setOverFlowBody()
     return () => {
-      if (lock) {
-        document.body.style.overflow = originalStyle
-      }
+      setOverFlowBody()
     }
   }, [lock])
 }

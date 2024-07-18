@@ -16,8 +16,7 @@ describe('useLockBodyScroll', () => {
   })
 
   it('restores original body scroll when not active', () => {
-    const originalOverflow = document.body.style.overflow
     render(<TestComponent isLock={false} />)
-    expect(document.body.style.overflow).toBe(originalOverflow)
+    expect(document.body.style.overflow).toBe('')
   })
 })
