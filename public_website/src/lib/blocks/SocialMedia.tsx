@@ -92,10 +92,10 @@ const StyledListItem = styled.li`
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      width: 6rem;
-      height: 6rem;
-      min-width: 6rem;
-      min-height: 6rem;
+      width: 4rem;
+      height: 4rem;
+      min-width: 4rem;
+      min-height: 4rem;
       background: ${theme.colors.secondary};
       transform: rotate(4deg);
 

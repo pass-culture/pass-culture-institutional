@@ -10,6 +10,7 @@ import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
+import { parseText } from '@/utils/parseText'
 
 export function Header(props: HeaderProps) {
   const { text, title, cta, image, icon, icon2, aboveTitle } = props
@@ -19,7 +20,9 @@ export function Header(props: HeaderProps) {
       <StyledContentWrapper>
         <div>
           <BlockRendererWithCondition condition={isRenderable(aboveTitle)}>
-            <StyledAboveHeading>{aboveTitle}</StyledAboveHeading>
+            <StyledAboveHeading>
+              {parseText(aboveTitle as string).processedText}
+            </StyledAboveHeading>
           </BlockRendererWithCondition>
           <StyledHeading>{title}</StyledHeading>
           <BlockRendererWithCondition condition={isRenderable(text)}>
@@ -30,7 +33,6 @@ export function Header(props: HeaderProps) {
               <ButtonWithCTA cta={cta as CTA} />
             </StyledBtnWrapper>
           </BlockRendererWithCondition>
-          {/* <Breadcrumb /> */}
         </div>
         <BlockRendererWithCondition condition={isRenderable(img_url)}>
           <CardContainer>

@@ -55,16 +55,12 @@ export function Eligibility(props: EligibilityProps) {
 
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    // max-width: 80rem;
-    // margin: 0 auto 12.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     gap: 1.5rem;
-    // padding: 0 1.5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
-      margin: 0rem auto 4.5rem;
     }
   `}
 `
