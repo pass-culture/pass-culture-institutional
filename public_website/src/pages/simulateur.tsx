@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
@@ -10,7 +12,6 @@ import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface SimulatorProps {
   data: APIResponseData<'api::simulator.simulator'>
@@ -39,9 +40,11 @@ export default function SimulatorPage(props: SimulatorProps) {
     offres,
   } = props.data.attributes
 
+  const memoSteps = useMemo(() => steps.map((s) => s.step), [steps])
+
   return (
     <Root>
-      {seo && <Seo metaData={seo} />}
+      {!!seo && <Seo metaData={seo} />}
       <Title>{title}</Title>
       <Description>{description}</Description>
       <UnpaddedBreadcrumb />
@@ -53,7 +56,7 @@ export default function SimulatorPage(props: SimulatorProps) {
         successScreen={successScreen}
         failureScreen={failureScreen}
         tooYoungScreen={tooYoungScreen}
-        steps={steps.map((s) => s.step)}
+        steps={memoSteps}
         amountScreen15={amountScreen_15}
         amountScreen16={amountScreen_16}
         amountScreen17={amountScreen_17}
@@ -63,7 +66,7 @@ export default function SimulatorPage(props: SimulatorProps) {
         bottomEmoji={bottomEmoji}
       />
 
-      {offres && (
+      {!!offres && (
         <SimplePushCta
           title={offres.title}
           surtitle={offres.surtitle}
@@ -149,13 +152,15 @@ export const getStaticProps = (async () => {
     },
     { encodeValuesOnly: true }
   )
-  const response = await fetchCMS<APIResponseData<'api::simulator.simulator'>>(
-    `/simulator?${query}`
-  )
+
+  const response = (await Pages.getPage(
+    PATHS.SIMULATOR,
+    query
+  )) as APIResponseData<'api::simulator.simulator'>
 
   return {
     props: {
-      data: response.data,
+      data: response,
     },
   }
 }) satisfies GetStaticProps<SimulatorProps>

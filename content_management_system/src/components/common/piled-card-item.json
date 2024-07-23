@@ -36,7 +36,14 @@
         "magenta",
         "orange",
         "green",
-        "blue"
+        "blue",
+        "gold",
+        "sky",
+        "lila",
+        "deeppink",
+        "aquamarine",
+        "lightgray",
+        "saumon"
       ],
       "required": true,
       "default": "purple"

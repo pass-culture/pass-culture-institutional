@@ -63,12 +63,14 @@ const Root = styled(Slide)<{ $isLandscape?: boolean }>`
 `
 
 const StyledExperienceVideo = styled(ReactPlayer)`
-  border-radius: 0.8125rem;
-  object-fit: cover;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1.7;
-  overflow: hidden;
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.sm};
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.7;
+    overflow: hidden;
+  `}
 `
 const StyledTitle = styled(Typo.Heading3)`
   ${({ theme }) => css`

@@ -14,6 +14,7 @@ export const headerDataFixtures: HeaderMenuProps = {
         cardDescription: 'CardDescription 1',
         cardFirstEmoji: '🌴',
         cardSecondEmoji: '🦊',
+        theme: 'aquamarine',
         primaryListItems: [
           {
             Label: 'primaryListItems 1',
@@ -43,6 +44,7 @@ export const headerDataFixtures: HeaderMenuProps = {
       label: 'Target item 2',
       megaMenu: {
         title: 'Mega menu 2',
+        theme: 'aquamarine',
         bannerDefaultUrl: '',
         cardTitle: 'CardTitle 2',
         cardDescription: 'CardDescription 2',

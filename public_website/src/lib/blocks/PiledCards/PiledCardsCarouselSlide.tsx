@@ -3,8 +3,7 @@ import Image from 'next/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { CARD_BACKGROUNDS } from './const'
-import { PiledCardItemsTheme } from './piled-card-items-theme'
+import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { PiledCardsCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -43,11 +42,10 @@ export function VerticalCarouselSlide(props: PiledCardsCarouselSlideProps) {
   )
 }
 
-const Root = styled(Slide)<{ $slideTheme: PiledCardItemsTheme }>`
+const Root = styled(Slide)<{ $slideTheme: ItemsTheme }>`
   ${({ $slideTheme }) => css`
     .inner {
       margin-right: 1rem;
-
       background: ${CARD_BACKGROUNDS[$slideTheme]};
       padding: 2rem;
       border-radius: 1.25rem;

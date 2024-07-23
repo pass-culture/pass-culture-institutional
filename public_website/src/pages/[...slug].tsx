@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::page.page'>
@@ -17,10 +17,9 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   const { seo, Blocks } = props.data.attributes
 
-  return (
-    <PageWrapper>
-      {seo && <Seo metaData={seo} />}
-      {Blocks?.map((block, index) => {
+  const memoBlocks = useMemo(
+    () =>
+      Blocks?.map((block, index) => {
         const blockContent = (
           <BlockRenderer
             key={`${block.__component}_${block.id}`}
@@ -30,13 +29,19 @@ export default function CustomPage(props: CustomPageProps) {
         return index === 1 ? (
           <React.Fragment key={`${block.__component}_${block.id}`}>
             <Breadcrumb isUnderHeader />
-            <span id="target-anchor-scroll">{blockContent}</span>
-            <ButtonScrollTo noTranslate />
+            {blockContent}
           </React.Fragment>
         ) : (
           blockContent
         )
-      })}
+      }),
+    [Blocks]
+  )
+
+  return (
+    <PageWrapper>
+      {!!seo && <Seo metaData={seo} />}
+      {memoBlocks}
     </PageWrapper>
   )
 }
@@ -96,12 +101,12 @@ export const getStaticProps = (async ({ params }) => {
     ],
   })
 
-  const apiEndpoint = `/pages?${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  const response = (await Pages.getPage(
+    PATHS.PAGES,
+    `${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
+  )) as APIResponseData<'api::page.page'>[]
 
-  const response =
-    await fetchCMS<APIResponseData<'api::page.page'>[]>(apiEndpoint)
-
-  if (response.data.length === 0) {
+  if (response.length === 0) {
     return { notFound: true }
   }
 
@@ -115,15 +120,12 @@ export const getStaticProps = (async ({ params }) => {
       },
     },
   })
-
-  const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-    `/events?${eventQuery}`
-  )
+  const events = await Pages.getPage(PATHS.EVENTS, eventQuery)
 
   return {
     props: {
-      data: response.data[0]!,
-      eventsData: events.data,
+      data: response[0]!,
+      eventsData: events,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
@@ -137,11 +139,13 @@ export const getStaticPaths = (async () => {
     },
     { encodeValuesOnly: true }
   )
-  const response = await fetchCMS<APIResponseData<'api::page.page'>[]>(
-    `/pages?${query}`
-  )
+  const response = (await Pages.getPage(
+    PATHS.PAGES,
+    query
+  )) as APIResponseData<'api::page.page'>[]
+
   const result = {
-    paths: response.data.map((page) => ({
+    paths: response.map((page: APIResponseData<'api::page.page'>) => ({
       params: {
         slug: page.attributes.Path.split('/').filter((slug) => slug.length),
       },

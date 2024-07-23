@@ -15,9 +15,7 @@ export function AccountItem(props: AccountItemDropdownProps) {
         href={url}
         onClick={(): void => onClickAnalytics({ eventName, eventOrigin })}>
         <StyledEmoji $color={color}>
-          <OutlinedText dilationRadius={0} blurDeviation={1.5} shadow>
-            {emoji}
-          </OutlinedText>
+          <OutlinedText shadow>{emoji}</OutlinedText>
         </StyledEmoji>
         <p>{label}</p>
         <ArrowRight />

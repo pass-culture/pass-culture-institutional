@@ -44,8 +44,9 @@ const StyledTabButton = styled.button`
     border: none;
     border-bottom: 0.0625rem solid transparent;
     font-size: ${theme.fonts.sizes['xl']};
-    font-weight: bold;
+    font-weight: ${theme.fonts.weights.bold};
     text-transform: uppercase;
     cursor: pointer;
+    color: ${theme.colors.black};
   `}
 `

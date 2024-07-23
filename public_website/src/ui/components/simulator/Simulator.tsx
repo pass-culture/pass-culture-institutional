@@ -8,6 +8,7 @@ import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
 import { Step } from './Step'
+import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
 import { stripTags } from '@/utils/stripTags'
 
@@ -254,16 +255,15 @@ export function Simulator(props: SimulatorProps) {
 
 const Root = styled.div`
   position: relative;
-
-  &::after {
-    position: absolute;
-    content: '';
-    inset: 0;
-    border-radius: 1rem;
-    background-color: ${({ theme }) => theme.colors.secondary};
-    transform: rotate(2.1deg);
-    z-index: -1;
-  }
+  // &::after {
+  //   position: absolute;
+  //   content: '';
+  //   inset: 0;
+  //   border-radius: 1rem;
+  //   background-color: ${({ theme }) => theme.colors.secondary};
+  //   transform: rotate(2.1deg);
+  //   z-index: -1;
+  // }
 `
 
 const TopEmoji = styled(OutlinedText)`
@@ -296,9 +296,9 @@ const Inner = styled.div<{ $showingResult: boolean }>`
   background-color: ${({ theme, $showingResult }) =>
     $showingResult ? theme.colors.lightGray : theme.colors.white};
   position: relative;
-  border-radius: 1rem;
+  border-radius: ${theme.radius.sm};
   min-height: 42rem;
-
+  border: 1px solid #cbcdd2;
   display: grid;
   grid-template-columns: 21rem 1fr;
   grid-template-rows: auto 1fr;

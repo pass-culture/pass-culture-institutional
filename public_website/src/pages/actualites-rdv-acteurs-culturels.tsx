@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { EventListItems } from '@/lib/blocks/EventListItems'
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia, StyledTitle } from '@/theme/style'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import Title from '@/ui/components/title/Title'
 import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -137,11 +139,12 @@ export default function ListeActuCulturels({
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
-    )
+    const news = (await Pages.getPage(
+      PATHS.NEWS,
+      newsQuery
+    )) as APIResponseData<'api::news.news'>[]
 
-    setData(news.data)
+    setData(news)
   }
 
   const fetchEventData = async () => {
@@ -164,12 +167,12 @@ export default function ListeActuCulturels({
         },
       },
     })
+    const events = (await Pages.getPage(
+      PATHS.EVENTS,
+      eventQuery
+    )) as APIResponseData<'api::event.event'>[]
 
-    const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-      `/events?${eventQuery}`
-    )
-
-    setEventData(events.data)
+    setEventData(events)
   }
 
   useEffect(() => {
@@ -187,10 +190,8 @@ export default function ListeActuCulturels({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      </StyledTitle>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -217,7 +218,7 @@ export default function ListeActuCulturels({
       <StyledTitle>
         {titleEventSection && (
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
-        )}{' '}
+        )}
       </StyledTitle>
       <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
@@ -260,10 +261,10 @@ export const getStaticProps = (async () => {
       },
     },
   })
-
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
-  )
+  const news = (await Pages.getPage(
+    PATHS.NEWS,
+    newsQuery
+  )) as APIResponseData<'api::news.news'>[]
 
   const eventQuery = stringify({
     sort: ['date:desc'],
@@ -276,9 +277,10 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-    `/events?${eventQuery}`
-  )
+  const events = (await Pages.getPage(
+    PATHS.EVENTS,
+    eventQuery
+  )) as APIResponseData<'api::event.event'>[]
 
   const query = stringify({
     populate: [
@@ -296,76 +298,31 @@ export const getStaticProps = (async () => {
       'seo.metaSocial.image',
     ],
   })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-  >(`/actualites-rdv-acteurs-culturel?${query}`)
+  const data = (await Pages.getPage(
+    PATHS.ACTU_RDV_ACTEURS,
+    query
+  )) as APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
 
   return {
     props: {
-      newsRDVData: news.data,
+      newsRDVData: news,
       listeActuCulturel: data,
-
-      eventsData: events.data,
+      eventsData: events,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    --module-spacing: 0;
-    margin-top: 3.5rem;
-
-    h2 {
-      margin-bottom: 3.5rem;
-      font-size: ${theme.fonts.sizes['8xl']};
-    }
-
-    h3 {
-      margin-bottom: 3.5rem;
-
-      font-size: ${theme.fonts.sizes['6xl']};
-      color: ${theme.colors.secondary};
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 2rem;
-
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['4xl']};
-        margin-bottom: 2rem;
-      }
-
-      h3 {
-        font-size: ${theme.fonts.sizes['3xl']};
-        margin-bottom: 3rem;
-      }
-    }
-  `}
-`
-
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;
   }
 `
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
-
 const StyledeventListItems = styled(EventListItems)`
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  // margin-top: 3rem;
+  // margin-bottom: 3rem;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;

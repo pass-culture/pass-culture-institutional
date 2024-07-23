@@ -3,6 +3,8 @@ import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
@@ -12,8 +14,6 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface TeachersHelpProps {
   data: APIResponseData<'api::help-teachers.help-teachers'>
@@ -29,7 +29,7 @@ export default function TeachersHelp({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
+      {!!seo && <Seo metaData={seo} />}
       <Header
         title={heroSection?.title}
         text={heroSection?.text}
@@ -37,17 +37,17 @@ export default function TeachersHelp({
         image={heroSection.image}
       />
       <Breadcrumb isUnderHeader />
-      <ButtonScrollTo noTranslate />
+
       <StyledSpacer />
-      <span id="target-anchor-scroll">
-        <Faq
-          title={faq.title}
-          cta={faq.cta}
-          categories={faq.categories}
-          filteringProperty={faq.filteringProperty}
-          limit={faq.limit}
-        />
-      </span>
+
+      <Faq
+        title={faq.title}
+        cta={faq.cta}
+        categories={faq.categories}
+        filteringProperty={faq.filteringProperty}
+        limit={faq.limit}
+      />
+
       <LatestNews
         news={latestStudies}
         title={data.attributes.latestStudies.title}
@@ -103,10 +103,10 @@ export const getStaticProps = (async () => {
       'seo.metaSocial.image',
     ],
   })
-
-  const help = await fetchCMS<
-    APIResponseData<'api::help-teachers.help-teachers'>
-  >(`/help-teachers?${helpQuery}`)
+  const help = (await Pages.getPage(
+    PATHS.HELP_TEACHERS,
+    helpQuery
+  )) as APIResponseData<'api::help-teachers.help-teachers'>
 
   // Fetch 3 latest studies
   const latestStudiesQuery = stringify({
@@ -121,13 +121,15 @@ export const getStaticProps = (async () => {
       },
     },
   })
-  const latestStudies = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${latestStudiesQuery}`
-  )
+  const latestStudies = (await Pages.getPage(
+    PATHS.NEWS,
+    latestStudiesQuery
+  )) as APIResponseData<'api::news.news'>[]
+
   return {
     props: {
-      data: help.data,
-      latestStudies: latestStudies.data,
+      data: help,
+      latestStudies: latestStudies,
     },
   }
 }) satisfies GetStaticProps<TeachersHelpProps>

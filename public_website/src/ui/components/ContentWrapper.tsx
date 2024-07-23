@@ -1,14 +1,16 @@
 import styled, { css } from 'styled-components'
 
-export const ContentWrapper = styled.div<{
+export const ContentWrapper = styled.section<{
   $noMargin?: boolean
   $marginTop?: number
   $marginBottom?: number
 }>`
   margin: auto;
+  position: relative;
   ${({ theme }) => css`
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 0;
+      margin-top: var(--module-margin);
+      margin-bottom: var(--module-margin);
     }
   `}
   ${(p) => {

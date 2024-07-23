@@ -81,7 +81,7 @@ export function Faq(props: FaqProps) {
             } = parseText(body)
 
             return (
-              <StyledAccordion key={faq.id}>
+              <StyledAccordion key={faq.title}>
                 <summary aria-label={summaryAccessibilityLabel}>
                   {summaryTextWithMarkup}
                 </summary>
@@ -177,7 +177,7 @@ const StyledAccordion = styled.details`
     }
 
     p {
-      margin-top: 1rem;
+      margin-top: 1.0625rem;
       line-height: 2.125rem;
     }
 

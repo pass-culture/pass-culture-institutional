@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Resources } from '@/domain/resources/resources.output'
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchCMS } from '@/utils/fetchCMS'
 interface CustomPageProps {
   data: APIResponseData<'api::resource.resource'>
@@ -18,12 +20,19 @@ interface CustomPageProps {
 export default function CustomPage(props: CustomPageProps) {
   const { image, title, seo, blocks } = props.data.attributes
   const { latestStudies } = props
+
+  const memoBlocks = useMemo(
+    () =>
+      blocks?.map((block) => (
+        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
+      )),
+    [blocks]
+  )
   return (
     <React.Fragment>
       <Header image={image} icon="" title={title} />
-      {blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      ))}
+      <Breadcrumb isUnderHeader />
+      {memoBlocks}
       <Seo metaData={seo} />
       <StyledLatestNews
         news={latestStudies}
@@ -88,8 +97,10 @@ export const getStaticProps = (async ({ params }) => {
       encodeValuesOnly: true,
     }
   )
-
-  const response = await Resources.getResources(queryParams)
+  const response = (await Pages.getPage(
+    PATHS.RESOURCES,
+    queryParams
+  )) as APIResponseData<'api::resource.resource'>[]
 
   if (response.length === 0) {
     return { notFound: true }
@@ -110,8 +121,10 @@ export const getStaticProps = (async ({ params }) => {
       },
     },
   })
-
-  const latestResources = await Resources.getResources(latestStudiesQuery)
+  const latestResources = (await Pages.getPage(
+    PATHS.RESOURCES,
+    latestStudiesQuery
+  )) as APIResponseData<'api::resource.resource'>[]
 
   return {
     props: {

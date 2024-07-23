@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { ArrowDown } from '../icons/ArrowDown'
+
 /**
  * This a simplify version of scroll anchor, wrap your compoonent with a span
  * and id target-anchor-scroll for scrolling you page to the anchor (only one per page!!)
@@ -67,7 +68,7 @@ const StyledButton = styled.button<{
     min-height: 4.375rem;
     background-color: ${theme.colors.secondary};
     position: fixed;
-    top: calc(100vh - 5.5rem);
+    top: calc(100vh - 8rem);
     left: 50%;
     margin-left: -35px;
     border-radius: 100%;
@@ -100,7 +101,7 @@ const StyledButton = styled.button<{
 const StyledWrappSvg = styled.div`
   width: 2.1875rem;
   height: 2.1875rem;
-
+  color: white;
   animation: move 1s ease-in-out infinite;
 
   @keyframes move {

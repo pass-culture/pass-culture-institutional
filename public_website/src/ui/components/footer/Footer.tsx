@@ -70,7 +70,8 @@ export function Footer(props: FooterProps) {
 
 const StyledFooter = styled.footer`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background-color: ${theme.colors.white};
+    box-shadow: 0px 0px 6px 0px #00000026;
   `}
 `
 

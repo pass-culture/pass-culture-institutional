@@ -5,15 +5,15 @@ import { Icon } from './Icon'
 export function ArrowDown() {
   return (
     <Icon
-      width="19"
-      height="27"
-      viewBox="0 0 19 27"
+      width="30"
+      height="30"
+      viewBox="0 0 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M9.5 1V26M9.5 26L1 17.6667M9.5 26L18 17.6667"
-        stroke="white"
-        strokeWidth="1.5"
+        d="M15.0012 26.065L15.0012 3.93787M15.0012 26.065L22.377 18.6893M15.0012 26.065L7.62551 18.6893"
+        stroke="currentColor"
+        strokeWidth="2.7659"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

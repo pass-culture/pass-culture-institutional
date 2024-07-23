@@ -1,8 +1,10 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { ExperienceVideoCarousel } from '@/lib/blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Header } from '@/lib/blocks/Header'
@@ -16,10 +18,8 @@ import { Offer } from '@/types/playlist'
 import { ExperienceVideoCarouselSlideProps, ListProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
-import { fetchCMS } from '@/utils/fetchCMS'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
@@ -36,7 +36,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
+      {!!seo && <Seo metaData={seo} />}
       {hero && hero.title && hero.icon && (
         <Header
           title={hero.title}
@@ -47,25 +47,24 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
       )}
 
       <Breadcrumb isUnderHeader />
-      <ButtonScrollTo noTranslate />
-      <span id="target-anchor-scroll">
-        <OfferSection
-          title={offres.title}
-          description={offres.description}
-          offers={offerItems}
-          cta={offres.cta}
-          firstCartTitle={offres.firstCartTitle}
-          secondCartTitle={offres.secondCartTitle}
-          descriptionCard={offres.descritptionCard}
-          ctaCard={offres.ctaCard}
-          firstIcon={offres.firstIcon}
-          secondIcon={offres.secondIcon}
-        />
-      </span>
+
+      <OfferSection
+        title={offres.title}
+        description={offres.description}
+        offers={offerItems}
+        cta={offres.cta}
+        firstCartTitle={offres.firstCartTitle}
+        secondCartTitle={offres.secondCartTitle}
+        descriptionCard={offres.descritptionCard}
+        ctaCard={offres.ctaCard}
+        firstIcon={offres.firstIcon}
+        secondIcon={offres.secondIcon}
+      />
+
       <Separator isActive={separatorIsActive(separator)} />
       <WhiteSpace space={0} />
 
-      {offres_culturelles && (
+      {offres_culturelles && offres_culturelles.items.length > 0 && (
         <OffersCarousel
           title={offres_culturelles.title}
           items={offres_culturelles.items}
@@ -137,9 +136,11 @@ export const getStaticProps = (async () => {
       'offres_culturelles.items',
     ],
   })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::liste-offre.liste-offre'>
-  >(`/liste-offre?${query}`)
+  const data = (await Pages.getPage(
+    PATHS.OFFERS_LIST,
+    query
+  )) as APIResponseData<'api::liste-offre.liste-offre'>
+
   const offerTag = data.attributes.offres?.offreTag
 
   const offerItems = (await fetchBackend(
@@ -155,10 +156,7 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps<ListProps>
 
 const StyledBackgroundExperienceVideoCarousel = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
-    width: 100%;
-    height: 100%;
-    padding: 1rem 0rem 1rem 0rem;
-  `}
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0rem 1rem 0rem;
 `

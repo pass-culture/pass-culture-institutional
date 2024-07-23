@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import styled, { css } from 'styled-components'
 
 import { ContentWrapper } from '../ContentWrapper'
@@ -18,6 +18,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const dropdownRef = useRef<HTMLUListElement | null>(null)
   const [isOpen, setIsOpen] = useState<number>(-1)
+  const params = useParams()
 
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
@@ -55,6 +56,18 @@ export function Breadcrumb(props: BreadcrumbProps) {
     setIsOpen(index)
   }
 
+  const isActu = (): boolean => {
+    return (
+      typeof params?.['slug'] === 'string' && pathname.startsWith('/actualite/')
+    )
+  }
+  const isResource = (): boolean => {
+    return (
+      typeof params?.['slug'] === 'string' &&
+      pathname.startsWith('/ressources/')
+    )
+  }
+
   const memoizeUL = useMemo(() => {
     return (
       <ul ref={dropdownRef} className="select-dropdown">
@@ -87,6 +100,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
 
   const label = currentNavigationGroup?.label
 
+  //Faudrait récupérer /actualites-pass-culture de manière dynamique
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -108,6 +122,16 @@ export function Breadcrumb(props: BreadcrumbProps) {
           <ListSeparator aria-hidden="true">
             <ChevronDown />
           </ListSeparator>
+          {isActu() && (
+            <StyledSimpleLink>
+              <Link href="/actualites-pass-culture">Actualités</Link>
+            </StyledSimpleLink>
+          )}
+          {isResource() && (
+            <StyledSimpleLink>
+              <Link href="/ressources-pass-culture">Ressources</Link>
+            </StyledSimpleLink>
+          )}
           <ListItem>
             <BlockRendererWithCondition condition={isRenderable(label)}>
               <SelectWrapper $groupLabel={label as string}>
@@ -151,6 +175,8 @@ export function Breadcrumb(props: BreadcrumbProps) {
 }
 
 const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
+  padding-left: 0;
+  padding-right: 0;
   ${({ theme, $isUnderHeader }) => css`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       display: none;
@@ -169,7 +195,7 @@ const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
 
     ${$isUnderHeader &&
     css`
-      transform: translateY(-10rem);
+      // transform: translateY(-10rem);
       @media (max-width: ${theme.mediaQueries.tablet}) {
         transform: none;
       }
@@ -191,7 +217,6 @@ const ListSeparator = styled.li<{ $isLast?: boolean }>`
   ${({ $isLast }) => css`
     svg {
       width: 0.5rem;
-
       ${!$isLast && 'transform: rotate(-90deg)'};
     }
   `}

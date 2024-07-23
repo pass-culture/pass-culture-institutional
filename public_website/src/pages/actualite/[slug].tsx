@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { News } from '@/domain/news/news.output'
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::news.news'>
@@ -19,15 +19,21 @@ interface CustomPageProps {
 
 export default function CustomPage(props: CustomPageProps) {
   const { seo, image, title, blocks, aboveTitle } = props.data.attributes
+
+  const memoBlocks = useMemo(
+    () =>
+      blocks?.map((block) => (
+        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
+      )),
+    [blocks]
+  )
+
   return (
     <React.Fragment>
       <Seo metaData={seo} />
       <Header image={image} icon="" title={title} aboveTitle={aboveTitle} />
       <Breadcrumb isUnderHeader />
-      {blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      ))}
-
+      {memoBlocks}
       <StyledLatestNews
         news={props.latestStudies}
         title="Les dernières **actualités**"
@@ -75,8 +81,10 @@ export const getStaticProps = (async ({ params }) => {
       encodeValuesOnly: true,
     }
   )
-
-  const actu = await News.getNews(queryParams)
+  const actu = (await Pages.getPage(
+    PATHS.NEWS,
+    queryParams
+  )) as APIResponseData<'api::news.news'>[]
 
   if (actu.length === 0) {
     return { notFound: true }
@@ -96,7 +104,11 @@ export const getStaticProps = (async ({ params }) => {
       },
     },
   })
-  const latestActu = await News.getNews(latestActuQuery)
+
+  const latestActu = (await Pages.getPage(
+    PATHS.NEWS,
+    latestActuQuery
+  )) as APIResponseData<'api::news.news'>[]
 
   return {
     props: {
@@ -107,11 +119,13 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
-  const response =
-    await fetchCMS<APIResponseData<'api::news.news'>[]>('/news-list')
+  const response = (await Pages.getPage(
+    PATHS.NEWS,
+    ''
+  )) as APIResponseData<'api::news.news'>[]
 
   const result = {
-    paths: response.data.map((page) => ({
+    paths: response.map((page) => ({
       params: {
         slug: page.attributes.slug,
       },

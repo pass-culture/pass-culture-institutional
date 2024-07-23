@@ -24,9 +24,9 @@ export function EventListItems(props: LatestEventsProps) {
 
   return (
     <Root className={className}>
-      <StyledList>
-        {events.length > 0 &&
-          events.slice(0, visibleItems).map((eventItem) => (
+      <BlockRendererWithCondition condition={events.length > 0}>
+        <StyledList>
+          {events.slice(0, visibleItems).map((eventItem) => (
             <li key={eventItem.attributes.slug}>
               <EventCard
                 title={eventItem.attributes.title}
@@ -44,7 +44,8 @@ export function EventListItems(props: LatestEventsProps) {
               />
             </li>
           ))}
-      </StyledList>
+        </StyledList>
+      </BlockRendererWithCondition>
       <BlockRendererWithCondition condition={isMoreButton()}>
         <LoadMoreButton onClick={loadMore}>{buttonText}</LoadMoreButton>
       </BlockRendererWithCondition>
@@ -69,11 +70,11 @@ const StyledList = styled.ul`
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
-    margin-bottom: 5rem;
+    // margin-bottom: 5rem;
 
-    > li {
-      scroll-snap-align: center;
-    }
+    // > li {
+    //   scroll-snap-align: center;
+    // }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;

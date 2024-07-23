@@ -89,11 +89,10 @@ export function LatestNews(props: LatestNewsProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-
   --module-spacing: 0;
 
   > a {

@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
+import { ContentWrapper } from '../ContentWrapper'
 import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
 import { RecommendationsProps, VerticalCarouselSlideProps } from '@/types/props'
 import { getOfferUrl } from '@/utils/apiHelpers'
@@ -32,10 +33,13 @@ export function Recommendations(props: RecommendationsProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background-color: ${theme.colors.lila};
     padding: 6.25rem 0 5rem;
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 100%;
 
     display: flex;
     flex-direction: column;

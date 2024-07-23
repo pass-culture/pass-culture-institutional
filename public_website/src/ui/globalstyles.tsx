@@ -137,6 +137,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     color: ${theme.colors.black};
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
   a {
@@ -171,13 +172,16 @@ const GlobalStyles = createGlobalStyle`
   /* Highlighted text inside sections title */
   mark {
     background: none;
-    background-image: linear-gradient(to right, ${theme.colors.flashGreen} 50%, ${theme.colors.flashGreen} 50%);
+    background-image: linear-gradient(to right,${theme.colors.flashGreen} 50%, ${theme.colors.flashGreen} 50%);
     background-size: 200% 0.4em;
     background-position: 100% 90%;
     background-repeat: no-repeat;
     color: inherit;
+    z-index:-1
   }
-  
+
+ 
+
   #main-content{
   position: relative;
   z-index:1
@@ -193,11 +197,10 @@ const GlobalStyles = createGlobalStyle`
   body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
-    --module-margin: 5rem;
+    --module-margin: 3.125rem;
     --module-spacing: calc(var(--module-margin) * 2);
-
     @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-      --module-margin: 2.825rem;
+       --module-margin:1.5625rem;
     }
   }
 

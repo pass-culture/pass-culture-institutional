@@ -6,7 +6,7 @@ import { LinkProps as NextLinkProps } from 'next/link'
 import { CTA } from './CTA'
 import { Offer } from './playlist'
 import { APIResponse, APIResponseData } from './strapi'
-import { PiledCardItemsTheme } from '@/lib/blocks/PiledCards/piled-card-items-theme'
+import { ItemsTheme } from '@/theme/style'
 
 export type BaseTextProps = {
   title: string
@@ -148,6 +148,7 @@ export type HeaderNavigationItemProps = {
     cardLink: CTA
     cardFirstEmoji: string
     cardSecondEmoji: string
+    theme: ItemsTheme
   }
 }
 
@@ -272,12 +273,12 @@ export type OffersVideoCarouselProps = {
   description?: BlocksContent
   cta: CTA
 }
-export type OffersCarouselSlideTheme =
-  | 'purple'
-  | 'yellow'
-  | 'magenta'
-  | 'orange'
-  | 'green'
+// export type OffersCarouselSlideTheme =
+//   | 'purple'
+//   | 'yellow'
+//   | 'magenta'
+//   | 'orange'
+//   | 'green'
 
 export type OffersCarouselSlideProps = {
   slideIndex: number
@@ -286,7 +287,7 @@ export type OffersCarouselSlideProps = {
   firstIcon: string
   secondIcon: string
   text: string
-  theme: OffersCarouselSlideTheme
+  theme: ItemsTheme
 }
 export type VerticalCarouselProps = {
   title: string
@@ -326,7 +327,7 @@ type Item = {
   firstIcon: string
   secondIcon: string
   image: APIResponse<'plugin::upload.file'> | null
-  theme: PiledCardItemsTheme
+  theme: ItemsTheme
 }
 export type PiledCardsProps = {
   items: Item[]
@@ -342,7 +343,7 @@ export type PiledCardsCarouselSlideProps = {
   image: string | APIResponse<'plugin::upload.file'> | null
   title: string
   description: string
-  theme: PiledCardItemsTheme
+  theme: ItemsTheme
 }
 
 export type DetailedLogosProps = {
@@ -396,6 +397,7 @@ export type MegaMenuProps = {
   data: {
     title: string
     cta: CTA
+    theme: ItemsTheme
     primaryListItems: CTA[]
     secondaryListItems: CTA[]
     cardTitle: string
@@ -468,6 +470,7 @@ export type MobileMenuListSubPanelProps = {
   cardLink: CTA
   cardFirstEmoji: string
   cardSecondEmoji: string
+  theme: ItemsTheme
 }
 export type MobileMenuSubPanelProps = {
   onClose: () => void

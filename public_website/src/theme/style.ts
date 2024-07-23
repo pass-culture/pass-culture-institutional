@@ -1,6 +1,39 @@
 import { Dot } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+export type ItemsTheme =
+  | 'gold'
+  | 'sky'
+  | 'lila'
+  | 'deeppink'
+  | 'aquamarine'
+  | 'saumon'
+  | 'lightgray'
+  | 'magenta'
+  | 'orange'
+  | 'purple'
+  | 'yellow'
+  | 'green'
+
+import { SocialMedia } from '@/lib/blocks/SocialMedia'
+import { theme } from '@/theme/theme'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
+
+export const CARD_BACKGROUNDS: Record<ItemsTheme, string> = {
+  aquamarine: theme.colors.aquamarine,
+  gold: theme.colors.gold,
+  deeppink: theme.colors.deepink,
+  sky: theme.colors.sky,
+  lightgray: theme.colors.lightGray,
+  lila: theme.colors.lila,
+  saumon: theme.colors.saumon,
+  magenta: theme.colors.deepink,
+  orange: theme.colors.saumon,
+  purple: theme.colors.lila,
+  yellow: theme.colors.gold,
+  green: theme.colors.flashGreen,
+}
+
 // DOT NAVIGATION FOR SLIDERS
 export const StyledDot = styled(Dot)`
   ${({ theme }) => css`
@@ -137,4 +170,48 @@ export const WrapperChevron = styled.span<{ $isOpen: boolean }>`
   transition: all 0.3s ease-in-out;
   ${(p) =>
     p.$isOpen ? 'transform: rotate(180deg)' : 'transform: rotate(0deg)'}
+`
+
+export const StyledSocialMedia = styled(SocialMedia)`
+  ${({ theme }) => css`
+    margin-top: 6rem;
+    margin-bottom: 5rem;
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 5rem 0 6.25rem;
+    }
+  `}
+`
+
+export const StyledTitle = styled(ContentWrapper)`
+  ${({ theme }) => css`
+    --module-spacing: 0;
+    // margin-top: 3.5rem;
+
+    h2 {
+      margin-bottom: 0rem;
+      //   font-size: ${theme.fonts.sizes['8xl']};
+    }
+
+    h3 {
+      margin-bottom: 3.5rem;
+      font-size: ${theme.fonts.sizes['6xl']};
+      color: ${theme.colors.secondary};
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-top: 2rem;
+
+      h2 {
+        text-align: center;
+        font-size: ${theme.fonts.sizes['4xl']};
+        margin-bottom: 2rem;
+      }
+
+      h3 {
+        font-size: ${theme.fonts.sizes['3xl']};
+        margin-bottom: 3rem;
+      }
+    }
+  `}
 `

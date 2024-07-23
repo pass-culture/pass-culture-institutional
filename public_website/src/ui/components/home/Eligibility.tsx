@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
+import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import { EligibilityProps } from '@/types/props'
@@ -20,23 +21,17 @@ export function Eligibility(props: EligibilityProps) {
   return (
     <Root>
       <StyledCard>
-        <StyledCardHeading>
+        <StyledCardHeading shadow={false}>
           <span aria-label={parseText(cardTitle).accessibilityLabel}>
             {parseText(cardTitle).processedText}
           </span>
         </StyledCardHeading>
         <StyledCardDescription>{cardDescription}</StyledCardDescription>
-        <ButtonWithCTA variant="tertiary" cta={cardCta} />
-        <StyledCardFirstEmoji
-          as={OutlinedText}
-          dilationRadius={2}
-          aria-hidden="true">
+        <ButtonWithCTA cta={cardCta} />
+        <StyledCardFirstEmoji as={OutlinedText}>
           {cardFirstEmoji}
         </StyledCardFirstEmoji>
-        <StyledCardSecondEmoji
-          as={OutlinedText}
-          dilationRadius={2}
-          aria-hidden="true">
+        <StyledCardSecondEmoji as={OutlinedText}>
           {cardSecondEmoji}
         </StyledCardSecondEmoji>
       </StyledCard>
@@ -46,9 +41,7 @@ export function Eligibility(props: EligibilityProps) {
           {items.map((item) => {
             return (
               <StyledListItem key={item.emoji}>
-                <OutlinedText dilationRadius={1} shadow aria-hidden="true">
-                  {item.emoji}
-                </OutlinedText>
+                <OutlinedText>{item.emoji}</OutlinedText>
                 <p>{item.title}</p>
                 <p>{item.description}</p>
               </StyledListItem>
@@ -60,14 +53,14 @@ export function Eligibility(props: EligibilityProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    max-width: 80rem;
-    margin: 0 auto 12.5rem;
+    // max-width: 80rem;
+    // margin: 0 auto 12.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     gap: 1.5rem;
-    padding: 0 1.5rem;
+    // padding: 0 1.5rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;
@@ -78,12 +71,8 @@ const Root = styled.div`
 
 const StyledCard = styled.div`
   ${({ theme }) => css`
-    background: linear-gradient(
-      180deg,
-      ${theme.colors.tertiary} 0%,
-      ${theme.colors.secondary} 100%
-    );
-    border-radius: 2.5rem;
+    background: ${theme.colors.gold};
+    border-radius: ${theme.radius.sm};
     padding: 5rem 4rem;
     position: relative;
     overflow: hidden;
@@ -97,7 +86,6 @@ const StyledCard = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       border-radius: 1.5rem;
-
       padding: 2rem 1rem;
     }
 
@@ -112,7 +100,7 @@ const StyledCardHeading = styled(OutlinedText)`
     line-height: 1;
     font-size: ${theme.fonts.sizes['7xl']};
     font-weight: ${theme.fonts.weights.black};
-    color: ${theme.colors.secondary};
+    color: ${theme.colors.black};
     transform: rotate(-2deg);
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -123,7 +111,7 @@ const StyledCardHeading = styled(OutlinedText)`
 
 const StyledCardDescription = styled.p`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
+    color: ${theme.colors.black};
     line-height: 2;
     width: 80%;
   `}
@@ -145,8 +133,8 @@ const StyledCardSecondEmoji = styled(Typo.Emoji)`
 
 const StyledListContainer = styled.div`
   ${({ theme }) => css`
-    border-radius: 2.5rem;
-    background: ${theme.colors.lightBlue};
+    border-radius: ${theme.radius.sm};
+    background: ${theme.colors.lightGray};
     padding: 3.25rem 3rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {

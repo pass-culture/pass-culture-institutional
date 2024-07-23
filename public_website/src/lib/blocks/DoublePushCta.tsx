@@ -95,15 +95,17 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const Root = styled.div`
+const Root = styled.section`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background-color: ${theme.colors.saumon};
     gap: 5.625rem;
-    border-radius: 2.5rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     position: relative;
     margin: 0 -3.4rem;
+    margin-bottom: 3.4rem;
+    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
+    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: block;
@@ -123,8 +125,14 @@ const Root = styled.div`
   `}
 `
 const CtaContainer = styled.div`
-  display: flex;
-  gap: 0.625rem;
+  ${({ theme }) => css`
+    display: flex;
+    gap: 0.625rem;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      flex-direction: column;
+      gap: 0rem;
+    }
+  `}
 `
 const CardContainer = styled.div`
   ${({ theme }) => css`
@@ -171,7 +179,7 @@ const CardContainer = styled.div`
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    border-radius: 1rem;
+    border-radius: ${theme.radius.sm};
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-repeat: no-repeat;
@@ -252,7 +260,7 @@ const CtaLink = styled(Link)`
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
-    border-radius: 100px;
+    border-radius: 6.25rem;
     position: relative;
     span {
       position: relative;
@@ -304,6 +312,8 @@ const MobileImage = styled.img`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
+      margin: 0 auto;
+      max-width: 85%;
     }
   `}
 `

@@ -1,28 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia } from '@/theme/style'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
+import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
   listejeune: APIResponseData<'api::liste-jeune.liste-jeune'>
+}
+const setQuery = (category: string[], localisation: string[]): string => {
+  return stringify({
+    sort: ['date:desc'],
+    populate: ['image'],
+    pagination: {},
+    filters: {
+      category: {
+        $eqi: category,
+      },
+      localisation: {
+        $eqi: localisation,
+      },
+      pageLocalisation: {
+        $containsi: 'Jeunes et parents',
+      },
+    },
+  })
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
@@ -63,28 +82,14 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   }, [])
 
   const fetchData = async () => {
-    const newsQuery = stringify({
-      sort: ['date:desc'],
-      populate: ['image'],
-      pagination: {},
-      filters: {
-        category: {
-          $eqi: category,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        pageLocalisation: {
-          $containsi: 'Jeunes et parents',
-        },
-      },
-    })
+    const newsQuery = setQuery(category, localisation)
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
-    )
+    const news = (await Pages.getPage(
+      PATHS.NEWS,
+      newsQuery
+    )) as APIResponseData<'api::news.news'>[]
 
-    setData(news.data)
+    setData(news)
   }
 
   useEffect(() => {
@@ -96,10 +101,8 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        <Typo.Heading2>{title}</Typo.Heading2>
-      </StyledTitle>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -119,7 +122,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       )}
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      {socialMediaSection && (
+      {!!socialMediaSection && (
         <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
       )}
     </React.Fragment>
@@ -144,86 +147,36 @@ export const getStaticProps = (async () => {
     ],
   })
 
-  const newsQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {},
-    filters: {
-      category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
-      },
-      pageLocalisation: {
-        $containsi: 'Jeunes et parents',
-      },
-    },
-  })
-
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const newsQuery = setQuery(
+    ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+    []
   )
-  const { data } = await fetchCMS<
-    APIResponseData<'api::liste-jeune.liste-jeune'>
-  >(`/liste-jeune?${query}`)
+
+  const news = (await Pages.getPage(
+    PATHS.NEWS,
+    newsQuery
+  )) as APIResponseData<'api::news.news'>[]
+
+  const data = (await Pages.getPage(
+    PATHS.LISTE_JEUNES,
+    query
+  )) as APIResponseData<'api::liste-jeune.liste-jeune'>
+
   return {
     props: {
-      newsData: news.data,
+      newsData: news,
       listejeune: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    --module-spacing: 0;
-    margin-top: 3.5rem;
-
-    h2 {
-      margin-bottom: 3.5rem;
-      font-size: ${theme.fonts.sizes['8xl']};
-    }
-
-    h3 {
-      margin-bottom: 3.5rem;
-
-      font-size: ${theme.fonts.sizes['6xl']};
-      color: ${theme.colors.secondary};
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 2rem;
-
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['4xl']};
-        margin-bottom: 2rem;
-      }
-
-      h3 {
-        font-size: ${theme.fonts.sizes['3xl']};
-        margin-bottom: 3rem;
-      }
-    }
-  `}
-`
-
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;
   }
-`
-
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

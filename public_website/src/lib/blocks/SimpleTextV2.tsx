@@ -23,7 +23,7 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
 
       <Content>
         <BlocksRenderer content={text} />
-        {isRenderColumns() && (
+        <BlockRendererWithCondition condition={isRenderColumns()}>
           <Columns>
             {columns?.map((col) => (
               <Column key={col.id}>
@@ -37,7 +37,7 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
               </Column>
             ))}
           </Columns>
-        )}
+        </BlockRendererWithCondition>
       </Content>
     </Root>
   )
@@ -48,15 +48,14 @@ const Root = styled(ContentWrapper)`
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
 
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+    // margin-top: 2.5rem;
+    // margin-bottom: 2.5rem;
 
     img {
       border-radius: 1rem;
       margin-bottom: 1.5rem;
       object-fit: cover;
       aspect-ratio: 1.2;
-      max-width: 37.5rem;
       display: block;
       margin: 0 auto;
       height: auto;

@@ -55,6 +55,7 @@ export function LittleList(props: LittleListProps) {
                 <OutlinedText shadow>{item.firstEmoji}</OutlinedText>
                 <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
               </ColumnEmoji>
+
               {isMobile ? (
                 <ColumnText
                   className={isOpen(index) ? 'open' : ''}
@@ -193,7 +194,9 @@ const ColumnText = styled.div`
       line-height: 2;
       position: relative;
       padding-right: 4rem;
-      cursor: pointer;
+      @media (width < ${theme.mediaQueries.mobile}) {
+        cursor: pointer;
+      }
     }
 
     p:nth-child(1)::after {

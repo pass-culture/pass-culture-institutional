@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OutlinedText } from '../../OutlinedText'
+import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { MobileMenuListSubPanelProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
@@ -14,7 +15,9 @@ export function MobileMenuListSubPanel(props: MobileMenuListSubPanelProps) {
     cardLink,
     cardFirstEmoji,
     cardSecondEmoji,
+    theme,
   } = props
+
   // Focus list on mount
   const listRef = useRef<HTMLUListElement>(null)
   const [visible, setVisible] = useState(false)
@@ -49,20 +52,18 @@ export function MobileMenuListSubPanel(props: MobileMenuListSubPanelProps) {
           )
         })}
       </StyledSubPanelList>
-      <StyledSubPanelCard href={cardLink.URL}>
+      <StyledSubPanelCard $backgroundColor={theme} href={cardLink.URL}>
         {!visible && <div className="trigger"></div>}
 
         <StyledSubPanelCardTitle
-          blurDeviation={2}
+          shadow={false}
           className="SubPanel__title"
           innerAs="p">
           {cardTitle}
         </StyledSubPanelCardTitle>
 
         <p className="SubPanel__description">{cardDescription}</p>
-        <OutlinedText blurDeviation={2} dilationRadius={5}>
-          {cardFirstEmoji}
-        </OutlinedText>
+        <OutlinedText>{cardFirstEmoji}</OutlinedText>
         <OutlinedText>{cardSecondEmoji}</OutlinedText>
       </StyledSubPanelCard>
     </div>
@@ -86,17 +87,16 @@ const StyledSubPanelList = styled.ul<{ tabIndex?: number }>`
 
 const StyledSubPanelCardTitle = styled(OutlinedText)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary} !important;
+    color: ${theme.colors.black};
   `}
 `
 
-const StyledSubPanelCard = styled(Link)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.secondary};
+const StyledSubPanelCard = styled(Link)<{ $backgroundColor: ItemsTheme }>`
+  ${({ theme, $backgroundColor }) => css`
+    background-color: ${CARD_BACKGROUNDS[$backgroundColor]};
     display: block;
     padding: 1.5rem;
-    border-radius: 0.5rem;
-    color: ${theme.colors.white};
+    border-radius: ${theme.radius.sm};
     padding-right: 30%;
     position: relative;
 
@@ -104,11 +104,13 @@ const StyledSubPanelCard = styled(Link)`
       font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.black};
       margin-bottom: 1.5rem;
-      color: white;
+      top: -1rem;
+      position: relative;
+      transform: rotate(-2deg);
     }
 
     .SubPanel__description {
-      color: ${theme.colors.white};
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.m};
       font-weight: ${theme.fonts.weights.semiBold};
     }
