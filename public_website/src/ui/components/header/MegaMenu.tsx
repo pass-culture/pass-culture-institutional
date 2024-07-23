@@ -5,6 +5,7 @@ import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import HeaderBanner from './HeaderBanner'
+import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { MegaMenuProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
@@ -33,8 +34,11 @@ export function MegaMenu({
     cardSecondEmoji,
     cardDescription,
     cardLink,
+    theme,
   } = data
+
   const megaMenuRef = useRef<HTMLDivElement | null>(null)
+  const backgroundCard = theme ?? 'gold'
 
   function onClickOutside(e: MouseEvent): void {
     if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
@@ -121,20 +125,22 @@ export function MegaMenu({
           </ul>
         </StyledMegaMenuLists>
 
-        <StyledMegaMenuCard>
+        <StyledMegaMenuCard $backgroundColor={backgroundCard}>
           <StyledMegaMenuCardHeading>
-            <OutlinedText innerAs="p">{cardTitle}</OutlinedText>
+            <OutlinedText innerAs="p" shadow={false}>
+              {cardTitle}
+            </OutlinedText>
 
-            <OutlinedText dilationRadius={2} shadow aria-hidden="true">
+            <OutlinedText shadow aria-hidden="true">
               {cardFirstEmoji}
             </OutlinedText>
-            <OutlinedText dilationRadius={2} shadow aria-hidden="true">
+            <OutlinedText shadow aria-hidden="true">
               {cardSecondEmoji}
             </OutlinedText>
           </StyledMegaMenuCardHeading>
 
           <p>{cardDescription}</p>
-          <ButtonWithCTA cta={cardLink} variant="secondary" />
+          <ButtonWithCTA cta={cardLink} variant="primary" />
         </StyledMegaMenuCard>
       </StyledMegaMenu>
     </StyledMegaMenuWrapper>
@@ -143,11 +149,7 @@ export function MegaMenu({
 
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
-    background: linear-gradient(
-      to bottom,
-      ${theme.colors.lightBlue},
-      ${theme.colors.white}
-    );
+    background: ${theme.colors.white};
     position: absolute;
     left: 0;
     right: 0;
@@ -208,15 +210,15 @@ const StyledMegaMenuLists = styled.div`
   `}
 `
 
-const StyledMegaMenuCard = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.secondary};
-    border-radius: 0.5rem;
-    padding: 7.5rem 3.5rem 4.5rem;
+const StyledMegaMenuCard = styled.div<{ $backgroundColor: ItemsTheme }>`
+  ${({ theme, $backgroundColor }) => css`
+    background-color: ${CARD_BACKGROUNDS[$backgroundColor]};
+    border-radius: ${theme.radius.sm};
+    padding: 7.5rem 2.5rem 4.5rem;
     text-align: center;
 
     > p {
-      color: ${theme.colors.white};
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xl};
       font-weight: ${theme.fonts.weights.medium};
       margin-bottom: 3.75rem;

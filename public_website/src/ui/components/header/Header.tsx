@@ -274,7 +274,8 @@ export function Header(props: HeaderMenuProps) {
                   onMouseEnter={onLoginDropdownMouseEnter}>
                   {login.buttonLabel}
                 </button>
-                {loginDropdownOpen && (
+
+                <BlockRendererWithCondition condition={loginDropdownOpen}>
                   <AccountDropdown
                     items={login.items}
                     openButtonElement={loginButtonRef.current}
@@ -285,7 +286,7 @@ export function Header(props: HeaderMenuProps) {
                       setLoginDropdownOpen(!loginDropdownOpen)
                     }
                   />
-                )}
+                </BlockRendererWithCondition>
               </StyledLoginItem>
 
               <StyledSignupItem>
@@ -300,7 +301,8 @@ export function Header(props: HeaderMenuProps) {
                   onMouseEnter={onSignupDropdownMouseEnter}>
                   {signup.buttonLabel}
                 </Button>
-                {signupDropdownOpen && (
+
+                <BlockRendererWithCondition condition={signupDropdownOpen}>
                   <AccountDropdown
                     items={signup.items}
                     openButtonElement={signupButtonRef.current}
@@ -312,7 +314,7 @@ export function Header(props: HeaderMenuProps) {
                       setSignupDropdownOpen(!signupDropdownOpen)
                     }
                   />
-                )}
+                </BlockRendererWithCondition>
               </StyledSignupItem>
 
               <StyledMobileMenuListItem>
@@ -326,7 +328,8 @@ export function Header(props: HeaderMenuProps) {
                 </StyledMobileMenuButton>
               </StyledMobileMenuListItem>
             </ul>
-            {showMobileMenu && (
+
+            <BlockRendererWithCondition condition={showMobileMenu}>
               <MobileMenu
                 targetItems={targetItems}
                 aboutItems={aboutItems}
@@ -340,7 +343,7 @@ export function Header(props: HeaderMenuProps) {
                   bannerText: targetItems[0]?.megaMenu?.bannerText,
                 }}
               />
-            )}
+            </BlockRendererWithCondition>
           </StyledNavigation>
         </StyledHeaderContent>
       </StyledHeader>
@@ -356,7 +359,7 @@ const StyledHeader = styled.header<{
     position: relative;
     z-index: 100;
 
-    background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+    background: ${$showMegaMenu ? theme.colors.white : 'none'};
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       ${$showMobileMenu &&
@@ -379,7 +382,7 @@ const StyledNavigation = styled.nav<{
   $showMegaMenu: boolean
 }>`
   ${({ theme, $showMobileMenu, $showMegaMenu }) => css`
-    background: ${$showMegaMenu ? theme.colors.lightBlue : 'none'};
+    background: ${$showMegaMenu ? theme.colors.white : 'none'};
 
     > ul {
       background: ${$showMobileMenu ? theme.colors.lightBlue : 'none'};

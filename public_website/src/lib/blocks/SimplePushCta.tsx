@@ -80,7 +80,6 @@ export function SimplePushCta(props: PushCTAProps) {
 
 const StyledContentWrapper = styled(ContentWrapper)`
   gap: 5.625rem;
-
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   position: relative;
@@ -93,19 +92,13 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const Root = styled.div`
+const Root = styled.section`
   ${({ theme }) => css`
-    background-color: ${theme.colors.secondary};
-    color: ${theme.colors.white};
-    max-width: 90rem;
+    background-color: ${theme.colors.deepink};
+    color: ${theme.colors.secondary};
     margin: auto;
-    border-radius: 2.5rem;
-    margin-top: calc(var(--module-margin) + 3.125rem);
-    margin-bottom: calc(var(--module-margin) + 3.125rem);
-
-    @media (width < ${theme.mediaQueries.extraLargeDesktop}) {
-      max-width: 95%;
-    }
+    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
+    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
 
     @media (width < ${theme.mediaQueries.tablet}) {
       margin-bottom: var(--module-margin);
@@ -159,7 +152,7 @@ const CardContainer = styled.div`
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    border-radius: 1rem;
+    border-radius: ${theme.radius.sm};
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-repeat: no-repeat;
@@ -247,16 +240,17 @@ const CtaLink = styled(Link)`
     outline-offset: 2px;
     transition: background 0.3s ease-in-out;
     &:hover {
-      background: ${`rgba(255, 255, 255, 0.20);`};
+      background: ${theme.colors.secondary};
+      color: ${theme.colors.white};
     }
     &:active {
-      outline: 2px solid ${theme.colors.white};
+      outline: 2px solid ${theme.colors.secondary};
     }
-    color: ${theme.colors.white};
+    color: ${theme.colors.secondary};
 
     padding: 1rem 1.75rem;
     border-radius: 100px;
-    border: 1px solid ${theme.colors.white};
+    border: 1px solid ${theme.colors.secondary};
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-right: 0;

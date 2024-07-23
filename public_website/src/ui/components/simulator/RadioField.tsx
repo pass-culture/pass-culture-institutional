@@ -41,12 +41,7 @@ export function RadioField(props: RadioFieldProps) {
             />
             <RadioLabel htmlFor={'answer-' + i}>
               <EmojiContainer>
-                <OutlinedText
-                  aria-hidden="true"
-                  dilationRadius={0}
-                  blurDeviation={1.5}>
-                  {emoji}
-                </OutlinedText>
+                <OutlinedText aria-hidden="true">{emoji}</OutlinedText>
               </EmojiContainer>
               {answer}
             </RadioLabel>

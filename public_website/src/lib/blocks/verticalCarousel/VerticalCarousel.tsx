@@ -66,7 +66,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
 
   return (
     <Root>
-      <ContentWrapper>
+      <ContentWrapper $noMargin>
         <CarouselProvider
           naturalSlideWidth={60}
           naturalSlideHeight={75}

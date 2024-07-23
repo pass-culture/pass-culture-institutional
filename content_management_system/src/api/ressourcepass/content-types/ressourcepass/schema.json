@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ressourcespass",
+  "info": {
+    "singularName": "ressourcepass",
+    "pluralName": "ressourcespass",
+    "displayName": "Ressources",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true,
+      "default": "2024-07-21T22:00:00.000Z"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Étude",
+        "Document",
+        "Article"
+      ],
+      "required": true,
+      "default": "Étude"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link",
+      "required": true
+    }
+  }
+}

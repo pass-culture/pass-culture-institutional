@@ -18,7 +18,6 @@ export async function fetchCMS<T>(path: string) {
         'Content-Type': 'application/json',
       },
     }
-
     const response = await fetch(requestUrl, mergedOptions)
 
     if (!response.ok) {

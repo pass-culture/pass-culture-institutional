@@ -707,7 +707,20 @@ export interface CommonOffersCarouselItem extends Schema.Component {
     secondIcon: Attribute.String & Attribute.Required;
     text: Attribute.Text & Attribute.Required;
     theme: Attribute.Enumeration<
-      ['purple', 'yellow', 'magenta', 'orange', 'green']
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
     > &
       Attribute.Required &
       Attribute.DefaultTo<'purple'>;
@@ -754,7 +767,21 @@ export interface CommonPiledCardItem extends Schema.Component {
     firstIcon: Attribute.String;
     secondIcon: Attribute.String;
     theme: Attribute.Enumeration<
-      ['purple', 'yellow', 'magenta', 'orange', 'green', 'blue']
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'blue',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
     > &
       Attribute.Required &
       Attribute.DefaultTo<'purple'>;
@@ -949,6 +976,23 @@ export interface HeaderMegaMenu extends Schema.Component {
     bannerAndroidUrl: Attribute.String;
     bannerIosUrl: Attribute.String;
     bannerDefaultUrl: Attribute.String;
+    theme: Attribute.Enumeration<
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
+    > &
+      Attribute.DefaultTo<'gold'>;
   };
 }
 

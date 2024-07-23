@@ -16,7 +16,15 @@ export const theme = {
     flashGreen: Colors.FLASH_GREEN,
     purple: Colors.PURPLE,
     lightGray: Colors.LIGHT_GRAY,
+    gold: Colors.GOLD,
+    sky: Colors.SKY,
+    lila: Colors.LILA,
+    pink: Colors.PINK,
+    deepink: Colors.DEEP_PINK,
+    aquamarine: Colors.AQUAMARINE,
+    saumon: Colors.SAUMON,
   },
+
   uniqueColors: {
     purple: '#ad86ff',
     green: '#27DCA8',
@@ -38,6 +46,9 @@ export const theme = {
     banner: `${Shadows.STICKER} ${Colors.GRAY}`,
     contai: `${Shadows.STICKER} ${Colors.GRAY}`,
     buttonCircular: `${Shadows.CARROUSEL_BUTTON} ${Colors.DARK_GRAY}`,
+  },
+  radius: {
+    sm: '0.5rem',
   },
   fonts: {
     sizes: {

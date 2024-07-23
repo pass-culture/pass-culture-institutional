@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
-import { CARD_BACKGROUNDS } from './const'
-import { PiledCardItemsTheme } from './piled-card-items-theme'
 import { PiledCardsCarousel } from './PiledCardsCarousel'
+import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { PiledCardsCarouselSlideProps, PiledCardsProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowDown } from '@/ui/components/icons/ArrowDown'
@@ -57,37 +56,19 @@ export function PiledCards(props: PiledCardsProps) {
   }
 
   const renderNav = (index: number): React.ReactNode => {
-    if (index === 0)
-      return (
-        <StyledButton
-          type="button"
-          aria-label="Diapositive suivante"
-          onClick={(): void => ScrollTo(index, 'bottom')}>
-          <ArrowDown />
-        </StyledButton>
-      )
-    if (index === items.length - 1) {
-      return (
-        <StyledButton
-          type="button"
-          aria-label="Diapositive précédente"
-          $isReverse
-          onClick={(): void => ScrollTo(index, 'top')}>
-          <ArrowDown />
-        </StyledButton>
-      )
-    }
     return (
       <React.Fragment>
         <StyledButton
           type="button"
           aria-label="Diapositive précédente"
           $isReverse
+          disabled={index === 0}
           onClick={(): void => ScrollTo(index, 'top')}>
           <ArrowDown />
         </StyledButton>
         <StyledButton
           type="button"
+          disabled={index === items.length - 1}
           aria-label="Diapositive suivante"
           onClick={(): void => ScrollTo(index, 'bottom')}>
           <ArrowDown />
@@ -125,14 +106,10 @@ export function PiledCards(props: PiledCardsProps) {
                   alt={item.image?.data?.attributes?.alternativeText}
                 />
                 <StyledFirstEmoji aria-hidden="true">
-                  <OutlinedText blurDeviation={1}>
-                    {item.firstIcon}
-                  </OutlinedText>
+                  <OutlinedText>{item.firstIcon}</OutlinedText>
                 </StyledFirstEmoji>
                 <StyledSecondEmoji aria-hidden="true">
-                  <OutlinedText blurDeviation={1}>
-                    {item.secondIcon}
-                  </OutlinedText>
+                  <OutlinedText>{item.secondIcon}</OutlinedText>
                 </StyledSecondEmoji>
               </StyledImageWrapper>
 
@@ -155,10 +132,14 @@ export function PiledCards(props: PiledCardsProps) {
 
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    color: ${theme.colors.white};
+    color: ${theme.colors.secondary};
     margin-bottom: calc(var(--module-margin) - 8rem);
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
+    }
+
+    p {
+      color: ${theme.colors.black};
     }
   `}
 `
@@ -181,7 +162,7 @@ const ItemScrollSentinel = styled.li`
 `
 
 const StyledContentListItems = styled.li<{
-  $itemTheme: PiledCardItemsTheme
+  $itemTheme: ItemsTheme
 }>`
   ${({ $itemTheme, theme }) => css`
     transform-origin: center top;
@@ -189,7 +170,7 @@ const StyledContentListItems = styled.li<{
     list-style: none;
     background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 30rem;
-    border-radius: 2rem;
+    border-radius: ${theme.radius.sm};
     box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
     position: sticky;
     top: 2rem;
@@ -233,7 +214,9 @@ const StyledNavWrapper = styled.div`
   padding: 1rem;
 `
 
-const StyledButton = styled.button<{ $isReverse?: boolean }>`
+const StyledButton = styled.button<{
+  $isReverse?: boolean
+}>`
   ${({ theme, $isReverse }) => css`
     width: 3.4375rem;
     height: 3.4375rem;
@@ -252,7 +235,13 @@ const StyledButton = styled.button<{ $isReverse?: boolean }>`
     outline-offset: 2px;
     z-index: 1000;
     transform: translateY(0) rotate(0deg);
-    ${$isReverse && 'transform:translateY(0) rotate(180deg);'}
+    background-color: ${theme.colors.white};
+    border: 1px solid #90949d;
+    ${$isReverse && 'transform:translateY(0) rotate(180deg)'};
+    &:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
     svg {
       will-change: transform;
@@ -272,7 +261,7 @@ const StyledButton = styled.button<{ $isReverse?: boolean }>`
     }
 
     &:active {
-      outline: 2px solid ${theme.colors.secondary};
+      outline: 2px solid ${theme.colors.white};
     }
   `}
 `
@@ -285,10 +274,12 @@ const StyledImageWrapper = styled.div`
 `
 
 const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: ${theme.radius.sm};
+  `}
 `
 
 const StyledFirstEmoji = styled(Typo.Emoji)`

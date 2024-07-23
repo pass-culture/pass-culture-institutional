@@ -38,9 +38,11 @@ const StyledAppBanner = styled(Link)`
     padding: 1.5rem 2rem;
     border-radius: 0.625rem;
     background: url('/images/banner-phone.png'),
-      linear-gradient(138.16deg, #610286 10%, #cc0261 100%);
+      radial-gradient(ellipse at top, #eae3ff, transparent),
+      radial-gradient(ellipse at bottom, #ffd7e9, transparent);
+
     background-position:
-      bottom right -0.5rem,
+      bottom right 0rem,
       bottom right;
     background-size:
       auto 100%,
@@ -49,9 +51,11 @@ const StyledAppBanner = styled(Link)`
     box-shadow: ${theme.shadows.banner};
     display: flex;
     align-items: center;
+    border: 1px solid #cbcdd2;
+    border: 1px solid #cbcdd2;
 
     p {
-      color: ${theme.colors.white};
+      color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.bold};
       text-transform: uppercase;

@@ -6,6 +6,7 @@ import { onClickAnalytics } from '../analytics/helpers'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
 import { PushCTAProps, QRCodeProps } from '@/types/props'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
@@ -45,7 +46,6 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
               <p>{qrCodeDescription}</p>
             </QRCodeCard>
           </Card>
-          <BackgroundLayer />
           <BlockRendererWithCondition condition={isRenderable(icon)}>
             <OutlinedText>{icon}</OutlinedText>
           </BlockRendererWithCondition>
@@ -73,21 +73,33 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    background-color: ${theme.colors.lightBlue};
+    background-color: ${theme.colors.sky};
     max-width: 80rem;
     margin: 0 auto;
     gap: 5.625rem;
-    border-radius: 2.5rem;
+    border-radius: ${theme.radius.sm};
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     position: relative;
+    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
+    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      background: none;
+      background-color: transparent;
       padding: 1.5rem;
       display: block;
+      &:before {
+        content: ' ';
+        height: 80%;
+        background-color: ${theme.colors.sky};
+        width: 100%;
+        position: absolute;
+        top: 25%;
+        left: 0;
+        z-index: 0;
+      }
     }
   `}
 `
@@ -106,7 +118,7 @@ const CardContainer = styled.div`
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
     background-color: ${theme.colors.tertiary};
-    border-radius: 1.5rem;
+    border-radius: ${theme.radius.sm};
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-position: center 4.5rem;
@@ -123,28 +135,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
       margin: 0 auto 3.75rem;
       aspect-ratio: 0.8;
       padding: 0;
-    }
-  `}
-`
-
-const BackgroundLayer = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    content: '';
-    inset: 0;
-    background-color: ${theme.colors.secondary};
-    transform: rotate(7deg);
-    border-radius: 1.5rem;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 80%;
-      margin: 0 auto;
-      aspect-ratio: 0.8;
-      inset: 0;
-      transform: rotate(5deg);
     }
   `}
 `
@@ -178,6 +168,7 @@ const QRCodeCard = styled.div`
 
 const RightSide = styled.div`
   ${({ theme }) => css`
+    position: relative;
     padding: 6.25rem 0;
     max-width: 32rem;
 

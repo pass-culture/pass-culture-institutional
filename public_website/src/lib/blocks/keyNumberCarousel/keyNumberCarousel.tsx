@@ -27,7 +27,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
   const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
   const getvisibleSlides = useMemo(() => {
-    if (width < MOBILE_WIDTH) return 2
+    if (width < MOBILE_WIDTH) return 1.2
     if (width < LARGE_DESKTOP_WIDTH) return 1.5
     return 2.2
   }, [width])

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia } from '@/theme/style'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
+import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -91,11 +92,12 @@ export default function RessourcesEnseignants({
       },
     })
 
-    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
-      `/resources?${newsQuery}`
-    )
+    const news = (await Pages.getPage(
+      PATHS.RESOURCES,
+      newsQuery
+    )) as APIResponseData<'api::resource.resource'>[]
 
-    setData(news.data)
+    setData(news)
   }
 
   useEffect(() => {
@@ -107,10 +109,8 @@ export default function RessourcesEnseignants({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      </StyledTitle>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
       <UnpaddedBreadcrumb />
       {hasData && (
         <React.Fragment>
@@ -159,7 +159,7 @@ export default function RessourcesEnseignants({
 }
 
 export const getStaticProps = (async () => {
-  const newsQuery = stringify({
+  const resourcesQuery = stringify({
     populate: ['image'],
     pagination: {},
     sort: ['date:desc'],
@@ -178,9 +178,10 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
-    `/resources?${newsQuery}`
-  )
+  const news = (await Pages.getPage(
+    PATHS.RESOURCES,
+    resourcesQuery
+  )) as APIResponseData<'api::resource.resource'>[]
 
   const rsQuery = stringify({
     populate: [
@@ -198,50 +199,23 @@ export const getStaticProps = (async () => {
       'seo.metaSocial.image',
     ],
   })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
-  >(`/ressources-enseignant?${rsQuery}`)
+  const data = (await Pages.getPage(
+    PATHS.RESSOURCES_TEACHERS_PAGE,
+    rsQuery
+  )) as APIResponseData<'api::ressources-enseignant.ressources-enseignant'>
 
   return {
     props: {
-      resourceREData: news.data,
+      resourceREData: news,
       ressourcesEnseignantsListe: data,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    margin-inline: auto;
-    padding: 1rem 1.5rem;
-    max-width: 80rem;
-    margin-top: 4rem;
-    h2 {
-      margin-bottom: 4rem;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['5xl']};
-      }
-    }
-  `}
-`
-
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  // margin-top: 3rem;
 `
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;
 `

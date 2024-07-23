@@ -1,25 +1,59 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { Filter } from '@/lib/blocks/FilterContainer'
-import { ListItems } from '@/lib/blocks/ListItems'
+import NoResult from '@/lib/blocks/NoResult'
+import { RessourceItems } from '@/lib/blocks/ResourceItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia } from '@/theme/style'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
+import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
-  ressourcesData: APIResponseData<'api::resource.resource'>[]
+  ressourcesData: APIResponseData<'api::ressourcepass.ressourcepass'>[]
   ressourcesPassCultureListe: APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
+}
+const newsQuery = stringify({
+  populate: [
+    'title',
+    'buttonText',
+    'filtres',
+    'socialMediaSection',
+    'socialMediaSection.socialMediaLink',
+    'separator',
+    'etudes',
+    'etudes.image',
+    'etudes.cta',
+    'seo',
+    'seo.metaSocial',
+    'seo.metaSocial.image',
+  ],
+})
+
+const getRessourcesQuery = (category: string[]) => {
+  return stringify({
+    sort: ['date:desc'],
+    populate: ['cta'],
+    pagination: {},
+    filters: {
+      category: {
+        $eqi: category,
+      },
+      pageLocalisation: {
+        // $containsi: 'S’informer - ressources',
+      },
+    },
+  })
 }
 
 export default function RessourcesPassCulture({
@@ -35,30 +69,20 @@ export default function RessourcesPassCulture({
     separator,
     filtres,
   } = ressourcesPassCultureListe.attributes
+
   const cat = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.category))
   )
 
-  const loc = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.localisation))
-  )
-
-  const sec = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.secteur))
-  )
   const [category, setCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [secteur, setSecteur] = useState<string[]>([])
 
-  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
-    []
-  )
+  const [data, setData] = useState<
+    APIResponseData<'api::ressourcepass.ressourcepass'>[]
+  >([])
   const [filters, setFilters] = useState<Filter[]>([])
 
   useEffect(() => {
     setCategory(cat)
-    setLocalisation(loc)
-    setSecteur(sec)
     setData(ressourcesData)
 
     const filtresOption = filterByAttribute(filtres, ressourcesData)
@@ -67,72 +91,47 @@ export default function RessourcesPassCulture({
   }, [])
 
   const fetchData = async () => {
-    const newsQuery = stringify({
-      sort: ['date:desc'],
-      populate: ['image'],
-      pagination: {},
-      filters: {
-        category: {
-          $eqi: category,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        secteur: {
-          $eqi: secteur,
-        },
-        pageLocalisation: {
-          $containsi: 'S’informer - ressources',
-        },
-      },
-    })
+    const ressourcesQuery = getRessourcesQuery(category)
+    const resources = (await Pages.getPage(
+      'ressourcespass',
+      ressourcesQuery
+    )) as APIResponseData<'api::ressourcepass.ressourcepass'>[]
 
-    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
-      `/resources?${newsQuery}`
-    )
-
-    setData(news.data)
+    setData(resources)
   }
+
+  const hasData = useMemo((): boolean => data.length > 0, [data])
 
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
-
-  const hasData = data.length > 0
+  }, [category])
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      </StyledTitle>
-      <UnpaddedBreadcrumb />
-      {hasData && (
-        <React.Fragment>
-          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-            <FilterOption
-              setCategory={setCategory}
-              setLocalisation={setLocalisation}
-              originalCategory={category}
-              originalLocalisation={localisation}
-              setSecteur={setSecteur}
-              originalSecteur={secteur}
-              data={filters}
-            />
-          </ContentWrapper>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
+      <ContentWrapper $noMargin>
+        <UnpaddedBreadcrumb />
+      </ContentWrapper>
 
-          <StyledListItems
-            news={data}
-            type="ressources"
-            buttonText={buttonText}
-          />
-        </React.Fragment>
+      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+        <FilterOption
+          setCategory={setCategory}
+          originalCategory={category}
+          data={filters}
+        />
+      </ContentWrapper>
+
+      {hasData ? (
+        <StyledListItems news={data} buttonText={buttonText} className="" />
+      ) : (
+        <NoResult />
       )}
 
       <Separator isActive={separator?.isActive} />
 
-      {etudes && (
+      {!!etudes && (
         <SimplePushCta
           title={etudes.title}
           image={etudes.image}
@@ -155,89 +154,26 @@ export default function RessourcesPassCulture({
 }
 
 export const getStaticProps = (async () => {
-  const newsQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {},
-    filters: {
-      category: {
-        $eqi: [
-          'Dossier de presse',
-          'Communiqué de presse',
-          'Étude ritualisée',
-          'Étude ponctuelle',
-        ],
-      },
-      pageLocalisation: {
-        $containsi: 'S’informer - ressources',
-      },
-    },
-  })
+  const ressourcesQuery = getRessourcesQuery(['Document', 'Article', 'Étude'])
+  const resources = (await Pages.getPage(
+    PATHS.RESSOURCES_PASS,
+    ressourcesQuery
+  )) as APIResponseData<'api::ressourcepass.ressourcepass'>[]
 
-  const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
-    `/resources?${newsQuery}`
-  )
-
-  const query = stringify({
-    populate: [
-      'title',
-      'buttonText',
-      'filtres',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'separator',
-      'etudes',
-      'etudes.image',
-      'etudes.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
-  >(`/ressources-pass-culture?${query}`)
+  const ressourcesPage = (await Pages.getPage(
+    PATHS.RESSOURCES_PASS_PAGE,
+    newsQuery
+  )) as APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
   return {
     props: {
-      ressourcesData: news.data,
-      ressourcesPassCultureListe: data,
+      ressourcesData: resources,
+      ressourcesPassCultureListe: ressourcesPage,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    padding: 1rem 1.5rem;
-    max-width: 80rem;
-    margin-inline: auto;
-    margin-top: 4rem;
+const StyledListItems = styled(RessourceItems)``
 
-    h2 {
-      margin-bottom: 4rem;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['5xl']};
-      }
-    }
-  `}
-`
-
-const StyledListItems = styled(ListItems)`
-  margin-top: -3rem;
-`
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;
 `

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { EventListItems } from '@/lib/blocks/EventListItems'
 import { Filter } from '@/lib/blocks/FilterContainer'
@@ -11,14 +13,14 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia, StyledTitle } from '@/theme/style'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import Title from '@/ui/components/title/Title'
 import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -109,7 +111,7 @@ export default function Presse({
   }, [])
 
   const fetchData = async () => {
-    const newsQuery = stringify({
+    const resourcesQuery = stringify({
       sort: ['date:desc'],
       pagination: {},
       populate: ['image'],
@@ -128,12 +130,12 @@ export default function Presse({
         },
       },
     })
+    const resources = (await Pages.getPage(
+      PATHS.RESOURCES,
+      resourcesQuery
+    )) as APIResponseData<'api::resource.resource'>[]
 
-    const news = await fetchCMS<APIResponseData<'api::resource.resource'>[]>(
-      `/resources?${newsQuery}`
-    )
-
-    setData(news.data)
+    setData(resources)
   }
   const fetchEventData = async () => {
     const eventQuery = stringify({
@@ -156,11 +158,12 @@ export default function Presse({
       },
     })
 
-    const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-      `/events?${eventQuery}`
-    )
+    const events = (await Pages.getPage(
+      PATHS.EVENTS,
+      eventQuery
+    )) as APIResponseData<'api::event.event'>[]
 
-    setEventData(events.data)
+    setEventData(events)
   }
 
   useEffect(() => {
@@ -178,10 +181,8 @@ export default function Presse({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      </StyledTitle>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -209,11 +210,11 @@ export default function Presse({
 
       <Separator isActive={separatorIsActive(separator)} />
       {/* BLOC EVENTS / RENDEZ-VOUS */}
-      <StyledTitle>
-        {titleEventSection && (
+      {!!titleEventSection && (
+        <StyledTitle>
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
-        )}
-      </StyledTitle>
+        </StyledTitle>
+      )}
 
       <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
@@ -255,7 +256,7 @@ export default function Presse({
         icon={pushCta.icon}
       />
       <StyledSimplePushCta>
-        {aide && (
+        {!!aide && (
           <SimplePushCta
             title={aide.title}
             image={aide.image}
@@ -278,7 +279,7 @@ export default function Presse({
 }
 
 export const getStaticProps = (async () => {
-  const newsQuery = stringify({
+  const resourcesQuery = stringify({
     sort: ['date:desc'],
     pagination: {},
     populate: ['image'],
@@ -296,10 +297,10 @@ export const getStaticProps = (async () => {
       },
     },
   })
-
-  const newsRequest = await fetchCMS<
-    APIResponseData<'api::resource.resource'>[]
-  >(`/resources?${newsQuery}`)
+  const resources = (await Pages.getPage(
+    PATHS.RESOURCES,
+    resourcesQuery
+  )) as APIResponseData<'api::resource.resource'>[]
 
   const query = stringify({
     populate: [
@@ -322,9 +323,10 @@ export const getStaticProps = (async () => {
       'seo.metaSocial.image',
     ],
   })
-  const { data } = await fetchCMS<APIResponseData<'api::presse.presse'>>(
-    `/presse?${query}`
-  )
+  const data = (await Pages.getPage(
+    PATHS.PRESSE,
+    query
+  )) as APIResponseData<'api::presse.presse'>
 
   const eventQuery = stringify({
     sort: ['date:desc'],
@@ -337,82 +339,41 @@ export const getStaticProps = (async () => {
     },
   })
 
-  const events = await fetchCMS<APIResponseData<'api::event.event'>[]>(
-    `/events?${eventQuery}`
-  )
+  const events = (await Pages.getPage(
+    PATHS.EVENTS,
+    eventQuery
+  )) as APIResponseData<'api::event.event'>[]
 
   return {
     props: {
-      resourcesData: newsRequest.data,
+      resourcesData: resources,
       presseListe: data,
-      eventsData: events.data,
+      eventsData: events,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    --module-spacing: 0;
-    margin-top: 3.5rem;
-
-    h2 {
-      margin-bottom: 3.5rem;
-      font-size: ${theme.fonts.sizes['8xl']};
-    }
-
-    h3 {
-      margin-bottom: 3.5rem;
-
-      font-size: ${theme.fonts.sizes['6xl']};
-      color: ${theme.colors.secondary};
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 2rem;
-
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['4xl']};
-        margin-bottom: 2rem;
-      }
-
-      h3 {
-        font-size: ${theme.fonts.sizes['3xl']};
-        margin-bottom: 3rem;
-      }
-    }
-  `}
-`
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;
 `
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;
   }
 `
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
 
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
-`
 const StyledeventListItems = styled(EventListItems)`
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  // margin-top: 3rem;
+  // margin-bottom: 3rem;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-    margin-top: 1.5rem;
+    // margin-top: 1.5rem;
   }
 `
 
 const StyledSimplePushCta = styled.div`
-  margin-top: 17rem;
+  // margin-top: 17rem;
 `

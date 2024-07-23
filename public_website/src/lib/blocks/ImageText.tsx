@@ -47,8 +47,10 @@ export function ImageText(props: ImageTextProps) {
   )
 }
 
-const Root = styled.div`
+const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
+    // margin-top: 3rem;
+    //  margin-bottom: 5rem;
     .right {
       grid-template-columns: 1.5fr 1fr;
       grid-template-areas: 'first second';
@@ -69,7 +71,8 @@ const Root = styled.div`
 
       .IconLeft {
         top: 6rem;
-        right: -2rem;
+        right: -5%;
+        transform: rotate(-20deg);
         z-index: 2;
       }
     }
@@ -84,13 +87,12 @@ const Root = styled.div`
       }
 
       .left {
-        grid-template-areas: 'first second';
-        grid-template-columns: 1.5fr 1fr;
+        // grid-template-areas: 'first second';
+        // grid-template-columns: 1.5fr 1fr;
 
         .IconLeft {
           top: 3rem;
-          right: auto;
-          left: -1rem;
+          right: -5%;
           z-index: 2;
         }
       }
@@ -104,10 +106,15 @@ const Root = styled.div`
           'second'
           'first';
 
-        .IconRight,
+        .IconRight {
+          top: 2rem;
+          left: 80%;
+          z-index: 2;
+        }
+
         .IconLeft {
           top: 2rem;
-          left: 0;
+          right: -5%;
           z-index: 2;
         }
       }
@@ -119,10 +126,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
     position: relative;
     display: grid;
-    gap: 1.5rem;
-
-    .first {
-      grid-area: first;
+    gap: 2.5rem;
+    grid-area: first;
     }
 
     .second {
@@ -189,6 +194,19 @@ const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
     position: relative;
     align-items: self-start;
 
+    &:after {
+      content: ' ';
+      background-color: ${theme.colors.aquamarine};
+      position: absolute;
+      top: 65%;
+      ${$imageOnLeft ? 'left: 0%' : 'right:0%'};
+
+      border-radius: ${theme.radius.sm};
+      height: 40%;
+      width: 120%;
+      z-index: -1;
+    }
+
     @media (width < ${theme.mediaQueries.tablet}) {
       justify-content: center;
     }
@@ -211,24 +229,18 @@ const StyledHeading = styled(Typo.Heading2)`
 `
 
 const ImageContainer = styled.div<{ $imageOnRight?: boolean }>`
-  ${({ theme, $imageOnRight }) => css`
-    transform: rotate(2deg);
-    aspect-ratio: 24/30;
-    max-width: 80%;
-    text-align: center;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      transform: rotate(${$imageOnRight ? '-5deg' : '5deg'});
-    }
-  `}
+  aspect-ratio: 24/30;
+  max-width: 80%;
+  text-align: center;
+  position: relative;
 `
-
 const StyledImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  box-shadow: -4px 8px 24px 0px rgba(0, 0, 0, 0.21);
-  border-radius: 1.5rem;
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: ${theme.radius.sm};
+  `}
 `
 
 const StyledIcon = styled(OutlinedText)`

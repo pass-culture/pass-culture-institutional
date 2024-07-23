@@ -5,23 +5,18 @@ import { Icon } from './Icon'
 export function ArrowRight() {
   return (
     <Icon
-      width="24"
-      height="15"
-      viewBox="0 0 24 15"
+      width="26"
+      height="18"
+      viewBox="0 0 26 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M16.7109 1L22.9248 7.56143L16.7109 13.9526"
-        stroke="#94008C"
-        strokeWidth="1.5"
+        xmlns="http://www.w3.org/2000/svg"
+        d="M24.0652 8.99914H1.93799M24.0652 8.99914L16.6894 1.62341M24.0652 8.99914L16.6894 16.3749"
+        stroke="#161617"
+        strokeWidth="2.7659"
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      <path
-        d="M1 7.56152L22 7.56152"
-        stroke="#94008C"
-        strokeWidth="1.5"
-        strokeLinecap="round"
       />
     </Icon>
   )

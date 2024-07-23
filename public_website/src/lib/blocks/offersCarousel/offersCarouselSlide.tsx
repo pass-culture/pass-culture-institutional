@@ -2,11 +2,9 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { theme } from '@/theme/theme'
-import {
-  OffersCarouselSlideProps,
-  OffersCarouselSlideTheme,
-} from '@/types/props'
+import { OffersCarouselSlideProps } from '@/types/props'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { parseText } from '@/utils/parseText'
 
@@ -23,24 +21,16 @@ export function OffersCarouselSlide(props: OffersCarouselSlideProps) {
         <Card>
           <StyledOffersHeader>
             <StyledOffersSurtitle>
-              <OutlinedText dilationRadius={6} blurDeviation={1}>
+              <OutlinedText shadow={false}>
                 <span aria-label={parseText(surtitle).accessibilityLabel}>
                   {parseText(surtitle).processedText}
                 </span>
               </OutlinedText>
             </StyledOffersSurtitle>
-            <StyledFirstIcon
-              shadow
-              aria-hidden="true"
-              dilationRadius={2}
-              blurDeviation={1.5}>
+            <StyledFirstIcon shadow aria-hidden="true">
               {firstIcon}
             </StyledFirstIcon>
-            <StyledSecondIcon
-              shadow
-              aria-hidden="true"
-              dilationRadius={2}
-              blurDeviation={1.5}>
+            <StyledSecondIcon shadow aria-hidden="true">
               {secondIcon}
             </StyledSecondIcon>
           </StyledOffersHeader>
@@ -49,8 +39,6 @@ export function OffersCarouselSlide(props: OffersCarouselSlideProps) {
             <p>{text}</p>
           </StyledOffersContentWrapper>
         </Card>
-        <FirstBackgroundLayer />
-        <SecondBackgroundLayer />
       </CardContainer>
     </Root>
   )
@@ -70,32 +58,10 @@ const Root = styled(Slide)`
   `}
 `
 
-const CARD_BACKGROUNDS: Record<OffersCarouselSlideTheme, [string, string]> = {
-  purple: [theme.uniqueColors.purple, theme.uniqueColors.purple],
-  yellow: [
-    `linear-gradient(141.28deg, ${theme.uniqueColors.yellowLight} 1.24%, ${theme.uniqueColors.yellowDark} 97.04%)`,
-    theme.uniqueColors.yellow,
-  ],
-  magenta: [
-    `linear-gradient(140.89deg, ${theme.uniqueColors.magentaLight} 1.32%, ${theme.uniqueColors.magenta} 99.76%)`,
-    theme.uniqueColors.magentaDark,
-  ],
-  orange: [
-    `linear-gradient(139.76deg, ${theme.uniqueColors.orangeLight} -0.2%, ${theme.uniqueColors.orangeDark} 98.71%)`,
-    theme.uniqueColors.orange,
-  ],
-  green: [theme.uniqueColors.green, theme.uniqueColors.green],
-}
-
-const CardContainer = styled.div<{ $slideTheme: OffersCarouselSlideTheme }>`
+const CardContainer = styled.div<{ $slideTheme: ItemsTheme }>`
   position: relative;
   z-index: 1;
-
-  --card-background: ${({ $slideTheme }) => CARD_BACKGROUNDS[$slideTheme][0]};
-  --card-background-layer-backgroud: ${({ $slideTheme }) =>
-    CARD_BACKGROUNDS[$slideTheme][1]};
-  --card-surtitle-color: ${({ $slideTheme }) =>
-    CARD_BACKGROUNDS[$slideTheme][1]};
+  --card-background: ${({ $slideTheme }) => CARD_BACKGROUNDS[$slideTheme]};
 `
 
 const Card = styled.div`
@@ -111,38 +77,10 @@ const Card = styled.div`
   position: relative;
   background: var(--card-background);
 
-  box-shadow: ${theme.shadows.banner};
-
   @media (width < ${theme.mediaQueries.largeDesktop}) {
     padding: 3rem 1rem;
     width: calc(100% - 2rem);
   }
-`
-
-const BackgroundLayer = styled.div`
-  ${({ theme }) => css`
-    position: absolute;
-    content: '';
-    inset: 0;
-    background: var(--card-background-layer-backgroud);
-
-    border-radius: 1.5rem;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-
-    box-shadow: ${theme.shadows.banner};
-
-    mix-blend-mode: color-burn;
-  `}
-`
-
-const FirstBackgroundLayer = styled(BackgroundLayer)`
-  transform: rotate(6.5deg);
-`
-
-const SecondBackgroundLayer = styled(BackgroundLayer)`
-  transform: rotate(2.5deg);
 `
 
 const StyledOffersHeader = styled.div`
@@ -150,15 +88,11 @@ const StyledOffersHeader = styled.div`
   flex-direction: column;
   justify-content: center;
   position: relative;
-
   align-self: center;
   width: 80%;
-
   margin-bottom: 2.5rem;
-
   transform: rotate(-2.15deg);
   flex-shrink: 0;
-  filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
 `
 
 const StyledFirstIcon = styled(OutlinedText)`
@@ -195,7 +129,7 @@ const StyledOffersSurtitle = styled.h2`
     line-height: 1;
     letter-spacing: -0.0625rem;
     text-align: center;
-    color: var(--card-surtitle-color);
+    color: ${theme.colors.black};
   `}
 `
 

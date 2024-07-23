@@ -43,12 +43,14 @@ const Root = styled.article`
 `
 
 const StyledImage = styled(Image)`
-  border-radius: 1rem;
-  margin-bottom: 1.5rem;
-  object-fit: cover;
-  aspect-ratio: 1.2;
-  height: auto;
-  width: 100%;
+  ${({ theme }) => css`
+    border-radius: ${theme.radius.sm};
+    margin-bottom: 1.5rem;
+    object-fit: cover;
+    aspect-ratio: 1.2;
+    height: auto;
+    width: 100%;
+  `}
 `
 
 const StyledMeta = styled.p`

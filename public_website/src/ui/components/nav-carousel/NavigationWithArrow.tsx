@@ -39,6 +39,7 @@ const StyledNavigationButtons = styled.div`
     button {
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.buttonCircular};
+      border: 1px solid #90949d;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       border-radius: 50%;
       display: flex;

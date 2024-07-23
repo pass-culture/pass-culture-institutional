@@ -1495,6 +1495,44 @@ export interface ApiResourceResource extends Schema.CollectionType {
   };
 }
 
+export interface ApiRessourcepassRessourcepass extends Schema.CollectionType {
+  collectionName: 'ressourcespass';
+  info: {
+    singularName: 'ressourcepass';
+    pluralName: 'ressourcespass';
+    displayName: 'Ressources';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-07-21T22:00:00.000Z'>;
+    category: Attribute.Enumeration<['\u00C9tude', 'Document', 'Article']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'\u00C9tude'>;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ressourcepass.ressourcepass',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ressourcepass.ressourcepass',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiRessourcesEnseignantRessourcesEnseignant
   extends Schema.SingleType {
   collectionName: 'ressources_enseignants';
@@ -1669,6 +1707,7 @@ declare module '@strapi/types' {
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
       'api::resource.resource': ApiResourceResource;
+      'api::ressourcepass.ressourcepass': ApiRessourcepassRessourcepass;
       'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
       'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
       'api::simulator.simulator': ApiSimulatorSimulator;

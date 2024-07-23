@@ -110,8 +110,11 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
   )
 }
 
-const StylesContainer = styled.section`
-  background: linear-gradient(360deg, rgba(255, 255, 255, 0), #f5f2fa);
+const StylesContainer = styled(ContentWrapper)`
+  ${({ theme }) => css`
+    background: ${theme.colors.lila};
+    min-width: 100%;
+  `}
 `
 
 const StyledHeading = styled.div`

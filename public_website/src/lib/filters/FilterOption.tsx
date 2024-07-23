@@ -8,7 +8,7 @@ const FilterOption = (props: {
   setCategory?: Dispatch<SetStateAction<string[]>>
   originalCategory?: string[]
   setLocalisation?: Dispatch<SetStateAction<string[]>>
-  originalLocalisation: string[]
+  originalLocalisation?: string[]
   setSecteur?: Dispatch<SetStateAction<string[]>>
   originalSecteur?: string[]
   setPartner?: Dispatch<SetStateAction<string[]>>

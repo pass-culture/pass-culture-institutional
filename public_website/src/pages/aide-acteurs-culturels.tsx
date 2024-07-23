@@ -2,6 +2,8 @@ import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
@@ -10,8 +12,6 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import ButtonScrollTo from '@/ui/components/buttonScrollTo/ButtonScrollTo'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CulturalActorsHelpProps {
   helpData: APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
@@ -25,7 +25,7 @@ export default function CulturalActorsHelp({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
+      {!!seo && <Seo metaData={seo} />}
       <Header
         title={heroSection?.title}
         text={heroSection?.text}
@@ -33,16 +33,15 @@ export default function CulturalActorsHelp({
         image={heroSection.image}
       />
       <Breadcrumb isUnderHeader />
-      <ButtonScrollTo noTranslate />
-      <span id="target-anchor-scroll">
-        <Faq
-          title={faq.title}
-          categories={faq.categories}
-          cta={faq.cta}
-          filteringProperty={faq.filteringProperty}
-          limit={faq.limit}
-        />
-      </span>
+
+      <Faq
+        title={faq.title}
+        categories={faq.categories}
+        cta={faq.cta}
+        filteringProperty={faq.filteringProperty}
+        limit={faq.limit}
+      />
+
       <DoublePushCTA
         title={cardText.title}
         text={cardText.text}
@@ -91,13 +90,14 @@ export const getStaticProps = (async () => {
     ],
   })
 
-  const help = await fetchCMS<
-    APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
-  >(`/help-cultural-actors?${helpQuery}`)
+  const help = (await Pages.getPage(
+    PATHS.HELP_CULTURAL_ACTORS,
+    helpQuery
+  )) as APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
 
   return {
     props: {
-      helpData: help.data,
+      helpData: help,
     },
   }
 }) satisfies GetStaticProps<CulturalActorsHelpProps>

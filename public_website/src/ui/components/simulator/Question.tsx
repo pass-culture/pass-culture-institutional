@@ -65,5 +65,5 @@ const Form = styled.form`
 
 const SubmitContainer = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: end;
 `

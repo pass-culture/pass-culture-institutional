@@ -14,6 +14,7 @@ import { ChevronDown } from '@/ui/components/icons/ChevronDown'
 import { Cross } from '@/ui/components/icons/Cross'
 import { Plus } from '@/ui/components/icons/Plus'
 import { Tick } from '@/ui/components/icons/Tick'
+import { isRenderable } from '@/utils/isRenderable'
 
 export type Filter = {
   filtre: string
@@ -108,86 +109,91 @@ export function FilterContainer(props: FiltersProps) {
     return !!filterValues[key]?.includes(value)
   }
 
+  const hasFilter = (): boolean | undefined => {
+    return filtres && filtres.length > 0
+  }
+
   return (
     <Root className={className}>
       <StyledMobileFilterLabel>
         <p>Filtres</p>
         <StyledRoundDiv>{numberOfFilters}</StyledRoundDiv>
       </StyledMobileFilterLabel>
-      {filtres?.map((filtre, index) => (
-        <CustomSelect
-          onMouseLeave={(): void => setIsOpen(-1)}
-          key={filtre.filtre + index}
-          $isInBreadcrumb={false}>
-          <CustomSelectButton
-            role="combobox"
-            onClick={(): void => {
-              filtre.value.length && setIsOpen(index)
-            }}
-            tabIndex={0}
-            aria-owns={filtre.filtre}
-            aria-autocomplete="none"
-            aria-labelledby="Sélectionnez"
-            aria-label="Sélectionnez"
-            aria-haspopup="listbox"
-            aria-expanded={checkIfOpen(index)}
-            aria-controls="listbox">
-            {filtre.filtre}
-            <WrapperChevron $isOpen={checkIfOpen(index)}>
-              <ChevronDown />
-            </WrapperChevron>
-          </CustomSelectButton>
-          <BlockRendererWithCondition condition={checkIfOpen(index)}>
-            <span
-              role="listbox"
-              aria-labelledby={filtre.filtre}
-              aria-multiselectable="true">
-              <ul id={filtre.filtre}>
-                {filtre.value.map((value, index) => (
-                  <span
-                    aria-selected={checkIsSelected(filtre.filtre, value)}
-                    role="option"
-                    aria-hidden="true"
-                    tabIndex={-1}
+      <BlockRendererWithCondition condition={isRenderable(hasFilter())}>
+        {filtres?.map((filtre, index) => (
+          <CustomSelect
+            onMouseLeave={(): void => setIsOpen(-1)}
+            key={filtre.filtre + index}
+            $isInBreadcrumb={false}>
+            <CustomSelectButton
+              role="combobox"
+              onClick={(): void => {
+                filtre.value.length && setIsOpen(index)
+              }}
+              tabIndex={0}
+              aria-owns={filtre.filtre}
+              aria-autocomplete="none"
+              aria-labelledby="Sélectionnez"
+              aria-label="Sélectionnez"
+              aria-haspopup="listbox"
+              aria-expanded={checkIfOpen(index)}
+              aria-controls="listbox">
+              {filtre.filtre}
+              <WrapperChevron $isOpen={checkIfOpen(index)}>
+                <ChevronDown />
+              </WrapperChevron>
+            </CustomSelectButton>
+            <BlockRendererWithCondition condition={checkIfOpen(index)}>
+              <span
+                role="listbox"
+                aria-labelledby={filtre.filtre}
+                aria-multiselectable="true">
+                <ul id={filtre.filtre}>
+                  {filtre.value.map((value, index) => (
+                    <span
+                      aria-selected={checkIsSelected(filtre.filtre, value)}
+                      role="option"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      key={value + index}
+                      onClick={(): void =>
+                        handleFilterChange(filtre.filtre, value)
+                      }>
+                      <li>
+                        <span
+                          aria-hidden="true"
+                          style={{
+                            opacity: checkIsSelected(filtre.filtre, value)
+                              ? 1
+                              : 0,
+                          }}>
+                          <Check />
+                        </span>
+                        {value}
+                      </li>
+                    </span>
+                  ))}
+                </ul>
+              </span>
+            </BlockRendererWithCondition>
+            {filterValues[filtre.filtre]?.map((value, index) => {
+              if (value !== '') {
+                return (
+                  <StyledSelectButton
                     key={value + index}
-                    onClick={(): void =>
-                      handleFilterChange(filtre.filtre, value)
-                    }>
-                    <li>
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          opacity: checkIsSelected(filtre.filtre, value)
-                            ? 1
-                            : 0,
-                        }}>
-                        <Check />
-                      </span>
-                      {value}
-                    </li>
-                  </span>
-                ))}
-              </ul>
-            </span>
-          </BlockRendererWithCondition>
-          {filterValues[filtre.filtre]?.map((value, index) => {
-            if (value !== '') {
-              return (
-                <StyledSelectButton
-                  key={value + index}
-                  aria-label={value}
-                  onClick={(): void => {
-                    handleDetailChange(filtre.filtre, value)
-                  }}>
-                  {value} <Cross />
-                </StyledSelectButton>
-              )
-            }
-            return null
-          })}
-        </CustomSelect>
-      ))}
-
+                    aria-label={value}
+                    onClick={(): void => {
+                      handleDetailChange(filtre.filtre, value)
+                    }}>
+                    {value} <Cross />
+                  </StyledSelectButton>
+                )
+              }
+              return null
+            })}
+          </CustomSelect>
+        ))}
+      </BlockRendererWithCondition>
       <StyledButton
         aria-label={isVisible ? 'Afficher les filtres' : 'Cacher les filtres'}
         onClick={(): void => {

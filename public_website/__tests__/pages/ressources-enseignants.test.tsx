@@ -20,7 +20,6 @@ describe('Ressources enseignants', () => {
     async () => {
       const { props } = await getStaticProps()
       const { container } = render(<RessourcesEnseignants {...props} />)
-
       let a11yResult
       await act(async () => {
         a11yResult = await axe(container)

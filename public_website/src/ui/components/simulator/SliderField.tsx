@@ -263,11 +263,11 @@ const Slider = styled(BaseSlider)`
     height: 0.5rem;
   }
   .rc-slider-track {
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.secondary};
     height: 0.5rem;
   }
   .rc-slider-handle {
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.secondary};
     width: 2rem;
     height: 2rem;
     margin-top: -0.6875rem;

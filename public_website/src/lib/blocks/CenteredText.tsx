@@ -11,7 +11,7 @@ import { parseText } from '@/utils/parseText'
 export function CenteredText(props: BaseTextWithOptionTitleProps) {
   const { title, description } = props
   return (
-    <Root data-testid="centered-text">
+    <Root id="target-anchor-scroll" data-testid="centered-text">
       <BlockRendererWithCondition condition={isRenderable(title)}>
         <Typo.Heading2>{title as string}</Typo.Heading2>
       </BlockRendererWithCondition>
@@ -23,10 +23,10 @@ export function CenteredText(props: BaseTextWithOptionTitleProps) {
 }
 
 const Root = styled(ContentWrapper)`
+  margin-top: 0;
   ${({ theme }) => css`
     text-align: center;
     --container-width: 52.5rem;
-
     h2 {
       margin-bottom: 1.5rem;
     }

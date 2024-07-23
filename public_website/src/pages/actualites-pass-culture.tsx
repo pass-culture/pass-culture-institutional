@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
+import { getPage } from '@/domain/pages/pages.actions'
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import FilterOption from '@/lib/filters/FilterOption'
 import { Seo } from '@/lib/seo/seo'
+import { StyledSocialMedia } from '@/theme/style'
 import { PushCTAProps, SocialMediaProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Typo } from '@/ui/components/typographies'
-import { fetchCMS } from '@/utils/fetchCMS'
+import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
   listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
+}
+
+const setQuery = (category: string[], localisation: string[]): string => {
+  return stringify({
+    sort: ['date:desc'],
+    populate: ['image'],
+    pagination: {},
+    filters: {
+      category: {
+        $eqi: category,
+      },
+      localisation: {
+        $eqi: localisation,
+      },
+      pageLocalisation: {
+        $containsi: 'S’informer',
+      },
+    },
+  })
 }
 
 export default function ListeActualitesPassCulture({
@@ -67,30 +88,14 @@ export default function ListeActualitesPassCulture({
   }, [])
 
   const fetchData = async () => {
-    const newsQuery = stringify({
-      populate: ['image'],
-      sort: ['date:desc'],
-      pagination: {},
-      filters: {
-        category: {
-          $eqi: category,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        pageLocalisation: {
-          $containsi: 'S’informer',
-        },
-      },
-    })
+    const newsQuery = setQuery(category, localisation)
+    const news = (await getPage(
+      'news-list',
+      newsQuery
+    )) as APIResponseData<'api::news.news'>[]
 
-    const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-      `/news-list?${newsQuery}`
-    )
-
-    setData(news.data)
+    setData(news)
   }
-  // IN THIS PAGE NO FILTER SECTEUR ADDED !
   useEffect(() => {
     fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,10 +105,9 @@ export default function ListeActualitesPassCulture({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
-      <StyledTitle>
-        {title && <Typo.Heading2>{title}</Typo.Heading2>}
-      </StyledTitle>
+      {!!seo && <Seo metaData={seo} />}
+      {!!title && <Title title={title} />}
+
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -125,7 +129,7 @@ export default function ListeActualitesPassCulture({
 
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      {socialMediaSection && (
+      {!!socialMediaSection && (
         <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
       )}
     </React.Fragment>
@@ -133,23 +137,15 @@ export default function ListeActualitesPassCulture({
 }
 
 export const getStaticProps = (async () => {
-  const newsQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {},
-    filters: {
-      category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
-      },
-      pageLocalisation: {
-        $containsi: 'S’informer',
-      },
-    },
-  })
-
-  const news = await fetchCMS<APIResponseData<'api::news.news'>[]>(
-    `/news-list?${newsQuery}`
+  const newsQuery = setQuery(
+    ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+    []
   )
+
+  const news = (await getPage(
+    PATHS.NEWS,
+    newsQuery
+  )) as APIResponseData<'api::news.news'>[]
 
   const query = stringify({
     populate: [
@@ -167,68 +163,27 @@ export const getStaticProps = (async () => {
       'seo.metaSocial.image',
     ],
   })
-  const { data } = await fetchCMS<
-    APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
-  >(`/actualites-pass-culture?${query}`)
+
+  const page = (await Pages.getPage(
+    PATHS.ACTU_PASS,
+    query
+  )) as APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
+
   return {
     props: {
-      newsActuPassData: news.data,
-      listeActualitesPassCulture: data,
+      newsActuPassData: news,
+      listeActualitesPassCulture: page,
     },
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledTitle = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    --module-spacing: 0;
-    margin-top: 3.5rem;
-
-    h2 {
-      margin-bottom: 3.5rem;
-      font-size: ${theme.fonts.sizes['8xl']};
-    }
-
-    h3 {
-      margin-bottom: 3.5rem;
-
-      font-size: ${theme.fonts.sizes['6xl']};
-      color: ${theme.colors.secondary};
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 2rem;
-
-      h2 {
-        text-align: center;
-        font-size: ${theme.fonts.sizes['4xl']};
-        margin-bottom: 2rem;
-      }
-
-      h3 {
-        font-size: ${theme.fonts.sizes['3xl']};
-        margin-bottom: 3rem;
-      }
-    }
-  `}
-`
-
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  //  margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;
   }
-`
-
-const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-    margin-bottom: 5rem;
-    margin-top: 6rem;
-  `}
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

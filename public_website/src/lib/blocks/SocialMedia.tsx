@@ -64,7 +64,7 @@ const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin-bottom: 2rem;
     text-align: center;
-
+    margin-top: var(--module-margin);
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 1.5rem;
     }
@@ -78,7 +78,7 @@ const StyledList = styled.ul`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
+    margin-bottom: var(--module-margin);
     @media (width < ${theme.mediaQueries.mobile}) {
       gap: 1rem;
     }
@@ -94,6 +94,8 @@ const StyledListItem = styled.li`
       border-radius: 50%;
       width: 6rem;
       height: 6rem;
+      min-width: 6rem;
+      min-height: 6rem;
       background: ${theme.colors.secondary};
       transform: rotate(4deg);
 
@@ -118,9 +120,6 @@ const StyledListItem = styled.li`
       transform: rotate(-35deg);
       filter: brightness(0.8);
     }
-    // &:focus {
-    //   outline: 2px solid ${theme.colors.secondary};
-    // }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       a {

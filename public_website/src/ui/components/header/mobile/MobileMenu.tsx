@@ -78,6 +78,7 @@ export function MobileMenu({
             cardLink={navItem.megaMenu.cardLink}
             cardFirstEmoji={navItem.megaMenu.cardFirstEmoji}
             cardSecondEmoji={navItem.megaMenu.cardSecondEmoji}
+            theme={navItem.megaMenu.theme}
           />
         </MobileMenuSubPanel>
       )

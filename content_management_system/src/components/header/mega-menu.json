@@ -68,6 +68,25 @@
     "bannerDefaultUrl": {
       "type": "string",
       "required": false
+    },
+    "theme": {
+      "type": "enumeration",
+      "enum": [
+        "purple",
+        "yellow",
+        "magenta",
+        "orange",
+        "green",
+        "gold",
+        "sky",
+        "lila",
+        "deeppink",
+        "aquamarine",
+        "lightgray",
+        "saumon"
+      ],
+      "default": "gold",
+      "required": false
     }
   }
 }

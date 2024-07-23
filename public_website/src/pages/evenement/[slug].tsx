@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Events } from '@/domain/events/events.output'
+import { Pages } from '@/domain/pages/pages.output'
+import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import NoResult from '@/lib/blocks/NoResult'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
+import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::event.event'>
@@ -21,41 +23,48 @@ export default function CustomPage(props: CustomPageProps) {
   const { seo, blocks } = props.data.attributes
   const { related } = props
 
-  const hasEvents = (): boolean => {
+  const memoBlocks = useMemo(
+    () =>
+      blocks?.map((block) => (
+        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
+      )),
+    [blocks]
+  )
+
+  const memoEvents = useMemo(
+    () =>
+      related?.map((eventItem) => (
+        <EventCard
+          key={eventItem.attributes.slug}
+          title={eventItem.attributes.title}
+          category={eventItem.attributes.category}
+          date={eventItem.attributes.date}
+          imageUrl={
+            eventItem.attributes.image &&
+            getStrapiURL(eventItem.attributes.image?.data.attributes.url)
+          }
+          startTime={eventItem.attributes.startTime}
+          endTime={eventItem.attributes.endTime}
+          city={eventItem.attributes.city}
+          cta={eventItem.attributes.cta}
+          type=""
+        />
+      )),
+    [related]
+  )
+
+  const hasEvents = useMemo((): boolean => {
     return related?.length > 0
-  }
+  }, [related?.length])
 
   return (
     <React.Fragment>
       <Seo metaData={seo} />
-      {blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      ))}
-
+      {memoBlocks}
       <StyledWrapper>
         <StyledHeading>Les derniers **événements**</StyledHeading>
-
-        {hasEvents() ? (
-          related?.map((eventItem) => (
-            <EventCard
-              key={eventItem.attributes.slug}
-              title={eventItem.attributes.title}
-              category={eventItem.attributes.category}
-              date={eventItem.attributes.date}
-              imageUrl={
-                eventItem.attributes.image &&
-                getStrapiURL(eventItem.attributes.image?.data.attributes.url)
-              }
-              startTime={eventItem.attributes.startTime}
-              endTime={eventItem.attributes.endTime}
-              city={eventItem.attributes.city}
-              cta={eventItem.attributes.cta}
-              type=""
-            />
-          ))
-        ) : (
-          <p>Aucun évènements</p>
-        )}
+        <Breadcrumb isUnderHeader />
+        {hasEvents ? memoEvents : <NoResult />}
       </StyledWrapper>
     </React.Fragment>
   )
@@ -98,7 +107,10 @@ export const getStaticProps = (async ({ params }) => {
     }
   )
 
-  const responseQuery = await Events.getEvents(query)
+  const responseQuery = (await Pages.getPage(
+    PATHS.EVENTS,
+    query
+  )) as APIResponseData<'api::event.event'>[]
 
   if (responseQuery.length === 0) {
     return { notFound: true }
@@ -118,8 +130,10 @@ export const getStaticProps = (async ({ params }) => {
       },
     },
   })
-
-  const latestEvents = await Events.getEvents(relatedQuery)
+  const latestEvents = (await Pages.getPage(
+    PATHS.EVENTS,
+    relatedQuery
+  )) as APIResponseData<'api::event.event'>[]
 
   return {
     props: {
@@ -130,11 +144,12 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
-  const response =
-    await fetchCMS<APIResponseData<'api::event.event'>[]>('/events')
-
+  const response = (await Pages.getPage(
+    PATHS.EVENTS,
+    ''
+  )) as APIResponseData<'api::event.event'>[]
   const result = {
-    paths: response.data.map((page) => ({
+    paths: response.map((page) => ({
       params: {
         slug: page.attributes.slug,
       },
