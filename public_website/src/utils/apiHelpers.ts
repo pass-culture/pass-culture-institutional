@@ -1,4 +1,4 @@
-export function getStrapiURL(path = '') {
+export function getStrapiURL(path = ''): string {
   if (path.startsWith('/')) {
     return `${
       process.env['NEXT_PUBLIC_STRAPI_API_URL'] || 'http://localhost:1337'
