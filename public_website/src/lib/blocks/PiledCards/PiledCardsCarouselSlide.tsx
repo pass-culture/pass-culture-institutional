@@ -25,7 +25,9 @@ export function VerticalCarouselSlide(props: PiledCardsCarouselSlideProps) {
       aria-roledescription="diapositive"
       $slideTheme={theme}>
       <div>
-        {imageUrl && <StyledImage src={URL} alt="" width={270} height={330} />}
+        {!!imageUrl && (
+          <StyledImage src={URL} alt="" width={270} height={330} />
+        )}
         <StyledTitle>{title}</StyledTitle>
 
         {descriptionIsOpen ? (

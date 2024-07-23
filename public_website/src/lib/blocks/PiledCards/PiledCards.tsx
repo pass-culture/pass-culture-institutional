@@ -8,6 +8,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowDown } from '@/ui/components/icons/ArrowDown'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
+import { parseText } from '@/utils/parseText'
 
 type Direction = 'top' | 'bottom'
 
@@ -117,7 +118,7 @@ export function PiledCards(props: PiledCardsProps) {
                 <div>
                   <p>{(index + 1).toString().padStart(2, '0')}</p>
                   <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <p>{parseText(item.description).processedText}</p>
                 </div>
                 <StyledNavWrapper>{renderNav(index)}</StyledNavWrapper>
               </StyledContentTextWrapper>
