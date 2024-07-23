@@ -2,7 +2,7 @@ import { APIResponseData } from '@/types/strapi'
 import { fetchCMS } from '@/utils/fetchCMS'
 
 export const getPage = async (
-  section: string = 'pages',
+  section: string,
   queryParams: string
 ): Promise<
   | APIResponseData<'api::page.page'>[]
