@@ -7,6 +7,7 @@ import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
 import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
 import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
+import { Separator } from '@/lib/blocks/Separator'
 import { Seo } from '@/lib/seo/seo'
 import { StyledSocialMedia } from '@/theme/style'
 import { Offer } from '@/types/playlist'
@@ -35,7 +36,7 @@ export default function Home({
 
   return (
     <React.Fragment>
-      {seo && <Seo metaData={seo} />}
+      {!!seo && <Seo metaData={seo} />}
       <StyledHomeGradient>
         <HeroSection
           title={heroSection.title}
@@ -60,7 +61,7 @@ export default function Home({
         title={aboutSection.title}
         description={aboutSection.description}
       />
-
+      <Separator isActive={false} />
       <EligibilitySection
         title={eligibilitySection.title}
         items={eligibilitySection.items}
@@ -70,7 +71,7 @@ export default function Home({
         cardFirstEmoji={eligibilitySection.firstEmoji}
         cardSecondEmoji={eligibilitySection.secondEmoji}
       />
-
+      <Separator isActive={false} />
       <StyledCTASection
         title={CTASection.title}
         description={CTASection.description}
@@ -79,7 +80,7 @@ export default function Home({
         qrCodeDescription={CTASection.qrCodeDescription}
         qrCodeUrl={CTASection.qrCodeUrl}
       />
-
+      <Separator isActive={false} />
       <BlockRendererWithCondition condition={recommendationItems.length > 0}>
         <RecommendationsSection
           title={recommendationsSection.recommendations.title}
@@ -87,13 +88,13 @@ export default function Home({
           cta={recommendationsSection.cta}
         />
       </BlockRendererWithCondition>
-
+      <Separator isActive={false} />
       <StyledLatestStudiesSection
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
         cta={homeData.attributes.latestStudies.cta}
       />
-
+      <Separator isActive={false} />
       <StyledSocialMedia
         title={socialMediaSection.title}
         socialMediaLink={socialMediaSection.socialMediaLink}
@@ -171,7 +172,6 @@ const StyledHomeGradient = styled.section`
     padding-top: 8rem;
     overflow: hidden;
     transform: translateY(-8rem);
-    --module-spacing: 0;
     height: calc(100vh - 6.75rem);
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -185,22 +185,14 @@ const StyledHomeGradient = styled.section`
 
 const StyledCTASection = styled(CTASection)`
   ${({ theme }) => css`
-    // margin-top: 12.5rem;
-    // margin-bottom: 10rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 4.5rem 0;
     }
   `}
 `
 
 const StyledLatestStudiesSection = styled(LatestStudiesSection)`
   ${({ theme }) => css`
-    // margin-top: 6rem;
-    // margin-bottom: 6rem;
-
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3.5rem 0 5rem;
     }
   `}
 `
