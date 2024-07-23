@@ -17,6 +17,7 @@ import { listeOffrePageFixtures } from './fixtures/listeOffre'
 import { notFoundDataFixtures } from './fixtures/notFound'
 import { PressePageFixtures } from './fixtures/presse'
 import { RessourcesEnseignatsPageFixtures } from './fixtures/ressourcesEnseignants'
+import { RessourcesPassFixtures } from './fixtures/ressourcespass'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { simulatorPageFixtures } from './fixtures/simulator'
 
@@ -74,6 +75,9 @@ export const handlers = [
     return jsonResponseOf(
       RessourcesPassCulturePageFixtures.ressourcesPassCulture
     )
+  }),
+  http.get(`${CMS_BASE_URL}/api/ressourcespass`, () => {
+    return jsonResponseOf(RessourcesPassFixtures.ressourcespass)
   }),
   http.get(`${CMS_BASE_URL}/api/presse`, () => {
     return jsonResponseOf(PressePageFixtures.presse)

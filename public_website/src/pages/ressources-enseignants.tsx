@@ -213,7 +213,7 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps<ListProps>
 
 const StyledListItems = styled(ListItems)`
-  margin-top: 3rem;
+  // margin-top: 3rem;
 `
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`

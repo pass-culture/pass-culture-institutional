@@ -164,7 +164,6 @@ export const getStaticProps = (async () => {
     PATHS.RESSOURCES_PASS_PAGE,
     newsQuery
   )) as APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
-
   return {
     props: {
       ressourcesData: resources,
