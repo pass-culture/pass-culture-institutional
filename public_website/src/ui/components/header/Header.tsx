@@ -73,7 +73,7 @@ export function Header(props: HeaderMenuProps) {
   const { targetItems, aboutItems, login, signup } = props
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const [activeId, setActiveId] = useState<number | null>(null)
+  const [activeId, setActiveId] = useState<number>(-1)
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
   const navItems = useMemo(
     () => [...targetItems, ...aboutItems],
@@ -209,6 +209,7 @@ export function Header(props: HeaderMenuProps) {
   return (
     <Wrapper>
       <StyledHeader
+        $activeId={activeId}
         $showMegaMenu={activeMegaMenuId !== null}
         $showMobileMenu={showMobileMenu}>
         <StyledHeaderContent>
@@ -354,12 +355,14 @@ export function Header(props: HeaderMenuProps) {
 const StyledHeader = styled.header<{
   $showMegaMenu: boolean
   $showMobileMenu: boolean
+  $activeId?: number
 }>`
-  ${({ theme, $showMegaMenu, $showMobileMenu }) => css`
+  ${({ theme, $showMegaMenu, $showMobileMenu, $activeId }) => css`
     position: relative;
     z-index: 100;
-
-    background: ${$showMegaMenu ? theme.colors.white : 'none'};
+    background: ${$showMegaMenu || $activeId !== -1
+      ? theme.colors.white
+      : '#ece6ff'};
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       ${$showMobileMenu &&
