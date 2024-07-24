@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
+import { Close } from '../icons/Close'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import HeaderBanner from './HeaderBanner'
@@ -38,10 +39,14 @@ export function MegaMenu({
   } = data
 
   const megaMenuRef = useRef<HTMLDivElement | null>(null)
+  const closeMenuRef = useRef<HTMLButtonElement | null>(null)
   const backgroundCard = theme ?? 'gold'
 
   function onClickOutside(e: MouseEvent): void {
-    if (!megaMenuRef.current?.contains(e.target as HTMLElement)) {
+    if (
+      !megaMenuRef.current?.contains(e.target as HTMLElement) &&
+      closeMenuRef.current?.contains(e.target as HTMLButtonElement)
+    ) {
       const openButtonElement = getOpenButtonEl()
       if (openButtonElement !== (e.target as HTMLElement)) {
         onBlur()
@@ -84,6 +89,15 @@ export function MegaMenu({
 
   return (
     <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
+      <StyledMegaMenuClose>
+        <StyledCloseButton
+          ref={closeMenuRef}
+          aria-label="Fermer le menu"
+          aria-expanded="true"
+          aria-controls="mobile-menu-main-navigation">
+          <Close />
+        </StyledCloseButton>
+      </StyledMegaMenuClose>
       <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
         <StyledMegaMenuHeading>
           <Typo.Heading2 as="p">{title}</Typo.Heading2>
@@ -157,7 +171,20 @@ const StyledMegaMenuWrapper = styled.div`
     z-index: 2;
   `}
 `
-
+const StyledMegaMenuClose = styled.div`
+  padding: 0 2.5rem 0;
+  display: flex;
+  justify-content: flex-end;
+  max-width: 90rem;
+  margin: 0 auto;
+`
+const StyledCloseButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.75rem;
+`
 const StyledMegaMenu = styled.div`
   max-width: 90rem;
   margin-inline: auto;
