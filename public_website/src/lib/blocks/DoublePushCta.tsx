@@ -87,15 +87,14 @@ export function DoublePushCTA(
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
-  padding-top: 3.125rem;
-  padding-bottom: 3.125rem;
-
+  min-width: 100%;
+  padding: 0;
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;
   }
 `
 
-const Root = styled.section`
+const Root = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.saumon};
     gap: 5.625rem;
@@ -104,15 +103,17 @@ const Root = styled.section`
     position: relative;
     margin: 0 -3.4rem;
     margin-bottom: 3.4rem;
-    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
-    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
+
+    // margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
+    // margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: block;
       position: relative;
-      padding-top: 25.125rem;
+      padding: 0;
       margin: 0;
-      margin-top: 15.125rem;
+      margin-top: 0;
+      // margin-top: 15.125rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -139,7 +140,7 @@ const CardContainer = styled.div`
     position: relative;
     z-index: 1;
     margin: -3.125rem 0;
-    margin-left: 3.4rem;
+    margin-left: calc(var(--module-margin) + var(--module-margin) * 2);
     max-width: 28rem;
 
     span {
@@ -152,13 +153,12 @@ const CardContainer = styled.div`
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin: 0 auto;
-      position: absolute;
-
+      position: relative;
+      margin: 0 auto;
       min-width: 90%;
       min-height: 40%;
-
       top: -10rem;
-      left: 1.8rem;
+      // left: 1.8rem;
       span {
         display: none;
       }
@@ -167,11 +167,9 @@ const CardContainer = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       margin: 0 auto;
       position: absolute;
-
       min-width: 90%;
       min-height: 40%;
-
-      top: -7rem;
+      // top: -7rem;
       left: 1.8rem;
     }
   `}
@@ -183,17 +181,15 @@ const Card = styled.div<{ $imageUrl?: string }>`
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-repeat: no-repeat;
-
     display: flex;
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
-
     aspect-ratio: 510/634.64;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
-      width: 80%;
+      width: 70%;
       aspect-ratio: 338/233;
       padding: 0;
       margin: 0 auto;
@@ -246,11 +242,9 @@ const RightSide = styled.div`
 const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
-
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
     margin-right: 0.75rem;
     background: linear-gradient(
       90deg,
@@ -258,7 +252,6 @@ const CtaLink = styled(Link)`
       ${theme.colors.secondary}
     );
     color: ${theme.colors.white};
-
     padding: 1rem 1.75rem;
     border-radius: 6.25rem;
     position: relative;
@@ -300,14 +293,13 @@ const CtaLink = styled(Link)`
 const MobileImage = styled.img`
   ${({ theme }) => css`
     display: none;
-    width: 85%;
+    width: 60%;
     margin: 0 2rem;
     z-index: 1;
     position: relative;
-    border-radius: 1rem;
+    border-radius: ${theme.radius.sm};
     object-fit: cover;
     max-width: 13rem;
-
     aspect-ratio: 13/16;
 
     @media (width < ${theme.mediaQueries.mobile}) {

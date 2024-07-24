@@ -237,7 +237,7 @@ const StyledMegaMenuCardHeading = styled.div`
       line-height: 1;
       font-size: ${theme.fonts.sizes['5xl']};
       font-weight: ${theme.fonts.weights.black};
-      color: ${theme.colors.secondary};
+      color: ${theme.colors.black};
       transform: rotate(-2deg);
       z-index: 1;
       word-break: break-word;

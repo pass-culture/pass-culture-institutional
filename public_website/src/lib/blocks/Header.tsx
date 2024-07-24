@@ -170,14 +170,13 @@ const CardContainer = styled.div`
   }
 
   @media (width < ${theme.mediaQueries.mobile}) {
-    // margin: 2rem 2rem -10.125rem 2rem;
     max-width: 100%;
   }
 `
 
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
-    background-color: ${theme.colors.tertiary};
+    background-color: ${theme.colors.sky};
     background-image: ${$imageUrl ? `url(${$imageUrl})` : 'none'};
     background-size: cover;
     background-repeat: no-repeat;

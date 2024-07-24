@@ -62,6 +62,7 @@ export const theme = {
       '3xl': FontSizes['3XL'],
       '4xl': FontSizes['4XL'],
       '5xl': FontSizes['5XL'],
+      '5xll': FontSizes['5XLL'],
       '6xl': FontSizes['6XL'],
       '7xl': FontSizes['7XL'],
       '8xl': FontSizes['8XL'],

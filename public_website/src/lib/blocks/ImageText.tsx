@@ -47,10 +47,8 @@ export function ImageText(props: ImageTextProps) {
   )
 }
 
-const Root = styled(ContentWrapper)`
+const Root = styled.div`
   ${({ theme }) => css`
-    // margin-top: 3rem;
-    //  margin-bottom: 5rem;
     .right {
       grid-template-columns: 1.5fr 1fr;
       grid-template-areas: 'first second';
@@ -127,8 +125,10 @@ const StyledContentWrapper = styled(ContentWrapper)`
     position: relative;
     display: grid;
     gap: 2.5rem;
-    grid-area: first;
+      grid-area: first;
     }
+
+    
 
     .second {
       grid-area: second;
@@ -193,6 +193,7 @@ const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
     justify-content: ${$imageOnLeft ? 'end' : 'start'};
     position: relative;
     align-items: self-start;
+    height: max-content;
 
     &:after {
       content: ' ';

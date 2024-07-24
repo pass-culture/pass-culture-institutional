@@ -8,6 +8,7 @@ import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
 import { onClickAnalytics } from '@/lib/analytics/helpers'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
+import { Separator } from '@/lib/blocks/Separator'
 import { CustomSelect, CustomSelectButton, WrapperChevron } from '@/theme/style'
 import { BreadcrumbProps } from '@/types/props'
 import { isRenderable } from '@/utils/isRenderable'
@@ -170,6 +171,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
           </ListItem>
         </ol>
       </Root>
+      <Separator isActive={false} />
     </BlockRendererWithCondition>
   )
 }
@@ -181,6 +183,11 @@ const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       display: none;
     }
+    @media (max-width: ${theme.mediaQueries.largeDesktop}) {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
     ol {
       display: flex;
       align-items: center;
@@ -192,10 +199,9 @@ const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
     color: ${theme.colors.black};
     font-size: ${theme.fonts.sizes['2xs']};
     font-weight: ${theme.fonts.weights.medium};
-
+    margin-bottom: var(--module-margin);
     ${$isUnderHeader &&
     css`
-      // transform: translateY(-10rem);
       @media (max-width: ${theme.mediaQueries.tablet}) {
         transform: none;
       }

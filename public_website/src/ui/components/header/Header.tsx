@@ -484,7 +484,6 @@ const StyledLoginItem = styled.li`
       color: ${theme.colors.black};
       font-size: ${theme.fonts.sizes.xs};
       font-weight: ${theme.fonts.weights.medium};
-      padding: 0 0.5rem;
     }
   `}
 `

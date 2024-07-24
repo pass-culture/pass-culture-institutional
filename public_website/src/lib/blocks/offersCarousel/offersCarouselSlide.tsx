@@ -66,14 +66,12 @@ const CardContainer = styled.div<{ $slideTheme: ItemsTheme }>`
 
 const Card = styled.div`
   border-radius: 1rem;
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 6rem 2rem;
   width: calc(100% - 4rem);
   height: 15rem;
-
   position: relative;
   background: var(--card-background);
 
@@ -124,7 +122,7 @@ const StyledSecondIcon = styled(OutlinedText)`
 `
 const StyledOffersSurtitle = styled.h2`
   ${({ theme }) => css`
-    font-size: ${theme.fonts.sizes['5xl']};
+    font-size: ${theme.fonts.sizes['5xll']};
     font-weight: ${theme.fonts.weights.black};
     line-height: 1;
     letter-spacing: -0.0625rem;
@@ -143,7 +141,7 @@ const StyledOffersContentWrapper = styled.div`
     text-align: center;
 
     h3 {
-      font-size: ${theme.fonts.sizes['5xl']};
+      font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.bold};
       line-height: 1.1;
       letter-spacing: -0.0625rem;

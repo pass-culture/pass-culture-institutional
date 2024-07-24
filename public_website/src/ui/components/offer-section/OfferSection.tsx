@@ -53,7 +53,9 @@ export function OfferSection(props: OfferProps & BaseTextProps) {
             <StyledIcon>{firstIcon}</StyledIcon>
             <StyledIcon>{secondIcon}</StyledIcon>
             <StyledOffersHeader>
-              <StyledOffersSurtitle>{firstCartTitle}</StyledOffersSurtitle>
+              <StyledOffersSurtitle shadow={false}>
+                {firstCartTitle}
+              </StyledOffersSurtitle>
               <StyledOffersSurtitle>{secondCartTitle}</StyledOffersSurtitle>
             </StyledOffersHeader>
             <StyledCardDescription>{descriptionCard}</StyledCardDescription>
@@ -64,7 +66,6 @@ export function OfferSection(props: OfferProps & BaseTextProps) {
       <StyledBtnWrapper>
         <ButtonWithCTA cta={cta} />
       </StyledBtnWrapper>
-      {/* {TODO: ADD CARD AND TEMOIGNAGES VIDEO} */}
     </Root>
   )
 }
@@ -162,16 +163,15 @@ const StyledOffersHeader = styled.div`
     flex-direction: column;
     justify-content: center;
     position: relative;
-
     align-self: center;
-
     margin-bottom: 2rem;
     margin-top: 1rem;
     width: fit-content;
-
     transform: rotate(-2.15deg);
     flex-shrink: 0;
-    filter: drop-shadow(-4px 8px 24px rgba(0, 0, 0, 0.21));
+    > span {
+      color: ${theme.colors.white}!important;
+    }
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
     }
@@ -194,13 +194,10 @@ const StyledOffersSurtitle = styled(OutlinedText)`
 const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
-
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
     color: ${theme.colors.white};
-
     padding: 1rem 1.75rem;
     border-radius: 100px;
     border: 1px solid ${theme.colors.white};
@@ -224,7 +221,6 @@ const StyledCardWrapper = styled.div`
   ${({ theme }) => css`
     height: fit-content;
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
