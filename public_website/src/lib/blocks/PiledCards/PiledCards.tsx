@@ -10,20 +10,20 @@ import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { parseText } from '@/utils/parseText'
 
-type Direction = 'top' | 'bottom'
-
 export function PiledCards(props: PiledCardsProps) {
   const { items } = props
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const sentinelRefs = useRef<(HTMLLIElement | null)[]>([])
   const refTop = useRef<number[]>([])
-
   useEffect(() => {
     refTop.current = []
     window.scrollTo({ top: 0 })
+
     for (const element of itemRefs.current) {
-      const posY = element?.offsetTop
-      if (posY) refTop.current.push(posY)
+      if (element) {
+        const posY = element.getBoundingClientRect().top + window.scrollY
+        refTop.current.push(posY)
+      }
     }
     const setScrcoll = (): void => {
       for (let i = 0; i < itemRefs.current.length; i++) {
@@ -48,11 +48,8 @@ export function PiledCards(props: PiledCardsProps) {
     return () => window.removeEventListener('scroll', setScrcoll)
   }, [])
 
-  const ScrollTo = (index: number, direction: Direction): void => {
-    const y =
-      direction === 'bottom'
-        ? refTop.current[index + 1]
-        : refTop.current[index - 1]
+  const ScrollTo = (index: number): void => {
+    const y = refTop.current[index]
     window.scrollTo({ top: y, behavior: 'smooth' })
   }
 
@@ -64,14 +61,14 @@ export function PiledCards(props: PiledCardsProps) {
           aria-label="Diapositive précédente"
           $isReverse
           disabled={index === 0}
-          onClick={(): void => ScrollTo(index, 'top')}>
+          onClick={(): void => ScrollTo(index - 1)}>
           <ArrowDown />
         </StyledButton>
         <StyledButton
           type="button"
           disabled={index === items.length - 1}
           aria-label="Diapositive suivante"
-          onClick={(): void => ScrollTo(index, 'bottom')}>
+          onClick={(): void => ScrollTo(index + 1)}>
           <ArrowDown />
         </StyledButton>
       </React.Fragment>
@@ -133,8 +130,6 @@ export function PiledCards(props: PiledCardsProps) {
 
 const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
-    color: ${theme.colors.secondary};
-    margin-bottom: calc(var(--module-margin) - 8rem);
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
     }
@@ -149,7 +144,6 @@ const StyledCarousel = styled(PiledCardsCarousel)`
   ${({ theme }) => css`
     margin-bottom: var(--module-margin);
     margin-top: var(--module-margin);
-
     @media (width >= ${theme.mediaQueries.mobile}) {
       display: none;
     }
@@ -262,7 +256,7 @@ const StyledButton = styled.button<{
     }
 
     &:active {
-      outline: 2px solid ${theme.colors.white};
+      outline: 2px solid ${theme.colors.darkGray};
     }
   `}
 `

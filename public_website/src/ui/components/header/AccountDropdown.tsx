@@ -60,7 +60,7 @@ export function AccountDropdown(props: AccountDropdownProps) {
         {items.map((item, i) => (
           <React.Fragment key={item.label}>
             <AccountItem {...item} />
-            {i !== items.length - 1 && <li aria-hidden="true"></li>}
+            {i !== items.length - 1 && <li aria-hidden="true" />}
           </React.Fragment>
         ))}
       </ul>

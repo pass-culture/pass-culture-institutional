@@ -1,7 +1,7 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
@@ -15,7 +15,11 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import { Seo } from '@/lib/seo/seo'
 import { Offer } from '@/types/playlist'
-import { ExperienceVideoCarouselSlideProps, ListProps } from '@/types/props'
+import {
+  ExperienceVideoCarouselSlideProps,
+  ListProps,
+  OffersVideoCarouselProps,
+} from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
@@ -37,7 +41,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   return (
     <React.Fragment>
       {!!seo && <Seo metaData={seo} />}
-      {hero && hero.title && hero.icon && (
+      {!!hero && (
         <Header
           title={hero.title}
           text={hero.text}
@@ -63,19 +67,10 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
 
       <Separator isActive={separatorIsActive(separator)} />
       <WhiteSpace space={0} />
-
-      {offres_culturelles && offres_culturelles.items.length > 0 && (
-        <OffersCarousel
-          title={offres_culturelles.title}
-          items={offres_culturelles.items}
-          cta={{
-            Label: offres_culturelles?.cta?.Label,
-            URL: offres_culturelles?.cta?.URL,
-            eventName: offres_culturelles?.cta?.eventName,
-            eventOrigin: offres_culturelles?.cta?.eventOrigin,
-          }}
-        />
-      )}
+      <BlockRendererWithCondition
+        condition={!!offres_culturelles && offres_culturelles.items.length > 0}>
+        <OffersCarousel {...(offres_culturelles as OffersVideoCarouselProps)} />
+      </BlockRendererWithCondition>
 
       <BlockRendererWithCondition
         condition={!!experience && experience.carouselItems.length > 0}>
@@ -93,7 +88,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
         </StyledBackgroundExperienceVideoCarousel>
       </BlockRendererWithCondition>
 
-      {question && (
+      {!!question && (
         <SimplePushCta
           title={question.title}
           surtitle={question.surtitle}
@@ -156,7 +151,9 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps<ListProps>
 
 const StyledBackgroundExperienceVideoCarousel = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 1rem 0rem 1rem 0rem;
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    background: ${theme.colors.lila};
+  `}
 `

@@ -47,9 +47,9 @@ const Root = styled(Slide)<{ $isLandscape?: boolean }>`
   ${($isLandscape) => css`
     min-width: ${$isLandscape ? '285px;' : '100%;'}
       ${({ theme }) => css`
-    .inner 
+    .inner {
       margin-right: 1rem;
-       margin-left: 1rem;
+     
     
       .react-player__preview {
         border-radius: 0.8125rem;
@@ -57,7 +57,7 @@ const Root = styled(Slide)<{ $isLandscape?: boolean }>`
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }
-    }
+  }}
   `};
   `}
 `

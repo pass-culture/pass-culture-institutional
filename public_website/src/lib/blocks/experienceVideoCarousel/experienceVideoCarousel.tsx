@@ -54,67 +54,63 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
   }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
 
   return (
-    <StylesContainer>
-      <ContentWrapper>
-        <CarouselProvider
-          naturalSlideWidth={60}
-          naturalSlideHeight={75}
-          visibleSlides={visibleSlides}
-          totalSlides={TOTAL_SLIDES}
-          isIntrinsicHeight
-          dragEnabled={false}
-          infinite={false}
-          step={1}>
-          <StyledHeading>
-            <StyledHeading2>{title}</StyledHeading2>
-            <BlockRendererWithCondition condition={isNavShowing}>
-              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
-                <NavigationWithArrow
-                  carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-                  slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-                />
-              </BlockRendererWithCondition>
+    <StyledContainer>
+      <CarouselProvider
+        naturalSlideWidth={60}
+        naturalSlideHeight={75}
+        visibleSlides={visibleSlides}
+        totalSlides={TOTAL_SLIDES}
+        isIntrinsicHeight
+        dragEnabled={false}
+        infinite={false}
+        step={1}>
+        <StyledHeading>
+          <StyledHeading2>{title}</StyledHeading2>
+          <BlockRendererWithCondition condition={isNavShowing}>
+            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+              <NavigationWithArrow
+                carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+                slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+              />
             </BlockRendererWithCondition>
-          </StyledHeading>
-
-          <BlockRendererWithCondition condition={items && items.length > 0}>
-            <StyledSlider
-              classNameAnimation="customCarrouselAnimation"
-              aria-label={stripTags(title)}
-              aria-roledescription="carrousel">
-              {items?.map((item, index) => {
-                return (
-                  <ExperienceVideoCarouselSlide
-                    isLandscape={isLandscape}
-                    key={`${item.title}_${index}`}
-                    slideIndex={index}
-                    {...item}
-                  />
-                )
-              })}
-            </StyledSlider>
           </BlockRendererWithCondition>
+        </StyledHeading>
 
-          <BlockRendererWithCondition
-            condition={isNavShowing && width < MOBILE_WIDTH}>
-            <NavigationWithDots
-              items={items}
-              carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-              slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-              carouselName="EXPERIENCE_VIDEO_CAROUSEL"
-            />
-          </BlockRendererWithCondition>
-        </CarouselProvider>
-      </ContentWrapper>
-    </StylesContainer>
+        <BlockRendererWithCondition condition={items && items.length > 0}>
+          <StyledSlider
+            classNameAnimation="customCarrouselAnimation"
+            aria-label={stripTags(title)}
+            aria-roledescription="carrousel">
+            {items?.map((item, index) => {
+              return (
+                <ExperienceVideoCarouselSlide
+                  isLandscape={isLandscape}
+                  key={`${item.title}_${index}`}
+                  slideIndex={index}
+                  {...item}
+                />
+              )
+            })}
+          </StyledSlider>
+        </BlockRendererWithCondition>
+
+        <BlockRendererWithCondition
+          condition={isNavShowing && width < MOBILE_WIDTH}>
+          <NavigationWithDots
+            items={items}
+            carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+            slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+            carouselName="EXPERIENCE_VIDEO_CAROUSEL"
+          />
+        </BlockRendererWithCondition>
+      </CarouselProvider>
+    </StyledContainer>
   )
 }
 
-const StylesContainer = styled(ContentWrapper)`
-  ${({ theme }) => css`
-    background: ${theme.colors.lila};
-    min-width: 100%;
-  `}
+const StyledContainer = styled(ContentWrapper)`
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 `
 
 const StyledHeading = styled.div`
@@ -136,7 +132,6 @@ const StyledSlider = styled(Slider)`
 
 const StyledHeading2 = styled(Typo.Heading2)`
   ${({ theme }) => css`
-    max-width: 50%;
     @media (width < ${theme.mediaQueries.mobile}) {
       max-width: 100%;
       text-align: center;

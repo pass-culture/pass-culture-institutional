@@ -66,69 +66,61 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
 
   return (
     <Root>
-      <ContentWrapper $noMargin>
-        <CarouselProvider
-          naturalSlideWidth={60}
-          naturalSlideHeight={75}
-          totalSlides={TOTAL_SLIDES}
-          visibleSlides={visibleSlides}
-          isIntrinsicHeight
-          infinite={false}
-          dragEnabled
-          touchEnabled
-          step={1}>
-          <BlockRendererWithCondition condition={isNavShowing}>
-            <StyledHeading>
-              <Typo.Heading2>{title}</Typo.Heading2>
-              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
-                <NavigationWithArrow
-                  carrouselSelector={CAROUSEL_SELECTOR}
-                  slidesSelector={SLIDES_SELECTOR}
-                />
-              </BlockRendererWithCondition>
-            </StyledHeading>
-          </BlockRendererWithCondition>
+      <CarouselProvider
+        naturalSlideWidth={60}
+        naturalSlideHeight={75}
+        totalSlides={TOTAL_SLIDES}
+        visibleSlides={visibleSlides}
+        isIntrinsicHeight
+        infinite={false}
+        dragEnabled
+        touchEnabled
+        step={1}>
+        <BlockRendererWithCondition condition={isNavShowing}>
+          <StyledHeading>
+            <Typo.Heading2>{title}</Typo.Heading2>
+            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+              <NavigationWithArrow
+                carrouselSelector={CAROUSEL_SELECTOR}
+                slidesSelector={SLIDES_SELECTOR}
+              />
+            </BlockRendererWithCondition>
+          </StyledHeading>
+        </BlockRendererWithCondition>
 
-          <StyledSlider
-            onTouchStart={(): void => setHasScroll(true)}
-            onTouchEnd={(): void => setHasScroll(false)}
-            classNameAnimation="customCarrouselAnimation"
-            role="region"
-            aria-label={stripTags(title)}
-            aria-roledescription="carrousel">
-            {items?.map((item, index) => {
-              return (
-                <VerticalCarouselSlide
-                  key={`${item.title}_${index}`}
-                  slideIndex={index}
-                  {...item}
-                  hidePlayIcon={hidePlayIcon}
-                />
-              )
-            })}
-          </StyledSlider>
-          <BlockRendererWithCondition
-            condition={isNavShowing && width < MOBILE_WIDTH}>
-            <NavigationWithDots
-              items={items}
-              carrouselSelector={CAROUSEL_SELECTOR}
-              slidesSelector={SLIDES_SELECTOR}
-              carouselName="VERTICAL_CAROUSEL"
-            />
-          </BlockRendererWithCondition>
-        </CarouselProvider>
-      </ContentWrapper>
+        <StyledSlider
+          onTouchStart={(): void => setHasScroll(true)}
+          onTouchEnd={(): void => setHasScroll(false)}
+          classNameAnimation="customCarrouselAnimation"
+          role="region"
+          aria-label={stripTags(title)}
+          aria-roledescription="carrousel">
+          {items?.map((item, index) => {
+            return (
+              <VerticalCarouselSlide
+                key={`${item.title}_${index}`}
+                slideIndex={index}
+                {...item}
+                hidePlayIcon={hidePlayIcon}
+              />
+            )
+          })}
+        </StyledSlider>
+        <BlockRendererWithCondition
+          condition={isNavShowing && width < MOBILE_WIDTH}>
+          <NavigationWithDots
+            items={items}
+            carrouselSelector={CAROUSEL_SELECTOR}
+            slidesSelector={SLIDES_SELECTOR}
+            carouselName="VERTICAL_CAROUSEL"
+          />
+        </BlockRendererWithCondition>
+      </CarouselProvider>
     </Root>
   )
 }
 
-const Root = styled.div`
-  overflow: hidden;
-
-  /* Fix control button shadows being clipped */
-  padding-top: 1rem;
-  margin-top: -1rem;
-`
+const Root = styled(ContentWrapper)``
 const StyledSlider = styled(Slider)``
 
 const StyledHeading = styled.div`

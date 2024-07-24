@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { Separator } from '@/lib/blocks/Separator'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
@@ -21,10 +22,10 @@ export default function CustomPage(props: CustomPageProps) {
     () =>
       Blocks?.map((block, index) => {
         const blockContent = (
-          <BlockRenderer
-            key={`${block.__component}_${block.id}`}
-            block={block}
-          />
+          <React.Fragment key={`${block.__component}_${block.id}`}>
+            <BlockRenderer block={block} />
+            <Separator isActive={false} />
+          </React.Fragment>
         )
         return index === 1 ? (
           <React.Fragment key={`${block.__component}_${block.id}`}>
