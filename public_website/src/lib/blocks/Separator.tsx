@@ -6,7 +6,11 @@ import { SeparatorTextProps } from '@/types/props'
 export function Separator(props: SeparatorTextProps) {
   const { isActive } = props
 
-  return <Root data-testid="separator">{!!isActive && <div />}</Root>
+  return (
+    <Root aria-hidden="true" data-testid="separator">
+      {!!isActive && <div />}
+    </Root>
+  )
 }
 
 const Root = styled.div`

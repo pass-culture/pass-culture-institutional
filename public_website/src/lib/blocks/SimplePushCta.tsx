@@ -52,8 +52,8 @@ export function SimplePushCta(props: PushCTAProps) {
   const image_props = image?.data?.attributes?.url
 
   return (
-    <Root className={className}>
-      <StyledContentWrapper $noMargin>
+    <StyledContentWrapper>
+      <Root className={className}>
         <RightSide>
           <BlockRendererWithCondition condition={isRenderable(surtitle)}>
             <SimplePushCtaSurTitle surtitle={surtitle as string} />
@@ -73,56 +73,55 @@ export function SimplePushCta(props: PushCTAProps) {
             <OutlinedText>{icon}</OutlinedText>
           </BlockRendererWithCondition>
         </CardContainer>
-      </StyledContentWrapper>
-    </Root>
+      </Root>
+    </StyledContentWrapper>
   )
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
-  gap: 5.625rem;
-  display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  position: relative;
-  width: 100%;
-
-  @media (width < ${theme.mediaQueries.tablet}) {
+  background-color: ${theme.colors.deepink};
+  min-width: 100%;
+  padding: 0;
+  margin-top: calc(var(--module-margin) * 2);
+  margin-bottom: calc(var(--module-margin) * 2);
+  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+    padding: 0;
+    margin-top: calc(var(--module-margin) * 8);
+    margin-bottom: calc(var(--module-margin) * 3);
+  }
+  @media (width < ${theme.mediaQueries.largeDesktop}) {
     display: flex;
     justify-content: center;
     text-align: center;
   }
 `
 
-const Root = styled.section`
+const Root = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.deepink};
+    gap: 5.625rem;
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    position: relative;
+    max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
+    margin: 0 auto;
     color: ${theme.colors.secondary};
-    margin: auto;
-    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
-    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      margin-bottom: var(--module-margin);
-      margin-top: calc(var(--module-margin) + 19rem);
-
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       max-width: 100%;
-
       display: flex;
+      flex-direction: column-reverse;
       justify-content: center;
       border-radius: 0;
       text-align: center;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: calc(var(--module-margin) + 7rem);
+      gap: 0;
     }
   `}
 `
 
 const CardContainer = styled.div`
   position: relative;
-  margin: -3.125rem 0 -3.125rem 5rem;
   max-width: 28rem;
-
+  margin: -3.125rem 0;
   span {
     position: absolute;
     bottom: 20%;
@@ -131,22 +130,14 @@ const CardContainer = styled.div`
     transform: rotate(7deg);
   }
 
-  @media (width < ${theme.mediaQueries.tablet}) {
-    margin: auto;
-    position: absolute;
-
-    top: -19rem;
-
-    min-width: 90%;
-    min-height: 40%;
-
+  @media (width < ${theme.mediaQueries.largeDesktop}) {
+    margin: 0 auto;
+    position: relative;
+    min-width: 30rem;
+    top: -7rem;
     span {
       display: none;
     }
-  }
-
-  @media (width < ${theme.mediaQueries.mobile}) {
-    top: -7rem;
   }
 `
 
@@ -161,25 +152,12 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
     aspect-ratio: 333.49/415;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      width: 80%;
+      width: 23rem;
       padding: 0;
       margin: 0 auto;
-    }
-
-    @media (width < ${theme.mediaQueries.tablet}) {
-      max-width: 23rem;
-      width: unset;
-      height: unset;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      max-width: 16rem;
-      width: unset;
-      height: unset;
     }
   `}
 `
@@ -188,7 +166,6 @@ const RightSide = styled.div`
   ${({ theme }) => css`
     padding: 4rem 0 4rem 2rem;
     max-width: 35rem;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,22 +181,20 @@ const RightSide = styled.div`
       font-weight: ${theme.fonts.weights.medium};
     }
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin-bottom: 4rem;
-      padding-left: 0;
-      padding-top: 11rem;
-      padding-bottom: 0;
-
+      position: relative;
+      padding: 0;
       display: block;
+      margin-top: -7rem;
       p {
         margin-top: 1rem;
       }
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 3rem auto 3rem auto;
       margin-bottom: 0;
-
+      padding: 2rem;
       p {
         margin-bottom: 1.25rem;
         font-size: ${theme.fonts.sizes.s};

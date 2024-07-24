@@ -87,33 +87,34 @@ export function DoublePushCTA(
 }
 
 const StyledContentWrapper = styled(ContentWrapper)`
-  min-width: 100%;
-  padding: 0;
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+  ${({ theme }) => css`
+    min-width: 100%;
     padding: 0;
-  }
+    background-color: ${theme.colors.saumon};
+    margin-top: calc(var(--module-margin) * 2);
+    margin-bottom: calc(var(--module-margin) * 2);
+    @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
+      padding: 0;
+      margin-top: calc(var(--module-margin) * 8);
+      margin-bottom: calc(var(--module-margin) * 3);
+    }
+  `}
 `
 
 const Root = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.saumon};
     gap: 5.625rem;
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     position: relative;
-    margin: 0 -3.4rem;
-    margin-bottom: 3.4rem;
-
-    // margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
-    // margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
+    max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
+    margin: 0 auto;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: block;
       position: relative;
       padding: 0;
       margin: 0;
-      margin-top: 0;
-      // margin-top: 15.125rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -140,7 +141,6 @@ const CardContainer = styled.div`
     position: relative;
     z-index: 1;
     margin: -3.125rem 0;
-    margin-left: calc(var(--module-margin) + var(--module-margin) * 2);
     max-width: 28rem;
 
     span {
@@ -154,11 +154,9 @@ const CardContainer = styled.div`
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       margin: 0 auto;
       position: relative;
-      margin: 0 auto;
       min-width: 90%;
       min-height: 40%;
-      top: -10rem;
-      // left: 1.8rem;
+      top: -7rem;
       span {
         display: none;
       }
@@ -169,7 +167,6 @@ const CardContainer = styled.div`
       position: absolute;
       min-width: 90%;
       min-height: 40%;
-      // top: -7rem;
       left: 1.8rem;
     }
   `}
@@ -229,11 +226,11 @@ const RightSide = styled.div`
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding: 2rem;
       max-width: none;
+      margin-top: -7rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      padding-top: 12rem;
-      margin-top: -10rem;
+      margin-top: -7rem;
       padding-inline: 1.3rem;
     }
   `}
@@ -294,7 +291,6 @@ const MobileImage = styled.img`
   ${({ theme }) => css`
     display: none;
     width: 60%;
-    margin: 0 2rem;
     z-index: 1;
     position: relative;
     border-radius: ${theme.radius.sm};
@@ -305,7 +301,8 @@ const MobileImage = styled.img`
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
       margin: 0 auto;
-      max-width: 85%;
+      max-width: 50%;
+      top: -7rem;
     }
   `}
 `
