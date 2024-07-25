@@ -45,13 +45,15 @@ export function ExperienceVideoCarouselSlide(
 
 const Root = styled(Slide)<{ $isLandscape?: boolean }>`
   ${($isLandscape) => css`
-    min-width: ${$isLandscape ? '285px;' : '100%;'}
+    min-width: ${$isLandscape ? '17.8125rem;' : '100%;'}
       ${({ theme }) => css`
     .inner {
-      margin-right: 1rem;
+        margin-right: 1rem;
+        margin-left: 1rem;
       
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
+        margin-left: 0;
       }
   }}
   `};
