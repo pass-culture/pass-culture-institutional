@@ -7,6 +7,7 @@ import { PATHS } from '@/domain/pages/pages.path'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
+import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
 import { CulturalActorsHelpProps } from '@/types/props'
@@ -36,7 +37,7 @@ export default function CulturalActorsHelp({
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
-
+      <Separator isActive={false} />
       <DoublePushCTA
         title={cardText.title}
         text={cardText.text}
@@ -44,7 +45,7 @@ export default function CulturalActorsHelp({
         image={cardText.image}
         secondCta={cardText.secondCta}
       />
-
+      <Separator isActive={false} />
       <SimplePushCta
         title={simplepushcta.title}
         surtitle={simplepushcta.surtitle}

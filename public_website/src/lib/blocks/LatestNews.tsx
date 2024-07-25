@@ -47,7 +47,7 @@ export function LatestNews(props: LatestNewsProps) {
 
   return (
     <Root className={className}>
-      <HeadingWrapper $noMargin>
+      <HeadingWrapper>
         <StyledHeading>{title}</StyledHeading>
       </HeadingWrapper>
       <ListWrapper $noMargin>
@@ -100,7 +100,7 @@ const Root = styled(ContentWrapper)`
   }
 `
 
-const HeadingWrapper = styled(ContentWrapper)`
+const HeadingWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
 `

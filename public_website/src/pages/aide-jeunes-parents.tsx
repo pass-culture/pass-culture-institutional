@@ -7,6 +7,7 @@ import { PATHS } from '@/domain/pages/pages.path'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
+import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
@@ -38,7 +39,7 @@ export default function Help({ helpData }: HelpProps) {
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
-
+      <Separator isActive={false} />
       <DoublePushCTA
         title={cardText.title}
         text={cardText.text}
@@ -47,7 +48,7 @@ export default function Help({ helpData }: HelpProps) {
         secondCta={cardText.secondCta}
         icon={cardText.icon}
       />
-
+      <Separator isActive={false} />
       <SimplePushCta
         title={simplepushcta.title}
         surtitle={simplepushcta.surtitle}
