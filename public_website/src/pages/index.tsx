@@ -96,10 +96,6 @@ export default function Home({
         cta={homeData.attributes.latestStudies.cta}
       />
       <Separator isActive={false} />
-      {/* <StyledSocialMedia
-        title={socialMediaSection.title}
-        socialMediaLink={socialMediaSection.socialMediaLink}
-      /> */}
     </PageLayout>
   )
 }

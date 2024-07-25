@@ -88,7 +88,6 @@ const StyledContentWrapper = styled.section`
     padding: 0;
     margin-top: calc(var(--module-margin) * 8);
     margin-bottom: calc(var(--module-margin) * 3);
-    // display:none!important;
   }
   @media (width < ${theme.mediaQueries.largeDesktop}) {
     display: flex;
