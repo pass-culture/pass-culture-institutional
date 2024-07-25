@@ -1,7 +1,6 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
@@ -9,6 +8,7 @@ import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
+import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
@@ -36,8 +36,6 @@ export default function TeachersHelp({
       />
       <Breadcrumb isUnderHeader />
 
-      <StyledSpacer />
-
       <Faq
         title={faq.title}
         cta={faq.cta}
@@ -45,12 +43,13 @@ export default function TeachersHelp({
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
-
+      <Separator isActive={false} />
       <LatestNews
         news={latestStudies}
         title={data.attributes.latestStudies.title}
         cta={data.attributes.latestStudies.cta}
       />
+      <Separator isActive={false} />
       <DoublePushCTA
         title={cardText.title}
         text={cardText.text}
@@ -59,7 +58,7 @@ export default function TeachersHelp({
         secondCta={cardText.secondCta}
         icon={cardText.icon}
       />
-
+      <Separator isActive={false} />
       <SimplePushCta
         title={simplepushcta.title}
         surtitle={simplepushcta.surtitle}
@@ -101,7 +100,6 @@ export const getStaticProps = (async () => {
     helpQuery
   )) as APIResponseData<'api::help-teachers.help-teachers'>
 
-  // Fetch 3 latest studies
   const latestStudiesQuery = stringify({
     sort: ['date:desc'],
     populate: ['image'],
@@ -110,12 +108,12 @@ export const getStaticProps = (async () => {
     },
     filters: {
       category: {
-        $eqi: 'Étude',
+        $eqi: ['Étude ponctuelle', 'Étude ritualisée'],
       },
     },
   })
   const latestStudies = (await Pages.getPage(
-    PATHS.NEWS,
+    PATHS.RESOURCES,
     latestStudiesQuery
   )) as APIResponseData<'api::news.news'>[]
 
@@ -126,13 +124,3 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<TeachersHelpProps>
-
-const StyledSpacer = styled.div`
-  margin-bottom: var(--module-spacing);
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
-      padding-top: 0;
-      margin-bottom: 0;
-    }
-  `}
-`
