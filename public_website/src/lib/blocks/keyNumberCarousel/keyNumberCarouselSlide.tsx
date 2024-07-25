@@ -49,6 +49,8 @@ const Root = styled(Slide)`
       @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 1rem;
         margin-left: 1rem;
+        padding-left: 1.875rem;
+        padding-right: 1.875rem;
       }
     }
   `}

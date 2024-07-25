@@ -23,11 +23,11 @@ export function Recommendations(props: RecommendationsProps) {
       <VerticalCarousel
         title={title}
         items={verticalCarouselItems}
-        hidePlayIcon
-      />
-      <StyledCtaWrapper>
-        <ButtonWithCTA cta={cta} />
-      </StyledCtaWrapper>
+        hidePlayIcon>
+        <StyledCtaWrapper>
+          <ButtonWithCTA cta={cta} />
+        </StyledCtaWrapper>
+      </VerticalCarousel>
     </Root>
   )
 }

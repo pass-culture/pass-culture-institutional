@@ -186,10 +186,10 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     position: relative;
     width: 100%;
-    min-height: 500px;
+    min-height: 31.25rem;
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: calc(var(--module-margin) * 2);
-
+      min-height: 24.0625rem;
       span:nth-child(1) {
         display: none;
       }
