@@ -140,6 +140,9 @@ const CardContainer = styled.div`
       display: none;
     }
   }
+  @media (width < ${theme.mediaQueries.mobile}) {
+    min-width: 100%;
+  }
 `
 
 const Card = styled.div<{ $imageUrl?: string }>`
@@ -157,6 +160,11 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       width: 23rem;
+      padding: 0;
+      margin: 0 auto;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      width: 18rem;
       padding: 0;
       margin: 0 auto;
     }
