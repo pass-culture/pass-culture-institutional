@@ -100,6 +100,7 @@ const Root = styled(ContentWrapper)`
         margin-left: -45%;
         left: 50%;
         z-index: 0;
+        border-radius: ${theme.radius.sm};
       }
     }
   `}
@@ -146,8 +147,7 @@ const QRCodeCard = styled.div`
     display: flex;
     align-items: center;
     gap: 2rem;
-    border-radius: 1rem;
-
+    border-radius: ${theme.radius.sm};
     box-shadow: ${theme.shadows.sticker};
 
     p {

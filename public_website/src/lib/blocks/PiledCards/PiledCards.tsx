@@ -97,7 +97,7 @@ export function PiledCards(props: PiledCardsProps) {
               // @ts-expect-error //main pull
               ref={(el) => (itemRefs.current[index] = el)}
               $itemTheme={item.theme}
-              aria-label={`Card ${index + 1}`}>
+              aria-label={`Diapositive ${index + 1}`}>
               <StyledImageWrapper>
                 <StyledImage
                   src={item.image?.data?.attributes?.url}
@@ -168,7 +168,7 @@ const StyledContentListItems = styled.li<{
     background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 30rem;
     border-radius: ${theme.radius.sm};
-    box-shadow: -0.25rem 0.5rem 1.5rem 0px ${theme.colors.black + '22'};
+    box-shadow: -0.25rem 0.5rem 1.5rem 0 ${theme.colors.black + '22'};
     position: sticky;
     top: 2rem;
     display: grid;
@@ -195,6 +195,7 @@ const StyledContentTextWrapper = styled.div`
     h3 {
       font-size: ${theme.fonts.sizes['6xl']};
       font-weight: 700;
+      color: ${theme.colors.secondary};
     }
 
     p {

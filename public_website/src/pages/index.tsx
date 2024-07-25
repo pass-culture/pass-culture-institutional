@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
 import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
-import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
+import { PushCTA } from '@/lib/blocks/PushCTA'
 import { Separator } from '@/lib/blocks/Separator'
 import PageLayout from '@/lib/PageLayout'
 import { Offer } from '@/types/playlist'
@@ -50,8 +50,6 @@ export default function Home({
           fifthEmoji={heroSection.fifthEmoji}
           sixthEmoji={heroSection.sixthEmoji}
           images={
-            // There seem to be a bug with the `strapi.ts` helper file.
-            // See https://github.com/PaulBratslavsky/strapi-next-js-no-types/issues/1#issuecomment-1812900338
             heroSection.images
               ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
           }
@@ -73,7 +71,7 @@ export default function Home({
         cardSecondEmoji={eligibilitySection.secondEmoji}
       />
       <Separator isActive={false} />
-      <StyledCTASection
+      <PushCTA
         title={CTASection.title}
         description={CTASection.description}
         image={CTASection.image}
@@ -90,7 +88,7 @@ export default function Home({
         />
       </BlockRendererWithCondition>
       <Separator isActive={false} />
-      <StyledLatestStudiesSection
+      <LatestStudiesSection
         news={latestStudies}
         title={homeData.attributes.latestStudies.title}
         cta={homeData.attributes.latestStudies.cta}
@@ -130,7 +128,6 @@ export const getStaticProps = (async () => {
     `/home?${query}`
   )
 
-  /// Fetch 3 latest studies
   const latestStudiesQuery = stringify({
     sort: ['date:desc'],
     populate: ['image'],
@@ -147,7 +144,6 @@ export const getStaticProps = (async () => {
     APIResponseData<'api::resource.resource'>[]
   >(`/resources?${latestStudiesQuery}`)
 
-  // Fetch recommandation items
   const recommendationTag =
     data.attributes.recommendationsSection.recommendationsBackendTag
   const recommendationItems = (await fetchBackend(
@@ -176,20 +172,6 @@ const StyledHomeGradient = styled.section`
       padding-top: 7rem;
       margin-bottom: -5rem;
       height: calc(100vh - 6.75rem);
-    }
-  `}
-`
-
-const StyledCTASection = styled(CTASection)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
-    }
-  `}
-`
-
-const StyledLatestStudiesSection = styled(LatestStudiesSection)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.mobile}) {
     }
   `}
 `

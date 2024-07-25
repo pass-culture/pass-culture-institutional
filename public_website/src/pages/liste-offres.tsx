@@ -10,7 +10,6 @@ import { Header } from '@/lib/blocks/Header'
 import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import PageLayout from '@/lib/PageLayout'
 import { Offer } from '@/types/playlist'
 import {
@@ -66,7 +65,6 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
       />
 
       <Separator isActive={separatorIsActive(separator)} />
-      <WhiteSpace space={0} />
       <BlockRendererWithCondition
         condition={!!offres_culturelles && offres_culturelles.items.length > 0}>
         <OffersCarousel {...(offres_culturelles as OffersVideoCarouselProps)} />

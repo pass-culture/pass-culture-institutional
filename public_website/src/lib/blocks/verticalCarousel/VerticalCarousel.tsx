@@ -18,8 +18,10 @@ import { stripTags } from '@/utils/stripTags'
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function VerticalCarousel(props: VerticalCarouselProps) {
-  const { title, items, hidePlayIcon } = props
+export function VerticalCarousel(
+  props: VerticalCarouselProps & { children?: React.ReactNode }
+) {
+  const { title, items, hidePlayIcon, children } = props
 
   const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
@@ -111,6 +113,7 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
             />
           </BlockRendererWithCondition>
         </CarouselProvider>
+        {!!children && children}
       </StyledContainer>
     </StyledBackgroundExperienceVideoCarousel>
   )
@@ -127,8 +130,8 @@ const StyledContainer = styled(ContentWrapper)`
   padding-top: 5rem;
   padding-bottom: 5rem;
   @media (width < ${theme.mediaQueries.mobile}) {
-    padding-top: 3.125rem;
-    padding-bottom:  3.125rem;
+    padding-top:1.875rem;
+    padding-bottom:1.875rem;
   }
   }
   `}

@@ -103,9 +103,6 @@ const StyledFirstIcon = styled(OutlinedText)`
     left: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(-1rem, 2rem);
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: none;
-    }
   `}
 `
 
@@ -116,9 +113,6 @@ const StyledSecondIcon = styled(OutlinedText)`
     right: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(1rem, -3rem);
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      display: none;
-    }
   `}
 `
 const StyledOffersSurtitle = styled.h2`
