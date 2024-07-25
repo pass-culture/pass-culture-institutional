@@ -10,8 +10,7 @@ import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { Seo } from '@/lib/seo/seo'
+import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
@@ -28,8 +27,7 @@ export default function TeachersHelp({
     data.attributes
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
+    <PageLayout seo={seo} title={undefined} socialMediaSection={social}>
       <Header
         title={heroSection?.title}
         text={heroSection?.text}
@@ -69,12 +67,7 @@ export default function TeachersHelp({
         cta={simplepushcta.cta}
         icon={simplepushcta.icon}
       />
-
-      <SocialMedia
-        title={social.title}
-        socialMediaLink={social.socialMediaLink}
-      />
-    </React.Fragment>
+    </PageLayout>
   )
 }
 

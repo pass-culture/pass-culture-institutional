@@ -85,9 +85,6 @@ const Root = styled.div`
       }
 
       .left {
-        // grid-template-areas: 'first second';
-        // grid-template-columns: 1.5fr 1fr;
-
         .IconLeft {
           top: 3rem;
           right: -5%;
@@ -206,6 +203,12 @@ const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
       height: 40%;
       width: 120%;
       z-index: -1;
+
+      @media (width < ${theme.mediaQueries.mobile}) {
+        width: 150%;
+        left: -1.5rem;
+        border-radius: 0;
+      }
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {

@@ -81,7 +81,6 @@ const StyledCard = styled.div`
     container-type: inline-size;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      border-radius: 1.5rem;
       padding: 2rem 1rem;
     }
 
@@ -134,8 +133,6 @@ const StyledListContainer = styled.div`
     padding: 3.25rem 3rem;
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      border-radius: 1.5rem;
-
       padding: 2.5rem 2rem;
     }
   `}

@@ -14,27 +14,21 @@ import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
+import PageLayout from '@/lib/PageLayout'
 import { StyledSocialMedia, StyledTitle } from '@/theme/style'
+import { ListPressProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { Typo } from '@/ui/components/typographies'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
-
-interface ListProps {
-  resourcesData: APIResponseData<'api::resource.resource'>[]
-  presseListe: APIResponseData<'api::presse.presse'>
-  eventsData: APIResponseData<'api::event.event'>[]
-}
 
 export default function Presse({
   resourcesData,
   presseListe,
   eventsData,
-}: ListProps) {
+}: ListPressProps) {
   const {
     seo,
     title,
@@ -180,9 +174,7 @@ export default function Presse({
   const hasEventData = eventData.length > 0
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -266,15 +258,13 @@ export default function Presse({
           />
         )}
       </StyledSimplePushCta>
-      {socialMediaSection &&
-        socialMediaSection.title &&
-        socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={socialMediaSection.title}
-            socialMediaLink={socialMediaSection.socialMediaLink}
-          />
-        )}
-    </React.Fragment>
+      {!!socialMediaSection && (
+        <StyledSocialMedia
+          title={socialMediaSection.title}
+          socialMediaLink={socialMediaSection.socialMediaLink}
+        />
+      )}
+    </PageLayout>
   )
 }
 
@@ -351,13 +341,12 @@ export const getStaticProps = (async () => {
       eventsData: events,
     },
   }
-}) satisfies GetStaticProps<ListProps>
+}) satisfies GetStaticProps<ListPressProps>
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;
 `
 const StyledListItems = styled(ListItems)`
-  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
@@ -365,15 +354,6 @@ const StyledListItems = styled(ListItems)`
   }
 `
 
-const StyledeventListItems = styled(EventListItems)`
-  // margin-top: 3rem;
-  // margin-bottom: 3rem;
+const StyledeventListItems = styled(EventListItems)``
 
-  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
-    // margin-top: 1.5rem;
-  }
-`
-
-const StyledSimplePushCta = styled.div`
-  // margin-top: 17rem;
-`
+const StyledSimplePushCta = styled.div``

@@ -11,18 +11,13 @@ import { RessourceItems } from '@/lib/blocks/ResourceItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia } from '@/theme/style'
+import PageLayout from '@/lib/PageLayout'
+import { ListRessourcesProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 
-interface ListProps {
-  ressourcesData: APIResponseData<'api::ressourcepass.ressourcepass'>[]
-  ressourcesPassCultureListe: APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
-}
 const newsQuery = stringify({
   populate: [
     'title',
@@ -59,7 +54,7 @@ const getRessourcesQuery = (category: string[]) => {
 export default function RessourcesPassCulture({
   ressourcesData,
   ressourcesPassCultureListe,
-}: ListProps) {
+}: ListRessourcesProps) {
   const {
     seo,
     title,
@@ -108,9 +103,7 @@ export default function RessourcesPassCulture({
   }, [category])
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -140,16 +133,7 @@ export default function RessourcesPassCulture({
           icon={etudes.icon}
         />
       )}
-
-      {socialMediaSection &&
-        socialMediaSection.title &&
-        socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={socialMediaSection.title}
-            socialMediaLink={socialMediaSection.socialMediaLink}
-          />
-        )}
-    </React.Fragment>
+    </PageLayout>
   )
 }
 
@@ -170,7 +154,7 @@ export const getStaticProps = (async () => {
       ressourcesPassCultureListe: ressourcesPage,
     },
   }
-}) satisfies GetStaticProps<ListProps>
+}) satisfies GetStaticProps<ListRessourcesProps>
 
 const StyledListItems = styled(RessourceItems)``
 

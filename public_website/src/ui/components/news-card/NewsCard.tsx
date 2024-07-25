@@ -11,7 +11,7 @@ export function NewsCard(props: NewsCardProps) {
 
   return (
     <Root>
-      {imageUrl && (
+      {!!imageUrl && (
         <StyledImage src={imageUrl} alt="" width={385} height={310} />
       )}
       <StyledMeta id={`news-meta-${slug}`}>
@@ -30,12 +30,9 @@ export function NewsCard(props: NewsCardProps) {
 const Root = styled.article`
   ${({ theme }) => css`
     position: relative;
-    // width: 24rem;
-
     max-width: 24rem;
     width: 100%;
     @media (width < ${theme.mediaQueries.mobile}) {
-      //  width: 75vw;
       width: 100%;
       max-width: 100%;
     }

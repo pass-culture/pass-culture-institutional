@@ -39,7 +39,7 @@ const StyledNavigationButtons = styled.div`
     button {
       background-color: ${theme.colors.white};
       box-shadow: ${theme.shadows.buttonCircular};
-      border: 1px solid #90949d;
+      border: 0.0625rem solid #90949d;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       border-radius: 50%;
       display: flex;
@@ -53,7 +53,7 @@ const StyledNavigationButtons = styled.div`
         opacity: 0.5;
       }
       &:active {
-        outline: 2px solid ${theme.colors.primary};
+        outline: 0.125rem solid ${theme.colors.primary};
       }
 
       svg {
@@ -69,12 +69,12 @@ const StyledNavigationButtons = styled.div`
     }
     button:not([disabled]):nth-child(1):hover {
       svg {
-        transform: translateX(-5px) rotate(180deg);
+        transform: translateX(-0.3125rem) rotate(180deg);
       }
     }
     button:not([disabled]):nth-child(2):hover {
       svg {
-        transform: translateX(5px) rotate(0deg);
+        transform: translateX(0.3125rem) rotate(0deg);
       }
     }
   `}

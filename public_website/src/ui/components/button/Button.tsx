@@ -62,9 +62,9 @@ function getFocusOutlineColor(variant?: ButtonVariants) {
   switch (variant) {
     case 'secondary':
     case 'tertiary':
-      return `outline: 2px solid ${theme.colors.white}`
+      return `outline: 0.125rem solid ${theme.colors.white}`
     default:
-      return `outline: 2px solid ${theme.colors.primary}`
+      return `outline: 0.125rem solid ${theme.colors.primary}`
   }
 }
 function getHoverBackgroundColor(variant?: ButtonVariants) {
@@ -87,10 +87,12 @@ const StyledButton = styled.button<{ $variant: ButtonVariants }>`
       ? getVariantButtonBackground($variant)
       : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
 
-    ${$variant !== 'primary' && `border: 1px solid ${theme.colors.white};`}
+    ${$variant !== 'primary' &&
+    `border: 0.0625rem solid ${theme.colors.white};`}
 
-    ${$variant === 'quaternary' && `border: 1px solid ${theme.colors.purple};`}
-    outline-offset: 2px;
+    ${$variant === 'quaternary' &&
+    `border: 0.0625rem solid ${theme.colors.purple};`}
+    outline-offset: 0.0625rem;
     transition: all 0.4s ease-in-out;
     &:active {
       ${$variant === 'tertiary' &&

@@ -59,7 +59,7 @@ export function DoublePushCTA(
               <CtaLink
                 href={firstCta.URL}
                 onClick={(): void => {
-                  firstCta?.eventName && firstCta?.eventOrigin
+                  !!firstCta.eventName && !!firstCta.eventOrigin
                     ? onClickAnalytics({
                         eventName: firstCta?.eventName,
                         eventOrigin: firstCta?.eventOrigin,
@@ -97,6 +97,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
       padding: 0;
       margin-top: calc(var(--module-margin) * 8);
       margin-bottom: calc(var(--module-margin) * 3);
+      overflow: visible;
     }
   `}
 `

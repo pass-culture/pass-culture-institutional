@@ -207,7 +207,7 @@ const StyledMegaMenuLists = styled.div`
     &::after {
       content: '';
       height: 100%;
-      width: 1px;
+      width: 0.0625rem;
       background-color: ${theme.colors.black};
       opacity: 0.2;
       position: absolute;

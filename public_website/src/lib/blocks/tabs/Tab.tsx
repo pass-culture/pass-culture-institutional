@@ -39,8 +39,8 @@ const StyledTabLi = styled.li`
 `
 const StyledTabButton = styled.button`
   ${({ theme }) => css`
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 0.625rem;
+    margin-right: 0.625rem;
     border: none;
     border-bottom: 0.0625rem solid transparent;
     font-size: ${theme.fonts.sizes['xl']};

@@ -90,7 +90,6 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
           )
         })}
       </StyledSlider>
-
       <BlockRendererWithCondition
         condition={isNavShowing && width < MOBILE_WIDTH}>
         <NavigationWithDots
@@ -109,7 +108,6 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     display: flex;
     justify-content: space-between;
     background-color: ${theme.colors.lightBlue};
-
     padding: 3.5rem 0;
     margin: auto;
     margin-bottom: var(--module-margin);
@@ -118,7 +116,6 @@ const StyledCarouselProvider = styled(CarouselProvider)`
     @media (max-width: ${theme.mediaQueries.mobile}) {
       padding: 0;
       flex-direction: column;
-      margin: 0 auto;
       padding-bottom: 2.8rem;
     }
   `}

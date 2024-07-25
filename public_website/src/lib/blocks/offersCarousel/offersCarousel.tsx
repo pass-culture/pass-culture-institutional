@@ -8,7 +8,6 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
 import { OffersVideoCarouselProps } from '@/types/props'
-import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
@@ -72,7 +71,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       touchEnabled
       infinite={false}
       step={1}>
-      <StyledHeading $noMargin>
+      <StyledHeading>
         <Typo.Heading2>{title}</Typo.Heading2>
 
         <BlockRendererWithCondition condition={!descriptionIsEmpty}>
@@ -141,7 +140,7 @@ const StyledCarousel = styled(CarouselProvider)`
   `}
 `
 
-const StyledHeading = styled(ContentWrapper)`
+const StyledHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
@@ -162,6 +161,11 @@ const StyledHeading = styled(ContentWrapper)`
       color: ${theme.colors.primary};
       text-decoration: underline;
     }
+    margin: 0px auto;
+    position: relative;
+    max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding-right: 0;
@@ -175,6 +179,9 @@ const StyledSlider = styled(Slider)`
 
   @media (width < ${(p) => p.theme.mediaQueries.largeDesktop}) {
     padding: 3.5rem 0;
+  }
+  @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
+    padding: 0;
   }
 `
 

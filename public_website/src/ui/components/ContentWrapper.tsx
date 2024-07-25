@@ -11,6 +11,7 @@ export const ContentWrapper = styled.section<{
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-top: var(--module-margin);
       margin-bottom: var(--module-margin);
+      overflow: hidden;
     }
   `}
   ${(p) => {

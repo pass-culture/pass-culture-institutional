@@ -29,7 +29,7 @@ const StyledAccountItem = styled.li`
     &[aria-hidden] {
       background-color: ${theme.colors.black};
       opacity: 0.2;
-      height: 1px;
+      height: 0.0625rem;
       width: 100%;
     }
 

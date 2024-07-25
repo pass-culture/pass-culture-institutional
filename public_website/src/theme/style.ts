@@ -19,6 +19,16 @@ import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { theme } from '@/theme/theme'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
+export const PageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    width: 100%;
+    box-sizing: border-box;
+  }
+`
+
 export const CARD_BACKGROUNDS: Record<ItemsTheme, string> = {
   aquamarine: theme.colors.aquamarine,
   gold: theme.colors.gold,

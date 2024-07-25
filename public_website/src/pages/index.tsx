@@ -8,8 +8,7 @@ import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
 import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
 import { PushCTA as CTASection } from '@/lib/blocks/PushCTA'
 import { Separator } from '@/lib/blocks/Separator'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia } from '@/theme/style'
+import PageLayout from '@/lib/PageLayout'
 import { Offer } from '@/types/playlist'
 import { HomeProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
@@ -35,8 +34,10 @@ export default function Home({
   } = homeData.attributes
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
+    <PageLayout
+      seo={seo}
+      title={undefined}
+      socialMediaSection={socialMediaSection}>
       <StyledHomeGradient>
         <HeroSection
           title={heroSection.title}
@@ -95,11 +96,7 @@ export default function Home({
         cta={homeData.attributes.latestStudies.cta}
       />
       <Separator isActive={false} />
-      <StyledSocialMedia
-        title={socialMediaSection.title}
-        socialMediaLink={socialMediaSection.socialMediaLink}
-      />
-    </React.Fragment>
+    </PageLayout>
   )
 }
 

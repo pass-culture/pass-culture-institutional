@@ -44,7 +44,7 @@ const Root = styled.div<{ $noMargin?: boolean }>`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 1000px;
+    max-width: 62.5rem;
     margin: 0 auto;
 
     ${$noMargin &&

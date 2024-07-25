@@ -10,12 +10,10 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia } from '@/theme/style'
+import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -108,9 +106,7 @@ export default function RessourcesEnseignants({
   const hasData = data.length > 0
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <UnpaddedBreadcrumb />
       {hasData && (
         <React.Fragment>
@@ -136,7 +132,7 @@ export default function RessourcesEnseignants({
 
       <Separator isActive={separatorIsActive(separator)} />
 
-      {aide && (
+      {!!aide && (
         <SimplePushCta
           title={aide.title}
           image={aide.image}
@@ -145,16 +141,7 @@ export default function RessourcesEnseignants({
           icon={aide.icon}
         />
       )}
-
-      {socialMediaSection &&
-        socialMediaSection.title &&
-        socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            title={socialMediaSection.title}
-            socialMediaLink={socialMediaSection.socialMediaLink}
-          />
-        )}
-    </React.Fragment>
+    </PageLayout>
   )
 }
 
@@ -212,9 +199,7 @@ export const getStaticProps = (async () => {
   }
 }) satisfies GetStaticProps<ListProps>
 
-const StyledListItems = styled(ListItems)`
-  // margin-top: 3rem;
-`
+const StyledListItems = styled(ListItems)``
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;

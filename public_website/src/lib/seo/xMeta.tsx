@@ -3,11 +3,10 @@ import Head from 'next/head'
 
 import { BaseTextProps, XMetaProps } from '@/types/props'
 import { getStrapiURL } from '@/utils/apiHelpers'
-import { isRenderable } from '@/utils/isRenderable'
 
 export function XMeta(props: XMetaProps & BaseTextProps) {
   const { title, description, image } = props
-  const url = isRenderable(image?.data.attributes.url)
+
   return (
     <Head>
       <meta key="twitter:title" property="twitter:title" content={title} />
@@ -17,7 +16,7 @@ export function XMeta(props: XMetaProps & BaseTextProps) {
         property="twitter:description"
         content={description}
       />
-      {image && url && (
+      {!!image && (
         <meta
           property="twitter:image"
           content={getStrapiURL(image.data.attributes.url)}

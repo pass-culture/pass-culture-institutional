@@ -133,9 +133,11 @@ const Root = styled(ContentWrapper)`
     @media (width < ${theme.mediaQueries.mobile}) {
       display: none;
     }
-
     p {
       color: ${theme.colors.black};
+    }
+    p:first-child {
+      color: ${theme.colors.secondary};
     }
   `}
 `
@@ -166,7 +168,7 @@ const StyledContentListItems = styled.li<{
     background: ${CARD_BACKGROUNDS[$itemTheme]};
     height: 30rem;
     border-radius: ${theme.radius.sm};
-    box-shadow: -4px 8px 24px 0px ${theme.colors.black + '22'};
+    box-shadow: -0.25rem 0.5rem 1.5rem 0px ${theme.colors.black + '22'};
     position: sticky;
     top: 2rem;
     display: grid;
@@ -226,12 +228,11 @@ const StyledButton = styled.button<{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
-    outline-offset: 2px;
+    outline-offset: 0.125rem;
     z-index: 1000;
     transform: translateY(0) rotate(0deg);
     background-color: ${theme.colors.white};
-    border: 1px solid #90949d;
+    border: 0.0625rem solid #90949d;
     ${$isReverse && 'transform:translateY(0) rotate(180deg)'};
     &:disabled {
       opacity: 0.5;
@@ -245,18 +246,18 @@ const StyledButton = styled.button<{
     ${$isReverse &&
     `&:hover {
       svg {
-        transform: translateY(-5px) rotate(0deg);
+        transform: translateY(-0.3125rem) rotate(0deg);
       }
     }`}
 
     &:hover {
       svg {
-        transform: translateY(5px) rotate(0deg);
+        transform: translateY(0.3125rem) rotate(0deg);
       }
     }
 
     &:active {
-      outline: 2px solid ${theme.colors.darkGray};
+      outline: 0.125rem solid ${theme.colors.darkGray};
     }
   `}
 `

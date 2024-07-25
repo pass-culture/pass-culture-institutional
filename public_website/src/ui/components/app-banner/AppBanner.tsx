@@ -32,7 +32,7 @@ export function AppBanner(props: AppBannerProps) {
 const StyledAppBanner = styled(Link)`
   ${({ theme }) => css`
     box-sizing: border-box;
-    min-height: 156px;
+    min-height: 9.75rem;
     grid-column: 1 / -1;
     justify-self: stretch;
     padding: 1.5rem 2rem;
@@ -51,8 +51,8 @@ const StyledAppBanner = styled(Link)`
     box-shadow: ${theme.shadows.banner};
     display: flex;
     align-items: center;
-    border: 1px solid #cbcdd2;
-    border: 1px solid #cbcdd2;
+    border: 0.0625rem solid #cbcdd2;
+    border: 0.0625rem solid #cbcdd2;
 
     p {
       color: ${theme.colors.black};

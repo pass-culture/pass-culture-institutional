@@ -11,12 +11,10 @@ import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia } from '@/theme/style'
+import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -115,9 +113,7 @@ export default function EtudesPassCulture({
   const hasData = data.length > 0
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -146,7 +142,7 @@ export default function EtudesPassCulture({
       </React.Fragment>
 
       <Separator isActive={separatorIsActive(separator)} />
-      {observatoire && (
+      {!!observatoire && (
         <SimplePushCta
           surtitle={observatoire?.surtitle}
           title={observatoire.title}
@@ -155,15 +151,7 @@ export default function EtudesPassCulture({
           cta={observatoire?.cta}
         />
       )}
-      {socialMediaSection &&
-        socialMediaSection.title &&
-        socialMediaSection.socialMediaLink && (
-          <StyledSocialMedia
-            socialMediaLink={socialMediaSection.socialMediaLink}
-            title={socialMediaSection.title}
-          />
-        )}
-    </React.Fragment>
+    </PageLayout>
   )
 }
 

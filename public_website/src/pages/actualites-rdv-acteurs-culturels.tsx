@@ -12,28 +12,21 @@ import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia, StyledTitle } from '@/theme/style'
-import { PushCTAProps, SocialMediaProps } from '@/types/props'
+import PageLayout from '@/lib/PageLayout'
+import { StyledTitle } from '@/theme/style'
+import { ListOffresProps, PushCTAProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { Typo } from '@/ui/components/typographies'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
-
-interface ListProps {
-  newsRDVData: APIResponseData<'api::news.news'>[]
-  listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
-  eventsData: APIResponseData<'api::event.event'>[]
-}
 
 export default function ListeActuCulturels({
   newsRDVData,
   listeActuCulturel,
   eventsData,
-}: ListProps) {
+}: ListOffresProps) {
   const {
     seo,
     title,
@@ -41,7 +34,7 @@ export default function ListeActuCulturels({
     separator,
     titleEventSection,
     aide,
-    socialMediaSection = [],
+    socialMediaSection,
     filtres,
   } = listeActuCulturel.attributes
 
@@ -189,9 +182,7 @@ export default function ListeActuCulturels({
   const hasEventData = eventData.length > 0
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -216,7 +207,7 @@ export default function ListeActuCulturels({
       <Separator isActive={separatorIsActive(separator)} />
 
       <StyledTitle>
-        {titleEventSection && (
+        {!!titleEventSection && (
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
       </StyledTitle>
@@ -242,8 +233,7 @@ export default function ListeActuCulturels({
       )}
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
-    </React.Fragment>
+    </PageLayout>
   )
 }
 
@@ -310,10 +300,9 @@ export const getStaticProps = (async () => {
       eventsData: events,
     },
   }
-}) satisfies GetStaticProps<ListProps>
+}) satisfies GetStaticProps<ListOffresProps>
 
 const StyledListItems = styled(ListItems)`
-  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
@@ -321,9 +310,6 @@ const StyledListItems = styled(ListItems)`
   }
 `
 const StyledeventListItems = styled(EventListItems)`
-  // margin-top: 3rem;
-  // margin-bottom: 3rem;
-
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-top: 1.5rem;
   }

@@ -99,10 +99,10 @@ const StyledListItem = styled.li`
       background: ${theme.colors.secondary};
       transform: rotate(4deg);
 
-      outline-offset: 2px;
+      outline-offset: 0.125rem;
 
       &:active {
-        outline: 2px solid ${theme.colors.secondary};
+        outline: 0.125rem solid ${theme.colors.secondary};
       }
 
       svg {

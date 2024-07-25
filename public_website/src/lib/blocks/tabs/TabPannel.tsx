@@ -26,6 +26,5 @@ export default TabPanel
 const StyledTabPanelSection = styled.section<{
   $isHidden?: boolean
 }>`
-  margin: 0.5rem;
   ${(p) => (p.$isHidden ? 'display:none' : 'display:block')}
 `

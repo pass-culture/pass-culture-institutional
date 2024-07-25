@@ -8,14 +8,10 @@ import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { Seo } from '@/lib/seo/seo'
+import PageLayout from '@/lib/PageLayout'
+import { CulturalActorsHelpProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-
-interface CulturalActorsHelpProps {
-  helpData: APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
-}
 
 export default function CulturalActorsHelp({
   helpData,
@@ -24,8 +20,7 @@ export default function CulturalActorsHelp({
     helpData.attributes
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
+    <PageLayout seo={seo} title={undefined} socialMediaSection={social}>
       <Header
         title={heroSection?.title}
         text={heroSection?.text}
@@ -57,12 +52,7 @@ export default function CulturalActorsHelp({
         image={simplepushcta.image}
         icon={simplepushcta.icon}
       />
-
-      <SocialMedia
-        socialMediaLink={social.socialMediaLink}
-        title={social.title}
-      />
-    </React.Fragment>
+    </PageLayout>
   )
 }
 

@@ -16,16 +16,15 @@ export function OrganizationChart(props: OrganizationChartProps) {
       <BlockRendererWithCondition condition={isRenderable(title)}>
         <StyledHeading>{title as string}</StyledHeading>
       </BlockRendererWithCondition>
-
       <StyledDescription>{description}</StyledDescription>
       <StyledList>
         {people?.map((person) => {
           return (
             <StyledPerson key={person.name}>
-              {person.image && (
+              {!!person.image && (
                 <StyledImage
                   src={person.image?.data.attributes.url}
-                  alt=""
+                  alt={person.image?.data.attributes.name}
                   width={person.image?.data.attributes.width}
                   height={person.image?.data.attributes.height}
                 />

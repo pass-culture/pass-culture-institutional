@@ -59,7 +59,7 @@ export function LittleList(props: LittleListProps) {
               {isMobile ? (
                 <ColumnText
                   className={isOpen(index) ? 'open' : ''}
-                  onClick={() => clickHandler(index)}>
+                  onClick={(): void => clickHandler(index)}>
                   <p>{item.text}</p>
                   {isOpen(index)
                     ? item.description && <p>{item.description}</p>
