@@ -77,12 +77,12 @@ const Root = styled(ContentWrapper)`
       color: ${theme.colors.primary}!important;
       text-decoration: underline;
       font-weight: 600;
-      outline-offset: 10px;
+      outline-offset: 0.625rem;
       &:hover {
         text-decoration: none;
       }
       &:focus {
-        outline: 2px solid ${theme.colors.primary};
+        outline: 0.125rem solid ${theme.colors.primary};
       }
     }
 

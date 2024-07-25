@@ -76,8 +76,11 @@ const Card = styled.div`
   background: var(--card-background);
 
   @media (width < ${theme.mediaQueries.largeDesktop}) {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     width: calc(100% - 2rem);
+  }
+  @media (width < ${theme.mediaQueries.mobile}) {
+    height: 12rem;
   }
 `
 
@@ -100,7 +103,6 @@ const StyledFirstIcon = styled(OutlinedText)`
     left: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(-1rem, 2rem);
-
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
@@ -114,7 +116,6 @@ const StyledSecondIcon = styled(OutlinedText)`
     right: 0;
     font-size: ${theme.fonts.sizes['6xl']};
     transform: translate(1rem, -3rem);
-
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       display: none;
     }
@@ -145,6 +146,7 @@ const StyledOffersContentWrapper = styled.div`
       font-weight: ${theme.fonts.weights.bold};
       line-height: 1.1;
       letter-spacing: -0.0625rem;
+      margin-bottom: 1.25rem;
     }
 
     p {

@@ -70,13 +70,13 @@ const StyledButton = styled.button<{
     position: fixed;
     top: calc(100vh - 8rem);
     left: 50%;
-    margin-left: -35px;
+    margin-left: -2.1875rem;
     border-radius: 100%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    outline-offset: 2px;
+    outline-offset: 0.125rem;
     z-index: 1000;
     ${$noTranslate &&
     css`
@@ -94,6 +94,10 @@ const StyledButton = styled.button<{
     }
     &:active {
       outline: 2px solid ${theme.colors.secondary};
+    }
+
+    @media (width < ${theme.mediaQueries.tablet}) {
+      top: calc(100vh - 10rem);
     }
   `}
 `

@@ -18,7 +18,7 @@ export function Header(props: HeaderProps) {
   return (
     <Root>
       <StyledContentWrapper>
-        <div>
+        <StyledContent>
           <BlockRendererWithCondition condition={isRenderable(aboveTitle)}>
             <StyledAboveHeading>
               {parseText(aboveTitle as string).processedText}
@@ -33,7 +33,7 @@ export function Header(props: HeaderProps) {
               <ButtonWithCTA cta={cta as CTA} />
             </StyledBtnWrapper>
           </BlockRendererWithCondition>
-        </div>
+        </StyledContent>
         <BlockRendererWithCondition condition={isRenderable(img_url)}>
           <CardContainer>
             <Card $imageUrl={getStrapiURL(img_url as string)}>
@@ -44,7 +44,6 @@ export function Header(props: HeaderProps) {
                 <OutlinedText shadow>{icon2}</OutlinedText>
               </BlockRendererWithCondition>
             </Card>
-            {/* <BackgroundLayer /> */}
           </CardContainer>
         </BlockRendererWithCondition>
       </StyledContentWrapper>
@@ -54,17 +53,19 @@ export function Header(props: HeaderProps) {
 
 const Root = styled.div`
   ${({ theme }) => css`
-    // transform: translateY(-8rem);
     overflow: hidden;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      // transform: translateY(-7rem);
       margin-bottom: -2rem;
       overflow: visible;
     }
   `}
 `
-
+const StyledContent = styled.div`
+  @media (width < ${theme.mediaQueries.mobile}) {
+    margin-top: 50px;
+  }
+`
 const StyledContentWrapper = styled.div`
   ${({ theme }) => css`
     max-width: calc(75.8125rem + 1.3rem);
@@ -188,6 +189,13 @@ const Card = styled.div<{ $imageUrl?: string }>`
     min-height: 500px;
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: calc(var(--module-margin) * 2);
+
+      span:nth-child(1) {
+        display: none;
+      }
+      span:nth-child(2) {
+        display: none;
+      }
     }
 
     span:nth-child(1) {

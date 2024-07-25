@@ -87,7 +87,7 @@ export function Faq(props: FaqProps) {
                 </summary>
                 <p aria-label={textAccessibilityLabel}>{textTextWithMarkup}</p>
                 <BlockRendererWithCondition condition={isRenderable(faq.url)}>
-                  <LinkFaq href={faq.html_url} text="Voir le detail" />
+                  <LinkFaq href={faq.html_url} text="Voir le détail" />
                 </BlockRendererWithCondition>
               </StyledAccordion>
             )

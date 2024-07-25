@@ -49,11 +49,7 @@ const Root = styled(Slide)<{ $isLandscape?: boolean }>`
       ${({ theme }) => css`
     .inner {
       margin-right: 1rem;
-     
-    
-      .react-player__preview {
-        border-radius: 0.8125rem;
-      }
+      
       @media (width < ${theme.mediaQueries.mobile}) {
         margin-right: 0;
       }

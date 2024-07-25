@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react'
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Separator } from '@/lib/blocks/Separator'
 import { Seo } from '@/lib/seo/seo'
+import { PageWrapper } from '@/theme/style'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
@@ -46,16 +46,6 @@ export default function CustomPage(props: CustomPageProps) {
     </PageWrapper>
   )
 }
-
-const PageWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    width: 100%;
-    box-sizing: border-box;
-  }
-`
 
 export const getStaticProps = (async ({ params }) => {
   const pagePath = (params?.['slug'] as string[]).join('/')

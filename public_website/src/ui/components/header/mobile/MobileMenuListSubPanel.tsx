@@ -116,7 +116,7 @@ const StyledSubPanelCard = styled(Link)<{ $backgroundColor: ItemsTheme }>`
     }
 
     .trigger {
-      height: 0.1px;
+      height: 0.0063rem;
     }
     span {
       font-size: 2.5rem;

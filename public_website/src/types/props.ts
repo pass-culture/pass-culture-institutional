@@ -273,12 +273,6 @@ export type OffersVideoCarouselProps = {
   description?: BlocksContent
   cta: CTA
 }
-// export type OffersCarouselSlideTheme =
-//   | 'purple'
-//   | 'yellow'
-//   | 'magenta'
-//   | 'orange'
-//   | 'green'
 
 export type OffersCarouselSlideProps = {
   slideIndex: number
@@ -517,4 +511,33 @@ export type LittleListProps = {
   title?: string
   description?: string
   content?: ContentItem[]
+}
+export type SimulatorProps = {
+  data: APIResponseData<'api::simulator.simulator'>
+}
+export type ListOffresProps = {
+  newsRDVData: APIResponseData<'api::news.news'>[]
+  listeActuCulturel: APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
+  eventsData: APIResponseData<'api::event.event'>[]
+}
+export type CulturalActorsHelpProps = {
+  helpData: APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
+}
+
+export type ListPressProps = {
+  resourcesData: APIResponseData<'api::resource.resource'>[]
+  presseListe: APIResponseData<'api::presse.presse'>
+  eventsData: APIResponseData<'api::event.event'>[]
+}
+
+export type ListRessourcesProps = {
+  ressourcesData: APIResponseData<'api::ressourcepass.ressourcepass'>[]
+  ressourcesPassCultureListe: APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
+}
+
+export type PageLayoutProps = {
+  children: React.ReactNode
+  seo?: APIResponseData<'api::page.page'>['attributes']['seo'] | null
+  socialMediaSection?: SocialMediaProps
+  title?: string
 }

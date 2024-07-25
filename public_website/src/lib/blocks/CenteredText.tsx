@@ -27,6 +27,10 @@ const Root = styled(ContentWrapper)`
     text-align: center;
     --container-width: 52.5rem;
 
+    h2 {
+      margin-bottom: 1.25rem;
+    }
+
     p {
       font-size: ${theme.fonts.sizes['4xl']};
       font-weight: ${theme.fonts.weights.semiBold};

@@ -26,7 +26,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
   const TOTAL_SLIDES = useMemo(() => items.length, [items])
 
   const getvisibleSlides = useMemo(() => {
-    if (width < MOBILE_WIDTH) return 1
+    if (width < MOBILE_WIDTH) return 2
     if (width < LARGE_DESKTOP_WIDTH) return 3
     return 6
   }, [width])
@@ -63,7 +63,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
         aria-roledescription="carrousel">
         {items?.map((item, index) => {
           return (
-            item.logo && (
+            !!item.logo && (
               <LogoCarouselSlide
                 key={`${item.logo.data.attributes.hash}_${index}`}
                 slideIndex={index}
@@ -74,7 +74,6 @@ export function LogoCarousel(props: LogoCarouselProps) {
           )
         })}
       </StyledSlider>
-
       <BlockRendererWithCondition condition={isNavShowing}>
         <StyledHeading>
           <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
@@ -103,18 +102,14 @@ const StyledHeading = styled.div`
     display: flex;
     align-items: end;
     justify-content: center;
-    margin-top: 3rem;
-
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding-right: 0;
       margin-top: 2.5rem;
     }
   `}
 `
-
 const StyledSlider = styled(Slider)`
   overflow: hidden;
-
   .carousel__slider-tray {
     margin: auto;
   }

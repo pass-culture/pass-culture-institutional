@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import NavigationWithArrow from '../../../ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '../../../ui/components/nav-carousel/NavigationWithDots'
 import { VerticalCarouselSlide } from './VerticalCarouselSlide'
-import useLockBodyScroll from '@/hooks/useLockBodyScroll'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
@@ -21,9 +20,6 @@ const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
 export function VerticalCarousel(props: VerticalCarouselProps) {
   const { title, items, hidePlayIcon } = props
-
-  const [hasScroll, setHasScroll] = useState<boolean>(false)
-  useLockBodyScroll(hasScroll)
 
   const itemsFilter = items.filter((item) => {
     return item.image && item.image !== ''
@@ -65,62 +61,79 @@ export function VerticalCarousel(props: VerticalCarouselProps) {
   }, [CAROUSEL_SELECTOR])
 
   return (
-    <Root>
-      <CarouselProvider
-        naturalSlideWidth={60}
-        naturalSlideHeight={75}
-        totalSlides={TOTAL_SLIDES}
-        visibleSlides={visibleSlides}
-        isIntrinsicHeight
-        infinite={false}
-        dragEnabled
-        touchEnabled
-        step={1}>
-        <BlockRendererWithCondition condition={isNavShowing}>
-          <StyledHeading>
-            <Typo.Heading2>{title}</Typo.Heading2>
-            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
-              <NavigationWithArrow
-                carrouselSelector={CAROUSEL_SELECTOR}
-                slidesSelector={SLIDES_SELECTOR}
-              />
-            </BlockRendererWithCondition>
-          </StyledHeading>
-        </BlockRendererWithCondition>
+    <StyledBackgroundExperienceVideoCarousel>
+      <StyledContainer>
+        <CarouselProvider
+          naturalSlideWidth={60}
+          naturalSlideHeight={75}
+          totalSlides={TOTAL_SLIDES}
+          visibleSlides={visibleSlides}
+          isIntrinsicHeight
+          infinite={false}
+          dragEnabled
+          touchEnabled
+          step={1}>
+          <BlockRendererWithCondition condition={isNavShowing}>
+            <StyledHeading>
+              <Typo.Heading2>{title}</Typo.Heading2>
+              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+                <NavigationWithArrow
+                  carrouselSelector={CAROUSEL_SELECTOR}
+                  slidesSelector={SLIDES_SELECTOR}
+                />
+              </BlockRendererWithCondition>
+            </StyledHeading>
+          </BlockRendererWithCondition>
 
-        <StyledSlider
-          onTouchStart={(): void => setHasScroll(true)}
-          onTouchEnd={(): void => setHasScroll(false)}
-          classNameAnimation="customCarrouselAnimation"
-          role="region"
-          aria-label={stripTags(title)}
-          aria-roledescription="carrousel">
-          {items?.map((item, index) => {
-            return (
-              <VerticalCarouselSlide
-                key={`${item.title}_${index}`}
-                slideIndex={index}
-                {...item}
-                hidePlayIcon={hidePlayIcon}
-              />
-            )
-          })}
-        </StyledSlider>
-        <BlockRendererWithCondition
-          condition={isNavShowing && width < MOBILE_WIDTH}>
-          <NavigationWithDots
-            items={items}
-            carrouselSelector={CAROUSEL_SELECTOR}
-            slidesSelector={SLIDES_SELECTOR}
-            carouselName="VERTICAL_CAROUSEL"
-          />
-        </BlockRendererWithCondition>
-      </CarouselProvider>
-    </Root>
+          <StyledSlider
+            classNameAnimation="customCarrouselAnimation"
+            role="region"
+            aria-label={stripTags(title)}
+            aria-roledescription="carrousel">
+            {items?.map((item, index) => {
+              return (
+                <VerticalCarouselSlide
+                  key={`${item.title}_${index}`}
+                  slideIndex={index}
+                  {...item}
+                  hidePlayIcon={hidePlayIcon}
+                />
+              )
+            })}
+          </StyledSlider>
+          <BlockRendererWithCondition
+            condition={isNavShowing && width < MOBILE_WIDTH}>
+            <NavigationWithDots
+              items={items}
+              carrouselSelector={CAROUSEL_SELECTOR}
+              slidesSelector={SLIDES_SELECTOR}
+              carouselName="VERTICAL_CAROUSEL"
+            />
+          </BlockRendererWithCondition>
+        </CarouselProvider>
+      </StyledContainer>
+    </StyledBackgroundExperienceVideoCarousel>
   )
 }
+const StyledBackgroundExperienceVideoCarousel = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    background: ${theme.colors.lila};
+  `}
+`
+const StyledContainer = styled(ContentWrapper)`
+  ${({ theme }) => css`
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  @media (width < ${theme.mediaQueries.mobile}) {
+    padding-top: 3.125rem;
+    padding-bottom:  3.125rem;
+  }
+  }
+  `}
+`
 
-const Root = styled(ContentWrapper)``
 const StyledSlider = styled(Slider)``
 
 const StyledHeading = styled.div`
@@ -133,7 +146,7 @@ const StyledHeading = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 2.5rem;
       display: block;
-      text-align: center;
+      text-align: left;
     }
   `}
 `

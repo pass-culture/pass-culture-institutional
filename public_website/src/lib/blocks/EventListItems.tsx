@@ -70,11 +70,6 @@ const StyledList = styled.ul`
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 1.5rem;
-    // margin-bottom: 5rem;
-
-    // > li {
-    //   scroll-snap-align: center;
-    // }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       width: 100%;

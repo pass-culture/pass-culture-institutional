@@ -198,16 +198,16 @@ const CtaLink = styled(Link)`
     color: ${theme.colors.white};
 
     padding: 1rem 1.75rem;
-    border-radius: 100px;
-    border: 1px solid ${theme.colors.white};
+    border-radius: 6.25rem;
+    border: 0.0625rem solid ${theme.colors.white};
 
-    outline-offset: 2px;
+    outline-offset: 0.125rem;
     transition: background 0.3s ease-in-out;
     &:hover {
       background: ${`rgba(255, 255, 255, 0.20);`};
     }
     &:active {
-      outline: 2px solid ${theme.colors.white};
+      outline: 0.125rem solid ${theme.colors.white};
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {

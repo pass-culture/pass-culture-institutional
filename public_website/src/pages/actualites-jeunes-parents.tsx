@@ -11,13 +11,11 @@ import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
-import { Seo } from '@/lib/seo/seo'
-import { StyledSocialMedia } from '@/theme/style'
-import { PushCTAProps, SocialMediaProps } from '@/types/props'
+import PageLayout from '@/lib/PageLayout'
+import { PushCTAProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import Title from '@/ui/components/title/Title'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -100,9 +98,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   const hasData = data.length > 0
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
-      {!!title && <Title title={title} />}
+    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
@@ -122,10 +118,7 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       )}
       <Separator isActive={separatorIsActive(separator)} />
       <SimplePushCta {...(aide as PushCTAProps)} />
-      {!!socialMediaSection && (
-        <StyledSocialMedia {...(socialMediaSection as SocialMediaProps)} />
-      )}
-    </React.Fragment>
+    </PageLayout>
   )
 }
 
@@ -171,7 +164,6 @@ export const getStaticProps = (async () => {
 }) satisfies GetStaticProps<ListProps>
 
 const StyledListItems = styled(ListItems)`
-  // margin-top: 3rem;
   --module-spacing: 0;
 
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {

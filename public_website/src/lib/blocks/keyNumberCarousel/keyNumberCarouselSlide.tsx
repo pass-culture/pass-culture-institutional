@@ -43,10 +43,9 @@ const Root = styled(Slide)`
       padding: 2rem 3rem;
       background-color: ${theme.colors.secondary}20;
       border-radius: 0.625rem;
-      min-height: 300px;
+      min-height: 18.75rem;
       box-sizing: border-box;
       height: 100%;
-      //  aspect-ratio: 2.8;
       @media (max-width: ${theme.mediaQueries.mobile}) {
         margin-right: 1rem;
         margin-left: 1rem;

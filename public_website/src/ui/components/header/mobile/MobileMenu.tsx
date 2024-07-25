@@ -160,7 +160,7 @@ const StyledMobileMenuWrapper = styled.div`
       ${theme.colors.white}
     );
     position: fixed;
-    inset: 6rem 0px 0px;
+    inset: 6rem 0 0;
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -183,7 +183,7 @@ const StyledMobileMenuListItem = styled.li`
     &[aria-hidden] {
       background-color: ${theme.colors.black};
       opacity: 0.2;
-      height: 1px;
+      height: 0.0625rem;
       width: 4rem;
     }
 
@@ -203,7 +203,7 @@ const StyledMobileMenuFooter = styled.ul`
     justify-content: center;
     gap: 2.25rem;
     padding: 1rem 2rem;
-    border-top: 1px solid rgb(0 0 0 / 0.12);
+    border-top: 0.0625rem solid rgb(0 0 0 / 0.12);
     margin-top: auto;
 
     li:first-child button {

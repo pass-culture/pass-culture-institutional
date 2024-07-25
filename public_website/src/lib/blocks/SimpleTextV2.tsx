@@ -48,9 +48,6 @@ const Root = styled(ContentWrapper)`
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
 
-    // margin-top: 2.5rem;
-    // margin-bottom: 2.5rem;
-
     img {
       border-radius: 1rem;
       margin-bottom: 1.5rem;
@@ -89,12 +86,12 @@ const Root = styled(ContentWrapper)`
       color: ${theme.colors.primary}!important;
       text-decoration: underline;
       font-weight: 600;
-      outline-offset: 10px;
+      outline-offset: 0.625rem;
       &:hover {
         text-decoration: none;
       }
       &:focus {
-        outline: 2px solid ${theme.colors.primary};
+        outline: 0.125rem solid ${theme.colors.primary};
       }
     }
 

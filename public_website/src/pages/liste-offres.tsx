@@ -1,7 +1,6 @@
 import React from 'react'
 import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
@@ -11,9 +10,8 @@ import { Header } from '@/lib/blocks/Header'
 import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
-import { Seo } from '@/lib/seo/seo'
+import PageLayout from '@/lib/PageLayout'
 import { Offer } from '@/types/playlist'
 import {
   ExperienceVideoCarouselSlideProps,
@@ -39,8 +37,10 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   } = offerListe.attributes
 
   return (
-    <React.Fragment>
-      {!!seo && <Seo metaData={seo} />}
+    <PageLayout
+      seo={seo}
+      title={undefined}
+      socialMediaSection={socialMediaSection}>
       {!!hero && (
         <Header
           title={hero.title}
@@ -74,18 +74,16 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
 
       <BlockRendererWithCondition
         condition={!!experience && experience.carouselItems.length > 0}>
-        <StyledBackgroundExperienceVideoCarousel>
-          <ExperienceVideoCarousel
-            title={experience?.title as string}
-            carouselItems={
-              experience?.carouselItems as Omit<
-                ExperienceVideoCarouselSlideProps,
-                'slideIndex'
-              >[]
-            }
-            isLandscape={experience?.isLandscape}
-          />
-        </StyledBackgroundExperienceVideoCarousel>
+        <ExperienceVideoCarousel
+          title={experience?.title as string}
+          carouselItems={
+            experience?.carouselItems as Omit<
+              ExperienceVideoCarouselSlideProps,
+              'slideIndex'
+            >[]
+          }
+          isLandscape={experience?.isLandscape}
+        />
       </BlockRendererWithCondition>
 
       {!!question && (
@@ -97,13 +95,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
           cta={question.cta}
         />
       )}
-      {socialMediaSection?.title && socialMediaSection?.socialMediaLink && (
-        <SocialMedia
-          title={socialMediaSection?.title}
-          socialMediaLink={socialMediaSection?.socialMediaLink}
-        />
-      )}
-    </React.Fragment>
+    </PageLayout>
   )
 }
 
@@ -149,11 +141,3 @@ export const getStaticProps = (async () => {
     },
   }
 }) satisfies GetStaticProps<ListProps>
-
-const StyledBackgroundExperienceVideoCarousel = styled.div`
-  ${({ theme }) => css`
-    width: 100%;
-    height: 100%;
-    background: ${theme.colors.lila};
-  `}
-`

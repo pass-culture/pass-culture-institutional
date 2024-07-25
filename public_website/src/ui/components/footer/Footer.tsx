@@ -71,13 +71,13 @@ export function Footer(props: FooterProps) {
 const StyledFooter = styled.footer`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
-    box-shadow: 0px 0px 6px 0px #00000026;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0.375rem 0px;
   `}
 `
 
 const StyledContentContainer = styled.div`
   ${({ theme }) => css`
-    max-width: 1440px;
+    max-width: 90rem;
     margin: 0 auto;
     padding: 5rem 2rem 2.875rem 2rem;
 

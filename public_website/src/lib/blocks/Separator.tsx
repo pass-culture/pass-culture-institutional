@@ -17,9 +17,9 @@ const Root = styled.div`
   ${({ theme }) => css`
     text-align: center;
     width: 100%;
-    border-top: 1px solid ${theme.colors.white};
+    border-top: 0.0625rem solid ${theme.colors.white};
     div {
-      border-top: 1px solid ${theme.colors.gray};
+      border-top: 0.0625rem solid ${theme.colors.gray};
     }
   `}
 `

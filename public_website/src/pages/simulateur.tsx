@@ -6,16 +6,14 @@ import styled, { css } from 'styled-components'
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import { SocialMedia } from '@/lib/blocks/SocialMedia'
-import { Seo } from '@/lib/seo/seo'
+import PageLayout from '@/lib/PageLayout'
+import { PageWrapper } from '@/theme/style'
+import { SimulatorProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
-
-interface SimulatorProps {
-  data: APIResponseData<'api::simulator.simulator'>
-}
 
 export default function SimulatorPage(props: SimulatorProps) {
   const {
@@ -43,52 +41,44 @@ export default function SimulatorPage(props: SimulatorProps) {
   const memoSteps = useMemo(() => steps.map((s) => s.step), [steps])
 
   return (
-    <Root>
-      {!!seo && <Seo metaData={seo} />}
-      <Title>{title}</Title>
-      <Description>{description}</Description>
-      <UnpaddedBreadcrumb />
-
-      <StyledSimulator
-        ageQuestion={ageQuestion}
-        nationnalityQuestion={nationnalityQuestion}
-        residencyQuestion={residencyQuestion}
-        successScreen={successScreen}
-        failureScreen={failureScreen}
-        tooYoungScreen={tooYoungScreen}
-        steps={memoSteps}
-        amountScreen15={amountScreen_15}
-        amountScreen16={amountScreen_16}
-        amountScreen17={amountScreen_17}
-        amountScreen18={amountScreen_18}
-        tooOldScreen={tooOldScreen}
-        topEmoji={topEmoji}
-        bottomEmoji={bottomEmoji}
-      />
-
-      {!!offres && (
-        <SimplePushCta
-          title={offres.title}
-          surtitle={offres.surtitle}
-          image={offres.image}
-          cta={offres.cta}
-          icon={offres.icon}
-        />
-      )}
-
-      <SocialMedia
-        title={socialMedias.title}
-        socialMediaLink={socialMedias.socialMediaLink}
-      />
-    </Root>
+    <PageLayout seo={seo} title={undefined} socialMediaSection={socialMedias}>
+      <PageWrapper>
+        <Root>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+          <UnpaddedBreadcrumb />
+          <StyledSimulator
+            ageQuestion={ageQuestion}
+            nationnalityQuestion={nationnalityQuestion}
+            residencyQuestion={residencyQuestion}
+            successScreen={successScreen}
+            failureScreen={failureScreen}
+            tooYoungScreen={tooYoungScreen}
+            steps={memoSteps}
+            amountScreen15={amountScreen_15}
+            amountScreen16={amountScreen_16}
+            amountScreen17={amountScreen_17}
+            amountScreen18={amountScreen_18}
+            tooOldScreen={tooOldScreen}
+            topEmoji={topEmoji}
+            bottomEmoji={bottomEmoji}
+          />
+        </Root>
+        {!!offres && (
+          <SimplePushCta
+            title={offres.title}
+            surtitle={offres.surtitle}
+            image={offres.image}
+            cta={offres.cta}
+            icon={offres.icon}
+          />
+        )}
+      </PageWrapper>
+    </PageLayout>
   )
 }
 
-const Root = styled.div`
-  max-width: calc(75rem + 1rem);
-  margin: auto;
-  padding: 1rem;
-`
+const Root = styled(ContentWrapper)``
 
 const Title = styled(Typo.Heading1)`
   margin-bottom: 1.75rem;
@@ -109,12 +99,9 @@ const Description = styled(Typo.Body)`
 
 const StyledSimulator = styled(Simulator)`
   ${({ theme }) => css`
-    margin-top: 7rem;
-    margin-bottom: 11rem;
-
     @media (width < ${theme.mediaQueries.tablet}) {
-      margin-top: 3rem;
-      margin-bottom: 3rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
   `}
 `

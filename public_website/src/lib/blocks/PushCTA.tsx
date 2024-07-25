@@ -60,7 +60,7 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
         </BlockRendererWithCondition>
         <CtaLink
           href={ctaLink.URL}
-          onClick={() =>
+          onClick={(): void =>
             onClickAnalytics({
               eventName: ctaLink.eventName,
               eventOrigin: ctaLink.eventOrigin,
@@ -94,10 +94,11 @@ const Root = styled(ContentWrapper)`
         content: ' ';
         height: 80%;
         background-color: ${theme.colors.sky};
-        width: 100%;
+        width: 90%;
         position: absolute;
         top: 25%;
-        left: 0;
+        margin-left: -45%;
+        left: 50%;
         z-index: 0;
       }
     }
@@ -114,7 +115,6 @@ const CardContainer = styled.div`
     margin: 0 auto;
   }
 `
-
 const Card = styled.div<{ $imageUrl?: string }>`
   ${({ $imageUrl, theme }) => css`
     background-color: ${theme.colors.tertiary};
@@ -138,7 +138,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
     }
   `}
 `
-
 const QRCodeCard = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.secondary};
@@ -165,7 +164,6 @@ const QRCodeCard = styled.div`
     }
   `}
 `
-
 const RightSide = styled.div`
   ${({ theme }) => css`
     position: relative;
@@ -180,17 +178,18 @@ const RightSide = styled.div`
       font-size: ${theme.fonts.sizes.m};
       line-height: 2.125rem;
       font-weight: ${theme.fonts.weights.medium};
-
       margin-bottom: 2rem;
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
-      padding: 0;
+      padding: 0.5rem 4rem;
       max-width: none;
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding: 0.5rem 2rem;
     }
   `}
 `
-
 const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;

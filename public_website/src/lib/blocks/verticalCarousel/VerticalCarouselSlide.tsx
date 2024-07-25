@@ -47,11 +47,9 @@ export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
 const Root = styled(Slide)`
   ${({ theme }) => css`
     position: relative;
-
     &:not(:last-child) {
       margin-right: 2rem;
     }
-
     @media (width < ${theme.mediaQueries.mobile}) {
       &:not(:last-child) {
         margin-right: 1rem;

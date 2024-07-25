@@ -5,7 +5,6 @@ import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
-import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -78,16 +77,18 @@ export function SimplePushCta(props: PushCTAProps) {
   )
 }
 
-const StyledContentWrapper = styled(ContentWrapper)`
+const StyledContentWrapper = styled.section`
   background-color: ${theme.colors.deepink};
   min-width: 100%;
   padding: 0;
+  max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
   margin-top: calc(var(--module-margin) * 2);
   margin-bottom: calc(var(--module-margin) * 2);
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;
     margin-top: calc(var(--module-margin) * 8);
     margin-bottom: calc(var(--module-margin) * 3);
+    // display:none!important;
   }
   @media (width < ${theme.mediaQueries.largeDesktop}) {
     display: flex;

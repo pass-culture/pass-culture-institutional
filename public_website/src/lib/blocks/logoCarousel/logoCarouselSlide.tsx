@@ -23,17 +23,11 @@ export function LogoCarouselSlide(props: LogoCarouselSlideProps) {
 }
 
 const Root = styled(Slide)`
-  ${({ theme }) => css`
-    .inner {
-      margin-right: 1rem;
-
-      @media (width < ${theme.mediaQueries.tablet}) {
-        margin-right: 0;
-      }
-    }
-  `}
+  .inner {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
 `
-
 const StyledLink = styled.div`
   ${({ theme }) => css`
     display: block;
@@ -43,7 +37,6 @@ const StyledLink = styled.div`
     height: 100%;
   `}
 `
-
 const StyledImageSimple = styled.img`
   object-fit: contain;
   width: 100%;
