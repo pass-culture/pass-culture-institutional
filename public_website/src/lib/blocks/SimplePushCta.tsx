@@ -87,14 +87,14 @@ const StyledContentWrapper = styled.section`
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;
     margin-top: calc(var(--module-margin) * 2 + 3.125rem);
-    margin-bottom: calc(var(--module-margin) * 2 + 3.125rem);
+    margin-bottom: calc(var(--module-margin) * 2);
   }
   @media (width < ${theme.mediaQueries.largeDesktop}) {
     display: flex;
     justify-content: center;
     text-align: center;
     margin-top: calc(var(--module-margin) * 2 + 8rem);
-    margin-bottom: calc(var(--module-margin) * 2 + 8rem);
+    margin-bottom: calc(var(--module-margin) * 2);
   }
 `
 
