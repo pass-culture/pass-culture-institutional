@@ -82,17 +82,19 @@ const StyledContentWrapper = styled.section`
   min-width: 100%;
   padding: 0;
   max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
-  margin-top: calc(var(--module-margin) * 2);
-  margin-bottom: calc(var(--module-margin) * 2);
+  margin-top: calc(var(--module-margin) * 2 + 3.125rem);
+  margin-bottom: calc(var(--module-margin) * 2 + 3.125rem);
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding: 0;
-    margin-top: calc(var(--module-margin) * 8);
-    margin-bottom: calc(var(--module-margin) * 3);
+    margin-top: calc(var(--module-margin) * 2 + 3.125rem);
+    margin-bottom: calc(var(--module-margin) * 2 + 3.125rem);
   }
   @media (width < ${theme.mediaQueries.largeDesktop}) {
     display: flex;
     justify-content: center;
     text-align: center;
+    margin-top: calc(var(--module-margin) * 2 + 8rem);
+    margin-bottom: calc(var(--module-margin) * 2 + 8rem);
   }
 `
 
@@ -134,7 +136,7 @@ const CardContainer = styled.div`
     margin: 0 auto;
     position: relative;
     min-width: 30rem;
-    top: -7rem;
+    margin-top: -8rem;
     span {
       display: none;
     }
@@ -194,7 +196,6 @@ const RightSide = styled.div`
       position: relative;
       padding: 0;
       display: block;
-      margin-top: -7rem;
       p {
         margin-top: 1rem;
       }
