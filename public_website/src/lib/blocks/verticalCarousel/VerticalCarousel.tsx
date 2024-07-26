@@ -47,12 +47,6 @@ export function VerticalCarousel(
 
   const visibleSlides = getvisibleSlides
 
-  /**
-   * Remove unnecessary HTML attributes for a11y.
-   * PR #469 will improve that: https://github.com/express-labs/pure-react-carousel/pull/469
-   *
-   * "pure-react-carousel" does not permit using `ref` on components to allow changing attributes
-   */
   useEffect(() => {
     const carouselEl = document.querySelector(CAROUSEL_SELECTOR)
     const carouselSlidesEl = carouselEl?.querySelectorAll(SLIDES_SELECTOR)
