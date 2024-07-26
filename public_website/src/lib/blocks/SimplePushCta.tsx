@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { Separator } from './Separator'
 import { theme } from '@/theme/theme'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
@@ -53,6 +54,7 @@ export function SimplePushCta(props: PushCTAProps) {
 
   return (
     <StyledContentWrapper>
+      <Separator isActive={false} />
       <StyledContent>
         <Root className={className}>
           <RightSide>
@@ -136,8 +138,12 @@ const CardContainer = styled.div`
     position: absolute;
     bottom: 40%;
     font-size: ${theme.fonts.sizes['8xl']};
-    left: 2rem;
+    left: -2rem;
     transform: rotate(7deg);
+
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      left: 2rem;
+    }
   }
 `
 
@@ -194,6 +200,7 @@ const RightSide = styled.div`
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 0;
       padding: 2rem;
+
       p {
         margin-bottom: 1.25rem;
         font-size: ${theme.fonts.sizes.s};

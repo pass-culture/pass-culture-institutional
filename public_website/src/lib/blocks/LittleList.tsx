@@ -49,30 +49,33 @@ export function LittleList(props: LittleListProps) {
         </Column>
 
         <Column as="ul">
-          {content?.map((item, index) => (
-            <ColumnContent key={item.id} as="li">
-              <ColumnEmoji>
-                <OutlinedText shadow>{item.firstEmoji}</OutlinedText>
-                <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
-              </ColumnEmoji>
+          {content?.map((item, index) => {
+            return (
+              <ColumnContent key={item.id} as="li">
+                <ColumnEmoji>
+                  <OutlinedText shadow>{item.firstEmoji}</OutlinedText>
+                  <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
+                </ColumnEmoji>
 
-              {isMobile ? (
-                <ColumnText
-                  className={isOpen(index) ? 'open' : ''}
-                  onClick={(): void => clickHandler(index)}>
-                  <p>{item.text}</p>
-                  {isOpen(index)
-                    ? item.description && <p>{item.description}</p>
-                    : null}
-                </ColumnText>
-              ) : (
-                <ColumnText>
-                  <p>{item.text}</p>
-                  <p>{item.description}</p>
-                </ColumnText>
-              )}
-            </ColumnContent>
-          ))}
+                {isMobile ? (
+                  <ColumnText
+                    $isShow={!!item.description}
+                    className={isOpen(index) ? 'open' : ''}
+                    onClick={(): void => clickHandler(index)}>
+                    <p>{item.text}</p>
+                    {isOpen(index)
+                      ? item.description && <p>{item.description}</p>
+                      : null}
+                  </ColumnText>
+                ) : (
+                  <ColumnText $isShow={!!item.description}>
+                    <p>{item.text}</p>
+                    <p>{item.description}</p>
+                  </ColumnText>
+                )}
+              </ColumnContent>
+            )
+          })}
         </Column>
       </Columns>
     </Root>
@@ -183,8 +186,8 @@ const ColumnEmoji = styled.div`
   `}
 `
 
-const ColumnText = styled.div`
-  ${({ theme }) => css`
+const ColumnText = styled.div<{ $isShow?: boolean }>`
+  ${({ theme, $isShow }) => css`
     padding-bottom: 1.5rem;
     border-bottom: solid 1px ${theme.colors.black}20;
     flex: 1;
@@ -208,7 +211,7 @@ const ColumnText = styled.div`
       line-height: 0;
       display: none;
       @media (width < ${theme.mediaQueries.mobile}) {
-        display: block;
+        display: ${$isShow ? 'block' : 'none'};
       }
     }
 

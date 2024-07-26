@@ -72,6 +72,7 @@ const StyledFooter = styled.footer`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0.375rem 0px;
+    margin-top: var(--module-margin);
   `}
 `
 
