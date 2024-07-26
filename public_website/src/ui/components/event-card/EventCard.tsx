@@ -81,7 +81,7 @@ export function EventCard(
           alt=""
           width={385}
           height={310}
-          layout="responsive" // TODO: Fix deprecated use of "layout" (https://nextjs.org/docs/messages/next-image-upgrade-to-13)
+          layout="responsive"
         />
       </BlockRendererWithCondition>
     </Root>
@@ -93,23 +93,26 @@ const Root = styled.article`
     position: relative;
     max-width: 100%;
     background-color: ${theme.colors.secondary};
-
     color: ${theme.colors.white};
-
     padding-left: 4rem;
-    border-radius: 0.625rem;
+    border-radius: ${theme.radius.sm};
     margin: 0 1rem;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 3rem;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
+    @media (width < ${theme.mediaQueries.mobile}) {
       padding-bottom: 1.5rem;
       padding-left: 0;
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
       margin: 0;
+
+      border-top-right-radius: ${theme.radius.sm};
+      border-top-left-radius: ${theme.radius.sm};
+      border-bottom-right-radius: 0rem;
+      border-bottom-left-radius: 0rem;
     }
   `}
 `
@@ -123,8 +126,9 @@ const StyledContentWrapper = styled.div`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       padding-left: 1rem;
-      align-self: start;
       padding-right: 1rem;
+      padding-top: 2rem;
+      align-self: start;
       width: 100%;
     }
   `}
@@ -194,13 +198,10 @@ const CtaLink = styled(Link)`
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
-
     color: ${theme.colors.white};
-
     padding: 1rem 1.75rem;
     border-radius: 6.25rem;
     border: 0.0625rem solid ${theme.colors.white};
-
     outline-offset: 0.125rem;
     transition: background 0.3s ease-in-out;
     &:hover {
@@ -214,23 +215,23 @@ const CtaLink = styled(Link)`
       margin: auto;
       margin-bottom: 1.5rem;
       font-size: ${theme.fonts.sizes['2xs']};
-      width: 80%;
     }
   `}
 `
 const StyledCardImage = styled(Image)`
   ${({ theme }) => css`
-    border-top-right-radius: 0.625rem;
-    border-bottom-right-radius: 0.625rem;
+    border-top-right-radius: ${theme.radius.sm};
+    border-bottom-right-radius: ${theme.radius.sm};
     aspect-ratio: 1.2;
-    height: auto;
     min-width: 100%;
     object-fit: cover;
+    min-height: 100%;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      border-top-right-radius: 0.625rem;
-      border-top-left-radius: 0.625rem;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      border-top-right-radius: ${theme.radius.sm};
+      border-top-left-radius: ${theme.radius.sm};
       border-bottom-right-radius: 0rem;
+      border-bottom-left-radius: 0rem;
     }
   `}
 `
