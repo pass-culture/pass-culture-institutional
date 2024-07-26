@@ -58,11 +58,11 @@ const Root = styled.div<{ $noMargin?: boolean }>`
 
       img {
         width: 100%;
-        border-radius: 1rem;
+        border-radius: ${theme.radius.sm};
       }
 
       .react-player__preview {
-        border-radius: 1rem;
+        border-radius: ${theme.radius.sm};
       }
     }
   `}

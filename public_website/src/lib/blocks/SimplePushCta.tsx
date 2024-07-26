@@ -5,6 +5,7 @@ import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
+import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -52,52 +53,50 @@ export function SimplePushCta(props: PushCTAProps) {
 
   return (
     <StyledContentWrapper>
-      <Root className={className}>
-        <RightSide>
-          <BlockRendererWithCondition condition={isRenderable(surtitle)}>
-            <SimplePushCtaSurTitle surtitle={surtitle as string} />
-          </BlockRendererWithCondition>
-          <BlockRendererWithCondition condition={isRenderable(title)}>
-            <SimplePushCtaTitle title={title} />
-          </BlockRendererWithCondition>
-          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
-            <SimplePushCtaLink {...(cta as CTA)} />
-          </BlockRendererWithCondition>
-        </RightSide>
-        <CardContainer>
-          <BlockRendererWithCondition condition={isRenderable(image_props)}>
-            <SimplePushCtaCard url={image_props as string} />
-          </BlockRendererWithCondition>
-          <BlockRendererWithCondition condition={isRenderable(icon)}>
-            <OutlinedText>{icon}</OutlinedText>
-          </BlockRendererWithCondition>
-        </CardContainer>
-      </Root>
+      <StyledContent>
+        <Root className={className}>
+          <RightSide>
+            <BlockRendererWithCondition condition={isRenderable(surtitle)}>
+              <SimplePushCtaSurTitle surtitle={surtitle as string} />
+            </BlockRendererWithCondition>
+            <BlockRendererWithCondition condition={isRenderable(title)}>
+              <SimplePushCtaTitle title={title} />
+            </BlockRendererWithCondition>
+            <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
+              <SimplePushCtaLink {...(cta as CTA)} />
+            </BlockRendererWithCondition>
+          </RightSide>
+          <CardContainer>
+            <BlockRendererWithCondition condition={isRenderable(image_props)}>
+              <SimplePushCtaCard url={image_props as string} />
+            </BlockRendererWithCondition>
+            <BlockRendererWithCondition condition={isRenderable(icon)}>
+              <OutlinedText>{icon}</OutlinedText>
+            </BlockRendererWithCondition>
+          </CardContainer>
+        </Root>
+      </StyledContent>
     </StyledContentWrapper>
   )
 }
 
-const StyledContentWrapper = styled.section`
-  background-color: ${theme.colors.deepink};
+const StyledContentWrapper = styled(ContentWrapper)`
   min-width: 100%;
   padding: 0;
-  max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
-  margin-top: calc(var(--module-margin) * 2 + 3.125rem);
-  margin-bottom: calc(var(--module-margin) * 2 + 3.125rem);
-  @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-    padding: 0;
-    margin-top: calc(var(--module-margin) * 2 + 3.125rem);
-    margin-bottom: calc(var(--module-margin) * 2);
-  }
+  overflow: visible;
   @media (width < ${theme.mediaQueries.largeDesktop}) {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-top: calc(var(--module-margin) * 2 + 8rem);
-    margin-bottom: calc(var(--module-margin) * 2);
+    margin-top: calc(7.5rem + var(--module-margin));
   }
 `
-
+const StyledContent = styled.div`
+  ${({ theme }) => css`
+    margin: auto;
+    position: relative;
+    margin-top: var(--module-margin);
+    margin-bottom: var(--module-margin);
+    background-color: ${theme.colors.deepink};
+  `}
+`
 const Root = styled.div`
   ${({ theme }) => css`
     gap: 5.625rem;
@@ -124,25 +123,21 @@ const CardContainer = styled.div`
   position: relative;
   max-width: 28rem;
   margin: -3.125rem 0;
-  span {
-    position: absolute;
-    bottom: 20%;
-    font-size: ${theme.fonts.sizes['8xl']};
-    left: -1.5rem;
-    transform: rotate(7deg);
-  }
-
   @media (width < ${theme.mediaQueries.largeDesktop}) {
-    margin: 0 auto;
-    position: relative;
-    min-width: 30rem;
-    margin-top: -8rem;
-    span {
-      display: none;
-    }
+    left: 50%;
+    margin-left: -14rem;
+    margin-bottom: 0;
   }
   @media (width < ${theme.mediaQueries.mobile}) {
-    min-width: 100%;
+    left: inherit;
+    margin: 0;
+  }
+  span {
+    position: absolute;
+    bottom: 40%;
+    font-size: ${theme.fonts.sizes['8xl']};
+    left: 2rem;
+    transform: rotate(7deg);
   }
 `
 
@@ -157,17 +152,15 @@ const Card = styled.div<{ $imageUrl?: string }>`
     flex-direction: column-reverse;
     padding: 2rem;
     width: calc(100% - 4rem);
-    aspect-ratio: 333.49/415;
+    height: calc(100% - 4rem);
+    aspect-ratio: 510/634.64;
 
-    @media (width < ${theme.mediaQueries.tablet}) {
-      width: 23rem;
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      width: 70%;
       padding: 0;
       margin: 0 auto;
-    }
-    @media (width < ${theme.mediaQueries.mobile}) {
-      width: 18rem;
-      padding: 0;
-      margin: 0 auto;
+      top: -7.5rem;
+      position: relative;
     }
   `}
 `
@@ -192,13 +185,10 @@ const RightSide = styled.div`
     }
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
-      margin-bottom: 4rem;
+      padding: 2rem;
+      max-width: none;
+      margin-top: -7.5rem;
       position: relative;
-      padding: 0;
-      display: block;
-      p {
-        margin-top: 1rem;
-      }
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -215,26 +205,24 @@ const RightSide = styled.div`
 const CtaLink = styled(Link)`
   ${({ theme }) => css`
     display: inline-block;
-
     font-size: ${theme.fonts.sizes.xs};
     font-weight: ${theme.fonts.weights.semiBold};
     line-height: 1.4;
     margin-right: 1.5rem;
-
-    outline-offset: 2px;
+    outline-offset: 0.125rem;
     transition: background 0.3s ease-in-out;
     &:hover {
       background: ${theme.colors.secondary};
       color: ${theme.colors.white};
     }
     &:active {
-      outline: 2px solid ${theme.colors.secondary};
+      outline: 0.125rem solid ${theme.colors.secondary};
     }
     color: ${theme.colors.secondary};
 
     padding: 1rem 1.75rem;
     border-radius: 100px;
-    border: 1px solid ${theme.colors.secondary};
+    border: 0.0625rem solid ${theme.colors.secondary};
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-right: 0;

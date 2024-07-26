@@ -54,10 +54,8 @@ export function Header(props: HeaderProps) {
 const Root = styled.div`
   ${({ theme }) => css`
     overflow: hidden;
-
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: -2rem;
-      overflow: visible;
     }
   `}
 `
@@ -111,10 +109,14 @@ const StyledHeading = styled(Typo.Heading1)`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       text-align: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     @media (width < ${theme.mediaQueries.mobile}) {
       font-size: ${theme.fonts.sizes['5xl']};
       margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   `}
 `
@@ -155,10 +157,14 @@ const StyledText = styled.p`
 
     @media (width < ${theme.mediaQueries.tablet}) {
       text-align: center;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       margin-bottom: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   `}
 `
@@ -187,21 +193,9 @@ const Card = styled.div<{ $imageUrl?: string }>`
     position: relative;
     width: 100%;
     min-height: 31.25rem;
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin-bottom: calc(var(--module-margin) * 2);
-      min-height: 24.0625rem;
-      span:nth-child(1) {
-        display: none;
-      }
-      span:nth-child(2) {
-        display: none;
-      }
-    }
-
     span:nth-child(1) {
       font-size: ${theme.fonts.sizes['8xl']};
       position: absolute;
-
       bottom: 30%;
       right: -5%;
       transform: rotate(-15deg);
@@ -212,6 +206,19 @@ const Card = styled.div<{ $imageUrl?: string }>`
       top: 15%;
       left: -5%;
       transform: rotate(15deg);
+    }
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin-bottom: calc(var(--module-margin) * 2);
+      min-height: 24.0625rem;
+
+      span:nth-child(1) {
+        bottom: -7%;
+        right: 5%;
+        transform: rotate(-15deg);
+      }
+      span:nth-child(2) {
+        display: none;
+      }
     }
   `}
 `

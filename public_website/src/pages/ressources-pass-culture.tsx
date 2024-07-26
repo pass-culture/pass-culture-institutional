@@ -10,6 +10,7 @@ import NoResult from '@/lib/blocks/NoResult'
 import { RessourceItems } from '@/lib/blocks/ResourceItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { ListRessourcesProps } from '@/types/props'
@@ -55,15 +56,8 @@ export default function RessourcesPassCulture({
   ressourcesData,
   ressourcesPassCultureListe,
 }: ListRessourcesProps) {
-  const {
-    seo,
-    title,
-    buttonText,
-    etudes,
-    socialMediaSection,
-    separator,
-    filtres,
-  } = ressourcesPassCultureListe.attributes
+  const { seo, title, buttonText, etudes, socialMediaSection, filtres } =
+    ressourcesPassCultureListe.attributes
 
   const cat = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.category))
@@ -107,7 +101,6 @@ export default function RessourcesPassCulture({
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
-
       <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
         <FilterOption
           setCategory={setCategory}
@@ -115,15 +108,13 @@ export default function RessourcesPassCulture({
           data={filters}
         />
       </ContentWrapper>
-
       {hasData ? (
         <StyledListItems news={data} buttonText={buttonText} className="" />
       ) : (
         <NoResult />
       )}
-
-      <Separator isActive={separator?.isActive} />
-
+      <Separator isActive />
+      <WhiteSpace />
       {!!etudes && (
         <SimplePushCta
           title={etudes.title}
@@ -132,7 +123,8 @@ export default function RessourcesPassCulture({
           surtitle={etudes.surtitle}
           icon={etudes.icon}
         />
-      )}
+      )}{' '}
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

@@ -10,13 +10,13 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   ressourcesData: APIResponseData<'api::resource.resource'>[]
@@ -27,15 +27,8 @@ export default function EtudesPassCulture({
   ressourcesData,
   etudesPassCultureListe,
 }: ListProps) {
-  const {
-    seo,
-    title,
-    buttonText,
-    observatoire,
-    socialMediaSection,
-    separator,
-    filtres,
-  } = etudesPassCultureListe.attributes
+  const { seo, title, buttonText, observatoire, socialMediaSection, filtres } =
+    etudesPassCultureListe.attributes
 
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
@@ -141,7 +134,8 @@ export default function EtudesPassCulture({
         )}
       </React.Fragment>
 
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive />
+      <WhiteSpace />
       {!!observatoire && (
         <SimplePushCta
           surtitle={observatoire?.surtitle}
@@ -151,6 +145,7 @@ export default function EtudesPassCulture({
           cta={observatoire?.cta}
         />
       )}
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

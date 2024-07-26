@@ -11,6 +11,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { StyledTitle } from '@/theme/style'
@@ -231,8 +232,10 @@ export default function ListeActuCulturels({
       ) : (
         <NoResult />
       )}
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive />
+      <WhiteSpace />
       <SimplePushCta {...(aide as PushCTAProps)} />
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

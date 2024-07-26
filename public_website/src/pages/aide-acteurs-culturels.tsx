@@ -53,6 +53,7 @@ export default function CulturalActorsHelp({
         image={simplepushcta.image}
         icon={simplepushcta.icon}
       />
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

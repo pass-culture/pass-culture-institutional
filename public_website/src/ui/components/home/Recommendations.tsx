@@ -39,10 +39,12 @@ const StyledCtaWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: 2rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     }
   `}
 `

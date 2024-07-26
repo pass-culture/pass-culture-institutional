@@ -50,7 +50,7 @@ export function LatestNews(props: LatestNewsProps) {
       <HeadingWrapper>
         <StyledHeading>{title}</StyledHeading>
       </HeadingWrapper>
-      <ListWrapper $noMargin>
+      <ListWrapper>
         <StyledList>
           {newsData?.slice(0, 3).map((newsItem) => {
             return (
@@ -115,11 +115,10 @@ const StyledHeading = styled(Typo.Heading2)`
   `}
 `
 
-const ListWrapper = styled(ContentWrapper)`
+const ListWrapper = styled.div`
   margin-bottom: 5rem;
   width: 100%;
   box-sizing: border-box;
-
   @media (width < ${(p) => p.theme.mediaQueries.mobile}) {
     margin-bottom: 2.25rem;
   }

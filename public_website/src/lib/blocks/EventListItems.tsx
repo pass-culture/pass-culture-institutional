@@ -54,15 +54,23 @@ export function EventListItems(props: LatestEventsProps) {
 }
 
 const Root = styled(ContentWrapper)`
-  padding: 1rem 1.5rem;
-  max-width: 80rem;
-  margin-inline: auto;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => css`
+    padding: 1rem 1.5rem;
+    max-width: 80rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
 
-  > a {
-    align-self: center;
-  }
+    > a {
+      align-self: center;
+    }
+
+    @media (width < ${theme.mediaQueries.mobile}) {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      padding-bottom: 0;
+    }
+  `}
 `
 
 const StyledList = styled.ul`

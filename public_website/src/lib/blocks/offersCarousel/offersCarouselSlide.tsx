@@ -65,7 +65,7 @@ const CardContainer = styled.div<{ $slideTheme: ItemsTheme }>`
 `
 
 const Card = styled.div`
-  border-radius: 1rem;
+  border-radius: ${theme.radius.sm};
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -76,7 +76,7 @@ const Card = styled.div`
   background: var(--card-background);
 
   @media (width < ${theme.mediaQueries.largeDesktop}) {
-    padding: 2rem 1rem;
+    padding: 4rem 1rem;
     width: calc(100% - 2rem);
   }
   @media (width < ${theme.mediaQueries.mobile}) {

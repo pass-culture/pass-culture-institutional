@@ -98,7 +98,6 @@ const StyledListItem = styled.li`
       min-height: 4rem;
       background: ${theme.colors.secondary};
       transform: rotate(4deg);
-
       outline-offset: 0.125rem;
 
       &:active {
@@ -138,7 +137,6 @@ const StyledListItem = styled.li`
 const Lists = styled.div`
   display: flex;
   flex-wrap: wrap;
-
   gap: 1.5rem;
   justify-content: center;
   align-items: center;

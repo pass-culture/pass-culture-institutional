@@ -11,6 +11,7 @@ import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { PushCTAProps } from '@/types/props'
@@ -18,7 +19,6 @@ import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   newsActuPassData: APIResponseData<'api::news.news'>[]
@@ -48,15 +48,8 @@ export default function ListeActualitesPassCulture({
   newsActuPassData,
   listeActualitesPassCulture,
 }: ListProps) {
-  const {
-    seo,
-    title,
-    buttonText,
-    separator,
-    aide,
-    socialMediaSection,
-    filtres,
-  } = listeActualitesPassCulture.attributes
+  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
+    listeActualitesPassCulture.attributes
 
   const cat = Array.from(
     new Set(newsActuPassData.map((item) => item.attributes.category))
@@ -122,8 +115,10 @@ export default function ListeActualitesPassCulture({
         <NoResult />
       )}
 
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive />
+      <WhiteSpace />
       <SimplePushCta {...(aide as PushCTAProps)} />
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

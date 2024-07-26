@@ -26,17 +26,19 @@ export function VerticalCarouselSlide(props: PiledCardsCarouselSlideProps) {
       $slideTheme={theme}>
       <div>
         {!!URL && <StyledImage src={URL} alt="" width={270} height={330} />}
-        <StyledTitle>{title}</StyledTitle>
+        <StyledContentText>
+          <StyledTitle>{title}</StyledTitle>
 
-        {descriptionIsOpen ? (
-          <StyledDescription>{description}</StyledDescription>
-        ) : (
-          <ShowMoreButton
-            as="button"
-            onClick={(): void => setDescriptionIsOpen(true)}>
-            Voir plus
-          </ShowMoreButton>
-        )}
+          {descriptionIsOpen ? (
+            <StyledDescription>{description}</StyledDescription>
+          ) : (
+            <ShowMoreButton
+              as="button"
+              onClick={(): void => setDescriptionIsOpen(true)}>
+              Voir plus
+            </ShowMoreButton>
+          )}
+        </StyledContentText>
       </div>
     </Root>
   )
@@ -48,13 +50,17 @@ const Root = styled(Slide)<{ $slideTheme: ItemsTheme }>`
       margin-right: 1rem;
       background: ${CARD_BACKGROUNDS[$slideTheme]};
       padding: 2rem;
-      border-radius: 1.25rem;
+      border-radius: ${({ theme }) => theme.radius.sm};
+      text-align: center;
     }
   `}
 `
+const StyledContentText = styled.div`
+  text-align: left;
+`
 
 const StyledImage = styled(Image)`
-  border-radius: 0.5rem;
+  border-radius: ${({ theme }) => theme.radius.sm};
   object-fit: cover;
 `
 

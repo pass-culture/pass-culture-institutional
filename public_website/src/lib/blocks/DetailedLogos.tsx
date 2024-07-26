@@ -83,7 +83,7 @@ const StyledListItem = styled.li`
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      border-radius: 1.25rem;
+      border-radius: ${theme.radius.sm};
     }
   `}
 `

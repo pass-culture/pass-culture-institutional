@@ -66,6 +66,7 @@ export default function TeachersHelp({
         cta={simplepushcta.cta}
         icon={simplepushcta.icon}
       />
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

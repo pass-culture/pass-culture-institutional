@@ -196,6 +196,10 @@ const StyledContentTextWrapper = styled.div`
       font-size: ${theme.fonts.sizes['6xl']};
       font-weight: 700;
       color: ${theme.colors.secondary};
+
+      @media (width < ${theme.mediaQueries.tablet}) {
+        font-size: ${theme.fonts.sizes['4xl']};
+      }
     }
 
     p {

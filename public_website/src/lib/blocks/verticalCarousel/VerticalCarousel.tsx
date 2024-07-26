@@ -87,7 +87,7 @@ export function VerticalCarousel(
             </StyledHeading>
           </BlockRendererWithCondition>
 
-          <StyledSlider
+          <Slider
             classNameAnimation="customCarrouselAnimation"
             role="region"
             aria-label={stripTags(title)}
@@ -102,7 +102,7 @@ export function VerticalCarousel(
                 />
               )
             })}
-          </StyledSlider>
+          </Slider>
           <BlockRendererWithCondition
             condition={isNavShowing && width < MOBILE_WIDTH}>
             <NavigationWithDots
@@ -123,12 +123,12 @@ const StyledBackgroundExperienceVideoCarousel = styled.div`
     width: 100%;
     height: 100%;
     background: ${theme.colors.lila};
+    margin-top: var(--module-margin);
+    margin-bottom: var(--module-margin);
   `}
 `
 const StyledContainer = styled(ContentWrapper)`
   ${({ theme }) => css`
-  padding-top: 5rem;
-  padding-bottom: 5rem;
   @media (width < ${theme.mediaQueries.mobile}) {
     padding-top:1.875rem;
     padding-bottom:1.875rem;
@@ -136,9 +136,6 @@ const StyledContainer = styled(ContentWrapper)`
   }
   `}
 `
-
-const StyledSlider = styled(Slider)``
-
 const StyledHeading = styled.div`
   ${({ theme }) => css`
     display: flex;
