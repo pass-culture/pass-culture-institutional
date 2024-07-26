@@ -113,10 +113,13 @@ const StyledBackgroundExperienceVideoCarousel = styled.div`
     width: 100%;
     height: 100%;
     background: ${theme.colors.lila};
+    margin-top: var(--module-margin);
+    margin-bottom: var(--module-margin);
   `}
 `
 const StyledContainer = styled(ContentWrapper)`
   ${({ theme }) => css`
+
   @media (width < ${theme.mediaQueries.mobile}) {
     padding-top:1.875rem;
     padding-bottom:1.875rem;
