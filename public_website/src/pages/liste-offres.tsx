@@ -69,7 +69,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
         condition={!!offres_culturelles && offres_culturelles.items.length > 0}>
         <OffersCarousel {...(offres_culturelles as OffersVideoCarouselProps)} />
       </BlockRendererWithCondition>
-
+      <Separator isActive={false} />
       <BlockRendererWithCondition
         condition={!!experience && experience.carouselItems.length > 0}>
         <ExperienceVideoCarousel
