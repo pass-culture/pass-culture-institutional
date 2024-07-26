@@ -183,24 +183,15 @@ export const WrapperChevron = styled.span<{ $isOpen: boolean }>`
 `
 
 export const StyledSocialMedia = styled(SocialMedia)`
-  ${({ theme }) => css`
-    margin-top: 6rem;
-    margin-bottom: 5rem;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 5rem 0 6.25rem;
-    }
-  `}
+  margin: 0rem;
 `
 
 export const StyledTitle = styled(ContentWrapper)`
   ${({ theme }) => css`
     --module-spacing: 0;
-    // margin-top: 3.5rem;
 
     h2 {
       margin-bottom: 0rem;
-      //   font-size: ${theme.fonts.sizes['8xl']};
     }
 
     h3 {
