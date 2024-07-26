@@ -56,10 +56,13 @@ export default function Home({
         />
       </StyledHomeGradient>
 
-      <AboutSection
-        title={aboutSection.title}
-        description={aboutSection.description}
-      />
+      <span id="target-anchor-scroll">
+        <AboutSection
+          title={aboutSection.title}
+          description={aboutSection.description}
+        />
+      </span>
+
       <Separator isActive={false} />
       <EligibilitySection
         title={eligibilitySection.title}
