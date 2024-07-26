@@ -87,7 +87,6 @@ const Root = styled(ContentWrapper)`
     margin-bottom: calc(var(--module-margin) + 1.5625rem);
     @media (width < ${theme.mediaQueries.tablet}) {
       overflow: visible;
-      
     }
 
     @media (width < ${theme.mediaQueries.tablet}) {
