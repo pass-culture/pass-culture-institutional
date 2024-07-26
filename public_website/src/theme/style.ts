@@ -183,7 +183,7 @@ export const WrapperChevron = styled.span<{ $isOpen: boolean }>`
 `
 
 export const StyledSocialMedia = styled(SocialMedia)`
-  margin: 0rem;
+  margin: 0 auto;
 `
 
 export const StyledTitle = styled(ContentWrapper)`
