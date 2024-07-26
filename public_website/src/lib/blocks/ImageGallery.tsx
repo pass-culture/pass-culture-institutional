@@ -61,7 +61,7 @@ const ImageComponent: React.FC<{
     alt={image.attributes.alternativeText ?? ''}
     width={image.attributes.width}
     height={image.attributes.height}
-    // fetchPriority="low"
+    fetchPriority="low"
     loading="lazy"
     decoding="async"
   />
@@ -169,21 +169,23 @@ const Rows = styled.div<{ $galleryIsShort: boolean }>`
 `
 
 const Row = styled.div`
-  height: 15rem;
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  width: fit-content;
+  ${({ theme }) => css`
+    height: 15rem;
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: fit-content;
 
-  &:nth-child(2) {
-    padding-left: 7.5rem;
-  }
+    &:nth-child(2) {
+      padding-left: 7.5rem;
+    }
 
-  img {
-    height: 100%;
-    width: auto;
-    border-radius: 1.25rem;
-  }
+    img {
+      height: 100%;
+      width: auto;
+      border-radius: ${theme.radius.sm};
+    }
+  `}
 `
 
 const Controls = styled.div`

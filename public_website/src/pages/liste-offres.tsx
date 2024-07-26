@@ -83,7 +83,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
           isLandscape={experience?.isLandscape}
         />
       </BlockRendererWithCondition>
-
+      <Separator isActive={false} />
       {!!question && (
         <SimplePushCta
           title={question.title}
@@ -93,6 +93,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
           cta={question.cta}
         />
       )}
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

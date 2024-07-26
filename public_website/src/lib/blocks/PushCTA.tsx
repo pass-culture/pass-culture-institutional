@@ -83,20 +83,21 @@ const Root = styled(ContentWrapper)`
     display: grid;
     grid-template-columns: 1fr 1.25fr;
     position: relative;
-    margin-top: calc(var(--module-margin) + var(--module-margin) * 2);
-    margin-bottom: calc(var(--module-margin) + var(--module-margin) * 2);
+    margin-top: calc(var(--module-margin) + 1.5625rem);
+    margin-bottom: calc(var(--module-margin) + 1.5625rem);
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background-color: transparent;
       padding: 1.5rem;
       display: block;
+      margin-top: calc(var(--module-margin) - 1.75rem);
       &:before {
         content: ' ';
         height: 80%;
         background-color: ${theme.colors.sky};
         width: 90%;
         position: absolute;
-        top: 25%;
+        margin-top: 30%;
         margin-left: -45%;
         left: 50%;
         z-index: 0;

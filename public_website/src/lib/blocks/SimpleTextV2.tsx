@@ -49,7 +49,7 @@ const Root = styled(ContentWrapper)`
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
 
     img {
-      border-radius: 1rem;
+      border-radius: ${theme.radius.sm};
       margin-bottom: 1.5rem;
       object-fit: cover;
       aspect-ratio: 1.2;

@@ -9,13 +9,13 @@ import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
+import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { separatorIsActive } from '@/utils/separatorIsActive'
 
 interface ListProps {
   resourceREData: APIResponseData<'api::resource.resource'>[]
@@ -26,15 +26,8 @@ export default function RessourcesEnseignants({
   resourceREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
-  const {
-    seo,
-    title,
-    buttonText,
-    aide,
-    socialMediaSection,
-    separator,
-    filtres,
-  } = ressourcesEnseignantsListe.attributes
+  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
+    ressourcesEnseignantsListe.attributes
 
   const cat = Array.from(
     new Set(resourceREData.map((item) => item.attributes.category))
@@ -130,7 +123,8 @@ export default function RessourcesEnseignants({
         </React.Fragment>
       )}
 
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive />
+      <WhiteSpace />
 
       {!!aide && (
         <SimplePushCta
@@ -141,6 +135,7 @@ export default function RessourcesEnseignants({
           icon={aide.icon}
         />
       )}
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

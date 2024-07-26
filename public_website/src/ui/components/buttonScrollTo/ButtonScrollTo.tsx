@@ -68,7 +68,7 @@ const StyledButton = styled.button<{
     min-height: 4.375rem;
     background-color: ${theme.colors.secondary};
     position: fixed;
-    top: calc(100vh - 8rem);
+    top: calc(100vh - 10rem);
     left: 50%;
     margin-left: -2.1875rem;
     border-radius: 100%;

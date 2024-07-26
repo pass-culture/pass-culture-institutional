@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled, { css } from 'styled-components'
 
+import { theme } from '@/theme/theme'
 import { ListCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
@@ -36,7 +37,7 @@ const Root = styled.article`
 `
 
 const StyledCardImage = styled(Image)`
-  border-radius: 1rem;
+  border-radius: ${theme.radius.sm};
   margin-bottom: 1.5rem;
   aspect-ratio: 395/318;
   width: 100%;

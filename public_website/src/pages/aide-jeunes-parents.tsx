@@ -56,6 +56,7 @@ export default function Help({ helpData }: HelpProps) {
         cta={simplepushcta.cta}
         icon={simplepushcta.icon}
       />
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

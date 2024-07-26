@@ -54,63 +54,75 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
   }, [EXPERIENCE_VIDEO_CAROUSEL_SELECTOR])
 
   return (
-    <StyledContainer>
-      <CarouselProvider
-        naturalSlideWidth={60}
-        naturalSlideHeight={75}
-        visibleSlides={visibleSlides}
-        totalSlides={TOTAL_SLIDES}
-        isIntrinsicHeight
-        dragEnabled={false}
-        infinite={false}
-        step={1}>
-        <StyledHeading>
-          <StyledHeading2>{title}</StyledHeading2>
-          <BlockRendererWithCondition condition={isNavShowing}>
-            <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
-              <NavigationWithArrow
-                carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-                slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-              />
-            </BlockRendererWithCondition>
-          </BlockRendererWithCondition>
-        </StyledHeading>
-
-        <BlockRendererWithCondition condition={items && items.length > 0}>
-          <StyledSlider
-            classNameAnimation="customCarrouselAnimation"
-            aria-label={stripTags(title)}
-            aria-roledescription="carrousel">
-            {items?.map((item, index) => {
-              return (
-                <ExperienceVideoCarouselSlide
-                  isLandscape={isLandscape}
-                  key={`${item.title}_${index}`}
-                  slideIndex={index}
-                  {...item}
+    <StyledBackgroundExperienceVideoCarousel>
+      <StyledContainer>
+        <CarouselProvider
+          naturalSlideWidth={60}
+          naturalSlideHeight={75}
+          visibleSlides={visibleSlides}
+          totalSlides={TOTAL_SLIDES}
+          isIntrinsicHeight
+          dragEnabled={false}
+          infinite={false}
+          step={1}>
+          <StyledHeading>
+            <StyledHeading2>{title}</StyledHeading2>
+            <BlockRendererWithCondition condition={isNavShowing}>
+              <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
+                <NavigationWithArrow
+                  carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+                  slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
                 />
-              )
-            })}
-          </StyledSlider>
-        </BlockRendererWithCondition>
+              </BlockRendererWithCondition>
+            </BlockRendererWithCondition>
+          </StyledHeading>
 
-        <BlockRendererWithCondition
-          condition={isNavShowing && width < MOBILE_WIDTH}>
-          <NavigationWithDots
-            items={items}
-            carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
-            slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
-            carouselName="EXPERIENCE_VIDEO_CAROUSEL"
-          />
-        </BlockRendererWithCondition>
-      </CarouselProvider>
-    </StyledContainer>
+          <BlockRendererWithCondition condition={items && items.length > 0}>
+            <StyledSlider
+              classNameAnimation="customCarrouselAnimation"
+              aria-label={stripTags(title)}
+              aria-roledescription="carrousel">
+              {items?.map((item, index) => {
+                return (
+                  <ExperienceVideoCarouselSlide
+                    isLandscape={isLandscape}
+                    key={`${item.title}_${index}`}
+                    slideIndex={index}
+                    {...item}
+                  />
+                )
+              })}
+            </StyledSlider>
+          </BlockRendererWithCondition>
+          <BlockRendererWithCondition
+            condition={isNavShowing && width < MOBILE_WIDTH}>
+            <NavigationWithDots
+              items={items}
+              carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
+              slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
+              carouselName="EXPERIENCE_VIDEO_CAROUSEL"
+            />
+          </BlockRendererWithCondition>
+        </CarouselProvider>
+      </StyledContainer>
+    </StyledBackgroundExperienceVideoCarousel>
   )
 }
-
+const StyledBackgroundExperienceVideoCarousel = styled.div`
+  ${({ theme }) => css`
+    width: 100%;
+    height: 100%;
+    background: ${theme.colors.lila};
+  `}
+`
 const StyledContainer = styled(ContentWrapper)`
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  ${({ theme }) => css`
+  @media (width < ${theme.mediaQueries.mobile}) {
+    padding-top:1.875rem;
+    padding-bottom:1.875rem;
+  }
+  }
+  `}
 `
 
 const StyledHeading = styled.div`

@@ -96,7 +96,7 @@ const Root = styled.div`
       .right,
       .left {
         grid-template-columns: 1fr;
-        padding: 0 1.5rem 0;
+        padding: 0 1.25rem 0;
         grid-template-areas:
           'second'
           'first';
@@ -116,16 +116,13 @@ const Root = styled.div`
     }
   `}
 `
-
 const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
     position: relative;
     display: grid;
     gap: 2.5rem;
-      grid-area: first;
+    grid-area: first;
     }
-
-    
 
     .second {
       grid-area: second;
@@ -137,14 +134,11 @@ const StyledContentWrapper = styled(ContentWrapper)`
     }
   `}
 `
-
 const StyledContentTextWrapper = styled.div`
   ${({ theme }) => css`
     font-weight: ${theme.fonts.weights.medium};
     line-height: 2.125rem;
-
     font-size: ${theme.fonts.sizes['m']};
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -183,7 +177,6 @@ const StyledContentTextWrapper = styled.div`
       }
   `}
 `
-
 const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
   ${({ theme, $imageOnRight: $imageOnLeft }) => css`
     display: flex;
@@ -220,7 +213,6 @@ const StyledContentImagetWrapper = styled.div<{ $imageOnRight?: boolean }>`
     }
   `}
 `
-
 const StyledHeading = styled(Typo.Heading2)`
   ${({ theme }) => css`
     margin: 0 0 3rem;
@@ -231,7 +223,6 @@ const StyledHeading = styled(Typo.Heading2)`
     }
   `}
 `
-
 const ImageContainer = styled.div<{ $imageOnRight?: boolean }>`
   aspect-ratio: 24/30;
   max-width: 80%;
@@ -246,7 +237,6 @@ const StyledImage = styled.img`
     border-radius: ${theme.radius.sm};
   `}
 `
-
 const StyledIcon = styled(OutlinedText)`
   ${({ theme }) => css`
     font-size: ${theme.fonts.sizes['8xl']};

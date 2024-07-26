@@ -35,53 +35,55 @@ export function DoublePushCTA(
 
   return (
     <StyledContentWrapper>
-      <BlockRendererWithCondition condition={isRenderable(image_url)}>
-        <MobileImage src={getStrapiURL(image_url as string)} alt="" />
-      </BlockRendererWithCondition>
-
-      <Root className={className}>
+      <StyledContent>
         <BlockRendererWithCondition condition={isRenderable(image_url)}>
-          <CardContainer>
-            <Card $imageUrl={getStrapiURL(image_url)} />
-            <OutlinedText shadow>{icon}</OutlinedText>
-          </CardContainer>
+          <MobileImage src={getStrapiURL(image_url as string)} alt="" />
         </BlockRendererWithCondition>
-        <RightSide>
-          <Typo.Heading2>{title}</Typo.Heading2>
-          <BlockRendererWithCondition condition={isRenderable(text)}>
-            <p aria-label={parseText(text as string).accessibilityLabel}>
-              {parseText(text as string).processedText}
-            </p>
-          </BlockRendererWithCondition>
 
-          <CtaContainer>
-            <span>
-              <CtaLink
-                href={firstCta.URL}
-                onClick={(): void => {
-                  !!firstCta.eventName && !!firstCta.eventOrigin
-                    ? onClickAnalytics({
-                        eventName: firstCta?.eventName,
-                        eventOrigin: firstCta?.eventOrigin,
-                      })
-                    : void 0
-                }}>
-                <span>{firstCta.Label}</span>
-              </CtaLink>
-            </span>
-            <BlockRendererWithCondition
-              condition={isRenderable(secondCta?.URL)}>
-              <span>
-                <ButtonWithCTA
-                  target="_blank"
-                  variant="quaternary"
-                  cta={secondCta as CTA}
-                />
-              </span>
+        <Root className={className}>
+          <BlockRendererWithCondition condition={isRenderable(image_url)}>
+            <CardContainer>
+              <Card $imageUrl={getStrapiURL(image_url)} />
+              <OutlinedText shadow>{icon}</OutlinedText>
+            </CardContainer>
+          </BlockRendererWithCondition>
+          <RightSide>
+            <Typo.Heading2>{title}</Typo.Heading2>
+            <BlockRendererWithCondition condition={isRenderable(text)}>
+              <p aria-label={parseText(text as string).accessibilityLabel}>
+                {parseText(text as string).processedText}
+              </p>
             </BlockRendererWithCondition>
-          </CtaContainer>
-        </RightSide>
-      </Root>
+
+            <CtaContainer>
+              <span>
+                <CtaLink
+                  href={firstCta.URL}
+                  onClick={(): void => {
+                    !!firstCta.eventName && !!firstCta.eventOrigin
+                      ? onClickAnalytics({
+                          eventName: firstCta?.eventName,
+                          eventOrigin: firstCta?.eventOrigin,
+                        })
+                      : void 0
+                  }}>
+                  <span>{firstCta.Label}</span>
+                </CtaLink>
+              </span>
+              <BlockRendererWithCondition
+                condition={isRenderable(secondCta?.URL)}>
+                <span>
+                  <ButtonWithCTA
+                    target="_blank"
+                    variant="quaternary"
+                    cta={secondCta as CTA}
+                  />
+                </span>
+              </BlockRendererWithCondition>
+            </CtaContainer>
+          </RightSide>
+        </Root>
+      </StyledContent>
     </StyledContentWrapper>
   )
 }
@@ -90,15 +92,20 @@ const StyledContentWrapper = styled(ContentWrapper)`
   ${({ theme }) => css`
     min-width: 100%;
     padding: 0;
-    background-color: ${theme.colors.saumon};
-    margin-top: calc(var(--module-margin) * 2);
-    margin-bottom: calc(var(--module-margin) * 2);
-    @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
-      padding: 0;
-      margin-top: calc(var(--module-margin) * 8);
-      margin-bottom: calc(var(--module-margin) * 3);
-      overflow: visible;
+    overflow: visible;
+    @media (width < ${theme.mediaQueries.largeDesktop}) {
+      margin-top: calc(120px + var(--module-margin));
     }
+  `}
+`
+
+const StyledContent = styled.div`
+  ${({ theme }) => css`
+    margin: auto;
+    position: relative;
+    margin-top: var(--module-margin);
+    margin-bottom: var(--module-margin);
+    background-color: ${theme.colors.saumon};
   `}
 `
 
@@ -120,10 +127,9 @@ const Root = styled.div`
 
     @media (width < ${theme.mediaQueries.mobile}) {
       display: block;
-      border-radius: 0;
       position: relative;
       padding: 0;
-      margin-top: 0;
+      margin: 0;
     }
   `}
 `
@@ -141,34 +147,17 @@ const CardContainer = styled.div`
   ${({ theme }) => css`
     position: relative;
     z-index: 1;
-    margin: -3.125rem 0;
     max-width: 28rem;
-
+    margin: -3.125rem 0px;
+    @media (width < ${theme.mediaQueries.mobile}) {
+      margin: 0;
+    }
     span {
       position: absolute;
       top: 20%;
-      right: -1rem;
+      right: 3rem;
       font-size: ${theme.fonts.sizes['8xl']};
       transform: rotate(-7deg);
-    }
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      margin: 0 auto;
-      position: relative;
-      min-width: 90%;
-      min-height: 40%;
-      top: -7rem;
-      span {
-        display: none;
-      }
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      margin: 0 auto;
-      position: absolute;
-      min-width: 90%;
-      min-height: 40%;
-      left: 1.8rem;
     }
   `}
 `
@@ -188,13 +177,10 @@ const Card = styled.div<{ $imageUrl?: string }>`
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       width: 70%;
-      aspect-ratio: 338/233;
       padding: 0;
       margin: 0 auto;
-    }
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: none;
+      top: -120px;
+      position: relative;
     }
   `}
 `
@@ -215,9 +201,7 @@ const RightSide = styled.div`
       font-size: ${theme.fonts.sizes.m};
       line-height: 2.125rem;
       font-weight: ${theme.fonts.weights.medium};
-
       margin-bottom: 2rem;
-
       @media (width < ${theme.mediaQueries.mobile}) {
         font-size: ${theme.fonts.sizes.s};
         line-height: 1.75rem;
@@ -227,11 +211,11 @@ const RightSide = styled.div`
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       padding: 2rem;
       max-width: none;
-      margin-top: -7rem;
+      margin-top: -120px;
+      position: relative;
     }
 
     @media (width < ${theme.mediaQueries.mobile}) {
-      margin-top: -7rem;
       padding-inline: 1.3rem;
     }
   `}
@@ -298,12 +282,5 @@ const MobileImage = styled.img`
     object-fit: cover;
     max-width: 13rem;
     aspect-ratio: 13/16;
-
-    @media (width < ${theme.mediaQueries.mobile}) {
-      display: block;
-      margin: 0 auto;
-      max-width: 50%;
-      top: -7rem;
-    }
   `}
 `

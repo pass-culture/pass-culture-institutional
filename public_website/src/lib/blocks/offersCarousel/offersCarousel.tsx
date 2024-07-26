@@ -166,10 +166,6 @@ const StyledHeading = styled.div`
     max-width: calc(var(--container-width, 75.8125rem) + 1.3rem);
     padding-left: 1.3rem;
     padding-right: 1.3rem;
-
-    @media (width < ${theme.mediaQueries.largeDesktop}) {
-      padding-right: 0;
-    }
   `}
 `
 

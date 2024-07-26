@@ -255,15 +255,6 @@ export function Simulator(props: SimulatorProps) {
 
 const Root = styled.div`
   position: relative;
-  // &::after {
-  //   position: absolute;
-  //   content: '';
-  //   inset: 0;
-  //   border-radius: 1rem;
-  //   background-color: ${({ theme }) => theme.colors.secondary};
-  //   transform: rotate(2.1deg);
-  //   z-index: -1;
-  // }
 `
 
 const TopEmoji = styled(OutlinedText)`

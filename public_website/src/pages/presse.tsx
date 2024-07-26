@@ -15,7 +15,7 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
-import { StyledSocialMedia, StyledTitle } from '@/theme/style'
+import { StyledTitle } from '@/theme/style'
 import { ListPressProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
@@ -201,7 +201,7 @@ export default function Presse({
       )}
 
       <Separator isActive={separatorIsActive(separator)} />
-      {/* BLOC EVENTS / RENDEZ-VOUS */}
+
       {!!titleEventSection && (
         <StyledTitle>
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
@@ -247,6 +247,7 @@ export default function Presse({
         text={pushCta.text}
         icon={pushCta.icon}
       />
+      <Separator isActive={false} />
       <StyledSimplePushCta>
         {!!aide && (
           <SimplePushCta
@@ -258,12 +259,7 @@ export default function Presse({
           />
         )}
       </StyledSimplePushCta>
-      {!!socialMediaSection && (
-        <StyledSocialMedia
-          title={socialMediaSection.title}
-          socialMediaLink={socialMediaSection.socialMediaLink}
-        />
-      )}
+      <Separator isActive={false} />
     </PageLayout>
   )
 }

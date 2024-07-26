@@ -2,23 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { parseText } from '@/utils/parseText'
-/**
- * Use these components to apply typography styles.
- *
- * - To override the tag name, use `as` prop: https://styled-components.com/docs/api#as-polymorphic-prop
- * - To override CSS properties when using them, use the double ampersand (&&) operator: https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
- */
 
 interface HeadingProps {
   children: string
   as?: keyof JSX.IntrinsicElements
 }
-
+const getFilteredRest = (rest: ParsedTextProps) => {
+  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
+  const { ['accessibilityLabel']: _, ...filterRest } = { ...rest }
+  return filterRest
+}
 const Heading1: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
   const { processedText, accessibilityLabel = 'aria-label' } =
     parseText(children)
+  const filterRest = getFilteredRest(rest)
   return (
-    <StyledHeading1 as={as} aria-label={accessibilityLabel} {...rest}>
+    <StyledHeading1 as={as} aria-label={accessibilityLabel} {...filterRest}>
       {processedText}
     </StyledHeading1>
   )
@@ -31,12 +30,19 @@ const StyledHeading1 = styled.h1(({ theme }) => ({
   },
 }))
 
-const Heading2: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
+interface ParsedTextProps {
+  accessibilityLabel?: string
+}
+
+const Heading2: React.FC<HeadingProps> = (props) => {
+  const { children, as, ...rest } = props
   const { processedText, accessibilityLabel = 'aria-label' } =
     parseText(children)
 
+  const filterRest = getFilteredRest(rest)
+
   return (
-    <StyledHeading2 as={as} aria-label={accessibilityLabel} {...rest}>
+    <StyledHeading2 {...filterRest} as={as} aria-label={accessibilityLabel}>
       {processedText}
     </StyledHeading2>
   )
@@ -54,8 +60,10 @@ const StyledHeading2 = styled.h2(({ theme }) => {
 const Heading3: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
   const { processedText, accessibilityLabel = 'aria-label' } =
     parseText(children)
+
+  const filterRest = getFilteredRest(rest)
   return (
-    <StyledHeading3 as={as} aria-label={accessibilityLabel} {...rest}>
+    <StyledHeading3 as={as} aria-label={accessibilityLabel} {...filterRest}>
       {processedText}
     </StyledHeading3>
   )
@@ -73,8 +81,9 @@ const StyledHeading3 = styled.h3(({ theme }) => {
 const Body: React.FC<HeadingProps> = ({ children, as, ...rest }) => {
   const { processedText, accessibilityLabel = 'aria-label' } =
     parseText(children)
+  const filterRest = getFilteredRest(rest)
   return (
-    <StyledBody as={as} aria-label={accessibilityLabel} {...rest}>
+    <StyledBody as={as} aria-label={accessibilityLabel} {...filterRest}>
       {processedText}
     </StyledBody>
   )

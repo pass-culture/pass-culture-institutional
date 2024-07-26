@@ -18,7 +18,7 @@ export function Imageblock(props: ImageProps) {
           <img
             src={getStrapiURL(image.data.attributes.url)}
             alt={props.alt}
-            // fetchPriority="low"
+            fetchPriority="low"
             loading="lazy"
             decoding="async"
           />
@@ -64,7 +64,7 @@ const Root = styled.div`
 
       img {
         width: 100%;
-        border-radius: 1rem;
+        border-radius: ${theme.radius.sm};
       }
 
       figure {

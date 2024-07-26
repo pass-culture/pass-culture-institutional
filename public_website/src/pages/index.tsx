@@ -99,7 +99,6 @@ export default function Home({
 }
 
 export const getStaticProps = (async () => {
-  // Fetch home data
   const query = stringify({
     populate: [
       'heroSection',
