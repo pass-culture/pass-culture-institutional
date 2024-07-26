@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { onClickAnalytics } from '../analytics/helpers'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { Separator } from './Separator'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -35,6 +36,7 @@ export function DoublePushCTA(
 
   return (
     <StyledContentWrapper>
+      <Separator isActive={false} />
       <StyledContent>
         <BlockRendererWithCondition condition={isRenderable(image_url)}>
           <MobileImage src={getStrapiURL(image_url as string)} alt="" />
@@ -155,9 +157,13 @@ const CardContainer = styled.div`
     span {
       position: absolute;
       top: 20%;
-      right: 3rem;
+      right: -2rem;
       font-size: ${theme.fonts.sizes['8xl']};
       transform: rotate(-7deg);
+
+      @media (width < ${theme.mediaQueries.largeDesktop}) {
+        right: 2rem;
+      }
     }
   `}
 `

@@ -85,19 +85,22 @@ const Root = styled(ContentWrapper)`
     position: relative;
     margin-top: calc(var(--module-margin) + 1.5625rem);
     margin-bottom: calc(var(--module-margin) + 1.5625rem);
+    @media (width < ${theme.mediaQueries.tablet}) {
+      overflow: visible;
+    }
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background-color: transparent;
-      padding: 1.5rem;
       display: block;
+      padding-top: 1rem;
       margin-top: calc(var(--module-margin) - 1.75rem);
       &:before {
         content: ' ';
-        height: 80%;
+        height: 85%;
         background-color: ${theme.colors.sky};
         width: 90%;
         position: absolute;
-        margin-top: 30%;
+        top: 20%;
         margin-left: -45%;
         left: 50%;
         z-index: 0;
@@ -125,7 +128,6 @@ const Card = styled.div<{ $imageUrl?: string }>`
     background-size: cover;
     background-position: center 4.5rem;
     background-repeat: no-repeat;
-
     display: flex;
     flex-direction: column-reverse;
     padding: 2rem;
@@ -231,7 +233,6 @@ const CtaLink = styled(Link)`
       ${theme.colors.secondary}
     );
     color: ${theme.colors.white};
-
     padding: 1rem 1.75rem;
     border-radius: 100px;
   `}
