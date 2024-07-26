@@ -10,7 +10,7 @@ jobs:
       project_id: passculture-cls-metier-prod
       environment: production 
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
-      teleport_version: 13.4.4
+      teleport_version: 15.2.5
       teleport_proxy: teleport.cls.passculture.team:443
       teleport_kubernetes_cluster: passculture-cls-metier-prod
       image_tag: ${{ github.sha }}
@@ -25,7 +25,7 @@ jobs:
       - deploy-cms-production
     with:
       environment: production
-      teleport_version: 13.4.4
+      teleport_version: 15.2.5
       teleport_proxy: teleport.cls.passculture.team:443
       teleport_kubernetes_cluster: passculture-cls-metier-prod
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
