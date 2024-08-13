@@ -3,37 +3,544 @@
     {
       "target": "testing",
       "public": "out",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "cleanUrls": true,
-      "redirects": [ {
-        "source": "/le-dispositif",
-        "destination": "/le-pass-culture-cest-quoi",
-        "type": 301
-      } ]
+      "redirects": [
+        {
+          "source": "/accessibilite",
+          "destination": "/accessibilite",
+          "type": 301
+        },
+        {
+          "source": "/actualites",
+          "destination": "/actualites",
+          "type": 301
+        },
+        {
+          "source": "/souscription",
+          "destination": "/actualites-jeunes-parents",
+          "type": 301
+        },
+        {
+          "source": "/sinformer-pres-de-chez-soi",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-institutionnels",
+          "destination": "/collectivites",
+          "type": 301
+        },
+        {
+          "source": "/support-pass-culture",
+          "destination": "/faq",
+          "type": 301
+        },
+        {
+          "source": "/le-dispositif",
+          "destination": "/le-pass-culture-cest-quoi",
+          "type": 301
+        },
+        {
+          "source": "/le-programme-ambassadeurs",
+          "destination": "/le-programme-ambassadeurs",
+          "type": 301
+        },
+        {
+          "source": "/le-programme-ambassadeurs-du-pass-culture",
+          "destination": "/le-programme-ambassadeurs-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/espace-acteurs-culturels",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-du-pass-culture",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/espace-professeurs",
+          "destination": "/lessentiel-du-pass-culture-enseignants",
+          "type": 301
+        },
+        {
+          "source": "/lequipe-pass-culture",
+          "destination": "/notre-equipe",
+          "type": 301
+        },
+        {
+          "source": "/lequipe",
+          "destination": "/notre-equipe",
+          "type": 301
+        },
+        {
+          "source": "/https-www-welcometothejungle-com-fr-companies-pass-culture-jobs",
+          "destination": "/nous-rejoindre",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-culturels",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/plan-du-site",
+          "destination": "/plan-du-site",
+          "type": 301
+        },
+        {
+          "source": "/service-presse",
+          "destination": "/presse",
+          "type": 301
+        },
+        {
+          "source": "/les-relais-socio-educatifs",
+          "destination": "/relais-socio-educatifs",
+          "type": 301
+        },
+        {
+          "source": "/supports-de-communication",
+          "destination": "/ressources-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/services-publics",
+          "destination": "/services-publics",
+          "type": 301
+        },
+        {
+          "source": "/la-culture-a-portee-de-main-pour-votre-enfant-des-ses-15-ans",
+          "destination": "/vous-etes-parents",
+          "type": 301
+        },
+        {
+          "source": "/cgu-professionnels",
+          "destination": "/cgu-professionnels",
+          "type": 301
+        },
+        {
+          "source": "/cgu",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/donnees-personnelles",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/marches-publics",
+          "destination": "/marches-publics",
+          "type": 301
+        },
+        {
+          "source": "/mention-dinformation",
+          "destination": "/TO DO",
+          "type": 301
+        },
+        {
+          "source": "/mentions-legales",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/nosapplications",
+          "destination": "/TO DO",
+          "type": 301
+        },
+        {
+          "source": "/politique-de-cookies",
+          "destination": "/politique-de-cookies",
+          "type": 301
+        },
+        {
+          "source": "/reglement-des-operations-speciales-2",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/reglement-jeu-concours",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/reglement/reglement",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/2022/05/09/les-references-culturelles-des-utilisateurs-du-pass-culture-mai-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/06/10/concerts-et-festivals-quel-regard-les-jeunes-posent-sur-la-musique-live",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/06/15/les-references-culturelles-des-utilisateurs-du-pass-culture-juin-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/08/10/la-recherche-utilisateurs-au-coeur-de-la-reflexion-de-loffre-collective",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/09/02/mesurer-et-definir-la-diversification-des-pratiques-culturelles-analyse-des-reservations-des-utilisateurs-du-pass-culture",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/10/06/les-references-culturelles-des-utilisateurs-du-pass-culture-septembre-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/17/conversations-avec-nos-acteurs-culturels",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/20/les-references-culturelles-des-utilisateurs-du-pass-culture-best-of-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/30/biennales-internationales-du-spectacle-le-pass-culture-etait-present-les-11-et-12-janvier-derniers",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/01/festival-international-de-la-bande-dessinee-dangouleme-une-edition-particuliere",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/03/les-coulisses-du-pass-culture-avec-sebastien-cavalier",
+          "destination": "/les-coulisses-du-pass-culture-avec-sebastien-cavalier",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/13/victoires-de-la-musique-une-edition-exceptionnelle-pour-les-jeunes-du-pass-culture",
+          "destination": "/victoires-de-la-musique-une-edition-exceptionnelle-pour-les-jeunes-du-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/06/les-references-culturelles-des-utilisateurs-du-pass-culture-fevrier-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/06/festival-international-de-programmation-audiovisuelle-de-biarritz-une-edition-riche-en-enseignements",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/07/les-10-chiffres-cles-de-lannee-2022-du-pass-culture",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/21/numerique-et-culture-lies-dans-lexperience-pass-culture-des-jeunes",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/22/les-references-culturelles-des-utilisateurs-du-pass-culture-mars-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/05/04/les-references-culturelles-des-utilisateurs-du-pass-culture-avril-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/05/17/le-pass-culture-partenaire-du-mai-des-arts-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        }
+      ]
     },
     {
       "target": "staging",
       "public": "out",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "cleanUrls": true
     },
     {
       "target": "production",
       "public": "out",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "cleanUrls": true
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "cleanUrls": true,
+      "redirects": [
+        {
+          "source": "/accessibilite",
+          "destination": "/accessibilite",
+          "type": 301
+        },
+        {
+          "source": "/actualites",
+          "destination": "/actualites",
+          "type": 301
+        },
+        {
+          "source": "/souscription",
+          "destination": "/actualites-jeunes-parents",
+          "type": 301
+        },
+        {
+          "source": "/sinformer-pres-de-chez-soi",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-institutionnels",
+          "destination": "/collectivites",
+          "type": 301
+        },
+        {
+          "source": "/support-pass-culture",
+          "destination": "/faq",
+          "type": 301
+        },
+        {
+          "source": "/le-dispositif",
+          "destination": "/le-pass-culture-cest-quoi",
+          "type": 301
+        },
+        {
+          "source": "/le-programme-ambassadeurs",
+          "destination": "/le-programme-ambassadeurs",
+          "type": 301
+        },
+        {
+          "source": "/le-programme-ambassadeurs-du-pass-culture",
+          "destination": "/le-programme-ambassadeurs-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/espace-acteurs-culturels",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-du-pass-culture",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/espace-professeurs",
+          "destination": "/lessentiel-du-pass-culture-enseignants",
+          "type": 301
+        },
+        {
+          "source": "/lequipe-pass-culture",
+          "destination": "/notre-equipe",
+          "type": 301
+        },
+        {
+          "source": "/lequipe",
+          "destination": "/notre-equipe",
+          "type": 301
+        },
+        {
+          "source": "/https-www-welcometothejungle-com-fr-companies-pass-culture-jobs",
+          "destination": "/nous-rejoindre",
+          "type": 301
+        },
+        {
+          "source": "/les-partenaires-culturels",
+          "destination": "/lessentiel-du-pass-culture-acteurs-culturels",
+          "type": 301
+        },
+        {
+          "source": "/plan-du-site",
+          "destination": "/plan-du-site",
+          "type": 301
+        },
+        {
+          "source": "/service-presse",
+          "destination": "/presse",
+          "type": 301
+        },
+        {
+          "source": "/les-relais-socio-educatifs",
+          "destination": "/relais-socio-educatifs",
+          "type": 301
+        },
+        {
+          "source": "/supports-de-communication",
+          "destination": "/ressources-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/services-publics",
+          "destination": "/services-publics",
+          "type": 301
+        },
+        {
+          "source": "/la-culture-a-portee-de-main-pour-votre-enfant-des-ses-15-ans",
+          "destination": "/vous-etes-parents",
+          "type": 301
+        },
+        {
+          "source": "/cgu-professionnels",
+          "destination": "/cgu-professionnels",
+          "type": 301
+        },
+        {
+          "source": "/cgu",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/donnees-personnelles",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/marches-publics",
+          "destination": "/marches-publics",
+          "type": 301
+        },
+        {
+          "source": "/mention-dinformation",
+          "destination": "/TO DO",
+          "type": 301
+        },
+        {
+          "source": "/mentions-legales",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/nosapplications",
+          "destination": "/TO DO",
+          "type": 301
+        },
+        {
+          "source": "/politique-de-cookies",
+          "destination": "/politique-de-cookies",
+          "type": 301
+        },
+        {
+          "source": "/reglement-des-operations-speciales-2",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/reglement-jeu-concours",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/reglement/reglement",
+          "destination": "/reglements",
+          "type": 301
+        },
+        {
+          "source": "/2022/05/09/les-references-culturelles-des-utilisateurs-du-pass-culture-mai-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/06/10/concerts-et-festivals-quel-regard-les-jeunes-posent-sur-la-musique-live",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/06/15/les-references-culturelles-des-utilisateurs-du-pass-culture-juin-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/08/10/la-recherche-utilisateurs-au-coeur-de-la-reflexion-de-loffre-collective",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/09/02/mesurer-et-definir-la-diversification-des-pratiques-culturelles-analyse-des-reservations-des-utilisateurs-du-pass-culture",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2022/10/06/les-references-culturelles-des-utilisateurs-du-pass-culture-septembre-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/17/conversations-avec-nos-acteurs-culturels",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/20/les-references-culturelles-des-utilisateurs-du-pass-culture-best-of-2022",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/01/30/biennales-internationales-du-spectacle-le-pass-culture-etait-present-les-11-et-12-janvier-derniers",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/01/festival-international-de-la-bande-dessinee-dangouleme-une-edition-particuliere",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/03/les-coulisses-du-pass-culture-avec-sebastien-cavalier",
+          "destination": "/les-coulisses-du-pass-culture-avec-sebastien-cavalier",
+          "type": 301
+        },
+        {
+          "source": "/2023/02/13/victoires-de-la-musique-une-edition-exceptionnelle-pour-les-jeunes-du-pass-culture",
+          "destination": "/victoires-de-la-musique-une-edition-exceptionnelle-pour-les-jeunes-du-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/06/les-references-culturelles-des-utilisateurs-du-pass-culture-fevrier-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/06/festival-international-de-programmation-audiovisuelle-de-biarritz-une-edition-riche-en-enseignements",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/07/les-10-chiffres-cles-de-lannee-2022-du-pass-culture",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/21/numerique-et-culture-lies-dans-lexperience-pass-culture-des-jeunes",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/03/22/les-references-culturelles-des-utilisateurs-du-pass-culture-mars-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/05/04/les-references-culturelles-des-utilisateurs-du-pass-culture-avril-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        },
+        {
+          "source": "/2023/05/17/le-pass-culture-partenaire-du-mai-des-arts-2023",
+          "destination": "/actualites-pass-culture",
+          "type": 301
+        }
+      ]
     }
   ]
 }
