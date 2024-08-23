@@ -5,6 +5,8 @@ import { Montserrat } from 'next/font/google'
 import { stringify } from 'qs'
 import { ThemeProvider } from 'styled-components'
 
+import { useAxeptio } from '@/hooks/useAxeptio'
+import { useConsent } from '@/hooks/useConsent'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
 import { FooterProps, MyAppProps } from '@/types/props'
@@ -24,19 +26,22 @@ export default function MyApp({
   headerData,
   footerData,
 }: MyAppProps) {
+  useAxeptio()
+  const acceptedVendors = useConsent()
+
   useEffect(() => {
-    analyticsProvider.init()
-  }, [])
+    if (acceptedVendors['firebase']) analyticsProvider.init()
+  }, [acceptedVendors])
 
   const path =
     typeof window !== 'undefined' ? window.location?.pathname : undefined
   useEffect(() => {
-    if (path) {
+    if (path && acceptedVendors['firebase']) {
       analyticsProvider.logEvent('pageView', {
         origin: path,
       })
     }
-  }, [path])
+  }, [acceptedVendors, path])
 
   const breadcrumbContextValue = useMemo(
     () => ({
