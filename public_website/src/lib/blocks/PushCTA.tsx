@@ -2,8 +2,8 @@ import React from 'react'
 import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
-import { onClickAnalytics } from '../analytics/helpers'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import { theme } from '@/theme/theme'
 import { PushCTAProps, QRCodeProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -26,6 +26,8 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
     image,
     qrCodeUrl,
   } = props
+
+  const { onClickAnalytics } = useOnClickAnalytics()
 
   const image_props = image?.data?.attributes?.url
 

@@ -6,7 +6,7 @@ import { FrenchRepublic } from '../icons/FrenchRepublic'
 import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
-import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import { FooterProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
@@ -19,6 +19,8 @@ export function Footer(props: FooterProps) {
     Lists,
     bannerDefaultUrl = '',
   } = props
+
+  const { onClickAnalytics } = useOnClickAnalytics()
 
   return (
     <StyledFooter id="footer">

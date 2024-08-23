@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { onClickAnalytics } from '../analytics/helpers'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { Separator } from './Separator'
+import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import { CTA } from '@/types/CTA'
 import { PushCTAProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -32,6 +32,7 @@ export function DoublePushCTA(
     secondCta,
   } = props
 
+  const { onClickAnalytics } = useOnClickAnalytics()
   const image_url = image?.data?.attributes?.url
 
   return (

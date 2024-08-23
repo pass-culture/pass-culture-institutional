@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { AppBanner } from '../app-banner/AppBanner'
-import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { BannerProps } from '@/types/props'
 import { isRenderable } from '@/utils/isRenderable'
@@ -13,6 +13,8 @@ const HeaderBanner = (props: BannerProps) => {
     bannerDefaultUrl = '',
     bannerIosUrl,
   } = props
+
+  const { onClickAnalytics } = useOnClickAnalytics()
 
   const isRenderBanner = (): boolean => {
     return (

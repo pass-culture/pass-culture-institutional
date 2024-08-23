@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
-import { onClickAnalytics } from '@/lib/analytics/helpers'
+import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { Separator } from '@/lib/blocks/Separator'
 import { CustomSelect, CustomSelectButton, WrapperChevron } from '@/theme/style'
@@ -20,6 +20,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
   const dropdownRef = useRef<HTMLUListElement | null>(null)
   const [isOpen, setIsOpen] = useState<number>(-1)
   const params = useParams()
+  const { onClickAnalytics } = useOnClickAnalytics()
 
   const headerData = useContext(BreadcrumbContext)
   const pathname = usePathname()
