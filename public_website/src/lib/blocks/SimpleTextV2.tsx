@@ -95,7 +95,6 @@ const Root = styled(ContentWrapper)`
     }
 
     ul {
-      list-style-type: none;
       padding-left: 0 rem;
       list-style-position: inside;
     }
