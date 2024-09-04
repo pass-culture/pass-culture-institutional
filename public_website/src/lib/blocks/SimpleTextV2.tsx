@@ -63,8 +63,30 @@ const Root = styled(ContentWrapper)`
 
     h2 {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-weight: 600;
       color: ${theme.colors.secondary};
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: ${theme.colors.secondary};
+    }
+
+    h4 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: ${theme.colors.secondary};
+    }
+
+    h5 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    h6 {
+      font-size: 1.1rem;
+      font-weight: 700;
     }
 
     ul {
