@@ -63,12 +63,38 @@ const Root = styled(ContentWrapper)`
 
     h2 {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
+      font-weight: 600;
       color: ${theme.colors.secondary};
+      line-height: 1.3;
+    }
+
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: ${theme.colors.secondary};
+      line-height: 1.3;
+    }
+
+    h4 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: ${theme.colors.secondary};
+      line-height: 1.3;
+    }
+
+    h5 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    h6 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
     ul {
-      list-style-type: none;
       padding-left: 0 rem;
       list-style-position: inside;
     }
@@ -104,9 +130,26 @@ const Root = styled(ContentWrapper)`
       padding-right: 1rem;
       margin-bottom: 0;
 
+      line-height: 1.8;
+
       h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.7rem;
+      }
+
+      h4 {
+        font-size: 1.3rem;
+      }
+
+      h5 {
+        font-size: 1.2rem;
+      }
+
+      h6 {
+        font-size: 1.05rem;
       }
 
       p,
