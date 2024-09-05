@@ -7,16 +7,6 @@
       "cleanUrls": true,
       "redirects": [
         {
-          "source": "/accessibilite",
-          "destination": "/accessibilite",
-          "type": 301
-        },
-        {
-          "source": "/actualites",
-          "destination": "/actualites",
-          "type": 301
-        },
-        {
           "source": "/souscription",
           "destination": "/actualites-jeunes-parents",
           "type": 301
@@ -39,11 +29,6 @@
         {
           "source": "/le-dispositif",
           "destination": "/le-pass-culture-cest-quoi",
-          "type": 301
-        },
-        {
-          "source": "/le-programme-ambassadeurs",
-          "destination": "/le-programme-ambassadeurs",
           "type": 301
         },
         {
@@ -87,11 +72,6 @@
           "type": 301
         },
         {
-          "source": "/plan-du-site",
-          "destination": "/plan-du-site",
-          "type": 301
-        },
-        {
           "source": "/service-presse",
           "destination": "/presse",
           "type": 301
@@ -107,18 +87,8 @@
           "type": 301
         },
         {
-          "source": "/services-publics",
-          "destination": "/services-publics",
-          "type": 301
-        },
-        {
           "source": "/la-culture-a-portee-de-main-pour-votre-enfant-des-ses-15-ans",
           "destination": "/vous-etes-parents",
-          "type": 301
-        },
-        {
-          "source": "/cgu-professionnels",
-          "destination": "/cgu-professionnels",
           "type": 301
         },
         {
@@ -132,28 +102,8 @@
           "type": 301
         },
         {
-          "source": "/marches-publics",
-          "destination": "/marches-publics",
-          "type": 301
-        },
-        {
-          "source": "/mention-dinformation",
-          "destination": "/TO DO",
-          "type": 301
-        },
-        {
           "source": "/mentions-legales",
           "destination": "/mentions-legales-et-cgu-site",
-          "type": 301
-        },
-        {
-          "source": "/nosapplications",
-          "destination": "/TO DO",
-          "type": 301
-        },
-        {
-          "source": "/politique-de-cookies",
-          "destination": "/politique-de-cookies",
           "type": 301
         },
         {
@@ -281,16 +231,6 @@
       "cleanUrls": true,
       "redirects": [
         {
-          "source": "/accessibilite",
-          "destination": "/accessibilite",
-          "type": 301
-        },
-        {
-          "source": "/actualites",
-          "destination": "/actualites",
-          "type": 301
-        },
-        {
           "source": "/souscription",
           "destination": "/actualites-jeunes-parents",
           "type": 301
@@ -313,11 +253,6 @@
         {
           "source": "/le-dispositif",
           "destination": "/le-pass-culture-cest-quoi",
-          "type": 301
-        },
-        {
-          "source": "/le-programme-ambassadeurs",
-          "destination": "/le-programme-ambassadeurs",
           "type": 301
         },
         {
@@ -361,11 +296,6 @@
           "type": 301
         },
         {
-          "source": "/plan-du-site",
-          "destination": "/plan-du-site",
-          "type": 301
-        },
-        {
           "source": "/service-presse",
           "destination": "/presse",
           "type": 301
@@ -381,18 +311,8 @@
           "type": 301
         },
         {
-          "source": "/services-publics",
-          "destination": "/services-publics",
-          "type": 301
-        },
-        {
           "source": "/la-culture-a-portee-de-main-pour-votre-enfant-des-ses-15-ans",
           "destination": "/vous-etes-parents",
-          "type": 301
-        },
-        {
-          "source": "/cgu-professionnels",
-          "destination": "/cgu-professionnels",
           "type": 301
         },
         {
@@ -405,29 +325,10 @@
           "destination": "/mentions-legales-et-cgu-site",
           "type": 301
         },
-        {
-          "source": "/marches-publics",
-          "destination": "/marches-publics",
-          "type": 301
-        },
-        {
-          "source": "/mention-dinformation",
-          "destination": "/TO DO",
-          "type": 301
-        },
+
         {
           "source": "/mentions-legales",
           "destination": "/mentions-legales-et-cgu-site",
-          "type": 301
-        },
-        {
-          "source": "/nosapplications",
-          "destination": "/TO DO",
-          "type": 301
-        },
-        {
-          "source": "/politique-de-cookies",
-          "destination": "/politique-de-cookies",
           "type": 301
         },
         {
