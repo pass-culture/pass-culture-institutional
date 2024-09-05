@@ -44,8 +44,8 @@ export function OfferSection(props: OfferProps & BaseTextProps) {
                 />
               )}
             </StyledLink>
-            <StyledTitle>{offer.venue.commonName}</StyledTitle>
-            <Typo.Body>{offer.name}</Typo.Body>
+            <StyledTitle>{offer.name}</StyledTitle>
+            <Typo.Body>{offer.venue.commonName}</Typo.Body>
           </div>
         ))}
         <StyledLastCard>
