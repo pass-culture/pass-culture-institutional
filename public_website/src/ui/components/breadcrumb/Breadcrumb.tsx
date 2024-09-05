@@ -98,7 +98,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
         )}
       </ul>
     )
-  }, [groupLinks])
+  }, [groupLinks, onClickAnalytics])
 
   const label = currentNavigationGroup?.label
 
