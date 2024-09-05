@@ -1508,10 +1508,12 @@ export interface ApiRessourcepassRessourcepass extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks & Attribute.Required;
-    date: Attribute.DateTime;
+    date: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-07-21T22:00:00.000Z'>;
     category: Attribute.Enumeration<['\u00C9tude', 'Document', 'Article']> &
-      Attribute.Required;
+      Attribute.Required &
+      Attribute.DefaultTo<'\u00C9tude'>;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
