@@ -5,6 +5,7 @@
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
+import sitemap from "strapi-plugin-sitemap/strapi-admin";
 import updateStaticContent from "strapi-plugin-update-static-content/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
@@ -13,6 +14,7 @@ renderAdmin(document.getElementById("strapi"), {
     seo: seo,
     "users-permissions": usersPermissions,
     "multi-select": multiSelect,
+    sitemap: sitemap,
     "update-static-content": updateStaticContent,
   },
 });
