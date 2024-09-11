@@ -90,7 +90,7 @@ export default function EtudesPassCulture({
           $eqi: partner,
         },
         pageLocalisation: {
-          $containsi: 'S’informer - études',
+          $containsi: 'S\u2019informer - études',
         },
       },
     })
@@ -164,7 +164,7 @@ export const getStaticProps = (async () => {
         ],
       },
       pageLocalisation: {
-        $containsi: 'S’informer - études',
+        $containsi: 'S\u2019informer - études',
       },
     },
     pagination: {},

@@ -11,7 +11,7 @@ import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-import { fetchCMS } from '@/utils/fetchCMS'
+
 interface CustomPageProps {
   data: APIResponseData<'api::resource.resource'>
   latestStudies: APIResponseData<'api::resource.resource'>[]
@@ -28,6 +28,7 @@ export default function CustomPage(props: CustomPageProps) {
       )),
     [blocks]
   )
+
   return (
     <React.Fragment>
       <Header image={image} icon="" title={title} />
@@ -42,50 +43,34 @@ export default function CustomPage(props: CustomPageProps) {
   )
 }
 
-export const getStaticPaths = (async () => {
-  const response =
-    await fetchCMS<APIResponseData<'api::resource.resource'>[]>('/resources')
-
-  const result = {
-    paths: response.data.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
-    fallback: false,
-  }
-
-  return result
-}) satisfies GetStaticPaths
-
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
   const queryParams = stringify(
     {
       populate: [
-        'blocks.image.image',
-        'blocks.socialMediaLink',
-        'blocks.image.image.data',
-        'blocks.content',
-        'blocks.items',
-        'blocks',
-        'news',
-        'blocks.logo.logo',
-        'blocks.cta',
-        'blocks.items.items',
-        'relatedRessources.cta',
-        'relatedRessources.category',
-        'blocks[0]',
-        'blocks.items.image',
-        'blocks.logo',
         'blocks.columns',
+        'blocks.content',
+        'blocks.cta',
         'blocks.firstCta',
+        'blocks.image.image.data',
+        'blocks.image.image',
+        'blocks.items.image',
+        'blocks.items.items',
+        'blocks.items',
+        'blocks.logo.logo',
+        'blocks.logo',
         'blocks.secondCta',
-        'seo',
-        'seo.metaSocial',
-        'seo.metaSocial.image',
+        'blocks.socialMediaLink',
+        'blocks',
+        'blocks[0]',
         'image',
+        'news',
+        'relatedRessources.category',
+        'relatedRessources.cta',
+        'seo.metaSocial.image',
+        'seo.metaSocial',
+        'seo',
       ],
       filters: {
         slug: {
@@ -97,12 +82,13 @@ export const getStaticProps = (async ({ params }) => {
       encodeValuesOnly: true,
     }
   )
-  const response = (await Pages.getPage(
+
+  const responseQuery = (await Pages.getPage(
     PATHS.RESOURCES,
     queryParams
   )) as APIResponseData<'api::resource.resource'>[]
 
-  if (response.length === 0) {
+  if (responseQuery.length === 0) {
     return { notFound: true }
   }
 
@@ -114,13 +100,14 @@ export const getStaticProps = (async ({ params }) => {
     },
     filters: {
       title: {
-        $ne: response[0]!.attributes.title,
+        $ne: responseQuery[0]!.attributes.title,
       },
       category: {
-        $eqi: response[0]!.attributes.category,
+        $eqi: responseQuery[0]!.attributes.category,
       },
     },
   })
+
   const latestResources = (await Pages.getPage(
     PATHS.RESOURCES,
     latestStudiesQuery
@@ -128,11 +115,29 @@ export const getStaticProps = (async ({ params }) => {
 
   return {
     props: {
-      data: response[0]!,
+      data: responseQuery[0]!,
       latestStudies: latestResources,
     },
   }
 }) satisfies GetStaticProps<CustomPageProps>
+
+export const getStaticPaths = (async () => {
+  const response = (await Pages.getPage(
+    PATHS.EVENTS,
+    ''
+  )) as APIResponseData<'api::resource.resource'>[]
+
+  const result = {
+    paths: response.map((page) => ({
+      params: {
+        slug: page.attributes.slug,
+      },
+    })),
+    fallback: false,
+  }
+
+  return result
+}) satisfies GetStaticPaths
 
 const StyledLatestNews = styled(LatestNews)`
   ${({ theme }) => css`

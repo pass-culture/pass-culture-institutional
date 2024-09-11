@@ -120,10 +120,11 @@ export default function Presse({
           $eqi: secteur,
         },
         pageLocalisation: {
-          // $containsi: 'S’informer - presse',
+          $containsi: 'S\u2019informer - presse',
         },
       },
     })
+
     const resources = (await Pages.getPage(
       PATHS.RESOURCES,
       resourcesQuery
@@ -131,6 +132,7 @@ export default function Presse({
 
     setData(resources)
   }
+
   const fetchEventData = async () => {
     const eventQuery = stringify({
       pagination: {},
@@ -147,7 +149,7 @@ export default function Presse({
           $eqi: eventSecteur,
         },
         pageLocalisation: {
-          $containsi: 'S’informer - presse',
+          $containsi: 'S\u2019informer - presse',
         },
       },
     })
@@ -279,7 +281,7 @@ export const getStaticProps = (async () => {
         ],
       },
       pageLocalisation: {
-        $containsi: 'S’informer - presse',
+        $containsi: 'S\u2019informer - presse',
       },
     },
   })
@@ -320,7 +322,7 @@ export const getStaticProps = (async () => {
     pagination: {},
     filter: {
       pageLocalisation: {
-        $containsi: 'S’informer - presse',
+        $containsi: 'S\u2019informer - presse',
       },
     },
   })
