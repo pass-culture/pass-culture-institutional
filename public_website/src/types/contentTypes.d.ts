@@ -710,7 +710,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
   info: {
     singularName: 'event';
     pluralName: 'events';
-    displayName: 'Event';
+    displayName: '\u00C9v\u00E9nements';
     description: '';
   };
   options: {
@@ -1140,7 +1140,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
   info: {
     singularName: 'news';
     pluralName: 'news-list';
-    displayName: 'News';
+    displayName: 'Actualit\u00E9s';
     description: '';
   };
   options: {
@@ -1270,7 +1270,7 @@ export interface ApiPagePage extends Schema.CollectionType {
   info: {
     singularName: 'page';
     pluralName: 'pages';
-    displayName: 'Page';
+    displayName: 'Pages';
     description: '';
   };
   options: {
@@ -1369,7 +1369,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
   info: {
     singularName: 'resource';
     pluralName: 'resources';
-    displayName: 'Resources';
+    displayName: 'CP \u00C9tudes';
     description: '';
   };
   options: {

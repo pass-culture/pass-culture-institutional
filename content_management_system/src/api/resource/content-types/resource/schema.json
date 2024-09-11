@@ -4,7 +4,7 @@
   "info": {
     "singularName": "resource",
     "pluralName": "resources",
-    "displayName": "Resources",
+    "displayName": "CP Études",
     "description": ""
   },
   "options": {
@@ -35,7 +35,9 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "slug": {
       "type": "string",
