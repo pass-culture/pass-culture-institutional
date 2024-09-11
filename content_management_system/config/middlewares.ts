@@ -13,8 +13,6 @@ export default [
           upgradeInsecureRequests: null,
         },
       },
-      // Exceptions for some routes
-      except: ["/api/sitemap/index.xml"],
     },
   },
   "strapi::cors",

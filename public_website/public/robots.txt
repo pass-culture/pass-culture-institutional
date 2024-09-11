@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pass.culture.fr/api/sitemap/index.xml
+Sitemap: https://pass.culture.fr/sitemap.xml
