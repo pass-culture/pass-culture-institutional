@@ -596,7 +596,7 @@ export interface ApiActualitesPassCultureActualitesPassCulture
   info: {
     singularName: 'actualites-pass-culture';
     pluralName: 'actualites-pass-cultures';
-    displayName: 'Actualites Pass Culture';
+    displayName: "S'informer - Actualit\u00E9s";
     description: '';
   };
   options: {
@@ -634,7 +634,7 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
   info: {
     singularName: 'actualites-rdv-acteurs-culturel';
     pluralName: 'actualites-rdv-acteurs-culturels';
-    displayName: 'Actualites Rdv Acteurs Culturels';
+    displayName: 'Acteurs culturels - Actualit\u00E9s';
     description: '';
   };
   options: {
@@ -673,7 +673,7 @@ export interface ApiEtudesPassCultureEtudesPassCulture
   info: {
     singularName: 'etudes-pass-culture';
     pluralName: 'etudes-pass-cultures';
-    displayName: 'Etudes Pass Culture';
+    displayName: "S'informer - \u00C9tudes";
     description: '';
   };
   options: {
@@ -815,7 +815,7 @@ export interface ApiFooterFooter extends Schema.SingleType {
   info: {
     singularName: 'footer';
     pluralName: 'footers';
-    displayName: 'Footer';
+    displayName: 'Pied de page';
     description: '';
   };
   options: {
@@ -851,7 +851,7 @@ export interface ApiHeaderHeader extends Schema.SingleType {
   info: {
     singularName: 'header';
     pluralName: 'headers';
-    displayName: 'Header';
+    displayName: 'Menu';
     description: '';
   };
   options: {
@@ -887,7 +887,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
   info: {
     singularName: 'help';
     pluralName: 'helps';
-    displayName: 'Help - Jeunes parents';
+    displayName: 'Jeunes & parents - Aide';
     description: '';
   };
   options: {
@@ -917,7 +917,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
   info: {
     singularName: 'help-cultural-actors';
     pluralName: 'help-cultural-actors-list';
-    displayName: 'Help - Cultural Actors';
+    displayName: 'Acteurs culturels - Aide';
     description: '';
   };
   options: {
@@ -954,7 +954,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
   info: {
     singularName: 'help-teachers';
     pluralName: 'help-teachers-list';
-    displayName: 'Help - Teachers';
+    displayName: 'Enseignants - Aide';
     description: '';
   };
   options: {
@@ -993,7 +993,7 @@ export interface ApiHomeHome extends Schema.SingleType {
   info: {
     singularName: 'home';
     pluralName: 'homes';
-    displayName: 'Home';
+    displayName: "Page d'accueil ";
     description: '';
   };
   options: {
@@ -1028,7 +1028,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
   info: {
     singularName: 'liste-jeune';
     pluralName: 'liste-jeunes';
-    displayName: 'Actualit\u00E9s jeunes parents';
+    displayName: 'Jeunes & parents - Actualit\u00E9s';
     description: '';
   };
   options: {
@@ -1066,7 +1066,7 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
   info: {
     singularName: 'liste-offre';
     pluralName: 'liste-offres';
-    displayName: 'Liste offres';
+    displayName: 'Jeunes & parents - Liste offres';
     description: '';
   };
   options: {
@@ -1092,42 +1092,6 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::liste-offre.liste-offre',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiMasterMaster extends Schema.SingleType {
-  collectionName: 'masters';
-  info: {
-    singularName: 'master';
-    pluralName: 'masters';
-    displayName: 'Master';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    image: Attribute.Component<'block.image'>;
-    imageTextRight: Attribute.Component<'block.image-text'>;
-    imageTextLeft: Attribute.Component<'block.image-text'>;
-    littleList: Attribute.Component<'block.little-list'>;
-    littleListdescription: Attribute.Component<'block.little-list'>;
-    space: Attribute.Component<'block.space'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::master.master',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::master.master',
       'oneToOne',
       'admin::user'
     > &
@@ -1238,7 +1202,7 @@ export interface ApiNotFoundNotFound extends Schema.SingleType {
   info: {
     singularName: 'not-found';
     pluralName: 'not-founds';
-    displayName: 'Not Found';
+    displayName: "Page d'erreur";
     description: '';
   };
   options: {
@@ -1329,7 +1293,7 @@ export interface ApiPressePresse extends Schema.SingleType {
   info: {
     singularName: 'presse';
     pluralName: 'presses';
-    displayName: 'Presse';
+    displayName: "S'informer - Espace presse";
     description: '';
   };
   options: {
@@ -1556,7 +1520,7 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
   info: {
     singularName: 'ressources-enseignant';
     pluralName: 'ressources-enseignants';
-    displayName: 'Ressources Enseignants';
+    displayName: 'Enseignants - Ressources';
     description: '';
   };
   options: {
@@ -1594,7 +1558,7 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
   info: {
     singularName: 'ressources-pass-culture';
     pluralName: 'ressources-pass-cultures';
-    displayName: 'Ressources Pass Culture';
+    displayName: "S'informer - Ressources pass Culture";
     description: '';
   };
   options: {
@@ -1631,7 +1595,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
   info: {
     singularName: 'simulator';
     pluralName: 'simulators';
-    displayName: 'Simulator';
+    displayName: 'Jeunes & parents - Simulateur';
     description: '';
   };
   options: {
@@ -1721,7 +1685,6 @@ declare module '@strapi/types' {
       'api::home.home': ApiHomeHome;
       'api::liste-jeune.liste-jeune': ApiListeJeuneListeJeune;
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
-      'api::master.master': ApiMasterMaster;
       'api::news.news': ApiNewsNews;
       'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;
