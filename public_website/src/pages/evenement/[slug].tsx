@@ -145,9 +145,15 @@ export const getStaticProps = (async ({ params }) => {
 }) satisfies GetStaticProps<CustomPageProps>
 
 export const getStaticPaths = (async () => {
+  const eventsQuery = stringify({
+    pagination: {},
+    populate: ['image', 'cta'],
+    sort: ['date:desc'],
+  })
+
   const response = (await Pages.getPage(
     PATHS.EVENTS,
-    ''
+    eventsQuery
   )) as APIResponseData<'api::event.event'>[]
 
   const result = {
