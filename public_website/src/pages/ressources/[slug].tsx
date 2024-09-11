@@ -123,7 +123,7 @@ export const getStaticProps = (async ({ params }) => {
 
 export const getStaticPaths = (async () => {
   const response = (await Pages.getPage(
-    PATHS.EVENTS,
+    PATHS.RESOURCES,
     ''
   )) as APIResponseData<'api::resource.resource'>[]
 
