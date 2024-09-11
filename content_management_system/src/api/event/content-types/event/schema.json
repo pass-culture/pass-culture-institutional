@@ -4,7 +4,7 @@
   "info": {
     "singularName": "event",
     "pluralName": "events",
-    "displayName": "Event",
+    "displayName": "Événements",
     "description": ""
   },
   "options": {
@@ -38,11 +38,15 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "category": {
       "type": "enumeration",
-      "enum": ["Salon"],
+      "enum": [
+        "Salon"
+      ],
       "required": true
     },
     "localisation": {
@@ -124,7 +128,10 @@
     },
     "pageLocalisation": {
       "type": "customField",
-      "options": ["Acteurs culturels", "S’informer - presse"],
+      "options": [
+        "Acteurs culturels",
+        "S’informer - presse"
+      ],
       "customField": "plugin::multi-select.multi-select"
     }
   }

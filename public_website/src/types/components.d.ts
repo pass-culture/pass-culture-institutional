@@ -832,7 +832,7 @@ export interface BlockSimpleTextV2 extends Schema.Component {
     description: '';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    title: Attribute.String;
     text: Attribute.Blocks & Attribute.Required;
     columns: Attribute.Component<'common.simple-text-column', true> &
       Attribute.SetMinMax<
