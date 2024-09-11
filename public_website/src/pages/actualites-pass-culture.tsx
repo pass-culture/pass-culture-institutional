@@ -38,7 +38,7 @@ const setQuery = (category: string[], localisation: string[]): string => {
         $eqi: localisation,
       },
       pageLocalisation: {
-        $containsi: 'S’informer',
+        $containsi: 'S\u2019informer',
       },
     },
   })

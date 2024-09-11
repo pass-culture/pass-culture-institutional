@@ -107,7 +107,7 @@ export const getStaticProps = (async ({ params }) => {
     pagination: {},
     filter: {
       pageLocalisation: {
-        $containsi: 'S’informer - presse',
+        $containsi: 'S\u2019informer - presse',
       },
     },
   })

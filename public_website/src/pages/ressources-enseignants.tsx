@@ -78,7 +78,7 @@ export default function RessourcesEnseignants({
           $eqi: localisation,
         },
         pageLocalisation: {
-          // $containsi: 'S’informer - ressources',
+          $containsi: 'S\u2019informer - ressources',
         },
       },
     })
@@ -155,7 +155,7 @@ export const getStaticProps = (async () => {
         ],
       },
       pageLocalisation: {
-        $containsi: 'S’informer - ressources',
+        $containsi: 'S\u2019informer - ressources',
       },
     },
   })

@@ -46,7 +46,7 @@ const getRessourcesQuery = (category: string[]) => {
         $eqi: category,
       },
       pageLocalisation: {
-        // $containsi: 'S’informer - ressources',
+        $containsi: 'S\u2019informer - ressources',
       },
     },
   })

@@ -73,28 +73,28 @@ export default function CustomPage(props: CustomPageProps) {
 export const getStaticProps = (async ({ params }) => {
   const pagePath = params?.['slug'] as string
 
-  const query = stringify(
+  const queryParams = stringify(
     {
       populate: [
-        'blocks.image.image',
-        'blocks',
-        'news',
-        'blocks[0]',
-        'blocks.items.image',
-        'blocks.logo',
-        'blocks.logo.logo',
-        'blocks.cta',
-        'blocks.socialMediaLink',
-        'blocks.image.image.data',
-        'blocks.content',
-        'blocks.items',
-        'blocks.items.items',
         'blocks.columns',
+        'blocks.content',
+        'blocks.cta',
         'blocks.firstCta',
+        'blocks.image.image.data',
+        'blocks.image.image',
+        'blocks.items.image',
+        'blocks.items.items',
+        'blocks.items',
+        'blocks.logo.logo',
+        'blocks.logo',
         'blocks.secondCta',
-        'seo',
-        'seo.metaSocial',
+        'blocks.socialMediaLink',
+        'blocks',
+        'blocks[0]',
+        'news',
         'seo.metaSocial.image',
+        'seo.metaSocial',
+        'seo',
       ],
       filters: {
         slug: {
@@ -109,7 +109,7 @@ export const getStaticProps = (async ({ params }) => {
 
   const responseQuery = (await Pages.getPage(
     PATHS.EVENTS,
-    query
+    queryParams
   )) as APIResponseData<'api::event.event'>[]
 
   if (responseQuery.length === 0) {
@@ -122,14 +122,15 @@ export const getStaticProps = (async ({ params }) => {
       limit: 1,
     },
     filters: {
-      category: {
-        $eqi: responseQuery[0]!.attributes.category,
-      },
       title: {
         $ne: responseQuery[0]!.attributes.title,
       },
+      category: {
+        $eqi: responseQuery[0]!.attributes.category,
+      },
     },
   })
+
   const latestEvents = (await Pages.getPage(
     PATHS.EVENTS,
     relatedQuery
@@ -148,6 +149,7 @@ export const getStaticPaths = (async () => {
     PATHS.EVENTS,
     ''
   )) as APIResponseData<'api::event.event'>[]
+
   const result = {
     paths: response.map((page) => ({
       params: {

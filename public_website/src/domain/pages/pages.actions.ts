@@ -22,7 +22,8 @@ export const getPage = async (
   | APIResponseData<'api::presse.presse'>
   | APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
 > => {
-  const apiEndpoint = `/${section}?${queryParams}`
+  const apiEndpoint =
+    queryParams.trim().length > 0 ? `/${section}?${queryParams}` : `/${section}`
   const response = await fetchCMS<
     | APIResponseData<'api::page.page'>[]
     | APIResponseData<'api::home.home'>[]
