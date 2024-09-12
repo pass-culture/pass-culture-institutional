@@ -18,8 +18,6 @@ import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { StyledTitle } from '@/theme/style'
-import { Typo } from '@/ui/components/typographies'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
