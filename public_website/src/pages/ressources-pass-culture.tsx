@@ -108,7 +108,6 @@ export default function RessourcesPassCulture({
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
-
       {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
@@ -118,7 +117,6 @@ export default function RessourcesPassCulture({
           />
         </ContentWrapper>
       )}
-
       {hasData ? (
         <StyledListItems news={data} buttonText={buttonText} className="" />
       ) : (

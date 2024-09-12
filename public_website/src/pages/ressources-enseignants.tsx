@@ -110,7 +110,6 @@ export default function RessourcesEnseignants({
       <UnpaddedBreadcrumb />
       {hasData && (
         <React.Fragment>
-
           {showFilter && (
             <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
               <FilterOption
