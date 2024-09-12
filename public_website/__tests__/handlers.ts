@@ -16,7 +16,6 @@ import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { listeOffrePageFixtures } from './fixtures/listeOffre'
 import { notFoundDataFixtures } from './fixtures/notFound'
 import { PressePageFixtures } from './fixtures/presse'
-import { RessourcesEnseignatsPageFixtures } from './fixtures/ressourcesEnseignants'
 import { RessourcesPassFixtures } from './fixtures/ressourcespass'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { simulatorPageFixtures } from './fixtures/simulator'
@@ -64,9 +63,6 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/events`, () => {
     return jsonResponseOf(ActusRdvActeursPageFixtures.eventsData)
-  }),
-  http.get(`${CMS_BASE_URL}/api/ressources-enseignant`, () => {
-    return jsonResponseOf(RessourcesEnseignatsPageFixtures.ressourcesEnseignant)
   }),
   http.get(`${CMS_BASE_URL}/api/etudes-pass-culture`, () => {
     return jsonResponseOf(EtudesPassCulturePageFixtures.etudesPassCulture)
