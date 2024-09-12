@@ -610,6 +610,9 @@ export interface ApiActualitesPassCultureActualitesPassCulture
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -649,6 +652,9 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -687,6 +693,9 @@ export interface ApiEtudesPassCultureEtudesPassCulture
     separator: Attribute.Component<'block.separator'>;
     observatoire: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1043,6 +1052,9 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1308,8 +1320,11 @@ export interface ApiPressePresse extends Schema.SingleType {
     texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
     pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
-    titleEventSection: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    titleEventSection: Attribute.String & Attribute.Required;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1534,6 +1549,9 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1572,6 +1590,9 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     separator: Attribute.Component<'block.separator'>;
     etudes: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -29,14 +29,15 @@ export default function ListeActuCulturels({
   eventsData,
 }: ListOffresProps) {
   const {
-    seo,
-    title,
-    buttonText,
-    separator,
-    titleEventSection,
     aide,
-    socialMediaSection,
+    buttonText,
     filtres,
+    seo,
+    separator,
+    showFilter,
+    socialMediaSection,
+    title,
+    titleEventSection,
   } = listeActuCulturel.attributes
 
   const cat = Array.from(
@@ -188,17 +189,19 @@ export default function ListeActuCulturels({
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          setLocalisation={setLocalisation}
-          originalCategory={originalRdvCategory}
-          originalLocalisation={originalRdvLocalisation}
-          originalSecteur={originalRdvSecteur}
-          setSecteur={setSecteur}
-          data={newsRdvFilters}
-        />
-      </ContentWrapper>
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            setLocalisation={setLocalisation}
+            originalCategory={originalRdvCategory}
+            originalLocalisation={originalRdvLocalisation}
+            originalSecteur={originalRdvSecteur}
+            setSecteur={setSecteur}
+            data={newsRdvFilters}
+          />
+        </ContentWrapper>
+      )}
 
       {hasData ? (
         <StyledListItems news={data} type="actualite" buttonText={buttonText} />
@@ -212,17 +215,21 @@ export default function ListeActuCulturels({
           <Typo.Heading3>{titleEventSection}</Typo.Heading3>
         )}
       </StyledTitle>
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setEventRdvCategory}
-          originalCategory={originalEventRdvCategory}
-          setLocalisation={setEventRdvLocalisation}
-          originalLocalisation={originalEventRdvLocalisation}
-          setSecteur={setEventSecteur}
-          originalSecteur={originalEventSecteur}
-          data={eventFilters}
-        />
-      </ContentWrapper>
+
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setEventRdvCategory}
+            originalCategory={originalEventRdvCategory}
+            setLocalisation={setEventRdvLocalisation}
+            originalLocalisation={originalEventRdvLocalisation}
+            setSecteur={setEventSecteur}
+            originalSecteur={originalEventSecteur}
+            data={eventFilters}
+          />
+        </ContentWrapper>
+      )}
+
       {hasEventData ? (
         <StyledeventListItems
           type="evenement/"

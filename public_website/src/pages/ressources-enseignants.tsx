@@ -26,8 +26,15 @@ export default function RessourcesEnseignants({
   resourceREData,
   ressourcesEnseignantsListe,
 }: ListProps) {
-  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
-    ressourcesEnseignantsListe.attributes
+  const {
+    aide,
+    buttonText,
+    filtres,
+    seo,
+    showFilter,
+    socialMediaSection,
+    title,
+  } = ressourcesEnseignantsListe.attributes
 
   const cat = Array.from(
     new Set(resourceREData.map((item) => item.attributes.category))
@@ -103,17 +110,19 @@ export default function RessourcesEnseignants({
       <UnpaddedBreadcrumb />
       {hasData && (
         <React.Fragment>
-          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-            <FilterOption
-              setCategory={setCategory}
-              setLocalisation={setLocalisation}
-              originalCategory={category}
-              originalLocalisation={localisation}
-              setSecteur={setSecteur}
-              originalSecteur={secteur}
-              data={filters}
-            />
-          </ContentWrapper>
+          {showFilter && (
+            <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+              <FilterOption
+                setCategory={setCategory}
+                setLocalisation={setLocalisation}
+                originalCategory={category}
+                originalLocalisation={localisation}
+                setSecteur={setSecteur}
+                originalSecteur={secteur}
+                data={filters}
+              />
+            </ContentWrapper>
+          )}
 
           <StyledListItems
             news={data}

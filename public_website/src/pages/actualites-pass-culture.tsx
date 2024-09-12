@@ -48,8 +48,15 @@ export default function ListeActualitesPassCulture({
   newsActuPassData,
   listeActualitesPassCulture,
 }: ListProps) {
-  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
-    listeActualitesPassCulture.attributes
+  const {
+    aide,
+    buttonText,
+    filtres,
+    seo,
+    showFilter,
+    socialMediaSection,
+    title,
+  } = listeActualitesPassCulture.attributes
 
   const cat = Array.from(
     new Set(newsActuPassData.map((item) => item.attributes.category))
@@ -100,15 +107,18 @@ export default function ListeActualitesPassCulture({
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          setLocalisation={setLocalisation}
-          originalCategory={originalCategory}
-          originalLocalisation={originalLocalisation}
-          data={filters}
-        />
-      </ContentWrapper>
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            setLocalisation={setLocalisation}
+            originalCategory={originalCategory}
+            originalLocalisation={originalLocalisation}
+            data={filters}
+          />
+        </ContentWrapper>
+      )}
+
       {hasData ? (
         <StyledListItems news={data} type="actualite" buttonText={buttonText} />
       ) : (

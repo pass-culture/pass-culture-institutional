@@ -43,8 +43,15 @@ const setQuery = (category: string[], localisation: string[]): string => {
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
-  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
-    listejeune.attributes
+  const {
+    seo,
+    title,
+    buttonText,
+    aide,
+    socialMediaSection,
+    filtres,
+    showFilter,
+  } = listejeune.attributes
 
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -95,15 +102,19 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          setLocalisation={setLocalisation}
-          originalCategory={originalCategory}
-          originalLocalisation={originalLocalisation}
-          data={filters}
-        />
-      </ContentWrapper>
+
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            setLocalisation={setLocalisation}
+            originalCategory={originalCategory}
+            originalLocalisation={originalLocalisation}
+            data={filters}
+          />
+        </ContentWrapper>
+      )}
+
       {hasData ? (
         <StyledListItems type="actualite" news={data} buttonText={buttonText} />
       ) : (

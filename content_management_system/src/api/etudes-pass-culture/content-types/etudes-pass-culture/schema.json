@@ -42,6 +42,11 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "showFilter": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

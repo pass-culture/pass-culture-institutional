@@ -56,8 +56,15 @@ export default function RessourcesPassCulture({
   ressourcesData,
   ressourcesPassCultureListe,
 }: ListRessourcesProps) {
-  const { seo, title, buttonText, etudes, socialMediaSection, filtres } =
-    ressourcesPassCultureListe.attributes
+  const {
+    buttonText,
+    etudes,
+    filtres,
+    seo,
+    showFilter,
+    socialMediaSection,
+    title,
+  } = ressourcesPassCultureListe.attributes
 
   const cat = Array.from(
     new Set(ressourcesData.map((item) => item.attributes.category))
@@ -101,13 +108,15 @@ export default function RessourcesPassCulture({
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          originalCategory={category}
-          data={filters}
-        />
-      </ContentWrapper>
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            originalCategory={category}
+            data={filters}
+          />
+        </ContentWrapper>
+      )}
       {hasData ? (
         <StyledListItems news={data} buttonText={buttonText} className="" />
       ) : (
