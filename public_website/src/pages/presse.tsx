@@ -196,7 +196,6 @@ export default function Presse({
         </ContentWrapper>
       )}
 
-
       {hasData ? (
         <StyledListItems
           news={data}
@@ -224,8 +223,8 @@ export default function Presse({
             originalSecteur={eventSecteur}
             data={eventFilters}
           />
-        </ContentWrapper>)
-      }
+        </ContentWrapper>
+      )}
 
       {hasEventData ? (
         <StyledeventListItems
