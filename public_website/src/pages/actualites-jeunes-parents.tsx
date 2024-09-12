@@ -18,6 +18,8 @@ import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
+import { StyledTitle } from '@/theme/style'
+import { Typo } from '@/ui/components/typographies'
 
 interface ListProps {
   newsData: APIResponseData<'api::news.news'>[]
@@ -43,8 +45,15 @@ const setQuery = (category: string[], localisation: string[]): string => {
 }
 
 export default function ListeJeune({ newsData, listejeune }: ListProps) {
-  const { seo, title, buttonText, aide, socialMediaSection, filtres } =
-    listejeune.attributes
+  const {
+    seo,
+    title,
+    buttonText,
+    aide,
+    socialMediaSection,
+    filtres,
+    showFilter,
+  } = listejeune.attributes
 
   const cat = Array.from(
     new Set(newsData.map((item) => item.attributes.category))
@@ -95,15 +104,19 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          setLocalisation={setLocalisation}
-          originalCategory={originalCategory}
-          originalLocalisation={originalLocalisation}
-          data={filters}
-        />
-      </ContentWrapper>
+
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            setLocalisation={setLocalisation}
+            originalCategory={originalCategory}
+            originalLocalisation={originalLocalisation}
+            data={filters}
+          />
+        </ContentWrapper>
+      )}
+
       {hasData ? (
         <StyledListItems type="actualite" news={data} buttonText={buttonText} />
       ) : (
