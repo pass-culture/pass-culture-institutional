@@ -40,7 +40,6 @@ export default function Presse({
     texteImage,
     title,
     titleEventSection,
-    titleResourceSection,
     filtres,
   } = presseListe.attributes
 
@@ -183,7 +182,7 @@ export default function Presse({
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      {showFilter ? (
+      {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setCategory}
@@ -194,12 +193,10 @@ export default function Presse({
             originalSecteur={secteur}
             data={filters}
           />
-        </ContentWrapper>)
-        : (
-          <StyledTitle>
-            <Typo.Heading3>{titleResourceSection}</Typo.Heading3>
-          </StyledTitle>
-        )}
+        </ContentWrapper>
+      )}
+
+
       {hasData ? (
         <StyledListItems
           news={data}
