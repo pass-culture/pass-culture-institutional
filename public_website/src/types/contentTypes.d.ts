@@ -652,6 +652,9 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1587,6 +1590,9 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     separator: Attribute.Component<'block.separator'>;
     etudes: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
