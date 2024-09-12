@@ -27,8 +27,15 @@ export default function EtudesPassCulture({
   ressourcesData,
   etudesPassCultureListe,
 }: ListProps) {
-  const { seo, title, buttonText, observatoire, socialMediaSection, filtres } =
-    etudesPassCultureListe.attributes
+  const {
+    buttonText,
+    filtres,
+    observatoire,
+    seo,
+    showFilter,
+    socialMediaSection,
+    title,
+  } = etudesPassCultureListe.attributes
 
   const [category, setCategory] = useState<string[]>([])
   const [localisation, setLocalisation] = useState<string[]>([])
@@ -112,17 +119,20 @@ export default function EtudesPassCulture({
       </ContentWrapper>
 
       <React.Fragment>
-        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-          <FilterOption
-            setCategory={setCategory}
-            originalCategory={category}
-            setLocalisation={setLocalisation}
-            originalLocalisation={localisation}
-            setPartner={setPartner}
-            originalPartner={partner}
-            data={filters}
-          />
-        </ContentWrapper>
+        {showFilter && (
+          <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+            <FilterOption
+              setCategory={setCategory}
+              originalCategory={category}
+              setLocalisation={setLocalisation}
+              originalLocalisation={localisation}
+              setPartner={setPartner}
+              originalPartner={partner}
+              data={filters}
+            />
+          </ContentWrapper>
+        )}
+
         {hasData ? (
           <StyledListItems
             news={data}

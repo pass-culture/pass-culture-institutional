@@ -610,6 +610,9 @@ export interface ApiActualitesPassCultureActualitesPassCulture
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -687,6 +690,9 @@ export interface ApiEtudesPassCultureEtudesPassCulture
     separator: Attribute.Component<'block.separator'>;
     observatoire: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1540,6 +1546,9 @@ export interface ApiRessourcesEnseignantRessourcesEnseignant
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
