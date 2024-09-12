@@ -365,7 +365,7 @@ const StyledHeader = styled.header<{
   ${({ theme, $showMegaMenu, $showMobileMenu, $activeId }) => css`
     position: relative;
     z-index: 100;
-    background: ${$showMegaMenu || !$activeId ? theme.colors.white : '#ece6ff'};
+    background: ${$showMegaMenu || !$activeId ? theme.colors.white : theme.colors.lightLila};
 
     @media (width < ${theme.mediaQueries.mobile}) {
       background: transparent;
@@ -373,7 +373,7 @@ const StyledHeader = styled.header<{
 
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       ${$showMobileMenu &&
-      css`
+    css`
         position: fixed;
         inset: 0;
         z-index: 100;

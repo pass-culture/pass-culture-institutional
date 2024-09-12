@@ -88,86 +88,100 @@ export function MegaMenu({
   )
 
   return (
-    <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
-      <StyledMegaMenuClose>
-        <StyledCloseButton
-          ref={closeMenuRef}
-          aria-label="Fermer le menu"
-          aria-expanded="true"
-          aria-controls="mobile-menu-main-navigation">
-          <Close />
-        </StyledCloseButton>
-      </StyledMegaMenuClose>
-      <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
-        <StyledMegaMenuHeading>
-          <Typo.Heading2 as="p">{title}</Typo.Heading2>
-          <ButtonWithCTA cta={cta} />
-          <HeaderBanner
-            bannerAndroidUrl={bannerAndroidUrl}
-            bannerDefaultUrl={bannerDefaultUrl}
-            bannerIosUrl={bannerIosUrl}
-            bannerText={bannerText}
-          />
-        </StyledMegaMenuHeading>
+    <React.Fragment>
+      <BackgroundOverlay onMouseEnter={onBlur} />
+      <StyledMegaMenuWrapper onMouseLeave={onMouseLeave}>
+        <StyledMegaMenuClose>
+          <StyledCloseButton
+            ref={closeMenuRef}
+            aria-label="Fermer le menu"
+            aria-expanded="true"
+            aria-controls="mobile-menu-main-navigation">
+            <Close />
+          </StyledCloseButton>
+        </StyledMegaMenuClose>
+        <StyledMegaMenu ref={megaMenuRef} id={id} aria-labelledby={labelId}>
+          <StyledMegaMenuHeading>
+            <Typo.Heading2 as="p">{title}</Typo.Heading2>
+            <ButtonWithCTA cta={cta} />
+            <HeaderBanner
+              bannerAndroidUrl={bannerAndroidUrl}
+              bannerDefaultUrl={bannerDefaultUrl}
+              bannerIosUrl={bannerIosUrl}
+              bannerText={bannerText}
+            />
+          </StyledMegaMenuHeading>
 
-        <StyledMegaMenuLists>
-          <ul>
-            {primaryListItemsWithoutSimulator?.map((item) => {
-              return (
-                <li key={item.Label}>
-                  <Link
-                    href={item.URL}
-                    aria-label={parseText(item.Label).accessibilityLabel}>
-                    {parseText(item.Label).processedText}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-          <ul>
-            {secondaryListItems?.map((item) => {
-              return (
-                <li key={item.Label}>
-                  <Link
-                    href={item.URL}
-                    aria-label={parseText(item.Label).accessibilityLabel}>
-                    {parseText(item.Label).processedText}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </StyledMegaMenuLists>
+          <StyledMegaMenuLists>
+            <ul>
+              {primaryListItemsWithoutSimulator?.map((item) => {
+                return (
+                  <li key={item.Label}>
+                    <Link
+                      href={item.URL}
+                      aria-label={parseText(item.Label).accessibilityLabel}>
+                      {parseText(item.Label).processedText}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+            <ul>
+              {secondaryListItems?.map((item) => {
+                return (
+                  <li key={item.Label}>
+                    <Link
+                      href={item.URL}
+                      aria-label={parseText(item.Label).accessibilityLabel}>
+                      {parseText(item.Label).processedText}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </StyledMegaMenuLists>
 
-        <StyledMegaMenuCard $backgroundColor={backgroundCard}>
-          <StyledMegaMenuCardHeading>
-            <OutlinedText innerAs="p" shadow={false}>
-              {cardTitle}
-            </OutlinedText>
+          <StyledMegaMenuCard $backgroundColor={backgroundCard}>
+            <StyledMegaMenuCardHeading>
+              <OutlinedText innerAs="p" shadow={false}>
+                {cardTitle}
+              </OutlinedText>
 
-            <OutlinedText shadow aria-hidden="true">
-              {cardFirstEmoji}
-            </OutlinedText>
-            <OutlinedText shadow aria-hidden="true">
-              {cardSecondEmoji}
-            </OutlinedText>
-          </StyledMegaMenuCardHeading>
+              <OutlinedText shadow aria-hidden="true">
+                {cardFirstEmoji}
+              </OutlinedText>
+              <OutlinedText shadow aria-hidden="true">
+                {cardSecondEmoji}
+              </OutlinedText>
+            </StyledMegaMenuCardHeading>
 
-          <p>{cardDescription}</p>
-          <ButtonWithCTA cta={cardLink} variant="primary" />
-        </StyledMegaMenuCard>
-      </StyledMegaMenu>
-    </StyledMegaMenuWrapper>
+            <p>{cardDescription}</p>
+            <ButtonWithCTA cta={cardLink} variant="primary" />
+          </StyledMegaMenuCard>
+        </StyledMegaMenu>
+      </StyledMegaMenuWrapper>
+    </React.Fragment>
   )
 }
 
+const HEADER_HEIGHT = `calc(4rem + 4rem)`
+
+const BackgroundOverlay = styled.div`
+  top: ${HEADER_HEIGHT};
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+`
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
+    top: ${HEADER_HEIGHT};
     background: ${theme.colors.white};
     position: absolute;
     left: 0;
     right: 0;
-    top: calc(4rem + 4rem);
     z-index: 2;
   `}
 `
@@ -191,7 +205,7 @@ const StyledMegaMenu = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)); // Allow exact same width
   gap: 6.5rem;
-  padding: 4.25rem 2.5rem 8.125rem;
+  padding: 3.25rem 2.5rem;
 `
 
 const StyledMegaMenuHeading = styled.div`
