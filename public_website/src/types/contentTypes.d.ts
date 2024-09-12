@@ -1317,7 +1317,6 @@ export interface ApiPressePresse extends Schema.SingleType {
     pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required
     aide: Attribute.Component<'block.simple-push-cta'>
     seo: Attribute.Component<'shared.seo'>
-    titleResourceSection: Attribute.String & Attribute.Required
     titleEventSection: Attribute.String & Attribute.Required
     showFilter: Attribute.Boolean &
       Attribute.Required &
