@@ -55,6 +55,10 @@
       "repeatable": false,
       "component": "shared.seo"
     },
+    "titleResourceSection": {
+      "type": "string",
+      "required": true
+    },
     "titleEventSection": {
       "type": "string",
       "required": true
