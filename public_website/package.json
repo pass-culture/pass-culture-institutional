@@ -12,6 +12,7 @@
     "test:coverage": "vitest run --coverage",
     "test:deadcode": "ts-prune",
     "test:lint": "next lint",
+    "test:lint:fix": "next lint --fix",
     "test:types": "yarn tsc --noEmit",
     "postinstall": "node getFaqQuestions.js",
     "prebuild": "node getFaqQuestions.js"

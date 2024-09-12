@@ -51,6 +51,69 @@ export interface SharedMetaSocial extends Schema.Component {
   };
 }
 
+export interface HomeRecommendationsSection extends Schema.Component {
+  collectionName: 'components_home_recommendations_sections';
+  info: {
+    displayName: 'recommendationsSection';
+  };
+  attributes: {
+    recommendations: Attribute.Component<'block.vertical-carousel'> &
+      Attribute.Required;
+    recommendationsBackendTag: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface HomeHeroSection extends Schema.Component {
+  collectionName: 'components_home_hero_sections';
+  info: {
+    displayName: 'heroSection';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.Text & Attribute.Required;
+    subTitle: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    firstEmoji: Attribute.String & Attribute.Required;
+    secondEmoji: Attribute.String & Attribute.Required;
+    thirdEmoji: Attribute.String & Attribute.Required;
+    fourthEmoji: Attribute.String & Attribute.Required;
+    images: Attribute.Media<'images', true> & Attribute.Required;
+    fifthEmoji: Attribute.String & Attribute.Required;
+    sixthEmoji: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HomeEligibilitySection extends Schema.Component {
+  collectionName: 'components_home_eligibility_sections';
+  info: {
+    displayName: 'eligibilitySection';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'home.eligibility-items', true> &
+      Attribute.Required;
+    cardTitle: Attribute.Text & Attribute.Required;
+    cardDescription: Attribute.String & Attribute.Required;
+    cardCta: Attribute.Component<'common.link'> & Attribute.Required;
+    firstEmoji: Attribute.String & Attribute.Required;
+    secondEmoji: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface HomeEligibilityItems extends Schema.Component {
+  collectionName: 'components_home_eligibility_items';
+  info: {
+    displayName: 'eligibilityItems';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+  };
+}
+
 export interface SimulatorSuccessScreen extends Schema.Component {
   collectionName: 'components_simulator_success_screens';
   info: {
@@ -151,67 +214,24 @@ export interface SimulatorAgeQuestion extends Schema.Component {
   };
 }
 
-export interface HomeRecommendationsSection extends Schema.Component {
-  collectionName: 'components_home_recommendations_sections';
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
   info: {
-    displayName: 'recommendationsSection';
-  };
-  attributes: {
-    recommendations: Attribute.Component<'block.vertical-carousel'> &
-      Attribute.Required;
-    recommendationsBackendTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
-}
-
-export interface HomeHeroSection extends Schema.Component {
-  collectionName: 'components_home_hero_sections';
-  info: {
-    displayName: 'heroSection';
+    displayName: 'Lists';
     description: '';
   };
   attributes: {
-    title: Attribute.Text & Attribute.Required;
-    subTitle: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
-    thirdEmoji: Attribute.String & Attribute.Required;
-    fourthEmoji: Attribute.String & Attribute.Required;
-    images: Attribute.Media<'images', true> & Attribute.Required;
-    fifthEmoji: Attribute.String & Attribute.Required;
-    sixthEmoji: Attribute.String & Attribute.Required;
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
   };
 }
 
-export interface HomeEligibilitySection extends Schema.Component {
-  collectionName: 'components_home_eligibility_sections';
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
   info: {
-    displayName: 'eligibilitySection';
-    description: '';
+    displayName: 'LegalLinks';
   };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'home.eligibility-items', true> &
-      Attribute.Required;
-    cardTitle: Attribute.Text & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardCta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface HomeEligibilityItems extends Schema.Component {
-  collectionName: 'components_home_eligibility_items';
-  info: {
-    displayName: 'eligibilityItems';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-  };
+  attributes: {};
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
@@ -388,26 +408,6 @@ export interface HeaderAccountDropdown extends Schema.Component {
     items: Attribute.Component<'header.account-item', true> &
       Attribute.Required;
   };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
@@ -1242,6 +1242,10 @@ declare module '@strapi/types' {
     export interface Components {
       'shared.seo': SharedSeo;
       'shared.meta-social': SharedMetaSocial;
+      'home.recommendations-section': HomeRecommendationsSection;
+      'home.hero-section': HomeHeroSection;
+      'home.eligibility-section': HomeEligibilitySection;
+      'home.eligibility-items': HomeEligibilityItems;
       'simulator.success-screen': SimulatorSuccessScreen;
       'simulator.step': SimulatorStep;
       'simulator.radio-question': SimulatorRadioQuestion;
@@ -1249,10 +1253,8 @@ declare module '@strapi/types' {
       'simulator.answer': SimulatorAnswer;
       'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.age-question': SimulatorAgeQuestion;
-      'home.recommendations-section': HomeRecommendationsSection;
-      'home.hero-section': HomeHeroSection;
-      'home.eligibility-section': HomeEligibilitySection;
-      'home.eligibility-items': HomeEligibilityItems;
+      'footer.list': FooterList;
+      'footer.legal-links': FooterLegalLinks;
       'header.navigation-items': HeaderNavigationItems;
       'header.mega-menu': HeaderMegaMenu;
       'header.login': HeaderLogin;
@@ -1260,8 +1262,6 @@ declare module '@strapi/types' {
       'header.header': HeaderHeader;
       'header.account-item': HeaderAccountItem;
       'header.account-dropdown': HeaderAccountDropdown;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'common.simple-text-column': CommonSimpleTextColumn;
       'common.piled-card-item': CommonPiledCardItem;
