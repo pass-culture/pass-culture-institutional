@@ -50,14 +50,23 @@
       "repeatable": false,
       "component": "block.simple-push-cta"
     },
-    "titleEventSection": {
-      "type": "string",
-      "required": true
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "titleResourceSection": {
+      "type": "string",
+      "required": true
+    },
+    "titleEventSection": {
+      "type": "string",
+      "required": true
+    },
+    "showFilter": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

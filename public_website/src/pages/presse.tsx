@@ -30,15 +30,17 @@ export default function Presse({
   eventsData,
 }: ListPressProps) {
   const {
-    seo,
-    title,
-    buttonText,
-    titleEventSection,
-    texteImage,
-    pushCta,
     aide,
-    socialMediaSection,
+    buttonText,
+    pushCta,
+    seo,
     separator,
+    showFilter,
+    socialMediaSection,
+    texteImage,
+    title,
+    titleEventSection,
+    titleResourceSection,
     filtres,
   } = presseListe.attributes
 
@@ -181,17 +183,23 @@ export default function Presse({
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setCategory}
-          originalCategory={category}
-          setLocalisation={setLocalisation}
-          originalLocalisation={localisation}
-          setSecteur={setSecteur}
-          originalSecteur={secteur}
-          data={filters}
-        />
-      </ContentWrapper>
+      {showFilter ? (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setCategory}
+            originalCategory={category}
+            setLocalisation={setLocalisation}
+            originalLocalisation={localisation}
+            setSecteur={setSecteur}
+            originalSecteur={secteur}
+            data={filters}
+          />
+        </ContentWrapper>)
+        : (
+          <StyledTitle>
+            <Typo.Heading3>{titleResourceSection}</Typo.Heading3>
+          </StyledTitle>
+        )}
       {hasData ? (
         <StyledListItems
           news={data}
@@ -204,23 +212,23 @@ export default function Presse({
 
       <Separator isActive={separatorIsActive(separator)} />
 
-      {!!titleEventSection && (
-        <StyledTitle>
-          <Typo.Heading3>{titleEventSection}</Typo.Heading3>
-        </StyledTitle>
-      )}
+      <StyledTitle>
+        <Typo.Heading3>{titleEventSection}</Typo.Heading3>
+      </StyledTitle>
 
-      <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
-        <FilterOption
-          setCategory={setEventCategory}
-          originalCategory={eventCat}
-          setLocalisation={setEventLocalisation}
-          originalLocalisation={eventLocalisation}
-          setSecteur={setEventSecteur}
-          originalSecteur={eventSecteur}
-          data={eventFilters}
-        />
-      </ContentWrapper>
+      {showFilter && (
+        <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
+          <FilterOption
+            setCategory={setEventCategory}
+            originalCategory={eventCat}
+            setLocalisation={setEventLocalisation}
+            originalLocalisation={eventLocalisation}
+            setSecteur={setEventSecteur}
+            originalSecteur={eventSecteur}
+            data={eventFilters}
+          />
+        </ContentWrapper>)
+      }
 
       {hasEventData ? (
         <StyledeventListItems

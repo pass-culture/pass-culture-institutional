@@ -1308,8 +1308,12 @@ export interface ApiPressePresse extends Schema.SingleType {
     texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
     pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
-    titleEventSection: Attribute.String & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
+    titleResourceSection: Attribute.String & Attribute.Required;
+    titleEventSection: Attribute.String & Attribute.Required;
+    showFilter: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
