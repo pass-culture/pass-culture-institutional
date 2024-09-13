@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
@@ -42,26 +42,29 @@ export function MegaMenu({
   const closeMenuRef = useRef<HTMLButtonElement | null>(null)
   const backgroundCard = theme ?? 'gold'
 
-  function onClickOutside(e: MouseEvent): void {
-    if (
-      !megaMenuRef.current?.contains(e.target as HTMLElement) &&
-      closeMenuRef.current?.contains(e.target as HTMLButtonElement)
-    ) {
-      const openButtonElement = getOpenButtonEl()
-      if (openButtonElement !== (e.target as HTMLElement)) {
-        onBlur()
-      }
-    } else {
-      const { nodeName } = e.target as HTMLElement
-
+  const onClickOutside = useCallback(
+    (e: MouseEvent) => {
       if (
-        nodeName === 'A' ||
-        (e.target as HTMLElement).parentElement?.nodeName === 'A'
+        !megaMenuRef.current?.contains(e.target as HTMLElement) &&
+        closeMenuRef.current?.contains(e.target as HTMLButtonElement)
       ) {
-        onBlur()
+        const openButtonElement = getOpenButtonEl()
+        if (openButtonElement !== (e.target as HTMLElement)) {
+          onBlur()
+        }
+      } else {
+        const { nodeName } = e.target as HTMLElement
+
+        if (
+          nodeName === 'A' ||
+          (e.target as HTMLElement).parentElement?.nodeName === 'A'
+        ) {
+          onBlur()
+        }
       }
-    }
-  }
+    },
+    [onBlur, getOpenButtonEl]
+  )
 
   useEffect(() => {
     const megaMenuElement = megaMenuRef.current
@@ -70,14 +73,20 @@ export function MegaMenu({
     )
     window?.addEventListener('click', onClickOutside)
 
+    const handleScroll = () => {
+      onBlur()
+    }
+    window?.addEventListener('scroll', handleScroll)
+
     return () => {
       megaMenuElement?.removeEventListener(
         'keydown',
         (e: KeyboardEvent): void => onKeyDown(e)
       )
       window?.removeEventListener('click', onClickOutside)
+      window?.removeEventListener('scroll', handleScroll)
     }
-  })
+  }, [onBlur, onKeyDown, onClickOutside])
 
   const primaryListItemsWithoutSimulator = React.useMemo(
     () =>
