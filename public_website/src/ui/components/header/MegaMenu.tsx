@@ -164,7 +164,7 @@ export function MegaMenu({
   )
 }
 
-const HEADER_HEIGHT = `calc(4rem + 4rem)`
+const HEADER_HEIGHT = `calc(8rem)`
 
 const BackgroundOverlay = styled.div`
   top: ${HEADER_HEIGHT};
@@ -174,6 +174,7 @@ const BackgroundOverlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   pointer-events: none;
+  z-index: 1;
 `
 const StyledMegaMenuWrapper = styled.div`
   ${({ theme }) => css`
