@@ -13,8 +13,8 @@ export function ListItems(
     LatestEventsProps & {
       type: string
       news:
-        | APIResponseData<'api::news.news'>[]
-        | APIResponseData<'api::resource.resource'>[]
+      | APIResponseData<'api::news.news'>[]
+      | APIResponseData<'api::resource.resource'>[]
     },
     'events'
   >
@@ -87,6 +87,7 @@ const StyledList = styled.ul`
 
 const LoadMoreButton = styled.button`
   ${({ theme }) => css`
+    cursor: pointer;
     margin-top: 1.875rem;
     margin-inline: auto;
 
