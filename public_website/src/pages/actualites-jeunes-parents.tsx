@@ -91,9 +91,9 @@ export default function ListeJeune({ newsData, listejeune }: ListProps) {
   }
 
   useEffect(() => {
-    fetchData()
+    showFilter && fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation])
+  }, [category, localisation, showFilter])
 
   const hasData = data.length > 0
 

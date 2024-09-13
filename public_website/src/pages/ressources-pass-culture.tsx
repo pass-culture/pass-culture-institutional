@@ -99,9 +99,9 @@ export default function RessourcesPassCulture({
   const hasData = useMemo((): boolean => data.length > 0, [data])
 
   useEffect(() => {
-    fetchData()
+    showFilter && fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category])
+  }, [category, showFilter])
 
   return (
     <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>

@@ -95,9 +95,9 @@ export default function ListeActualitesPassCulture({
     setData(news)
   }
   useEffect(() => {
-    fetchData()
+    showFilter && fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation])
+  }, [category, localisation, showFilter])
 
   const hasData = data.length > 0
 

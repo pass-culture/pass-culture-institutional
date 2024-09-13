@@ -73,9 +73,9 @@ export default function EtudesPassCulture({
   }, [])
 
   useEffect(() => {
-    fetchData()
+    showFilter && fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur, partner])
+  }, [category, localisation, secteur, partner, showFilter])
 
   const fetchData = async () => {
     const resourcesQuery = stringify({
