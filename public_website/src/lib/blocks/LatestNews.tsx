@@ -53,13 +53,11 @@ export function LatestNews(props: LatestNewsProps) {
       <ListWrapper>
         <StyledList>
           {newsData?.slice(0, 3).map((newsItem) => {
+            const slug = isModule
+              ? `/actualite/${newsItem.attributes.slug}`
+              : `/ressources/${newsItem.attributes.slug}`
             return (
-              <li
-                key={
-                  isModule
-                    ? `/actualite/${newsItem.attributes.slug}`
-                    : newsItem.attributes.slug
-                }>
+              <li key={slug}>
                 <NewsCard
                   title={newsItem.attributes.title}
                   category={newsItem.attributes.category}
@@ -68,11 +66,7 @@ export function LatestNews(props: LatestNewsProps) {
                     newsItem.attributes.image &&
                     getStrapiURL(newsItem.attributes.image?.data.attributes.url)
                   }
-                  slug={
-                    isModule
-                      ? `/actualite/${newsItem.attributes.slug}`
-                      : newsItem.attributes.slug
-                  }
+                  slug={slug}
                 />
               </li>
             )
