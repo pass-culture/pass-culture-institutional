@@ -42,10 +42,10 @@
   <url><loc>https://pass.culture.fr/un-observatoire-des-pratiques-culturelles-des-jeunes</loc><priority>0.5</priority></url>
   <url><loc>https://pass.culture.fr/vous-etes-parent</loc><priority>0.5</priority></url>
   <!-- Ressources -->
-  <url><loc>https://pass.culture.fr/ressources/Ambassadeurs-pass-culture-2023</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/Biarritz-Film-Festival-NOUVELLES-VAGUES</loc><priority>0.3</priority></url>
-  <url><loc>https://pass.culture.fr/ressources/comite-strategique</loc><priority>0.3</priority></url>
+  <url><loc>https://pass.culture.fr/ressources/comite-stratégique</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/etude-habitude-lecture-pass-culture</loc><priority>0.3</priority></url>
+  <url><loc>https://pass.culture.fr/ressources/festival-d-angouleme-pass-culture-2024</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/Festival-d-angouleme-pass-culture</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/festival-d-avignon-pass-culture</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/festival-de-cannes-2024-x-pass-culture</loc><priority>0.3</priority></url>
@@ -59,12 +59,35 @@
   <url><loc>https://pass.culture.fr/ressources/Olympiade-culturelle-pass-culture-2024</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/pass-culture-groupe-SOS-culture</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/pass-culture-livres</loc><priority>0.3</priority></url>
-  <url><loc>https://pass.culture.fr/ressources/pass-culture-prix-josephine</loc><priority>0.3</priority></url>
+  <url><loc>https://pass.culture.fr/ressources/pass-culture-prix-joséphine</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/pass-culture-ville-de-rennes</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/Pass-culture-x-ville-de-lille</loc><priority>0.3</priority></url>
-  <url><loc>https://pass.culture.fr/ressources/Pratiques-et-usages-autour-du-cinema-mai-2024</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/Prix-vendredi-pass-culture-2023</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/references-culturelles-juin-2024</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/references-culturelles-mars-2024</loc><priority>0.3</priority></url>
   <url><loc>https://pass.culture.fr/ressources/temps-fort-métiers-de-la-culture</loc><priority>0.3</priority></url>
+  <!-- Actualites --> 
+  <url><loc>https://pass.culture.fr/actualite/ambassadeurs-associes-dijon</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/ambassadrices-associees-theatre-paris-villette</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/dessous-de-linfo</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/festival-international-bande-dessinee-d-angouleme-2024</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/jeunes-au-festival-d-avignon-2024</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-au-congres-des-bibliothecaires-de-france</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-au-festival-de-cannes</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-au-sitem</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-Culture-en-Martinique-Guadeloupe-Saint-Martin</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-gaite-lyrique</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-intervient-MJC</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/le-pass-culture-the-product-crew</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/les-coulisses-des-metiers-de-la-culture.fr</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/olympiades-culturelles-x-le-pass-culture</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/on-a-rencontre-jude-law</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-boutographies</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-concours-d-ecriture</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-programme-ensemble-egalite</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-quatre-millions</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-rencontres-d-arles</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/pass-culture-x-biarritz-film-festival</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/rencontre-des-collectivites</loc></url>
+  <url><loc>https://pass.culture.fr/actualite/seminaire-juin-2024</loc></url>
 </urlset>
