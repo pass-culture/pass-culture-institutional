@@ -171,14 +171,14 @@ export default function ListeActuCulturels({
   }
 
   useEffect(() => {
-    fetchData()
+    showFilter && fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur])
+  }, [category, localisation, secteur, showFilter])
 
   useEffect(() => {
-    fetchEventData()
+    showFilter && fetchEventData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventRdvCategory, eventRdvLocalisation, eventSecteur])
+  }, [eventRdvCategory, eventRdvLocalisation, eventSecteur, showFilter])
 
   const hasData = data.length > 0
   const hasEventData = eventData.length > 0
