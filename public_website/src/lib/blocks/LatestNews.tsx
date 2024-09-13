@@ -1,50 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { stringify } from 'querystring'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
 import { LatestNewsProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
-import { fetchCMS } from '@/utils/fetchCMS'
 import { isRenderable } from '@/utils/isRenderable'
 
 export function LatestNews(props: LatestNewsProps) {
-  const { title, news, cta, className } = props
-  const [newsData, setNewsData] = useState<
-    | APIResponseData<'api::news.news'>[]
-    | APIResponseData<'api::resource.resource'>[]
-    | null
-  >(null)
-
-  const [isModule, setIsModule] = useState<boolean>(true)
-  useEffect(() => {
-    const fetchLatestStudies = async () => {
-      if (!news) {
-        const latestStudiesQuery = stringify({
-          sort: ['date:desc'],
-          populate: ['image', 'cta'],
-        })
-        const latestStudies = await fetchCMS<
-          APIResponseData<'api::news.news'>[]
-        >(`/news-list?${latestStudiesQuery}`)
-
-        setNewsData(latestStudies.data)
-      } else {
-        setIsModule(false)
-
-        setNewsData(news)
-      }
-    }
-
-    fetchLatestStudies()
-  }, [isModule, news])
-
+  const { title, newsOrStudies, cta, className, isNews } = props
+  const slugPrefix = isNews ? `/actualite/` : `/ressources/`
   return (
     <Root className={className}>
       <HeadingWrapper>
@@ -52,27 +21,19 @@ export function LatestNews(props: LatestNewsProps) {
       </HeadingWrapper>
       <ListWrapper>
         <StyledList>
-          {newsData?.slice(0, 3).map((newsItem) => {
+          {newsOrStudies?.slice(0, 3).map((item) => {
+            const fullSlug = slugPrefix + item.attributes.slug
             return (
-              <li
-                key={
-                  isModule
-                    ? `/actualite/${newsItem.attributes.slug}`
-                    : newsItem.attributes.slug
-                }>
+              <li key={fullSlug}>
                 <NewsCard
-                  title={newsItem.attributes.title}
-                  category={newsItem.attributes.category}
-                  date={newsItem.attributes.date}
+                  title={item.attributes.title}
+                  category={item.attributes.category}
+                  date={item.attributes.date}
                   imageUrl={
-                    newsItem.attributes.image &&
-                    getStrapiURL(newsItem.attributes.image?.data.attributes.url)
+                    item.attributes.image &&
+                    getStrapiURL(item.attributes.image?.data.attributes.url)
                   }
-                  slug={
-                    isModule
-                      ? `/actualite/${newsItem.attributes.slug}`
-                      : newsItem.attributes.slug
-                  }
+                  slug={fullSlug}
                 />
               </li>
             )

@@ -35,7 +35,8 @@ export default function CustomPage(props: CustomPageProps) {
       <Breadcrumb isUnderHeader />
       {memoBlocks}
       <StyledLatestNews
-        news={props.latestStudies}
+        newsOrStudies={props.latestStudies}
+        isNews={true}
         title="Les dernières **actualités**"
       />
     </React.Fragment>
