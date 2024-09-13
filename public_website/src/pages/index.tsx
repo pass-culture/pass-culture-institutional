@@ -92,7 +92,8 @@ export default function Home({
       </BlockRendererWithCondition>
       <Separator isActive={false} />
       <LatestStudiesSection
-        news={latestStudies}
+        newsOrStudies={latestStudies}
+        isNews={false}
         title={homeData.attributes.latestStudies.title}
         cta={homeData.attributes.latestStudies.cta}
       />

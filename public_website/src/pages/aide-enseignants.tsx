@@ -45,7 +45,8 @@ export default function TeachersHelp({
       />
       <Separator isActive={false} />
       <LatestNews
-        news={latestStudies}
+        newsOrStudies={latestStudies}
+        isNews={false}
         title={data.attributes.latestStudies.title}
         cta={data.attributes.latestStudies.cta}
       />

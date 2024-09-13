@@ -36,7 +36,8 @@ export default function CustomPage(props: CustomPageProps) {
       {memoBlocks}
       <Seo metaData={seo} />
       <StyledLatestNews
-        news={latestStudies}
+        newsOrStudies={latestStudies}
+        isNews={false}
         title="Les dernières **ressources**"
       />
     </React.Fragment>

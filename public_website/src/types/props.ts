@@ -358,11 +358,12 @@ export type LatestEventsProps = {
 }
 export type LatestNewsProps = {
   title: string
-  news:
+  newsOrStudies:
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
   cta?: CTA
   className?: string
+  isNews: boolean
 }
 export type OrganizationChartProps = {
   title?: string
