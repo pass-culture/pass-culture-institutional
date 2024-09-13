@@ -1529,47 +1529,6 @@ export interface ApiRessourcepassRessourcepass extends Schema.CollectionType {
   };
 }
 
-export interface ApiRessourcesEnseignantRessourcesEnseignant
-  extends Schema.SingleType {
-  collectionName: 'ressources_enseignants';
-  info: {
-    singularName: 'ressources-enseignant';
-    pluralName: 'ressources-enseignants';
-    displayName: 'Enseignants - Ressources';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    buttonText: Attribute.String;
-    filtres: Attribute.Component<'common.filtre', true>;
-    socialMediaSection: Attribute.Component<'block.social-media'>;
-    separator: Attribute.Component<'block.separator'>;
-    aide: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
-    showFilter: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::ressources-enseignant.ressources-enseignant',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::ressources-enseignant.ressources-enseignant',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiRessourcesPassCultureRessourcesPassCulture
   extends Schema.SingleType {
   collectionName: 'ressources_pass_cultures';
@@ -1712,7 +1671,6 @@ declare module '@strapi/types' {
       'api::presse.presse': ApiPressePresse;
       'api::resource.resource': ApiResourceResource;
       'api::ressourcepass.ressourcepass': ApiRessourcepassRessourcepass;
-      'api::ressources-enseignant.ressources-enseignant': ApiRessourcesEnseignantRessourcesEnseignant;
       'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }
