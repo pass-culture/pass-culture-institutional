@@ -13,8 +13,8 @@ export function ListItems(
     LatestEventsProps & {
       type: string
       news:
-      | APIResponseData<'api::news.news'>[]
-      | APIResponseData<'api::resource.resource'>[]
+        | APIResponseData<'api::news.news'>[]
+        | APIResponseData<'api::resource.resource'>[]
     },
     'events'
   >
