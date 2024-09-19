@@ -8,13 +8,6 @@
         ]
       }
     },
-    "pc-site-instit-staging": {
-      "hosting": {
-        "staging": [
-          "pc-site-instit-staging"
-        ]
-      }
-    },
     "pc-site-instit-production": {
       "hosting": {
         "production": [

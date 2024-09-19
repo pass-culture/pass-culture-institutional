@@ -7,6 +7,26 @@
       "cleanUrls": true,
       "redirects": [
         {
+          "source": "/politique-de-cookies/",
+          "destination": "/politique-de-cookies",
+          "type": 301
+        },
+        {
+          "source": "/cgu/",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/donnees-personnelles/",
+          "destination": "/charte-des-donnees-personnelles",
+          "type": 301
+        },
+        {
+          "source": "/accessibilite-de-la-webapp/",
+          "destination": "/accessibilite",
+          "type": 301
+        },
+        {
           "source": "/souscription",
           "destination": "/actualites-jeunes-parents",
           "type": 301
@@ -219,17 +239,31 @@
       ]
     },
     {
-      "target": "staging",
-      "public": "out",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "cleanUrls": true
-    },
-    {
       "target": "production",
       "public": "out",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "cleanUrls": true,
       "redirects": [
+        {
+          "source": "/politique-de-cookies/",
+          "destination": "/politique-de-cookies",
+          "type": 301
+        },
+        {
+          "source": "/cgu/",
+          "destination": "/mentions-legales-et-cgu-site",
+          "type": 301
+        },
+        {
+          "source": "/donnees-personnelles/",
+          "destination": "/charte-des-donnees-personnelles",
+          "type": 301
+        },
+        {
+          "source": "/accessibilite-de-la-webapp/",
+          "destination": "/accessibilite",
+          "type": 301
+        },
         {
           "source": "/souscription",
           "destination": "/actualites-jeunes-parents",
