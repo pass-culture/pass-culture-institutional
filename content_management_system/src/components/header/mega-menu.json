@@ -22,7 +22,7 @@
       "type": "component",
       "repeatable": true,
       "component": "common.link",
-      "required": true
+      "required": false
     },
     "cta": {
       "displayName": "cta",

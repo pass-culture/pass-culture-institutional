@@ -235,8 +235,7 @@ export interface HeaderMegaMenu extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     primaryListItems: Attribute.Component<'common.link', true> &
       Attribute.Required;
-    secondaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required;
+    secondaryListItems: Attribute.Component<'common.link', true>;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     cardTitle: Attribute.String & Attribute.Required;
     cardDescription: Attribute.String & Attribute.Required;
