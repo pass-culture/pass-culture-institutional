@@ -164,9 +164,12 @@ export const getStaticProps = (async () => {
 
 const StyledHomeGradient = styled.section`
   ${({ theme }) => css`
-    background: linear-gradient(180deg, #eae3ff 0%, #ffffff 100%);
+    background: linear-gradient(
+      180deg,
+      ${theme.colors.lila} 0%,
+      ${theme.colors.white} 100%
+    );
     padding-top: 8rem;
-    overflow: hidden;
     transform: translateY(-8rem);
     height: calc(100vh - 6.75rem);
 
@@ -175,6 +178,7 @@ const StyledHomeGradient = styled.section`
       padding-top: 7rem;
       margin-bottom: -5rem;
       height: calc(100vh - 6.75rem);
+      overflow: hidden;
     }
   `}
 `
