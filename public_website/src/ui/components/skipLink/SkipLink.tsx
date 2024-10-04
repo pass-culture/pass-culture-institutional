@@ -9,7 +9,11 @@ type SkipLinkProps = {
 }
 
 export function SkipLink({ label, href }: SkipLinkProps) {
-  return <StyledLink href={href}>{label}</StyledLink>
+  return (
+    <StyledLink href={href} target="_parent">
+      {label}
+    </StyledLink>
+  )
 }
 
 const StyledLink = styled(Link)`
@@ -25,7 +29,7 @@ const StyledLink = styled(Link)`
     &:focus {
       top: 1rem;
       left: 1rem;
-      z-index: 2;
+      z-index: 9999;
     }
   `}
 `
