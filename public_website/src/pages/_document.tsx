@@ -6,7 +6,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import styled, { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -56,11 +56,15 @@ export default class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
         </Head>
-        <body>
+        <Body>
           <Main />
           <NextScript />
-        </body>
+        </Body>
       </Html>
     )
   }
 }
+
+const Body = styled.body({
+  backgroundColor: '#ffffff',
+})
