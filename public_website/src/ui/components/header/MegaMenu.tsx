@@ -68,23 +68,28 @@ export function MegaMenu({
 
   useEffect(() => {
     const megaMenuElement = megaMenuRef.current
-    megaMenuElement?.addEventListener('keydown', (e: KeyboardEvent): void =>
+    const handleKeyDown = (e: KeyboardEvent) => {
+      e.stopPropagation()
       onKeyDown(e)
-    )
-    window?.addEventListener('click', onClickOutside)
+      if (e.key === 'Escape') {
+        onBlur()
+      }
+    }
+
+    megaMenuElement?.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('click', onClickOutside)
 
     const handleScroll = () => {
       onBlur()
     }
-    window?.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      megaMenuElement?.removeEventListener(
-        'keydown',
-        (e: KeyboardEvent): void => onKeyDown(e)
-      )
-      window?.removeEventListener('click', onClickOutside)
-      window?.removeEventListener('scroll', handleScroll)
+      megaMenuElement?.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('click', onClickOutside)
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [onBlur, onKeyDown, onClickOutside])
 
