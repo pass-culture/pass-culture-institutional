@@ -28,20 +28,21 @@ export default function MyApp({
 }: MyAppProps) {
   useAxeptio()
   const acceptedVendors = useConsent()
+  const hasAcceptedFirebase = acceptedVendors['firebase']
 
   useEffect(() => {
-    if (acceptedVendors['firebase']) analyticsProvider.init()
-  }, [acceptedVendors])
+    if (hasAcceptedFirebase) analyticsProvider.init()
+  }, [hasAcceptedFirebase])
 
   const path =
     typeof window !== 'undefined' ? window.location?.pathname : undefined
   useEffect(() => {
-    if (path && acceptedVendors['firebase']) {
+    if (path && hasAcceptedFirebase) {
       analyticsProvider.logEvent('pageView', {
         origin: path,
       })
     }
-  }, [acceptedVendors, path])
+  }, [hasAcceptedFirebase, path])
 
   const breadcrumbContextValue = useMemo(
     () => ({
