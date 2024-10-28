@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   run_public_website_tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -31,7 +31,7 @@ jobs:
         run: cd public_website && yarn test
         
   run_content_management_system_tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,7 +47,7 @@ jobs:
         run: cd content_management_system && yarn test:types
 
   build-image-cms:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
     - name: Authentification to Google to get secret
@@ -73,7 +73,7 @@ jobs:
         cosign_kms_key: ${{ steps.secrets.outputs.COSIGN_KMS_KEY }}
 
   build-image-public-site-preview:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v4
     - name: Authentification to Google to get secret
