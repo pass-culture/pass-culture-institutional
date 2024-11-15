@@ -1,5 +1,9 @@
 on: 
   workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
     
 name: Deploy production public website
 
