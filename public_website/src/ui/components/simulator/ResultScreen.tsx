@@ -35,7 +35,7 @@ export function ResultScreen(props: ResultScreenProps) {
         <span aria-label={parseText(props.helpText).accessibilityLabel}>
           {parseText(props.helpText).processedText}
         </span>
-        <Link href={props.ctaLink.URL}>{props.supportLink.Label}</Link>
+        <Link href={props.supportLink.URL}>{props.supportLink.Label}</Link>
       </HelpText>
     </Root>
   )
