@@ -133,6 +133,9 @@
         "S’informer - presse"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "endDate": {
+      "type": "date"
     }
   }
 }
