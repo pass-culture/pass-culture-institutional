@@ -69,9 +69,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
       pathname.startsWith('/ressources/')
     )
   }
-  const isFooterLink = (): boolean => {
-    return footerItems.some((obj) => isStringAreEquals(obj.URL, pathname))
-  }
+
   const getFooterItem = (): {
     Label: string
     URL: string
@@ -147,7 +145,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
               <Link href="/ressources-pass-culture">Ressources</Link>
             </StyledSimpleLink>
           )}
-          {isFooterLink() && footerLink && (
+          {footerLink && (
             <StyledSimpleLink>
               <Link href={footerLink.URL}>{footerLink.Label}</Link>
             </StyledSimpleLink>
