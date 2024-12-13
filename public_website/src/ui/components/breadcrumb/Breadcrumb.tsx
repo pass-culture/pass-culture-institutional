@@ -22,13 +22,13 @@ export function Breadcrumb(props: BreadcrumbProps) {
   const params = useParams()
   const { onClickAnalytics } = useOnClickAnalytics()
 
-  const headerData = useContext(BreadcrumbContext)
+  const breadcrumbData = useContext(BreadcrumbContext)
   const pathname = usePathname()
 
-  const allItems = headerData
-    ? [...headerData.targetItems, ...headerData.aboutItems]
+  const allItems = breadcrumbData
+    ? [...breadcrumbData.targetItems, ...breadcrumbData.aboutItems]
     : []
-
+  const footerItems = breadcrumbData ? [...breadcrumbData.footerItems] : []
   const currentNavigationGroup = allItems.find(
     (x) =>
       x.megaMenu.primaryListItems.some((y: { URL: string }) =>
@@ -70,6 +70,18 @@ export function Breadcrumb(props: BreadcrumbProps) {
     )
   }
 
+  const getFooterItem = (): {
+    Label: string
+    URL: string
+    id: number
+  } | null => {
+    const item = footerItems.find((obj) => isStringAreEquals(obj.URL, pathname))
+
+    if (item) return item
+    return null
+  }
+  const footerLink = getFooterItem()
+
   const memoizeUL = useMemo(() => {
     return (
       <ul ref={dropdownRef} className="select-dropdown">
@@ -102,7 +114,6 @@ export function Breadcrumb(props: BreadcrumbProps) {
 
   const label = currentNavigationGroup?.label
 
-  //Faudrait récupérer /actualites-pass-culture de manière dynamique
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -132,6 +143,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
           {isResource() && (
             <StyledSimpleLink>
               <Link href="/ressources-pass-culture">Ressources</Link>
+            </StyledSimpleLink>
+          )}
+          {footerLink && (
+            <StyledSimpleLink>
+              <Link href={footerLink.URL}>{footerLink.Label}</Link>
             </StyledSimpleLink>
           )}
           <ListItem>
