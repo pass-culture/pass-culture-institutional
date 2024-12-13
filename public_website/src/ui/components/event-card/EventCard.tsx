@@ -10,8 +10,8 @@ import { Link } from '../Link'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
 import { ListCardProps } from '@/types/props'
-import { compareDate } from '@/utils/compareDate'
 import { convertTime } from '@/utils/convertTime'
+import { getFormattedDateAfterComparison } from '@/utils/getFormattedDateAfterComparison'
 import { isRenderable } from '@/utils/isRenderable'
 
 export function EventCard(
@@ -64,7 +64,7 @@ export function EventCard(
         <StyledTimeWrapper>
           <time>
             <Calendar />
-            {compareDate(date, endDate)}
+            {getFormattedDateAfterComparison(date, endDate)}
           </time>
           <p className="desktop">
             <Clock /> {convertTime(startTime)} <ArrowLeft />
