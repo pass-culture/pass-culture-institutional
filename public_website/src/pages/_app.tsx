@@ -48,8 +48,9 @@ export default function MyApp({
     () => ({
       targetItems: headerData.targetItems,
       aboutItems: headerData.aboutItems,
+      footerItems: footerData.LegalLinks,
     }),
-    [headerData.targetItems, headerData.aboutItems]
+    [headerData.targetItems, headerData.aboutItems, footerData.LegalLinks]
   )
 
   return (

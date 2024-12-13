@@ -93,6 +93,11 @@ export type ImageTextProps = {
   icon?: string
   isImageRight?: boolean
 }
+export type BreadcrumbDataProps = {
+  targetItems: HeaderNavigationItemProps[]
+  aboutItems: HeaderNavigationItemProps[]
+  footerItems: { Label: string; URL: string; id: number }[]
+}
 export type HeaderMenuProps = {
   targetItems: HeaderNavigationItemProps[]
   aboutItems: HeaderNavigationItemProps[]
