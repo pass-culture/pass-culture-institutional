@@ -1,56 +1,5 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface SharedSeo extends Schema.Component {
-  collectionName: 'components_shared_seos';
-  info: {
-    displayName: 'seo';
-    icon: 'search';
-  };
-  attributes: {
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 50;
-        maxLength: 160;
-      }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    keywords: Attribute.Text;
-    metaRobots: Attribute.String;
-    structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
-  };
-}
-
-export interface SharedMetaSocial extends Schema.Component {
-  collectionName: 'components_shared_meta_socials';
-  info: {
-    displayName: 'metaSocial';
-    icon: 'project-diagram';
-  };
-  attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 65;
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
-  };
-}
-
 export interface SimulatorSuccessScreen extends Schema.Component {
   collectionName: 'components_simulator_success_screens';
   info: {
@@ -151,6 +100,57 @@ export interface SimulatorAgeQuestion extends Schema.Component {
   };
 }
 
+export interface SharedSeo extends Schema.Component {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
+  };
+}
+
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
+  };
+}
+
 export interface HomeRecommendationsSection extends Schema.Component {
   collectionName: 'components_home_recommendations_sections';
   info: {
@@ -212,6 +212,26 @@ export interface HomeEligibilityItems extends Schema.Component {
     description: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
   };
+}
+
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'Lists';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
@@ -387,26 +407,6 @@ export interface HeaderAccountDropdown extends Schema.Component {
     items: Attribute.Component<'header.account-item', true> &
       Attribute.Required;
   };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
@@ -1239,8 +1239,6 @@ export interface BlockBreadcrumb extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'shared.seo': SharedSeo;
-      'shared.meta-social': SharedMetaSocial;
       'simulator.success-screen': SimulatorSuccessScreen;
       'simulator.step': SimulatorStep;
       'simulator.radio-question': SimulatorRadioQuestion;
@@ -1248,10 +1246,14 @@ declare module '@strapi/types' {
       'simulator.answer': SimulatorAnswer;
       'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.age-question': SimulatorAgeQuestion;
+      'shared.seo': SharedSeo;
+      'shared.meta-social': SharedMetaSocial;
       'home.recommendations-section': HomeRecommendationsSection;
       'home.hero-section': HomeHeroSection;
       'home.eligibility-section': HomeEligibilitySection;
       'home.eligibility-items': HomeEligibilityItems;
+      'footer.list': FooterList;
+      'footer.legal-links': FooterLegalLinks;
       'header.navigation-items': HeaderNavigationItems;
       'header.mega-menu': HeaderMegaMenu;
       'header.login': HeaderLogin;
@@ -1259,8 +1261,6 @@ declare module '@strapi/types' {
       'header.header': HeaderHeader;
       'header.account-item': HeaderAccountItem;
       'header.account-dropdown': HeaderAccountDropdown;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'common.simple-text-column': CommonSimpleTextColumn;
       'common.piled-card-item': CommonPiledCardItem;

@@ -801,6 +801,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
         'plugin::multi-select.multi-select',
         ['Acteurs culturels', 'S\u2019informer - presse']
       >;
+    endDate: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

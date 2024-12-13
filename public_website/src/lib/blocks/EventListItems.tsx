@@ -32,6 +32,7 @@ export function EventListItems(props: LatestEventsProps) {
                 title={eventItem.attributes.title}
                 category={eventItem.attributes.category}
                 date={eventItem.attributes.date}
+                endDate={eventItem.attributes.endDate}
                 imageUrl={
                   eventItem.attributes.image &&
                   getStrapiURL(eventItem.attributes.image?.data.attributes.url)

@@ -11,7 +11,7 @@ import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CTA } from '@/types/CTA'
 import { ListCardProps } from '@/types/props'
 import { convertTime } from '@/utils/convertTime'
-import { formatDate } from '@/utils/formatDate'
+import { getFormattedDateAfterComparison } from '@/utils/getFormattedDateAfterComparison'
 import { isRenderable } from '@/utils/isRenderable'
 
 export function EventCard(
@@ -19,6 +19,7 @@ export function EventCard(
     ListCardProps & {
       startTime: string | Date
       endTime: string | Date
+      endDate: string | Date | null | undefined
       city: string
       cta: CTA
     },
@@ -29,6 +30,7 @@ export function EventCard(
     title,
     category,
     date,
+    endDate,
     imageUrl,
     startTime,
     endTime,
@@ -62,7 +64,7 @@ export function EventCard(
         <StyledTimeWrapper>
           <time>
             <Calendar />
-            {formatDate(date)}
+            {getFormattedDateAfterComparison(date, endDate)}
           </time>
           <p className="desktop">
             <Clock /> {convertTime(startTime)} <ArrowLeft />
