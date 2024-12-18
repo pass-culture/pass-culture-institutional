@@ -29,7 +29,7 @@ export type EventMap = {
   pageView: { origin: string }
 }
 
-export const eventMapKeys: { [K in keyof EventMap]: true } = {
+export const eventMapKeys = {
   testEvent: true,
   goToSignUpNative: true,
   goToSignUpPro: true,
