@@ -1,20 +1,46 @@
 # pass Culture Institutional
 
-Welcome to the pass culture institutional project !
-
-This repo contains two important folders `public_website` (Next) and `content_management_system` (Strapi) for the institutional site.
-
-This README contains general information that concerns the both folders.
-
-For more specific information:
-
-[Public website documentation](./public_website/README.md)
-
-[Content management system documentation](./content_management_system/README.md)
-
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=code_smells)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=coverage)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pass-culture_pass-culture-institutional&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=pass-culture_pass-culture-institutional)
+
+Welcome to the **pass Culture Institutional** project!
+
+This repository contains the following key components for the institutional site:
+
+- **`public_website`**: The frontend application built with **Next.js**.
+- **`content_management_system`**: The backend powered by **Strapi**.
+
+In addition, the project provides tools to streamline local development and testing by connecting to the **Strapi testing backend** behind Google Cloud IAP.
+
+This README provides general project information, scripts, and setup instructions. For detailed documentation on each part of the project:
+
+- [Public Website Documentation](./public_website/README.md)
+- [Content Management System Documentation](./content_management_system/README.md)
+- [Strapi Testing Proxy Documentation](./nginx-strapi-testing-proxy/README.md)
+
+---
+
+## Table of Contents
+
+- [pass Culture Institutional](#pass-culture-institutional)
+  - [Table of Contents](#table-of-contents)
+  - [Requirements](#requirements)
+  - [Start the project](#start-the-project)
+  - [Local Database](#local-database)
+  - [Access the Strapi Testing Backend](#access-the-strapi-testing-backend)
+    - [Key Features:](#key-features)
+    - [Quick Start:](#quick-start)
+  - [Project Scripts](#project-scripts)
+  - [Testing](#testing)
+    - [Public website](#public-website)
+    - [Content management system](#content-management-system)
+      - [Sharing types between the front \& back](#sharing-types-between-the-front--back)
+      - [Why aren't there any unit test on the CMS?](#why-arent-there-any-unit-test-on-the-cms)
+  - [PR title format 🤖](#pr-title-format-)
+    - [Why](#why)
+      - [About squashing the PR commits](#about-squashing-the-pr-commits)
+    - [Key points](#key-points)
 
 ## Requirements
 
@@ -40,23 +66,51 @@ If you want to run the content_management_system locally, you need to install Po
 
 More information on how to setup here: [content_management_system documentation](./content_management_system/README.md)
 
+## Access the Strapi Testing Backend
+
+To connect your local frontend to the Strapi testing backend (secured behind Google Cloud IAP) and transfer data to your local database, refer to the detailed documentation in the [Strapi Testing Proxy](./nginx-strapi-testing-proxy/README.md).
+
+### Key Features:
+
+1. **Proxy Setup**: Allows your local frontend to communicate with the Strapi testing server.
+2. **Data Transfer**: Synchronize the testing environment data into your local database for seamless development and debugging.
+
+### Quick Start:
+
+1. Follow the setup instructions in the [Strapi Testing Proxy README](./nginx-strapi-testing-proxy/README.md).
+2. Use the available scripts:
+   - `yarn proxy:testing`: Start the proxy server.
+   - `yarn proxy:transfer`: Transfer data from the Strapi testing backend to your local database.
+3. Point your frontend (`public_website`) to the local proxy:
+   ```env
+   NEXT_PUBLIC_STRAPI_API_URL=http://localhost:8080
+   ```
+
+For detailed steps and troubleshooting, see the full [Strapi Testing Proxy documentation](./nginx-strapi-testing-proxy/README.md).
+
 ## Project Scripts
 
 Before you can use the scripts, ensure you have `Yarn` installed on your system.
-The project includes several scripts to simplify development and setup:
+The project includes several useful scripts for development, testing, and proxy setup
 
-- `yarn public_website`: Start the public_website development server.
-- `yarn content_management_system`: Start the content_management_system development server.
-- `yarn clear`: Remove temporary files and caches in the public_website directory.
-- `yarn setup:public_website`: Install the public_website dependencies.
-- `yarn setup:content_management_system`: Install the content_management_system dependencies.
-- `yarn setup`: Install the public_website and content_management_system project dependencies.
-- `yarn dev`: Run during development. It clears caches, and starts the public_website and content_management_system servers.
-- `yarn audit:all`: Test all the vulnerabilities packages.
-- `yarn test:deadcode`: Test both public_website and content_management_system dead code.
-- `yarn test:deadcode:update`: Update the public_website and content_management_system dead code snapshots.
-- `yarn test:lint`: Test both public_website and content_management_system linting.
-- `yarn test:types`: Test both public_website and content_management_system typing.
+| **Command**                            | **Description**                                                                 |
+| -------------------------------------- | ------------------------------------------------------------------------------- |
+| `yarn setup`                           | Install dependencies for both `public_website` and `content_management_system`. |
+| `yarn dev`                             | Start both the frontend and backend servers for development.                    |
+| `yarn public_website`                  | Start the `public_website` development server.                                  |
+| `yarn content_management_system`       | Start the `content_management_system` development server.                       |
+| `yarn clear`                           | Remove temporary files and caches in the `public_website` directory.            |
+| `yarn setup:public_website`            | Install dependencies for the `public_website` only.                             |
+| `yarn setup:content_management_system` | Install dependencies for the `content_management_system` only.                  |
+| `yarn audit:all`                       | Check for vulnerabilities in project dependencies.                              |
+| `yarn test:deadcode`                   | Detect unused (dead) code in both projects.                                     |
+| `yarn test:deadcode:update`            | Update snapshots for dead code detection.                                       |
+| `yarn test:lint`                       | Run linting for both frontend and backend.                                      |
+| `yarn test:types`                      | Verify TypeScript types across the project.                                     |
+| `yarn proxy:testing`                   | Start the testing proxy server to connect to the Strapi testing backend.        |
+| `yarn proxy:testing:infinite`          | Run the proxy server in infinite mode with automatic JWT regeneration.          |
+| `yarn proxy:testing:stop`              | Stop the currently running proxy server.                                        |
+| `yarn proxy:transfer`                  | Transfer data from the Strapi testing backend to your local database.           |
 
 ## Testing
 
@@ -101,6 +155,7 @@ The commits of the PR won't be on `main`, but are still useful for PR readiness 
 Here is a recap:
 
 ```
+
 <type>[optional scope]: <description>
   │          │               │
   │          │               └─⫸ PR Description: A short and concise summary of the changes. Present tense.
@@ -110,6 +165,7 @@ Here is a recap:
   |
   │
   └─⫸ PR Type: build:, chore:, ci:, docs:, feat:, fix:, perf:, refactor:, revert:, style:, test:
+
 ```
 
 Here is a more detailed explanation for different types:
