@@ -9,30 +9,42 @@ const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
   const cardLink = item.megaMenu.cardLink
   const cardCTA = item.megaMenu.cta
 
-  const filterNonEmptyLabel = useCallback(
-    (item: { Label?: string }): boolean => item.Label?.trim() !== '',
-    []
-  )
+  const FilteredLinks = ({
+    items,
+    sectionLabel,
+  }: {
+    items: CTA[]
+    sectionLabel: string
+  }) => {
+    const filterNonEmptyLabel = useCallback(
+      (item: { Label?: string }): boolean => item.Label?.trim() !== '',
+      []
+    )
 
-  const renderFilteredLinks = useCallback(
-    (links: CTA[]) =>
-      links
-        .filter(filterNonEmptyLabel)
-        .map((link) => (
-          <SitemapLinkItem
-            key={link.Label}
-            link={link}
-            sectionLabel={item.label}
-          />
-        )),
-    [filterNonEmptyLabel, item.label]
-  )
+    return items
+      .filter(filterNonEmptyLabel)
+      .map((link) => (
+        <SitemapLinkItem
+          key={link.Label}
+          link={link}
+          sectionLabel={sectionLabel}
+        />
+      ))
+  }
+
   return (
     <div key={item.label}>
       <SectionTitle>{item.label}</SectionTitle>
       <SitemapList>
-        {renderFilteredLinks(item.megaMenu.primaryListItems)}
-        {renderFilteredLinks(item.megaMenu.secondaryListItems)}
+        <FilteredLinks
+          items={item.megaMenu.primaryListItems}
+          sectionLabel={item.label}
+        />
+        <FilteredLinks
+          items={item.megaMenu.secondaryListItems}
+          sectionLabel={item.label}
+        />
+
         {cardLink && (
           <SitemapLinkItem link={cardLink} sectionLabel={cardLink.Label} />
         )}
