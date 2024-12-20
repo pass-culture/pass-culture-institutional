@@ -44,10 +44,11 @@ const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
 export default MenuSection
 
 export const SectionTitle = styled.h3`
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-  font-size: 1.25rem;
+  ${({ theme }) => css`
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: ${theme.colors.primary};
+  `}
 `
 const SitemapList = styled.ul`
   ${({ theme }) => css`
@@ -57,15 +58,14 @@ const SitemapList = styled.ul`
 
     li {
       position: relative;
-      margin-bottom: 0.5rem;
 
       &::before {
         content: '';
         position: absolute;
         left: -1rem;
         top: 0.8em;
-        width: 0.375rem;
-        height: 0.375rem;
+        width: 0.3125rem;
+        height: 0.3125rem;
         background-color: ${theme.colors.primary};
         border-radius: 50%;
       }
