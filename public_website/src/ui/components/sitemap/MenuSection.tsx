@@ -1,36 +1,31 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 
 import SitemapLinkItem from './SitemapLinkItem'
 import { CTA } from '@/types/CTA'
 import { HeaderNavigationItemProps } from '@/types/props'
+import { filterNonEmptyLabel } from '@/utils/filterNonEmptyLabel'
 
+const FilteredLinks = ({
+  items,
+  sectionLabel,
+}: {
+  items: CTA[]
+  sectionLabel: string
+}) => {
+  return items
+    .filter(filterNonEmptyLabel)
+    .map((link) => (
+      <SitemapLinkItem
+        key={link.Label}
+        link={link}
+        sectionLabel={sectionLabel}
+      />
+    ))
+}
 const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
   const cardLink = item.megaMenu.cardLink
   const cardCTA = item.megaMenu.cta
-
-  const FilteredLinks = ({
-    items,
-    sectionLabel,
-  }: {
-    items: CTA[]
-    sectionLabel: string
-  }) => {
-    const filterNonEmptyLabel = useCallback(
-      (item: { Label?: string }): boolean => item.Label?.trim() !== '',
-      []
-    )
-
-    return items
-      .filter(filterNonEmptyLabel)
-      .map((link) => (
-        <SitemapLinkItem
-          key={link.Label}
-          link={link}
-          sectionLabel={sectionLabel}
-        />
-      ))
-  }
 
   return (
     <div key={item.label}>
