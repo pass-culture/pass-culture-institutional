@@ -14,16 +14,18 @@ const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
     []
   )
 
-  const renderSitemapLink = useCallback(
-    (link: CTA) => (
-      <SitemapLinkItem key={link.Label} link={link} sectionLabel={item.label} />
-    ),
-    [item.label]
-  )
-
   const renderFilteredLinks = useCallback(
-    (links: CTA[]) => links.filter(filterNonEmptyLabel).map(renderSitemapLink),
-    [filterNonEmptyLabel, renderSitemapLink]
+    (links: CTA[]) =>
+      links
+        .filter(filterNonEmptyLabel)
+        .map((link) => (
+          <SitemapLinkItem
+            key={link.Label}
+            link={link}
+            sectionLabel={item.label}
+          />
+        )),
+    [filterNonEmptyLabel, item.label]
   )
   return (
     <div key={item.label}>
@@ -43,7 +45,7 @@ const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
 }
 export default MenuSection
 
-export const SectionTitle = styled.h3`
+const SectionTitle = styled.h3`
   ${({ theme }) => css`
     margin-top: 1.5rem;
     margin-bottom: 1rem;
