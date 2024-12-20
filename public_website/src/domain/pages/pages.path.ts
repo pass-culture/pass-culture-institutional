@@ -17,4 +17,5 @@ export const PATHS = {
   OFFERS_LIST: 'liste-offre',
   PRESSE: 'presse',
   ETUDES_PASS_PAGE: 'etudes-pass-culture',
+  MAP_SITE: 'plan-du-site',
 }
