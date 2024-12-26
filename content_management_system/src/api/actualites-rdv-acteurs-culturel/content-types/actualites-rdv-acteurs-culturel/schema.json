@@ -51,6 +51,12 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "priority": {
+      "type": "decimal",
+      "max": 1,
+      "min": 0,
+      "default": 0.5
     }
   }
 }

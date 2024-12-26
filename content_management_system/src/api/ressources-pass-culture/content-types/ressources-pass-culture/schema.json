@@ -47,6 +47,12 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "priority": {
+      "type": "decimal",
+      "default": 0.5,
+      "max": 1,
+      "min": 0
     }
   }
 }
