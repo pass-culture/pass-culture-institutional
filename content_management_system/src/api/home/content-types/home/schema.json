@@ -61,6 +61,12 @@
       "type": "component",
       "repeatable": false,
       "component": "shared.seo"
+    },
+    "priority": {
+      "type": "decimal",
+      "default": 1,
+      "max": 1,
+      "min": 0
     }
   }
 }

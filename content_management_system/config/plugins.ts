@@ -23,4 +23,11 @@ export default ({ env }) => ({
       },
     },
   },
+  'sitemap-pass': {
+    enabled: true,
+    resolve: './src/plugins/sitemap-pass',
+    config: {
+      build: true
+    }
+  },
 });
