@@ -2,7 +2,7 @@ import hljs from "highlight.js/lib/core";
 import xml from "highlight.js/lib/languages/xml";
 import "highlight.js/styles/default.css";
 import React, { CSSProperties } from "react";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 hljs.registerLanguage("xml", xml);
 

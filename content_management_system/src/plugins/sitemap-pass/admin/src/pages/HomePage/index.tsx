@@ -15,9 +15,15 @@ import { apiCall } from "../../utils/apiCall";
 import ActionButton from "../../components/PluginComponents/action-button";
 const HomePage = () => {
   const [sitemap, setSitemap] = useState<string>("");
-  const [isFetching, setIsFetching] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [isCopying, setIsCopying] = useState(false);
+  const [status, setStatus] = useState<{
+    isFetching: boolean;
+    isGenerating: boolean;
+    isCopying: boolean;
+  }>({
+    isFetching: false,
+    isGenerating: false,
+    isCopying: false,
+  });
 
   const toggleNotification = useNotification();
 
@@ -25,51 +31,58 @@ const HomePage = () => {
     toggleNotification({ type, message });
   };
 
+  const handleApiCall = async (
+    action: () => Promise<void>,
+    statusKey: keyof typeof status
+  ) => {
+    setStatus((prev) => ({ ...prev, [statusKey]: true }));
+    try {
+      await action();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setStatus((prev) => ({ ...prev, [statusKey]: false }));
+    }
+  };
+
   const fetchSitemap = async (): Promise<void> => {
-    setIsFetching(true);
-    apiCall(
+    await apiCall(
       api.getSitemapPreview,
       (response) => {
         setSitemap(response);
-        setIsFetching(false);
       },
       (error) => {
         notify("error", `Erreur lors de la récupération du sitemap: ${error}`);
-        setIsFetching(false);
       }
     );
   };
+
   const copyToClipboard = async (): Promise<void> => {
-    apiCall(
+    await apiCall(
       () => api.copyToClipboard(sitemap),
       () => {
         notify("success", "Sitemap copié dans le presse-papier");
-        setIsCopying(false);
       },
       (error) => {
         notify("error", `Impossible de copier le sitemap: ${error}`);
-        setIsCopying(false);
       }
     );
   };
 
   const generateSitemap = async (): Promise<void> => {
-    setIsGenerating(true);
-    apiCall(
+    await apiCall(
       api.exportSitemap,
       () => {
         notify("success", "Sitemap généré avec succès et exporté");
-        setIsGenerating(false);
       },
       (error) => {
         notify("error", `Echec de la génération du sitemap: ${error}`);
-        setIsGenerating(false);
       }
     );
   };
 
   useEffect(() => {
-    fetchSitemap();
+    handleApiCall(fetchSitemap, "isFetching");
   }, []);
 
   const hasSitemap = sitemap !== "";
@@ -82,28 +95,23 @@ const HomePage = () => {
       />
       <ContentLayout>
         {hasSitemap && <AlertWithIssues sitemap={sitemap} />}
-
         <Flex justifyContent="center" gap={4} padding={8}>
           <ActionButton
-            onClick={fetchSitemap}
-            disabled={isFetching}
-            isLoading={isFetching}
-            aria-label="Rafraichir le sitemap"
+            onClick={() => handleApiCall(fetchSitemap, "isFetching")}
+            disabled={status.isFetching}
+            isLoading={status.isFetching}
             label="Rafraichir le sitemap"
           />
-
           <ActionButton
-            onClick={generateSitemap}
-            disabled={!hasSitemap || isGenerating}
-            isLoading={isGenerating}
-            aria-label="Générer le sitemap"
+            onClick={() => handleApiCall(generateSitemap, "isGenerating")}
+            disabled={!hasSitemap || status.isGenerating}
+            isLoading={status.isGenerating}
             label="Générer le sitemap"
           />
           <ActionButton
-            onClick={copyToClipboard}
-            disabled={!hasSitemap || isCopying}
-            isLoading={isCopying}
-            aria-label="Copier le sitemap dans le presse-papier"
+            onClick={() => handleApiCall(copyToClipboard, "isCopying")}
+            disabled={!hasSitemap || status.isCopying}
+            isLoading={status.isCopying}
             label="Copier"
           />
         </Flex>
