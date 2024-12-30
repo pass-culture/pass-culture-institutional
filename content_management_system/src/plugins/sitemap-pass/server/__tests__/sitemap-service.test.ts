@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import sitemapService from '../services/sitemap-service';
+import { getLastMod, isPageContent, processContentType } from '../utils/content-type-utils';
+import { ContentType } from '../content-types/types';
 
-const { isPageContent, getContentTypes, processContentType, fetchEntities, generateSitemapXml,getLastMod } = sitemapService;
+const { getContentTypes, fetchEntities, generateSitemapXml } = sitemapService;
 
 describe('Sitemap Service', () => {
   const mockStrapi = {
@@ -20,7 +22,9 @@ describe('Sitemap Service', () => {
 
   describe('isPageContent', () => {
     it('should return true when content type has Path and priority', () => {
-      const contentType = {
+      const contentType: ContentType = {
+        uid: 'test',
+        kind: 'collectionType',
         attributes: {
           Path: { type: 'string' },
           priority: { type: 'decimal' }
@@ -30,7 +34,9 @@ describe('Sitemap Service', () => {
     });
 
     it('should return true when content type has slug and priority', () => {
-      const contentType = {
+      const contentType: ContentType = {
+        uid: 'test',
+        kind: 'collectionType',
         attributes: {
           slug: { type: 'string' },
           priority: { type: 'decimal' }
@@ -40,7 +46,9 @@ describe('Sitemap Service', () => {
     });
 
     it('should return false when content type has no priority', () => {
-      const contentType = {
+      const contentType: ContentType = {
+        uid: 'test',
+        kind: 'collectionType',
         attributes: {
           Path: { type: 'string' }
         }
