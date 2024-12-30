@@ -1,10 +1,11 @@
 {
   "name": "sitemap-pass",
   "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "private": true,
+  "description": "This plugin is used to generate a sitemap.xml.",
   "strapi": {
     "name": "sitemap-pass",
-    "description": "Description of sitemap-pass plugin",
+    "description": "This plugin is used to generate a sitemap.xml.",
     "kind": "plugin"
   },
   "dependencies": {
@@ -36,11 +37,11 @@
     "styled-components": "^5.2.1"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Pass Culture"
   },
   "maintainers": [
     {
-      "name": "A Strapi developer"
+      "name": "Pass Culture"
     }
   ],
   "engines": {

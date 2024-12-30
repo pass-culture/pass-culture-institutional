@@ -38,6 +38,9 @@
     "ts-prune": "^0.10.3",
     "typescript": "^5.3.3"
   },
+  "workspaces": [
+    "plugins/*"
+  ],
   "engines": {
     "node": ">=18.17.0 <=20.8.0",
     "npm": "please-use-yarn",
