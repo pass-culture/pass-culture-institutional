@@ -11,7 +11,8 @@
     "strapi": "strapi",
     "test:deadcode": "ts-prune",
     "test:lint": "eslint .",
-    "test:types": "yarn tsc --noEmit"
+    "test:types": "yarn tsc --noEmit",
+    "postinstall": "cd src/plugins/sitemap-pass && yarn install"
   },
   "dependencies": {
     "@strapi-community/strapi-provider-upload-google-cloud-storage": "https://github.com/pass-culture/strapi-provider-upload-google-cloud-storage#master",
@@ -38,9 +39,6 @@
     "ts-prune": "^0.10.3",
     "typescript": "^5.3.3"
   },
-  "workspaces": [
-    "plugins/*"
-  ],
   "engines": {
     "node": ">=18.17.0 <=20.8.0",
     "npm": "please-use-yarn",
