@@ -4,6 +4,9 @@
   "private": true,
   "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 300€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
+  "workspaces": [
+    "./src/plugins/sitemap-pass"
+  ],
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
@@ -13,9 +16,6 @@
     "test:lint": "eslint .",
     "test:types": "yarn tsc --noEmit"
   },
-  "workspaces": [
-    "./src/plugins/sitemap-pass"
-  ],
   "dependencies": {
     "@strapi-community/strapi-provider-upload-google-cloud-storage": "https://github.com/pass-culture/strapi-provider-upload-google-cloud-storage#master",
     "@strapi/plugin-seo": "^1.9.8",
