@@ -122,6 +122,12 @@
       "type": "component",
       "repeatable": false,
       "component": "block.simple-push-cta"
+    },
+    "priority": {
+      "type": "decimal",
+      "max": 1,
+      "default": 0.5,
+      "min": 0
     }
   }
 }
