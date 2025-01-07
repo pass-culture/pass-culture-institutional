@@ -16,6 +16,8 @@ COPY database /build/database
 COPY types /build/types
 COPY src /build/src
 
+RUN cd src/plugins/sitemap-pass && yarn install --frozen-lockfile
+
 RUN  yarn build
 
 # Runner
