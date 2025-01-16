@@ -33,7 +33,7 @@ export function DoublePushCTA(
   } = props
 
   const { onClickAnalytics } = useOnClickAnalytics()
-  const image_url = image?.data?.attributes?.url
+  const image_url = image?.data?.attributes.url
 
   return (
     <StyledContentWrapper>

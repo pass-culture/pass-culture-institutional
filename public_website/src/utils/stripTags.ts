@@ -6,7 +6,7 @@ export function stripTags(str: string): string {
     return str
       .replace(/(<([^>]+)>)/gi, '')
       .replace(/\s\s+/g, ' ')
-      .replace('&nbsp;', ' ')
+      .replace('&nbsp;', ' ');
   } else {
     return ''
   }

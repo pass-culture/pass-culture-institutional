@@ -16,6 +16,7 @@ export async function fetchCMS<T>(path: string) {
     const mergedOptions = {
       headers: {
         'Content-Type': 'application/json',
+        'Strapi-Response-Format': 'v4',
       },
     }
 

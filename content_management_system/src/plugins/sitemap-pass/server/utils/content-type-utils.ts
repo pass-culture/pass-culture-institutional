@@ -1,15 +1,20 @@
-import { Strapi } from "@strapi/strapi";
-import { ContentType, SitemapUrl } from '../content-types/types';
+import { Core } from "@strapi/strapi";
+import { ContentType, SitemapUrl } from "../content-types/types";
 
 export const isPageContent = (contentType: ContentType): boolean => {
   const attributes = contentType.attributes || {};
   return !!(
-    (attributes.Path || attributes.slug || attributes.seo || attributes.blocks) &&
+    (attributes.Path ||
+      attributes.slug ||
+      attributes.seo ||
+      attributes.blocks) &&
     attributes.priority
   );
 };
 
-export const getContentTypes = (strapi: Strapi): { uid: string; apiName: string; }[] => {
+export const getContentTypes = (
+  strapi: Core.Strapi
+): { uid: string; apiName: string }[] => {
   return Object.keys(strapi.contentTypes)
     .filter((key) => key.startsWith("api::"))
     .map((key) => ({
@@ -18,11 +23,15 @@ export const getContentTypes = (strapi: Strapi): { uid: string; apiName: string;
     }));
 };
 
-export const processContentType = (uid: string, contentType: any): SitemapUrl | null => {
+export const processContentType = (
+  uid: string,
+  contentType: any
+): SitemapUrl | null => {
   if (!uid.startsWith("api::") || !isPageContent(contentType)) return null;
 
-  const isDisplayable = contentType.options?.draftAndPublish || 
-                       contentType.options?.displayable !== false;
+  const isDisplayable =
+    contentType.options?.draftAndPublish ||
+    contentType.options?.displayable !== false;
   if (!isDisplayable) return null;
 
   const apiName = uid.replace("api::", "").split(".")[0];
@@ -31,15 +40,19 @@ export const processContentType = (uid: string, contentType: any): SitemapUrl | 
     return { loc: `/${apiName}`, priority: 0.3 };
   }
 
-  if (contentType.kind === "collectionType" && 
-      contentType.options?.hasListingPage !== false) {
+  if (
+    contentType.kind === "collectionType" &&
+    contentType.options?.hasListingPage !== false
+  ) {
     return { loc: `/${apiName}`, priority: 0.5 };
   }
 
   return null;
 };
 
-export const getStaticPages = async (strapi: Strapi): Promise<SitemapUrl[]> => {
+export const getStaticPages = async (
+  strapi: Core.Strapi
+): Promise<SitemapUrl[]> => {
   const contentTypes = strapi.contentTypes;
   const staticPages: SitemapUrl[] = [];
 
@@ -55,17 +68,25 @@ export const getStaticPages = async (strapi: Strapi): Promise<SitemapUrl[]> => {
   return staticPages;
 };
 
-export const getDefaultPriority = (contentType: { attributes?: { priority?: { default?: number } } }): number => {
+export const getDefaultPriority = (contentType: {
+  attributes?: { priority?: { default?: number } };
+}): number => {
   return contentType.attributes?.priority?.default ?? 0.5;
 };
 
-export const buildLoc = (item: { Path?: string; slug?: string; id: number | string }, apiName: string): string => {
+export const buildLoc = (
+  item: { Path?: string; slug?: string; id: number | string },
+  apiName: string
+): string => {
   if (item.Path) return item.Path.startsWith("/") ? item.Path : `/${item.Path}`;
   if (item.slug) return `/${apiName}/${item.slug}`;
   return `/${apiName}/${item.id}`;
 };
 
-export const getLastMod = (item: { updatedAt?: string; publishedAt?: string }): string | undefined => {
+export const getLastMod = (item: {
+  updatedAt?: string;
+  publishedAt?: string;
+}): string | undefined => {
   if (item.updatedAt) {
     return new Date(item.updatedAt).toISOString();
   }
@@ -75,4 +96,4 @@ export const getLastMod = (item: { updatedAt?: string; publishedAt?: string }): 
   }
 
   return undefined;
-}; 
+};

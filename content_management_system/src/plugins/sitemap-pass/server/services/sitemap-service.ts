@@ -1,15 +1,15 @@
-import { Strapi } from "@strapi/strapi";
+import { Core } from "@strapi/strapi";
 import { SitemapConfig, SitemapUrl } from "../content-types/types";
 import {
   getContentTypes,
   getStaticPages,
   getDefaultPriority,
   buildLoc,
-  getLastMod
+  getLastMod,
 } from "../utils/content-type-utils";
 
 const fetchEntities = async (
-  strapi: Strapi,
+  strapi: Core.Strapi,
   entityUid: string
 ): Promise<SitemapUrl[]> => {
   if (!strapi.entityService) {
@@ -20,17 +20,13 @@ const fetchEntities = async (
     const contentType = strapi.contentTypes[entityUid];
     const attributes = contentType.attributes || {};
 
-    const fields = [
-      "id",
-      "updatedAt",
-      "Path",
-      "slug",
-      "priority",
-    ].filter((field) => attributes[field]);
+    const fields = ["id", "updatedAt", "Path", "slug", "priority"].filter(
+      (field) => attributes[field]
+    );
 
-    const results = await strapi.entityService.findMany(entityUid as any, {
+    const results = await strapi.documents(entityUid as any).findMany({
       fields,
-      publicationState: "live",
+      status: "published",
     });
 
     const apiName = entityUid.replace("api::", "").split(".")[0];
@@ -48,8 +44,8 @@ const fetchEntities = async (
   }
 };
 
-const generateUrls = async (strapi: Strapi): Promise<SitemapUrl[]> => {
-  const config = strapi.config.get("plugin.sitemap-pass") as SitemapConfig;
+const generateUrls = async (strapi: Core.Strapi): Promise<SitemapUrl[]> => {
+  const config = strapi.config.get("plugin::sitemap-pass") as SitemapConfig;
   const { baseUrl, excludedTypes = [] } = config;
 
   const staticPages = await getStaticPages(strapi);
@@ -87,7 +83,7 @@ const generateUrls = async (strapi: Strapi): Promise<SitemapUrl[]> => {
   );
 };
 
-const generateSitemapXml = async (strapi: Strapi): Promise<string> => {
+const generateSitemapXml = async (strapi: Core.Strapi): Promise<string> => {
   const urls = await generateUrls(strapi);
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
@@ -95,7 +91,13 @@ const generateSitemapXml = async (strapi: Strapi): Promise<string> => {
     .map(
       ({ loc, priority, lastmod }) => `
   <url>
-    <loc>${loc}</loc>${priority ? `\n    <priority>${priority.toFixed(1)}</priority>` : ""}${lastmod ? `\n    <lastmod>${getLastMod({ updatedAt: lastmod })}</lastmod>` : ""}
+    <loc>${loc}</loc>${
+        priority ? `\n    <priority>${priority.toFixed(1)}</priority>` : ""
+      }${
+        lastmod
+          ? `\n    <lastmod>${getLastMod({ updatedAt: lastmod })}</lastmod>`
+          : ""
+      }
   </url>`
     )
     .join("")}
@@ -107,5 +109,5 @@ export default {
   generateSitemapXml,
   getContentTypes,
   getStaticPages,
-  fetchEntities
+  fetchEntities,
 };

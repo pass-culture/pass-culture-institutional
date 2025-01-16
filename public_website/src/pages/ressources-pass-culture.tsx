@@ -21,8 +21,6 @@ import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 const newsQuery = stringify({
   populate: [
-    'title',
-    'buttonText',
     'filtres',
     'socialMediaSection',
     'socialMediaSection.socialMediaLink',

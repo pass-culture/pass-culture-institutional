@@ -1,8 +1,8 @@
-import { Strapi } from "@strapi/strapi";
+import { Core } from "@strapi/strapi";
 
 import { Context } from "koa";
 
-export default ({ strapi }: { strapi: Strapi }) => ({
+export default ({ strapi }: { strapi: Core.Strapi }) => ({
   async preview(ctx: Context) {
     const xml = await strapi
       .plugin("sitemap-pass")

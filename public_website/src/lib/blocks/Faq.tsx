@@ -61,7 +61,7 @@ export function Faq(props: FaqProps) {
   )
 
   return (
-    <ContentWrapper>
+    (<ContentWrapper>
       <StyledContentWrapper>
         <StyledContentTextWrapper>
           <StyledHeading>{title}</StyledHeading>
@@ -96,8 +96,8 @@ export function Faq(props: FaqProps) {
 
         {cta && <MobileCta cta={cta} />}
       </StyledContentWrapper>
-    </ContentWrapper>
-  )
+    </ContentWrapper>)
+  );
 }
 
 const StyledContentWrapper = styled.div`

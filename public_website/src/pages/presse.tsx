@@ -296,10 +296,8 @@ export const getStaticProps = (async () => {
 
   const query = stringify({
     populate: [
-      'title',
       'socialMediaSection',
       'socialMediaSection.socialMediaLink',
-      'buttonText',
       'filtres',
       'separator',
       'pushCta',

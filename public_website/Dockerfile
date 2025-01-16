@@ -1,7 +1,7 @@
 ARG network_mode=default
 
 # Builder base
-FROM node:18.18-alpine3.18 AS base
+FROM node:20.9-alpine3.18 AS base
 COPY package.json yarn.lock tsconfig.json /app/
 COPY *.js /app
 WORKDIR  /app
@@ -19,7 +19,7 @@ RUN yarn config set cafile '/cacert.pem' && \
 
 # Runner
 FROM builder-${network_mode} AS runner
-COPY .firebaserc firebase.json /app
+COPY .firebaserc firebase.json /app/
 COPY public /app/public
 COPY src /app/src
 
