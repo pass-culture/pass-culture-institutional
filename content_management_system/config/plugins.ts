@@ -12,7 +12,7 @@ export default ({ env }) => ({
   seo: {
     enabled: true,
   },
-  "users-permissions": false,
+  // "users-permissions": false,
   upload: {
     config: {
       provider: "@strapi-community/strapi-provider-upload-google-cloud-storage",
@@ -20,6 +20,20 @@ export default ({ env }) => ({
         bucketName: env("GCS_BUCKET_NAME"),
         publicFiles: true,
         uniform: true,
+      },
+    },
+  },
+  graphql: {
+    config: {
+      endpoint: "/graphql",
+      shadowCRUD: true,
+      landingPage: env("NODE_ENV") !== "production",
+      depthLimit: 10,
+      amountLimit: 1000,
+      defaultLimit: 1000,
+      apolloServer: {
+        tracing: false,
+        introspection: true,
       },
     },
   },

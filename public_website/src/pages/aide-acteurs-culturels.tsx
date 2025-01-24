@@ -1,56 +1,56 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  AideActeursCulturelsDocument,
+  AideActeursCulturelsQuery,
+} from '@/generated/graphql'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { CulturalActorsHelpProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
-export default function CulturalActorsHelp({
-  helpData,
-}: CulturalActorsHelpProps) {
-  const { seo, heroSection, faq, simplepushcta, cardText, social } =
-    helpData.attributes
+type Props = {
+  helpData: NonNullable<AideActeursCulturelsQuery['helpCulturalActors']>
+}
+
+export default function CulturalActorsHelp({ helpData }: Props) {
+  const { seo, heroSection, faq, simplepushcta, cardText, social } = helpData
 
   return (
     <PageLayout seo={seo} title={undefined} socialMediaSection={social}>
       <Header
-        title={heroSection?.title}
+        requiredTitle={heroSection?.requiredTitle}
         text={heroSection?.text}
-        icon={heroSection.icon}
-        image={heroSection.image}
+        requiredIcon={heroSection.requiredIcon}
+        requiredImage={heroSection.requiredImage}
       />
       <Breadcrumb isUnderHeader />
 
       <Faq
-        title={faq.title}
+        requiredTitle={faq.requiredTitle}
         categories={faq.categories}
-        cta={faq.cta}
+        requiredCta={faq.requiredCta}
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
       <Separator isActive={false} />
       <DoublePushCTA
-        title={cardText.title}
+        requiredTitle={cardText.requiredTitle}
         text={cardText.text}
         firstCta={cardText.firstCta}
-        image={cardText.image}
+        requiredImage={cardText.requiredImage}
         secondCta={cardText.secondCta}
       />
       <Separator isActive={false} />
       <SimplePushCta
-        title={simplepushcta.title}
+        requiredTitle={simplepushcta.requiredTitle}
         surtitle={simplepushcta.surtitle}
-        cta={simplepushcta.cta}
-        image={simplepushcta.image}
+        requiredCta={simplepushcta.requiredCta}
+        requiredImage={simplepushcta.requiredImage}
         icon={simplepushcta.icon}
       />
       <Separator isActive={false} />
@@ -58,36 +58,20 @@ export default function CulturalActorsHelp({
   )
 }
 
-export const getStaticProps = (async () => {
-  const helpQuery = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.image',
-      'cardText',
-      'cardText.image',
-      'cardText.firstCta',
-      'cardText.secondCta',
-      'social',
-      'social.socialMediaLink',
-      'faq',
-      'faq.cta',
-      'simplepushcta',
-      'simplepushcta.image',
-      'simplepushcta.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<AideActeursCulturelsQuery>(AideActeursCulturelsDocument, {})
+    .toPromise()
 
-  const help = (await Pages.getPage(
-    PATHS.HELP_CULTURAL_ACTORS,
-    helpQuery
-  )) as APIResponseData<'api::help-cultural-actors.help-cultural-actors'>
+  if (result.error || !result.data || !result.data.helpCulturalActors) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      helpData: help,
+      helpData: result.data.helpCulturalActors,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<CulturalActorsHelpProps>
+}

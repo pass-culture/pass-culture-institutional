@@ -1,0 +1,7 @@
+fragment ComponentBlockTabPushGreyCta on ComponentBlockTabPushGreyCta {
+  id
+  title
+  block {
+    ...ComponentBlockDoublePushCta
+  }
+}

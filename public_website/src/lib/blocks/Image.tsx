@@ -1,13 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { ImageProps } from '@/types/props'
+import { ComponentBlockImageFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function Imageblock(props: ImageProps) {
-  const { image, description } = props
+export function Imageblock(props: ComponentBlockImageFragment) {
+  const { requiredImage, description, requiredAlt } = props
   const caption_description = description && isRenderable(description)
 
   return (
@@ -16,8 +16,8 @@ export function Imageblock(props: ImageProps) {
         <figure>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={getStrapiURL(image.data.attributes.url)}
-            alt={props.alt}
+            src={getStrapiURL(requiredImage.url)}
+            alt={requiredAlt}
             fetchPriority="low"
             loading="lazy"
             decoding="async"

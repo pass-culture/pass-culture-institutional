@@ -3,10 +3,16 @@ import React from 'react'
 import { AppBanner } from '../app-banner/AppBanner'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
-import { BannerProps } from '@/types/props'
 import { isRenderable } from '@/utils/isRenderable'
 
-const HeaderBanner = (props: BannerProps) => {
+export type HeaderBannerProps = {
+  bannerText?: string | null
+  bannerAndroidUrl?: string | null
+  bannerDefaultUrl?: string | null
+  bannerIosUrl?: string | null
+}
+
+const HeaderBanner = (props: HeaderBannerProps) => {
   const {
     bannerText,
     bannerAndroidUrl,

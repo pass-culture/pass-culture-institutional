@@ -4,6 +4,7 @@
  */
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
+import graphql from "@strapi/plugin-graphql/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
 import { renderAdmin } from "@strapi/strapi/admin";
 
@@ -11,6 +12,7 @@ renderAdmin(document.getElementById("strapi"), {
   plugins: {
     seo: seo,
     "users-permissions": usersPermissions,
+    graphql: graphql,
     "multi-select": multiSelect,
   },
 });

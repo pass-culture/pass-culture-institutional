@@ -1,7 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { SocialMediaProps } from '@/types/props'
+import {
+  ComponentBlockSocialMediaFragment,
+  Enum_Componentblocklink_Name,
+} from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Facebook } from '@/ui/components/icons/social-media/facebook'
 import { Instagram } from '@/ui/components/icons/social-media/instagram'
@@ -23,8 +26,10 @@ const SOCIAL_ICONS: { [key: string]: React.JSX.Element } = {
   linkedin: <LinkedIn />,
 }
 
-export function SocialMedia(props: SocialMediaProps) {
-  const { socialMediaLink = [], title, className } = props
+export function SocialMedia(
+  props: ComponentBlockSocialMediaFragment & { className?: string }
+) {
+  const { socialMediaLink = [], requiredTitle, className } = props
 
   const sliceIndex = Math.ceil(socialMediaLink.length / 2)
   const firstRow = socialMediaLink.slice(0, sliceIndex)
@@ -32,7 +37,7 @@ export function SocialMedia(props: SocialMediaProps) {
 
   const renderFirstRow = (
     collection: {
-      name: string
+      name: Enum_Componentblocklink_Name
       url: string
     }[]
   ) => {
@@ -51,10 +56,12 @@ export function SocialMedia(props: SocialMediaProps) {
 
   return (
     <ContentWrapper className={className}>
-      <StyledHeading {...{ accessibilityLabel: title }}>{title}</StyledHeading>
+      <StyledHeading {...{ accessibilityLabel: requiredTitle }}>
+        {requiredTitle}
+      </StyledHeading>
       <Lists>
-        {renderFirstRow(firstRow)}
-        {renderFirstRow(secondRow)}
+        {renderFirstRow(firstRow.filter((link) => link !== null))}
+        {renderFirstRow(secondRow.filter((link) => link !== null))}
       </Lists>
     </ContentWrapper>
   )

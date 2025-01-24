@@ -1,0 +1,11 @@
+fragment ComponentBlockOffersCarousel on ComponentBlockOffersCarousel {
+  id
+  requiredTitle: title
+  jsonDescription: description
+  requiredCta: cta {
+    ...ComponentCommonLink
+  }
+  offersCarouselItems: items {
+    ...ComponentCommonOffersCarouselItem
+  }
+}

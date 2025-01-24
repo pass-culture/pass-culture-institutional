@@ -1,0 +1,4 @@
+fragment ComponentBlockCenteredTitle on ComponentBlockCenteredTitle {
+  id
+  requiredTitle: title
+}

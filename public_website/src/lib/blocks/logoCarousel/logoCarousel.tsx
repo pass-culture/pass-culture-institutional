@@ -3,10 +3,10 @@ import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { LogoCarouselSlide } from './logoCarouselSlide'
+import { ComponentBlockLogosFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { LogoCarouselProps } from '@/types/props'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
 import { cleanSlideAttributes } from '@/utils/carouselHelper'
@@ -16,14 +16,14 @@ import { stripTags } from '@/utils/stripTags'
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function LogoCarousel(props: LogoCarouselProps) {
-  const { items } = props
+export function LogoCarousel(props: ComponentBlockLogosFragment) {
+  const { logo } = props
   const LOGO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
     'title'
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
-  const TOTAL_SLIDES = useMemo(() => items.length, [items])
+  const TOTAL_SLIDES = useMemo(() => logo?.length ?? 0, [logo])
 
   const getvisibleSlides = useMemo(() => {
     if (width < MOBILE_WIDTH) return 2
@@ -61,18 +61,20 @@ export function LogoCarousel(props: LogoCarouselProps) {
         classNameAnimation="customCarrouselAnimation"
         aria-label={stripTags('title')}
         aria-roledescription="carrousel">
-        {items?.map((item, index) => {
-          return (
-            !!item.logo && (
-              <LogoCarouselSlide
-                key={`${item.logo.data.attributes.hash}_${index}`}
-                slideIndex={index}
-                {...item}
-                image={item.logo}
-              />
+        {logo
+          ?.filter((i) => i !== null)
+          .map((item, index) => {
+            return (
+              !!item.logo && (
+                <LogoCarouselSlide
+                  key={`${item.logo.hash}_${index}`}
+                  slideIndex={index}
+                  {...item}
+                  image={item.logo}
+                />
+              )
             )
-          )
-        })}
+          })}
       </StyledSlider>
       <BlockRendererWithCondition condition={isNavShowing}>
         <StyledHeading>
@@ -86,7 +88,7 @@ export function LogoCarousel(props: LogoCarouselProps) {
         <BlockRendererWithCondition
           condition={isNavShowing && width < MOBILE_WIDTH}>
           <NavigationWithDots
-            items={items}
+            items={logo?.filter((item) => item != null) ?? []}
             carrouselSelector={LOGO_CAROUSEL_SELECTOR}
             slidesSelector={SLIDES_SELECTOR}
             carouselName="LOGO_CAROUSEL"

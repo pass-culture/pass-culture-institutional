@@ -1,0 +1,8 @@
+fragment Ressourcepass on Ressourcepass {
+  title
+  date
+  category
+  cta {
+    ...ComponentCommonLink
+  }
+}

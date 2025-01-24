@@ -4,15 +4,15 @@ import styled from 'styled-components'
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { Link } from '../Link'
 import { Typo } from '../typographies'
-import { CTA } from '@/types/CTA'
+import { ComponentCommonLinkFragment } from '@/generated/graphql'
 import { parseText } from '@/utils/parseText'
 
 interface ResultScreenProps {
   title: string
   steps: string[]
-  ctaLink: CTA
+  ctaLink: ComponentCommonLinkFragment
   helpText: string
-  supportLink: CTA
+  supportLink: ComponentCommonLinkFragment
 }
 
 export function ResultScreen(props: ResultScreenProps) {

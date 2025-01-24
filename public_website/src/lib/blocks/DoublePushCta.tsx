@@ -3,9 +3,12 @@ import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { Separator } from './Separator'
+import {
+  ComponentBlockDoublePushCtaFragment,
+  ComponentCommonLinkFragment,
+  UploadFileFragment,
+} from '@/generated/graphql'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
-import { CTA } from '@/types/CTA'
-import { PushCTAProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
@@ -16,42 +19,48 @@ import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function DoublePushCTA(
-  props: PushCTAProps & {
-    text?: string
-    firstCta: CTA
-    secondCta?: CTA
+  props: Omit<
+    ComponentBlockDoublePushCtaFragment,
+    'id' | 'requiredImage' | '__typename'
+  > & {
+    requiredImage?: UploadFileFragment
+    className?: string
   }
 ) {
   const {
     className = '',
-    title,
+    requiredTitle,
     icon,
-    image,
+    requiredImage,
     text,
     firstCta,
     secondCta,
   } = props
 
   const { onClickAnalytics } = useOnClickAnalytics()
-  const image_url = image?.data?.attributes.url
 
   return (
     <StyledContentWrapper>
       <Separator isActive={false} />
       <StyledContent>
-        <BlockRendererWithCondition condition={isRenderable(image_url)}>
-          <MobileImage src={getStrapiURL(image_url as string)} alt="" />
+        <BlockRendererWithCondition
+          condition={isRenderable(requiredImage?.url)}>
+          <MobileImage
+            src={getStrapiURL(requiredImage?.url as string)}
+            alt=""
+          />
         </BlockRendererWithCondition>
 
         <Root className={className}>
-          <BlockRendererWithCondition condition={isRenderable(image_url)}>
+          <BlockRendererWithCondition
+            condition={isRenderable(requiredImage?.url)}>
             <CardContainer>
-              <Card $imageUrl={getStrapiURL(image_url)} />
+              <Card $imageUrl={getStrapiURL(requiredImage?.url)} />
               <OutlinedText shadow>{icon}</OutlinedText>
             </CardContainer>
           </BlockRendererWithCondition>
           <RightSide>
-            <Typo.Heading2>{title}</Typo.Heading2>
+            <Typo.Heading2>{requiredTitle}</Typo.Heading2>
             <BlockRendererWithCondition condition={isRenderable(text)}>
               <p aria-label={parseText(text as string).accessibilityLabel}>
                 {parseText(text as string).processedText}
@@ -79,7 +88,7 @@ export function DoublePushCTA(
                   <ButtonWithCTA
                     target="_blank"
                     variant="quaternary"
-                    cta={secondCta as CTA}
+                    cta={secondCta as ComponentCommonLinkFragment}
                   />
                 </span>
               </BlockRendererWithCondition>

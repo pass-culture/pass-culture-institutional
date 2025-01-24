@@ -1,0 +1,35 @@
+query Home(
+  $filters: ResourceFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+) {
+  home {
+    aboutSection {
+      ...ComponentBlockCenteredText
+    }
+    CTASection {
+      ...ComponentBlockPushCta
+    }
+    socialMediaSection {
+      ...ComponentBlockSocialMedia
+    }
+    latestStudies {
+      ...ComponentBlockLatestNews
+    }
+    eligibilitySection {
+      ...ComponentHomeEligibilitySection
+    }
+    heroSection {
+      ...ComponentHomeHeroSection
+    }
+    recommendationsSection {
+      ...ComponentHomeRecommendationsSection
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+  resources(filters: $filters, pagination: $pagination, sort: $sort) {
+    ...Resource
+  }
+}

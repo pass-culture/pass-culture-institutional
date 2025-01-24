@@ -1,0 +1,46 @@
+query PlanDuSite(
+  $filters: PageFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+) {
+  pages(filters: $filters, pagination: $pagination, sort: $sort) {
+    Path
+    Blocks {
+      __typename
+      ...ComponentBlockCenteredText
+      ...ComponentBlockHeader
+      ...ComponentBlockSocialMedia
+      ...ComponentBlockDoublePushCta
+      ...ComponentBlockImageText
+      ...ComponentBlockImage
+      ...ComponentBlockLittleList
+      ...ComponentBlockSeparator
+      ...ComponentBlockSimplePushCta
+      ...ComponentBlockSpace
+      ...ComponentBlockVerticalCarousel
+      ...ComponentBlockVideo
+      ...ComponentBlockKeyNumberCarousel
+      ...ComponentBlockLogos
+      ...ComponentBlockLatestNews
+      ...ComponentBlockExperienceVideoCarousel
+      ...ComponentBlockOffersCarousel
+      ...ComponentBlockPiledCards
+      ...ComponentBlockFaq
+      ...ComponentBlockDetailedLogos
+      ...ComponentBlockOrganizationChart
+      ...ComponentBlockSimpleTextV2
+      ...ComponentBlockImageGallery
+      ...ComponentBlockBreadcrumb
+      ...ComponentBlockHeaderWithQRcode
+      ...ComponentBlockColumnsText
+      ...ComponentBlockCenteredTitle
+      ...ComponentBlockTabsSimpleText
+      ...ComponentBlockTabsPushGreyCta
+      ...ComponentBlockTabsLittleList
+      ...ComponentBlockTabsImageText
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+}

@@ -17,7 +17,7 @@ describe('Liste offres', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<ListeOffre {...props} />)
+      const { container } = render(<ListeOffre {...props!} />)
 
       let a11yResult
       await act(async () => {

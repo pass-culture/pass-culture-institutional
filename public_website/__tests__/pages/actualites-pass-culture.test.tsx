@@ -19,7 +19,7 @@ describe('Actus pass culture', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<ListeActualitesPassCulture {...props} />)
+      const { container } = render(<ListeActualitesPassCulture {...props!} />)
 
       let a11yResult
       await act(async () => {

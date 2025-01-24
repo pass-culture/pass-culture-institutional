@@ -3,10 +3,23 @@ import styled from 'styled-components'
 
 import Tab from './Tab'
 import TabPanel from './TabPannel'
-import { TabImageTextProps, TabPushGreyProps } from '@/types/props'
+import {
+  ComponentBlockTabsImageTextFragment,
+  ComponentBlockTabsLittleListFragment,
+  ComponentBlockTabsPushGreyCtaFragment,
+  ComponentBlockTabsSimpleTextFragment,
+} from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-
-const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
+const Tabs = (
+  props: (
+    | ComponentBlockTabsImageTextFragment
+    | ComponentBlockTabsPushGreyCtaFragment
+    | ComponentBlockTabsLittleListFragment
+    | ComponentBlockTabsSimpleTextFragment
+  ) & {
+    children: ReactNode
+  }
+) => {
   const { tab, children } = props
   const [selectedTab, setSelectedTab] = useState<number>(0)
   const handleClick = (index: number): void => {
@@ -23,7 +36,7 @@ const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
     setSelectedTab(tabToSelect)
   }
   const handleKeyPress = (event: { key: string }): void => {
-    const tabCount = Object.keys(tab).length
+    const tabCount = Object.keys(tab ?? {}).length
 
     if (event.key === 'ArrowLeft') {
       const last = tabCount
@@ -43,15 +56,17 @@ const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
     return React.cloneElement(child as React.ReactElement, props)
   }
   const tabPanels = useMemo(() => {
-    return tab?.map((item, index: number) => (
-      <TabPanel
-        key={item.id}
-        tabId={`TabPanel_${index}`}
-        tabIndex={index}
-        selectedTab={selectedTab}>
-        {renderChildrenWithProps(children, { ...item.block })}
-      </TabPanel>
-    ))
+    return tab
+      ?.filter((t) => t != null)
+      .map((item, index: number) => (
+        <TabPanel
+          key={item.id}
+          tabId={`TabPanel_${index}`}
+          tabIndex={index}
+          selectedTab={selectedTab}>
+          {renderChildrenWithProps(children, { ...item.block })}
+        </TabPanel>
+      ))
   }, [tab, children, selectedTab])
 
   return (
@@ -62,18 +77,20 @@ const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
           className="tablist switcher"
           aria-label="Cat tabs"
           onKeyDown={handleKeyPress}>
-          {tab?.map((item, index: number) => {
-            return (
-              <Tab
-                key={item.id}
-                tabPanelId="firstTabPanel"
-                index={index}
-                handleChange={handleClick}
-                selectedTab={selectedTab}
-                title={item.title}
-              />
-            )
-          })}
+          {tab
+            ?.filter((t) => t != null)
+            .map((item, index: number) => {
+              return (
+                <Tab
+                  key={item.id}
+                  tabPanelId="firstTabPanel"
+                  index={index}
+                  handleChange={handleClick}
+                  selectedTab={selectedTab}
+                  title={item.title}
+                />
+              )
+            })}
         </StyledTabUl>
       </ContentWrapper>
       {tabPanels}

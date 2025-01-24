@@ -17,7 +17,7 @@ describe('Simulator page', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<SimulatorPage {...props} />)
+      const { container } = render(<SimulatorPage {...props!} />)
 
       let a11yResult
       await act(async () => {
@@ -30,7 +30,7 @@ describe('Simulator page', () => {
 
   it('should show the success screen if user is 16, not french, in france for more than a year', async () => {
     const { props } = await getStaticProps()
-    render(<SimulatorPage {...props} />)
+    render(<SimulatorPage {...props!} />)
 
     // Selct 16 years old and click "Next"
     fireEvent.click(screen.getAllByText('16 ans')[0]!)
@@ -53,14 +53,14 @@ describe('Simulator page', () => {
     // The result screen should appear
     expect(
       await screen.findByText(
-        'C’est noté ! Voici maintenant les étapes à suivre'
+        'C’est noté ! Voici maintenant les étapes à suivre :'
       )
     ).toBeTruthy()
   })
 
   it('should show the failure screen if user is younger than 15 yo', async () => {
     const { props } = await getStaticProps()
-    render(<SimulatorPage {...props} />)
+    render(<SimulatorPage {...props!} />)
 
     // Selct 15 years old and click "Next"
     fireEvent.click(screen.getAllByText('-15 ans')[0]!)
@@ -72,7 +72,7 @@ describe('Simulator page', () => {
 
   it('should show the failure screen if user is older than 18 yo', async () => {
     const { props } = await getStaticProps()
-    render(<SimulatorPage {...props} />)
+    render(<SimulatorPage {...props!} />)
 
     // Selct 15 years old and click "Next"
     fireEvent.click(screen.getAllByText('+18 ans')[0]!)
@@ -80,7 +80,9 @@ describe('Simulator page', () => {
 
     // The failure screen should appear
     expect(
-      await screen.findByText('Trop tard, tu n’es plus éligible')
+      await screen.findByText(
+        'Trop tard, tu n’es malheureusement plus éligible'
+      )
     ).toBeTruthy()
   })
 })

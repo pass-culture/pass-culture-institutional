@@ -1,0 +1,8 @@
+fragment ComponentBlockImage on ComponentBlockImage {
+  id
+  requiredImage: image {
+    ...UploadFile
+  }
+  description
+  requiredAlt: alt
+}

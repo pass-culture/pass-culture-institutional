@@ -20,7 +20,7 @@ describe('Help page - Cultural actors', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<CulturalActorsHelp {...props} />)
+      const { container } = render(<CulturalActorsHelp {...props!} />)
       let a11yResult
       await act(async () => {
         a11yResult = await axe(container)

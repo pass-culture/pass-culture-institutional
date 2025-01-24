@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
-import { APIResponseData } from '@/types/strapi'
+import { ComponentBlockImageGalleryFragment } from '@/generated/graphql'
 import { ArrowRight } from '@/ui/components/icons/ArrowRight'
 
-type ImageData = APIResponseData<'plugin::upload.file'>
-
+type ImageData = NonNullable<
+  ComponentBlockImageGalleryFragment['images'][number]
+>
 interface ImageFormats {
   medium?: {
     width: number
@@ -14,22 +15,20 @@ interface ImageFormats {
   }
 }
 
-interface ImageGalleryProps {
-  images: { data: ImageData[] }
-}
-
 /**
  * Split images based on their size. Some images may be wider than other and take more place in a row.
  * So images are split in half based on their width
  */
-function splitImages(images: ImageData[]): [ImageData[], ImageData[]] {
+function splitImages(
+  images: ComponentBlockImageGalleryFragment['images']
+): [ImageData[], ImageData[]] {
   const firstRowImages: ImageData[] = []
   const secondRowImages: ImageData[] = []
 
   {
-    const ratios = images.map(
-      (image) => image.attributes.width! / image.attributes.height!
-    )
+    const ratios = images
+      .filter((i) => i !== null)
+      .map((image) => image.width! / image.height!)
     const ratioTotal = ratios.reduce((total, it) => total + it, 0)
 
     let currentRatio = 0
@@ -54,23 +53,20 @@ const ImageComponent: React.FC<{
   image: ImageData
 }> = ({ image }) => (
   <img
-    src={
-      (image.attributes.formats as ImageFormats)?.medium?.url ||
-      image.attributes.url
-    }
-    alt={image.attributes.alternativeText ?? ''}
-    width={image.attributes.width}
-    height={image.attributes.height}
+    src={(image.formats as ImageFormats)?.medium?.url || image.url}
+    alt={image.alternativeText ?? ''}
+    width={image.width ?? 0}
+    height={image.height ?? 0}
     fetchPriority="low"
     loading="lazy"
     decoding="async"
   />
 )
 
-export function ImageGallery(props: ImageGalleryProps) {
+export function ImageGallery(props: ComponentBlockImageGalleryFragment) {
   const [firstRow, secondRow] = useMemo(
-    () => splitImages(props.images.data),
-    [props.images.data]
+    () => splitImages(props.images),
+    [props.images]
   )
 
   const galleryElement = useRef<HTMLDivElement>(null)
@@ -111,12 +107,12 @@ export function ImageGallery(props: ImageGalleryProps) {
         $galleryIsShort={!showScrollButtons}>
         <Row ref={rowElement}>
           {firstRow.map((image) => (
-            <ImageComponent key={image.id} image={image} />
+            <ImageComponent key={image.hash} image={image} />
           ))}
         </Row>
         <Row>
           {secondRow.map((image) => (
-            <ImageComponent key={image.id} image={image} />
+            <ImageComponent key={image.hash} image={image} />
           ))}
         </Row>
       </Rows>

@@ -1,0 +1,28 @@
+query ListeOffres {
+  listeOffre {
+    experience {
+      ...ComponentBlockExperienceVideoCarousel
+    }
+    hero {
+      ...ComponentBlockHeader
+    }
+    socialMediaSection {
+      ...ComponentBlockSocialMedia
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+    offres {
+      ...ComponentBlockOfferList
+    }
+    offres_culturelles {
+      ...ComponentBlockOffersCarousel
+    }
+    question {
+      ...ComponentBlockSimplePushCta
+    }
+    separator {
+      ...ComponentBlockSeparator
+    }
+  }
+}

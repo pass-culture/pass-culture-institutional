@@ -1,0 +1,9 @@
+fragment ComponentBlockVideo on ComponentBlockVideo {
+  id
+  url
+  description
+  alt
+  image {
+    ...UploadFile
+  }
+}

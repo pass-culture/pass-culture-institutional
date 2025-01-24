@@ -1,0 +1,7 @@
+fragment ComponentBlockPiledCards on ComponentBlockPiledCards {
+  id
+  accessibleTitle
+  piledCardsItems: items {
+    ...ComponentCommonPiledCardItem
+  }
+}

@@ -1,0 +1,8 @@
+query App {
+  header {
+    ...Header
+  }
+  footer {
+    ...Footer
+  }
+}

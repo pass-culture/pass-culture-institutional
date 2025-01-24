@@ -36,13 +36,10 @@ import { VerticalCarousel } from './blocks/verticalCarousel/VerticalCarousel'
 import { Video } from './blocks/Video'
 import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
+import { PageQuery } from '@/generated/graphql'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 export interface Block {
   __component: string
-}
-
-interface BlockRendererProps {
-  block: Block
 }
 
 const COMPONENTS: Record<
@@ -50,51 +47,57 @@ const COMPONENTS: Record<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
-  'block.header': Header,
-  'block.header-test': Headertest,
-  'block.centered-text': CenteredText,
-  'block.push-cta': PushCTA,
-  'block.social-media': SocialMedia,
-  'block.latest-news': LatestNews,
-  'block.vertical-carousel': VerticalCarousel,
-  'block.key-number': KeyNumber,
-  'block.logos': Logos,
-  'block.detailed-logos': DetailedLogos,
-  'block.experience-video-carousel': ExperienceVideoCarousel,
-  'block.key-number-carousel': KeyNumberCarousel,
-  'block.logo-carousel': LogoCarousel,
-  'block.logo-carousel-slide': LogoCarouselSlide,
-  'block.image': Imageblock,
-  'block.image-text': ImageText,
-  'block.little-list': LittleList,
-  'block.video': Video,
-  'block.space': WhiteSpace,
-  'block.key-number-carousel-slide': KeyNumberCarouselSlide,
-  'block.double-push-cta': DoublePushCTA,
-  'block.separator': Separator,
-  'block.simple-push-cta': SimplePushCta,
-  'block.offers-carousel': OffersCarousel,
-  'block.piled-cards': PiledCards,
-  'block.faq': Faq,
-  'block.organization-chart': OrganizationChart,
-  'block.simple-text-v2': SimpleTextV2,
-  'block.image-gallery': ImageGallery,
-  'block.breadcrumb': Breadcrumb,
-  'block.header-with-q-rcode': HeaderWithQRCode,
-  'block.columns-text': SimpleTextWithMedia,
-  'block.centered-title': CenteredText,
-  'block.tabs-image-text': TabsImageText,
-  'block.tabs-simple-text': TabsSimpleText,
-  'block.tabs-little-list': TabsLittleList,
-  'block.tabs-push-grey-cta': TabsPushGreyCta,
+  ComponentBlockHeader: Header,
+  ComponentBlockHeaderTest: Headertest,
+  ComponentBlockCenteredText: CenteredText,
+  ComponentBlockPushCta: PushCTA,
+  ComponentBlockSocialMedia: SocialMedia,
+  ComponentBlockLatestNews: LatestNews,
+  ComponentBlockVerticalCarousel: VerticalCarousel,
+  ComponentBlockKeyNumber: KeyNumber,
+  ComponentBlockLogos: Logos,
+  ComponentBlockDetailedLogos: DetailedLogos,
+  ComponentBlockExperienceVideoCarousel: ExperienceVideoCarousel,
+  ComponentBlockKeyNumberCarousel: KeyNumberCarousel,
+  ComponentBlockLogoCarousel: LogoCarousel,
+  ComponentBlockLogoCarouselSlide: LogoCarouselSlide,
+  ComponentBlockImage: Imageblock,
+  ComponentBlockImageText: ImageText,
+  ComponentBlockLittleList: LittleList,
+  ComponentBlockVideo: Video,
+  ComponentBlockSpace: WhiteSpace,
+  ComponentBlockKeyNumberCarouselSlide: KeyNumberCarouselSlide,
+  ComponentBlockDoublePushCta: DoublePushCTA,
+  ComponentBlockSeparator: Separator,
+  ComponentBlockSimplePushCta: SimplePushCta,
+  ComponentBlockOffersCarousel: OffersCarousel,
+  ComponentBlockPiledCards: PiledCards,
+  ComponentBlockFaq: Faq,
+  ComponentBlockOrganizationChart: OrganizationChart,
+  ComponentBlockSimpleTextV2: SimpleTextV2,
+  ComponentBlockImageGallery: ImageGallery,
+  ComponentBlockBreadcrumb: Breadcrumb,
+  ComponentBlockHeaderWithQRcode: HeaderWithQRCode,
+  ComponentBlockColumnsText: SimpleTextWithMedia,
+  ComponentBlockCenteredTitle: CenteredText,
+  ComponentBlockTabsImageText: TabsImageText,
+  ComponentBlockTabsSimpleText: TabsSimpleText,
+  ComponentBlockTabsLittleList: TabsLittleList,
+  ComponentBlockTabsPushGreyCta: TabsPushGreyCta,
 }
 
-export function BlockRenderer(props: BlockRendererProps) {
-  const BlockComponent = COMPONENTS[props.block.__component]
+export function BlockRenderer({
+  block,
+}: {
+  block: NonNullable<
+    NonNullable<NonNullable<PageQuery['pages'][number]>['Blocks']>[number]
+  >
+}) {
+  const BlockComponent = COMPONENTS[block.__typename]
 
   if (!BlockComponent) {
-    return <UnkwnownBlock block={props.block} />
+    return <UnkwnownBlock block={block} />
   }
 
-  return <BlockComponent {...props.block} />
+  return <BlockComponent {...block} />
 }

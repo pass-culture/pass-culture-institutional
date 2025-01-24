@@ -1,10 +1,10 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { BaseTextProps, XMetaProps } from '@/types/props'
+import { ComponentSharedMetaSocialFragment } from '@/generated/graphql'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function XMeta(props: XMetaProps & BaseTextProps) {
+export function XMeta(props: ComponentSharedMetaSocialFragment) {
   const { title, description, image } = props
 
   return (
@@ -17,10 +17,7 @@ export function XMeta(props: XMetaProps & BaseTextProps) {
         content={description}
       />
       {!!image && (
-        <meta
-          property="twitter:image"
-          content={getStrapiURL(image.data.attributes.url)}
-        />
+        <meta property="twitter:image" content={getStrapiURL(image.url)} />
       )}
     </Head>
   )

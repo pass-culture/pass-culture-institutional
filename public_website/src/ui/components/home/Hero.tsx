@@ -6,10 +6,10 @@ import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import Circle from './Circle'
-import { HeroProps } from '@/types/props'
+import { ComponentHomeHeroSectionFragment } from '@/generated/graphql'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function Hero(props: HeroProps) {
+export function Hero(props: ComponentHomeHeroSectionFragment) {
   const {
     title,
     subTitle,
@@ -24,10 +24,10 @@ export function Hero(props: HeroProps) {
   } = props
 
   const setCircleCenter = useMemo(() => {
-    if (images?.[0]?.attributes.url)
+    if (images?.[0]?.url)
       return [
         {
-          url: getStrapiURL(images?.[0]?.attributes.url),
+          url: getStrapiURL(images?.[0]?.url),
           rotation: '-10deg',
           bottom: '3rem',
           right: '3rem',
@@ -38,10 +38,10 @@ export function Hero(props: HeroProps) {
   }, [images])
 
   const setCircleMedium = useMemo(() => {
-    if (images?.[1]?.attributes.url)
+    if (images?.[1]?.url)
       return [
         {
-          url: getStrapiURL(images?.[1]?.attributes.url),
+          url: getStrapiURL(images?.[1]?.url),
           rotation: '-12deg',
           bottom: '12rem',
           left: '2rem',
@@ -52,16 +52,16 @@ export function Hero(props: HeroProps) {
   }, [images])
 
   const setCircleLarge = useMemo(() => {
-    if (images?.[2]?.attributes.url && images?.[3]?.attributes.url)
+    if (images?.[2]?.url && images?.[3]?.url)
       return [
         {
-          url: getStrapiURL(images?.[2]?.attributes.url),
+          url: getStrapiURL(images?.[2]?.url),
           rotation: '6deg',
           top: '40%',
           left: '-1.5rem',
         },
         {
-          url: getStrapiURL(images?.[3]?.attributes.url),
+          url: getStrapiURL(images?.[3]?.url),
           rotation: '9deg',
           top: '30%',
           right: '0',

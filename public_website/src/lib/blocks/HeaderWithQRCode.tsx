@@ -3,32 +3,27 @@ import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { ComponentBlockHeaderWithQRcodeFragment } from '@/generated/graphql'
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { HeaderWithQRCodeProps } from '@/types/props'
-import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function HeaderWithQRCode(props: HeaderWithQRCodeProps) {
-  const { text, title, cta, image, icon, QRCode } = props
+export function HeaderWithQRCode(
+  props: ComponentBlockHeaderWithQRcodeFragment
+) {
+  const { text, requiredTitle, requiredImage, icon, QRCode } = props
 
   const { SVG: QrCode } = useQRCode()
-  const img_url = image?.data?.attributes?.url
+  const img_url = requiredImage?.url
   return (
     <Root>
       <StyledContentWrapper>
         <div>
-          <StyledHeading>{title}</StyledHeading>
+          <StyledHeading>{requiredTitle}</StyledHeading>
           <BlockRendererWithCondition condition={isRenderable(text)}>
             <StyledText>{text}</StyledText>
-          </BlockRendererWithCondition>
-          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
-            <StyledBtnWrapper>
-              <ButtonWithCTA cta={cta as CTA} />
-            </StyledBtnWrapper>
           </BlockRendererWithCondition>
         </div>
         <BlockRendererWithCondition condition={isRenderable(img_url)}>
@@ -37,14 +32,14 @@ export function HeaderWithQRCode(props: HeaderWithQRCodeProps) {
               <OutlinedText shadow>{icon}</OutlinedText>
               <QRCodeCard>
                 <QrCode
-                  text={QRCode.URL}
+                  text={QRCode?.URL ?? ''}
                   options={{
                     width: 100,
                     margin: 2,
                     color: { dark: theme.colors.secondary },
                   }}
                 />
-                <p>{QRCode.Label}</p>
+                <p>{QRCode?.Label ?? ''}</p>
               </QRCodeCard>
             </Card>
 
@@ -235,12 +230,4 @@ const BackgroundLayer = styled.div`
     z-index: -1;
     aspect-ratio: 290 / 360;
   `}
-`
-
-const StyledBtnWrapper = styled.div`
-  margin-bottom: 2rem;
-  @media (width < ${theme.mediaQueries.tablet}) {
-    display: flex;
-    justify-content: center;
-  }
 `

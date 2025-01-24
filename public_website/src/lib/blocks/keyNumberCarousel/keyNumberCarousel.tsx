@@ -3,10 +3,10 @@ import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { KeyNumberCarouselSlide } from './keyNumberCarouselSlide'
+import { ComponentBlockKeyNumberCarouselFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { KeyNumberCarouselProps } from '@/types/props'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
 import { Typo } from '@/ui/components/typographies'
@@ -17,14 +17,19 @@ import { stripTags } from '@/utils/stripTags'
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
-  const { title, items } = props
+export function KeyNumberCarousel(
+  props: ComponentBlockKeyNumberCarouselFragment
+) {
+  const { title, keyNumberItems } = props
   const KEY_NUMBER_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
-    title
+    title ?? ''
   )}"]`
   const KEY_NUMBER_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
-  const TOTAL_SLIDES = useMemo(() => items.length, [items])
+  const TOTAL_SLIDES = useMemo(
+    () => keyNumberItems?.length ?? 0,
+    [keyNumberItems]
+  )
 
   const getvisibleSlides = useMemo(() => {
     if (width < MOBILE_WIDTH) return 1.2
@@ -61,7 +66,7 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
       infinite={false}
       step={1}>
       <StyledKeyCarouselHeading>
-        <StyledTitle>{title}</StyledTitle>
+        <StyledTitle>{title ?? ''}</StyledTitle>
 
         <BlockRendererWithCondition
           condition={isNavShowing && width > MOBILE_WIDTH}>
@@ -74,26 +79,29 @@ export function KeyNumberCarousel(props: KeyNumberCarouselProps) {
 
       <StyledSlider
         classNameAnimation="customCarrouselAnimation"
-        aria-label={stripTags(title)}
+        aria-label={stripTags(title ?? '')}
         aria-roledescription="carousel">
-        {items?.map((item, index) => {
-          return (
-            <KeyNumberCarouselSlide
-              key={`${item.title}_${index}`}
-              title={item.title}
-              slideIndex={index}
-              description={item.description}
-              secondEmoji={item.secondEmoji}
-              firstEmoji={item.firstEmoji}
-              thirdEmoji={item.thirdEmoji}
-            />
-          )
-        })}
+        {keyNumberItems
+          ?.filter((i) => i !== null)
+          .map((item, index) => {
+            return (
+              <KeyNumberCarouselSlide
+                id={item?.id}
+                key={`${item.title}_${index}`}
+                title={item.title}
+                slideIndex={index}
+                description={item.description}
+                secondEmoji={item.secondEmoji}
+                firstEmoji={item.firstEmoji}
+                thirdEmoji={item.thirdEmoji}
+              />
+            )
+          })}
       </StyledSlider>
       <BlockRendererWithCondition
         condition={isNavShowing && width < MOBILE_WIDTH}>
         <NavigationWithDots
-          items={items}
+          items={keyNumberItems?.filter((item) => item != null) ?? []}
           carrouselSelector={KEY_NUMBER_CAROUSEL_SELECTOR}
           slidesSelector={KEY_NUMBER_SLIDES_SELECTOR}
           carouselName="KEY_NUMBER_CAROUSEL"

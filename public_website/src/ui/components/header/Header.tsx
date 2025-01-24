@@ -10,11 +10,14 @@ import { PassCulture } from '../icons/PassCulture'
 import { AccountDropdown } from './AccountDropdown'
 import { MegaMenu } from './MegaMenu'
 import { MobileMenu } from './mobile/MobileMenu'
+import {
+  ComponentCommonLinkFragment,
+  ComponentHeaderNavigationItemsFragment,
+  HeaderFragment,
+} from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { CTA } from '@/types/CTA'
-import { HeaderMenuProps, HeaderNavigationItemProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { getMediaQuery } from '@/utils/getMediaQuery'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
@@ -26,7 +29,10 @@ import { isStringAreEquals } from '@/utils/stringAreEquals'
  * @param {string} path
  * @return {*}  {boolean}
  */
-const findInMenu = (items: CTA[], str: string): boolean => {
+const findInMenu = (
+  items: ComponentCommonLinkFragment[],
+  str: string
+): boolean => {
   for (const item of items) {
     if (isStringAreEquals(item.URL, str)) return true
   }
@@ -41,20 +47,30 @@ const findInMenu = (items: CTA[], str: string): boolean => {
  */
 const findCollectionIdByPath = (
   path: string,
-  collections: HeaderNavigationItemProps[]
+  collections: ComponentHeaderNavigationItemsFragment[]
 ): number => {
   for (const collection of collections) {
     const { megaMenu } = collection
 
-    if (megaMenu.primaryListItems.length > 0) {
-      if (findInMenu(megaMenu.primaryListItems, path)) {
+    if ((megaMenu?.primaryListItems?.length ?? 0) > 0) {
+      if (
+        findInMenu(
+          megaMenu?.primaryListItems.filter((i) => i !== null) ?? [],
+          path
+        )
+      ) {
         const index = collections.findIndex(
           (item) => item.label === collection.label
         )
         return index
       }
-      if (megaMenu.secondaryListItems.length > 0) {
-        if (findInMenu(megaMenu.secondaryListItems, path)) {
+      if ((megaMenu?.secondaryListItems?.length ?? 0) > 0) {
+        if (
+          findInMenu(
+            megaMenu?.secondaryListItems?.filter((i) => i !== null) ?? [],
+            path
+          )
+        ) {
           const index = collections.findIndex(
             (item) => item.label === collection.label
           )
@@ -69,7 +85,7 @@ const findCollectionIdByPath = (
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function Header(props: HeaderMenuProps) {
+export function Header(props: HeaderFragment) {
   const { targetItems, aboutItems, login, signup } = props
   const [activeMegaMenuId, setActiveMegaMenuId] = useState<number | null>(null)
   const megaMenuButtonRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -199,7 +215,10 @@ export function Header(props: HeaderMenuProps) {
   }, [currentPath, showMobileMenu, previousPath])
 
   useEffect(() => {
-    const activeId = findCollectionIdByPath(currentPath, navItems)
+    const activeId = findCollectionIdByPath(
+      currentPath,
+      navItems.filter((i) => i !== null)
+    )
 
     setActiveId(activeId)
   }, [currentPath, navItems, previousPath])
@@ -230,7 +249,7 @@ export function Header(props: HeaderMenuProps) {
 
               {navItems.map((el, i) => {
                 return (
-                  <React.Fragment key={el.label}>
+                  <React.Fragment key={el?.label}>
                     <StyledNavigationItem>
                       <button
                         // @ts-expect-error //main pull
@@ -242,23 +261,27 @@ export function Header(props: HeaderMenuProps) {
                         onClick={() => toggleMegaMenu(i)}
                         onKeyDown={(e) => onMegaMenuKeyDown(e, i)}
                         onMouseEnter={() => toggleMegaMenu(i)}>
-                        {el.label}
+                        {el?.label}
                       </button>
 
-                      <BlockRendererWithCondition
-                        condition={i === activeMegaMenuId}>
-                        <MegaMenu
-                          getOpenButtonEl={() =>
-                            megaMenuButtonRefs.current[i] ?? null
-                          }
-                          labelId={`mega-menu-button-${i}`}
-                          id={`mega-menu-${i}`}
-                          data={el.megaMenu}
-                          onBlur={onMegaMenuBlur}
-                          onKeyDown={(e): void => onMegaMenuKeyDown(e, i)}
-                          onMouseLeave={(): void => setActiveMegaMenuId(null)}
-                        />
-                      </BlockRendererWithCondition>
+                      {el?.megaMenu && (
+                        <BlockRendererWithCondition
+                          condition={i === activeMegaMenuId}>
+                          <MegaMenu
+                            getOpenButtonEl={() =>
+                              megaMenuButtonRefs.current[i] ?? null
+                            }
+                            labelId={`mega-menu-button-${i}`}
+                            id={`mega-menu-${i}`}
+                            data={el.megaMenu}
+                            onBlur={onMegaMenuBlur}
+                            onKeyDown={(e: KeyboardEvent): void =>
+                              onMegaMenuKeyDown(e, i)
+                            }
+                            onMouseLeave={(): void => setActiveMegaMenuId(null)}
+                          />
+                        </BlockRendererWithCondition>
+                      )}
                     </StyledNavigationItem>
 
                     <BlockRendererWithCondition
@@ -283,7 +306,7 @@ export function Header(props: HeaderMenuProps) {
 
                 <BlockRendererWithCondition condition={loginDropdownOpen}>
                   <AccountDropdown
-                    items={login.items}
+                    items={login.items.filter((i) => i !== null)}
                     openButtonElement={loginButtonRef.current}
                     labelId="login-dropdown"
                     onKeyDown={onLoginDropdownKeyDown}
@@ -310,7 +333,7 @@ export function Header(props: HeaderMenuProps) {
 
                 <BlockRendererWithCondition condition={signupDropdownOpen}>
                   <AccountDropdown
-                    items={signup.items}
+                    items={signup.items.filter((i) => i !== null)}
                     openButtonElement={signupButtonRef.current}
                     labelId="signup-dropdown"
                     align="right"

@@ -1,0 +1,9 @@
+query Ressources(
+  $filters: ResourceFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+) {
+  resources(filters: $filters, pagination: $pagination, sort: $sort) {
+    ...Resource
+  }
+}

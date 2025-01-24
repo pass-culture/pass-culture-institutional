@@ -2,15 +2,17 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import SitemapLinkItem from './SitemapLinkItem'
-import { CTA } from '@/types/CTA'
-import { HeaderNavigationItemProps } from '@/types/props'
+import {
+  ComponentCommonLinkFragment,
+  ComponentHeaderNavigationItemsFragment,
+} from '@/generated/graphql'
 import { filterNonEmptyLabel } from '@/utils/filterNonEmptyLabel'
 
 const FilteredLinks = ({
   items,
   sectionLabel,
 }: {
-  items: CTA[]
+  items: ComponentCommonLinkFragment[]
   sectionLabel: string
 }) => {
   return items
@@ -23,20 +25,31 @@ const FilteredLinks = ({
       />
     ))
 }
-const MenuSection = ({ item }: { item: HeaderNavigationItemProps }) => {
-  const cardLink = item.megaMenu.cardLink
-  const cardCTA = item.megaMenu.cta
+const MenuSection = ({
+  item,
+}: {
+  item: ComponentHeaderNavigationItemsFragment
+}) => {
+  const cardLink = item.megaMenu?.cardLink
+  const cardCTA = item.megaMenu?.cta
 
   return (
     <div key={item.label}>
       <SectionTitle>{item.label}</SectionTitle>
       <SitemapList>
         <FilteredLinks
-          items={item.megaMenu.primaryListItems}
+          items={
+            item.megaMenu?.primaryListItems.filter((item) => item !== null) ??
+            []
+          }
           sectionLabel={item.label}
         />
         <FilteredLinks
-          items={item.megaMenu.secondaryListItems}
+          items={
+            item.megaMenu?.secondaryListItems?.filter(
+              (item) => item !== null
+            ) ?? []
+          }
           sectionLabel={item.label}
         />
 

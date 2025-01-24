@@ -1,0 +1,8 @@
+fragment ComponentBlockSocialMedia on ComponentBlockSocialMedia {
+  id
+  requiredTitle: title
+  socialMediaLink {
+    name
+    url
+  }
+}

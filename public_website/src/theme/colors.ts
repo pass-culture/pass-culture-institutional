@@ -18,4 +18,5 @@ export enum Colors {
   SKY = '#D6F8FF',
   TERTIARY = '#eb0055',
   WHITE = '#FFFFFF',
+  BLUE = '#2D0390',
 }

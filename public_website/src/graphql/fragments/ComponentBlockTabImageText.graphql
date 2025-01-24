@@ -1,0 +1,7 @@
+fragment ComponentBlockTabImageText on ComponentBlockTabImageText {
+  id
+  title
+  block {
+    ...ComponentBlockImageText
+  }
+}

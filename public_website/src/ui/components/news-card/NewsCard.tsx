@@ -1,10 +1,17 @@
 import React from 'react'
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 import styled, { css } from 'styled-components'
 
-import { NewsCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
+
+type NewsCardProps = {
+  title: string
+  category: string
+  date: string
+  imageUrl: string
+  slug: string
+}
 
 export function NewsCard(props: NewsCardProps) {
   const { title, category, date, imageUrl, slug } = props

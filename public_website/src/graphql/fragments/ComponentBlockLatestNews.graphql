@@ -1,0 +1,7 @@
+fragment ComponentBlockLatestNews on ComponentBlockLatestNews {
+  id
+  requiredTitle: title
+  requiredCta: cta {
+    ...ComponentCommonLink
+  }
+}

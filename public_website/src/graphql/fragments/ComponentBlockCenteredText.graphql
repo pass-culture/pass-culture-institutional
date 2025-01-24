@@ -1,0 +1,5 @@
+fragment ComponentBlockCenteredText on ComponentBlockCenteredText {
+  id
+  title
+  requiredDescription: description
+}

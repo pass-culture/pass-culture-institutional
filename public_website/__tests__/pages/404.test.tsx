@@ -16,7 +16,7 @@ describe('404', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<NotFound {...props} />)
+      const { container } = render(<NotFound {...props!} />)
 
       let a11yResult
       await act(async () => {

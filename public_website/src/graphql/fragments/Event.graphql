@@ -1,0 +1,30 @@
+fragment Event on Event {
+  title
+  date
+  startTime
+  endTime
+  cta {
+    ...ComponentCommonLink
+  }
+  image {
+    ...UploadFile
+  }
+  category
+  localisation
+  secteur
+  blocks {
+    __typename
+    ...ComponentBlockImage
+    ...ComponentBlockSimpleTextV2
+    ...ComponentBlockVideo
+    ...ComponentBlockDoublePushCta
+    ...ComponentBlockSocialMedia
+  }
+  city
+  slug
+  seo {
+    ...ComponentSharedSeo
+  }
+  pageLocalisation
+  endDate
+}

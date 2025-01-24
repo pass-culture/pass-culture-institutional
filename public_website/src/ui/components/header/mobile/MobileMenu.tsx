@@ -3,13 +3,13 @@ import styled, { css } from 'styled-components'
 
 import { Button } from '../../button/Button'
 import { ChevronRight } from '../../icons/ChevronRight'
-import HeaderBanner from '../HeaderBanner'
+import HeaderBanner, { HeaderBannerProps } from '../HeaderBanner'
 import { MobileMenuAccountSubPanel } from './MobileMenuAccountSubPanel'
 import { MobileMenuListSubPanel } from './MobileMenuListSubPanel'
 import { MobileMenuSubPanel } from './MobileMenuSubPanel'
-import { BannerProps, HeaderMenuProps } from '@/types/props'
+import { HeaderFragment } from '@/generated/graphql'
 
-type MobileMenuProps = HeaderMenuProps & {
+type MobileMenuProps = HeaderFragment & {
   onKeyDown: (e: KeyboardEvent) => void
 }
 
@@ -20,7 +20,7 @@ export function MobileMenu({
   login,
   signup,
   banner,
-}: MobileMenuProps & { banner: BannerProps }) {
+}: MobileMenuProps & { banner: HeaderBannerProps }) {
   const navItems = [...targetItems, ...aboutItems]
 
   const [subPanelType, setSubPanelType] = useState<
@@ -62,7 +62,11 @@ export function MobileMenu({
         onClose={closeSubPanel}
         title={isLoginPanel ? login.buttonLabel : signup.buttonLabel}>
         <MobileMenuAccountSubPanel
-          items={isLoginPanel ? login.items : signup.items}
+          items={
+            isLoginPanel
+              ? login.items.filter((i) => i !== null)
+              : signup.items.filter((i) => i !== null)
+          }
         />
       </MobileMenuSubPanel>
     ) : (
@@ -70,16 +74,7 @@ export function MobileMenu({
         <MobileMenuSubPanel
           onClose={closeSubPanel}
           title={isLoginPanel ? login.buttonLabel : navItem.label}>
-          <MobileMenuListSubPanel
-            primaryList={navItem.megaMenu.primaryListItems}
-            secondaryList={navItem.megaMenu.secondaryListItems}
-            cardTitle={navItem.megaMenu.cardTitle}
-            cardDescription={navItem.megaMenu.cardDescription}
-            cardLink={navItem.megaMenu.cardLink}
-            cardFirstEmoji={navItem.megaMenu.cardFirstEmoji}
-            cardSecondEmoji={navItem.megaMenu.cardSecondEmoji}
-            theme={navItem.megaMenu.theme}
-          />
+          {navItem.megaMenu && <MobileMenuListSubPanel {...navItem.megaMenu} />}
         </MobileMenuSubPanel>
       )
     )
@@ -113,10 +108,10 @@ export function MobileMenu({
             id="mobile-menu-main-navigation">
             {navItems.map((item, i) => {
               return (
-                <React.Fragment key={item.label}>
+                <React.Fragment key={item?.label}>
                   <StyledMobileMenuListItem>
                     <button onClick={() => openSubPanel('list', i)}>
-                      {item.label}
+                      {item?.label}
                       <ChevronRight />
                     </button>
                   </StyledMobileMenuListItem>

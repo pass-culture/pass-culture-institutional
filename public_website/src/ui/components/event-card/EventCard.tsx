@@ -1,5 +1,5 @@
 import React from 'react'
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 import styled, { css } from 'styled-components'
 
 import { ArrowLeft } from '../icons/ArrowLeft'
@@ -7,21 +7,25 @@ import { Calendar } from '../icons/Calendar'
 import { Clock } from '../icons/Clock'
 import { TargetBlank } from '../icons/TargeBlank'
 import { Link } from '../Link'
+import { ComponentCommonLinkFragment } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
-import { CTA } from '@/types/CTA'
-import { ListCardProps } from '@/types/props'
 import { convertTime } from '@/utils/convertTime'
 import { getFormattedDateAfterComparison } from '@/utils/getFormattedDateAfterComparison'
 import { isRenderable } from '@/utils/isRenderable'
 
 export function EventCard(
   props: Omit<
-    ListCardProps & {
-      startTime: string | Date
-      endTime: string | Date
-      endDate: string | Date | null | undefined
+    {
+      title: string
+      category: string
+      date: string
+      endDate: string | null
+      startTime: string
+      endTime: string
       city: string
-      cta: CTA
+      cta: ComponentCommonLinkFragment
+      imageUrl?: string | null
+      type: string
     },
     'slug'
   >

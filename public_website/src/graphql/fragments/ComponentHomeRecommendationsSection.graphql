@@ -1,0 +1,9 @@
+fragment ComponentHomeRecommendationsSection on ComponentHomeRecommendationsSection {
+  recommendations {
+    ...ComponentBlockVerticalCarousel
+  }
+  recommendationsBackendTag
+  cta {
+    ...ComponentCommonLink
+  }
+}

@@ -1,0 +1,8 @@
+fragment ComponentSimulatorFailureScreen on ComponentSimulatorFailureScreen {
+  id
+  title
+  text
+  cta {
+    ...ComponentCommonLink
+  }
+}

@@ -1,0 +1,51 @@
+fragment Simulator on Simulator {
+  title
+  description
+  ageQuestion {
+    ...ComponentSimulatorAgeQuestion
+  }
+  nationnalityQuestion {
+    ...ComponentSimulatorRadioQuestion
+  }
+  residencyQuestion {
+    ...ComponentSimulatorRadioQuestion
+  }
+  steps {
+    ...ComponentSimulatorStep
+  }
+  successScreen {
+    ...ComponentSimulatorSuccessScreen
+  }
+  failureScreen {
+    ...ComponentSimulatorFailureScreen
+  }
+  tooYoungScreen {
+    ...ComponentSimulatorFailureScreen
+  }
+  tooOldScreen {
+    ...ComponentSimulatorFailureScreen
+  }
+  amountScreen_15 {
+    ...ComponentSimulatorAmountScreen
+  }
+  amountScreen_16 {
+    ...ComponentSimulatorAmountScreen
+  }
+  amountScreen_17 {
+    ...ComponentSimulatorAmountScreen
+  }
+  amountScreen_18 {
+    ...ComponentSimulatorAmountScreen
+  }
+  topEmoji
+  bottomEmoji
+  socialMedias {
+    ...ComponentBlockSocialMedia
+  }
+  seo {
+    ...ComponentSharedSeo
+  }
+  offres {
+    ...ComponentBlockSimplePushCta
+  }
+}

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { SeparatorTextProps } from '@/types/props'
+import { ComponentBlockSeparatorFragment } from '@/generated/graphql'
 
-export function Separator(props: SeparatorTextProps) {
+export function Separator(props: Omit<ComponentBlockSeparatorFragment, 'id'>) {
   const { isActive } = props
 
   return (

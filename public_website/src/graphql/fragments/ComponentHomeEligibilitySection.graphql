@@ -1,0 +1,13 @@
+fragment ComponentHomeEligibilitySection on ComponentHomeEligibilitySection {
+  title
+  cardTitle
+  cardDescription
+  cardCta {
+    ...ComponentCommonLink
+  }
+  firstEmoji
+  secondEmoji
+  items {
+    ...ComponentHomeEligibilityItems
+  }
+}

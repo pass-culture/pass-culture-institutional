@@ -1,0 +1,5 @@
+fragment UploadFileRelationResponseCollection on UploadFileRelationResponseCollection {
+  nodes {
+    ...UploadFile
+  }
+}

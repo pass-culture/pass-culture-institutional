@@ -6,11 +6,11 @@ import { FrenchRepublic } from '../icons/FrenchRepublic'
 import { PassCulture } from '../icons/PassCulture'
 import { FooterList } from './FooterList'
 import { FooterMobileList } from './FooterMobileList'
+import { FooterFragment } from '@/generated/graphql'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
-import { FooterProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-export function Footer(props: FooterProps) {
+export function Footer(props: FooterFragment) {
   const {
     PlayStoreUrl,
     AppStoreUrl,
@@ -49,17 +49,23 @@ export function Footer(props: FooterProps) {
 
           <StyledLists>
             {Lists?.map((list) => (
-              <React.Fragment key={list.id}>
-                <FooterList title={list.Title} listItems={list.Links} />
-                <FooterMobileList title={list.Title} listItems={list.Links} />
+              <React.Fragment key={list?.id}>
+                <FooterList
+                  title={list?.Title}
+                  listItems={list?.Links?.filter((l) => l !== null) ?? []}
+                />
+                <FooterMobileList
+                  title={list?.Title}
+                  listItems={list?.Links?.filter((l) => l !== null) ?? []}
+                />
               </React.Fragment>
             ))}
           </StyledLists>
           <StyledLegalLinks>
             {LegalLinks?.map((link) => {
               return (
-                <li key={link.id}>
-                  <Link href={link.URL}>{link.Label}</Link>
+                <li key={link?.id}>
+                  <Link href={link?.URL ?? ''}>{link?.Label}</Link>
                 </li>
               )
             })}

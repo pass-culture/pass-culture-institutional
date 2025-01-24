@@ -1,0 +1,10 @@
+fragment ComponentBlockColumnsText on ComponentBlockColumnsText {
+  id
+  requiredTitle: title
+  video {
+    ...ComponentBlockVideo
+  }
+  columns {
+    ...ComponentCommonSimpleTextColumn
+  }
+}

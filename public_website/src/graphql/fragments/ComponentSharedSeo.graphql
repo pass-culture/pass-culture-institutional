@@ -1,0 +1,16 @@
+fragment ComponentSharedSeo on ComponentSharedSeo {
+  id
+  keywords
+  metaDescription
+  metaImage {
+    ...UploadFile
+  }
+  metaRobots
+  metaSocial {
+    ...ComponentSharedMetaSocial
+  }
+  metaTitle
+  metaViewport
+  structuredData
+  canonicalURL
+}

@@ -1,0 +1,6 @@
+fragment ComponentSimulatorAgeQuestion on ComponentSimulatorAgeQuestion {
+  title
+  answers {
+    ...ComponentSimulatorAnswer
+  }
+}

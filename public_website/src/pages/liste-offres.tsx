@@ -1,9 +1,6 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import { ListeOffresDocument, ListeOffresQuery } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { ExperienceVideoCarousel } from '@/lib/blocks/experienceVideoCarousel/experienceVideoCarousel'
 import { Header } from '@/lib/blocks/Header'
@@ -11,17 +8,16 @@ import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
+import urqlClient from '@/lib/urqlClient'
 import { Offer } from '@/types/playlist'
-import {
-  ExperienceVideoCarouselSlideProps,
-  ListProps,
-  OffersVideoCarouselProps,
-} from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
-import { separatorIsActive } from '@/utils/separatorIsActive'
+
+type ListProps = {
+  offerListe: NonNullable<ListeOffresQuery['listeOffre']>
+  offerItems: Offer[]
+}
 
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   const {
@@ -33,7 +29,7 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
     question,
     experience,
     offres_culturelles,
-  } = offerListe.attributes
+  } = offerListe
 
   return (
     <PageLayout
@@ -42,55 +38,39 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
       socialMediaSection={socialMediaSection}>
       {!!hero && (
         <Header
-          title={hero.title}
+          requiredTitle={hero.requiredTitle}
           text={hero.text}
-          image={hero.image}
-          icon={hero.icon}
+          requiredImage={hero.requiredImage}
+          requiredIcon={hero.requiredIcon}
         />
       )}
-
       <Breadcrumb isUnderHeader />
-
-      <OfferSection
-        title={offres.title}
-        description={offres.description}
-        offers={offerItems}
-        cta={offres.cta}
-        firstCartTitle={offres.firstCartTitle}
-        secondCartTitle={offres.secondCartTitle}
-        descriptionCard={offres.descritptionCard}
-        ctaCard={offres.ctaCard}
-        firstIcon={offres.firstIcon}
-        secondIcon={offres.secondIcon}
-      />
-
-      <Separator isActive={separatorIsActive(separator)} />
+      <OfferSection offers={offerItems} {...offres} />
+      <Separator isActive={separator?.isActive ?? false} />
       <BlockRendererWithCondition
-        condition={!!offres_culturelles && offres_culturelles.items.length > 0}>
-        <OffersCarousel {...(offres_culturelles as OffersVideoCarouselProps)} />
+        condition={
+          !!offres_culturelles &&
+          offres_culturelles.offersCarouselItems.length > 0
+        }>
+        <OffersCarousel {...offres_culturelles!} />
       </BlockRendererWithCondition>
       <Separator isActive={false} />
       <BlockRendererWithCondition
         condition={!!experience && experience.carouselItems.length > 0}>
         <ExperienceVideoCarousel
-          title={experience?.title as string}
-          carouselItems={
-            experience?.carouselItems as Omit<
-              ExperienceVideoCarouselSlideProps,
-              'slideIndex'
-            >[]
-          }
+          title={experience?.title ?? ''}
+          carouselItems={experience?.carouselItems ?? []}
           isLandscape={experience?.isLandscape}
         />
       </BlockRendererWithCondition>
       <Separator isActive={false} />
       {!!question && (
         <SimplePushCta
-          title={question.title}
+          requiredTitle={question.requiredTitle}
           surtitle={question.surtitle}
           icon={question.icon}
-          image={question.image}
-          cta={question.cta}
+          requiredImage={question.requiredImage}
+          requiredCta={question.requiredCta}
         />
       )}
       <Separator isActive={false} />
@@ -98,36 +78,17 @@ export default function ListeOffre({ offerListe, offerItems }: ListProps) {
   )
 }
 
-export const getStaticProps = (async () => {
-  const query = stringify({
-    populate: [
-      'hero.image',
-      'hero',
-      'separator',
-      'offres',
-      'offres.cta',
-      'question',
-      'question.image',
-      'question.cta',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'offres.ctaCard',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-      'experience',
-      'experience.carouselItems',
-      'offres_culturelles',
-      'offres_culturelles.cta',
-      'offres_culturelles.items',
-    ],
-  })
-  const data = (await Pages.getPage(
-    PATHS.OFFERS_LIST,
-    query
-  )) as APIResponseData<'api::liste-offre.liste-offre'>
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<ListeOffresQuery>(ListeOffresDocument, {})
+    .toPromise()
 
-  const offerTag = data.attributes.offres?.offreTag
+  if (result.error || !result.data || !result.data.listeOffre) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
+
+  const offerTag = result.data.listeOffre.offres?.offreTag
 
   const offerItems = (await fetchBackend(
     `institutional/playlist/${offerTag}`
@@ -135,8 +96,9 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
-      offerListe: data,
+      offerListe: result.data.listeOffre,
       offerItems,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListProps>
+}

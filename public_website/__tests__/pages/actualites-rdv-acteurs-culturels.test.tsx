@@ -19,7 +19,7 @@ describe('Actus rdv acteurs pass culture', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<ListeActuCulturels {...props} />)
+      const { container } = render(<ListeActuCulturels {...props!} />)
 
       let a11yResult
       await act(async () => {

@@ -1,5 +1,5 @@
 # Builder
-FROM node:18.18-alpine3.18 AS builder
+FROM node:20.9-alpine3.18 AS builder
 
 RUN mkdir /build
 WORKDIR /build
@@ -21,7 +21,7 @@ RUN cd src/plugins/sitemap-pass && yarn install --frozen-lockfile
 RUN  yarn build
 
 # Runner
-FROM node:18.18-alpine3.18 AS runner
+FROM node:20.9-alpine3.18 AS runner
 ENV NODE_ENV=production
 COPY package.json /app/
 COPY --from=builder /build/node_modules /app/node_modules

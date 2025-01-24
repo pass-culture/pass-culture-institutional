@@ -2,9 +2,9 @@ import React from 'react'
 
 import { LittleList } from '../LittleList'
 import Tabs from './Tabs'
-import { TabImageTextProps } from '@/types/props'
+import { ComponentBlockTabsLittleListFragment } from '@/generated/graphql'
 
-const TabsLittleList = (props: TabImageTextProps) => {
+const TabsLittleList = (props: ComponentBlockTabsLittleListFragment) => {
   return (
     <Tabs {...props}>
       <LittleList />

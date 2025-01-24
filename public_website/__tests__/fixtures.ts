@@ -1,50 +1,59 @@
+import {
+  Enum_Componentheadermegamenu_Theme,
+  HeaderFragment,
+} from '@/generated/graphql'
 import { Offer, Tag } from '@/types/playlist'
-import { HeaderMenuProps } from '@/types/props'
 
 export const testDataFixtures = { message: 'Hello World!' }
 
-export const headerDataFixtures: HeaderMenuProps = {
+export const headerDataFixtures: HeaderFragment = {
   targetItems: [
     {
       label: 'Target item 1',
       megaMenu: {
+        id: '1',
         title: 'Mega menu 1',
         cardTitle: 'CardTitle 1',
         bannerDefaultUrl: '',
         cardDescription: 'CardDescription 1',
         cardFirstEmoji: '🌴',
         cardSecondEmoji: '🦊',
-        theme: 'aquamarine',
+        theme: Enum_Componentheadermegamenu_Theme.Aquamarine,
         primaryListItems: [
           {
+            id: '1',
             Label: 'primaryListItems 1',
             URL: '#',
           },
         ],
         secondaryListItems: [
           {
+            id: '2',
             Label: 'secondaryListItems 1',
             URL: '#',
           },
         ],
         cta: {
+          id: '3',
           Label: 'Cta 1',
           URL: '#',
         },
         cardLink: {
+          id: '4',
           Label: 'CardLink 1',
           URL: '#',
         },
       },
-      id: 0,
+      id: '1',
     },
   ],
   aboutItems: [
     {
       label: 'Target item 2',
       megaMenu: {
+        id: '2',
         title: 'Mega menu 2',
-        theme: 'aquamarine',
+        theme: Enum_Componentheadermegamenu_Theme.Aquamarine,
         bannerDefaultUrl: '',
         cardTitle: 'CardTitle 2',
         cardDescription: 'CardDescription 2',
@@ -52,32 +61,38 @@ export const headerDataFixtures: HeaderMenuProps = {
         cardSecondEmoji: '☎️',
         primaryListItems: [
           {
+            id: '5',
             Label: 'primaryListItems 2',
             URL: '#',
           },
         ],
         secondaryListItems: [
           {
+            id: '6',
             Label: 'secondaryListItems 2',
             URL: '#',
           },
         ],
         cta: {
+          id: '7',
           Label: 'Cta 2',
           URL: '#',
         },
         cardLink: {
+          id: '8',
           Label: 'CardLink 2',
           URL: '#',
         },
       },
-      id: 0,
+      id: '2',
     },
   ],
   login: {
+    id: '9',
     buttonLabel: 'Login label',
     items: [
       {
+        id: '9',
         label: 'LoginItem 1',
         color: '#ff0000',
         emoji: '😇',
@@ -86,9 +101,11 @@ export const headerDataFixtures: HeaderMenuProps = {
     ],
   },
   signup: {
+    id: '10',
     buttonLabel: 'Signup label',
     items: [
       {
+        id: '10',
         label: 'LoginItem 1',
         color: '#ff0000',
         emoji: '😇',

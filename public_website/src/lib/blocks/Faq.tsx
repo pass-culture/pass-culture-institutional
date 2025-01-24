@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import faqJsonData from '../../../faqData.json'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { FaqProps } from '@/types/props'
+import { ComponentBlockFaqFragment } from '@/generated/graphql'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { LinkFaq } from '@/ui/components/help/Link'
@@ -42,8 +42,9 @@ function filterFaqQuestions(
   return filteredQuestions.slice(0, limit)
 }
 
-export function Faq(props: FaqProps) {
-  const { title, cta, categories, filteringProperty, limit } = props
+export function Faq(props: Omit<ComponentBlockFaqFragment, 'id'>) {
+  const { requiredTitle, requiredCta, categories, filteringProperty, limit } =
+    props
 
   /** Extract plain text from html and cut it at 600 characters */
   const cutFaqBody = (body: string): string => {
@@ -56,16 +57,16 @@ export function Faq(props: FaqProps) {
   }
 
   const filteredQuestions = useMemo(
-    () => filterFaqQuestions(categories, filteringProperty, limit),
+    () => filterFaqQuestions(categories ?? undefined, filteringProperty, limit),
     [categories, filteringProperty, limit]
   )
 
   return (
-    (<ContentWrapper>
+    <ContentWrapper>
       <StyledContentWrapper>
         <StyledContentTextWrapper>
-          <StyledHeading>{title}</StyledHeading>
-          <ButtonWithCTA cta={cta} />
+          <StyledHeading>{requiredTitle}</StyledHeading>
+          <ButtonWithCTA cta={requiredCta} />
         </StyledContentTextWrapper>
         <div>
           {filteredQuestions?.map((faq) => {
@@ -94,10 +95,10 @@ export function Faq(props: FaqProps) {
           })}
         </div>
 
-        {cta && <MobileCta cta={cta} />}
+        {requiredCta && <MobileCta cta={requiredCta} />}
       </StyledContentWrapper>
-    </ContentWrapper>)
-  );
+    </ContentWrapper>
+  )
 }
 
 const StyledContentWrapper = styled.div`

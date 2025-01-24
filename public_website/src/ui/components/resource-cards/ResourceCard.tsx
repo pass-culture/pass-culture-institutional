@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 import { Download } from '../icons/Download'
 import { ExternalLink } from '../icons/ExternalLink'
-import { CTA } from '@/types/CTA'
+import { ComponentCommonLinkFragment } from '@/generated/graphql'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
@@ -12,7 +12,7 @@ export function ResourceCard(props: {
   title: string
   category: string
   date: string | Date
-  cta: CTA
+  cta: ComponentCommonLinkFragment
 }) {
   const { title, category, date, cta } = props
 

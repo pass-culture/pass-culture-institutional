@@ -3,17 +3,19 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { SimpleTextV2Props } from '@/types/props'
+import { ComponentBlockSimpleTextV2Fragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function SimpleTextV2(props: SimpleTextV2Props) {
-  const { columns, title, text } = props
+export function SimpleTextV2(
+  props: Omit<ComponentBlockSimpleTextV2Fragment, 'id'>
+) {
+  const { columns, title, jsonText } = props
 
   const isRenderColumns = (): boolean => {
-    return columns?.length > 0
+    return (columns?.length ?? 0) > 0
   }
   return (
     <Root data-testid="simple-text">
@@ -22,20 +24,22 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
       </BlockRendererWithCondition>
 
       <Content>
-        <BlocksRenderer content={text} />
+        <BlocksRenderer content={jsonText} />
         <BlockRendererWithCondition condition={isRenderColumns()}>
           <Columns>
-            {columns?.map((col) => (
-              <Column key={col.id}>
-                {col.title && (
-                  <ColumnTitle
-                    aria-label={parseText(col.title).accessibilityLabel}>
-                    {parseText(col.title).processedText}
-                  </ColumnTitle>
-                )}
-                <BlocksRenderer content={col.text} />
-              </Column>
-            ))}
+            {columns
+              ?.filter((c) => c !== null)
+              .map((col) => (
+                <Column key={col.id}>
+                  {col.title && (
+                    <ColumnTitle
+                      aria-label={parseText(col.title).accessibilityLabel}>
+                      {parseText(col.title).processedText}
+                    </ColumnTitle>
+                  )}
+                  <BlocksRenderer content={col.text} />
+                </Column>
+              ))}
           </Columns>
         </BlockRendererWithCondition>
       </Content>

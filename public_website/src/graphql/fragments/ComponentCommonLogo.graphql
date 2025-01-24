@@ -1,0 +1,5 @@
+fragment ComponentCommonLogo on ComponentCommonLogo {
+  logo {
+    ...UploadFile
+  }
+}

@@ -3,13 +3,15 @@ import { describe, expect, it } from 'vitest'
 
 import { render, screen } from '..'
 import { BlockRenderer } from '@/lib/BlockRenderer'
+import { PageQuery } from '@/generated/graphql'
 
 describe('BlockRenderer', () => {
   it('should render the correct block', () => {
-    const block = {
-      __component: 'block.header-test',
-      Title: 'The title',
-      Text: 'Some longer text',
+    const block: NonNullable<
+      NonNullable<NonNullable<PageQuery['pages'][number]>['Blocks']>[number]
+    > = {
+      __typename: 'ComponentBlockHeaderTest' as 'ComponentBlockBreadcrumb',
+      id: '1',
     }
 
     render(<BlockRenderer block={block} />)
@@ -18,7 +20,11 @@ describe('BlockRenderer', () => {
   })
 
   it('should render the unknown block', () => {
-    const block = { __component: 'some.unkwnown.block', foo: 'bar' }
+    const block: NonNullable<
+      NonNullable<NonNullable<PageQuery['pages'][number]>['Blocks']>[number]
+    > = {
+      __typename: 'Error',
+    }
 
     render(<BlockRenderer block={block} />)
 

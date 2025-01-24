@@ -2,9 +2,17 @@ import React, { Ref, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AccountItem } from './AccountItem'
-import { AccountDropdownProps } from '@/types/props'
+import { ComponentHeaderAccountItem } from '@/generated/graphql'
 
-export function AccountDropdown(props: AccountDropdownProps) {
+export function AccountDropdown(props: {
+  items: ComponentHeaderAccountItem[]
+  openButtonElement: HTMLElement | null
+  labelId: string
+  align?: 'left' | 'right'
+  onKeyDown: () => void
+  onBlur: () => void
+  onMouseLeave: () => void
+}) {
   const {
     items,
     openButtonElement,
@@ -58,7 +66,7 @@ export function AccountDropdown(props: AccountDropdownProps) {
       onMouseLeave={onMouseLeave}>
       <ul aria-labelledby={labelId} id="account-menu">
         {items.map((item, i) => (
-          <React.Fragment key={item.label}>
+          <React.Fragment key={item?.label}>
             <AccountItem {...item} />
             {i !== items.length - 1 && <li aria-hidden="true" />}
           </React.Fragment>

@@ -1,0 +1,15 @@
+fragment ComponentBlockDoublePushCta on ComponentBlockDoublePushCta {
+  id
+  requiredTitle: title
+  text
+  firstCta {
+    ...ComponentCommonLink
+  }
+  secondCta {
+    ...ComponentCommonNotRequiredLink
+  }
+  requiredImage: image {
+    ...UploadFile
+  }
+  icon
+}

@@ -18,7 +18,7 @@ describe('Help page - Young & adults', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<Help {...props} />)
+      const { container } = render(<Help {...props!} />)
 
       let a11yResult
       await act(async () => {

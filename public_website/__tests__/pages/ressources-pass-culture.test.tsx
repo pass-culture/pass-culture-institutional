@@ -19,7 +19,7 @@ describe('Ressources Pass Culture', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<RessourcesPassCulture {...props} />)
+      const { container } = render(<RessourcesPassCulture {...props!} />)
 
       let a11yResult
       await act(async () => {

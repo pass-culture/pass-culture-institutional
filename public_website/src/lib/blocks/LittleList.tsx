@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { ComponentBlockLittleListFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
-import { LittleListProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
@@ -13,7 +13,10 @@ import { getMediaQuery } from '@/utils/getMediaQuery'
 import { isRenderable } from '@/utils/isRenderable'
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
-export function LittleList(props: LittleListProps) {
+
+export function LittleList(
+  props: Omit<ComponentBlockLittleListFragment, 'id'>
+) {
   const { title, description, content } = props
   const [collectionRefsOpened, setCollectionRefsOpened] = useState<number[]>([])
 
@@ -51,26 +54,26 @@ export function LittleList(props: LittleListProps) {
         <Column as="ul">
           {content?.map((item, index) => {
             return (
-              <ColumnContent key={item.id} as="li">
+              <ColumnContent key={item?.id} as="li">
                 <ColumnEmoji>
-                  <OutlinedText shadow>{item.firstEmoji}</OutlinedText>
-                  <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
+                  <OutlinedText shadow>{item?.firstEmoji}</OutlinedText>
+                  <OutlinedText shadow>{item?.secondEmoji}</OutlinedText>
                 </ColumnEmoji>
 
                 {isMobile ? (
                   <ColumnText
-                    $isShow={!!item.description}
+                    $isShow={!!item?.description}
                     className={isOpen(index) ? 'open' : ''}
                     onClick={(): void => clickHandler(index)}>
-                    <p>{item.text}</p>
+                    <p>{item?.text}</p>
                     {isOpen(index)
-                      ? item.description && <p>{item.description}</p>
+                      ? item?.description && <p>{item?.description}</p>
                       : null}
                   </ColumnText>
                 ) : (
-                  <ColumnText $isShow={!!item.description}>
-                    <p>{item.text}</p>
-                    <p>{item.description}</p>
+                  <ColumnText $isShow={!!item?.description}>
+                    <p>{item?.text}</p>
+                    <p>{item?.description}</p>
                   </ColumnText>
                 )}
               </ColumnContent>

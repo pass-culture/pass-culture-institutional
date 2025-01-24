@@ -17,7 +17,7 @@ describe('Liste jeunes', () => {
     'should pass accessibility tests',
     async () => {
       const { props } = await getStaticProps()
-      const { container } = render(<ListeJeune {...props} />)
+      const { container } = render(<ListeJeune {...props!} />)
 
       let a11yResult
       await act(async () => {

@@ -1,0 +1,7 @@
+fragment ComponentCommonLittleListComponent on ComponentCommonLittleListComponent {
+  id
+  text
+  description
+  firstEmoji
+  secondEmoji
+}

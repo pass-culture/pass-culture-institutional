@@ -1,188 +1,178 @@
-import React, { useEffect, useState } from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import React from 'react'
 import styled from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import { PresseDocument, PresseQuery } from '@/generated/graphql'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter } from '@/lib/blocks/FilterContainer'
 import { ImageText } from '@/lib/blocks/ImageText'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
-import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
+import urqlClient from '@/lib/urqlClient'
 import { StyledTitle } from '@/theme/style'
-import { ListPressProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
-import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { separatorIsActive } from '@/utils/separatorIsActive'
+
+type PresseProps = {
+  resourcesData: NonNullable<PresseQuery['resources']>
+  presseListe: NonNullable<PresseQuery['presse']>
+  eventsData: NonNullable<PresseQuery['events']>
+}
 
 export default function Presse({
   resourcesData,
   presseListe,
   eventsData,
-}: ListPressProps) {
+}: PresseProps) {
   const {
     aide,
     buttonText,
     pushCta,
     seo,
     separator,
-    showFilter,
+    // showFilter,
     socialMediaSection,
     texteImage,
     title,
     titleEventSection,
-    filtres,
-  } = presseListe.attributes
+    // filtres,
+  } = presseListe
 
-  const cat = Array.from(
-    new Set(resourcesData.map((item) => item.attributes.category))
-  )
+  // const cat = Array.from(new Set(resourcesData.map((item) => item?.category)))
 
-  const loc = Array.from(
-    new Set(resourcesData.map((item) => item.attributes.localisation))
-  )
+  // const loc = Array.from(
+  //   new Set(resourcesData.map((item) => item?.localisation))
+  // )
 
-  const sec = Array.from(
-    new Set(resourcesData.map((item) => item.attributes.secteur))
-  )
+  // const sec = Array.from(new Set(resourcesData.map((item) => item?.secteur)))
 
-  const eventCat = Array.from(
-    new Set(eventsData.map((item) => item.attributes.category))
-  )
+  // const eventCat = Array.from(new Set(eventsData.map((item) => item?.category)))
 
-  const eventLoc = Array.from(
-    new Set(eventsData.map((item) => item.attributes.localisation))
-  )
+  // const eventLoc = Array.from(
+  //   new Set(eventsData.map((item) => item?.localisation))
+  // )
 
-  const eventSec = Array.from(
-    new Set(eventsData.map((item) => item.attributes.secteur))
-  )
-  const [category, setCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [secteur, setSecteur] = useState<string[]>([])
+  // const eventSec = Array.from(new Set(eventsData.map((item) => item?.secteur)))
+  // const [category, setCategory] = useState<string[]>([])
+  // const [localisation, setLocalisation] = useState<string[]>([])
+  // const [secteur, setSecteur] = useState<string[]>([])
 
-  const [eventCategory, setEventCategory] = useState<string[]>([])
-  const [eventLocalisation, setEventLocalisation] = useState<string[]>([])
-  const [eventSecteur, setEventSecteur] = useState<string[]>([])
+  // const [eventCategory, setEventCategory] = useState<string[]>([])
+  // const [eventLocalisation, setEventLocalisation] = useState<string[]>([])
+  // const [eventSecteur, setEventSecteur] = useState<string[]>([])
 
-  const [filters, setFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
-    []
-  )
+  // const [filters, setFilters] = useState<Filter[]>([])
+  // const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+  //   []
+  // )
 
-  const [eventFilters, setEventFilters] = useState<Filter[]>([])
-  const [eventData, setEventData] = useState<
-    APIResponseData<'api::event.event'>[]
-  >([])
+  // const [eventFilters, setEventFilters] = useState<Filter[]>([])
+  // const [eventData, setEventData] = useState<
+  //   APIResponseData<'api::event.event'>[]
+  // >([])
 
-  useEffect(() => {
-    setCategory(cat)
-    setLocalisation(loc)
-    setSecteur(sec)
+  // useEffect(() => {
+  //   setCategory(cat)
+  //   setLocalisation(loc)
+  //   setSecteur(sec)
 
-    setEventCategory(eventCat)
-    setEventLocalisation(eventLoc)
-    setEventSecteur(eventSec)
+  //   setEventCategory(eventCat)
+  //   setEventLocalisation(eventLoc)
+  //   setEventSecteur(eventSec)
 
-    setData(resourcesData)
+  //   setData(resourcesData)
 
-    setEventData(eventsData)
+  //   setEventData(eventsData)
 
-    const filtresOption = filterByAttribute(filtres, resourcesData)
-    if (filtresOption) setFilters(filtresOption)
+  //   const filtresOption = filterByAttribute(filtres, resourcesData)
+  //   if (filtresOption) setFilters(filtresOption)
 
-    if (filtresOption) setEventFilters(filtresOption)
+  //   if (filtresOption) setEventFilters(filtresOption)
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
-  const fetchData = async () => {
-    const resourcesQuery = stringify({
-      sort: ['date:desc'],
-      pagination: {},
-      populate: ['image'],
-      filters: {
-        category: {
-          $eqi: category,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        secteur: {
-          $eqi: secteur,
-        },
-        pageLocalisation: {
-          $containsi: 'S\u2019informer - presse',
-        },
-      },
-    })
+  // const fetchData = async () => {
+  //   const resourcesQuery = stringify({
+  //     sort: ['date:desc'],
+  //     pagination: {},
+  //     populate: ['image'],
+  //     filters: {
+  //       category: {
+  //         $eqi: category,
+  //       },
+  //       localisation: {
+  //         $eqi: localisation,
+  //       },
+  //       secteur: {
+  //         $eqi: secteur,
+  //       },
+  //       pageLocalisation: {
+  //         $containsi: 'S\u2019informer - presse',
+  //       },
+  //     },
+  //   })
 
-    const resources = (await Pages.getPage(
-      PATHS.RESOURCES,
-      resourcesQuery
-    )) as APIResponseData<'api::resource.resource'>[]
+  //   const resources = (await Pages.getPage(
+  //     PATHS.RESOURCES,
+  //     resourcesQuery
+  //   )) as APIResponseData<'api::resource.resource'>[]
 
-    setData(resources)
-  }
+  //   setData(resources)
+  // }
 
-  const fetchEventData = async () => {
-    const eventQuery = stringify({
-      pagination: {},
-      sort: ['date:desc'],
-      populate: ['image', 'cta'],
-      filters: {
-        category: {
-          $eqi: eventCategory,
-        },
-        localisation: {
-          $eqi: eventLocalisation,
-        },
-        secteur: {
-          $eqi: eventSecteur,
-        },
-        pageLocalisation: {
-          $containsi: 'S\u2019informer - presse',
-        },
-      },
-    })
+  // const fetchEventData = async () => {
+  //   const eventQuery = stringify({
+  //     pagination: {},
+  //     sort: ['date:desc'],
+  //     populate: ['image', 'cta'],
+  //     filters: {
+  //       category: {
+  //         $eqi: eventCategory,
+  //       },
+  //       localisation: {
+  //         $eqi: eventLocalisation,
+  //       },
+  //       secteur: {
+  //         $eqi: eventSecteur,
+  //       },
+  //       pageLocalisation: {
+  //         $containsi: 'S\u2019informer - presse',
+  //       },
+  //     },
+  //   })
 
-    const events = (await Pages.getPage(
-      PATHS.EVENTS,
-      eventQuery
-    )) as APIResponseData<'api::event.event'>[]
+  //   const events = (await Pages.getPage(
+  //     PATHS.EVENTS,
+  //     eventQuery
+  //   )) as APIResponseData<'api::event.event'>[]
 
-    setEventData(events)
-  }
+  //   setEventData(events)
+  // }
 
-  useEffect(() => {
-    showFilter && fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur, showFilter])
+  // useEffect(() => {
+  //   showFilter && fetchData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [category, localisation, secteur, showFilter])
 
-  useEffect(() => {
-    showFilter && fetchEventData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventCategory, eventLocalisation, eventSecteur, showFilter])
-
-  const hasData = data.length > 0
-  const hasEventData = eventData.length > 0
+  // useEffect(() => {
+  //   showFilter && fetchEventData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [eventCategory, eventLocalisation, eventSecteur, showFilter])
 
   return (
-    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
+    <PageLayout
+      seo={seo}
+      title={title ?? undefined}
+      socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      {showFilter && (
+      {/* {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setCategory}
@@ -194,154 +184,109 @@ export default function Presse({
             data={filters}
           />
         </ContentWrapper>
-      )}
+      )} */}
 
-      {hasData ? (
+      {resourcesData.length > 0 ? (
         <StyledListItems
-          news={data}
+          news={resourcesData.filter((item) => item !== null)}
           type="ressources"
-          buttonText={buttonText}
+          buttonText={buttonText ?? undefined}
         />
       ) : (
         <NoResult />
       )}
 
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive={separator?.isActive ?? false} />
 
       <StyledTitle>
         <Typo.Heading3>{titleEventSection}</Typo.Heading3>
       </StyledTitle>
 
-      {showFilter && (
+      {/* {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setEventCategory}
-            originalCategory={eventCat}
+            originalCategory={eventCat.filter((item) => item !== undefined)}
             setLocalisation={setEventLocalisation}
-            originalLocalisation={eventLocalisation}
+            originalLocalisation={eventLocalisation.filter(
+              (item) => item !== undefined
+            )}
             setSecteur={setEventSecteur}
-            originalSecteur={eventSecteur}
+            originalSecteur={eventSecteur.filter((item) => item !== undefined)}
             data={eventFilters}
           />
         </ContentWrapper>
-      )}
+      )} */}
 
-      {hasEventData ? (
+      {eventsData.length > 0 ? (
         <StyledeventListItems
           type="evenement"
-          events={eventData}
-          buttonText={buttonText}
+          events={eventsData.filter((item) => item !== null)}
+          buttonText={buttonText ?? ''}
         />
       ) : (
         <NoResult />
       )}
 
-      <Separator isActive={separatorIsActive(separator)} />
-      <ImageText
-        title={texteImage.title}
-        image={texteImage.image}
-        text={texteImage.text}
-        icon={texteImage.icon}
-        isImageRight={texteImage.isImageRight}
-      />
+      <Separator isActive={separator?.isActive ?? false} />
+      <ImageText {...texteImage} />
 
-      <DoublePushCTA
-        title={pushCta.title}
-        image={pushCta.image}
-        firstCta={pushCta.firstCta}
-        secondCta={pushCta.secondCta}
-        text={pushCta.text}
-        icon={pushCta.icon}
-      />
+      <DoublePushCTA {...pushCta} />
       <Separator isActive={false} />
       <StyledSimplePushCta>
-        {!!aide && (
-          <SimplePushCta
-            title={aide.title}
-            image={aide.image}
-            cta={aide.cta}
-            surtitle={aide.surtitle}
-            icon={aide.icon}
-          />
-        )}
+        {!!aide && <SimplePushCta {...aide} />}
       </StyledSimplePushCta>
       <Separator isActive={false} />
     </PageLayout>
   )
 }
 
-export const getStaticProps = (async () => {
-  const resourcesQuery = stringify({
-    sort: ['date:desc'],
-    pagination: {},
-    populate: ['image'],
-    filters: {
-      category: {
-        $eqi: [
-          'Dossier de presse',
-          'Étude ritualisée',
-          'Étude ponctuelle',
-          'Communiqué de presse',
-        ],
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<PresseQuery>(PresseDocument, {
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          in: [
+            'Dossier de presse',
+            'Étude ritualisée',
+            'Étude ponctuelle',
+            'Communiqué de presse',
+          ],
+        },
+        pageLocalisation: {
+          containsi: 'S\u2019informer - presse',
+        },
       },
-      pageLocalisation: {
-        $containsi: 'S\u2019informer - presse',
+      sortEvents: ['date:desc'],
+      filtersEvents: {
+        pageLocalisation: {
+          containsi: 'S\u2019informer - presse',
+        },
       },
-    },
-  })
-  const resources = (await Pages.getPage(
-    PATHS.RESOURCES,
-    resourcesQuery
-  )) as APIResponseData<'api::resource.resource'>[]
+    })
+    .toPromise()
 
-  const query = stringify({
-    populate: [
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'filtres',
-      'separator',
-      'pushCta',
-      'pushCta.image',
-      'pushCta.firstCta',
-      'pushCta.secondCta',
-      'texteImage',
-      'texteImage.image',
-      'aide.image',
-      'aide.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-  const data = (await Pages.getPage(
-    PATHS.PRESSE,
-    query
-  )) as APIResponseData<'api::presse.presse'>
-
-  const eventQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image', 'cta'],
-    pagination: {},
-    filter: {
-      pageLocalisation: {
-        $containsi: 'S\u2019informer - presse',
-      },
-    },
-  })
-
-  const events = (await Pages.getPage(
-    PATHS.EVENTS,
-    eventQuery
-  )) as APIResponseData<'api::event.event'>[]
+  if (
+    result.error ||
+    !result.data ||
+    !result.data.presse ||
+    !result.data.resources ||
+    !result.data.events
+  ) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      resourcesData: resources,
-      presseListe: data,
-      eventsData: events,
+      resourcesData: result.data.resources,
+      presseListe: result.data.presse,
+      eventsData: result.data.events,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListPressProps>
+}
 
 const UnpaddedBreadcrumb = styled(Breadcrumb)`
   padding: 0;

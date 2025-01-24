@@ -1,9 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import type { Block } from './BlockRenderer'
+import { PageQuery } from '@/generated/graphql'
 
-export function UnkwnownBlock(props: { block: Block }) {
+export function UnkwnownBlock(props: {
+  block: NonNullable<
+    NonNullable<NonNullable<PageQuery['pages'][number]>['Blocks']>[number]
+  >
+}) {
   if (process.env.NODE_ENV === 'production') {
     return null
   }
@@ -11,7 +15,7 @@ export function UnkwnownBlock(props: { block: Block }) {
   return (
     <UnkownBlockContainer data-testid="unknown-block">
       <p>
-        Unknown block <code>{props.block.__component}</code>
+        Unknown block <code>{props.block.__typename}</code>
       </p>
 
       <pre>
