@@ -18,13 +18,10 @@ on:
         type: string
         description: Secret name to retrieve the workload identity provider
         required: true
-      teleport_version:
+      cluster_scope:
         type: string
         required: true
-      teleport_proxy:
-        type: string
-        required: true
-      teleport_kubernetes_cluster:
+      cluster_environment:
         type: string
         required: true
       argocd_version:
@@ -92,13 +89,16 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
 
+      - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
+        with:
+          cluster_scope: ${{ inputs.cluster_scope }}
+          cluster_environment: ${{ inputs.cluster_environment }}
+          api_token_github: ${{ steps.secrets.outputs.api_token_github_secret_name }}
 
       - name: Sync argoCD application 
-        uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.1.0
+        uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.5.0
         with:
           app_name: site-instit-${{ inputs.environment }}
-          teleport_proxy: ${{ inputs.teleport_proxy }} 
-          teleport_kubernetes_cluster: ${{ inputs.teleport_kubernetes_cluster }} 
 
   notification:
     name: "Notification"
