@@ -70,343 +70,708 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>http://localhost:3000/actualites-pass-culture/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-13T07:12:53.928Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/actualites-rdv-acteurs-culturel/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-13T07:12:14.231Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/etudes-pass-culture/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-13T07:13:09.629Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/event/je-suis-un-event-de-lucas</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T14:06:15.334Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/event//think-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T15:55:29.171Z</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:3000/event/test</loc>
     <priority>0.3</priority>
     <lastmod>2024-04-25T11:53:58.678Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/event/festival-de-cannes</loc>
+    <loc>http://localhost:3000/event//festival-de-cannes</loc>
     <priority>0.3</priority>
-    <lastmod>2024-12-23T13:57:48.426Z</lastmod>
+    <lastmod>2024-06-21T13:51:01.948Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-fete-ses-deux-ans</loc>
+    <loc>http://localhost:3000/event/test-xavier</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:43:41.415Z</lastmod>
+    <lastmod>2025-01-23T10:08:45.250Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/fete-de-la-musique-les-jeunes-talents-sous-les-projecteurs-avec-le-tremplin-pass-culture</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:53.157Z</lastmod>
+    <loc>http://localhost:3000/footer/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-08-29T13:10:05.397Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/nuit-blanche-une-operation-speciale-organisee-par-la-ville-de-paris-et-le-pass-culture-pour-les-jeunes</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:44:31.018Z</lastmod>
+    <loc>http://localhost:3000/header/4</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-02T14:18:17.414Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-lance-son-cine-club</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:43:46.895Z</lastmod>
+    <loc>http://localhost:3000/help/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-08-26T13:15:47.754Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/top-depart-des-journees-europeennes-des-metiers-dart</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:44:50.822Z</lastmod>
+    <loc>http://localhost:3000/help-cultural-actors/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-02T13:40:08.328Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-lance-son-nouveau-temps-fort</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:43:52.701Z</lastmod>
+    <loc>http://localhost:3000/help-teachers/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-02T08:07:22.055Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-au-festival-de-cannes-seconde-edition</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:41:59.527Z</lastmod>
+    <loc>http://localhost:3000/home/3</loc>
+    <priority>1.0</priority>
+    <lastmod>2024-09-02T13:25:14.564Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/festival-nouvelles-vagues-une-experience-exceptionnelle-pour-les-jeunes-du-pass-culture</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:44.468Z</lastmod>
+    <loc>http://localhost:3000/liste-jeune/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-13T07:12:29.282Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/1-an-apres-lextension-du-pass-culture</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:11.228Z</lastmod>
+    <loc>http://localhost:3000/liste-offre/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-02T14:26:19.914Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news//le-pass-culture-signe-un-partenariat-avec-le-groupe-sos</loc>
+    <loc>http://localhost:3000/news/le-pass-culture-intervient-MJC</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-22T15:26:44.847Z</lastmod>
+    <lastmod>2024-08-30T14:56:00.315Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/victoires-de-la-musique-une-edition-exceptionnelle-pour-les-jeunes-du-pass-culture</loc>
+    <loc>http://localhost:3000/news/le-pass-Culture-en-Martinique-Guadeloupe-Saint-Martin</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:44:56.732Z</lastmod>
+    <lastmod>2024-08-30T14:54:49.185Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-etait-printemps-de-bourges-credit-mutuel-2023</loc>
+    <loc>http://localhost:3000/news/ambassadeurs-associés-dijon</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:43:21.885Z</lastmod>
+    <lastmod>2024-08-30T14:57:24.276Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/festival-international-de-la-bande-dessinee-dangouleme-une-edition-particuliere</loc>
+    <loc>http://localhost:3000/news/le-pass-culture-au-festival-de-cannes</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:42:36.089Z</lastmod>
+    <lastmod>2024-08-30T14:53:21.408Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/la-part-collective-du-pass-culture-setend-aux-eleves-de-6e-et-5e</loc>
+    <loc>http://localhost:3000/news/le-pass-culture-au-congres-des-bibliothecaires-de-france</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:41:02.355Z</lastmod>
+    <lastmod>2024-08-30T14:52:09.900Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/8000-jeunes-du-pass-culture-aux-francofolies-de-la-rochelle</loc>
+    <loc>http://localhost:3000/news/pass-culture-x-biarritz-film-festival</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:19.378Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/news/rencontre-des-acteurs-ruralité</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:26.118Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/news/les-coulisses-des-métiers-de-la-culture.fr</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:40:35.788Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/news/rencontre-des-collectivites</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-04-23T15:41:50.949Z</lastmod>
+    <lastmod>2024-08-30T14:49:16.376Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/news/festival-ecrans-mixtes-lyon</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:42:29.001Z</lastmod>
+    <lastmod>2024-08-30T15:03:56.605Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-met-le-livre-a-portee-de-main-des-jeunes</loc>
+    <loc>http://localhost:3000/news/festival-international-bande-dessinee-d-angouleme-2024</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:43:58.418Z</lastmod>
+    <lastmod>2024-08-30T15:06:25.103Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/le-pass-culture-et-la-ville-de-lille-sengagent-pour-favoriser-lacces-des-jeunes-a-la-culture</loc>
+    <loc>http://localhost:3000/news/les-coulisses-des-métiers-de-la-culture.fr</loc>
     <priority>0.3</priority>
-    <lastmod>2024-06-28T14:50:14.590Z</lastmod>
+    <lastmod>2024-08-30T15:07:00.076Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/les-coulisses-du-pass-culture-avec-sebastien-cavalier</loc>
+    <loc>http://localhost:3000/news/ambassadrices-associees-theatre-paris-villette</loc>
     <priority>0.3</priority>
-    <lastmod>2024-07-17T15:24:10.863Z</lastmod>
+    <lastmod>2024-09-11T15:01:54.052Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/news/séminaire-juin-2024</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:51:33.162Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/news/on-a-rencontré-jude-law</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:57:07.997Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/news/pass-culture-boutographies</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:53:00.892Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/news/dessous-de-linfo</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:44:16.805Z</lastmod>
+    <lastmod>2024-08-30T15:01:59.717Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/pass-culture-union-nationale-missions-locales</loc>
+    <loc>http://localhost:3000/news/rencontre-des-acteurs-ruralité</loc>
     <priority>0.3</priority>
-    <lastmod>2024-04-23T15:44:38.898Z</lastmod>
+    <lastmod>2024-08-30T15:02:22.900Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/azerty</loc>
+    <loc>http://localhost:3000/news/pass-culture-programme-ensemble-egalite</loc>
     <priority>0.3</priority>
-    <lastmod>2024-07-04T09:56:52.271Z</lastmod>
+    <lastmod>2024-08-30T14:38:15.302Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/festival</loc>
+    <loc>http://localhost:3000/news/pass-culture-rencontres-d'arles</loc>
     <priority>0.3</priority>
-    <lastmod>2024-07-03T10:20:59.745Z</lastmod>
+    <lastmod>2024-08-30T14:40:30.785Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/news/coucou</loc>
+    <loc>http://localhost:3000/news/jeunes-au-festival-d'avignon-2024</loc>
     <priority>0.3</priority>
-    <lastmod>2024-07-03T11:33:21.085Z</lastmod>
+    <lastmod>2024-08-30T14:48:45.346Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/comment-ca-marche-enseignants</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-05-17T13:44:15.006Z</lastmod>
+    <loc>http://localhost:3000/news/olympiades-culturelles-x-le-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:54:08.295Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/mentions-legales-et-cgu-site</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-24T09:13:56.779Z</lastmod>
+    <loc>http://localhost:3000/news/le-pass-culture-gaite-lyrique</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:55:37.095Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/faq-jeunes-parents</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-04T12:50:16.184Z</lastmod>
+    <loc>http://localhost:3000/news/rencontre-des-collectivites</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T15:02:59.340Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/politique-de-cookies</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-24T09:18:16.220Z</lastmod>
+    <loc>http://localhost:3000/news/pass-culture-concours-d-ecriture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:38:57.501Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/organisations-professionnelles</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-05-17T14:09:51.305Z</lastmod>
+    <loc>http://localhost:3000/news/le-pass-culture-the-product-crew</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:40:01.583Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/notre-gouvernance</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-26T13:33:53.423Z</lastmod>
+    <loc>http://localhost:3000/news/pass-culture-aux-francos</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:48:17.875Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/charte-des-donnees-personnelles</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-05-02T13:41:57.049Z</lastmod>
+    <loc>http://localhost:3000/news/lucas-nouvelle-actu</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T13:42:01.225Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/les-offres-et-experiences</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-07-26T08:41:24.986Z</lastmod>
+    <loc>http://localhost:3000/news/synchronisation-des-billets</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:51:06.821Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/notre-equipe</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-26T13:36:25.889Z</lastmod>
+    <loc>http://localhost:3000/news/pass-culture-quatre-millions</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:53:39.243Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/nous-rejoindre</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-26T13:37:30.002Z</lastmod>
+    <loc>http://localhost:3000/news/les-équipes-du-pass-en-formation</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:55:16.564Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/le-pass-culture-cest-quoi</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-07-26T13:49:32.514Z</lastmod>
+    <loc>http://localhost:3000/news/le-pass-culture-au-sitem</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:56:32.438Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/lessentiel-du-pass-enseignants</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-05-17T13:28:40.380Z</lastmod>
+    <loc>http://localhost:3000/news/metiers-de-la-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:58:01.215Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/marches-publics</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-04-17T14:29:09.872Z</lastmod>
+    <loc>http://localhost:3000/news/promouvoir-le-pass-abu-dhabi</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:59:09.890Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/plan-du-site</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-12-20T13:26:38.503Z</lastmod>
+    <loc>http://localhost:3000/news/equipe-du-pass-au-Mans</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T14:59:49.078Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/cgu-professionnels</loc>
+    <loc>http://localhost:3000/news/le-pass-culture-union-nationale-missions-locales</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T15:00:48.782Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/news/autre-regard-handicap</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-30T15:01:34.740Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/not-found/3</loc>
     <priority>0.5</priority>
-    <lastmod>2024-12-23T13:56:47.645Z</lastmod>
+    <lastmod>2024-08-28T15:21:40.574Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/cgu-utilisateurs</loc>
-    <priority>0.5</priority>
-    <lastmod>2024-12-23T13:56:54.560Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/chercheurs</loc>
+    <loc>http://localhost:3000/declaration-accessibilite</loc>
     <priority>0.6</priority>
-    <lastmod>2024-06-17T12:38:37.395Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/comment-proposer-des-offres</loc>
-    <priority>0.5</priority>
-    <lastmod>2024-12-23T13:57:01.881Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/accessibilite</loc>
-    <priority>1.0</priority>
-    <lastmod>2024-12-23T14:41:20.915Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/notre-mission</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-06-17T13:52:56.313Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/relais-sociaux-educatifs</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-06-18T07:15:11.919Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/collectivites</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-07-01T06:24:22.900Z</lastmod>
-  </url>
-  <url>
-    <loc>http://localhost:3000/le-programme-ambassadeurs-acteurs-culturels</loc>
-    <priority>0.6</priority>
-    <lastmod>2024-06-26T14:57:58.167Z</lastmod>
+    <lastmod>2025-01-07T09:20:13.137Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/le-programme-ambassadeurs</loc>
     <priority>0.6</priority>
-    <lastmod>2024-07-01T14:51:58.822Z</lastmod>
+    <lastmod>2024-09-02T14:46:34.499Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/accessibilite</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-30T09:01:08.861Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/partenaires-culturels</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-29T13:24:05.751Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/nous-contacter</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T09:37:16.460Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/nos-rapports-d'activite</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-28T11:47:14.995Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notre-mission</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T12:27:42.277Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notre-gouvernance</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-01T14:57:40.278Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/les-offres-et-experiences</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T07:07:36.702Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/un-observatoire-des-pratiques-culturelles-des-jeunes</loc>
     <priority>0.6</priority>
-    <lastmod>2024-06-27T12:09:28.246Z</lastmod>
+    <lastmod>2024-08-28T14:46:12.851Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/telecharge-app</loc>
+    <loc>http://localhost:3000/cgu-professionnels</loc>
     <priority>0.6</priority>
-    <lastmod>2024-06-27T14:17:22.716Z</lastmod>
+    <lastmod>2024-09-02T09:39:16.728Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/cgu-utilisateurs</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T09:40:34.162Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/faq-jeunes-parents</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-14T13:27:28.187Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/mentions-legales-et-cgu-site</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T10:07:23.126Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/politique-de-cookies</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-01T14:10:46.245Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/services-publics</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T12:56:38.892Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/lessentiel-du-pass-culture-acteurs-culturels</loc>
     <priority>0.6</priority>
-    <lastmod>2024-07-11T13:07:21.893Z</lastmod>
+    <lastmod>2024-08-28T15:22:02.475Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/vous-etes-parents</loc>
+    <loc>http://localhost:3000/lessentiel-du-pass-enseignants</loc>
     <priority>0.6</priority>
-    <lastmod>2024-07-16T08:14:55.384Z</lastmod>
+    <lastmod>2024-08-28T15:25:31.354Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/marches-publics</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-14T12:39:49.966Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/charte-des-donnees-personnelles</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-14T11:47:53.077Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/comment-debloquer-ton-credit</loc>
     <priority>0.6</priority>
-    <lastmod>2024-07-23T15:55:52.951Z</lastmod>
+    <lastmod>2024-08-30T14:50:21.311Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/mesurer-et-definir-la-diversification-des-pratiques-culturelles</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-05-15T15:11:25.161Z</lastmod>
+    <loc>http://localhost:3000/le-programme-ambassadeurs-acteurs-culturels</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T10:01:39.373Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/les-jeunes-et-le-livre-une-histoire-damour-qui-dure</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-06-26T13:16:08.688Z</lastmod>
+    <loc>http://localhost:3000/vous-etes-parent</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T15:04:52.133Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/les-references-culturelles-des-utilisateurs-du-pass-culture-juin-2023</loc>
-    <priority>0.3</priority>
-    <lastmod>2024-06-28T07:14:59.797Z</lastmod>
+    <loc>http://localhost:3000/comment-proposer-des-offres</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T15:16:13.376Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/les-references-culturelles-des-utilisateurs-du-pass-culture-septembre-2023</loc>
+    <loc>http://localhost:3000/nous-rejoindre</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-29T11:58:35.733Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/comment-ca-marche-enseignants</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T15:22:54.923Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/collectivites</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T15:32:54.745Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/chercheurs</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-08-30T15:39:20.943Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/relais-socio-educatifs</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T12:32:55.869Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/notre-equipe</loc>
+    <priority>0.6</priority>
+    <lastmod>2024-09-02T13:38:55.256Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/le-pass-culture-cest-quoi</loc>
+    <priority>0.6</priority>
+    <lastmod>2025-01-23T18:21:33.132Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/presse/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-13T07:13:02.365Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/nuit-europeenne-des-musees-2023-pass-culture</loc>
     <priority>0.3</priority>
-    <lastmod>2024-06-28T07:16:03.390Z</lastmod>
+    <lastmod>2024-09-02T13:06:16.917Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Festival-Nouvelles-Vagues-Biarritz-x-pass-Culture-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T13:37:12.887Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Pass-culture-x-ville-de-lille</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T13:40:47.964Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/festival-d-avignon-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T13:32:52.400Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/pass-culture-prix-joséphine</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:25:44.275Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/pass-culture-ville-de-rennes</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T13:53:36.235Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/pass-culture-groupe-SOS-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:08:42.127Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Journées-européennes-du-patrimoine-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:19:50.010Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/fete-de-la-musique-pass-cultur-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:21:27.078Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Ambassadeurs-pass-culture-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:34:49.527Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Prix-vendredi-pass-culture-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:38:30.779Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Festival-d-Angoulême-pass-culture-2024</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:42:28.834Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/JEP-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T12:38:36.956Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Festival-de-cannes-pass-culture-AFCAE</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T13:15:27.715Z</lastmod>
   </url>
   <url>
     <loc>http://localhost:3000/resource/les-references-culturelles-des-utilisateurs-du-pass-culture-mars-2023</loc>
     <priority>0.3</priority>
-    <lastmod>2024-06-28T07:16:29.443Z</lastmod>
+    <lastmod>2024-09-11T12:19:40.899Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/la-recherche-utilisateurs-au-coeur-de-la-reflexion-de-loffre-collective</loc>
+    <loc>http://localhost:3000/resource/festivals-quel-regard-les-jeunes-posent-sur-la-musique-live</loc>
     <priority>0.3</priority>
-    <lastmod>2024-06-28T07:16:58.043Z</lastmod>
+    <lastmod>2024-09-11T18:01:05.513Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/resource/concert-et-festivals-quel-regard-les-jeunes-posent-sur-la-musique-live</loc>
+    <loc>http://localhost:3000/resource/Festival-d-angouleme-pass-culture</loc>
     <priority>0.3</priority>
-    <lastmod>2024-12-23T13:57:55.330Z</lastmod>
+    <lastmod>2024-09-02T12:37:45.473Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/ressourcepass/2</loc>
+    <loc>http://localhost:3000/resource/mesurer-et-definir-la-diversification-des-pratiques-culturelles</loc>
     <priority>0.3</priority>
-    <lastmod>2024-12-23T13:57:11.694Z</lastmod>
+    <lastmod>2024-07-17T15:18:54.183Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/ressourcepass/1</loc>
+    <loc>http://localhost:3000/resource/pass-culture-livres</loc>
     <priority>0.3</priority>
-    <lastmod>2024-12-23T13:57:19.945Z</lastmod>
+    <lastmod>2024-09-02T13:49:45.622Z</lastmod>
   </url>
   <url>
-    <loc>http://localhost:3000/ressourcepass/3</loc>
+    <loc>http://localhost:3000/resource/temps-fort-métiers-de-la-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T12:57:56.773Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Temps-fort-metiers-de-la-culture-2024</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:48:01.004Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/temps-fort-les-dessous-de-l-info</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:53:05.108Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/festival-de-cannes-2024-x-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:55:39.590Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Olympiade-culturelle-pass-culture-2024</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T14:58:16.522Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Etude-habitude-lecture-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-02T15:01:27.387Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/Biarritz-Film-Festival-NOUVELLES-VAGUES</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-03T07:54:37.697Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/spectacle-vivant-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-03T08:22:19.423Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/les-references-culturelles-des-utilisateurs-du-pass-culture-septembre-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-17T15:26:10.730Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/top-3-les-references-culturelles-des-utilisateurs-du-pass-culture-juin-2023</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T16:50:23.844Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/lucas-test-premiere-fois-avignon-pass-culture</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T12:41:00.195Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/les-jeunes-et-le-livre-une-histoire-damour-qui-dure</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T17:41:40.750Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/resource/custom-slug</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-09-11T18:16:21.338Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/49</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:14:13.770Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/50</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:14:39.977Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/51</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:00:10.439Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/52</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:00:19.478Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/53</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:01:27.330Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/54</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:01:56.022Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/55</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:02:23.347Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/56</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:02:51.664Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/57</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:03:47.612Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/58</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:05:04.258Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/59</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:05:40.885Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/60</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:06:38.752Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/61</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:07:15.363Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/62</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:07:46.691Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/63</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:08:21.701Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/64</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:13:10.400Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/65</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-07-30T14:13:45.444Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/66</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-27T15:11:01.250Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/67</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:20:06.068Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/68</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:20:30.566Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/69</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:20:40.031Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/70</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:20:51.439Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/71</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:21:00.481Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressourcepass/72</loc>
+    <priority>0.3</priority>
+    <lastmod>2024-08-14T13:19:14.567Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/ressources-pass-culture/6</loc>
     <priority>0.5</priority>
-    <lastmod>2024-12-23T13:57:31.281Z</lastmod>
+    <lastmod>2025-01-17T17:55:43.055Z</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:3000/simulator/3</loc>
+    <priority>0.5</priority>
+    <lastmod>2024-09-02T14:57:21.039Z</lastmod>
   </url>
 </urlset>

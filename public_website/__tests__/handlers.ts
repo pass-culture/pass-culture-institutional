@@ -8,18 +8,15 @@ import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
 import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
 import { HomePageFixtures } from './fixtures/home'
-import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { ListeOffrePageFixtures } from './fixtures/listeOffre'
 import { NotFoundDataFixtures } from './fixtures/notFound'
 import { PressePageFixtures } from './fixtures/presse'
-import { RessourcesPassFixtures } from './fixtures/ressourcespass'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { SimulatorPageFixtures } from './fixtures/simulator'
 import { AideActeursCulturelsPageFixtures } from './fixtures/aide-acteurs-culturels'
 import { ActusPassCultureJeunePageFixtures } from './fixtures/actualitesPassCultureJeune'
 
 const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
-export const jsonResponseOf = <T>(data: T) => HttpResponse.json({ data })
 
 export const handlers = [
   graphql.query('Presse', () => {

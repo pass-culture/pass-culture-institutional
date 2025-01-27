@@ -38,9 +38,6 @@ import { WhiteSpace } from './blocks/WhiteSpace'
 import { UnkwnownBlock } from './UnknownBlock'
 import { PageQuery } from '@/generated/graphql'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
-export interface Block {
-  __component: string
-}
 
 const COMPONENTS: Record<
   string,

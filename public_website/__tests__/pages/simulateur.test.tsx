@@ -13,20 +13,16 @@ describe('Simulator page', () => {
     }
   })
 
-  it(
-    'should pass accessibility tests',
-    async () => {
-      const { props } = await getStaticProps()
-      const { container } = render(<SimulatorPage {...props!} />)
+  it('should pass accessibility tests', { timeout: 10000 }, async () => {
+    const { props } = await getStaticProps()
+    const { container } = render(<SimulatorPage {...props!} />)
 
-      let a11yResult
-      await act(async () => {
-        a11yResult = await axe(container)
-      })
-      expect(a11yResult).toHaveNoViolations()
-    },
-    { timeout: 10000 }
-  )
+    let a11yResult
+    await act(async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
+  })
 
   it('should show the success screen if user is 16, not french, in france for more than a year', async () => {
     const { props } = await getStaticProps()

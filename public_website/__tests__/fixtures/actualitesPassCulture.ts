@@ -1,5 +1,4 @@
 import {
-  ActualitesJeunesParentsQuery,
   ActualitesPassCultureQuery,
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,

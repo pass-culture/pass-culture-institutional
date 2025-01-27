@@ -72,12 +72,12 @@ export function DoublePushCTA(
                 <CtaLink
                   href={firstCta.URL}
                   onClick={(): void => {
-                    !!firstCta.eventName && !!firstCta.eventOrigin
-                      ? onClickAnalytics({
-                          eventName: firstCta?.eventName,
-                          eventOrigin: firstCta?.eventOrigin,
-                        })
-                      : void 0
+                    if (!!firstCta.eventName && !!firstCta.eventOrigin) {
+                      onClickAnalytics({
+                        eventName: firstCta?.eventName,
+                        eventOrigin: firstCta?.eventOrigin,
+                      })
+                    }
                   }}>
                   <span>{firstCta.Label}</span>
                 </CtaLink>

@@ -13,7 +13,7 @@ const nextConfig = {
 
 module.exports = nextConfig
 
-/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const { withSentryConfig } = require('@sentry/nextjs')
 
 module.exports = withSentryConfig(

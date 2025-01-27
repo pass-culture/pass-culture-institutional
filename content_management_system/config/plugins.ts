@@ -12,7 +12,6 @@ export default ({ env }) => ({
   seo: {
     enabled: true,
   },
-  // "users-permissions": false,
   upload: {
     config: {
       provider: "@strapi-community/strapi-provider-upload-google-cloud-storage",
@@ -37,11 +36,11 @@ export default ({ env }) => ({
       },
     },
   },
-  // "sitemap-pass": {
-  //   enabled: true,
-  //   resolve: "./src/plugins/sitemap-pass",
-  //   config: {
-  //     build: true,
-  //   },
-  // },
+  sitemap: {
+    enabled: true,
+    resolve: "./src/plugins/sitemap",
+    config: {
+      build: true,
+    },
+  },
 });

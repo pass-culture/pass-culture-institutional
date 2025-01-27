@@ -176,9 +176,11 @@ export function Header(props: HeaderFragment) {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
   function toggleMobileMenu(): void {
     setShowMobileMenu((showMobileMenu): boolean => !showMobileMenu)
-    showMobileMenu
-      ? document.body.removeAttribute('style')
-      : document.body.setAttribute('style', 'overflow: hidden')
+    if (showMobileMenu) {
+      document.body.removeAttribute('style')
+    } else {
+      document.body.setAttribute('style', 'overflow: hidden')
+    }
 
     setTimeout(() => {
       mobileMenuButtonRef.current?.focus()

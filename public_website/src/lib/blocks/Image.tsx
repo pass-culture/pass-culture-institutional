@@ -14,7 +14,6 @@ export function Imageblock(props: ComponentBlockImageFragment) {
     <ContentWrapper>
       <Root>
         <figure>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={getStrapiURL(requiredImage.url)}
             alt={requiredAlt}
