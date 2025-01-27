@@ -13,7 +13,7 @@ jobs:
     with:
       environment: production
       cluster_scope: cls-metier
-      cluster-environment: prod
+      cluster_environment: prod
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
       cms_url: https://siteinstit-cms.passculture.team
       backend_url: https://backend.passculture.app
