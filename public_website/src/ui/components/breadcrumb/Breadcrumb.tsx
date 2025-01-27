@@ -10,9 +10,13 @@ import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { Separator } from '@/lib/blocks/Separator'
 import { CustomSelect, CustomSelectButton, WrapperChevron } from '@/theme/style'
-import { BreadcrumbProps } from '@/types/props'
 import { isRenderable } from '@/utils/isRenderable'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
+
+type BreadcrumbProps = {
+  isUnderHeader?: boolean
+  className?: string
+}
 
 export function Breadcrumb(props: BreadcrumbProps) {
   const { isUnderHeader, className } = props
@@ -29,26 +33,34 @@ export function Breadcrumb(props: BreadcrumbProps) {
     ? [...breadcrumbData.targetItems, ...breadcrumbData.aboutItems]
     : []
   const footerItems = breadcrumbData ? [...breadcrumbData.footerItems] : []
-  const currentNavigationGroup = allItems.find(
-    (x) =>
-      x.megaMenu.primaryListItems.some((y: { URL: string }) =>
+
+  const currentNavigationGroup = allItems.find((x) => {
+    const primaryListItems =
+      x.megaMenu?.primaryListItems?.filter((y) => y !== null) ?? []
+    const secondaryListItems =
+      x.megaMenu?.secondaryListItems?.filter((y) => y !== null) ?? []
+    return (
+      primaryListItems.some((y: { URL: string }) =>
         isStringAreEquals(y.URL, pathname)
       ) ||
-      x.megaMenu.secondaryListItems.some((y: { URL: string }) =>
+      secondaryListItems.some((y: { URL: string }) =>
         isStringAreEquals(y.URL, pathname)
       )
-  )
+    )
+  })
 
   const groupLinks = useMemo(() => {
     return currentNavigationGroup
       ? [
-          ...currentNavigationGroup.megaMenu.primaryListItems,
-          ...currentNavigationGroup.megaMenu.secondaryListItems,
+          ...(currentNavigationGroup.megaMenu?.primaryListItems ?? []),
+          ...(currentNavigationGroup.megaMenu?.secondaryListItems ?? []),
         ]
       : []
   }, [currentNavigationGroup])
 
-  const currentLink = groupLinks.find((l) => isStringAreEquals(l.URL, pathname))
+  const currentLink = groupLinks.find((l) =>
+    isStringAreEquals(l?.URL ?? '', pathname)
+  )
 
   const checkIfOpen = (index: number): boolean => {
     return isOpen === index
@@ -70,11 +82,7 @@ export function Breadcrumb(props: BreadcrumbProps) {
     )
   }
 
-  const getFooterItem = (): {
-    Label: string
-    URL: string
-    id: number
-  } | null => {
+  const getFooterItem = () => {
     const item = footerItems.find((obj) => isStringAreEquals(obj.URL, pathname))
 
     if (item) return item

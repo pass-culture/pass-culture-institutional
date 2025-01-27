@@ -1,0 +1,12 @@
+fragment ComponentBlockPushCta on ComponentBlockPushCta {
+  title
+  description
+  image {
+    ...UploadFile
+  }
+  ctaLink {
+    ...ComponentCommonLink
+  }
+  qrCodeDescription
+  qrCodeUrl
+}

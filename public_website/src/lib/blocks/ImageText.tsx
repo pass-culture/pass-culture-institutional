@@ -3,17 +3,19 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { ImageTextProps } from '@/types/props'
+import { ComponentBlockImageTextFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function ImageText(props: ImageTextProps) {
-  const { title, text, image, icon, isImageRight = false } = props
-
-  const image_props = image?.data?.attributes?.url
+export function ImageText(
+  props: Omit<ComponentBlockImageTextFragment, 'requiredImage'> & {
+    requiredImage?: ComponentBlockImageTextFragment['requiredImage']
+  }
+) {
+  const { title, jsonText, requiredImage, icon, isImageRight = false } = props
 
   return (
     <Root>
@@ -23,16 +25,17 @@ export function ImageText(props: ImageTextProps) {
             <StyledHeading>{title as string}</StyledHeading>
           </BlockRendererWithCondition>
 
-          <BlocksRenderer content={text} />
+          <BlocksRenderer content={jsonText} />
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"
-          $imageOnRight={isImageRight}>
-          <BlockRendererWithCondition condition={isRenderable(image_props)}>
-            <ImageContainer $imageOnRight={isImageRight}>
+          $imageOnRight={isImageRight ?? false}>
+          <BlockRendererWithCondition
+            condition={isRenderable(requiredImage?.url)}>
+            <ImageContainer $imageOnRight={isImageRight ?? false}>
               <StyledImage
-                src={getStrapiURL(image_props)}
-                alt={image?.data?.attributes?.alternativeText ?? ''}
+                src={getStrapiURL(requiredImage?.url)}
+                alt={requiredImage?.alternativeText ?? ''}
               />
               <BlockRendererWithCondition condition={isRenderable(icon)}>
                 <StyledIcon className={isImageRight ? 'IconRight' : 'IconLeft'}>

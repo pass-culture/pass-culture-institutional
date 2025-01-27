@@ -1,0 +1,12 @@
+fragment ComponentBlockSimplePushCta on ComponentBlockSimplePushCta {
+  id
+  requiredTitle: title
+  surtitle
+  icon
+  requiredImage: image {
+    ...UploadFile
+  }
+  requiredCta: cta {
+    ...ComponentCommonLink
+  }
+}

@@ -1,22 +1,25 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
+import { HomeDocument, HomeQuery } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { CenteredText as AboutSection } from '@/lib/blocks/CenteredText'
 import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { Separator } from '@/lib/blocks/Separator'
 import PageLayout from '@/lib/PageLayout'
+import urqlClient from '@/lib/urqlClient'
 import { Offer } from '@/types/playlist'
-import { HomeProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
-import { Eligibility as EligibilitySection } from '@/ui/components/home/Eligibility'
+import { Eligibility } from '@/ui/components/home/Eligibility'
 import { Hero as HeroSection } from '@/ui/components/home/Hero'
 import { Recommendations as RecommendationsSection } from '@/ui/components/home/Recommendations'
 import { fetchBackend } from '@/utils/fetchBackend'
-import { fetchCMS } from '@/utils/fetchCMS'
+
+type HomeProps = {
+  homeData: NonNullable<HomeQuery['home']>
+  recommendationItems: Offer[]
+  latestStudies: NonNullable<HomeQuery['resources']>
+}
 
 export default function Home({
   homeData,
@@ -31,7 +34,7 @@ export default function Home({
     CTASection,
     recommendationsSection,
     socialMediaSection,
-  } = homeData.attributes
+  } = homeData
 
   return (
     <PageLayout
@@ -39,40 +42,19 @@ export default function Home({
       title={undefined}
       socialMediaSection={socialMediaSection}>
       <StyledHomeGradient>
-        <HeroSection
-          title={heroSection.title}
-          subTitle={heroSection.subTitle}
-          cta={heroSection.cta}
-          firstEmoji={heroSection.firstEmoji}
-          secondEmoji={heroSection.secondEmoji}
-          thirdEmoji={heroSection.thirdEmoji}
-          fourthEmoji={heroSection.fourthEmoji}
-          fifthEmoji={heroSection.fifthEmoji}
-          sixthEmoji={heroSection.sixthEmoji}
-          images={
-            heroSection.images
-              ?.data as unknown as APIResponseData<'plugin::upload.file'>[]
-          }
-        />
+        <HeroSection {...heroSection} />
       </StyledHomeGradient>
 
       <span id="target-anchor-scroll">
         <AboutSection
-          title={aboutSection.title}
-          description={aboutSection.description}
+          title={aboutSection.title ?? ''}
+          description={aboutSection.requiredDescription}
         />
       </span>
 
       <Separator isActive={false} />
-      <EligibilitySection
-        title={eligibilitySection.title}
-        items={eligibilitySection.items}
-        cardTitle={eligibilitySection.cardTitle}
-        cardDescription={eligibilitySection.cardDescription}
-        cardCta={eligibilitySection.cardCta}
-        cardFirstEmoji={eligibilitySection.firstEmoji}
-        cardSecondEmoji={eligibilitySection.secondEmoji}
-      />
+      <Eligibility {...eligibilitySection} />
+
       <Separator isActive={false} />
       <PushCTA
         title={CTASection.title}
@@ -85,82 +67,58 @@ export default function Home({
       <Separator isActive={false} />
       <BlockRendererWithCondition condition={recommendationItems.length > 0}>
         <RecommendationsSection
-          title={recommendationsSection.recommendations.title}
+          requiredTitle={recommendationsSection.recommendations.requiredTitle}
           recommendations={recommendationItems}
           cta={recommendationsSection.cta}
         />
       </BlockRendererWithCondition>
       <Separator isActive={false} />
       <LatestStudiesSection
-        newsOrStudies={latestStudies}
+        newsOrStudies={latestStudies.filter((item) => item !== null)}
         isNews={false}
-        title={homeData.attributes.latestStudies.title}
-        cta={homeData.attributes.latestStudies.cta}
+        title={homeData.latestStudies.requiredTitle}
+        cta={homeData.latestStudies.requiredCta}
       />
       <Separator isActive={false} />
     </PageLayout>
   )
 }
 
-export const getStaticProps = (async () => {
-  const query = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.cta',
-      'heroSection.images',
-      'aboutSection',
-      'eligibilitySection',
-      'eligibilitySection.items',
-      'eligibilitySection.cardCta',
-      'CTASection',
-      'CTASection.image',
-      'CTASection.ctaLink',
-      'recommendationsSection.cta',
-      'recommendationsSection.recommendations.items',
-      'recommendationsSection.recommendations.items.image',
-      'latestStudies',
-      'latestStudies.cta',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-  const { data } = await fetchCMS<APIResponseData<'api::home.home'>>(
-    `/home?${query}`
-  )
-
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eqi: ['Étude ponctuelle', 'Étude ritualisée'],
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<HomeQuery>(HomeDocument, {
+      pagination: {
+        limit: 3,
       },
-    },
-  })
-  const latestStudies = await fetchCMS<
-    APIResponseData<'api::resource.resource'>[]
-  >(`/resources?${latestStudiesQuery}`)
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          in: ['Étude ponctuelle', 'Étude ritualisée'],
+        },
+      },
+    })
+    .toPromise()
+
+  if (result.error || !result.data || !result.data.home) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   const recommendationTag =
-    data.attributes.recommendationsSection.recommendationsBackendTag
+    result.data.home.recommendationsSection.recommendationsBackendTag
   const recommendationItems = (await fetchBackend(
     `institutional/playlist/${recommendationTag}`
   )) as Offer[]
 
   return {
     props: {
-      homeData: data,
+      homeData: result.data.home,
       recommendationItems,
-      latestStudies: latestStudies.data,
+      latestStudies: result.data.resources,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<HomeProps>
+}
 
 const StyledHomeGradient = styled.section`
   ${({ theme }) => css`

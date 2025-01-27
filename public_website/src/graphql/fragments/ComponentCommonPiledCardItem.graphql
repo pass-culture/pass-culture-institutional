@@ -1,0 +1,11 @@
+fragment ComponentCommonPiledCardItem on ComponentCommonPiledCardItem {
+  id
+  title
+  description
+  image {
+    ...UploadFile
+  }
+  firstIcon
+  secondIcon
+  theme
+}

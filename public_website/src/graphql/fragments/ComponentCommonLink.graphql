@@ -1,0 +1,7 @@
+fragment ComponentCommonLink on ComponentCommonLink {
+  id
+  Label
+  URL
+  eventName
+  eventOrigin
+}

@@ -2,13 +2,13 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { Link } from '../Link'
-import { CTA } from '@/types/CTA'
+import { ComponentCommonLinkFragment } from '@/generated/graphql'
 
 const SitemapLinkItem = ({
   link,
   sectionLabel = '',
 }: {
-  link: CTA
+  link: ComponentCommonLinkFragment
   sectionLabel: string
 }) => (
   <li key={link.Label}>

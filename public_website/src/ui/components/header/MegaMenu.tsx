@@ -6,11 +6,24 @@ import { Close } from '../icons/Close'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
 import HeaderBanner from './HeaderBanner'
-import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
-import { MegaMenuProps } from '@/types/props'
+import {
+  ComponentHeaderMegaMenuFragment,
+  Enum_Componentheadermegamenu_Theme,
+} from '@/generated/graphql'
+import { CARD_BACKGROUNDS } from '@/theme/style'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
+
+type MegaMenuProps = {
+  onBlur: () => void
+  onKeyDown: (e: KeyboardEvent) => void
+  onMouseLeave: () => void
+  getOpenButtonEl: () => HTMLElement | null
+  id: string
+  labelId: string
+  data: ComponentHeaderMegaMenuFragment
+}
 
 export function MegaMenu({
   onBlur,
@@ -40,7 +53,7 @@ export function MegaMenu({
 
   const megaMenuRef = useRef<HTMLDivElement | null>(null)
   const closeMenuRef = useRef<HTMLButtonElement | null>(null)
-  const backgroundCard = theme ?? 'gold'
+  const backgroundCard = theme ?? Enum_Componentheadermegamenu_Theme.Gold
 
   const onClickOutside = useCallback(
     (e: MouseEvent) => {
@@ -96,7 +109,7 @@ export function MegaMenu({
   const primaryListItemsWithoutSimulator = React.useMemo(
     () =>
       primaryListItems.filter(
-        (item) => !isStringAreEquals(item.Label, 'simulateur')
+        (item) => !isStringAreEquals(item?.Label ?? '', 'simulateur')
       ),
     [primaryListItems]
   )
@@ -130,11 +143,13 @@ export function MegaMenu({
             <ul>
               {primaryListItemsWithoutSimulator?.map((item) => {
                 return (
-                  <li key={item.Label}>
+                  <li key={item?.Label}>
                     <Link
-                      href={item.URL}
-                      aria-label={parseText(item.Label).accessibilityLabel}>
-                      {parseText(item.Label).processedText}
+                      href={item?.URL ?? ''}
+                      aria-label={
+                        parseText(item?.Label ?? '').accessibilityLabel
+                      }>
+                      {parseText(item?.Label ?? '').processedText}
                     </Link>
                   </li>
                 )
@@ -143,11 +158,13 @@ export function MegaMenu({
             <ul>
               {secondaryListItems?.map((item) => {
                 return (
-                  <li key={item.Label}>
+                  <li key={item?.Label}>
                     <Link
-                      href={item.URL}
-                      aria-label={parseText(item.Label).accessibilityLabel}>
-                      {parseText(item.Label).processedText}
+                      href={item?.URL ?? ''}
+                      aria-label={
+                        parseText(item?.Label ?? '').accessibilityLabel
+                      }>
+                      {parseText(item?.Label ?? '').processedText}
                     </Link>
                   </li>
                 )
@@ -266,7 +283,9 @@ const StyledMegaMenuLists = styled.div`
   `}
 `
 
-const StyledMegaMenuCard = styled.div<{ $backgroundColor: ItemsTheme }>`
+const StyledMegaMenuCard = styled.div<{
+  $backgroundColor: Enum_Componentheadermegamenu_Theme
+}>`
   ${({ theme, $backgroundColor }) => css`
     background-color: ${CARD_BACKGROUNDS[$backgroundColor]};
     border-radius: ${theme.radius.sm};

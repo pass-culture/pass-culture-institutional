@@ -1,0 +1,7 @@
+fragment ComponentBlockVerticalCarousel on ComponentBlockVerticalCarousel {
+  id
+  requiredTitle: title
+  verticalCarouselItems: items {
+    ...ComponentCommonVerticalCarouselItem
+  }
+}

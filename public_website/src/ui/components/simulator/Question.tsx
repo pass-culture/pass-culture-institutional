@@ -8,7 +8,7 @@ import { SliderField } from './SliderField'
 interface QuestionProps {
   title: string
   type: 'slider' | 'radio'
-  answers: { answer: string; emoji?: string }[]
+  answers: { answer: string; emoji?: string | null }[]
 
   onSubmit: (response: number) => void
 }

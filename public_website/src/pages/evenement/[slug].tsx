@@ -1,33 +1,40 @@
 import React, { useMemo } from 'react'
-import type { GetStaticPaths, GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import type { GetStaticProps } from 'next'
 import styled, { css } from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  EvenementsDocument,
+  EvenementsQuery,
+  EventFragment,
+} from '@/generated/graphql'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import NoResult from '@/lib/blocks/NoResult'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
 interface CustomPageProps {
-  data: APIResponseData<'api::event.event'>
-  related: APIResponseData<'api::event.event'>[]
+  data: EventFragment
+  related: EventFragment[]
 }
 
 export default function CustomPage(props: CustomPageProps) {
-  const { seo, blocks } = props.data.attributes
+  const { seo, blocks } = props.data
   const { related } = props
 
   const memoBlocks = useMemo(
     () =>
-      blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      )),
+      blocks
+        ?.filter((block) => block !== null)
+        .map((block) => (
+          <BlockRenderer
+            key={`${block.__typename}_${(block as { id: string }).id}`}
+            block={block}
+          />
+        )),
     [blocks]
   )
 
@@ -35,19 +42,16 @@ export default function CustomPage(props: CustomPageProps) {
     () =>
       related?.map((eventItem) => (
         <EventCard
-          key={eventItem.attributes.slug}
-          title={eventItem.attributes.title}
-          category={eventItem.attributes.category}
-          date={eventItem.attributes.date}
-          endDate={eventItem.attributes.endDate}
-          imageUrl={
-            eventItem.attributes.image &&
-            getStrapiURL(eventItem.attributes.image?.data.attributes.url)
-          }
-          startTime={eventItem.attributes.startTime}
-          endTime={eventItem.attributes.endTime}
-          city={eventItem.attributes.city}
-          cta={eventItem.attributes.cta}
+          key={eventItem.slug}
+          title={eventItem.title}
+          category={eventItem.category}
+          date={eventItem.date}
+          endDate={eventItem.endDate}
+          imageUrl={eventItem.image && getStrapiURL(eventItem.image?.url)}
+          startTime={eventItem.startTime}
+          endTime={eventItem.endTime}
+          city={eventItem.city}
+          cta={eventItem.cta}
           type=""
         />
       )),
@@ -60,7 +64,7 @@ export default function CustomPage(props: CustomPageProps) {
 
   return (
     <React.Fragment>
-      <Seo metaData={seo} />
+      {seo && <Seo metaData={seo} />}
       {memoBlocks}
       <StyledWrapper>
         <StyledHeading>Les derniers **événements**</StyledHeading>
@@ -71,103 +75,74 @@ export default function CustomPage(props: CustomPageProps) {
   )
 }
 
-export const getStaticProps = (async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pagePath = params?.['slug'] as string
-
-  const queryParams = stringify(
-    {
-      populate: [
-        'blocks.columns',
-        'blocks.content',
-        'blocks.cta',
-        'blocks.firstCta',
-        'blocks.image.image.data',
-        'blocks.image.image',
-        'blocks.items.image',
-        'blocks.items.items',
-        'blocks.items',
-        'blocks.logo.logo',
-        'blocks.logo',
-        'blocks.secondCta',
-        'blocks.socialMediaLink',
-        'blocks',
-        'blocks[0]',
-        'news',
-        'seo.metaSocial.image',
-        'seo.metaSocial',
-        'seo',
-      ],
+  const result = await urqlClient
+    .query<EvenementsQuery>(EvenementsDocument, {
       filters: {
         slug: {
-          $eqi: pagePath,
+          eqi: pagePath,
         },
       },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
+    })
+    .toPromise()
 
-  const responseQuery = (await Pages.getPage(
-    PATHS.EVENTS,
-    queryParams
-  )) as APIResponseData<'api::event.event'>[]
-
-  if (responseQuery.length === 0) {
+  if (result.error || !result.data || !result.data.events) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
     return { notFound: true }
   }
 
-  const relatedQuery = stringify({
-    populate: ['image', 'cta'],
-    pagination: {
-      limit: 1,
-    },
-    filters: {
-      title: {
-        $ne: responseQuery[0]!.attributes.title,
-      },
-      category: {
-        $eqi: responseQuery[0]!.attributes.category,
-      },
-    },
-  })
+  if (result.data.events.length === 0) {
+    return { notFound: true }
+  }
 
-  const latestEvents = (await Pages.getPage(
-    PATHS.EVENTS,
-    relatedQuery
-  )) as APIResponseData<'api::event.event'>[]
+  const latestResult = await urqlClient
+    .query<EvenementsQuery>(EvenementsDocument, {
+      pagination: {
+        limit: 1,
+      },
+      filters: {
+        category: {
+          eqi: result.data.events[0]!.category,
+        },
+        title: {
+          ne: result.data.events[0]!.title,
+        },
+      },
+      sort: ['date:desc'],
+    })
+    .toPromise()
 
   return {
     props: {
-      data: latestEvents[0]!,
-      related: latestEvents,
+      data: result.data.events[0]!,
+      latestEvents: latestResult.data?.events ?? [],
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<CustomPageProps>
+}
 
-export const getStaticPaths = (async () => {
-  const eventsQuery = stringify({
-    pagination: {},
-    populate: ['image', 'cta'],
-    sort: ['date:desc'],
-  })
+export const getStaticPaths = async () => {
+  const result = await urqlClient
+    .query<EvenementsQuery>(EvenementsDocument, {
+      sort: ['date:desc'],
+    })
+    .toPromise()
 
-  const response = (await Pages.getPage(
-    PATHS.EVENTS,
-    eventsQuery
-  )) as APIResponseData<'api::event.event'>[]
-
-  const result = {
-    paths: response.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
+  const paths = {
+    paths:
+      result.data?.events
+        .filter((p) => p !== null)
+        .map((page) => ({
+          params: {
+            slug: page?.slug,
+          },
+        })) ?? [],
     fallback: false,
   }
 
-  return result
-}) satisfies GetStaticPaths
+  return paths
+}
 
 const StyledWrapper = styled.div`
   padding: 1rem 1.5rem;

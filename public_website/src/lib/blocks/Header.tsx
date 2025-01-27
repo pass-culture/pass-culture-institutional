@@ -2,9 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { ComponentBlockHeaderFragment } from '@/generated/graphql'
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { HeaderProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
@@ -12,9 +11,16 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function Header(props: HeaderProps) {
-  const { text, title, cta, image, icon, icon2, aboveTitle } = props
-  const img_url = image?.data?.attributes?.url
+export function Header(props: Omit<ComponentBlockHeaderFragment, 'id'>) {
+  const {
+    text,
+    requiredTitle,
+    cta,
+    requiredImage,
+    requiredIcon,
+    icon2,
+    aboveTitle,
+  } = props
   return (
     <Root>
       <StyledContentWrapper>
@@ -24,21 +30,23 @@ export function Header(props: HeaderProps) {
               {parseText(aboveTitle as string).processedText}
             </StyledAboveHeading>
           </BlockRendererWithCondition>
-          <StyledHeading>{title}</StyledHeading>
+          <StyledHeading>{requiredTitle}</StyledHeading>
           <BlockRendererWithCondition condition={isRenderable(text)}>
             <StyledText>{text}</StyledText>
           </BlockRendererWithCondition>
           <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
             <StyledBtnWrapper>
-              <ButtonWithCTA cta={cta as CTA} />
+              {cta && <ButtonWithCTA cta={cta} />}
             </StyledBtnWrapper>
           </BlockRendererWithCondition>
         </StyledContent>
-        <BlockRendererWithCondition condition={isRenderable(img_url)}>
+        <BlockRendererWithCondition
+          condition={isRenderable(requiredImage?.url)}>
           <CardContainer>
-            <Card $imageUrl={getStrapiURL(img_url as string)}>
-              <BlockRendererWithCondition condition={isRenderable(icon)}>
-                <OutlinedText shadow>{icon}</OutlinedText>
+            <Card $imageUrl={getStrapiURL(requiredImage?.url)}>
+              <BlockRendererWithCondition
+                condition={isRenderable(requiredIcon)}>
+                <OutlinedText shadow>{requiredIcon}</OutlinedText>
               </BlockRendererWithCondition>
               <BlockRendererWithCondition condition={isRenderable(icon2)}>
                 <OutlinedText shadow>{icon2}</OutlinedText>

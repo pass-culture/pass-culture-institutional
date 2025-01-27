@@ -1,9 +1,9 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  AideEnseignantsDocument,
+  AideEnseignantsQuery,
+} from '@/generated/graphql'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
@@ -11,60 +11,59 @@ import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
 interface TeachersHelpProps {
-  data: APIResponseData<'api::help-teachers.help-teachers'>
-  latestStudies: APIResponseData<'api::news.news'>[]
+  data: NonNullable<AideEnseignantsQuery['helpTeachers']>
+  latestStudies: NonNullable<AideEnseignantsQuery['resources']>
 }
 
 export default function TeachersHelp({
   data,
   latestStudies,
 }: TeachersHelpProps) {
-  const { seo, heroSection, faq, cardText, simplepushcta, social } =
-    data.attributes
+  const { seo, heroSection, faq, cardText, simplepushcta, social } = data
 
   return (
     <PageLayout seo={seo} title={undefined} socialMediaSection={social}>
       <Header
-        title={heroSection?.title}
+        requiredTitle={heroSection?.requiredTitle}
         text={heroSection?.text}
-        icon={heroSection.icon}
-        image={heroSection.image}
+        requiredIcon={heroSection.requiredIcon}
+        requiredImage={heroSection.requiredImage}
       />
       <Breadcrumb isUnderHeader />
 
       <Faq
-        title={faq.title}
-        cta={faq.cta}
+        requiredTitle={faq.requiredTitle}
+        requiredCta={faq.requiredCta}
         categories={faq.categories}
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
       <Separator isActive={false} />
       <LatestNews
-        newsOrStudies={latestStudies}
+        newsOrStudies={latestStudies.filter((item) => item !== null)}
         isNews={false}
-        title={data.attributes.latestStudies.title}
-        cta={data.attributes.latestStudies.cta}
+        title={data.latestStudies.requiredTitle}
+        cta={data.latestStudies.requiredCta}
       />
       <Separator isActive={false} />
       <DoublePushCTA
-        title={cardText.title}
+        requiredTitle={cardText.requiredTitle}
         text={cardText.text}
-        image={cardText.image}
+        requiredImage={cardText.requiredImage}
         firstCta={cardText.firstCta}
         secondCta={cardText.secondCta}
         icon={cardText.icon}
       />
       <Separator isActive={false} />
       <SimplePushCta
-        title={simplepushcta.title}
+        requiredTitle={simplepushcta.requiredTitle}
         surtitle={simplepushcta.surtitle}
-        image={simplepushcta.image}
-        cta={simplepushcta.cta}
+        requiredImage={simplepushcta.requiredImage}
+        requiredCta={simplepushcta.requiredCta}
         icon={simplepushcta.icon}
       />
       <Separator isActive={false} />
@@ -72,57 +71,31 @@ export default function TeachersHelp({
   )
 }
 
-export const getStaticProps = (async () => {
-  const helpQuery = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.image',
-      'cardText',
-      'cardText.image',
-      'cardText.firstCta',
-      'cardText.secondCta',
-      'social',
-      'social.socialMediaLink',
-      'social.title',
-      'faq',
-      'faq.cta',
-      'simplepushcta',
-      'simplepushcta.image',
-      'simplepushcta.cta',
-      'simplepushcta.cta[0]',
-      'latestStudies',
-      'latestStudies.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-  const help = (await Pages.getPage(
-    PATHS.HELP_TEACHERS,
-    helpQuery
-  )) as APIResponseData<'api::help-teachers.help-teachers'>
-
-  const latestStudiesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eqi: ['Étude ponctuelle', 'Étude ritualisée'],
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<AideEnseignantsQuery>(AideEnseignantsDocument, {
+      pagination: {
+        limit: 3,
       },
-    },
-  })
-  const latestStudies = (await Pages.getPage(
-    PATHS.RESOURCES,
-    latestStudiesQuery
-  )) as APIResponseData<'api::news.news'>[]
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          in: ['Étude ponctuelle', 'Étude ritualisée'],
+        },
+      },
+    })
+    .toPromise()
+
+  if (result.error || !result.data || !result.data.helpTeachers) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      data: help,
-      latestStudies: latestStudies,
+      data: result.data.helpTeachers,
+      latestStudies: result.data.resources,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<TeachersHelpProps>
+}

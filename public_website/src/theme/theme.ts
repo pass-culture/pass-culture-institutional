@@ -7,6 +7,7 @@ export const theme = {
   colors: {
     aquamarine: Colors.AQUAMARINE,
     black: Colors.BLACK,
+    blue: Colors.BLUE,
     darkGray: Colors.DARK_GRAY,
     deepink: Colors.DEEP_PINK,
     flashGreen: Colors.FLASH_GREEN,

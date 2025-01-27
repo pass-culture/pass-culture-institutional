@@ -2,6 +2,6 @@
  * presse controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::presse.presse');
+export default factories.createCoreController("api::presse.presse");

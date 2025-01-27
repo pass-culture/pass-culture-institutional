@@ -8,36 +8,19 @@ import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
 import { Step } from './Step'
+import { SimulatorFragment } from '@/generated/graphql'
 import { theme } from '@/theme/theme'
-import { APIResponseData } from '@/types/strapi'
 import { stripTags } from '@/utils/stripTags'
 
-interface SimulatorProps {
+type SimulatorProps = SimulatorFragment & {
   className?: string
-
-  ageQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['ageQuestion']
-  nationnalityQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['nationnalityQuestion']
-  residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
-
-  amountScreen15: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_15']
-  amountScreen16: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_16']
-  amountScreen17: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_17']
-  amountScreen18: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_18']
-
-  successScreen: APIResponseData<'api::simulator.simulator'>['attributes']['successScreen']
-  failureScreen: APIResponseData<'api::simulator.simulator'>['attributes']['failureScreen']
-  tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
-  tooOldScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooOldScreen']
-  steps: string[]
-  topEmoji: string
-  bottomEmoji: string
 }
 
-type AmountScreen =
-  | SimulatorProps['amountScreen15']
-  | SimulatorProps['amountScreen16']
-  | SimulatorProps['amountScreen17']
-  | SimulatorProps['amountScreen18']
+// type AmountScreen =
+//   | SimulatorProps['data']['amountScreen_15']
+//   | SimulatorProps['data']['amountScreen_16']
+//   | SimulatorProps['amountScreen17']
+//   | SimulatorProps['amountScreen18']
 
 enum AgeAnswer {
   IS_LESS_THAN_15 = 0,
@@ -86,7 +69,7 @@ export function Simulator(props: SimulatorProps) {
       <Question
         onSubmit={(r) => onAnswerSubmit([r])}
         title={props.ageQuestion.title}
-        answers={props.ageQuestion.answers}
+        answers={props.ageQuestion.answers.filter((a) => a !== null)}
         type="slider"
       />
     )
@@ -118,21 +101,21 @@ export function Simulator(props: SimulatorProps) {
     } else {
       // 15, 16, 17, or 18 yo
       const screen = {
-        [AgeAnswer.IS_15]: props.amountScreen15,
-        [AgeAnswer.IS_16]: props.amountScreen16,
-        [AgeAnswer.IS_17]: props.amountScreen17,
-        [AgeAnswer.IS_18]: props.amountScreen18,
-      }[answers[0]] as AmountScreen
+        [AgeAnswer.IS_15]: props.amountScreen_15,
+        [AgeAnswer.IS_16]: props.amountScreen_16,
+        [AgeAnswer.IS_17]: props.amountScreen_17,
+        [AgeAnswer.IS_18]: props.amountScreen_18,
+      }[answers[0]]
       const ageAnswer = answers[0]
       currentStepElement = (
         <AmountScreen
-          text={screen.text}
-          title={screen.title}
+          text={screen?.text ?? ''}
+          title={screen?.title ?? ''}
           onNext={() => onAnswerSubmit([ageAnswer, 0])}
         />
       )
       isResultScreen = true
-      stepContainerAriaLabel = screen.title
+      stepContainerAriaLabel = screen?.title ?? ''
     }
   } else if (answers.length === 2) {
     // Nationality question
@@ -142,7 +125,7 @@ export function Simulator(props: SimulatorProps) {
         key="nat_question"
         onSubmit={(r) => onAnswerSubmit([...previousAnswers, r])}
         title={props.nationnalityQuestion.title}
-        answers={props.nationnalityQuestion.answers}
+        answers={props.nationnalityQuestion.answers.filter((a) => a !== null)}
         type="radio"
       />
     )
@@ -153,7 +136,9 @@ export function Simulator(props: SimulatorProps) {
       currentStepElement = (
         <ResultScreen
           title={props.successScreen.title}
-          steps={props.successScreen.steps.map((s) => s.step)}
+          steps={props.successScreen.steps
+            .map((s) => s?.step)
+            .filter((s) => s != null)}
           ctaLink={props.successScreen.cta}
           helpText={props.successScreen.needSupport}
           supportLink={props.successScreen.supportLink}
@@ -169,7 +154,7 @@ export function Simulator(props: SimulatorProps) {
           key="res_question"
           onSubmit={(r) => setAnswers([...previousAnswers, r])}
           title={props.residencyQuestion.title}
-          answers={props.residencyQuestion.answers}
+          answers={props.residencyQuestion.answers.filter((a) => a != null)}
           type="radio"
         />
       )
@@ -181,7 +166,9 @@ export function Simulator(props: SimulatorProps) {
       currentStepElement = (
         <ResultScreen
           title={props.successScreen.title}
-          steps={props.successScreen.steps.map((s) => s.step)}
+          steps={props.successScreen.steps
+            .map((s) => s?.step)
+            .filter((s) => s != null)}
           ctaLink={props.successScreen.cta}
           helpText={props.successScreen.needSupport}
           supportLink={props.successScreen.supportLink}
@@ -219,12 +206,12 @@ export function Simulator(props: SimulatorProps) {
       <Inner $showingResult={isResultScreen}>
         <Steps>
           {displayedSteps.map((step, i) => (
-            <React.Fragment key={step}>
+            <React.Fragment key={step?.id}>
               {i !== 0 && <StepSeparator aria-hidden="true" />}
               <Step
                 circleText={(i + 1).toString().padStart(2, '0')}
                 surtitle={`ÉTAPE ${i + 1}`}
-                title={step}
+                title={step?.step ?? ''}
                 isActive={i + 1 === displayedSteps.length}
               />
             </React.Fragment>

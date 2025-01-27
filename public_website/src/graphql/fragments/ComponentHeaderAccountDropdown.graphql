@@ -1,0 +1,7 @@
+fragment ComponentHeaderAccountDropdown on ComponentHeaderAccountDropdown {
+  id
+  buttonLabel
+  items {
+    ...ComponentHeaderAccountItem
+  }
+}

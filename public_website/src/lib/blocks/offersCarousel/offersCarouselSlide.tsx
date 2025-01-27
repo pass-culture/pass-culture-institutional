@@ -2,13 +2,17 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { ComponentCommonOffersCarouselItemFragment } from '@/generated/graphql'
 import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
 import { theme } from '@/theme/theme'
-import { OffersCarouselSlideProps } from '@/types/props'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { parseText } from '@/utils/parseText'
 
-export function OffersCarouselSlide(props: OffersCarouselSlideProps) {
+export function OffersCarouselSlide(
+  props: ComponentCommonOffersCarouselItemFragment & {
+    slideIndex: number
+  }
+) {
   const { slideIndex, title, surtitle, firstIcon, secondIcon, text, theme } =
     props
   return (

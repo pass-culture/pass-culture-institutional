@@ -2,14 +2,25 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { CTA } from '@/types/CTA'
-import { LatestNewsProps } from '@/types/props'
+import {
+  ComponentCommonLinkFragment,
+  NewsFragment,
+  ResourceFragment,
+} from '@/generated/graphql'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
+
+type LatestNewsProps = {
+  title: string
+  newsOrStudies: (ResourceFragment | NewsFragment)[]
+  cta?: ComponentCommonLinkFragment
+  className?: string
+  isNews: boolean
+}
 
 export function LatestNews(props: LatestNewsProps) {
   const { title, newsOrStudies, cta, className, isNews } = props
@@ -22,17 +33,14 @@ export function LatestNews(props: LatestNewsProps) {
       <ListWrapper>
         <StyledList>
           {newsOrStudies?.slice(0, 3).map((item) => {
-            const fullSlug = slugPrefix + item.attributes.slug
+            const fullSlug = slugPrefix + item.slug
             return (
               <li key={fullSlug}>
                 <NewsCard
-                  title={item.attributes.title}
-                  category={item.attributes.category}
-                  date={item.attributes.date}
-                  imageUrl={
-                    item.attributes.image &&
-                    getStrapiURL(item.attributes.image?.data.attributes.url)
-                  }
+                  title={item.title}
+                  category={item.category}
+                  date={item.date}
+                  imageUrl={item.image && getStrapiURL(item.image?.url)}
                   slug={fullSlug}
                 />
               </li>
@@ -43,7 +51,7 @@ export function LatestNews(props: LatestNewsProps) {
 
       <ContentWrapper $noMargin>
         <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
-          <ButtonWithCTA cta={cta as CTA} />
+          <ButtonWithCTA cta={cta!} />
         </BlockRendererWithCondition>
       </ContentWrapper>
     </Root>

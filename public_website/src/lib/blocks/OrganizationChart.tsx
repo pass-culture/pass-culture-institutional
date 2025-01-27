@@ -1,41 +1,45 @@
 import React from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { OrganizationChartProps } from '@/types/props'
+import { ComponentBlockOrganizationChartFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function OrganizationChart(props: OrganizationChartProps) {
-  const { title, description, people } = props
+export function OrganizationChart(
+  props: ComponentBlockOrganizationChartFragment
+) {
+  const { title, requiredDescription, people } = props
 
   return (
     <ContentWrapper>
       <BlockRendererWithCondition condition={isRenderable(title)}>
         <StyledHeading>{title as string}</StyledHeading>
       </BlockRendererWithCondition>
-      <StyledDescription>{description}</StyledDescription>
+      <StyledDescription>{requiredDescription}</StyledDescription>
       <StyledList>
-        {people?.map((person) => {
-          return (
-            <StyledPerson key={person.name}>
-              {!!person.image && (
-                <StyledImage
-                  src={person.image?.data.attributes.url}
-                  alt={person.image?.data.attributes.name}
-                  width={person.image?.data.attributes.width}
-                  height={person.image?.data.attributes.height}
-                />
-              )}
-              <div>
-                <StyledName>{person.name}</StyledName>
-                <StyledPosition>{person.position}</StyledPosition>
-              </div>
-            </StyledPerson>
-          )
-        })}
+        {people
+          ?.filter((person) => person !== null)
+          .map((person) => {
+            return (
+              <StyledPerson key={person.name}>
+                {!!person.image && (
+                  <StyledImage
+                    src={person.image?.url}
+                    alt={person.image?.name}
+                    width={person.image?.width ?? 0}
+                    height={person.image?.height ?? 0}
+                  />
+                )}
+                <div>
+                  <StyledName>{person.name}</StyledName>
+                  <StyledPosition>{person.position}</StyledPosition>
+                </div>
+              </StyledPerson>
+            )
+          })}
       </StyledList>
     </ContentWrapper>
   )

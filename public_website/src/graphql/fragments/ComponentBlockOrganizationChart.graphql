@@ -1,0 +1,8 @@
+fragment ComponentBlockOrganizationChart on ComponentBlockOrganizationChart {
+  id
+  title
+  requiredDescription: description
+  people {
+    ...ComponentCommonPerson
+  }
+}

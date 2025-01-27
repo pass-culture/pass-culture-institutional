@@ -1,0 +1,14 @@
+fragment Header on Header {
+  targetItems {
+    ...ComponentHeaderNavigationItems
+  }
+  aboutItems {
+    ...ComponentHeaderNavigationItems
+  }
+  login {
+    ...ComponentHeaderAccountDropdown
+  }
+  signup {
+    ...ComponentHeaderAccountDropdown
+  }
+}

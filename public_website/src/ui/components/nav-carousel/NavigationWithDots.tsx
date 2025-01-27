@@ -1,33 +1,27 @@
 import React, { useCallback, useMemo } from 'react'
 import styled from 'styled-components'
 
-import { StyledDot } from '@/theme/style'
 import {
-  ExperienceVideoCarouselSlideProps,
-  KeyNumberCarouselSlideProps,
-  OffersCarouselSlideProps,
-  PiledCardsCarouselSlideProps,
-  VerticalCarouselSlideProps,
-} from '@/types/props'
-import { APIResponse } from '@/types/strapi'
+  ComponentCommonExperienceVideoCarouselItemFragment,
+  ComponentCommonKeyNumberItems,
+  ComponentCommonOffersCarouselItemFragment,
+  ComponentCommonPiledCardItemFragment,
+  ComponentCommonVerticalCarouselItem,
+  UploadFileFragment,
+} from '@/generated/graphql'
+import { StyledDot } from '@/theme/style'
 import { handleNavigationButtonClick } from '@/utils/carouselHelper'
 
 type Item =
-  | Omit<VerticalCarouselSlideProps, 'slideIndex'>
-  | Omit<KeyNumberCarouselSlideProps, 'slideIndex'>
-  | Omit<PiledCardsCarouselSlideProps, 'slideIndex'>
-  | Omit<OffersCarouselSlideProps, 'slideIndex'>
-  | Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>
-  | { logo: APIResponse<'plugin::upload.file'> | null | undefined }
+  | Omit<ComponentCommonVerticalCarouselItem, 'image'>
+  | Omit<ComponentCommonKeyNumberItems, 'image'>
+  | Omit<ComponentCommonPiledCardItemFragment, 'image'>
+  | Omit<ComponentCommonOffersCarouselItemFragment, 'image'>
+  | Omit<ComponentCommonExperienceVideoCarouselItemFragment, 'image'>
+  | { logo: UploadFileFragment | null | undefined }
 
 const NavigationWithDots = (props: {
-  items:
-    | Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
-    | Omit<KeyNumberCarouselSlideProps, 'slideIndex'>[]
-    | Omit<PiledCardsCarouselSlideProps, 'slideIndex'>[]
-    | Omit<OffersCarouselSlideProps, 'slideIndex'>[]
-    | Omit<ExperienceVideoCarouselSlideProps, 'slideIndex'>[]
-    | { logo: APIResponse<'plugin::upload.file'> | null | undefined }[]
+  items: Item[]
   carrouselSelector: string
   slidesSelector: string
   carouselName: string
@@ -39,15 +33,14 @@ const NavigationWithDots = (props: {
   }, [carrouselSelector, slidesSelector])
 
   const getTitle = (item: Item, key: string): string => {
-    if ('title' in item) return item.title
-    if (item.logo) return item.logo.data.attributes.hash
+    if ('title' in item) return item.title ?? ''
+    if ('logo' in item) return item.logo?.hash ?? ''
     return key
   }
 
   const getLabel = (item: Item): string => {
-    if ('title' in item) return item.title
-    if (item?.logo?.data.attributes.alternativeText)
-      return item.logo.data.attributes.alternativeText
+    if ('title' in item) return item.title ?? ''
+    if ('logo' in item) return item.logo?.alternativeText ?? ''
     return ''
   }
 

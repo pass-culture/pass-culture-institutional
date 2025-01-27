@@ -2,21 +2,26 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { LogoCarouselSlideProps } from '@/types/props'
+import { UploadFileFragment } from '@/generated/graphql'
 import { getStrapiURL } from '@/utils/apiHelpers'
+
+type LogoCarouselSlideProps = {
+  slideIndex: number
+  image: UploadFileFragment
+}
 
 export function LogoCarouselSlide(props: LogoCarouselSlideProps) {
   const { slideIndex, image } = props
   return (
     <Root
       index={slideIndex}
-      key={image?.data?.attributes?.alternativeText}
+      key={image?.alternativeText}
       innerClassName="inner"
       aria-roledescription="diapositive">
       <StyledLink>
         <StyledImageSimple
-          alt={image?.data?.attributes?.alternativeText}
-          src={getStrapiURL(image?.data?.attributes?.url)}></StyledImageSimple>
+          alt={image?.alternativeText ?? ''}
+          src={getStrapiURL(image?.url)}></StyledImageSimple>
       </StyledLink>
     </Root>
   )

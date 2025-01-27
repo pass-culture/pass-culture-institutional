@@ -2,12 +2,12 @@ import React from 'react'
 
 import { SimpleTextV2 } from '../SimpleTextV2'
 import Tabs from './Tabs'
-import { TabSimpleTextProps } from '@/types/props'
+import { ComponentBlockTabsSimpleTextFragment } from '@/generated/graphql'
 
-const TabsSimpleText = (props: TabSimpleTextProps) => {
+const TabsSimpleText = (props: ComponentBlockTabsSimpleTextFragment) => {
   return (
     <Tabs {...props}>
-      <SimpleTextV2 text={[]} columns={[]} />
+      <SimpleTextV2 jsonText={[]} columns={[]} />
     </Tabs>
   )
 }

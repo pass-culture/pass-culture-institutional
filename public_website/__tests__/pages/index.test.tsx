@@ -1,12 +1,8 @@
 import React from 'react'
-import { http } from 'msw'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { axe } from 'vitest-axe'
 
 import { act, fireEvent, render, screen, waitFor } from '..'
-import { homePageFixturesWithTracking } from '../fixtures/home'
-import { CMS_BASE_URL, jsonResponseOf } from '../handlers'
-import { server } from '../server'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import Home, { getStaticProps } from '@/pages'
 
@@ -21,38 +17,22 @@ describe('Home page', () => {
     }
   })
 
-  it(
-    'should pass accessibility tests',
-    async () => {
-      const { props } = await getStaticProps()
-      const { container } = render(<Home {...props} />)
+  it('should pass accessibility tests', { timeout: 30000 }, async () => {
+    const { props } = await getStaticProps()
+    const { container } = render(<Home {...props!} />)
 
-      let a11yResult
-      await act(async () => {
-        a11yResult = await axe(container)
-      })
-      expect(a11yResult).toHaveNoViolations()
-    },
-    { timeout: 30000 }
-  )
+    let a11yResult
+    await act(async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
+  })
 
   describe('when eventName is defined in the cta and exists in EventMap', () => {
     it('should trigger event when clicking on the button', async () => {
-      server.use(
-        http.get(
-          `${CMS_BASE_URL}/api/home`,
-          () => {
-            return jsonResponseOf(
-              homePageFixturesWithTracking.homeDataWithTrackingOnCTAs
-            )
-          },
-          { once: true }
-        )
-      )
-
       const { props } = await getStaticProps()
 
-      render(<Home {...props} />)
+      render(<Home {...props!} />)
 
       const button = screen.getByText('Je m’inscris')
       fireEvent.click(button)
@@ -69,7 +49,7 @@ describe('Home page', () => {
       vi.resetAllMocks()
       const { props } = await getStaticProps()
 
-      render(<Home {...props} />)
+      render(<Home {...props!} />)
 
       const button = screen.getByText('Je m’inscris')
       fireEvent.click(button)

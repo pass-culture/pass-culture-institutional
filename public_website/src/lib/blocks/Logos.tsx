@@ -2,14 +2,12 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { LogoCarousel } from './logoCarousel/logoCarousel'
-import { LogoProps } from '@/types/props'
+import { ComponentBlockLogosFragment } from '@/generated/graphql'
 
-export function Logos(props: LogoProps) {
-  const { logo } = props
-
+export function Logos(props: ComponentBlockLogosFragment) {
   return (
     <Root>
-      <LogoCarousel items={logo} />
+      <LogoCarousel {...props} />
     </Root>
   )
 }

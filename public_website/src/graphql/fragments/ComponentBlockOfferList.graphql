@@ -1,0 +1,16 @@
+fragment ComponentBlockOfferList on ComponentBlockOfferList {
+  title
+  description
+  offreTag
+  firstCartTitle
+  firstIcon
+  secondCartTitle
+  secondIcon
+  descritptionCard
+  cta {
+    ...ComponentCommonLink
+  }
+  ctaCard {
+    ...ComponentCommonLink
+  }
+}

@@ -1,0 +1,32 @@
+query AideEnseignants(
+  $filters: ResourceFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+) {
+  helpTeachers {
+    heroSection {
+      ...ComponentBlockHeader
+    }
+    cardText {
+      ...ComponentBlockDoublePushCta
+    }
+    social {
+      ...ComponentBlockSocialMedia
+    }
+    simplepushcta {
+      ...ComponentBlockSimplePushCta
+    }
+    faq {
+      ...ComponentBlockFaq
+    }
+    latestStudies {
+      ...ComponentBlockLatestNews
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+  resources(filters: $filters, pagination: $pagination, sort: $sort) {
+    ...Resource
+  }
+}

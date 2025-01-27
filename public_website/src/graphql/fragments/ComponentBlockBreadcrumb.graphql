@@ -1,0 +1,3 @@
+fragment ComponentBlockBreadcrumb on ComponentBlockBreadcrumb {
+  id
+}

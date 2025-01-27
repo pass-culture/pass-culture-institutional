@@ -1,0 +1,10 @@
+fragment ComponentBlockImageText on ComponentBlockImageText {
+  id
+  title
+  requiredImage: image {
+    ...UploadFile
+  }
+  isImageRight
+  icon
+  jsonText: text
+}

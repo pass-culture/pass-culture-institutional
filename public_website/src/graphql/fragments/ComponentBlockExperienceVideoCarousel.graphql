@@ -1,0 +1,8 @@
+fragment ComponentBlockExperienceVideoCarousel on ComponentBlockExperienceVideoCarousel {
+  id
+  title
+  isLandscape
+  carouselItems {
+    ...ComponentCommonExperienceVideoCarouselItem
+  }
+}

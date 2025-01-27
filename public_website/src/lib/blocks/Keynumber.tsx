@@ -2,19 +2,23 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { KeyNumberCarousel } from './keyNumberCarousel/keyNumberCarousel'
-import { KeyNumberProps } from '@/types/props'
+import { ComponentBlockKeyNumberCarouselFragment } from '@/generated/graphql'
 import { Typo } from '@/ui/components/typographies'
 
-export function KeyNumber(props: KeyNumberProps) {
-  const { title, items } = props
+export function KeyNumber(props: ComponentBlockKeyNumberCarouselFragment) {
+  const { title, keyNumberItems, id } = props
   return (
     <Root>
       <StyledWrapper>
         <div>
-          <Typo.Heading2>{title}</Typo.Heading2>
+          <Typo.Heading2>{title ?? ''}</Typo.Heading2>
         </div>
         <StyledCarouselWrapper>
-          <KeyNumberCarousel title={title} items={items} />
+          <KeyNumberCarousel
+            id={id}
+            title={title}
+            keyNumberItems={keyNumberItems?.filter((item) => item != null)}
+          />
         </StyledCarouselWrapper>
       </StyledWrapper>
     </Root>

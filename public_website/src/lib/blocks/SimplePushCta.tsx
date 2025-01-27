@@ -3,9 +3,8 @@ import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { Separator } from './Separator'
+import { ComponentBlockSimplePushCtaFragment } from '@/generated/graphql'
 import { theme } from '@/theme/theme'
-import { CTA } from '@/types/CTA'
-import { PushCTAProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -48,9 +47,19 @@ const SimplePushCtaCard = (props: { url: string }): React.ReactNode => {
   return <Card $imageUrl={getStrapiURL(url)} />
 }
 
-export function SimplePushCta(props: PushCTAProps) {
-  const { className, surtitle, title, cta, image, icon } = props
-  const image_props = image?.data?.attributes?.url
+export function SimplePushCta(
+  props: Omit<ComponentBlockSimplePushCtaFragment, 'id'> & {
+    className?: string
+  }
+) {
+  const {
+    className,
+    surtitle,
+    requiredTitle,
+    requiredImage,
+    icon,
+    requiredCta,
+  } = props
 
   return (
     <StyledContentWrapper>
@@ -61,16 +70,18 @@ export function SimplePushCta(props: PushCTAProps) {
             <BlockRendererWithCondition condition={isRenderable(surtitle)}>
               <SimplePushCtaSurTitle surtitle={surtitle as string} />
             </BlockRendererWithCondition>
-            <BlockRendererWithCondition condition={isRenderable(title)}>
-              <SimplePushCtaTitle title={title} />
+            <BlockRendererWithCondition condition={isRenderable(requiredTitle)}>
+              <SimplePushCtaTitle title={requiredTitle} />
             </BlockRendererWithCondition>
-            <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
-              <SimplePushCtaLink {...(cta as CTA)} />
+            <BlockRendererWithCondition
+              condition={isRenderable(requiredCta.URL)}>
+              <SimplePushCtaLink {...requiredCta} />
             </BlockRendererWithCondition>
           </RightSide>
           <CardContainer>
-            <BlockRendererWithCondition condition={isRenderable(image_props)}>
-              <SimplePushCtaCard url={image_props as string} />
+            <BlockRendererWithCondition
+              condition={isRenderable(requiredImage.url)}>
+              <SimplePushCtaCard url={requiredImage.url ?? ''} />
             </BlockRendererWithCondition>
             <BlockRendererWithCondition condition={isRenderable(icon)}>
               <OutlinedText>{icon}</OutlinedText>

@@ -2,11 +2,15 @@ import React from 'react'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
-import { KeyNumberCarouselSlideProps } from '@/types/props'
+import { ComponentCommonKeyNumberItems } from '@/generated/graphql'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 
-export function KeyNumberCarouselSlide(props: KeyNumberCarouselSlideProps) {
+export function KeyNumberCarouselSlide(
+  props: ComponentCommonKeyNumberItems & {
+    slideIndex: number
+  }
+) {
   const {
     slideIndex,
     title,
@@ -28,8 +32,8 @@ export function KeyNumberCarouselSlide(props: KeyNumberCarouselSlideProps) {
           <OutlinedText>{thirdEmoji}</OutlinedText>
         </StyledIconWrapper>
         <StyledTextWrapper>
-          <StyledTitle>{title}</StyledTitle>
-          <Description>{description}</Description>
+          <StyledTitle>{title ?? ''}</StyledTitle>
+          <Description>{description ?? ''}</Description>
         </StyledTextWrapper>
       </StyledWrapper>
     </Root>

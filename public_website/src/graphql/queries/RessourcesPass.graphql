@@ -1,0 +1,12 @@
+query RessourcesPass(
+  $filters: RessourcepassFiltersInput
+  $sort: [String]
+  $pagination: PaginationArg
+) {
+  ressourcespass(filters: $filters, sort: $sort, pagination: $pagination) {
+    ...Ressourcepass
+  }
+  ressourcesPassCulture {
+    ...RessourcesPassCulture
+  }
+}

@@ -5,18 +5,18 @@ import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
 import { Typo } from '../typographies'
-import { EligibilityProps } from '@/types/props'
+import { ComponentHomeEligibilitySectionFragment } from '@/generated/graphql'
 import { parseText } from '@/utils/parseText'
 
-export function Eligibility(props: EligibilityProps) {
+export function Eligibility(props: ComponentHomeEligibilitySectionFragment) {
   const {
     title,
     items,
     cardTitle,
     cardDescription,
     cardCta,
-    cardFirstEmoji,
-    cardSecondEmoji,
+    firstEmoji,
+    secondEmoji,
   } = props
   return (
     <Root>
@@ -29,10 +29,10 @@ export function Eligibility(props: EligibilityProps) {
         <StyledCardDescription>{cardDescription}</StyledCardDescription>
         <ButtonWithCTA cta={cardCta} />
         <StyledCardFirstEmoji as={OutlinedText}>
-          {cardFirstEmoji}
+          {firstEmoji}
         </StyledCardFirstEmoji>
         <StyledCardSecondEmoji as={OutlinedText}>
-          {cardSecondEmoji}
+          {secondEmoji}
         </StyledCardSecondEmoji>
       </StyledCard>
       <StyledListContainer>
@@ -40,10 +40,10 @@ export function Eligibility(props: EligibilityProps) {
         <StyledList>
           {items.map((item) => {
             return (
-              <StyledListItem key={item.emoji}>
-                <OutlinedText>{item.emoji}</OutlinedText>
-                <p>{item.title}</p>
-                <p>{item.description}</p>
+              <StyledListItem key={item?.emoji}>
+                <OutlinedText>{item?.emoji}</OutlinedText>
+                <p>{item?.title}</p>
+                <p>{item?.description}</p>
               </StyledListItem>
             )
           })}

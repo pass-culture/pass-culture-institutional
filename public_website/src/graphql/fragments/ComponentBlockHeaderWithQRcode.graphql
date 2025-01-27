@@ -1,0 +1,12 @@
+fragment ComponentBlockHeaderWithQRcode on ComponentBlockHeaderWithQRcode {
+  id
+  requiredTitle: title
+  text
+  requiredImage: image {
+    ...UploadFile
+  }
+  icon
+  QRCode {
+    ...ComponentCommonLink
+  }
+}

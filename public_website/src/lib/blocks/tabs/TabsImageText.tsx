@@ -2,12 +2,12 @@ import React from 'react'
 
 import { ImageText } from '../ImageText'
 import Tabs from './Tabs'
-import { TabImageTextProps } from '@/types/props'
+import { ComponentBlockTabsImageTextFragment } from '@/generated/graphql'
 
-const TabsImageText = (props: TabImageTextProps) => {
+const TabsImageText = (props: ComponentBlockTabsImageTextFragment) => {
   return (
     <Tabs {...props}>
-      <ImageText text={[]} />
+      <ImageText id="" jsonText={[]} />
     </Tabs>
   )
 }

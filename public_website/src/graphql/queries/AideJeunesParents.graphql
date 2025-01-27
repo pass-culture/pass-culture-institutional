@@ -1,0 +1,22 @@
+query AideJeunesParents {
+  help {
+    heroSection {
+      ...ComponentBlockHeader
+    }
+    cardText {
+      ...ComponentBlockDoublePushCta
+    }
+    social {
+      ...ComponentBlockSocialMedia
+    }
+    simplepushcta {
+      ...ComponentBlockSimplePushCta
+    }
+    faq {
+      ...ComponentBlockFaq
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+}

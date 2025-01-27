@@ -1,0 +1,8 @@
+fragment ComponentCommonKeyNumberItems on ComponentCommonKeyNumberItems {
+  id
+  title
+  description
+  firstEmoji
+  secondEmoji
+  thirdEmoji
+}

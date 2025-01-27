@@ -1,0 +1,7 @@
+fragment ComponentBlockTabLittleList on ComponentBlockTabLittleList {
+  id
+  title
+  block {
+    ...ComponentBlockLittleList
+  }
+}

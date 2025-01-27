@@ -1,0 +1,27 @@
+fragment Presse on Presse {
+  title
+  buttonText
+  filtres {
+    ...ComponentCommonFiltre
+  }
+  socialMediaSection {
+    ...ComponentBlockSocialMedia
+  }
+  separator {
+    ...ComponentBlockSeparator
+  }
+  texteImage {
+    ...ComponentBlockImageText
+  }
+  pushCta {
+    ...ComponentBlockDoublePushCta
+  }
+  aide {
+    ...ComponentBlockSimplePushCta
+  }
+  seo {
+    ...ComponentSharedSeo
+  }
+  titleEventSection
+  showFilter
+}

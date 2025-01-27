@@ -3,16 +3,23 @@ import styled, { css } from 'styled-components'
 
 import { useOS } from '@/hooks/useOS'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
-import { AppBannerProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { isRenderable } from '@/utils/isRenderable'
+
+type AppBannerProps = {
+  title?: string | null
+  androidUrl?: string | null
+  defaultUrl: string | null
+  iosUrl?: string | null
+  onClick?: () => void
+}
 
 export function AppBanner(props: AppBannerProps) {
   const { title, androidUrl, defaultUrl, iosUrl, onClick } = props
   const isAndroid = useOS().isAndroid
   const isIos = useOS().isIos
 
-  const setUrl = (): string | undefined => {
+  const setUrl = (): string | undefined | null => {
     if (isIos) return iosUrl
     if (isAndroid) return androidUrl
     return defaultUrl

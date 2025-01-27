@@ -1,0 +1,4 @@
+fragment ComponentBlockSpace on ComponentBlockSpace {
+  id
+  space
+}

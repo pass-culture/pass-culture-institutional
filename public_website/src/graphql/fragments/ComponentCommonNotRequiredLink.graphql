@@ -1,0 +1,6 @@
+fragment ComponentCommonNotRequiredLink on ComponentCommonNotRequiredLink {
+  Label
+  URL
+  eventName
+  eventOrigin
+}

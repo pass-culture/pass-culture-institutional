@@ -1,0 +1,7 @@
+fragment ComponentSimulatorRadioQuestion on ComponentSimulatorRadioQuestion {
+  id
+  title
+  answers {
+    ...ComponentSimulatorAnswer
+  }
+}

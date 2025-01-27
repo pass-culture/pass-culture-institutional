@@ -1,0 +1,17 @@
+query Presse(
+  $filters: ResourceFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+  $sortEvents: [String]
+  $filtersEvents: EventFiltersInput
+) {
+  resources(filters: $filters, pagination: $pagination, sort: $sort) {
+    ...Resource
+  }
+  events(sort: $sortEvents, filters: $filtersEvents) {
+    ...Event
+  }
+  presse {
+    ...Presse
+  }
+}

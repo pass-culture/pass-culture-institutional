@@ -1,0 +1,43 @@
+fragment Resource on Resource {
+  title
+  category
+  date
+  image {
+    ...UploadFile
+  }
+  slug
+  localisation
+  secteur
+  blocks {
+    __typename
+    ...ComponentBlockCenteredText
+    ...ComponentBlockHeader
+    ...ComponentBlockSocialMedia
+    ...ComponentBlockDoublePushCta
+    ...ComponentBlockImageText
+    ...ComponentBlockImage
+    ...ComponentBlockLittleList
+    ...ComponentBlockSeparator
+    ...ComponentBlockSimplePushCta
+    ...ComponentBlockSpace
+    ...ComponentBlockVerticalCarousel
+    ...ComponentBlockVideo
+    ...ComponentBlockKeyNumberCarousel
+    ...ComponentBlockLogos
+    ...ComponentBlockLatestNews
+    ...ComponentBlockExperienceVideoCarousel
+    ...ComponentBlockOffersCarousel
+    ...ComponentBlockPiledCards
+    ...ComponentBlockFaq
+    ...ComponentBlockDetailedLogos
+    ...ComponentBlockOrganizationChart
+    ...ComponentBlockSimpleTextV2
+    ...ComponentBlockImageGallery
+    ...ComponentBlockBreadcrumb
+  }
+  partnership
+  seo {
+    ...ComponentSharedSeo
+  }
+  pageLocalisation
+}

@@ -3,10 +3,10 @@ import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { ExperienceVideoCarouselSlide } from './experieneVideoCarouselSlide'
+import { ComponentBlockExperienceVideoCarouselFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { ExperienceVideoCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
@@ -17,10 +17,13 @@ import { stripTags } from '@/utils/stripTags'
 
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
-export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
+
+export function ExperienceVideoCarousel(
+  props: Omit<ComponentBlockExperienceVideoCarouselFragment, 'id'>
+) {
   const { title, isLandscape, carouselItems: items } = props
   const EXPERIENCE_VIDEO_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
-    title
+    title ?? ''
   )}"]`
   const EXPERIENCE_VIDEO_SLIDES_SELECTOR =
     '[aria-roledescription="diapositive"]'
@@ -36,8 +39,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
   const visibleSlides = getvisibleSlides
 
   const isNavShowing = useMemo(() => {
-    const visibleKeySlides = getvisibleSlides
-    return TOTAL_SLIDES > visibleKeySlides
+    return TOTAL_SLIDES > getvisibleSlides
   }, [TOTAL_SLIDES, getvisibleSlides])
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
           infinite={false}
           step={1}>
           <StyledHeading>
-            <StyledHeading2>{title}</StyledHeading2>
+            <StyledHeading2>{title ?? ''}</StyledHeading2>
             <BlockRendererWithCondition condition={isNavShowing}>
               <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
                 <NavigationWithArrow
@@ -80,24 +82,26 @@ export function ExperienceVideoCarousel(props: ExperienceVideoCarouselProps) {
           <BlockRendererWithCondition condition={items && items.length > 0}>
             <StyledSlider
               classNameAnimation="customCarrouselAnimation"
-              aria-label={stripTags(title)}
+              aria-label={stripTags(title ?? '')}
               aria-roledescription="carrousel">
-              {items?.map((item, index) => {
-                return (
-                  <ExperienceVideoCarouselSlide
-                    isLandscape={isLandscape}
-                    key={`${item.title}_${index}`}
-                    slideIndex={index}
-                    {...item}
-                  />
-                )
-              })}
+              {items
+                ?.filter((item) => item !== null)
+                .map((item, index) => {
+                  return (
+                    <ExperienceVideoCarouselSlide
+                      isLandscape={isLandscape ?? false}
+                      key={`${item?.title ?? ''}_${index}`}
+                      slideIndex={index}
+                      {...item}
+                    />
+                  )
+                })}
             </StyledSlider>
           </BlockRendererWithCondition>
           <BlockRendererWithCondition
             condition={isNavShowing && width < MOBILE_WIDTH}>
             <NavigationWithDots
-              items={items}
+              items={items.filter((item) => item !== null) ?? []}
               carrouselSelector={EXPERIENCE_VIDEO_CAROUSEL_SELECTOR}
               slidesSelector={EXPERIENCE_VIDEO_SLIDES_SELECTOR}
               carouselName="EXPERIENCE_VIDEO_CAROUSEL"

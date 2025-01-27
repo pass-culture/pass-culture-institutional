@@ -2,23 +2,18 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { LatestEventsProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import { NewsFragment, ResourceFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
-import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function ListItems(
-  props: Omit<
-    LatestEventsProps & {
-      type: string
-      news:
-        | APIResponseData<'api::news.news'>[]
-        | APIResponseData<'api::resource.resource'>[]
-    },
-    'events'
-  >
-) {
+type ListItemsProps = {
+  type: string
+  news: NonNullable<NewsFragment[] | ResourceFragment[]>
+  className?: string
+  buttonText?: string
+}
+
+export function ListItems(props: ListItemsProps) {
   const { news, className, buttonText, type } = props
   const [visibleItems, setVisibleItems] = useState<number>(9)
 
@@ -35,18 +30,8 @@ export function ListItems(
     <Root $noMargin $marginBottom={2} $marginTop={2} className={className}>
       <StyledList>
         {news?.slice(0, visibleItems).map((newsItem) => (
-          <li key={newsItem.attributes.slug}>
-            <ListCard
-              type={type}
-              title={newsItem.attributes.title}
-              category={newsItem.attributes.category}
-              date={newsItem.attributes.date}
-              imageUrl={
-                newsItem.attributes.image &&
-                getStrapiURL(newsItem.attributes.image?.data.attributes.url)
-              }
-              slug={newsItem.attributes.slug}
-            />
+          <li key={newsItem.slug}>
+            <ListCard type={type} {...newsItem} />
           </li>
         ))}
       </StyledList>

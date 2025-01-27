@@ -1,21 +1,23 @@
 import React from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import styled, { css } from 'styled-components'
 
+import { NewsFragment, ResourceFragment } from '@/generated/graphql'
 import { theme } from '@/theme/theme'
-import { ListCardProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import { formatDate } from '@/utils/formatDate'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function ListCard(props: ListCardProps) {
-  const { title, category, date, imageUrl, slug, type } = props
+export function ListCard(
+  props: (NewsFragment | ResourceFragment) & { type: string }
+) {
+  const { title, category, date, image, slug, type } = props
 
-  const IMAGE_URL = imageUrl && isRenderable(imageUrl)
+  const IMAGE_URL = image && isRenderable(image.url)
   return (
     <Root>
       {IMAGE_URL && (
-        <StyledCardImage src={imageUrl} alt="" width={385} height={310} />
+        <StyledCardImage src={image?.url} alt="" width={385} height={310} />
       )}
       <StyledMeta id={`news-meta-${slug}`}>
         {category} - <span className="visually-hidden">Publié le</span>{' '}

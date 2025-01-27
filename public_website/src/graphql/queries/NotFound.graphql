@@ -1,0 +1,10 @@
+query NotFound {
+  notFound {
+    header {
+      ...ComponentBlockHeader
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+}

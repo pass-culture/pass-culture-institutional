@@ -1,0 +1,9 @@
+fragment ComponentBlockImageGallery on ComponentBlockImageGallery {
+  id
+  images {
+    ...UploadFile
+  }
+  images_connection {
+    ...UploadFileRelationResponseCollection
+  }
+}

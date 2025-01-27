@@ -3,9 +3,9 @@ import { useQRCode } from 'next-qrcode'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { ComponentBlockPushCtaFragment } from '@/generated/graphql'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import { theme } from '@/theme/theme'
-import { PushCTAProps, QRCodeProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import { OutlinedText } from '@/ui/components/OutlinedText'
@@ -14,7 +14,9 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function PushCTA(props: PushCTAProps & QRCodeProps) {
+export function PushCTA(
+  props: ComponentBlockPushCtaFragment & { className?: string; icon?: string }
+) {
   const { SVG: QrCode } = useQRCode()
   const {
     className = '',
@@ -29,13 +31,11 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
 
   const { onClickAnalytics } = useOnClickAnalytics()
 
-  const image_props = image?.data?.attributes?.url
-
   return (
     <Root className={className}>
-      <BlockRendererWithCondition condition={isRenderable(image_props)}>
+      <BlockRendererWithCondition condition={isRenderable(image?.url)}>
         <CardContainer>
-          <Card $imageUrl={getStrapiURL(image_props)}>
+          <Card $imageUrl={getStrapiURL(image?.url)}>
             <QRCodeCard>
               <QrCode
                 text={qrCodeUrl}

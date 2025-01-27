@@ -1,0 +1,7 @@
+fragment ComponentBlockDetailedLogos on ComponentBlockDetailedLogos {
+  id
+  title
+  logos {
+    ...ComponentCommonDetailedLogo
+  }
+}

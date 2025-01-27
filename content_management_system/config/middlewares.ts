@@ -7,9 +7,10 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          "connect-src": ["self", "https:"],
+          "connect-src": ["'self'", "http:", "https:", "ws:", "wss:"],
           "img-src": ["self", "data:", "blob:", "storage.googleapis.com"],
           "media-src": ["self", "data:", "blob:", "storage.googleapis.com"],
+          "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
           upgradeInsecureRequests: null,
         },
       },

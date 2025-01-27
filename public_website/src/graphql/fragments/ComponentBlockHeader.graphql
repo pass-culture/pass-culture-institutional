@@ -1,0 +1,14 @@
+fragment ComponentBlockHeader on ComponentBlockHeader {
+  id
+  requiredTitle: title
+  text
+  aboveTitle
+  requiredImage: image {
+    ...UploadFile
+  }
+  requiredIcon: icon
+  icon2
+  cta {
+    ...ComponentCommonLink
+  }
+}

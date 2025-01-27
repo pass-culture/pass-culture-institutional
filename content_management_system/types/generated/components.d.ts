@@ -1,252 +1,752 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SimulatorSuccessScreen extends Schema.Component {
-  collectionName: 'components_simulator_success_screens';
+export interface BlockBreadcrumb extends Struct.ComponentSchema {
+  collectionName: 'components_block_breadcrumbs';
   info: {
-    displayName: 'Success Screen';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    steps: Attribute.Component<'simulator.step', true> & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    needSupport: Attribute.String & Attribute.Required;
-    supportLink: Attribute.Component<'common.link'> & Attribute.Required;
-  };
-}
-
-export interface SimulatorStep extends Schema.Component {
-  collectionName: 'components_simulator_steps';
-  info: {
-    displayName: 'Step';
-  };
-  attributes: {
-    step: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface SimulatorRadioQuestion extends Schema.Component {
-  collectionName: 'components_simulator_radio_questions';
-  info: {
-    displayName: 'RadioQuestion';
     description: '';
+    displayName: 'Breadcrumbs';
+  };
+  attributes: {};
+}
+
+export interface BlockCenteredText extends Struct.ComponentSchema {
+  collectionName: 'components_block_centered_texts';
+  info: {
+    description: '';
+    displayName: 'Centered Text';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    answers: Attribute.Component<'simulator.answer', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockCenteredTitle extends Struct.ComponentSchema {
+  collectionName: 'components_block_centered_titles';
+  info: {
+    displayName: 'Centered Title';
+  };
+  attributes: {
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockColumnsText extends Struct.ComponentSchema {
+  collectionName: 'components_block_columns_texts';
+  info: {
+    description: '';
+    displayName: 'Columns Text';
+  };
+  attributes: {
+    columns: Schema.Attribute.Component<'common.simple-text-column', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    video: Schema.Attribute.Component<'block.video', false>;
+  };
+}
+
+export interface BlockDetailedLogos extends Struct.ComponentSchema {
+  collectionName: 'components_block_detailed_logos';
+  info: {
+    displayName: 'Detailed Logos';
+  };
+  attributes: {
+    logos: Schema.Attribute.Component<'common.detailed-logo', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockDoublePushCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_double_push_ctas';
+  info: {
+    description: '';
+    displayName: 'Push Grey CTA';
+  };
+  attributes: {
+    firstCta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    secondCta: Schema.Attribute.Component<'common.not-required-link', false>;
+    text: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockExperienceVideoCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_block_experience_video_carousels';
+  info: {
+    description: '';
+    displayName: 'ExperienceVideoCarousel';
+  };
+  attributes: {
+    carouselItems: Schema.Attribute.Component<
+      'common.experience-video-carousel-item',
+      true
+    > &
+      Schema.Attribute.Required;
+    isLandscape: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockFaq extends Struct.ComponentSchema {
+  collectionName: 'components_block_faqs';
+  info: {
+    displayName: 'Faq';
+  };
+  attributes: {
+    categories: Schema.Attribute.String;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    filteringProperty: Schema.Attribute.String & Schema.Attribute.Required;
+    limit: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<10>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockHeader extends Struct.ComponentSchema {
+  collectionName: 'components_block_headers';
+  info: {
+    description: '';
+    displayName: 'Header';
+  };
+  attributes: {
+    aboveTitle: Schema.Attribute.String;
+    cta: Schema.Attribute.Component<'common.link', false>;
+    icon: Schema.Attribute.String & Schema.Attribute.Required;
+    icon2: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    text: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockHeaderWithQRcode extends Struct.ComponentSchema {
+  collectionName: 'components_block_header_with_q_rcodes';
+  info: {
+    description: '';
+    displayName: 'HeaderWithQRcode';
+  };
+  attributes: {
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    QRCode: Schema.Attribute.Component<'common.link', false>;
+    text: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockImage extends Struct.ComponentSchema {
+  collectionName: 'components_block_images';
+  info: {
+    description: '';
+    displayName: 'Image';
+  };
+  attributes: {
+    alt: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface BlockImageGallery extends Struct.ComponentSchema {
+  collectionName: 'components_block_image_galleries';
+  info: {
+    displayName: 'Image Gallery';
+  };
+  attributes: {
+    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockImageText extends Struct.ComponentSchema {
+  collectionName: 'components_block_image_texts';
+  info: {
+    description: '';
+    displayName: 'ImageText';
+  };
+  attributes: {
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    isImageRight: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    text: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockKeyNumberCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_block_key_number_carousels';
+  info: {
+    displayName: 'KeyNumberCarousel';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'common.key-number-items', true> &
+      Schema.Attribute.SetMinMax<
         {
-          min: 2;
+          max: 4;
+        },
+        number
+      >;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockLatestNews extends Struct.ComponentSchema {
+  collectionName: 'components_block_latest_news';
+  info: {
+    description: '';
+    displayName: 'latestNews';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockLink extends Struct.ComponentSchema {
+  collectionName: 'components_block_links';
+  info: {
+    description: '';
+    displayName: 'socialMediaLink';
+  };
+  attributes: {
+    name: Schema.Attribute.Enumeration<
+      [
+        'x',
+        'instagram',
+        'tiktok',
+        'youtube',
+        'facebook',
+        'snapchat',
+        'linkedin',
+      ]
+    > &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockLittleList extends Struct.ComponentSchema {
+  collectionName: 'components_block_little_lists';
+  info: {
+    description: '';
+    displayName: 'LittleList';
+  };
+  attributes: {
+    content: Schema.Attribute.Component<'common.little-list-component', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 4;
+        },
+        number
+      >;
+    description: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockLogos extends Struct.ComponentSchema {
+  collectionName: 'components_block_logos';
+  info: {
+    description: '';
+    displayName: 'Logos';
+  };
+  attributes: {
+    logo: Schema.Attribute.Component<'common.logo', true>;
+  };
+}
+
+export interface BlockOfferList extends Struct.ComponentSchema {
+  collectionName: 'components_block_offer_lists';
+  info: {
+    description: '';
+    displayName: 'OfferList';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    ctaCard: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    descritptionCard: Schema.Attribute.Text & Schema.Attribute.Required;
+    firstCartTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    firstIcon: Schema.Attribute.String & Schema.Attribute.Required;
+    offreTag: Schema.Attribute.String & Schema.Attribute.Required;
+    secondCartTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    secondIcon: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockOffersCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_block_offers_carousels';
+  info: {
+    description: '';
+    displayName: 'OffersCarousel';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Blocks;
+    items: Schema.Attribute.Component<'common.offers-carousel-item', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockOffersSection extends Struct.ComponentSchema {
+  collectionName: 'components_block_offers_sections';
+  info: {
+    description: '';
+    displayName: 'OffersSection';
+  };
+  attributes: {
+    cardCta: Schema.Attribute.Component<'common.link', false>;
+    cta: Schema.Attribute.Component<'common.link', false>;
+    descriptionCard: Schema.Attribute.Text & Schema.Attribute.Required;
+    firstCardIcon: Schema.Attribute.String;
+    firstCardtitle: Schema.Attribute.String & Schema.Attribute.Required;
+    offers: Schema.Attribute.Component<'common.offers', false>;
+    offerTag: Schema.Attribute.String;
+    secondCardIcon: Schema.Attribute.String;
+    secondCardTitle: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockOrganizationChart extends Struct.ComponentSchema {
+  collectionName: 'components_block_organization_charts';
+  info: {
+    description: '';
+    displayName: 'Organization Chart';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    people: Schema.Attribute.Component<'common.person', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockPiledCards extends Struct.ComponentSchema {
+  collectionName: 'components_block_piled_cards';
+  info: {
+    description: '';
+    displayName: 'PiledCards';
+  };
+  attributes: {
+    accessibleTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'common.piled-card-item', true>;
+  };
+}
+
+export interface BlockPushCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_push_ctas';
+  info: {
+    description: '';
+    displayName: 'Push CTA With QrCode';
+  };
+  attributes: {
+    ctaLink: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    qrCodeDescription: Schema.Attribute.String & Schema.Attribute.Required;
+    qrCodeUrl: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockRelatedNews extends Struct.ComponentSchema {
+  collectionName: 'components_block_related_news';
+  info: {
+    description: '';
+    displayName: 'RelatedNews';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockSeparator extends Struct.ComponentSchema {
+  collectionName: 'components_block_separators';
+  info: {
+    description: '';
+    displayName: 'Separator';
+  };
+  attributes: {
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface BlockSimplePushCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_simple_push_ctas';
+  info: {
+    description: '';
+    displayName: 'Push Blue CTA';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    icon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    surtitle: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockSimpleTextV2 extends Struct.ComponentSchema {
+  collectionName: 'components_block_simple_text_v2s';
+  info: {
+    description: '';
+    displayName: 'Simple Text';
+  };
+  attributes: {
+    columns: Schema.Attribute.Component<'common.simple-text-column', true> &
+      Schema.Attribute.SetMinMax<
+        {
           max: 2;
         },
         number
       >;
+    text: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface SimulatorFailureScreen extends Schema.Component {
-  collectionName: 'components_simulator_failure_screens';
+export interface BlockSocialMedia extends Struct.ComponentSchema {
+  collectionName: 'components_block_social_medias';
   info: {
-    displayName: 'Failure Screen';
     description: '';
+    displayName: 'socialMedia';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    socialMediaLink: Schema.Attribute.Component<'block.link', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface SimulatorAnswer extends Schema.Component {
-  collectionName: 'components_simulator_answers';
+export interface BlockSpace extends Struct.ComponentSchema {
+  collectionName: 'components_block_spaces';
   info: {
-    displayName: 'Answer';
     description: '';
+    displayName: 'Space';
   };
   attributes: {
-    answer: Attribute.String & Attribute.Required;
-    emoji: Attribute.String;
+    space: Schema.Attribute.Integer;
   };
 }
 
-export interface SimulatorAmountScreen extends Schema.Component {
-  collectionName: 'components_simulator_amount_screens';
+export interface BlockTabImageText extends Struct.ComponentSchema {
+  collectionName: 'components_block_tab_image_texts';
   info: {
-    displayName: 'Amount Screen';
+    displayName: 'TabImageText';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
+    block: Schema.Attribute.Component<'block.image-text', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface SimulatorAgeQuestion extends Schema.Component {
-  collectionName: 'components_simulator_age_questions';
+export interface BlockTabLittleList extends Struct.ComponentSchema {
+  collectionName: 'components_block_tab_little_lists';
   info: {
-    displayName: 'AgeQuestion';
+    displayName: 'TabLittleList';
+  };
+  attributes: {
+    block: Schema.Attribute.Component<'block.little-list', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockTabPushGreyCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_tab_push_grey_ctas';
+  info: {
+    displayName: 'TabPushGreyCTA';
+  };
+  attributes: {
+    block: Schema.Attribute.Component<'block.double-push-cta', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockTabSimpleText extends Struct.ComponentSchema {
+  collectionName: 'components_block_tab_simple_texts';
+  info: {
+    displayName: 'TabSimpleText';
+  };
+  attributes: {
+    block: Schema.Attribute.Component<'block.simple-text-v2', false>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BlockTabsImageText extends Struct.ComponentSchema {
+  collectionName: 'components_block_tabs_image_texts';
+  info: {
+    displayName: 'TabsImageText';
+  };
+  attributes: {
+    tab: Schema.Attribute.Component<'block.tab-image-text', true>;
+  };
+}
+
+export interface BlockTabsLittleList extends Struct.ComponentSchema {
+  collectionName: 'components_block_tabs_little_lists';
+  info: {
+    displayName: 'TabsLittleList';
+  };
+  attributes: {
+    tab: Schema.Attribute.Component<'block.tab-little-list', true>;
+  };
+}
+
+export interface BlockTabsPushGreyCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_tabs_push_grey_ctas';
+  info: {
     description: '';
+    displayName: 'TabsPushGreyCTA';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    answers: Attribute.Component<'simulator.answer', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 6;
-          max: 6;
-        },
-        number
-      >;
+    tab: Schema.Attribute.Component<'block.tab-push-grey-cta', true>;
   };
 }
 
-export interface SharedSeo extends Schema.Component {
-  collectionName: 'components_shared_seos';
+export interface BlockTabsSimpleText extends Struct.ComponentSchema {
+  collectionName: 'components_block_tabs_simple_texts';
   info: {
-    displayName: 'seo';
-    icon: 'search';
+    displayName: 'TabsSimpleText';
   };
   attributes: {
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 50;
-        maxLength: 160;
-      }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    keywords: Attribute.Text;
-    metaRobots: Attribute.String;
-    structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
+    tab: Schema.Attribute.Component<'block.tab-simple-text', true>;
   };
 }
 
-export interface SharedMetaSocial extends Schema.Component {
-  collectionName: 'components_shared_meta_socials';
+export interface BlockVerticalCarousel extends Struct.ComponentSchema {
+  collectionName: 'components_block_vertical_carousels';
   info: {
-    displayName: 'metaSocial';
-    icon: 'project-diagram';
-  };
-  attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 65;
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
-  };
-}
-
-export interface HomeRecommendationsSection extends Schema.Component {
-  collectionName: 'components_home_recommendations_sections';
-  info: {
-    displayName: 'recommendationsSection';
-  };
-  attributes: {
-    recommendations: Attribute.Component<'block.vertical-carousel'> &
-      Attribute.Required;
-    recommendationsBackendTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
-}
-
-export interface HomeHeroSection extends Schema.Component {
-  collectionName: 'components_home_hero_sections';
-  info: {
-    displayName: 'heroSection';
     description: '';
+    displayName: 'VerticalCarousel';
   };
   attributes: {
-    title: Attribute.Text & Attribute.Required;
-    subTitle: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
-    thirdEmoji: Attribute.String & Attribute.Required;
-    fourthEmoji: Attribute.String & Attribute.Required;
-    images: Attribute.Media<'images', true> & Attribute.Required;
-    fifthEmoji: Attribute.String & Attribute.Required;
-    sixthEmoji: Attribute.String & Attribute.Required;
+    items: Schema.Attribute.Component<'common.vertical-carousel-item', true> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
-export interface HomeEligibilitySection extends Schema.Component {
-  collectionName: 'components_home_eligibility_sections';
+export interface BlockVideo extends Struct.ComponentSchema {
+  collectionName: 'components_block_videos';
   info: {
-    displayName: 'eligibilitySection';
     description: '';
+    displayName: 'Video';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'home.eligibility-items', true> &
-      Attribute.Required;
-    cardTitle: Attribute.Text & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardCta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstEmoji: Attribute.String & Attribute.Required;
-    secondEmoji: Attribute.String & Attribute.Required;
+    alt: Schema.Attribute.Text;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    url: Schema.Attribute.Text;
   };
 }
 
-export interface HomeEligibilityItems extends Schema.Component {
-  collectionName: 'components_home_eligibility_items';
+export interface CommonDetailedLogo extends Struct.ComponentSchema {
+  collectionName: 'components_common_detailed_logos';
   info: {
-    displayName: 'eligibilityItems';
+    displayName: 'Detailed Logo';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface HeaderNavigationItems extends Schema.Component {
-  collectionName: 'components_header_navigation_items';
+export interface CommonExperienceVideoCarouselItem
+  extends Struct.ComponentSchema {
+  collectionName: 'components_common_experience_video_carousel_items';
   info: {
-    displayName: 'navigationItems';
+    displayName: 'ExperienceVideoCarouselItem';
   };
   attributes: {
-    label: Attribute.String & Attribute.Required;
-    megaMenu: Attribute.Component<'header.mega-menu'>;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String;
   };
 }
 
-export interface HeaderMegaMenu extends Schema.Component {
-  collectionName: 'components_header_mega_menus';
+export interface CommonFiltre extends Struct.ComponentSchema {
+  collectionName: 'components_common_filtres';
   info: {
-    displayName: 'megaMenu';
     description: '';
+    displayName: 'Filtre';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    primaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required;
-    secondaryListItems: Attribute.Component<'common.link', true>;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    cardTitle: Attribute.String & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
-    bannerText: Attribute.String;
-    cardFirstEmoji: Attribute.String & Attribute.Required;
-    cardSecondEmoji: Attribute.String & Attribute.Required;
-    bannerAndroidUrl: Attribute.String;
-    bannerIosUrl: Attribute.String;
-    bannerDefaultUrl: Attribute.String;
-    theme: Attribute.Enumeration<
+    filtre: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface CommonKeyNumberItems extends Struct.ComponentSchema {
+  collectionName: 'components_common_key_number_items';
+  info: {
+    displayName: 'KeyNumberItems';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    firstEmoji: Schema.Attribute.String;
+    secondEmoji: Schema.Attribute.String;
+    thirdEmoji: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface CommonLink extends Struct.ComponentSchema {
+  collectionName: 'components_common_links';
+  info: {
+    description: '';
+    displayName: 'Link';
+  };
+  attributes: {
+    eventName: Schema.Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport',
+      ]
+    >;
+    eventOrigin: Schema.Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer',
+      ]
+    >;
+    Label: Schema.Attribute.String & Schema.Attribute.Required;
+    URL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface CommonLittleListComponent extends Struct.ComponentSchema {
+  collectionName: 'components_common_little_list_components';
+  info: {
+    description: '';
+    displayName: 'LittleListComponent';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    firstEmoji: Schema.Attribute.String;
+    secondEmoji: Schema.Attribute.String;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+  };
+}
+
+export interface CommonLogo extends Struct.ComponentSchema {
+  collectionName: 'components_common_logos';
+  info: {
+    description: '';
+    displayName: 'Logo';
+  };
+  attributes: {
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface CommonNotRequiredLink extends Struct.ComponentSchema {
+  collectionName: 'components_common_not_required_links';
+  info: {
+    description: '';
+    displayName: 'NotRequiredLink';
+  };
+  attributes: {
+    eventName: Schema.Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport',
+      ]
+    >;
+    eventOrigin: Schema.Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer',
+      ]
+    >;
+    Label: Schema.Attribute.String & Schema.Attribute.Required;
+    URL: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface CommonOffers extends Struct.ComponentSchema {
+  collectionName: 'components_common_offers';
+  info: {
+    description: '';
+    displayName: 'Offers';
+  };
+  attributes: {
+    controlsLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    nextButtonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    previousButtonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface CommonOffersCarouselItem extends Struct.ComponentSchema {
+  collectionName: 'components_common_offers_carousel_items';
+  info: {
+    description: '';
+    displayName: 'OffersCarouselItem';
+  };
+  attributes: {
+    firstIcon: Schema.Attribute.String & Schema.Attribute.Required;
+    secondIcon: Schema.Attribute.String & Schema.Attribute.Required;
+    surtitle: Schema.Attribute.String & Schema.Attribute.Required;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+    theme: Schema.Attribute.Enumeration<
       [
         'purple',
         'yellow',
@@ -259,195 +759,39 @@ export interface HeaderMegaMenu extends Schema.Component {
         'deeppink',
         'aquamarine',
         'lightgray',
-        'saumon'
+        'saumon',
       ]
     > &
-      Attribute.DefaultTo<'gold'>;
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'purple'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface HeaderLogin extends Schema.Component {
-  collectionName: 'components_header_logins';
+export interface CommonPerson extends Struct.ComponentSchema {
+  collectionName: 'components_common_people';
   info: {
-    displayName: 'login';
+    displayName: 'Person';
   };
   attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
-    loginItems: Attribute.Component<'header.login-items', true> &
-      Attribute.SetMinMax<
-        {
-          max: 2;
-        },
-        number
-      >;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    position: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface HeaderLoginItems extends Schema.Component {
-  collectionName: 'components_header_login_items';
-  info: {
-    displayName: 'loginItems';
-    description: '';
-  };
-  attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface HeaderHeader extends Schema.Component {
-  collectionName: 'components_header_headers';
-  info: {
-    displayName: 'header';
-  };
-  attributes: {};
-}
-
-export interface HeaderAccountItem extends Schema.Component {
-  collectionName: 'components_header_account_item';
-  info: {
-    displayName: 'accountItem';
-    description: '';
-  };
-  attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface HeaderAccountDropdown extends Schema.Component {
-  collectionName: 'components_header_account_dropdowns';
-  info: {
-    displayName: 'accountDropdown';
-  };
-  attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'header.account-item', true> &
-      Attribute.Required;
-  };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
-}
-
-export interface CommonVerticalCarouselItem extends Schema.Component {
-  collectionName: 'components_common_vertical_carousel_items';
-  info: {
-    displayName: 'verticalCarouselItem';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'>;
-  };
-}
-
-export interface CommonSimpleTextColumn extends Schema.Component {
-  collectionName: 'components_common_simple_text_columns';
-  info: {
-    displayName: 'Simple Text Column';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Blocks & Attribute.Required;
-  };
-}
-
-export interface CommonPiledCardItem extends Schema.Component {
+export interface CommonPiledCardItem extends Struct.ComponentSchema {
   collectionName: 'components_common_piled_card_items';
   info: {
-    displayName: 'PiledCardItem';
     description: '';
+    displayName: 'PiledCardItem';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    theme: Attribute.Enumeration<
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    firstIcon: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    secondIcon: Schema.Attribute.String;
+    theme: Schema.Attribute.Enumeration<
       [
         'purple',
         'yellow',
@@ -461,54 +805,207 @@ export interface CommonPiledCardItem extends Schema.Component {
         'deeppink',
         'aquamarine',
         'lightgray',
-        'saumon'
+        'saumon',
       ]
     > &
-      Attribute.Required &
-      Attribute.DefaultTo<'purple'>;
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'purple'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonPerson extends Schema.Component {
-  collectionName: 'components_common_people';
+export interface CommonSimpleTextColumn extends Struct.ComponentSchema {
+  collectionName: 'components_common_simple_text_columns';
   info: {
-    displayName: 'Person';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    position: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
-export interface CommonOffers extends Schema.Component {
-  collectionName: 'components_common_offers';
-  info: {
-    displayName: 'Offers';
     description: '';
+    displayName: 'Simple Text Column';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String & Attribute.Required;
-    controlsLabel: Attribute.String & Attribute.Required;
+    text: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    title: Schema.Attribute.String;
   };
 }
 
-export interface CommonOffersCarouselItem extends Schema.Component {
-  collectionName: 'components_common_offers_carousel_items';
+export interface CommonVerticalCarouselItem extends Struct.ComponentSchema {
+  collectionName: 'components_common_vertical_carousel_items';
   info: {
-    displayName: 'OffersCarouselItem';
     description: '';
+    displayName: 'verticalCarouselItem';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    surtitle: Attribute.String & Attribute.Required;
-    firstIcon: Attribute.String & Attribute.Required;
-    secondIcon: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
-    theme: Attribute.Enumeration<
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface FooterLegalLinks extends Struct.ComponentSchema {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
+}
+
+export interface FooterList extends Struct.ComponentSchema {
+  collectionName: 'components_footer_lists';
+  info: {
+    description: '';
+    displayName: 'Lists';
+  };
+  attributes: {
+    Links: Schema.Attribute.Component<'common.link', true>;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HeaderAccountDropdown extends Struct.ComponentSchema {
+  collectionName: 'components_header_account_dropdowns';
+  info: {
+    displayName: 'accountDropdown';
+  };
+  attributes: {
+    buttonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'header.account-item', true> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface HeaderAccountItem extends Struct.ComponentSchema {
+  collectionName: 'components_header_account_item';
+  info: {
+    description: '';
+    displayName: 'accountItem';
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.Required;
+    emoji: Schema.Attribute.String & Schema.Attribute.Required;
+    eventName: Schema.Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport',
+      ]
+    >;
+    eventOrigin: Schema.Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer',
+      ]
+    >;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HeaderHeader extends Struct.ComponentSchema {
+  collectionName: 'components_header_headers';
+  info: {
+    displayName: 'header';
+  };
+  attributes: {};
+}
+
+export interface HeaderLogin extends Struct.ComponentSchema {
+  collectionName: 'components_header_logins';
+  info: {
+    displayName: 'login';
+  };
+  attributes: {
+    buttonLabel: Schema.Attribute.String & Schema.Attribute.Required;
+    loginItems: Schema.Attribute.Component<'header.login-items', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
+  };
+}
+
+export interface HeaderLoginItems extends Struct.ComponentSchema {
+  collectionName: 'components_header_login_items';
+  info: {
+    description: '';
+    displayName: 'loginItems';
+  };
+  attributes: {
+    color: Schema.Attribute.String & Schema.Attribute.Required;
+    emoji: Schema.Attribute.String & Schema.Attribute.Required;
+    eventName: Schema.Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport',
+      ]
+    >;
+    eventOrigin: Schema.Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer',
+      ]
+    >;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HeaderMegaMenu extends Struct.ComponentSchema {
+  collectionName: 'components_header_mega_menus';
+  info: {
+    description: '';
+    displayName: 'megaMenu';
+  };
+  attributes: {
+    bannerAndroidUrl: Schema.Attribute.String;
+    bannerDefaultUrl: Schema.Attribute.String;
+    bannerIosUrl: Schema.Attribute.String;
+    bannerText: Schema.Attribute.String;
+    cardDescription: Schema.Attribute.String & Schema.Attribute.Required;
+    cardFirstEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    cardLink: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    cardSecondEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    cardTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    primaryListItems: Schema.Attribute.Component<'common.link', true> &
+      Schema.Attribute.Required;
+    secondaryListItems: Schema.Attribute.Component<'common.link', true>;
+    theme: Schema.Attribute.Enumeration<
       [
         'purple',
         'yellow',
@@ -521,800 +1018,329 @@ export interface CommonOffersCarouselItem extends Schema.Component {
         'deeppink',
         'aquamarine',
         'lightgray',
-        'saumon'
+        'saumon',
       ]
     > &
-      Attribute.Required &
-      Attribute.DefaultTo<'purple'>;
+      Schema.Attribute.DefaultTo<'gold'>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonNotRequiredLink extends Schema.Component {
-  collectionName: 'components_common_not_required_links';
+export interface HeaderNavigationItems extends Struct.ComponentSchema {
+  collectionName: 'components_header_navigation_items';
   info: {
-    displayName: 'NotRequiredLink';
+    displayName: 'navigationItems';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    megaMenu: Schema.Attribute.Component<'header.mega-menu', false>;
+  };
+}
+
+export interface HomeEligibilityItems extends Struct.ComponentSchema {
+  collectionName: 'components_home_eligibility_items';
+  info: {
+    displayName: 'eligibilityItems';
+  };
+  attributes: {
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    emoji: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface HomeEligibilitySection extends Struct.ComponentSchema {
+  collectionName: 'components_home_eligibility_sections';
+  info: {
     description: '';
+    displayName: 'eligibilitySection';
   };
   attributes: {
-    Label: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
+    cardCta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    cardDescription: Schema.Attribute.String & Schema.Attribute.Required;
+    cardTitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    firstEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    items: Schema.Attribute.Component<'home.eligibility-items', true> &
+      Schema.Attribute.Required;
+    secondEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonLogo extends Schema.Component {
-  collectionName: 'components_common_logos';
+export interface HomeHeroSection extends Struct.ComponentSchema {
+  collectionName: 'components_home_hero_sections';
   info: {
-    displayName: 'Logo';
     description: '';
+    displayName: 'heroSection';
   };
   attributes: {
-    logo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    fifthEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    firstEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    fourthEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    images: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    secondEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    sixthEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    subTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    thirdEmoji: Schema.Attribute.String & Schema.Attribute.Required;
+    title: Schema.Attribute.Text & Schema.Attribute.Required;
   };
 }
 
-export interface CommonLittleListComponent extends Schema.Component {
-  collectionName: 'components_common_little_list_components';
+export interface HomeRecommendationsSection extends Struct.ComponentSchema {
+  collectionName: 'components_home_recommendations_sections';
   info: {
-    displayName: 'LittleListComponent';
+    displayName: 'recommendationsSection';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    recommendations: Schema.Attribute.Component<
+      'block.vertical-carousel',
+      false
+    > &
+      Schema.Attribute.Required;
+    recommendationsBackendTag: Schema.Attribute.String &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface SharedMetaSocial extends Struct.ComponentSchema {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    description: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    socialNetwork: Schema.Attribute.Enumeration<['Facebook', 'X']> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+  };
+}
+
+export interface SharedSeo extends Struct.ComponentSchema {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    canonicalURL: Schema.Attribute.String;
+    keywords: Schema.Attribute.Text;
+    metaDescription: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 160;
+        minLength: 50;
+      }>;
+    metaImage: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    metaRobots: Schema.Attribute.String;
+    metaSocial: Schema.Attribute.Component<'shared.meta-social', true>;
+    metaTitle: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaViewport: Schema.Attribute.String;
+    structuredData: Schema.Attribute.JSON;
+  };
+}
+
+export interface SimulatorAgeQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_age_questions';
+  info: {
     description: '';
+    displayName: 'AgeQuestion';
   };
   attributes: {
-    text: Attribute.Text & Attribute.Required;
-    description: Attribute.Text;
-    firstEmoji: Attribute.String;
-    secondEmoji: Attribute.String;
+    answers: Schema.Attribute.Component<'simulator.answer', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 6;
+          min: 6;
+        },
+        number
+      >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonLink extends Schema.Component {
-  collectionName: 'components_common_links';
+export interface SimulatorAmountScreen extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_amount_screens';
   info: {
-    displayName: 'Link';
+    displayName: 'Amount Screen';
+  };
+  attributes: {
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SimulatorAnswer extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_answers';
+  info: {
     description: '';
+    displayName: 'Answer';
   };
   attributes: {
-    Label: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
+    answer: Schema.Attribute.String & Schema.Attribute.Required;
+    emoji: Schema.Attribute.String;
   };
 }
 
-export interface CommonKeyNumberItems extends Schema.Component {
-  collectionName: 'components_common_key_number_items';
+export interface SimulatorFailureScreen extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_failure_screens';
   info: {
-    displayName: 'KeyNumberItems';
-  };
-  attributes: {
-    firstEmoji: Attribute.String;
-    secondEmoji: Attribute.String;
-    thirdEmoji: Attribute.String;
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface CommonFiltre extends Schema.Component {
-  collectionName: 'components_common_filtres';
-  info: {
-    displayName: 'Filtre';
     description: '';
+    displayName: 'Failure Screen';
   };
   attributes: {
-    filtre: Attribute.String & Attribute.Required;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    text: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface CommonExperienceVideoCarouselItem extends Schema.Component {
-  collectionName: 'components_common_experience_video_carousel_items';
+export interface SimulatorRadioQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_radio_questions';
   info: {
-    displayName: 'ExperienceVideoCarouselItem';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    image: Attribute.Media<'images'>;
-  };
-}
-
-export interface CommonDetailedLogo extends Schema.Component {
-  collectionName: 'components_common_detailed_logos';
-  info: {
-    displayName: 'Detailed Logo';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
-export interface BlockVideo extends Schema.Component {
-  collectionName: 'components_block_videos';
-  info: {
-    displayName: 'Video';
     description: '';
+    displayName: 'RadioQuestion';
   };
   attributes: {
-    url: Attribute.Text;
-    description: Attribute.Text;
-    alt: Attribute.Text;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-  };
-}
-
-export interface BlockVerticalCarousel extends Schema.Component {
-  collectionName: 'components_block_vertical_carousels';
-  info: {
-    displayName: 'VerticalCarousel';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.Text & Attribute.Required;
-    items: Attribute.Component<'common.vertical-carousel-item', true> &
-      Attribute.Required;
-  };
-}
-
-export interface BlockTabsSimpleText extends Schema.Component {
-  collectionName: 'components_block_tabs_simple_texts';
-  info: {
-    displayName: 'TabsSimpleText';
-  };
-  attributes: {
-    tab: Attribute.Component<'block.tab-simple-text', true>;
-  };
-}
-
-export interface BlockTabsPushGreyCta extends Schema.Component {
-  collectionName: 'components_block_tabs_push_grey_ctas';
-  info: {
-    displayName: 'TabsPushGreyCTA';
-    description: '';
-  };
-  attributes: {
-    tab: Attribute.Component<'block.tab-push-grey-cta', true>;
-  };
-}
-
-export interface BlockTabsLittleList extends Schema.Component {
-  collectionName: 'components_block_tabs_little_lists';
-  info: {
-    displayName: 'TabsLittleList';
-  };
-  attributes: {
-    tab: Attribute.Component<'block.tab-little-list', true>;
-  };
-}
-
-export interface BlockTabsImageText extends Schema.Component {
-  collectionName: 'components_block_tabs_image_texts';
-  info: {
-    displayName: 'TabsImageText';
-  };
-  attributes: {
-    tab: Attribute.Component<'block.tab-image-text', true>;
-  };
-}
-
-export interface BlockTabSimpleText extends Schema.Component {
-  collectionName: 'components_block_tab_simple_texts';
-  info: {
-    displayName: 'TabSimpleText';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    block: Attribute.Component<'block.simple-text-v2'>;
-  };
-}
-
-export interface BlockTabPushGreyCta extends Schema.Component {
-  collectionName: 'components_block_tab_push_grey_ctas';
-  info: {
-    displayName: 'TabPushGreyCTA';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    block: Attribute.Component<'block.double-push-cta'>;
-  };
-}
-
-export interface BlockTabLittleList extends Schema.Component {
-  collectionName: 'components_block_tab_little_lists';
-  info: {
-    displayName: 'TabLittleList';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    block: Attribute.Component<'block.little-list'>;
-  };
-}
-
-export interface BlockTabImageText extends Schema.Component {
-  collectionName: 'components_block_tab_image_texts';
-  info: {
-    displayName: 'TabImageText';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    block: Attribute.Component<'block.image-text'>;
-  };
-}
-
-export interface BlockSpace extends Schema.Component {
-  collectionName: 'components_block_spaces';
-  info: {
-    displayName: 'Space';
-    description: '';
-  };
-  attributes: {
-    space: Attribute.Integer;
-  };
-}
-
-export interface BlockSocialMedia extends Schema.Component {
-  collectionName: 'components_block_social_medias';
-  info: {
-    displayName: 'socialMedia';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    socialMediaLink: Attribute.Component<'block.link', true> &
-      Attribute.Required;
-  };
-}
-
-export interface BlockSimpleTextV2 extends Schema.Component {
-  collectionName: 'components_block_simple_text_v2s';
-  info: {
-    displayName: 'Simple Text';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Blocks & Attribute.Required;
-    columns: Attribute.Component<'common.simple-text-column', true> &
-      Attribute.SetMinMax<
+    answers: Schema.Attribute.Component<'simulator.answer', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
         {
           max: 2;
+          min: 2;
         },
         number
       >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface BlockSimplePushCta extends Schema.Component {
-  collectionName: 'components_block_simple_push_ctas';
+export interface SimulatorStep extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_steps';
   info: {
-    displayName: 'Push Blue CTA';
-    description: '';
+    displayName: 'Step';
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    surtitle: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    icon: Attribute.String;
+    step: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface BlockSeparator extends Schema.Component {
-  collectionName: 'components_block_separators';
+export interface SimulatorSuccessScreen extends Struct.ComponentSchema {
+  collectionName: 'components_simulator_success_screens';
   info: {
-    displayName: 'Separator';
-    description: '';
+    displayName: 'Success Screen';
   };
   attributes: {
-    isActive: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
+    cta: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    needSupport: Schema.Attribute.String & Schema.Attribute.Required;
+    steps: Schema.Attribute.Component<'simulator.step', true> &
+      Schema.Attribute.Required;
+    supportLink: Schema.Attribute.Component<'common.link', false> &
+      Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
-export interface BlockRelatedNews extends Schema.Component {
-  collectionName: 'components_block_related_news';
-  info: {
-    displayName: 'RelatedNews';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    cta: Attribute.Component<'common.link'>;
-  };
-}
-
-export interface BlockPushCta extends Schema.Component {
-  collectionName: 'components_block_push_ctas';
-  info: {
-    displayName: 'Push CTA With QrCode';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
-    qrCodeDescription: Attribute.String & Attribute.Required;
-    qrCodeUrl: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockPiledCards extends Schema.Component {
-  collectionName: 'components_block_piled_cards';
-  info: {
-    displayName: 'PiledCards';
-    description: '';
-  };
-  attributes: {
-    items: Attribute.Component<'common.piled-card-item', true>;
-    accessibleTitle: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockOrganizationChart extends Schema.Component {
-  collectionName: 'components_block_organization_charts';
-  info: {
-    displayName: 'Organization Chart';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text & Attribute.Required;
-    people: Attribute.Component<'common.person', true> & Attribute.Required;
-  };
-}
-
-export interface BlockOffersSection extends Schema.Component {
-  collectionName: 'components_block_offers_sections';
-  info: {
-    displayName: 'OffersSection';
-    description: '';
-  };
-  attributes: {
-    offers: Attribute.Component<'common.offers'>;
-    offerTag: Attribute.String;
-    cta: Attribute.Component<'common.link'>;
-    firstCardtitle: Attribute.String & Attribute.Required;
-    secondCardTitle: Attribute.String & Attribute.Required;
-    descriptionCard: Attribute.Text & Attribute.Required;
-    firstCardIcon: Attribute.String;
-    secondCardIcon: Attribute.String;
-    cardCta: Attribute.Component<'common.link'>;
-  };
-}
-
-export interface BlockOffersCarousel extends Schema.Component {
-  collectionName: 'components_block_offers_carousels';
-  info: {
-    displayName: 'OffersCarousel';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'common.offers-carousel-item', true> &
-      Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    description: Attribute.Blocks;
-  };
-}
-
-export interface BlockOfferList extends Schema.Component {
-  collectionName: 'components_block_offer_lists';
-  info: {
-    displayName: 'OfferList';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    offreTag: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    firstCartTitle: Attribute.String & Attribute.Required;
-    secondCartTitle: Attribute.String & Attribute.Required;
-    descritptionCard: Attribute.Text & Attribute.Required;
-    firstIcon: Attribute.String & Attribute.Required;
-    secondIcon: Attribute.String & Attribute.Required;
-    ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
-  };
-}
-
-export interface BlockLogos extends Schema.Component {
-  collectionName: 'components_block_logos';
-  info: {
-    displayName: 'Logos';
-    description: '';
-  };
-  attributes: {
-    logo: Attribute.Component<'common.logo', true>;
-  };
-}
-
-export interface BlockLittleList extends Schema.Component {
-  collectionName: 'components_block_little_lists';
-  info: {
-    displayName: 'LittleList';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text;
-    content: Attribute.Component<'common.little-list-component', true> &
-      Attribute.SetMinMax<
-        {
-          max: 4;
-        },
-        number
-      >;
-  };
-}
-
-export interface BlockLink extends Schema.Component {
-  collectionName: 'components_block_links';
-  info: {
-    displayName: 'socialMediaLink';
-    description: '';
-  };
-  attributes: {
-    name: Attribute.Enumeration<
-      [
-        'x',
-        'instagram',
-        'tiktok',
-        'youtube',
-        'facebook',
-        'snapchat',
-        'linkedin'
-      ]
-    > &
-      Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockLatestNews extends Schema.Component {
-  collectionName: 'components_block_latest_news';
-  info: {
-    displayName: 'latestNews';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.Text & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-  };
-}
-
-export interface BlockKeyNumberCarousel extends Schema.Component {
-  collectionName: 'components_block_key_number_carousels';
-  info: {
-    displayName: 'KeyNumberCarousel';
-  };
-  attributes: {
-    title: Attribute.String;
-    items: Attribute.Component<'common.key-number-items', true> &
-      Attribute.SetMinMax<
-        {
-          max: 4;
-        },
-        number
-      >;
-  };
-}
-
-export interface BlockImage extends Schema.Component {
-  collectionName: 'components_block_images';
-  info: {
-    displayName: 'Image';
-    description: '';
-  };
-  attributes: {
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    description: Attribute.Text;
-    alt: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockImageText extends Schema.Component {
-  collectionName: 'components_block_image_texts';
-  info: {
-    displayName: 'ImageText';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    isImageRight: Attribute.Boolean & Attribute.DefaultTo<true>;
-    icon: Attribute.String;
-    text: Attribute.Blocks & Attribute.Required;
-  };
-}
-
-export interface BlockImageGallery extends Schema.Component {
-  collectionName: 'components_block_image_galleries';
-  info: {
-    displayName: 'Image Gallery';
-  };
-  attributes: {
-    images: Attribute.Media<'images', true> & Attribute.Required;
-  };
-}
-
-export interface BlockHeader extends Schema.Component {
-  collectionName: 'components_block_headers';
-  info: {
-    displayName: 'Header';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-    icon: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'>;
-    icon2: Attribute.String;
-    aboveTitle: Attribute.String;
-  };
-}
-
-export interface BlockHeaderWithQRcode extends Schema.Component {
-  collectionName: 'components_block_header_with_q_rcodes';
-  info: {
-    displayName: 'HeaderWithQRcode';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    icon: Attribute.String;
-    QRCode: Attribute.Component<'common.link'>;
-  };
-}
-
-export interface BlockFaq extends Schema.Component {
-  collectionName: 'components_block_faqs';
-  info: {
-    displayName: 'Faq';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    categories: Attribute.String;
-    filteringProperty: Attribute.String & Attribute.Required;
-    limit: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<10>;
-  };
-}
-
-export interface BlockExperienceVideoCarousel extends Schema.Component {
-  collectionName: 'components_block_experience_video_carousels';
-  info: {
-    displayName: 'ExperienceVideoCarousel';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    carouselItems: Attribute.Component<
-      'common.experience-video-carousel-item',
-      true
-    > &
-      Attribute.Required;
-    isLandscape: Attribute.Boolean & Attribute.DefaultTo<true>;
-  };
-}
-
-export interface BlockDoublePushCta extends Schema.Component {
-  collectionName: 'components_block_double_push_ctas';
-  info: {
-    displayName: 'Push Grey CTA';
-    description: '';
-  };
-  attributes: {
-    image: Attribute.Media<'images'> & Attribute.Required;
-    title: Attribute.String & Attribute.Required;
-    text: Attribute.Text;
-    firstCta: Attribute.Component<'common.link'> & Attribute.Required;
-    icon: Attribute.String;
-    secondCta: Attribute.Component<'common.not-required-link'>;
-  };
-}
-
-export interface BlockDetailedLogos extends Schema.Component {
-  collectionName: 'components_block_detailed_logos';
-  info: {
-    displayName: 'Detailed Logos';
-  };
-  attributes: {
-    title: Attribute.String;
-    logos: Attribute.Component<'common.detailed-logo', true> &
-      Attribute.Required;
-  };
-}
-
-export interface BlockColumnsText extends Schema.Component {
-  collectionName: 'components_block_columns_texts';
-  info: {
-    displayName: 'Columns Text';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    video: Attribute.Component<'block.video'>;
-    columns: Attribute.Component<'common.simple-text-column', true>;
-  };
-}
-
-export interface BlockCenteredTitle extends Schema.Component {
-  collectionName: 'components_block_centered_titles';
-  info: {
-    displayName: 'Centered Title';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface BlockCenteredText extends Schema.Component {
-  collectionName: 'components_block_centered_texts';
-  info: {
-    displayName: 'Centered Text';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    description: Attribute.Text & Attribute.Required;
-  };
-}
-
-export interface BlockBreadcrumb extends Schema.Component {
-  collectionName: 'components_block_breadcrumbs';
-  info: {
-    displayName: 'Breadcrumbs';
-    description: '';
-  };
-  attributes: {};
-}
-
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
-      'simulator.success-screen': SimulatorSuccessScreen;
-      'simulator.step': SimulatorStep;
-      'simulator.radio-question': SimulatorRadioQuestion;
-      'simulator.failure-screen': SimulatorFailureScreen;
-      'simulator.answer': SimulatorAnswer;
-      'simulator.amount-screen': SimulatorAmountScreen;
-      'simulator.age-question': SimulatorAgeQuestion;
-      'shared.seo': SharedSeo;
-      'shared.meta-social': SharedMetaSocial;
-      'home.recommendations-section': HomeRecommendationsSection;
-      'home.hero-section': HomeHeroSection;
-      'home.eligibility-section': HomeEligibilitySection;
-      'home.eligibility-items': HomeEligibilityItems;
-      'header.navigation-items': HeaderNavigationItems;
-      'header.mega-menu': HeaderMegaMenu;
-      'header.login': HeaderLogin;
-      'header.login-items': HeaderLoginItems;
-      'header.header': HeaderHeader;
-      'header.account-item': HeaderAccountItem;
-      'header.account-dropdown': HeaderAccountDropdown;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
-      'common.vertical-carousel-item': CommonVerticalCarouselItem;
-      'common.simple-text-column': CommonSimpleTextColumn;
-      'common.piled-card-item': CommonPiledCardItem;
-      'common.person': CommonPerson;
-      'common.offers': CommonOffers;
-      'common.offers-carousel-item': CommonOffersCarouselItem;
-      'common.not-required-link': CommonNotRequiredLink;
-      'common.logo': CommonLogo;
-      'common.little-list-component': CommonLittleListComponent;
-      'common.link': CommonLink;
-      'common.key-number-items': CommonKeyNumberItems;
-      'common.filtre': CommonFiltre;
-      'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
-      'common.detailed-logo': CommonDetailedLogo;
-      'block.video': BlockVideo;
-      'block.vertical-carousel': BlockVerticalCarousel;
-      'block.tabs-simple-text': BlockTabsSimpleText;
-      'block.tabs-push-grey-cta': BlockTabsPushGreyCta;
-      'block.tabs-little-list': BlockTabsLittleList;
-      'block.tabs-image-text': BlockTabsImageText;
-      'block.tab-simple-text': BlockTabSimpleText;
-      'block.tab-push-grey-cta': BlockTabPushGreyCta;
-      'block.tab-little-list': BlockTabLittleList;
-      'block.tab-image-text': BlockTabImageText;
-      'block.space': BlockSpace;
-      'block.social-media': BlockSocialMedia;
-      'block.simple-text-v2': BlockSimpleTextV2;
-      'block.simple-push-cta': BlockSimplePushCta;
-      'block.separator': BlockSeparator;
-      'block.related-news': BlockRelatedNews;
-      'block.push-cta': BlockPushCta;
-      'block.piled-cards': BlockPiledCards;
-      'block.organization-chart': BlockOrganizationChart;
-      'block.offers-section': BlockOffersSection;
-      'block.offers-carousel': BlockOffersCarousel;
-      'block.offer-list': BlockOfferList;
-      'block.logos': BlockLogos;
-      'block.little-list': BlockLittleList;
-      'block.link': BlockLink;
-      'block.latest-news': BlockLatestNews;
-      'block.key-number-carousel': BlockKeyNumberCarousel;
-      'block.image': BlockImage;
-      'block.image-text': BlockImageText;
-      'block.image-gallery': BlockImageGallery;
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
+      'block.breadcrumb': BlockBreadcrumb;
+      'block.centered-text': BlockCenteredText;
+      'block.centered-title': BlockCenteredTitle;
+      'block.columns-text': BlockColumnsText;
+      'block.detailed-logos': BlockDetailedLogos;
+      'block.double-push-cta': BlockDoublePushCta;
+      'block.experience-video-carousel': BlockExperienceVideoCarousel;
+      'block.faq': BlockFaq;
       'block.header': BlockHeader;
       'block.header-with-q-rcode': BlockHeaderWithQRcode;
-      'block.faq': BlockFaq;
-      'block.experience-video-carousel': BlockExperienceVideoCarousel;
-      'block.double-push-cta': BlockDoublePushCta;
-      'block.detailed-logos': BlockDetailedLogos;
-      'block.columns-text': BlockColumnsText;
-      'block.centered-title': BlockCenteredTitle;
-      'block.centered-text': BlockCenteredText;
-      'block.breadcrumb': BlockBreadcrumb;
+      'block.image': BlockImage;
+      'block.image-gallery': BlockImageGallery;
+      'block.image-text': BlockImageText;
+      'block.key-number-carousel': BlockKeyNumberCarousel;
+      'block.latest-news': BlockLatestNews;
+      'block.link': BlockLink;
+      'block.little-list': BlockLittleList;
+      'block.logos': BlockLogos;
+      'block.offer-list': BlockOfferList;
+      'block.offers-carousel': BlockOffersCarousel;
+      'block.offers-section': BlockOffersSection;
+      'block.organization-chart': BlockOrganizationChart;
+      'block.piled-cards': BlockPiledCards;
+      'block.push-cta': BlockPushCta;
+      'block.related-news': BlockRelatedNews;
+      'block.separator': BlockSeparator;
+      'block.simple-push-cta': BlockSimplePushCta;
+      'block.simple-text-v2': BlockSimpleTextV2;
+      'block.social-media': BlockSocialMedia;
+      'block.space': BlockSpace;
+      'block.tab-image-text': BlockTabImageText;
+      'block.tab-little-list': BlockTabLittleList;
+      'block.tab-push-grey-cta': BlockTabPushGreyCta;
+      'block.tab-simple-text': BlockTabSimpleText;
+      'block.tabs-image-text': BlockTabsImageText;
+      'block.tabs-little-list': BlockTabsLittleList;
+      'block.tabs-push-grey-cta': BlockTabsPushGreyCta;
+      'block.tabs-simple-text': BlockTabsSimpleText;
+      'block.vertical-carousel': BlockVerticalCarousel;
+      'block.video': BlockVideo;
+      'common.detailed-logo': CommonDetailedLogo;
+      'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
+      'common.filtre': CommonFiltre;
+      'common.key-number-items': CommonKeyNumberItems;
+      'common.link': CommonLink;
+      'common.little-list-component': CommonLittleListComponent;
+      'common.logo': CommonLogo;
+      'common.not-required-link': CommonNotRequiredLink;
+      'common.offers': CommonOffers;
+      'common.offers-carousel-item': CommonOffersCarouselItem;
+      'common.person': CommonPerson;
+      'common.piled-card-item': CommonPiledCardItem;
+      'common.simple-text-column': CommonSimpleTextColumn;
+      'common.vertical-carousel-item': CommonVerticalCarouselItem;
+      'footer.legal-links': FooterLegalLinks;
+      'footer.list': FooterList;
+      'header.account-dropdown': HeaderAccountDropdown;
+      'header.account-item': HeaderAccountItem;
+      'header.header': HeaderHeader;
+      'header.login': HeaderLogin;
+      'header.login-items': HeaderLoginItems;
+      'header.mega-menu': HeaderMegaMenu;
+      'header.navigation-items': HeaderNavigationItems;
+      'home.eligibility-items': HomeEligibilityItems;
+      'home.eligibility-section': HomeEligibilitySection;
+      'home.hero-section': HomeHeroSection;
+      'home.recommendations-section': HomeRecommendationsSection;
+      'shared.meta-social': SharedMetaSocial;
+      'shared.seo': SharedSeo;
+      'simulator.age-question': SimulatorAgeQuestion;
+      'simulator.amount-screen': SimulatorAmountScreen;
+      'simulator.answer': SimulatorAnswer;
+      'simulator.failure-screen': SimulatorFailureScreen;
+      'simulator.radio-question': SimulatorRadioQuestion;
+      'simulator.step': SimulatorStep;
+      'simulator.success-screen': SimulatorSuccessScreen;
     }
   }
 }

@@ -2,18 +2,26 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
+import {
+  ComponentCommonLinkFragment,
+  UploadFileFragment,
+} from '@/generated/graphql'
 import { VerticalCarousel } from '@/lib/blocks/verticalCarousel/VerticalCarousel'
-import { RecommendationsProps, VerticalCarouselSlideProps } from '@/types/props'
+import { Offer } from '@/types/playlist'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
+type RecommendationsProps = {
+  requiredTitle: string
+  cta: ComponentCommonLinkFragment
+  recommendations: Offer[]
+}
+
 export function Recommendations(props: RecommendationsProps) {
-  const { title, recommendations, cta } = props
-  const verticalCarouselItems: Omit<
-    VerticalCarouselSlideProps,
-    'slideIndex'
-  >[] = recommendations.map((recommendation) => ({
+  const { requiredTitle, recommendations, cta } = props
+  const verticalCarouselItems = recommendations.map((recommendation) => ({
+    id: recommendation.id.toString(),
     description: recommendation.venue.commonName,
-    image: recommendation.image?.url ?? null,
+    image: { url: recommendation.image?.url ?? null } as UploadFileFragment,
     title: recommendation.name,
     url: getOfferUrl(recommendation.id),
   }))
@@ -21,8 +29,9 @@ export function Recommendations(props: RecommendationsProps) {
   return (
     <Root>
       <VerticalCarousel
-        title={title}
-        items={verticalCarouselItems}
+        id={`${requiredTitle}-${recommendations.length}`}
+        requiredTitle={requiredTitle}
+        verticalCarouselItems={verticalCarouselItems}
         hidePlayIcon>
         <StyledCtaWrapper>
           <ButtonWithCTA cta={cta} />

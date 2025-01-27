@@ -1,9 +1,13 @@
-import React from 'react'
-import NextLink from 'next/link'
+import React, { AnchorHTMLAttributes, ReactNode } from 'react'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
-import { LinkProps } from '@/types/props'
-
-export function Link(props: LinkProps) {
+export function Link(
+  props: {
+    href: string
+    children?: ReactNode
+  } & NextLinkProps &
+    AnchorHTMLAttributes<HTMLAnchorElement>
+) {
   const { href } = props
 
   const external = !href?.startsWith('/')

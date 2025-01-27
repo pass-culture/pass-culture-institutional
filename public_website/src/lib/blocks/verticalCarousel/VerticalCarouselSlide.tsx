@@ -1,20 +1,29 @@
 import React from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { ComponentCommonVerticalCarouselItemFragment } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
-import { VerticalCarouselSlideProps } from '@/types/props'
 import { Play } from '@/ui/components/icons/Play'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 
+type VerticalCarouselSlideProps =
+  ComponentCommonVerticalCarouselItemFragment & {
+    slideIndex: number
+    // image: string | null | UploadFileFragment
+    // title: string
+    // description: string
+    // url: string
+    hidePlayIcon: boolean
+  }
+
 export function VerticalCarouselSlide(props: VerticalCarouselSlideProps) {
   const { slideIndex, image, title, description, url, hidePlayIcon } = props
-  const imageUrl =
-    typeof image === 'string' ? image : image?.data?.attributes?.url
+  const imageUrl = typeof image === 'string' ? image : image?.url
 
   return (
     <Root

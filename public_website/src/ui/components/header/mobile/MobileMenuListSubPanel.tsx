@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import { OutlinedText } from '../../OutlinedText'
-import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
-import { MobileMenuListSubPanelProps } from '@/types/props'
+import {
+  ComponentHeaderMegaMenuFragment,
+  Enum_Componentheadermegamenu_Theme,
+} from '@/generated/graphql'
+import { CARD_BACKGROUNDS } from '@/theme/style'
 import { Link } from '@/ui/components/Link'
 
-export function MobileMenuListSubPanel(props: MobileMenuListSubPanelProps) {
+export function MobileMenuListSubPanel(props: ComponentHeaderMegaMenuFragment) {
   const {
-    primaryList,
-    secondaryList,
+    primaryListItems,
+    secondaryListItems,
     cardTitle,
     cardDescription,
     cardLink,
@@ -35,24 +38,28 @@ export function MobileMenuListSubPanel(props: MobileMenuListSubPanelProps) {
         ref={listRef}
         tabIndex={0}
         aria-labelledby="sub-panel-title">
-        {primaryList.map((item) => {
+        {primaryListItems.map((item) => {
           return (
-            <li key={item.Label}>
-              <Link href={item.URL}>{item.Label}</Link>
+            <li key={item?.Label}>
+              <Link href={item?.URL ?? ''}>{item?.Label}</Link>
             </li>
           )
         })}
       </StyledSubPanelList>
       <StyledSubPanelList>
-        {secondaryList.map((item) => {
+        {secondaryListItems?.map((item) => {
           return (
-            <li key={item.Label}>
-              <Link href={item.URL}>{item.Label}</Link>
+            <li key={item?.Label}>
+              <Link href={item?.URL ?? ''}>{item?.Label}</Link>
             </li>
           )
         })}
       </StyledSubPanelList>
-      <StyledSubPanelCard $backgroundColor={theme} href={cardLink.URL}>
+      <StyledSubPanelCard
+        $backgroundColor={
+          theme ?? Enum_Componentheadermegamenu_Theme.Aquamarine
+        }
+        href={cardLink.URL}>
         {!visible && <div className="trigger"></div>}
 
         <StyledSubPanelCardTitle
@@ -91,9 +98,13 @@ const StyledSubPanelCardTitle = styled(OutlinedText)`
   `}
 `
 
-const StyledSubPanelCard = styled(Link)<{ $backgroundColor: ItemsTheme }>`
+const StyledSubPanelCard = styled(Link)<{
+  $backgroundColor: Enum_Componentheadermegamenu_Theme
+}>`
   ${({ theme, $backgroundColor }) => css`
-    background-color: ${CARD_BACKGROUNDS[$backgroundColor]};
+    background-color: ${CARD_BACKGROUNDS[
+      $backgroundColor as Enum_Componentheadermegamenu_Theme
+    ]};
     display: block;
     padding: 1.5rem;
     border-radius: ${theme.radius.sm};

@@ -2,13 +2,17 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { BaseTextWithOptionTitleProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function CenteredText(props: BaseTextWithOptionTitleProps) {
+type CenteredTextProps = {
+  title: string
+  description: string
+}
+
+export function CenteredText(props: CenteredTextProps) {
   const { title, description } = props
   return (
     <Root data-testid="centered-text">

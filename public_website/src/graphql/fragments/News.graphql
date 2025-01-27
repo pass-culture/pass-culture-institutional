@@ -1,0 +1,25 @@
+fragment News on News {
+  title
+  category
+  date
+  image {
+    ...UploadFile
+  }
+  slug
+  localisation
+  secteur
+  blocks {
+    __typename
+    ...ComponentBlockImage
+    ...ComponentBlockSimpleTextV2
+    ...ComponentBlockVideo
+    ...ComponentBlockDoublePushCta
+    ...ComponentBlockSocialMedia
+  }
+  seo {
+    ...ComponentSharedSeo
+  }
+  pageLocalisation
+  aboveTitle
+  emoji
+}

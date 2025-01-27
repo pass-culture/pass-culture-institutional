@@ -1,0 +1,7 @@
+fragment ComponentHeaderNavigationItems on ComponentHeaderNavigationItems {
+  id
+  label
+  megaMenu {
+    ...ComponentHeaderMegaMenu
+  }
+}

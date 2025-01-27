@@ -1,0 +1,8 @@
+fragment ComponentCommonExperienceVideoCarouselItem on ComponentCommonExperienceVideoCarouselItem {
+  title
+  description
+  url
+  image {
+    ...UploadFile
+  }
+}

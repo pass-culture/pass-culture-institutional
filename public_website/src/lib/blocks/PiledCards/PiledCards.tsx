@@ -2,16 +2,20 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { PiledCardsCarousel } from './PiledCardsCarousel'
-import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
-import { PiledCardsCarouselSlideProps, PiledCardsProps } from '@/types/props'
+import {
+  ComponentBlockPiledCardsFragment,
+  ComponentCommonPiledCardItemFragment,
+  Enum_Componentcommonpiledcarditem_Theme,
+} from '@/generated/graphql'
+import { CARD_BACKGROUNDS } from '@/theme/style'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ArrowDown } from '@/ui/components/icons/ArrowDown'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import { parseText } from '@/utils/parseText'
 
-export function PiledCards(props: PiledCardsProps) {
-  const { items } = props
+export function PiledCards(props: ComponentBlockPiledCardsFragment) {
+  const { piledCardsItems } = props
   const itemRefs = useRef<(HTMLLIElement | null)[]>([])
   const sentinelRefs = useRef<(HTMLLIElement | null)[]>([])
   const refTop = useRef<number[]>([])
@@ -66,7 +70,7 @@ export function PiledCards(props: PiledCardsProps) {
         </StyledButton>
         <StyledButton
           type="button"
-          disabled={index === items.length - 1}
+          disabled={index === (piledCardsItems?.length ?? 0) - 1}
           aria-label="Diapositive suivante"
           onClick={(): void => ScrollTo(index + 1)}>
           <ArrowDown />
@@ -76,52 +80,58 @@ export function PiledCards(props: PiledCardsProps) {
   }
 
   const carouselItems = useMemo(() => {
-    const itemsPiles: PiledCardsCarouselSlideProps[] = items.map((it, i) => ({
-      slideIndex: i,
-      ...it,
-    }))
+    const itemsPiles: ComponentCommonPiledCardItemFragment[] =
+      piledCardsItems
+        ?.filter((item) => item !== null)
+        .map((it, i) => ({
+          slideIndex: i,
+          ...it,
+        })) ?? []
     return itemsPiles
-  }, [items])
+  }, [piledCardsItems])
 
   return (
     <React.Fragment>
       <Root>
-        {items?.map((item, index) => (
-          <React.Fragment key={item.id}>
-            <ItemScrollSentinel
-              aria-hidden="true"
-              // @ts-expect-error //main pull
-              ref={(el) => (sentinelRefs.current[index] = el)}
-            />
-            <StyledContentListItems
-              // @ts-expect-error //main pull
-              ref={(el) => (itemRefs.current[index] = el)}
-              $itemTheme={item.theme}
-              aria-label={`Diapositive ${index + 1}`}>
-              <StyledImageWrapper>
-                <StyledImage
-                  src={item.image?.data?.attributes?.url}
-                  alt={item.image?.data?.attributes?.alternativeText}
-                />
-                <StyledFirstEmoji aria-hidden="true">
-                  <OutlinedText>{item.firstIcon}</OutlinedText>
-                </StyledFirstEmoji>
-                <StyledSecondEmoji aria-hidden="true">
-                  <OutlinedText>{item.secondIcon}</OutlinedText>
-                </StyledSecondEmoji>
-              </StyledImageWrapper>
+        {piledCardsItems
+          ?.filter((item) => item !== null)
+          .map((item, index) => (
+            <React.Fragment key={item.id}>
+              <ItemScrollSentinel
+                aria-hidden="true"
+                // @ts-expect-error //main pull
+                ref={(el) => (sentinelRefs.current[index] = el)}
+              />
+              <StyledContentListItems
+                l
+                // @ts-expect-error //main pull
+                ref={(el) => (itemRefs.current[index] = el)}
+                $itemTheme={item.theme}
+                aria-label={`Diapositive ${index + 1}`}>
+                <StyledImageWrapper>
+                  <StyledImage
+                    src={item.image?.url}
+                    alt={item.image?.alternativeText ?? ''}
+                  />
+                  <StyledFirstEmoji aria-hidden="true">
+                    <OutlinedText>{item.firstIcon}</OutlinedText>
+                  </StyledFirstEmoji>
+                  <StyledSecondEmoji aria-hidden="true">
+                    <OutlinedText>{item.secondIcon}</OutlinedText>
+                  </StyledSecondEmoji>
+                </StyledImageWrapper>
 
-              <StyledContentTextWrapper>
-                <div>
-                  <p>{(index + 1).toString().padStart(2, '0')}</p>
-                  <h3>{item.title}</h3>
-                  <p>{parseText(item.description).processedText}</p>
-                </div>
-                <StyledNavWrapper>{renderNav(index)}</StyledNavWrapper>
-              </StyledContentTextWrapper>
-            </StyledContentListItems>
-          </React.Fragment>
-        ))}
+                <StyledContentTextWrapper>
+                  <div>
+                    <p>{(index + 1).toString().padStart(2, '0')}</p>
+                    <h3>{item.title}</h3>
+                    <p>{parseText(item.description).processedText}</p>
+                  </div>
+                  <StyledNavWrapper>{renderNav(index)}</StyledNavWrapper>
+                </StyledContentTextWrapper>
+              </StyledContentListItems>
+            </React.Fragment>
+          ))}
       </Root>
       <StyledCarousel title={props.accessibleTitle} items={carouselItems} />
     </React.Fragment>
@@ -159,7 +169,7 @@ const ItemScrollSentinel = styled.li`
 `
 
 const StyledContentListItems = styled.li<{
-  $itemTheme: ItemsTheme
+  $itemTheme: Enum_Componentcommonpiledcarditem_Theme
 }>`
   ${({ $itemTheme, theme }) => css`
     transform-origin: center top;

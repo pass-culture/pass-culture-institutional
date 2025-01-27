@@ -1,0 +1,20 @@
+fragment RessourcesPassCulture on RessourcesPassCulture {
+  title
+  buttonText
+  filtres {
+    ...ComponentCommonFiltre
+  }
+  socialMediaSection {
+    ...ComponentBlockSocialMedia
+  }
+  separator {
+    ...ComponentBlockSeparator
+  }
+  etudes {
+    ...ComponentBlockSimplePushCta
+  }
+  seo {
+    ...ComponentSharedSeo
+  }
+  showFilter
+}

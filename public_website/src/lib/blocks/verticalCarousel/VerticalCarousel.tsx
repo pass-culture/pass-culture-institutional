@@ -5,10 +5,10 @@ import styled, { css } from 'styled-components'
 import NavigationWithArrow from '../../../ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '../../../ui/components/nav-carousel/NavigationWithDots'
 import { VerticalCarouselSlide } from './VerticalCarouselSlide'
+import { ComponentBlockVerticalCarouselFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { VerticalCarouselProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { cleanSlideAttributes } from '@/utils/carouselHelper'
@@ -18,18 +18,21 @@ import { stripTags } from '@/utils/stripTags'
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function VerticalCarousel(
-  props: VerticalCarouselProps & { children?: React.ReactNode }
-) {
-  const { title, items, hidePlayIcon, children } = props
+type VerticalCarouselProps = ComponentBlockVerticalCarouselFragment & {
+  children?: React.ReactNode
+  hidePlayIcon?: boolean
+}
 
-  const itemsFilter = items.filter((item) => {
-    return item.image && item.image !== ''
+export function VerticalCarousel(props: VerticalCarouselProps) {
+  const { requiredTitle, verticalCarouselItems, hidePlayIcon, children } = props
+
+  const itemsFilter = verticalCarouselItems?.filter((item) => {
+    return item?.image
   })
   const TOTAL_SLIDES = useMemo(() => itemsFilter.length, [itemsFilter])
 
   const CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
-    title
+    requiredTitle
   )}"]`
   const SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
@@ -71,7 +74,7 @@ export function VerticalCarousel(
           step={1}>
           <BlockRendererWithCondition condition={isNavShowing}>
             <StyledHeading>
-              <Typo.Heading2>{title}</Typo.Heading2>
+              <Typo.Heading2>{requiredTitle}</Typo.Heading2>
               <BlockRendererWithCondition condition={width > MOBILE_WIDTH}>
                 <NavigationWithArrow
                   carrouselSelector={CAROUSEL_SELECTOR}
@@ -84,23 +87,25 @@ export function VerticalCarousel(
           <Slider
             classNameAnimation="customCarrouselAnimation"
             role="region"
-            aria-label={stripTags(title)}
+            aria-label={stripTags(requiredTitle)}
             aria-roledescription="carrousel">
-            {items?.map((item, index) => {
-              return (
-                <VerticalCarouselSlide
-                  key={`${item.title}_${index}`}
-                  slideIndex={index}
-                  {...item}
-                  hidePlayIcon={hidePlayIcon}
-                />
-              )
-            })}
+            {verticalCarouselItems
+              ?.filter((item) => item !== null)
+              .map((item, index) => {
+                return (
+                  <VerticalCarouselSlide
+                    key={`${item?.title}_${index}`}
+                    slideIndex={index}
+                    {...item}
+                    hidePlayIcon={hidePlayIcon ?? false}
+                  />
+                )
+              })}
           </Slider>
           <BlockRendererWithCondition
             condition={isNavShowing && width < MOBILE_WIDTH}>
             <NavigationWithDots
-              items={items}
+              items={verticalCarouselItems?.filter((item) => item !== null)}
               carrouselSelector={CAROUSEL_SELECTOR}
               slidesSelector={SLIDES_SELECTOR}
               carouselName="VERTICAL_CAROUSEL"

@@ -1,0 +1,29 @@
+query EtudesPassCulture(
+  $filters: ResourceFiltersInput
+  $pagination: PaginationArg
+  $sort: [String]
+) {
+  etudesPassCulture {
+    title
+    buttonText
+    filtres {
+      ...ComponentCommonFiltre
+    }
+    socialMediaSection {
+      ...ComponentBlockSocialMedia
+    }
+    separator {
+      ...ComponentBlockSeparator
+    }
+    observatoire {
+      ...ComponentBlockSimplePushCta
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+    showFilter
+  }
+  resources(filters: $filters, pagination: $pagination, sort: $sort) {
+    ...Resource
+  }
+}

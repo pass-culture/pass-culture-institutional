@@ -1,0 +1,5 @@
+fragment ComponentHomeEligibilityItems on ComponentHomeEligibilityItems {
+  title
+  description
+  emoji
+}

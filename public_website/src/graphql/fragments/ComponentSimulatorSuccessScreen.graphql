@@ -1,0 +1,14 @@
+fragment ComponentSimulatorSuccessScreen on ComponentSimulatorSuccessScreen {
+  id
+  title
+  steps {
+    ...ComponentSimulatorStep
+  }
+  cta {
+    ...ComponentCommonLink
+  }
+  needSupport
+  supportLink {
+    ...ComponentCommonLink
+  }
+}

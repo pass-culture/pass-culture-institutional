@@ -3,11 +3,17 @@ import ReactPlayer from 'react-player/youtube'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { ComponentCommonExperienceVideoCarouselItemFragment } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { theme } from '@/theme/theme'
-import { ExperienceVideoCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
+
+type ExperienceVideoCarouselSlideProps =
+  ComponentCommonExperienceVideoCarouselItemFragment & {
+    slideIndex: number
+    isLandscape: boolean
+  }
 
 export function ExperienceVideoCarouselSlide(
   props: ExperienceVideoCarouselSlideProps

@@ -1,0 +1,25 @@
+query ActualitesPassCulture($filters: NewsFiltersInput, $sort: [String]) {
+  actualitesPassCulture {
+    title
+    buttonText
+    filtres {
+      ...ComponentCommonFiltre
+    }
+    socialMediaSection {
+      ...ComponentBlockSocialMedia
+    }
+    separator {
+      ...ComponentBlockSeparator
+    }
+    aide {
+      ...ComponentBlockSimplePushCta
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+    showFilter
+  }
+  newsList(filters: $filters, sort: $sort) {
+    ...News
+  }
+}

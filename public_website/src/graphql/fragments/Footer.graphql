@@ -1,0 +1,12 @@
+fragment Footer on Footer {
+  PlayStoreUrl
+  AppStoreUrl
+  Lists {
+    ...ComponentFooterList
+  }
+  bannerText
+  LegalLinks {
+    ...ComponentCommonLink
+  }
+  bannerDefaultUrl
+}

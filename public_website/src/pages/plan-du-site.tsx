@@ -1,25 +1,22 @@
 import React, { useContext } from 'react'
-import { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import { PlanDuSiteDocument, PlanDuSiteQuery } from '@/generated/graphql'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import MenuSection from '@/ui/components/sitemap/MenuSection'
 
-interface PlanDuSiteProps {
-  mapSiteData: APIResponseData<'api::page.page'>[]
+type PlanDuSiteProps = {
+  mapSiteData: PlanDuSiteQuery['pages']
 }
 
 const PlanDuSite = (props: PlanDuSiteProps) => {
   const data = useContext(BreadcrumbContext)
-  const seo = props?.mapSiteData?.[0]?.attributes?.seo ?? null
+  const seo = props?.mapSiteData?.[0]?.seo ?? null
   const AndroidUrl = data?.targetItems?.[0]?.megaMenu?.bannerAndroidUrl
   const IosUrl = data?.targetItems?.[0]?.megaMenu?.bannerIosUrl
 
@@ -135,20 +132,27 @@ const SitemapList = styled.ul`
     }
   `}
 `
-export const getStaticProps = (async () => {
-  const query = stringify({
-    populate: ['seo', 'seo.metaSocial', 'seo.metaSocial.image'],
-  })
-  const response = (await Pages.getPage(
-    PATHS.PAGES,
-    `${query}&filters[Path][$eqi]=${PATHS.MAP_SITE}`
-  )) as APIResponseData<'api::page.page'>[]
+
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<PlanDuSiteQuery>(PlanDuSiteDocument, {
+      filters: {
+        Path: {
+          eqi: 'plan-du-site',
+        },
+      },
+    })
+    .toPromise()
+
+  if (result.error || !result.data || !result.data.pages) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      mapSiteData: response,
+      mapSiteData: result.data.pages,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<{
-  mapSiteData: APIResponseData<'api::page.page'>[]
-}>
+}

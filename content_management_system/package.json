@@ -4,9 +4,7 @@
   "private": true,
   "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 300€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
-  "workspaces": [
-    "./src/plugins/sitemap-pass"
-  ],
+  "workspaces": [],
   "scripts": {
     "build": "strapi build",
     "develop": "strapi develop",
@@ -17,32 +15,36 @@
     "test:types": "yarn tsc --noEmit"
   },
   "dependencies": {
-    "@strapi-community/strapi-provider-upload-google-cloud-storage": "https://github.com/pass-culture/strapi-provider-upload-google-cloud-storage#master",
-    "@strapi/plugin-seo": "^1.9.8",
-    "@strapi/plugin-users-permissions": "4.25.10",
-    "@strapi/strapi": "4.25.10",
-    "pg": "8.11.3",
+    "@strapi-community/strapi-provider-upload-google-cloud-storage": "strapi-community/strapi-provider-upload-google-cloud-storage",
+    "@strapi/plugin-graphql": "^5.8.1",
+    "@strapi/plugin-seo": "^2.0.4",
+    "@strapi/plugin-users-permissions": "^5.8.1",
+    "@strapi/strapi": "^5.8.1",
+    "pg": "^8.13.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-router-dom": "^5.2.0",
-    "strapi-plugin-multi-select": "^1.2.3",
-    "strapi-plugin-update-static-content": "https://github.com/pass-culture/strapi-plugin-update-static-content#main",
-    "styled-components": "^5.2.1"
+    "react-router-dom": "^6.0.0",
+    "strapi-plugin-multi-select": "^2.1.1",
+    "styled-components": "^6.0.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.19.0",
-    "eslint": "^8.57.0",
+    "@eslint/compat": "^1.2.5",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.19.0",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "@typescript-eslint/parser": "^8.21.0",
+    "eslint": "^9.19.0",
     "eslint-config-standard-with-typescript": "^43.0.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-n": "^17.15.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-promise": "^7.2.1",
+    "globals": "^15.14.0",
     "ts-prune": "^0.10.3",
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=18.17.0 <=20.8.0",
+    "node": ">=18.17.0 <=20.9.0",
     "npm": "please-use-yarn",
     "yarn": ">=1.22.19"
   },

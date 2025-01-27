@@ -1,0 +1,6 @@
+fragment ComponentBlockLogos on ComponentBlockLogos {
+  id
+  logo {
+    ...ComponentCommonLogo
+  }
+}

@@ -3,11 +3,11 @@ import ReactPlayer from 'react-player/youtube'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { VideoProps } from '@/types/props'
+import { ComponentBlockVideoFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { isRenderable } from '@/utils/isRenderable'
 
-export function Video(props: VideoProps) {
+export function Video(props: ComponentBlockVideoFragment) {
   const { description, url, alt } = props
   const [isMounted, setIsMounted] = useState<boolean>(false)
 

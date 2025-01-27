@@ -2,12 +2,19 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { LatestEventsProps } from '@/types/props'
+import { EventFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function EventListItems(props: LatestEventsProps) {
+type EventListItemsProps = {
+  type: string
+  events: NonNullable<EventFragment[]>
+  className?: string
+  buttonText: string
+}
+
+export function EventListItems(props: EventListItemsProps) {
   const { events, className, buttonText, type } = props
   const [visibleItems, setVisibleItems] = useState<number>(2)
 
@@ -27,20 +34,17 @@ export function EventListItems(props: LatestEventsProps) {
       <BlockRendererWithCondition condition={events.length > 0}>
         <StyledList>
           {events.slice(0, visibleItems).map((eventItem) => (
-            <li key={eventItem.attributes.slug}>
+            <li key={eventItem.slug}>
               <EventCard
-                title={eventItem.attributes.title}
-                category={eventItem.attributes.category}
-                date={eventItem.attributes.date}
-                endDate={eventItem.attributes.endDate}
-                imageUrl={
-                  eventItem.attributes.image &&
-                  getStrapiURL(eventItem.attributes.image?.data.attributes.url)
-                }
-                startTime={eventItem.attributes.startTime}
-                endTime={eventItem.attributes.endTime}
-                city={eventItem.attributes.city}
-                cta={eventItem.attributes.cta}
+                title={eventItem.title}
+                category={eventItem.category}
+                date={eventItem.date}
+                endDate={eventItem.endDate}
+                imageUrl={eventItem.image && getStrapiURL(eventItem.image?.url)}
+                startTime={eventItem.startTime}
+                endTime={eventItem.endTime}
+                city={eventItem.city}
+                cta={eventItem.cta}
                 type={type}
               />
             </li>

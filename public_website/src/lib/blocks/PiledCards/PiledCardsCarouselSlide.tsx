@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
+import { ComponentCommonPiledCardItemFragment } from '@/generated/graphql'
 import { CARD_BACKGROUNDS, ItemsTheme } from '@/theme/style'
-import { PiledCardsCarouselSlideProps } from '@/types/props'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 
-export function VerticalCarouselSlide(props: PiledCardsCarouselSlideProps) {
+export function VerticalCarouselSlide(
+  props: ComponentCommonPiledCardItemFragment & {
+    slideIndex: number
+  }
+) {
   const { slideIndex, image, title, description, theme } = props
-  const imageUrl =
-    typeof image === 'string' ? image : image?.data?.attributes?.url
+  const imageUrl = typeof image === 'string' ? image : image?.url
 
   const [descriptionIsOpen, setDescriptionIsOpen] = useState<boolean>(false)
   const URL = getStrapiURL(imageUrl)

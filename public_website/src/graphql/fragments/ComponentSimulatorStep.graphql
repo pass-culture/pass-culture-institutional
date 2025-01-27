@@ -1,0 +1,4 @@
+fragment ComponentSimulatorStep on ComponentSimulatorStep {
+  id
+  step
+}
