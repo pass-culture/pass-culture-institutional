@@ -10,9 +10,8 @@ jobs:
       project_id: passculture-cls-metier-prod
       environment: production 
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
-      teleport_version: 13.4.4
-      teleport_proxy: teleport.cls.passculture.team:443
-      teleport_kubernetes_cluster: passculture-cls-metier-prod
+      cluster_scope: cls-metier
+      cluster-environment: prod
       image_tag: ${{ github.sha }}
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
@@ -25,9 +24,8 @@ jobs:
       - deploy-cms-production
     with:
       environment: production
-      teleport_version: 13.4.4
-      teleport_proxy: teleport.cls.passculture.team:443
-      teleport_kubernetes_cluster: passculture-cls-metier-prod
+      cluster_scope: cls-metier
+      cluster-environment: prod
       workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
       cms_url: https://siteinstit-cms.passculture.team
       backend_url: https://backend.passculture.app

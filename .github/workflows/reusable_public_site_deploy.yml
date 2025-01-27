@@ -22,13 +22,10 @@ on:
         type: string
         description: GCP project to retrieve secrets from
         required: true
-      teleport_version:
+      cluster_scope:
         type: string
         required: true
-      teleport_proxy:
-        type: string
-        required: true
-      teleport_kubernetes_cluster:
+      cluster_environment:
         type: string
         required: true
       namespace:
@@ -73,6 +70,7 @@ jobs:
             IAP_CLIENT_ID:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_iap-client-id
             SENTRY_TOKEN:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_sentry-token
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
+            API_TOKEN_GITHUB:passculture-cls-metier-${{ inputs.cluster_environment }}/passculture-institutional_${{ inputs.environment }}_github_token
 
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
@@ -88,18 +86,11 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
-      - name: Install Teleport
-        uses: teleport-actions/setup@v1
+      - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
         with:
-          version: ${{ inputs.teleport_version }}
-
-      - name: "Teleport Authentication"
-        uses: teleport-actions/auth-k8s@v1
-        with:
-          proxy: ${{ inputs.teleport_proxy }}
-          token: github-token
-          certificate-ttl: 1h
-          kubernetes-cluster: ${{ inputs.teleport_kubernetes_cluster }}
+          cluster_scope: ${{ inputs.cluster_scope }}
+          cluster_environment: ${{ inputs.cluster_environment }}
+          api_token_github: ${{ steps.secrets.outputs.API_TOKEN_GITHUB }}
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
