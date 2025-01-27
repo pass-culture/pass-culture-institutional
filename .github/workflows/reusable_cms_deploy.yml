@@ -93,7 +93,7 @@ jobs:
         with:
           cluster_scope: ${{ inputs.cluster_scope }}
           cluster_environment: ${{ inputs.cluster_environment }}
-          api_token_github: ${{ steps.secrets.outputs.api_token_github_secret_name }}
+          api_token_github: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_github_token
 
       - name: Sync argoCD application 
         uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.5.0
