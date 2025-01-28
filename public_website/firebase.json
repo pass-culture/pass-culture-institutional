@@ -5,6 +5,7 @@
       "public": "out",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "cleanUrls": true,
+      "trailingSlash": false,
       "redirects": [
         {
           "source": "/politique-de-cookies/",
