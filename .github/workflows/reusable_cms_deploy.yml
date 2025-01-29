@@ -65,6 +65,7 @@ jobs:
           secrets: |-
             INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
+            API_TOKEN_GITHUB:passculture-cls-metier-ehp/passculture-institutional_${{ inputs.environment }}_github_token
 
       - name: "Generate and push rendered manifests"
         uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v2.0.0
@@ -93,7 +94,7 @@ jobs:
         with:
           cluster_scope: ${{ inputs.cluster_scope }}
           cluster_environment: ${{ inputs.cluster_environment }}
-          api_token_github: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_github_token
+          api_token_github: ${{ steps.secrets.outputs.API_TOKEN_GITHUB }}
 
       - name: Sync argoCD application 
         uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.5.0
