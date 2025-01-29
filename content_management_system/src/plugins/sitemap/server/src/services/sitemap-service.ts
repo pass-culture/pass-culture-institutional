@@ -1,32 +1,35 @@
-import { Core } from '@strapi/strapi';
-import { SitemapConfig, SitemapUrl } from '../content-types/types';
+import { Core } from "@strapi/strapi";
+import { SitemapConfig, SitemapUrl } from "../content-types/types";
 import {
   getContentTypes,
   getStaticPages,
   getDefaultPriority,
   buildLoc,
   getLastMod,
-} from '../utils/content-type-utils';
+} from "../utils/content-type-utils";
 
-const fetchEntities = async (strapi: Core.Strapi, entityUid: string): Promise<SitemapUrl[]> => {
+const fetchEntities = async (
+  strapi: Core.Strapi,
+  entityUid: string,
+): Promise<SitemapUrl[]> => {
   if (!strapi.entityService) {
-    throw new Error('Entity service is not available');
+    throw new Error("Entity service is not available");
   }
 
   try {
     const contentType = strapi.contentTypes[entityUid];
     const attributes = contentType.attributes || {};
 
-    const fields = ['id', 'updatedAt', 'Path', 'slug', 'priority'].filter(
-      (field) => attributes[field]
+    const fields = ["id", "updatedAt", "Path", "slug", "priority"].filter(
+      (field) => attributes[field],
     );
 
     const results = await strapi.entityService.findMany(entityUid as any, {
       fields,
-      publicationState: 'live',
+      publicationState: "live",
     });
 
-    const apiName = entityUid.replace('api::', '').split('.')[0];
+    const apiName = entityUid.replace("api::", "").split(".")[0];
     const defaultPriority = getDefaultPriority(contentType);
     return Array.isArray(results)
       ? results.map((item) => ({
@@ -42,7 +45,7 @@ const fetchEntities = async (strapi: Core.Strapi, entityUid: string): Promise<Si
 };
 
 const generateUrls = async (strapi: Core.Strapi): Promise<SitemapUrl[]> => {
-  const config = strapi.config.get('plugin.sitemap') as SitemapConfig;
+  const config = strapi.config.get("plugin::sitemap") as SitemapConfig;
   const { baseUrl, excludedTypes = [] } = config;
 
   const staticPages = await getStaticPages(strapi);
@@ -58,8 +61,12 @@ const generateUrls = async (strapi: Core.Strapi): Promise<SitemapUrl[]> => {
     })),
   ];
 
-  const contentTypes = getContentTypes(strapi).filter(({ uid }) => !excludedTypes.includes(uid));
-  const entityUrlsPromises = contentTypes.map(({ uid }) => fetchEntities(strapi, uid));
+  const contentTypes = getContentTypes(strapi).filter(
+    ({ uid }) => !excludedTypes.includes(uid),
+  );
+  const entityUrlsPromises = contentTypes.map(({ uid }) =>
+    fetchEntities(strapi, uid),
+  );
   const entityUrlsArrays = await Promise.all(entityUrlsPromises);
   const entityUrls = entityUrlsArrays.flat().map((url) => ({
     ...url,
@@ -70,9 +77,9 @@ const generateUrls = async (strapi: Core.Strapi): Promise<SitemapUrl[]> => {
   return Array.from(
     new Map(
       allUrls
-        .filter((url) => url.loc && !url.loc.includes('undefined'))
-        .map((url) => [url.loc, url])
-    ).values()
+        .filter((url) => url.loc && !url.loc.includes("undefined"))
+        .map((url) => [url.loc, url]),
+    ).values(),
   );
 };
 
@@ -84,10 +91,10 @@ const generateSitemapXml = async (strapi: Core.Strapi): Promise<string> => {
     .map(
       ({ loc, priority, lastmod }) => `
   <url>
-    <loc>${loc}</loc>${priority ? `\n    <priority>${priority.toFixed(1)}</priority>` : ''}${lastmod ? `\n    <lastmod>${getLastMod({ updatedAt: lastmod })}</lastmod>` : ''}
-  </url>`
+    <loc>${loc}</loc>${priority ? `\n    <priority>${priority.toFixed(1)}</priority>` : ""}${lastmod ? `\n    <lastmod>${getLastMod({ updatedAt: lastmod })}</lastmod>` : ""}
+  </url>`,
     )
-    .join('')}
+    .join("")}
 </urlset>`;
 };
 

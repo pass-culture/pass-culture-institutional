@@ -6,6 +6,7 @@ import graphql from "@strapi/plugin-graphql/strapi-admin";
 import seo from "@strapi/plugin-seo/strapi-admin";
 import usersPermissions from "@strapi/plugin-users-permissions/strapi-admin";
 import multiSelect from "strapi-plugin-multi-select/strapi-admin";
+import updateStaticContent from "../../src/plugins/update-static-content/./dist/admin/index.mjs";
 import sitemap from "../../src/plugins/sitemap/./dist/admin/index.mjs";
 import { renderAdmin } from "@strapi/strapi/admin";
 
@@ -15,6 +16,7 @@ renderAdmin(document.getElementById("strapi"), {
     seo: seo,
     "users-permissions": usersPermissions,
     "multi-select": multiSelect,
+    "update-static-content": updateStaticContent,
     sitemap: sitemap,
   },
 });
