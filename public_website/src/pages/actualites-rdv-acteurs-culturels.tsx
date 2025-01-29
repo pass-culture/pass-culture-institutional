@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import React from 'react'
 import styled from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  ActualitesRdvActeursCulturelsDocument,
+  ActualitesRdvActeursCulturelsQuery,
+} from '@/generated/graphql'
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
-import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
+import urqlClient from '@/lib/urqlClient'
 import { StyledTitle } from '@/theme/style'
-import { ListOffresProps, PushCTAProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
-import { filterByAttribute } from '@/utils/filterbyAttributes'
-import { separatorIsActive } from '@/utils/separatorIsActive'
+
+type ListOffresProps = {
+  newsRDVData: NonNullable<ActualitesRdvActeursCulturelsQuery['newsList']>
+  listeActuCulturel: NonNullable<
+    ActualitesRdvActeursCulturelsQuery['actualitesRdvActeursCulturel']
+  >
+  eventsData: NonNullable<ActualitesRdvActeursCulturelsQuery['events']>
+}
 
 export default function ListeActuCulturels({
   newsRDVData,
@@ -31,165 +34,165 @@ export default function ListeActuCulturels({
   const {
     aide,
     buttonText,
-    filtres,
+    // filtres,
     seo,
     separator,
-    showFilter,
+    // showFilter,
     socialMediaSection,
     title,
     titleEventSection,
-  } = listeActuCulturel.attributes
+  } = listeActuCulturel
 
-  const cat = Array.from(
-    new Set(newsRDVData.map((item) => item.attributes.category))
-  )
+  // const cat = Array.from(
+  //   new Set(newsRDVData.map((item) => item.attributes.category))
+  // )
 
-  const loc = Array.from(
-    new Set(newsRDVData.map((item) => item.attributes.localisation))
-  )
+  // const loc = Array.from(
+  //   new Set(newsRDVData.map((item) => item.attributes.localisation))
+  // )
 
-  const sec = Array.from(
-    new Set(newsRDVData.map((item) => item.attributes.secteur))
-  )
+  // const sec = Array.from(
+  //   new Set(newsRDVData.map((item) => item.attributes.secteur))
+  // )
 
-  const eventLACCat = Array.from(
-    new Set(eventsData.map((item) => item.attributes.category))
-  )
+  // const eventLACCat = Array.from(
+  //   new Set(eventsData.map((item) => item.attributes.category))
+  // )
 
-  const eventLACLoc = Array.from(
-    new Set(eventsData.map((item) => item.attributes.localisation))
-  )
+  // const eventLACLoc = Array.from(
+  //   new Set(eventsData.map((item) => item.attributes.localisation))
+  // )
 
-  const eventLACSec = Array.from(
-    new Set(eventsData.map((item) => item.attributes.secteur))
-  )
-  const [category, setCategory] = useState<string[]>([])
-  const [originalRdvCategory, setOriginalRdvCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalRdvLocalisation, setOriginalRdvLocalisation] = useState<
-    string[]
-  >([])
-  const [secteur, setSecteur] = useState<string[]>([])
-  const [originalRdvSecteur, setOriginalRdvSecteur] = useState<string[]>([])
+  // const eventLACSec = Array.from(
+  //   new Set(eventsData.map((item) => item.attributes.secteur))
+  // )
+  // const [category, setCategory] = useState<string[]>([])
+  // const [originalRdvCategory, setOriginalRdvCategory] = useState<string[]>([])
+  // const [localisation, setLocalisation] = useState<string[]>([])
+  // const [originalRdvLocalisation, setOriginalRdvLocalisation] = useState<
+  //   string[]
+  // >([])
+  // const [secteur, setSecteur] = useState<string[]>([])
+  // const [originalRdvSecteur, setOriginalRdvSecteur] = useState<string[]>([])
 
-  const [eventRdvCategory, setEventRdvCategory] = useState<string[]>([])
-  const [originalEventRdvCategory, setOriginalEventRdvCategory] = useState<
-    string[]
-  >([])
-  const [eventRdvLocalisation, setEventRdvLocalisation] = useState<string[]>([])
-  const [originalEventRdvLocalisation, setOriginalEventRdvLocalisation] =
-    useState<string[]>([])
-  const [eventSecteur, setEventSecteur] = useState<string[]>([])
-  const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
+  // const [eventRdvCategory, setEventRdvCategory] = useState<string[]>([])
+  // const [originalEventRdvCategory, setOriginalEventRdvCategory] = useState<
+  //   string[]
+  // >([])
+  // const [eventRdvLocalisation, setEventRdvLocalisation] = useState<string[]>([])
+  // const [originalEventRdvLocalisation, setOriginalEventRdvLocalisation] =
+  //   useState<string[]>([])
+  // const [eventSecteur, setEventSecteur] = useState<string[]>([])
+  // const [originalEventSecteur, setOriginalEventSecteur] = useState<string[]>([])
 
-  const [newsRdvFilters, setNewsRdvFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  // const [newsRdvFilters, setNewsRdvFilters] = useState<Filter[]>([])
+  // const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
-  const [eventFilters, setEventFilters] = useState<Filter[]>([])
-  const [eventData, setEventData] = useState<
-    APIResponseData<'api::event.event'>[]
-  >([])
+  // const [eventFilters, setEventFilters] = useState<Filter[]>([])
+  // const [eventData, setEventData] = useState<
+  //   APIResponseData<'api::event.event'>[]
+  // >([])
 
-  useEffect(() => {
-    setEventRdvCategory(eventLACCat)
-    setEventRdvLocalisation(eventLACLoc)
-    setOriginalEventRdvCategory(eventLACCat)
-    setOriginalEventRdvLocalisation(eventLACLoc)
-    setEventSecteur(eventLACSec)
-    setOriginalEventSecteur(eventLACSec)
-    setEventData(eventsData)
-    setCategory(cat)
-    setLocalisation(loc)
-    setOriginalRdvCategory(cat)
-    setOriginalRdvLocalisation(loc)
-    setSecteur(sec)
-    setOriginalRdvSecteur(sec)
+  // useEffect(() => {
+  //   setEventRdvCategory(eventLACCat)
+  //   setEventRdvLocalisation(eventLACLoc)
+  //   setOriginalEventRdvCategory(eventLACCat)
+  //   setOriginalEventRdvLocalisation(eventLACLoc)
+  //   setEventSecteur(eventLACSec)
+  //   setOriginalEventSecteur(eventLACSec)
+  //   setEventData(eventsData)
+  //   setCategory(cat)
+  //   setLocalisation(loc)
+  //   setOriginalRdvCategory(cat)
+  //   setOriginalRdvLocalisation(loc)
+  //   setSecteur(sec)
+  //   setOriginalRdvSecteur(sec)
 
-    setData(newsRDVData)
-    const newsFiltres = filterByAttribute(filtres, newsRDVData)
-    const eventFiltres = filterByAttribute(filtres, eventsData)
-    if (newsFiltres) setNewsRdvFilters(newsFiltres)
-    if (eventFiltres) setEventFilters(eventFiltres)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   setData(newsRDVData)
+  //   const newsFiltres = filterByAttribute(filtres, newsRDVData)
+  //   const eventFiltres = filterByAttribute(filtres, eventsData)
+  //   if (newsFiltres) setNewsRdvFilters(newsFiltres)
+  //   if (eventFiltres) setEventFilters(eventFiltres)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
-  const fetchData = async () => {
-    const newsQuery = stringify({
-      populate: ['image'],
-      sort: ['date:desc'],
-      pagination: {},
-      filters: {
-        localisation: {
-          $eqi: localisation,
-        },
-        category: {
-          $eqi: category,
-        },
-        secteur: {
-          $eqi: secteur,
-        },
-        pageLocalisation: {
-          $containsi: 'Acteurs culturels',
-        },
-      },
-    })
+  // const fetchData = async () => {
+  //   const newsQuery = stringify({
+  //     populate: ['image'],
+  //     sort: ['date:desc'],
+  //     pagination: {},
+  //     filters: {
+  //       localisation: {
+  //         $eqi: localisation,
+  //       },
+  //       category: {
+  //         $eqi: category,
+  //       },
+  //       secteur: {
+  //         $eqi: secteur,
+  //       },
+  //       pageLocalisation: {
+  //         $containsi: 'Acteurs culturels',
+  //       },
+  //     },
+  //   })
 
-    const news = (await Pages.getPage(
-      PATHS.NEWS,
-      newsQuery
-    )) as APIResponseData<'api::news.news'>[]
+  //   const news = (await Pages.getPage(
+  //     PATHS.NEWS,
+  //     newsQuery
+  //   )) as APIResponseData<'api::news.news'>[]
 
-    setData(news)
-  }
+  //   setData(news)
+  // }
 
-  const fetchEventData = async () => {
-    const eventQuery = stringify({
-      sort: ['date:desc'],
-      populate: ['image', 'cta'],
-      pagination: {},
-      filters: {
-        category: {
-          $eqi: eventRdvCategory,
-        },
-        localisation: {
-          $eqi: eventRdvLocalisation,
-        },
-        secteur: {
-          $eqi: eventSecteur,
-        },
-        pageLocalisation: {
-          $containsi: 'Acteurs culturels',
-        },
-      },
-    })
-    const events = (await Pages.getPage(
-      PATHS.EVENTS,
-      eventQuery
-    )) as APIResponseData<'api::event.event'>[]
+  // const fetchEventData = async () => {
+  //   const eventQuery = stringify({
+  //     sort: ['date:desc'],
+  //     populate: ['image', 'cta'],
+  //     pagination: {},
+  //     filters: {
+  //       category: {
+  //         $eqi: eventRdvCategory,
+  //       },
+  //       localisation: {
+  //         $eqi: eventRdvLocalisation,
+  //       },
+  //       secteur: {
+  //         $eqi: eventSecteur,
+  //       },
+  //       pageLocalisation: {
+  //         $containsi: 'Acteurs culturels',
+  //       },
+  //     },
+  //   })
+  //   const events = (await Pages.getPage(
+  //     PATHS.EVENTS,
+  //     eventQuery
+  //   )) as APIResponseData<'api::event.event'>[]
 
-    setEventData(events)
-  }
+  //   setEventData(events)
+  // }
 
-  useEffect(() => {
-    showFilter && fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur, showFilter])
+  // useEffect(() => {
+  //   showFilter && fetchData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [category, localisation, secteur, showFilter])
 
-  useEffect(() => {
-    showFilter && fetchEventData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventRdvCategory, eventRdvLocalisation, eventSecteur, showFilter])
-
-  const hasData = data.length > 0
-  const hasEventData = eventData.length > 0
+  // useEffect(() => {
+  //   showFilter && fetchEventData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [eventRdvCategory, eventRdvLocalisation, eventSecteur, showFilter])
 
   return (
-    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
+    <PageLayout
+      seo={seo}
+      title={title ?? undefined}
+      socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      {showFilter && (
+      {/* {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setCategory}
@@ -201,14 +204,18 @@ export default function ListeActuCulturels({
             data={newsRdvFilters}
           />
         </ContentWrapper>
-      )}
+      )} */}
 
-      {hasData ? (
-        <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      {newsRDVData.length > 0 ? (
+        <StyledListItems
+          news={newsRDVData.filter((item) => item !== null)}
+          type="actualite"
+          buttonText={buttonText ?? ''}
+        />
       ) : (
         <NoResult />
       )}
-      <Separator isActive={separatorIsActive(separator)} />
+      <Separator isActive={separator?.isActive ?? false} />
 
       <StyledTitle>
         {!!titleEventSection && (
@@ -216,7 +223,7 @@ export default function ListeActuCulturels({
         )}
       </StyledTitle>
 
-      {showFilter && (
+      {/* {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setEventRdvCategory}
@@ -228,89 +235,69 @@ export default function ListeActuCulturels({
             data={eventFilters}
           />
         </ContentWrapper>
-      )}
+      )} */}
 
-      {hasEventData ? (
+      {eventsData.length > 0 ? (
         <StyledeventListItems
           type="evenement/"
-          events={eventData}
-          buttonText={buttonText}
+          events={eventsData.filter((item) => item !== null)}
+          buttonText={buttonText ?? ''}
         />
       ) : (
         <NoResult />
       )}
       <Separator isActive />
       <WhiteSpace />
-      <SimplePushCta {...(aide as PushCTAProps)} />
+      {aide && <SimplePushCta {...aide} />}
       <Separator isActive={false} />
     </PageLayout>
   )
 }
 
-export const getStaticProps = (async () => {
-  const newsQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {},
-    filters: {
-      category: {
-        $eqi: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
-      },
-      pageLocalisation: {
-        $containsi: 'Acteurs culturels',
-      },
-    },
-  })
-  const news = (await Pages.getPage(
-    PATHS.NEWS,
-    newsQuery
-  )) as APIResponseData<'api::news.news'>[]
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<ActualitesRdvActeursCulturelsQuery>(
+      ActualitesRdvActeursCulturelsDocument,
+      {
+        sortNews: ['date:desc'],
+        filtersNews: {
+          category: {
+            in: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+          },
+          pageLocalisation: {
+            containsi: 'S\u2019informer',
+          },
+        },
+        sortEvents: ['date:desc'],
+        filtersEvents: {
+          pageLocalisation: {
+            containsi: 'Acteurs culturels',
+          },
+        },
+      }
+    )
+    .toPromise()
 
-  const eventQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image', 'cta'],
-    pagination: {},
-    filter: {
-      pageLocalisation: {
-        $containsi: 'Acteurs culturels',
-      },
-    },
-  })
-
-  const events = (await Pages.getPage(
-    PATHS.EVENTS,
-    eventQuery
-  )) as APIResponseData<'api::event.event'>[]
-
-  const query = stringify({
-    populate: [
-      'title',
-      'buttonText',
-      'filtres',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'separator',
-      'aide',
-      'aide.image',
-      'aide.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-  const data = (await Pages.getPage(
-    PATHS.ACTU_RDV_ACTEURS,
-    query
-  )) as APIResponseData<'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel'>
+  if (
+    result.error ||
+    !result.data ||
+    !result.data.actualitesRdvActeursCulturel ||
+    !result.data.newsList ||
+    !result.data.events
+  ) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      newsRDVData: news,
-      listeActuCulturel: data,
-      eventsData: events,
+      newsRDVData: result.data.newsList,
+      listeActuCulturel: result.data.actualitesRdvActeursCulturel,
+      eventsData: result.data.events,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListOffresProps>
+}
 
 const StyledListItems = styled(ListItems)`
   --module-spacing: 0;

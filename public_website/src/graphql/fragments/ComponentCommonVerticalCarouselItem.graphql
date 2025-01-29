@@ -1,0 +1,9 @@
+fragment ComponentCommonVerticalCarouselItem on ComponentCommonVerticalCarouselItem {
+  id
+  title
+  description
+  url
+  image {
+    ...UploadFile
+  }
+}

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { WhiteSpaceProps } from '@/types/props'
+import { ComponentBlockSpaceFragment } from '@/generated/graphql'
 
-export function WhiteSpace(props: WhiteSpaceProps) {
+export function WhiteSpace(props: Omit<ComponentBlockSpaceFragment, 'id'>) {
   const { space } = props
-  return <Spacer $height={space}></Spacer>
+  return <Spacer $height={space ?? undefined} />
 }
 
 const Spacer = styled.div<{ $height?: number }>`

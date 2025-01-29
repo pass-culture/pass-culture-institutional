@@ -1,50 +1,52 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 import styled from 'styled-components'
 
+import { NotFoundDocument, NotFoundQuery } from '@/generated/graphql'
 import { Header } from '@/lib/blocks/Header'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
-import { fetchCMS } from '@/utils/fetchCMS'
+import urqlClient from '@/lib/urqlClient'
 
 interface ListProps {
-  notData: APIResponseData<'api::not-found.not-found'>
+  notData: NonNullable<NotFoundQuery['notFound']>
 }
 
 export default function NotFound({ notData }: ListProps) {
-  const { title, text, image, icon, cta } = notData.attributes.header || {}
+  const { requiredTitle, text, requiredImage, requiredIcon, cta } =
+    notData.header || {}
 
   return (
     <Root>
-      {notData.attributes.seo && <Seo metaData={notData.attributes.seo} />}
-      {title && image && icon && (
-        <Header title={title} text={text} image={image} icon={icon} cta={cta} />
+      {notData.seo && <Seo metaData={notData.seo} />}
+      {requiredTitle && requiredImage && requiredIcon && (
+        <Header
+          requiredTitle={requiredTitle}
+          text={text}
+          requiredImage={requiredImage}
+          requiredIcon={requiredIcon}
+          cta={cta}
+        />
       )}
     </Root>
   )
 }
 
-export const getStaticProps = (async () => {
-  const query = stringify({
-    populate: [
-      'header',
-      'header.image',
-      'header.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<NotFoundQuery>(NotFoundDocument, {})
+    .toPromise()
 
-  const { data } = await fetchCMS<APIResponseData<'api::not-found.not-found'>>(
-    `/not-found?${query}`
-  )
+  if (result.error || !result.data || !result.data.notFound) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
-    props: { notData: data },
+    props: {
+      notData: result.data.notFound,
+    },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListProps>
+}
 
 const Root = styled.div`
   width: 100%;

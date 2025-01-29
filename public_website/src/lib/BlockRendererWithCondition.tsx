@@ -6,7 +6,7 @@ type ConditionalRenderProps = {
 }
 
 const ConditionalRender = ({ condition, children }: ConditionalRenderProps) => {
-  return !!condition && children
+  return condition && children
 }
 
 const BlockRendererWithCondition = ({

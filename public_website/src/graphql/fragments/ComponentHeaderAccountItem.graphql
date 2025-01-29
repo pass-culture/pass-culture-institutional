@@ -1,0 +1,9 @@
+fragment ComponentHeaderAccountItem on ComponentHeaderAccountItem {
+  id
+  label
+  color
+  emoji
+  url
+  eventName
+  eventOrigin
+}

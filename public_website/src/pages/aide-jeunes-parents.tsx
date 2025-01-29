@@ -1,59 +1,58 @@
 import React from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  AideJeunesParentsDocument,
+  AideJeunesParentsQuery,
+} from '@/generated/graphql'
 import { DoublePushCTA } from '@/lib/blocks/DoublePushCta'
 import { Faq } from '@/lib/blocks/Faq'
 import { Header } from '@/lib/blocks/Header'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
 interface HelpProps {
-  helpData: APIResponseData<'api::help.help'>
+  helpData: NonNullable<AideJeunesParentsQuery['help']>
 }
 
 export default function Help({ helpData }: HelpProps) {
-  const { seo, heroSection, faq, cardText, simplepushcta, social } =
-    helpData.attributes
+  const { seo, heroSection, faq, cardText, simplepushcta, social } = helpData
 
   return (
     <PageLayout seo={seo} title={undefined} socialMediaSection={social}>
       <Header
-        title={heroSection.title}
+        requiredTitle={heroSection.requiredTitle}
         text={heroSection?.text}
-        icon={heroSection.icon}
+        requiredIcon={heroSection.requiredIcon}
         icon2={heroSection?.icon2}
-        image={heroSection.image}
+        requiredImage={heroSection.requiredImage}
       />
 
       <Breadcrumb isUnderHeader />
       <Faq
-        title={faq.title}
-        cta={faq.cta}
+        requiredTitle={faq.requiredTitle}
+        requiredCta={faq.requiredCta}
         categories={faq.categories}
         filteringProperty={faq.filteringProperty}
         limit={faq.limit}
       />
       <Separator isActive={false} />
       <DoublePushCTA
-        title={cardText.title}
+        requiredTitle={cardText.requiredTitle}
         text={cardText.text}
-        image={cardText.image}
+        requiredImage={cardText.requiredImage}
         firstCta={cardText.firstCta}
         secondCta={cardText.secondCta}
         icon={cardText.icon}
       />
       <Separator isActive={false} />
       <SimplePushCta
-        title={simplepushcta.title}
+        requiredTitle={simplepushcta.requiredTitle}
         surtitle={simplepushcta.surtitle}
-        image={simplepushcta.image}
-        cta={simplepushcta.cta}
+        requiredImage={simplepushcta.requiredImage}
+        requiredCta={simplepushcta.requiredCta}
         icon={simplepushcta.icon}
       />
       <Separator isActive={false} />
@@ -61,38 +60,20 @@ export default function Help({ helpData }: HelpProps) {
   )
 }
 
-export const getStaticProps = (async () => {
-  const helpQuery = stringify({
-    populate: [
-      'heroSection',
-      'heroSection.image',
-      'cardText',
-      'cardText.image',
-      'cardText.firstCta',
-      'cardText.secondCta',
-      'social',
-      'social.socialMediaLink',
-      'social.title',
-      'faq',
-      'faq.cta',
-      'simplepushcta',
-      'simplepushcta.image',
-      'simplepushcta.cta',
-      'simplepushcta.cta[0]',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<AideJeunesParentsQuery>(AideJeunesParentsDocument, {})
+    .toPromise()
 
-  const help = (await Pages.getPage(
-    PATHS.HELP,
-    helpQuery
-  )) as APIResponseData<'api::help.help'>
+  if (result.error || !result.data || !result.data.help) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      helpData: help,
+      helpData: result.data.help,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<HelpProps>
+}

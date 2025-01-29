@@ -4,10 +4,10 @@ import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 import { OffersCarouselSlide } from './offersCarouselSlide'
+import { ComponentBlockOffersCarouselFragment } from '@/generated/graphql'
 import { useWindowSize } from '@/hooks/useWindowSize'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { MediaQueries } from '@/theme/media-queries'
-import { OffersVideoCarouselProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
@@ -20,14 +20,18 @@ import { stripTags } from '@/utils/stripTags'
 const MOBILE_WIDTH = getMediaQuery(MediaQueries.MOBILE)
 const LARGE_DESKTOP_WIDTH = getMediaQuery(MediaQueries.LARGE_DESKTOP)
 
-export function OffersCarousel(props: OffersVideoCarouselProps) {
-  const { title, items, cta, description } = props
+export function OffersCarousel(props: ComponentBlockOffersCarouselFragment) {
+  const { requiredTitle, offersCarouselItems, requiredCta, jsonDescription } =
+    props
   const OFFERS_CAROUSEL_SELECTOR = `[aria-roledescription="carrousel"][aria-label="${stripTags(
-    title
+    requiredTitle ?? ''
   )}"]`
   const OFFERS_SLIDES_SELECTOR = '[aria-roledescription="diapositive"]'
   const { width = 0 } = useWindowSize({ debounceDelay: 50 })
-  const TOTAL_SLIDES = useMemo(() => items.length, [items])
+  const TOTAL_SLIDES = useMemo(
+    () => offersCarouselItems?.length ?? 0,
+    [offersCarouselItems]
+  )
 
   const getvisibleSlides = useMemo(() => {
     if (width < MOBILE_WIDTH) return 1
@@ -55,10 +59,10 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
   const visibleSlides = getvisibleSlides
 
   const descriptionIsEmpty =
-    !description ||
-    (description.length === 1 &&
-      description.at(0)?.children.at(0)?.type === 'text' &&
-      (description.at(0)?.children.at(0) as { text: string })?.text === '')
+    !jsonDescription ||
+    (jsonDescription.length === 1 &&
+      jsonDescription.at(0)?.children.at(0)?.type === 'text' &&
+      (jsonDescription.at(0)?.children.at(0) as { text: string })?.text === '')
 
   return (
     <StyledCarousel
@@ -72,10 +76,10 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       infinite={false}
       step={1}>
       <StyledHeading>
-        <Typo.Heading2>{title}</Typo.Heading2>
+        <Typo.Heading2>{requiredTitle ?? ''}</Typo.Heading2>
 
         <BlockRendererWithCondition condition={!descriptionIsEmpty}>
-          <BlocksRenderer content={description as BlocksContent} />
+          <BlocksRenderer content={jsonDescription as BlocksContent} />
         </BlockRendererWithCondition>
 
         <StyledArrowButtonWrapper>
@@ -87,9 +91,10 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
               />
             </BlockRendererWithCondition>
           </BlockRendererWithCondition>
-          <BlockRendererWithCondition condition={isRenderable(cta?.URL)}>
-            <CtaLink href={cta.URL}>
-              <span>{cta.Label}</span>
+          <BlockRendererWithCondition
+            condition={isRenderable(requiredCta?.URL)}>
+            <CtaLink href={requiredCta?.URL}>
+              <span>{requiredCta?.Label}</span>
             </CtaLink>
           </BlockRendererWithCondition>
         </StyledArrowButtonWrapper>
@@ -98,31 +103,35 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
       <StyledSlider
         classNameAnimation="customCarrouselAnimation"
         preventVerticalScrollOnTouch
-        aria-label={stripTags(title)}
+        aria-label={stripTags(requiredTitle ?? '')}
         aria-roledescription="carrousel">
-        {items.map((item, index) => {
-          return (
-            <OffersCarouselSlide
-              key={`${item.title}_${index}`}
-              slideIndex={index}
-              {...item}
-            />
-          )
-        })}
+        {offersCarouselItems
+          ?.filter((item) => item !== null)
+          .map((item, index) => {
+            return (
+              <OffersCarouselSlide
+                key={`${item?.title ?? ''}_${index}`}
+                slideIndex={index}
+                {...item}
+              />
+            )
+          })}
       </StyledSlider>
       <BlockRendererWithCondition
         condition={isNavShowing && width < MOBILE_WIDTH}>
         <NavigationWithDots
-          items={items}
+          items={offersCarouselItems?.filter((item) => item !== null) ?? []}
           carrouselSelector={OFFERS_CAROUSEL_SELECTOR}
           slidesSelector={OFFERS_SLIDES_SELECTOR}
           carouselName="OFFERS_CAROUSEL"
         />
       </BlockRendererWithCondition>
 
-      <BlockRendererWithCondition condition={isRenderable(cta.Label)}>
+      <BlockRendererWithCondition condition={isRenderable(requiredCta?.Label)}>
         <MobileCtaWrapper>
-          <MobileCtaLink href={cta.URL}>{cta.Label}</MobileCtaLink>
+          <MobileCtaLink href={requiredCta?.URL}>
+            {requiredCta?.Label}
+          </MobileCtaLink>
         </MobileCtaWrapper>
       </BlockRendererWithCondition>
     </StyledCarousel>

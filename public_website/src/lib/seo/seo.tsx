@@ -4,9 +4,13 @@ import { usePathname } from 'next/navigation'
 
 import { FacebookMeta } from './facebookMeta'
 import { XMeta } from './xMeta'
-import { SeoProps } from '@/types/props'
+import { ComponentSharedSeoFragment } from '@/generated/graphql'
 import { isRenderable } from '@/utils/isRenderable'
 import { isStringAreEquals } from '@/utils/stringAreEquals'
+
+type SeoProps = {
+  metaData: ComponentSharedSeoFragment
+}
 
 export function Seo(props: SeoProps) {
   const { metaData } = props
@@ -39,36 +43,30 @@ export function Seo(props: SeoProps) {
         {meta_description && (
           <meta name="description" content={metaData.metaDescription} />
         )}
-        {meta_robots && <meta name="robots" content={metaData.metaRobots} />}
+        {meta_robots && (
+          <meta name="robots" content={metaData.metaRobots ?? ''} />
+        )}
         {structure_data && (
           <script type="application/ld+json">
             {JSON.stringify(metaData.structuredData)}
           </script>
         )}
         {meta_viewport && (
-          <meta name="viewport" content={metaData.metaViewport} />
+          <meta name="viewport" content={metaData.metaViewport ?? ''} />
         )}
-        {keywords && <meta name="keywords" content={metaData.keywords} />}
+        {keywords && <meta name="keywords" content={metaData.keywords ?? ''} />}
         <link rel="canonical" href={setCanonicaURL()} />
       </Head>
       {meta_social?.map((social) => (
-        <React.Fragment key={social.title}>
-          {isStringAreEquals(social.socialNetwork, 'Facebook') && (
-            <FacebookMeta
-              key={social.title}
-              title={social.title}
-              description={social.description}
-              image={social.image}
-            />
-          )}
-          {isStringAreEquals(social.socialNetwork, 'X') && (
-            <XMeta
-              key={social.title}
-              title={social.title}
-              description={social.description}
-              image={social.image}
-            />
-          )}
+        <React.Fragment key={social?.title ?? ''}>
+          {social?.socialNetwork &&
+            isStringAreEquals(social?.socialNetwork, 'Facebook') && (
+              <FacebookMeta key={social.title} {...social} />
+            )}
+          {social?.socialNetwork &&
+            isStringAreEquals(social?.socialNetwork, 'X') && (
+              <XMeta key={social?.title ?? ''} {...social} />
+            )}
         </React.Fragment>
       ))}
     </React.Fragment>

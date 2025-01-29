@@ -1,0 +1,8 @@
+fragment ComponentBlockSimpleTextV2 on ComponentBlockSimpleTextV2 {
+  id
+  title
+  jsonText: text
+  columns {
+    ...ComponentCommonSimpleTextColumn
+  }
+}

@@ -1,50 +1,57 @@
-import { Offer, Tag } from '@/types/playlist'
-import { HeaderMenuProps } from '@/types/props'
+import {
+  Enum_Componentheadermegamenu_Theme,
+  HeaderFragment,
+} from '@/generated/graphql'
+import { Offer } from '@/types/playlist'
 
-export const testDataFixtures = { message: 'Hello World!' }
-
-export const headerDataFixtures: HeaderMenuProps = {
+export const headerDataFixtures: HeaderFragment = {
   targetItems: [
     {
       label: 'Target item 1',
       megaMenu: {
+        id: '1',
         title: 'Mega menu 1',
         cardTitle: 'CardTitle 1',
         bannerDefaultUrl: '',
         cardDescription: 'CardDescription 1',
         cardFirstEmoji: '🌴',
         cardSecondEmoji: '🦊',
-        theme: 'aquamarine',
+        theme: Enum_Componentheadermegamenu_Theme.Aquamarine,
         primaryListItems: [
           {
+            id: '1',
             Label: 'primaryListItems 1',
             URL: '#',
           },
         ],
         secondaryListItems: [
           {
+            id: '2',
             Label: 'secondaryListItems 1',
             URL: '#',
           },
         ],
         cta: {
+          id: '3',
           Label: 'Cta 1',
           URL: '#',
         },
         cardLink: {
+          id: '4',
           Label: 'CardLink 1',
           URL: '#',
         },
       },
-      id: 0,
+      id: '1',
     },
   ],
   aboutItems: [
     {
       label: 'Target item 2',
       megaMenu: {
+        id: '2',
         title: 'Mega menu 2',
-        theme: 'aquamarine',
+        theme: Enum_Componentheadermegamenu_Theme.Aquamarine,
         bannerDefaultUrl: '',
         cardTitle: 'CardTitle 2',
         cardDescription: 'CardDescription 2',
@@ -52,32 +59,38 @@ export const headerDataFixtures: HeaderMenuProps = {
         cardSecondEmoji: '☎️',
         primaryListItems: [
           {
+            id: '5',
             Label: 'primaryListItems 2',
             URL: '#',
           },
         ],
         secondaryListItems: [
           {
+            id: '6',
             Label: 'secondaryListItems 2',
             URL: '#',
           },
         ],
         cta: {
+          id: '7',
           Label: 'Cta 2',
           URL: '#',
         },
         cardLink: {
+          id: '8',
           Label: 'CardLink 2',
           URL: '#',
         },
       },
-      id: 0,
+      id: '2',
     },
   ],
   login: {
+    id: '9',
     buttonLabel: 'Login label',
     items: [
       {
+        id: '9',
         label: 'LoginItem 1',
         color: '#ff0000',
         emoji: '😇',
@@ -86,9 +99,11 @@ export const headerDataFixtures: HeaderMenuProps = {
     ],
   },
   signup: {
+    id: '10',
     buttonLabel: 'Signup label',
     items: [
       {
+        id: '10',
         label: 'LoginItem 1',
         color: '#ff0000',
         emoji: '😇',
@@ -97,44 +112,6 @@ export const headerDataFixtures: HeaderMenuProps = {
     ],
   },
 }
-
-type RestaurantData = {
-  attributes: {
-    description: string
-    name: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-  }
-  id: number
-}
-
-export const restaurantDataFixtures: RestaurantData[] = [
-  {
-    attributes: {
-      description:
-        'Tacos de Lyon, c’est l’histoire de deux amis d’enfance, passionnés de cuisine, qui ont décidé de se lancer dans l’aventure de la restauration. Leur objectif : faire découvrir la gastronomie lyonnaise à travers un plat emblématique de la ville : le tacos. Pour cela, ils ont imaginé une carte de tacos à base de produits frais et de qualité, avec des recettes originales et savoureuses. Le tout, dans une ambiance conviviale et chaleureuse.',
-      name: 'Tacos de Lyon',
-      publishedAt: '2023-08-15T18:00:00.000Z',
-      createdAt: '2023-08-15T18:00:00.000Z',
-      updatedAt: '2023-08-15T18:00:00.000Z',
-    },
-    id: 107,
-  },
-]
-
-export const activePlaylistTagsFixtures: Tag[] = [
-  {
-    attributes: {
-      tag: 'Bons_plans_du_moment',
-      displayName: 'Bons plans du moment',
-      publishedAt: '2023-08-15T18:00:00.000Z',
-      createdAt: '2023-08-15T18:00:00.000Z',
-      updatedAt: '2023-08-15T18:00:00.000Z',
-    },
-    id: 45,
-  },
-]
 
 export const playlistOffersFixtures: Offer[] = [
   {

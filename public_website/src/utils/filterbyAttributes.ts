@@ -1,4 +1,9 @@
-import { APIResponseData } from '@/types/strapi'
+import {
+  EventFragment,
+  NewsFragment,
+  ResourceFragment,
+  RessourcepassFragment,
+} from '@/generated/graphql'
 
 export enum Options {
   Secteur = "Secteur d'activités",
@@ -10,27 +15,25 @@ export enum Options {
 type Filtre = { filtre: string }[] | undefined
 
 type Data =
-  | APIResponseData<'api::event.event'>[]
-  | APIResponseData<'api::news.news'>[]
-  | APIResponseData<'api::resource.resource'>[]
-  | APIResponseData<'api::ressourcepass.ressourcepass'>[]
+  | EventFragment[]
+  | NewsFragment[]
+  | ResourceFragment[]
+  | RessourcepassFragment[]
 type AttributeGetter = (
-  item:
-    | APIResponseData<'api::event.event'>
-    | APIResponseData<'api::news.news'>
-    | APIResponseData<'api::resource.resource'>
-    | APIResponseData<'api::ressourcepass.ressourcepass'>
+  item: EventFragment | NewsFragment | ResourceFragment | RessourcepassFragment
 ) => string
 const filterMappings: { [key: string]: AttributeGetter } = {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-  [Options.Secteur]: (item) => item.attributes.secteur,
-  [Options.Category]: (item) => item.attributes.category,
+  [Options.Secteur]: (item) => item.secteur,
+  [Options.Category]: (item) => item.category,
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-  [Options.Localisation]: (item) => item.attributes?.localisation,
-  [Options.Partenariat]: (item) => item.attributes.category,
+  [Options.Localisation]: (item) => item?.localisation,
+  [Options.Partenariat]: (item) => item.category,
 }
+
+// ts-prune-ignore-next
 export const filterByAttribute = (
   filtres: Filtre,
   data: Data

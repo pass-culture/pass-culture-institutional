@@ -3,11 +3,17 @@ import { CarouselProvider, Slider } from 'pure-react-carousel'
 import styled from 'styled-components'
 
 import { VerticalCarouselSlide } from './PiledCardsCarouselSlide'
+import { ComponentCommonPiledCardItemFragment } from '@/generated/graphql'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
-import { PiledCardsCarouselProps } from '@/types/props'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
 import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { stripTags } from '@/utils/stripTags'
+
+type PiledCardsCarouselProps = {
+  title: string
+  items: ComponentCommonPiledCardItemFragment[]
+  className?: string
+}
 
 export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
   const { title, items, className } = props
@@ -22,8 +28,7 @@ export function PiledCardsCarousel(props: PiledCardsCarouselProps) {
   const getvisibleSlides = 1
 
   const isNavShowing = useMemo(() => {
-    const visibleKeySlides = getvisibleSlides
-    return TOTAL_SLIDES > visibleKeySlides
+    return TOTAL_SLIDES > getvisibleSlides
   }, [TOTAL_SLIDES, getvisibleSlides])
 
   /**

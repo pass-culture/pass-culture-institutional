@@ -1,0 +1,10 @@
+fragment ComponentBlockFaq on ComponentBlockFaq {
+  id
+  requiredTitle: title
+  limit
+  categories
+  filteringProperty
+  requiredCta: cta {
+    ...ComponentCommonLink
+  }
+}

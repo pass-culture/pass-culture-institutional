@@ -53,4 +53,5 @@ const FilterOption = (props: {
   return <FilterContainer filtres={data} onFilterChange={handleFilterChange} />
 }
 
+// ts-prune-ignore-next
 export default FilterOption

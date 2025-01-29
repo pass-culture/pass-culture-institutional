@@ -1,0 +1,8 @@
+fragment ComponentSharedMetaSocial on ComponentSharedMetaSocial {
+  socialNetwork
+  title
+  description
+  image {
+    ...UploadFile
+  }
+}

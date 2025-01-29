@@ -19,8 +19,8 @@ export const useOnClickAnalytics = () => {
   const acceptedVendors = useConsent()
 
   const onClickAnalytics = (cta: {
-    eventName?: string
-    eventOrigin?: string
+    eventName?: string | null
+    eventOrigin?: string | null
   }) => {
     if (!acceptedVendors['firebase']) return
 

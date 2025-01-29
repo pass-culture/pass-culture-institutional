@@ -16,7 +16,7 @@ describe('header', () => {
     render(<VerticalCarousel {...verticalCarouselFixtures} />)
 
     expect(screen.getAllByRole('link').length).toEqual(
-      verticalCarouselFixtures.items.length
+      verticalCarouselFixtures.verticalCarouselItems.length
     )
   })
 })

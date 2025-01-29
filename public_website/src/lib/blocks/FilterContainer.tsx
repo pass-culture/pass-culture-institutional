@@ -128,7 +128,7 @@ export function FilterContainer(props: FiltersProps) {
             <CustomSelectButton
               role="combobox"
               onClick={(): void => {
-                filtre.value.length && setIsOpen(index)
+                if (filtre.value.length) setIsOpen(index)
               }}
               tabIndex={0}
               aria-owns={filtre.filtre}

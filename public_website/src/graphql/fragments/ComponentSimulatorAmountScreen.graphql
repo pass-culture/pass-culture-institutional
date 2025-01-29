@@ -1,0 +1,5 @@
+fragment ComponentSimulatorAmountScreen on ComponentSimulatorAmountScreen {
+  id
+  title
+  text
+}

@@ -1,0 +1,19 @@
+fragment ComponentHomeHeroSection on ComponentHomeHeroSection {
+  title
+  subTitle
+  cta {
+    ...ComponentCommonLink
+  }
+  firstEmoji
+  secondEmoji
+  thirdEmoji
+  fourthEmoji
+  fifthEmoji
+  sixthEmoji
+  images_connection {
+    ...UploadFileRelationResponseCollection
+  }
+  images {
+    ...UploadFile
+  }
+}

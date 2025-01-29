@@ -1,34 +1,34 @@
 import React, { useMemo } from 'react'
-import type { GetStaticPaths, GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import type { GetStaticProps } from 'next'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import { PageDocument, PageQuery } from '@/generated/graphql'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Separator } from '@/lib/blocks/Separator'
 import { Seo } from '@/lib/seo/seo'
+import urqlClient from '@/lib/urqlClient'
 import { PageWrapper } from '@/theme/style'
-import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
 interface CustomPageProps {
-  data: APIResponseData<'api::page.page'>
+  data: NonNullable<PageQuery['pages'][number]>
 }
 
 export default function CustomPage(props: CustomPageProps) {
-  const { seo, Blocks } = props.data.attributes
+  const { seo, Blocks } = props.data
 
   const memoBlocks = useMemo(
     () =>
       Blocks?.map((block, index) => {
         const blockContent = (
-          <React.Fragment key={`${block.__component}_${block.id}`}>
-            <BlockRenderer block={block} />
+          <React.Fragment
+            key={`${block?.__typename}_${(block as { id: string })?.id}`}>
+            {block && <BlockRenderer block={block} />}
             <Separator isActive={false} />
           </React.Fragment>
         )
         return index === 1 ? (
-          <React.Fragment key={`${block.__component}_${block.id}`}>
+          <React.Fragment
+            key={`${block?.__typename}_${(block as { id: string })?.id}`}>
             <Breadcrumb isUnderHeader />
             {blockContent}
           </React.Fragment>
@@ -47,102 +47,55 @@ export default function CustomPage(props: CustomPageProps) {
   )
 }
 
-export const getStaticProps = (async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pagePath = (params?.['slug'] as string[]).join('/')
+  const result = await urqlClient
+    .query<PageQuery>(PageDocument, {
+      filters: {
+        Path: {
+          eqi: pagePath,
+        },
+      },
+    })
+    .toPromise()
 
-  const queryParams = stringify({
-    populate: [
-      'Blocks.image.image',
-      'Blocks.firstCta',
-      'Blocks.secondCta',
-      'Blocks.image.image.data',
-      'Blocks.content',
-      'Blocks.items',
-      'Blocks[0]',
-      'Blocks.items.image',
-      'Blocks.logo',
-      'Blocks.logo.logo',
-      'Blocks.cta',
-      'Blocks.items.items',
-      'Blocks.socialMediaLink',
-      'Blocks.columns',
-      'Blocks.video',
-      'Blocks.people',
-      'Blocks.people.image',
-      'Blocks.logos.cta',
-      'Blocks.logos.image',
-      'Blocks.breadCrumbs',
-      'Blocks.breadCrumbs.fils',
-      'Blocks.breadCrumbs.parent',
-      'Blocks.images',
-      'Blocks.carouselItems',
-      'Blocks.carouselItems.image',
-      'Blocks.QRCode',
-      'Blocks.tab',
-      'Blocks.tab.block',
-      'Blocks.tab.block.image',
-      'Blocks.tab.block.firstCta',
-      'Blocks.tab.block.secondCta',
-      'Blocks.tab.block.columns',
-      'Blocks.tab.block.content',
-      'Blocks.centered.title',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-
-  const response = (await Pages.getPage(
-    PATHS.PAGES,
-    `${queryParams}&filters[Path][$eqi]=${encodeURIComponent(pagePath)}`
-  )) as APIResponseData<'api::page.page'>[]
-
-  if (response.length === 0) {
+  if (result.error || !result.data || !result.data.pages) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
     return { notFound: true }
   }
 
-  const eventQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image', 'cta'],
-    pagination: {},
-    filter: {
-      pageLocalisation: {
-        $containsi: 'S\u2019informer - presse',
-      },
-    },
-  })
-  const events = await Pages.getPage(PATHS.EVENTS, eventQuery)
+  if (result.data.pages.length === 0) {
+    return { notFound: true }
+  }
 
   return {
     props: {
-      data: response[0]!,
-      eventsData: events,
+      data: result.data.pages[0],
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<CustomPageProps>
+}
 
-export const getStaticPaths = (async () => {
-  const query = stringify(
-    {
+export const getStaticPaths = async () => {
+  const result = await urqlClient
+    .query<PageQuery>(PageDocument, {
       pagination: {
         limit: 100,
       },
-    },
-    { encodeValuesOnly: true }
-  )
-  const response = (await Pages.getPage(
-    PATHS.PAGES,
-    query
-  )) as APIResponseData<'api::page.page'>[]
+    })
+    .toPromise()
 
-  const result = {
-    paths: response.map((page: APIResponseData<'api::page.page'>) => ({
-      params: {
-        slug: page.attributes.Path.split('/').filter((slug) => slug.length),
-      },
-    })),
+  const paths = {
+    paths:
+      result.data?.pages
+        .filter((p) => p !== null)
+        .map((page) => ({
+          params: {
+            slug: page?.Path.split('/').filter((slug) => slug.length),
+          },
+        })) ?? [],
     fallback: false,
   }
 
-  return result
-}) satisfies GetStaticPaths
+  return paths
+}

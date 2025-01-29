@@ -1,24 +1,34 @@
 import React, { useEffect, useMemo } from 'react'
-import type { AppContext } from 'next/app'
-import App from 'next/app'
+import App, { AppContext } from 'next/app'
 import { Montserrat } from 'next/font/google'
-import { stringify } from 'qs'
 import { ThemeProvider } from 'styled-components'
 
+import {
+  AppDocument,
+  AppQuery,
+  FooterFragment,
+  HeaderFragment,
+} from '@/generated/graphql'
 import { useAxeptio } from '@/hooks/useAxeptio'
 import { useConsent } from '@/hooks/useConsent'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
+import urqlClient from '@/lib/urqlClient'
 import { theme } from '@/theme/theme'
-import { FooterProps, MyAppProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { Footer } from '@/ui/components/footer/Footer'
 import { Header } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })
+
+type MyAppProps = {
+  Component: React.ComponentType
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pageProps: any
+  headerData: HeaderFragment
+  footerData: FooterFragment
+}
 
 export default function MyApp({
   Component,
@@ -46,9 +56,9 @@ export default function MyApp({
 
   const breadcrumbContextValue = useMemo(
     () => ({
-      targetItems: headerData.targetItems,
-      aboutItems: headerData.aboutItems,
-      footerItems: footerData.LegalLinks,
+      targetItems: headerData.targetItems.filter((item) => item !== null) ?? [],
+      aboutItems: headerData.aboutItems.filter((item) => item !== null) ?? [],
+      footerItems: footerData.LegalLinks?.filter((item) => item !== null) ?? [],
     }),
     [headerData.targetItems, headerData.aboutItems, footerData.LegalLinks]
   )
@@ -80,43 +90,24 @@ export default function MyApp({
   )
 }
 
-type FooterData = {
-  id: number
-  attributes: FooterProps
-}
-
 MyApp.getInitialProps = async (context: AppContext) => {
-  // Fetch header data
-  const headerQuery = stringify({
-    populate: [
-      'targetItems.megaMenu',
-      'targetItems.megaMenu.primaryListItems',
-      'targetItems.megaMenu.secondaryListItems',
-      'targetItems.megaMenu.cta',
-      'targetItems.megaMenu.cardLink',
-      'aboutItems.megaMenu',
-      'aboutItems.megaMenu.primaryListItems',
-      'aboutItems.megaMenu.secondaryListItems',
-      'aboutItems.megaMenu.cta',
-      'aboutItems.megaMenu.cardLink',
-      'login',
-      'login.items',
-      'signup',
-      'signup.items',
-    ],
-  })
-  const headerData = await fetchCMS<APIResponseData<'api::header.header'>>(
-    `/header?${headerQuery}`
-  )
+  const result = await urqlClient.query<AppQuery>(AppDocument, {}).toPromise()
 
-  const footerData = await fetchCMS<FooterData>(
-    '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'
-  )
+  if (
+    result.error ||
+    !result.data ||
+    !result.data.header ||
+    !result.data.footer
+  ) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
+
   const ctx = await App.getInitialProps(context)
 
   return {
     ...ctx,
-    headerData: headerData.data.attributes,
-    footerData: footerData.data.attributes,
+    headerData: result.data.header,
+    footerData: result.data.footer,
   }
 }

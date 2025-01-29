@@ -1,8 +1,15 @@
 import { createContext } from 'react'
 
-import { BreadcrumbDataProps } from '@/types/props'
+import {
+  ComponentCommonLink,
+  ComponentHeaderNavigationItems,
+} from '@/generated/graphql'
 
-type BreadcrumbContextData = BreadcrumbDataProps
+type BreadcrumbContextData = {
+  targetItems: ComponentHeaderNavigationItems[]
+  aboutItems: ComponentHeaderNavigationItems[]
+  footerItems: ComponentCommonLink[]
+}
 
 export const BreadcrumbContext = createContext<BreadcrumbContextData | null>(
   null

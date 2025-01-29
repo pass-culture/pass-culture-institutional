@@ -1,0 +1,10 @@
+fragment ComponentCommonDetailedLogo on ComponentCommonDetailedLogo {
+  title
+  description
+  cta {
+    ...ComponentCommonLink
+  }
+  image {
+    ...UploadFile
+  }
+}

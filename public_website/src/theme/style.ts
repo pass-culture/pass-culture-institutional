@@ -2,19 +2,15 @@ import { Dot } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
 export type ItemsTheme =
-  | 'gold'
-  | 'sky'
-  | 'lila'
-  | 'deeppink'
-  | 'aquamarine'
-  | 'saumon'
-  | 'lightgray'
-  | 'magenta'
-  | 'orange'
-  | 'purple'
-  | 'yellow'
-  | 'green'
+  | Enum_Componentcommonpiledcarditem_Theme
+  | Enum_Componentheadermegamenu_Theme
+  | Enum_Componentcommonofferscarouselitem_Theme
 
+import {
+  Enum_Componentcommonofferscarouselitem_Theme,
+  Enum_Componentcommonpiledcarditem_Theme,
+  Enum_Componentheadermegamenu_Theme,
+} from '@/generated/graphql'
 import { SocialMedia } from '@/lib/blocks/SocialMedia'
 import { theme } from '@/theme/theme'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
@@ -29,7 +25,10 @@ export const PageWrapper = styled.div`
   }
 `
 
-export const CARD_BACKGROUNDS: Record<ItemsTheme, string> = {
+export const CARD_BACKGROUNDS: Record<
+  Enum_Componentcommonpiledcarditem_Theme | Enum_Componentheadermegamenu_Theme,
+  string
+> = {
   aquamarine: theme.colors.aquamarine,
   gold: theme.colors.gold,
   deeppink: theme.colors.deepink,
@@ -42,6 +41,7 @@ export const CARD_BACKGROUNDS: Record<ItemsTheme, string> = {
   purple: theme.colors.lila,
   yellow: theme.colors.gold,
   green: theme.colors.flashGreen,
+  blue: theme.colors.blue,
 }
 
 // DOT NAVIGATION FOR SLIDERS

@@ -1,0 +1,7 @@
+fragment ComponentFooterList on ComponentFooterList {
+  id
+  Title
+  Links {
+    ...ComponentCommonLink
+  }
+}

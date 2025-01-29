@@ -2,15 +2,16 @@ import React from 'react'
 
 import { DoublePushCTA } from '../DoublePushCta'
 import Tabs from './Tabs'
-import { TabPushGreyProps } from '@/types/props'
+import { ComponentBlockTabsPushGreyCtaFragment } from '@/generated/graphql'
 
-const TabsPushGreyCta = (props: TabPushGreyProps) => {
+const TabsPushGreyCta = (props: ComponentBlockTabsPushGreyCtaFragment) => {
   return (
     <Tabs {...props}>
       <DoublePushCTA
-        title=""
-        image={undefined}
+        requiredTitle=""
+        requiredImage={undefined}
         firstCta={{
+          id: '',
           Label: '',
           URL: '',
           eventName: undefined,

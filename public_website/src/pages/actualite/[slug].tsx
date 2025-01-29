@@ -1,37 +1,49 @@
 import React, { useMemo } from 'react'
-import type { GetStaticPaths, GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import type { GetStaticProps } from 'next'
 import styled, { css } from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
+import {
+  ActualitesDocument,
+  ActualitesQuery,
+  NewsFragment,
+} from '@/generated/graphql'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 
 interface CustomPageProps {
-  data: APIResponseData<'api::news.news'>
-  latestStudies: APIResponseData<'api::news.news'>[]
+  data: NewsFragment
+  latestStudies: NewsFragment[]
 }
 
 export default function CustomPage(props: CustomPageProps) {
-  const { seo, image, title, blocks, aboveTitle } = props.data.attributes
+  const { seo, image, title, blocks, aboveTitle } = props.data
 
   const memoBlocks = useMemo(
     () =>
-      blocks?.map((block) => (
-        <BlockRenderer key={`${block.__component}_${block.id}`} block={block} />
-      )),
+      blocks
+        ?.filter((block) => block !== null)
+        .map((block) => (
+          <BlockRenderer
+            key={`${block.__typename}_${(block as { id: string }).id}`}
+            block={block}
+          />
+        )),
     [blocks]
   )
 
   return (
     <React.Fragment>
-      <Seo metaData={seo} />
-      <Header image={image} icon="" title={title} aboveTitle={aboveTitle} />
+      {seo && <Seo metaData={seo} />}
+      <Header
+        requiredImage={image}
+        requiredIcon=""
+        requiredTitle={title}
+        aboveTitle={aboveTitle}
+      />
       <Breadcrumb isUnderHeader />
       {memoBlocks}
       <StyledLatestNews
@@ -43,105 +55,74 @@ export default function CustomPage(props: CustomPageProps) {
   )
 }
 
-export const getStaticProps = (async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pagePath = params?.['slug'] as string
-  const queryParams = stringify(
-    {
-      populate: [
-        'blocks.image.image',
-        'blocks.socialMediaLink',
-        'blocks.image.image.data',
-        'blocks.content',
-        'blocks.items',
-        'blocks',
-        'news',
-        'blocks[0]',
-        'blocks.items.image',
-        'blocks.logo',
-        'blocks.logo.logo',
-        'relatedNews',
-        'relatedNews.cta',
-        'relatedNews.category',
-        'blocks.cta',
-        'blocks.items.items',
-        'blocks.columns',
-        'blocks.firstCta',
-        'blocks.secondCta',
-        'seo',
-        'seo.metaSocial',
-        'seo.metaSocial.image',
-        'image',
-      ],
+  const result = await urqlClient
+    .query<ActualitesQuery>(ActualitesDocument, {
       filters: {
         slug: {
-          $eqi: pagePath,
+          eqi: pagePath,
         },
       },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
-  const actu = (await Pages.getPage(
-    PATHS.NEWS,
-    queryParams
-  )) as APIResponseData<'api::news.news'>[]
+    })
+    .toPromise()
 
-  if (actu.length === 0) {
+  if (result.error || !result.data || !result.data.newsList) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
     return { notFound: true }
   }
-  const latestActuQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {
-      limit: 3,
-    },
-    filters: {
-      category: {
-        $eqi: actu[0]!.attributes.category,
-      },
-      title: {
-        $ne: actu[0]!.attributes.title,
-      },
-    },
-  })
 
-  const latestActu = (await Pages.getPage(
-    PATHS.NEWS,
-    latestActuQuery
-  )) as APIResponseData<'api::news.news'>[]
+  if (result.data.newsList.length === 0) {
+    return { notFound: true }
+  }
+
+  const latestResult = await urqlClient
+    .query<ActualitesQuery>(ActualitesDocument, {
+      pagination: {
+        limit: 3,
+      },
+      filters: {
+        category: {
+          eqi: result.data.newsList[0]!.category,
+        },
+        title: {
+          ne: result.data.newsList[0]!.title,
+        },
+      },
+      sort: ['date:desc'],
+    })
+    .toPromise()
 
   return {
     props: {
-      data: actu[0]!,
-      latestStudies: latestActu,
+      data: result.data.newsList[0]!,
+      latestStudies: latestResult.data?.newsList ?? [],
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<CustomPageProps>
+}
 
-export const getStaticPaths = (async () => {
-  const newsQuery = stringify({
-    pagination: {},
-    populate: ['image'],
-    sort: ['date:desc'],
-  })
+export const getStaticPaths = async () => {
+  const result = await urqlClient
+    .query<ActualitesQuery>(ActualitesDocument, {
+      sort: ['date:desc'],
+    })
+    .toPromise()
 
-  const response = (await Pages.getPage(
-    PATHS.NEWS,
-    newsQuery
-  )) as APIResponseData<'api::news.news'>[]
-
-  const result = {
-    paths: response.map((page) => ({
-      params: {
-        slug: page.attributes.slug,
-      },
-    })),
+  const paths = {
+    paths:
+      result.data?.newsList
+        .filter((p) => p !== null)
+        .map((page) => ({
+          params: {
+            slug: page?.slug,
+          },
+        })) ?? [],
     fallback: false,
   }
 
-  return result
-}) satisfies GetStaticPaths
+  return paths
+}
 
 const StyledLatestNews = styled(LatestNews)`
   ${({ theme }) => css`

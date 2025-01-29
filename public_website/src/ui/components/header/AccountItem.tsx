@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components'
 
 import { ArrowRight } from '../icons/ArrowRight'
 import { OutlinedText } from '../OutlinedText'
+import { ComponentHeaderAccountItemFragment } from '@/generated/graphql'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
-import { AccountItemDropdownProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 
-export function AccountItem(props: AccountItemDropdownProps) {
+export function AccountItem(props: ComponentHeaderAccountItemFragment) {
   const { color, url, emoji, label, eventName, eventOrigin } = props
   const { onClickAnalytics } = useOnClickAnalytics()
 

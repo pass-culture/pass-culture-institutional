@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 
 import { AccountItem } from '../AccountItem'
-import { MobileMenuAccountSubPanelProps } from '@/types/props'
+import { ComponentHeaderAccountItemFragment } from '@/generated/graphql'
+
+type MobileMenuAccountSubPanelProps = {
+  items: ComponentHeaderAccountItemFragment[]
+}
 
 export function MobileMenuAccountSubPanel(
   props: MobileMenuAccountSubPanelProps

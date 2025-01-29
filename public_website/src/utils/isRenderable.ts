@@ -1,14 +1,8 @@
-import { APIResponse } from '@/types/strapi'
+import { UploadFileFragment } from '@/generated/graphql'
 
 // Fonction utilitaire pour vérifier si une valeur est "rédable"
 export const isRenderable = (
-  value:
-    | string
-    | number
-    | boolean
-    | undefined
-    | null
-    | APIResponse<'plugin::upload.file'>
+  value: string | number | boolean | undefined | null | UploadFileFragment
 ): boolean => {
   return (
     value !== undefined &&

@@ -1,0 +1,5 @@
+query Simulateur {
+  simulator {
+    ...Simulator
+  }
+}

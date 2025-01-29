@@ -1,0 +1,34 @@
+query ActualitesRDVActeursCulturels(
+  $sortNews: [String]
+  $filtersNews: NewsFiltersInput
+  $sortEvents: [String]
+  $filtersEvents: EventFiltersInput
+) {
+  actualitesRdvActeursCulturel {
+    title
+    buttonText
+    filtres {
+      ...ComponentCommonFiltre
+    }
+    socialMediaSection {
+      ...ComponentBlockSocialMedia
+    }
+    separator {
+      ...ComponentBlockSeparator
+    }
+    aide {
+      ...ComponentBlockSimplePushCta
+    }
+    titleEventSection
+    seo {
+      ...ComponentSharedSeo
+    }
+    showFilter
+  }
+  newsList(sort: $sortNews, filters: $filtersNews) {
+    ...News
+  }
+  events(sort: $sortEvents, filters: $filtersEvents) {
+    ...Event
+  }
+}

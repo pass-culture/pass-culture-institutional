@@ -4,41 +4,43 @@ import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { Video } from './Video'
-import { SimpleTextWithMediaProps } from '@/types/props'
+import { ComponentBlockColumnsTextFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function SimpleTextWithMedia(props: SimpleTextWithMediaProps) {
-  const { columns, title, video } = props
+export function SimpleTextWithMedia(props: ComponentBlockColumnsTextFragment) {
+  const { columns, requiredTitle, video } = props
 
   const isRenderColumns = (): boolean => {
-    return columns?.length > 0
+    return (columns?.length ?? 0) > 0
   }
 
   return (
     <Root data-testid="simple-text-with-media">
-      <BlockRendererWithCondition condition={isRenderable(title)}>
-        <StyledHeading2>{title as string}</StyledHeading2>
+      <BlockRendererWithCondition condition={isRenderable(requiredTitle)}>
+        <StyledHeading2>{requiredTitle as string}</StyledHeading2>
       </BlockRendererWithCondition>
       <Content>
         <BlockRendererWithCondition condition={isRenderColumns()}>
           <Columns>
-            {columns?.map((col) => (
-              <Column key={col.id}>
-                {col?.title && (
-                  <ColumnTitle
-                    aria-label={parseText(col.title).accessibilityLabel}>
-                    {parseText(col.title).processedText}
-                  </ColumnTitle>
-                )}
-                {col?.text && <BlocksRenderer content={col.text} />}
-              </Column>
-            ))}
+            {columns
+              ?.filter((col) => col !== null)
+              .map((col) => (
+                <Column key={col.id}>
+                  {col?.title && (
+                    <ColumnTitle
+                      aria-label={parseText(col.title).accessibilityLabel}>
+                      {parseText(col.title).processedText}
+                    </ColumnTitle>
+                  )}
+                  {col?.text && <BlocksRenderer content={col.text} />}
+                </Column>
+              ))}
           </Columns>
         </BlockRendererWithCondition>
-        <Video $noMargin {...video} />
+        {video && <Video {...video} />}
       </Content>
     </Root>
   )

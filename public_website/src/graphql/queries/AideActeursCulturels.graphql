@@ -1,0 +1,22 @@
+query AideActeursCulturels {
+  helpCulturalActors {
+    heroSection {
+      ...ComponentBlockHeader
+    }
+    cardText {
+      ...ComponentBlockDoublePushCta
+    }
+    faq {
+      ...ComponentBlockFaq
+    }
+    social {
+      ...ComponentBlockSocialMedia
+    }
+    simplepushcta {
+      ...ComponentBlockSimplePushCta
+    }
+    seo {
+      ...ComponentSharedSeo
+    }
+  }
+}

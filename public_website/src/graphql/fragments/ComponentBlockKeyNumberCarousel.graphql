@@ -1,0 +1,7 @@
+fragment ComponentBlockKeyNumberCarousel on ComponentBlockKeyNumberCarousel {
+  id
+  title
+  keyNumberItems: items {
+    ...ComponentCommonKeyNumberItems
+  }
+}

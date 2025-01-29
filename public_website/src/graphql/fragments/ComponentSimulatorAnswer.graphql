@@ -1,0 +1,5 @@
+fragment ComponentSimulatorAnswer on ComponentSimulatorAnswer {
+  id
+  answer
+  emoji
+}

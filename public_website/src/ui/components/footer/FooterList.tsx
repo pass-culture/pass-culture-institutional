@@ -1,9 +1,14 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { FooterListProps } from '@/types/props'
+import { ComponentCommonLinkFragment } from '@/generated/graphql'
 import { Link } from '@/ui/components/Link'
 import { parseText } from '@/utils/parseText'
+
+export type FooterListProps = {
+  title?: string | null
+  listItems: ComponentCommonLinkFragment[]
+}
 
 export function FooterList(props: FooterListProps) {
   const { title, listItems } = props

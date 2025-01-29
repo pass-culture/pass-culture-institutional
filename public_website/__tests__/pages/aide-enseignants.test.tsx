@@ -14,18 +14,14 @@ describe('Help page - Teachers', () => {
     }
   })
 
-  it(
-    'should pass accessibility tests',
-    async () => {
-      const { props } = await getStaticProps()
-      const { container } = render(<TeachersHelp {...props} />)
+  it('should pass accessibility tests', { timeout: 50000 }, async () => {
+    const { props } = await getStaticProps()
+    const { container } = render(<TeachersHelp {...props!} />)
 
-      let a11yResult
-      await act(async () => {
-        a11yResult = await axe(container)
-      })
-      expect(a11yResult).toHaveNoViolations()
-    },
-    { timeout: 50000 }
-  )
+    let a11yResult
+    await act(async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
+  })
 })

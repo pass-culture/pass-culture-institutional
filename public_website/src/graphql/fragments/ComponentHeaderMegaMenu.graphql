@@ -1,0 +1,25 @@
+fragment ComponentHeaderMegaMenu on ComponentHeaderMegaMenu {
+  id
+  title
+  primaryListItems {
+    ...ComponentCommonLink
+  }
+  secondaryListItems {
+    ...ComponentCommonLink
+  }
+  cta {
+    ...ComponentCommonLink
+  }
+  cardTitle
+  cardDescription
+  cardLink {
+    ...ComponentCommonLink
+  }
+  bannerText
+  cardFirstEmoji
+  cardSecondEmoji
+  bannerAndroidUrl
+  bannerIosUrl
+  bannerDefaultUrl
+  theme
+}

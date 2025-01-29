@@ -17,7 +17,6 @@
     "test:deadcode:update": "yarn --silent test:deadcode > scripts/dead_code_snapshot.txt",
     "test:lint": "concurrently \"cd public_website && yarn test:lint\" \"cd content_management_system && yarn test:lint\"",
     "test:types": "concurrently \"cd public_website && yarn test:types\" \"cd content_management_system && yarn test:types\"",
-    "copytypes": "node copyTypes.js",
     "proxy:testing": "cd nginx-strapi-testing-proxy && bash launch-testing-proxy.sh",
     "proxy:testing:infinite": "cd nginx-strapi-testing-proxy && bash launch-testing-proxy.sh -l true",
     "proxy:testing:stop": "docker stop nginx-strapi-testing-proxy",

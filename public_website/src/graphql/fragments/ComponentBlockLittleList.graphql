@@ -1,0 +1,8 @@
+fragment ComponentBlockLittleList on ComponentBlockLittleList {
+  id
+  title
+  description
+  content {
+    ...ComponentCommonLittleListComponent
+  }
+}

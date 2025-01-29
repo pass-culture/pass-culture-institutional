@@ -1,47 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import React from 'react'
 import styled from 'styled-components'
 
-import { getPage } from '@/domain/pages/pages.actions'
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
-import { Filter } from '@/lib/blocks/FilterContainer'
+import {
+  ActualitesPassCultureDocument,
+  ActualitesPassCultureQuery,
+} from '@/generated/graphql'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
-import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
-import { PushCTAProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
-  newsActuPassData: APIResponseData<'api::news.news'>[]
-  listeActualitesPassCulture: APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
-}
-
-const setQuery = (category: string[], localisation: string[]): string => {
-  return stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    pagination: {},
-    filters: {
-      category: {
-        $eqi: category,
-      },
-      localisation: {
-        $eqi: localisation,
-      },
-      pageLocalisation: {
-        $containsi: 'S\u2019informer',
-      },
-    },
-  })
+  newsActuPassData: NonNullable<ActualitesPassCultureQuery['newsList']>
+  listeActualitesPassCulture: NonNullable<
+    ActualitesPassCultureQuery['actualitesPassCulture']
+  >
 }
 
 export default function ListeActualitesPassCulture({
@@ -51,63 +29,66 @@ export default function ListeActualitesPassCulture({
   const {
     aide,
     buttonText,
-    filtres,
+    // filtres,
     seo,
-    showFilter,
+    // showFilter,
     socialMediaSection,
     title,
-  } = listeActualitesPassCulture.attributes
+  } = listeActualitesPassCulture
 
-  const cat = Array.from(
-    new Set(newsActuPassData.map((item) => item.attributes.category))
-  )
+  // const cat = Array.from(
+  //   new Set(newsActuPassData.map((item) => item.attributes.category))
+  // )
 
-  const loc = Array.from(
-    new Set(newsActuPassData.map((item) => item.attributes.localisation))
-  )
-  const [category, setCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [originalCategory, setOriginalCategory] = useState<string[]>([])
-  const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
+  // const loc = Array.from(
+  //   new Set(newsActuPassData.map((item) => item.attributes.localisation))
+  // )
+  // const [category, setCategory] = useState<string[]>([])
+  // const [localisation, setLocalisation] = useState<string[]>([])
+  // const [originalCategory, setOriginalCategory] = useState<string[]>([])
+  // const [originalLocalisation, setOriginalLocalisation] = useState<string[]>([])
 
-  const [filters, setFilters] = useState<Filter[]>([])
-  const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
+  // const [filters, setFilters] = useState<Filter[]>([])
+  // const [data, setData] = useState<APIResponseData<'api::news.news'>[]>([])
 
-  useEffect(() => {
-    setCategory(cat)
-    setLocalisation(loc)
-    setOriginalLocalisation(loc)
-    setOriginalCategory(cat)
+  // useEffect(() => {
+  //   setCategory(cat)
+  //   setLocalisation(loc)
+  //   setOriginalLocalisation(loc)
+  //   setOriginalCategory(cat)
 
-    setData(newsActuPassData)
-    const filtresOption = filterByAttribute(filtres, newsActuPassData)
-    if (filtresOption) setFilters(filtresOption)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   setData(newsActuPassData)
+  //   const filtresOption = filterByAttribute(filtres, newsActuPassData)
+  //   if (filtresOption) setFilters(filtresOption)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
-  const fetchData = async () => {
-    const newsQuery = setQuery(category, localisation)
-    const news = (await getPage(
-      'news-list',
-      newsQuery
-    )) as APIResponseData<'api::news.news'>[]
+  // const fetchData = async () => {
+  //   const newsQuery = setQuery(category, localisation)
+  //   const news = (await getPage(
+  //     'news-list',
+  //     newsQuery
+  //   )) as APIResponseData<'api::news.news'>[]
 
-    setData(news)
-  }
-  useEffect(() => {
-    showFilter && fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, showFilter])
+  //   setData(news)
+  // }
+  // useEffect(() => {
+  //   showFilter && fetchData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [category, localisation, showFilter])
 
-  const hasData = data.length > 0
+  // const hasData = newsActuPassData.length > 0
 
   return (
-    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
+    <PageLayout
+      seo={seo}
+      title={title ?? undefined}
+      socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      {showFilter && (
+      {/* {showFilter && (
         <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
           <FilterOption
             setCategory={setCategory}
@@ -117,62 +98,59 @@ export default function ListeActualitesPassCulture({
             data={filters}
           />
         </ContentWrapper>
-      )}
+      )} */}
 
-      {hasData ? (
-        <StyledListItems news={data} type="actualite" buttonText={buttonText} />
+      {newsActuPassData ? (
+        <StyledListItems
+          news={newsActuPassData.filter((item) => item !== null)}
+          type="actualite"
+          buttonText={buttonText ?? ''}
+        />
       ) : (
         <NoResult />
       )}
 
       <Separator isActive />
       <WhiteSpace />
-      <SimplePushCta {...(aide as PushCTAProps)} />
+      {aide && <SimplePushCta {...aide} />}
       <Separator isActive={false} />
     </PageLayout>
   )
 }
 
-export const getStaticProps = (async () => {
-  const newsQuery = setQuery(
-    ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
-    []
-  )
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<ActualitesPassCultureQuery>(ActualitesPassCultureDocument, {
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          in: ['Article', 'Évènement', 'Partenariat', 'Rencontre'],
+        },
+        pageLocalisation: {
+          containsi: 'S\u2019informer',
+        },
+      },
+    })
+    .toPromise()
 
-  const news = (await getPage(
-    PATHS.NEWS,
-    newsQuery
-  )) as APIResponseData<'api::news.news'>[]
-
-  const query = stringify({
-    populate: [
-      'title',
-      'buttonText',
-      'filtres',
-      'socialMediaSection',
-      'socialMediaSection.socialMediaLink',
-      'separator',
-      'aide',
-      'aide.image',
-      'aide.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-
-  const page = (await Pages.getPage(
-    PATHS.ACTU_PASS,
-    query
-  )) as APIResponseData<'api::actualites-pass-culture.actualites-pass-culture'>
+  if (
+    result.error ||
+    !result.data ||
+    !result.data.actualitesPassCulture ||
+    !result.data.newsList
+  ) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      newsActuPassData: news,
-      listeActualitesPassCulture: page,
+      newsActuPassData: result.data.newsList,
+      listeActualitesPassCulture: result.data.actualitesPassCulture,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListProps>
+}
 
 const StyledListItems = styled(ListItems)`
   --module-spacing: 0;

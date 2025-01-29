@@ -1,0 +1,6 @@
+fragment ComponentBlockTabsSimpleText on ComponentBlockTabsSimpleText {
+  id
+  tab {
+    ...ComponentBlockTabSimpleText
+  }
+}

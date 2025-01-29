@@ -1,10 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import { ButtonProps } from '@/types/props'
-import { Link } from '@/ui/components/Link'
+import { Link } from '../Link'
 
-export function LinkFaq({ href, target, text }: ButtonProps) {
+type LinkFaqProps = {
+  href: string
+  text: string
+  target?: string
+}
+
+export function LinkFaq({ href, target, text }: LinkFaqProps) {
   const isTarget = (): boolean => target === '_blank'
 
   return (

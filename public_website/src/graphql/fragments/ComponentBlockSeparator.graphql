@@ -1,0 +1,4 @@
+fragment ComponentBlockSeparator on ComponentBlockSeparator {
+  id
+  isActive
+}

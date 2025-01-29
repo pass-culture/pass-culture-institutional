@@ -1,0 +1,8 @@
+fragment ComponentCommonOffersCarouselItem on ComponentCommonOffersCarouselItem {
+  title
+  surtitle
+  text
+  theme
+  firstIcon
+  secondIcon
+}

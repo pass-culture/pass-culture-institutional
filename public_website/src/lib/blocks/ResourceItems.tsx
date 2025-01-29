@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { APIResponseData } from '@/types/strapi'
+import { RessourcepassFragment } from '@/generated/graphql'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ResourceCard } from '@/ui/components/resource-cards/ResourceCard'
 
 export function RessourceItems(props: {
-  news: APIResponseData<'api::ressourcepass.ressourcepass'>[]
+  news: RessourcepassFragment[]
   buttonText?: string
   className: string
 }) {
@@ -28,12 +28,12 @@ export function RessourceItems(props: {
     <Root $noMargin $marginBottom={2} $marginTop={2} className={className}>
       <StyledList>
         {news?.slice(0, visibleItems).map((newsItem) => (
-          <li key={newsItem.attributes.cta.URL}>
+          <li key={newsItem.cta?.URL}>
             <ResourceCard
-              title={newsItem.attributes.title}
-              category={newsItem.attributes.category}
-              date={newsItem.attributes.date as string}
-              cta={newsItem.attributes.cta}
+              title={newsItem.title}
+              category={newsItem.category}
+              date={newsItem.date as string}
+              cta={newsItem.cta}
             />
           </li>
         ))}

@@ -1,125 +1,127 @@
-import React, { useEffect, useState } from 'react'
-import type { GetStaticProps } from 'next'
-import { stringify } from 'qs'
+import React from 'react'
 import styled from 'styled-components'
 
-import { Pages } from '@/domain/pages/pages.output'
-import { PATHS } from '@/domain/pages/pages.path'
-import { Filter } from '@/lib/blocks/FilterContainer'
+import {
+  EtudesPassCultureDocument,
+  EtudesPassCultureQuery,
+} from '@/generated/graphql'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
-import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import urqlClient from '@/lib/urqlClient'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
-  ressourcesData: APIResponseData<'api::resource.resource'>[]
-  etudesPassCultureListe: APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+  ressourcesData: NonNullable<EtudesPassCultureQuery['resources']>
+  etudesPassCultureData: NonNullable<
+    EtudesPassCultureQuery['etudesPassCulture']
+  >
 }
 
 export default function EtudesPassCulture({
   ressourcesData,
-  etudesPassCultureListe,
+  etudesPassCultureData,
 }: ListProps) {
   const {
     buttonText,
-    filtres,
+    // filtres,
     observatoire,
     seo,
-    showFilter,
+    // showFilter,
     socialMediaSection,
     title,
-  } = etudesPassCultureListe.attributes
+  } = etudesPassCultureData
 
-  const [category, setCategory] = useState<string[]>([])
-  const [localisation, setLocalisation] = useState<string[]>([])
-  const [secteur, setSecteur] = useState<string[]>([])
-  const [partner, setPartner] = useState<string[]>([])
+  // const [category, setCategory] = useState<string[]>([])
+  // const [localisation, setLocalisation] = useState<string[]>([])
+  // const [secteur, setSecteur] = useState<string[]>([])
+  // const [partner, setPartner] = useState<string[]>([])
 
-  const cat = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.category))
-  )
-  const sec = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.secteur))
-  )
-  const loc = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.localisation))
-  )
-  const part = Array.from(
-    new Set(ressourcesData.map((item) => item.attributes.partnership))
-  )
+  // const cat = Array.from(
+  //   new Set(ressourcesData.map((item) => item.attributes.category))
+  // )
+  // const sec = Array.from(
+  //   new Set(ressourcesData.map((item) => item.attributes.secteur))
+  // )
+  // const loc = Array.from(
+  //   new Set(ressourcesData.map((item) => item.attributes.localisation))
+  // )
+  // const part = Array.from(
+  //   new Set(ressourcesData.map((item) => item.attributes.partnership))
+  // )
 
-  const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
-    []
-  )
-  const [filters, setFilters] = useState<Filter[]>([])
+  // const [data, setData] = useState<APIResponseData<'api::resource.resource'>[]>(
+  //   []
+  // )
+  // const [filters, setFilters] = useState<Filter[]>([])
 
-  useEffect(() => {
-    setCategory(cat)
-    setLocalisation(loc)
-    setSecteur(sec)
-    setPartner(part)
+  // useEffect(() => {
+  //   setCategory(cat)
+  //   setLocalisation(loc)
+  //   setSecteur(sec)
+  //   setPartner(part)
 
-    setData(ressourcesData)
-    const filtresOption = filterByAttribute(filtres, ressourcesData)
-    if (filtresOption) setFilters(filtresOption)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  //   setData(ressourcesData)
+  //   const filtresOption = filterByAttribute(filtres, ressourcesData)
+  //   if (filtresOption) setFilters(filtresOption)
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
-  useEffect(() => {
-    showFilter && fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, localisation, secteur, partner, showFilter])
+  // useEffect(() => {
+  //   showFilter && fetchData()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [category, localisation, secteur, partner, showFilter])
 
-  const fetchData = async () => {
-    const resourcesQuery = stringify({
-      populate: ['image'],
-      pagination: {},
-      sort: ['date:desc'],
-      filters: {
-        category: {
-          $eqi: category,
-        },
+  // const fetchData = async () => {
+  //   const resourcesQuery = stringify({
+  //     populate: ['image'],
+  //     pagination: {},
+  //     sort: ['date:desc'],
+  //     filters: {
+  //       category: {
+  //         $eqi: category,
+  //       },
 
-        secteur: {
-          $eqi: secteur,
-        },
-        localisation: {
-          $eqi: localisation,
-        },
-        partnership: {
-          $eqi: partner,
-        },
-        pageLocalisation: {
-          $containsi: 'S\u2019informer - études',
-        },
-      },
-    })
+  //       secteur: {
+  //         $eqi: secteur,
+  //       },
+  //       localisation: {
+  //         $eqi: localisation,
+  //       },
+  //       partnership: {
+  //         $eqi: partner,
+  //       },
+  //       pageLocalisation: {
+  //         $containsi: 'S\u2019informer - études',
+  //       },
+  //     },
+  //   })
 
-    const resources = (await Pages.getPage(
-      PATHS.RESOURCES,
-      resourcesQuery
-    )) as APIResponseData<'api::resource.resource'>[]
+  //   const resources = (await Pages.getPage(
+  //     PATHS.RESOURCES,
+  //     resourcesQuery
+  //   )) as APIResponseData<'api::resource.resource'>[]
 
-    setData(resources)
-  }
+  //   setData(resources)
+  // }
 
-  const hasData = data.length > 0
+  // const hasData = data.length > 0
 
   return (
-    <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
+    <PageLayout
+      seo={seo}
+      title={title ?? undefined}
+      socialMediaSection={socialMediaSection}>
       <ContentWrapper $noMargin>
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
       <React.Fragment>
-        {showFilter && (
+        {/* {showFilter && (
           <ContentWrapper $noMargin $marginBottom={2} $marginTop={0}>
             <FilterOption
               setCategory={setCategory}
@@ -131,13 +133,13 @@ export default function EtudesPassCulture({
               data={filters}
             />
           </ContentWrapper>
-        )}
+        )} */}
 
-        {hasData ? (
+        {ressourcesData.length > 0 ? (
           <StyledListItems
-            news={data}
+            news={ressourcesData.filter((item) => item !== null)}
             type="ressources"
-            buttonText={buttonText}
+            buttonText={buttonText ?? ''}
           />
         ) : (
           <NoResult />
@@ -149,10 +151,10 @@ export default function EtudesPassCulture({
       {!!observatoire && (
         <SimplePushCta
           surtitle={observatoire?.surtitle}
-          title={observatoire.title}
-          image={observatoire?.image}
+          requiredTitle={observatoire.requiredTitle}
+          requiredImage={observatoire?.requiredImage}
           icon={observatoire?.icon}
-          cta={observatoire?.cta}
+          requiredCta={observatoire?.requiredCta}
         />
       )}
       <Separator isActive={false} />
@@ -160,60 +162,39 @@ export default function EtudesPassCulture({
   )
 }
 
-export const getStaticProps = (async () => {
-  const resourcesQuery = stringify({
-    sort: ['date:desc'],
-    populate: ['image'],
-    filters: {
-      category: {
-        $eqi: [
-          'Dossier de presse',
-          'Communiqué de presse',
-          'Étude ritualisée',
-          'Étude ponctuelle',
-        ],
+export const getStaticProps = async () => {
+  const result = await urqlClient
+    .query<EtudesPassCultureQuery>(EtudesPassCultureDocument, {
+      sort: ['date:desc'],
+      filters: {
+        category: {
+          in: [
+            'Dossier de presse',
+            'Communiqué de presse',
+            'Étude ritualisée',
+            'Étude ponctuelle',
+          ],
+        },
+        pageLocalisation: {
+          containsi: 'S\u2019informer - études',
+        },
       },
-      pageLocalisation: {
-        $containsi: 'S\u2019informer - études',
-      },
-    },
-    pagination: {},
-  })
+    })
+    .toPromise()
 
-  const query = stringify({
-    populate: [
-      'title',
-      'filtres',
-      'buttonText',
-      'socialMediaSection.socialMediaLink',
-      'separator',
-      'socialMediaSection',
-      'observatoire',
-      'observatoire.image',
-      'observatoire.cta',
-      'seo',
-      'seo.metaSocial',
-      'seo.metaSocial.image',
-    ],
-  })
-
-  const resources = (await Pages.getPage(
-    PATHS.RESOURCES,
-    resourcesQuery
-  )) as APIResponseData<'api::resource.resource'>[]
-
-  const data = (await Pages.getPage(
-    PATHS.ETUDES_PASS_PAGE,
-    query
-  )) as APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+  if (result.error || !result.data || !result.data.etudesPassCulture) {
+    console.error('GraphQL Error:', result.error?.message ?? 'No data')
+    return { notFound: true }
+  }
 
   return {
     props: {
-      ressourcesData: resources,
-      etudesPassCultureListe: data,
+      etudesPassCultureData: result.data.etudesPassCulture,
+      ressourcesData: result.data.resources,
     },
+    revalidate: false,
   }
-}) satisfies GetStaticProps<ListProps>
+}
 
 const StyledListItems = styled(ListItems)`
   top: 0;

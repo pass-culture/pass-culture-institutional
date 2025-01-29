@@ -1,16 +1,19 @@
 import React from 'react'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import styled, { css } from 'styled-components'
 
 import { ButtonWithCTA } from '../buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '../ContentWrapper'
 import { OutlinedText } from '../OutlinedText'
-import { BaseTextProps, OfferProps } from '@/types/props'
+import { ComponentBlockOfferListFragment } from '@/generated/graphql'
+import { Offer } from '@/types/playlist'
 import { Link } from '@/ui/components/Link'
 import { Typo } from '@/ui/components/typographies'
 import { getOfferUrl } from '@/utils/apiHelpers'
 
-export function OfferSection(props: OfferProps & BaseTextProps) {
+export function OfferSection(
+  props: ComponentBlockOfferListFragment & { offers: Offer[] }
+) {
   const {
     title,
     description,
@@ -19,7 +22,7 @@ export function OfferSection(props: OfferProps & BaseTextProps) {
     firstCartTitle,
     secondCartTitle,
     ctaCard,
-    descriptionCard,
+    descritptionCard,
     firstIcon,
     secondIcon,
   } = props
@@ -58,7 +61,7 @@ export function OfferSection(props: OfferProps & BaseTextProps) {
               </StyledOffersSurtitle>
               <StyledOffersSurtitle>{secondCartTitle}</StyledOffersSurtitle>
             </StyledOffersHeader>
-            <StyledCardDescription>{descriptionCard}</StyledCardDescription>
+            <StyledCardDescription>{descritptionCard}</StyledCardDescription>
             <CtaLink href={ctaCard.URL}>{ctaCard.Label}</CtaLink>
           </StyledCardWrapper>
         </StyledLastCard>
