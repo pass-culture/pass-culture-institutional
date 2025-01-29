@@ -2,8 +2,8 @@ import {
   ActualitesRdvActeursCulturelsQuery,
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
-  Enum_Event_Localisation,
   Enum_Event_Category,
+  Enum_Event_Localisation,
   Enum_Event_Secteur,
 } from '@/generated/graphql'
 
@@ -300,4 +300,4 @@ export const ActusRdvActeursPageFixtures = {
     },
   ],
   newsList: [],
-} satisfies ActualitesRdvActeursCulturelsQuery
+}

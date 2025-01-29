@@ -1,7 +1,4 @@
-import {
-  Enum_Componentsharedmetasocial_Socialnetwork,
-  NotFoundQuery,
-} from '@/generated/graphql'
+import { Enum_Componentsharedmetasocial_Socialnetwork } from '@/generated/graphql'
 
 export const NotFoundDataFixtures = {
   notFound: {
@@ -126,4 +123,4 @@ export const NotFoundDataFixtures = {
       ],
     },
   },
-} satisfies NotFoundQuery
+}

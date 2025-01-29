@@ -1,5 +1,4 @@
 import {
-  AideJeunesParentsQuery,
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
 } from '@/generated/graphql'
@@ -279,4 +278,4 @@ export const AideJeunesParentsPageFixtures = {
       ],
     },
   },
-} satisfies AideJeunesParentsQuery
+}

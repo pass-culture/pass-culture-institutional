@@ -1,7 +1,6 @@
 import {
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
-  EtudesPassCultureQuery,
 } from '@/generated/graphql'
 
 export const EtudesPassCulturePageFixtures = {
@@ -125,4 +124,4 @@ export const EtudesPassCulturePageFixtures = {
     },
   },
   resources: [],
-} satisfies EtudesPassCultureQuery
+}

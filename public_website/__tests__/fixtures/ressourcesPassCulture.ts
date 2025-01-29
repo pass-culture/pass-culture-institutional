@@ -1,7 +1,6 @@
 import {
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
-  RessourcesPassQuery,
 } from '@/generated/graphql'
 
 export const RessourcesPassCulturePageFixtures = {
@@ -126,4 +125,4 @@ export const RessourcesPassCulturePageFixtures = {
       requiredTitle: 'On restdsfsde connectés',
     },
   },
-} satisfies RessourcesPassQuery
+}

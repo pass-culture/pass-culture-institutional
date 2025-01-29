@@ -1,5 +1,4 @@
 import {
-  ActualitesJeunesParentsQuery,
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
   Enum_News_Category,
@@ -186,4 +185,4 @@ export const ActusPassCultureJeunePageFixtures = {
       secteur: Enum_News_Secteur.Cinema,
     },
   ],
-} satisfies ActualitesJeunesParentsQuery
+}

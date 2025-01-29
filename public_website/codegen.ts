@@ -23,4 +23,5 @@ const config: CodegenConfig = {
   },
 }
 
+// ts-prune-ignore-next
 export default config

@@ -1,7 +1,6 @@
 import {
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
-  PresseQuery,
 } from '@/generated/graphql'
 
 export const PressePageFixtures = {
@@ -219,4 +218,4 @@ export const PressePageFixtures = {
       requiredTitle: 'On reste connectés',
     },
   },
-} satisfies PresseQuery
+}

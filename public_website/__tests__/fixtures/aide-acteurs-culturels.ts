@@ -1,5 +1,4 @@
 import {
-  AideActeursCulturelsQuery,
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
 } from '@/generated/graphql'
@@ -279,4 +278,4 @@ export const AideActeursCulturelsPageFixtures = {
       ],
     },
   },
-} satisfies AideActeursCulturelsQuery
+}

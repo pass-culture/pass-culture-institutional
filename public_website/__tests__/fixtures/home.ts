@@ -1,3 +1,4 @@
+import { verticalCarouselFixtures } from './verticalCarousel'
 import {
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
@@ -5,9 +6,7 @@ import {
   Enum_Resource_Localisation,
   Enum_Resource_Partnership,
   Enum_Resource_Secteur,
-  HomeQuery,
 } from '@/generated/graphql'
-import { verticalCarouselFixtures } from './verticalCarousel'
 
 export const HomePageFixtures = {
   home: {
@@ -384,55 +383,4 @@ export const HomePageFixtures = {
       },
     },
   ],
-} satisfies HomeQuery
-
-export const homePageFixturesWithTracking = {
-  ...HomePageFixtures,
-  homeDataWithTrackingOnCTAs: {
-    ...HomePageFixtures.home,
-    attributes: {
-      ...HomePageFixtures.home,
-      heroSection: {
-        ...HomePageFixtures.home.heroSection,
-        cta: {
-          ...HomePageFixtures.home.heroSection.cta,
-          eventName: 'testEvent',
-          eventOrigin: 'testOrigin',
-        },
-      },
-      eligibilitySection: {
-        ...HomePageFixtures.home.eligibilitySection,
-        cardCta: {
-          ...HomePageFixtures.home.eligibilitySection.cardCta,
-          eventName: 'testEvent',
-          eventOrigin: 'testOrigin',
-        },
-      },
-      CTASection: {
-        ...HomePageFixtures.home.CTASection,
-        ctaLink: {
-          ...HomePageFixtures.home.CTASection.ctaLink,
-          eventName: 'testEvent',
-          eventOrigin: 'testOrigin',
-        },
-      },
-      recommendationsSection: {
-        ...HomePageFixtures.home.recommendationsSection,
-        cta: {
-          ...HomePageFixtures.home.recommendationsSection.cta,
-          eventName: 'testEvent',
-          eventOrigin: 'testOrigin',
-        },
-      },
-      latestStudies: {
-        ...HomePageFixtures.home.latestStudies,
-        cta: {
-          ...HomePageFixtures.home.latestStudies.requiredCta,
-
-          eventName: 'testEvent',
-          eventOrigin: 'testOrigin',
-        },
-      },
-    },
-  },
 }

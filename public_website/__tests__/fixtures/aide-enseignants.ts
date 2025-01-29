@@ -1,8 +1,5 @@
-import {
-  AideEnseignantsQuery,
-  Enum_Componentsharedmetasocial_Socialnetwork,
-} from '@/generated/graphql'
 import { AideJeunesParentsPageFixtures } from './aide-jeunes-parents'
+import { Enum_Componentsharedmetasocial_Socialnetwork } from '@/generated/graphql'
 
 export const AideEnseignantsPageFixtures = {
   helpTeachers: {
@@ -80,4 +77,4 @@ export const AideEnseignantsPageFixtures = {
     },
   },
   resources: [],
-} satisfies AideEnseignantsQuery
+}

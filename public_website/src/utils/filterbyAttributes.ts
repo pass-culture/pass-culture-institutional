@@ -32,6 +32,8 @@ const filterMappings: { [key: string]: AttributeGetter } = {
   [Options.Localisation]: (item) => item?.localisation,
   [Options.Partenariat]: (item) => item.category,
 }
+
+// ts-prune-ignore-next
 export const filterByAttribute = (
   filtres: Filtre,
   data: Data

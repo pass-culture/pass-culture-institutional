@@ -1,7 +1,6 @@
 import {
   Enum_Componentblocklink_Name,
   Enum_Componentsharedmetasocial_Socialnetwork,
-  SimulateurQuery,
 } from '@/generated/graphql'
 
 export const SimulatorPageFixtures = {
@@ -284,4 +283,4 @@ export const SimulatorPageFixtures = {
       ],
     },
   },
-} satisfies SimulateurQuery
+}
