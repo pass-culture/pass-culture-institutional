@@ -83,7 +83,7 @@ cd - >/dev/null || exit 1
 
 # Step 4: Build the Docker image
 echo "🔧 Building the Docker image..."
-docker build -t "$IMAGE_NAME" . || { echo "⚠️ Error: Docker build failed"; exit 1; }
+docker build --no-cache -t "$IMAGE_NAME" . || { echo "⚠️ Error: Docker build failed"; exit 1; }
 
 # Step 5: Run the Docker container
 start_container() {

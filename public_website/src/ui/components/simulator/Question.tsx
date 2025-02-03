@@ -26,8 +26,8 @@ export function Question(props: QuestionProps) {
       {props.type === 'slider' ? (
         <SliderField
           title={props.title}
-          answers={props.answers.map((a) => a.answer)}
-          answer={answer}
+          options={props.answers.map((a) => a.answer)}
+          selectedIndex={answer}
           onChange={setAnswer}
         />
       ) : (

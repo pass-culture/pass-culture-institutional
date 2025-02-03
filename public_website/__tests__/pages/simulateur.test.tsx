@@ -36,10 +36,6 @@ describe('Simulator page', () => {
     fireEvent.click(screen.getAllByText('16 ans')[0]!)
     fireEvent.click(screen.getByText('Suivant'))
 
-    // Click "Next"
-    await screen.findByText('30 €')
-    fireEvent.click(screen.getByText('Suivant'))
-
     // Select "Other nationality" and click "Next"
     await screen.findByText('Quelle est ta nationalité ?')
     fireEvent.click(screen.getByText('Autre nationalité'))
@@ -48,6 +44,10 @@ describe('Simulator page', () => {
     // Select "Since more than a year" and click "Next"
     await screen.findByText('Depuis combien de temps résides-tu en France ?')
     fireEvent.click(screen.getByText('Depuis plus d’une année'))
+    fireEvent.click(screen.getByText('Suivant'))
+
+    // Click "Next"
+    await screen.findByText('30 €')
     fireEvent.click(screen.getByText('Suivant'))
 
     // The result screen should appear

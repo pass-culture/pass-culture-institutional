@@ -25,8 +25,8 @@ export default function SimulatorPage(props: SimulatorProps) {
     residencyQuestion,
     successScreen,
     failureScreen,
-    tooYoungScreen,
     steps,
+    tooYoungScreen,
     amountScreen_15,
     amountScreen_16,
     amountScreen_17,
@@ -53,8 +53,8 @@ export default function SimulatorPage(props: SimulatorProps) {
             residencyQuestion={residencyQuestion}
             successScreen={successScreen}
             failureScreen={failureScreen}
-            tooYoungScreen={tooYoungScreen}
             steps={memoSteps}
+            tooYoungScreen={tooYoungScreen}
             amountScreen15={amountScreen_15}
             amountScreen16={amountScreen_16}
             amountScreen17={amountScreen_17}
