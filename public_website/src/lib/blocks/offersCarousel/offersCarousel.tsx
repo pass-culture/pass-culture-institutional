@@ -11,6 +11,7 @@ import { OffersVideoCarouselProps } from '@/types/props'
 import { Link } from '@/ui/components/Link'
 import NavigationWithArrow from '@/ui/components/nav-carousel/NavigationWithArrow'
 import NavigationWithDots from '@/ui/components/nav-carousel/NavigationWithDots'
+import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
 import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
@@ -75,7 +76,9 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
         <Typo.Heading2>{title}</Typo.Heading2>
 
         <BlockRendererWithCondition condition={!descriptionIsEmpty}>
-          <BlocksRenderer content={description as BlocksContent} />
+          <StyledBlocksRenderer>
+            <BlocksRenderer content={description as BlocksContent} />
+          </StyledBlocksRenderer>
         </BlockRendererWithCondition>
 
         <StyledArrowButtonWrapper>

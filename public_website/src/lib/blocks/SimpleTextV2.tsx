@@ -5,6 +5,7 @@ import styled, { css } from 'styled-components'
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { SimpleTextV2Props } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
@@ -22,7 +23,9 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
       </BlockRendererWithCondition>
 
       <Content>
-        <BlocksRenderer content={text} />
+        <StyledBlocksRenderer>
+          <BlocksRenderer content={text} />
+        </StyledBlocksRenderer>
         <BlockRendererWithCondition condition={isRenderColumns()}>
           <Columns>
             {columns?.map((col) => (
@@ -33,7 +36,9 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
                     {parseText(col.title).processedText}
                   </ColumnTitle>
                 )}
-                <BlocksRenderer content={col.text} />
+                <StyledBlocksRenderer>
+                  <BlocksRenderer content={col.text} />
+                </StyledBlocksRenderer>
               </Column>
             ))}
           </Columns>
@@ -50,7 +55,6 @@ const Root = styled(ContentWrapper)`
 
     img {
       border-radius: ${theme.radius.sm};
-      margin-bottom: 1.5rem;
       object-fit: cover;
       aspect-ratio: 1.2;
       display: block;

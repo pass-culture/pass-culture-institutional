@@ -7,7 +7,10 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ResourceCard } from '@/ui/components/resource-cards/ResourceCard'
 
 export function RessourceItems(props: {
-  news: APIResponseData<'api::ressourcepass.ressourcepass'>[]
+  news: (
+    | APIResponseData<'api::ressourcepass.ressourcepass'>
+    | APIResponseData<'api::reglement.reglement'>
+  )[]
   buttonText?: string
   className: string
 }) {
@@ -31,7 +34,11 @@ export function RessourceItems(props: {
           <li key={newsItem.attributes.cta.URL}>
             <ResourceCard
               title={newsItem.attributes.title}
-              category={newsItem.attributes.category}
+              category={
+                'category' in newsItem.attributes
+                  ? newsItem.attributes.category
+                  : undefined
+              }
               date={newsItem.attributes.date as string}
               cta={newsItem.attributes.cta}
             />

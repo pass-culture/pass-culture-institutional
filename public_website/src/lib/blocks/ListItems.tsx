@@ -15,6 +15,7 @@ export function ListItems(
       news:
         | APIResponseData<'api::news.news'>[]
         | APIResponseData<'api::resource.resource'>[]
+        | APIResponseData<'api::blogtech.blogtech'>[]
     },
     'events'
   >
@@ -39,7 +40,11 @@ export function ListItems(
             <ListCard
               type={type}
               title={newsItem.attributes.title}
-              category={newsItem.attributes.category}
+              category={
+                'category' in newsItem.attributes
+                  ? newsItem.attributes.category
+                  : 'Article'
+              }
               date={newsItem.attributes.date}
               imageUrl={
                 newsItem.attributes.image &&
