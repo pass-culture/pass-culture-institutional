@@ -15,8 +15,6 @@
       "type": "component",
       "repeatable": true,
       "component": "simulator.answer",
-      "min": 6,
-      "max": 6,
       "required": true
     }
   }

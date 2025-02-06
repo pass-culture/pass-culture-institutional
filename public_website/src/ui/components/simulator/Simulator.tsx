@@ -7,7 +7,7 @@ import { BackButton } from './BackButton'
 import { FailureScreen } from './FailureScreen'
 import { Question } from './Question'
 import { ResultScreen } from './ResultScreen'
-import { Step } from './Step'
+import { Step as StepUI } from './Step'
 import { theme } from '@/theme/theme'
 import { APIResponseData } from '@/types/strapi'
 import { stripTags } from '@/utils/stripTags'
@@ -19,33 +19,19 @@ interface SimulatorProps {
   nationnalityQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['nationnalityQuestion']
   residencyQuestion: APIResponseData<'api::simulator.simulator'>['attributes']['residencyQuestion']
 
+  tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
   amountScreen15: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_15']
   amountScreen16: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_16']
   amountScreen17: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_17']
   amountScreen18: APIResponseData<'api::simulator.simulator'>['attributes']['amountScreen_18']
+  tooOldScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooOldScreen']
 
   successScreen: APIResponseData<'api::simulator.simulator'>['attributes']['successScreen']
   failureScreen: APIResponseData<'api::simulator.simulator'>['attributes']['failureScreen']
-  tooYoungScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooYoungScreen']
-  tooOldScreen: APIResponseData<'api::simulator.simulator'>['attributes']['tooOldScreen']
+
   steps: string[]
   topEmoji: string
   bottomEmoji: string
-}
-
-type AmountScreen =
-  | SimulatorProps['amountScreen15']
-  | SimulatorProps['amountScreen16']
-  | SimulatorProps['amountScreen17']
-  | SimulatorProps['amountScreen18']
-
-enum AgeAnswer {
-  IS_LESS_THAN_15 = 0,
-  IS_15 = 1,
-  IS_16 = 2,
-  IS_17 = 3,
-  IS_18 = 4,
-  IS_MORE_THAN_18 = 5,
 }
 
 enum NationalityAnswer {
@@ -58,127 +44,294 @@ enum ResidencyAnswer {
   LESS_THAN_A_YEAR = 1,
 }
 
-export function Simulator(props: SimulatorProps) {
-  // Each number in the array represents an answer or validated step
-  const [answers, setAnswers] = useState<number[]>([])
-  const [isPristine, setIsPristine] = useState(true)
+enum Step {
+  AGE = 'AGE',
+  TOO_YOUNG = 'TOO_YOUNG',
+  TOO_OLD = 'TOO_OLD',
+  NATIONALITY = 'NATIONALITY',
+  RESIDENCY = 'RESIDENCY',
+  AMOUNT = 'AMOUNT',
+  SUCCESS = 'SUCCESS',
+  FAILURE = 'FAILURE',
+}
 
-  function onAnswerSubmit(newAnswers: number[]) {
-    setAnswers(newAnswers)
-    setIsPristine(false)
+/**
+ * Store user responses in an object.
+ * The answer to the age question is now a number (the index of the chosen answer).
+ */
+interface StepAnswers {
+  age: number | null
+  nationality: NationalityAnswer | null
+  residency: ResidencyAnswer | null
+}
+
+/**
+ * Determines the next step based on the current step and the given answer.
+ * For the AGE step, the text of the response is checked.
+ * If the text contains '-' → TOO_YOUNG, if it contains '+' → TOO_OLD, otherwise proceed.
+ */
+function getNextStep(
+  currentStep: Step,
+  answer: number,
+  ageAnswers?: string[]
+): Step {
+  switch (currentStep) {
+    case Step.AGE: {
+      const answerText = ageAnswers?.[answer]?.trim()
+      if (answerText?.includes('-')) return Step.TOO_YOUNG
+      if (answerText?.includes('+')) return Step.TOO_OLD
+      return Step.NATIONALITY
+    }
+    case Step.NATIONALITY: {
+      if (answer === NationalityAnswer.FRANCE) return Step.AMOUNT
+      return Step.RESIDENCY
+    }
+    case Step.RESIDENCY: {
+      if (answer === ResidencyAnswer.MORE_THAN_A_YEAR) return Step.AMOUNT
+      return Step.FAILURE
+    }
+    case Step.AMOUNT: {
+      return Step.SUCCESS
+    }
+    case Step.TOO_YOUNG:
+    case Step.TOO_OLD:
+    case Step.SUCCESS:
+    case Step.FAILURE: {
+      return currentStep
+    }
   }
+}
 
-  // Reset the focus at the start of the current step whenever it changes
+/**
+ * Indicates whether the current step is a result screen.
+ */
+function isResultStep(step: Step) {
+  return (
+    step === Step.TOO_YOUNG ||
+    step === Step.TOO_OLD ||
+    step === Step.SUCCESS ||
+    step === Step.FAILURE
+  )
+}
+
+export function Simulator(props: SimulatorProps) {
+  const [currentStep, setCurrentStep] = useState<Step>(Step.AGE)
+
+  /**
+   * Store user responses.
+   * For the age question, store the index of the selected answer.
+   */
+  const [stepAnswers, setStepAnswers] = useState<StepAnswers>({
+    age: null,
+    nationality: null,
+    residency: null,
+  })
+
   const stepContainerRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (answers.length !== 0 || !isPristine) {
-      stepContainerRef.current?.focus()
+    stepContainerRef.current?.focus()
+  }, [currentStep])
+
+  /**
+   * When an answer is selected, store it and move to the next step.
+   */
+  function handleAnswer(answer: number) {
+    setStepAnswers((prev) => {
+      const next = { ...prev }
+      switch (currentStep) {
+        case Step.AGE:
+          next.age = answer
+          break
+        case Step.NATIONALITY:
+          next.nationality = answer as NationalityAnswer
+          break
+        case Step.RESIDENCY:
+          next.residency = answer as ResidencyAnswer
+          break
+        case Step.AMOUNT:
+        default:
+          break
+      }
+      return next
+    })
+    if (currentStep === Step.AGE) {
+      setCurrentStep((prev) =>
+        getNextStep(
+          prev,
+          answer,
+          props.ageQuestion.answers.map((a) => a.answer)
+        )
+      )
+    } else {
+      setCurrentStep((prev) => getNextStep(prev, answer))
     }
-  }, [answers, isPristine])
+  }
 
-  let currentStepElement: ReactNode = null
-  let isResultScreen = false
+  function handleBackClick() {
+    setCurrentStep((prev) => {
+      switch (prev) {
+        case Step.TOO_OLD:
+        case Step.NATIONALITY:
+          setStepAnswers((sa) => ({
+            ...sa,
+            nationality: null,
+          }))
+          return Step.AGE
+        case Step.TOO_YOUNG:
+          return Step.AGE
+        case Step.RESIDENCY:
+          setStepAnswers((sa) => ({
+            ...sa,
+            residency: null,
+          }))
+          return Step.NATIONALITY
+        case Step.AMOUNT: {
+          const { nationality } = stepAnswers
+          return nationality === NationalityAnswer.FRANCE
+            ? Step.NATIONALITY
+            : Step.RESIDENCY
+        }
+        case Step.SUCCESS:
+          return Step.AMOUNT
+        case Step.FAILURE:
+          return Step.RESIDENCY
+        default:
+          return Step.AGE
+      }
+    })
+  }
+
+  function getDisplayedSteps(): string[] {
+    let maxStepIndex = 0
+    switch (currentStep) {
+      case Step.AGE:
+      case Step.TOO_YOUNG:
+      case Step.TOO_OLD:
+        maxStepIndex = 1
+        break
+      case Step.NATIONALITY:
+        maxStepIndex = 2
+        break
+      case Step.RESIDENCY:
+        maxStepIndex = 3
+        break
+      case Step.AMOUNT:
+      case Step.SUCCESS:
+      case Step.FAILURE:
+        maxStepIndex = 4
+        break
+      default:
+        maxStepIndex = 1
+    }
+    return props.steps.slice(0, maxStepIndex)
+  }
+
   let stepContainerAriaLabel = ''
+  let stepComponent: ReactNode = null
 
-  if (answers.length === 0) {
-    // Age question
-    currentStepElement = (
-      <Question
-        onSubmit={(r) => onAnswerSubmit([r])}
-        title={props.ageQuestion.title}
-        answers={props.ageQuestion.answers}
-        type="slider"
-      />
-    )
-    stepContainerAriaLabel = props.ageQuestion.title
-  } else if (answers.length === 1 && typeof answers[0] === 'number') {
-    // Amount screens or failures
-    if (answers[0] === AgeAnswer.IS_LESS_THAN_15) {
-      // Less than 15 yo
-      currentStepElement = (
+  switch (currentStep) {
+    case Step.AGE: {
+      stepContainerAriaLabel = props.ageQuestion.title
+      stepComponent = (
+        <Question
+          key="age-question"
+          onSubmit={handleAnswer}
+          title={props.ageQuestion.title}
+          answers={props.ageQuestion.answers}
+          type="slider"
+        />
+      )
+      break
+    }
+    case Step.TOO_YOUNG: {
+      stepContainerAriaLabel = props.tooYoungScreen.title
+      stepComponent = (
         <FailureScreen
           title={props.tooYoungScreen.title}
           text={props.tooYoungScreen.text}
           ctaLink={props.tooYoungScreen.cta}
         />
       )
-      isResultScreen = true
-      stepContainerAriaLabel = props.tooYoungScreen.title
-    } else if (answers[0] === AgeAnswer.IS_MORE_THAN_18) {
-      // More than 18 yo
-      currentStepElement = (
+      break
+    }
+    case Step.TOO_OLD: {
+      stepContainerAriaLabel = props.tooOldScreen.title
+      stepComponent = (
         <FailureScreen
           title={props.tooOldScreen.title}
           text={props.tooOldScreen.text}
           ctaLink={props.tooOldScreen.cta}
         />
       )
-      isResultScreen = true
-      stepContainerAriaLabel = props.tooOldScreen.title
-    } else {
-      // 15, 16, 17, or 18 yo
-      const screen = {
-        [AgeAnswer.IS_15]: props.amountScreen15,
-        [AgeAnswer.IS_16]: props.amountScreen16,
-        [AgeAnswer.IS_17]: props.amountScreen17,
-        [AgeAnswer.IS_18]: props.amountScreen18,
-      }[answers[0]] as AmountScreen
-      const ageAnswer = answers[0]
-      currentStepElement = (
-        <AmountScreen
-          text={screen.text}
-          title={screen.title}
-          onNext={() => onAnswerSubmit([ageAnswer, 0])}
-        />
-      )
-      isResultScreen = true
-      stepContainerAriaLabel = screen.title
+      break
     }
-  } else if (answers.length === 2) {
-    // Nationality question
-    const previousAnswers = answers.slice(0, 2)
-    currentStepElement = (
-      <Question
-        key="nat_question"
-        onSubmit={(r) => onAnswerSubmit([...previousAnswers, r])}
-        title={props.nationnalityQuestion.title}
-        answers={props.nationnalityQuestion.answers}
-        type="radio"
-      />
-    )
-    stepContainerAriaLabel = props.nationnalityQuestion.title
-  } else if (answers.length === 3) {
-    if (answers[2] === NationalityAnswer.FRANCE) {
-      // Success screen
-      currentStepElement = (
-        <ResultScreen
-          title={props.successScreen.title}
-          steps={props.successScreen.steps.map((s) => s.step)}
-          ctaLink={props.successScreen.cta}
-          helpText={props.successScreen.needSupport}
-          supportLink={props.successScreen.supportLink}
+    case Step.NATIONALITY: {
+      stepContainerAriaLabel = props.nationnalityQuestion.title
+      stepComponent = (
+        <Question
+          key="nationality-question"
+          onSubmit={handleAnswer}
+          title={props.nationnalityQuestion.title}
+          answers={props.nationnalityQuestion.answers}
+          type="radio"
         />
       )
-      isResultScreen = true
-      stepContainerAriaLabel = props.successScreen.title
-    } else {
-      // Residency time question
-      const previousAnswers = answers.slice(0, 3)
-      currentStepElement = (
+      break
+    }
+    case Step.RESIDENCY: {
+      stepContainerAriaLabel = props.residencyQuestion.title
+      stepComponent = (
         <Question
-          key="res_question"
-          onSubmit={(r) => setAnswers([...previousAnswers, r])}
+          key="residency-question"
+          onSubmit={handleAnswer}
           title={props.residencyQuestion.title}
           answers={props.residencyQuestion.answers}
           type="radio"
         />
       )
-      stepContainerAriaLabel = props.residencyQuestion.title
+      break
     }
-  } else if (answers.length === 4) {
-    if (answers[3] === ResidencyAnswer.MORE_THAN_A_YEAR) {
-      // More than a year, success
-      currentStepElement = (
+    case Step.AMOUNT: {
+      const ageIndex = stepAnswers.age ?? 0
+      const ageText = props.ageQuestion.answers[ageIndex]?.answer.trim() ?? ''
+      const match = /\d+/.exec(ageText)
+      const ageNumber = match ? parseInt(match[0], 10) : null
+
+      let screen
+      if (ageNumber !== null) {
+        switch (ageNumber) {
+          case 15:
+            screen = props.amountScreen15
+            break
+          case 16:
+            screen = props.amountScreen16
+            break
+          case 17:
+            screen = props.amountScreen17
+            break
+          case 18:
+            screen = props.amountScreen18
+            break
+          default:
+            screen = props.amountScreen18
+        }
+      } else {
+        screen = props.amountScreen18
+      }
+
+      stepContainerAriaLabel = screen.title
+      stepComponent = (
+        <AmountScreen
+          text={screen.text}
+          title={screen.title}
+          onNext={() => handleAnswer(0)}
+        />
+      )
+      break
+    }
+    case Step.SUCCESS: {
+      stepContainerAriaLabel = props.successScreen.title
+      stepComponent = (
         <ResultScreen
           title={props.successScreen.title}
           steps={props.successScreen.steps.map((s) => s.step)}
@@ -187,43 +340,34 @@ export function Simulator(props: SimulatorProps) {
           supportLink={props.successScreen.supportLink}
         />
       )
-      isResultScreen = true
-      stepContainerAriaLabel = props.successScreen.title
-    } else {
-      // Failure
-      currentStepElement = (
+      break
+    }
+    case Step.FAILURE: {
+      stepContainerAriaLabel = props.failureScreen.title
+      stepComponent = (
         <FailureScreen
           title={props.failureScreen.title}
           text={props.failureScreen.text}
           ctaLink={props.failureScreen.cta}
         />
       )
-      isResultScreen = true
-      stepContainerAriaLabel = props.failureScreen.title
+      break
     }
   }
 
-  let displayedSteps = props.steps.slice(0, 1)
-  if (answers.length === 2) {
-    displayedSteps = props.steps.slice(0, 2)
-  } else if (answers.length >= 3) {
-    displayedSteps = props.steps.slice(0, 3)
-  }
-
-  const handleBackClick = function () {
-    setAnswers(answers.slice(0, -1))
-  }
+  const showingResult = isResultStep(currentStep)
+  const displayedSteps = getDisplayedSteps()
 
   return (
     <Root className={props.className}>
-      <Inner $showingResult={isResultScreen}>
+      <Inner $showingResult={showingResult}>
         <Steps>
           {displayedSteps.map((step, i) => (
             <React.Fragment key={step}>
               {i !== 0 && <StepSeparator aria-hidden="true" />}
-              <Step
+              <StepUI
                 circleText={(i + 1).toString().padStart(2, '0')}
-                surtitle={`ÉTAPE ${i + 1}`}
+                surtitle={`Étape ${i + 1}`}
                 title={step}
                 isActive={i + 1 === displayedSteps.length}
               />
@@ -232,14 +376,14 @@ export function Simulator(props: SimulatorProps) {
         </Steps>
 
         <BackContainer>
-          {answers.length > 0 && <BackButton onClick={handleBackClick} />}
+          {currentStep !== Step.AGE && <BackButton onClick={handleBackClick} />}
         </BackContainer>
 
         <StepContainer
+          ref={stepContainerRef}
           tabIndex={-1}
-          aria-label={stripTags(stepContainerAriaLabel)}
-          ref={stepContainerRef}>
-          {currentStepElement}
+          aria-label={stripTags(stepContainerAriaLabel)}>
+          {stepComponent}
         </StepContainer>
       </Inner>
 
