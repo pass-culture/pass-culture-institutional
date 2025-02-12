@@ -27,7 +27,11 @@ export function LatestNews(props: LatestNewsProps) {
               <li key={fullSlug}>
                 <NewsCard
                   title={item.attributes.title}
-                  category={item.attributes.category}
+                  category={
+                    'category' in item.attributes
+                      ? item.attributes.category
+                      : 'Article'
+                  }
                   date={item.attributes.date}
                   imageUrl={
                     item.attributes.image &&

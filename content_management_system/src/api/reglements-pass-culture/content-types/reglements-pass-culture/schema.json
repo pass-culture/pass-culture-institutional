@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "reglements_pass_cultures",
+  "info": {
+    "singularName": "reglements-pass-culture",
+    "pluralName": "reglements-pass-cultures",
+    "displayName": "Règlements - Pass Culture"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "socialMediaSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.social-media"
+    },
+    "separator": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.separator"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-push-cta"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "priority": {
+      "type": "decimal",
+      "max": 1,
+      "min": 0,
+      "default": 0.5
+    }
+  }
+}

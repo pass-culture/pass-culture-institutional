@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogtech_list",
+  "info": {
+    "singularName": "blogtech",
+    "pluralName": "blogtech-list",
+    "displayName": "Blogtech",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.image",
+        "block.simple-text-v2",
+        "block.video",
+        "block.double-push-cta",
+        "block.social-media"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    },
+    "aboveTitle": {
+      "type": "string"
+    },
+    "emoji": {
+      "type": "string"
+    },
+    "priority": {
+      "max": 1,
+      "default": 0.3,
+      "min": 0,
+      "type": "decimal"
+    }
+  }
+}

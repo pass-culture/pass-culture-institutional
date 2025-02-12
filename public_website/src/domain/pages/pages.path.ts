@@ -18,4 +18,8 @@ export const PATHS = {
   PRESSE: 'presse',
   ETUDES_PASS_PAGE: 'etudes-pass-culture',
   MAP_SITE: 'plan-du-site',
+  REGLEMENTS_PAGE: 'reglements-pass-culture',
+  BLOGTECH_PAGE: 'blogtech-pass-culture',
+  REGLEMENTS: 'reglements',
+  BLOGTECH: 'blogtech-list',
 }

@@ -10,12 +10,14 @@ import { ActusPassCultureJeunePageFixtures } from './fixtures/actualitesPassCult
 import { ActusRdvActeursPageFixtures } from './fixtures/actualitesRdvActeursCulturels'
 import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
 import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
+import { blogtechData, blogtechPage } from './fixtures/blog-tech'
 import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { listeOffrePageFixtures } from './fixtures/listeOffre'
 import { notFoundDataFixtures } from './fixtures/notFound'
 import { PressePageFixtures } from './fixtures/presse'
+import { reglements, reglementsPage } from './fixtures/reglements'
 import { RessourcesPassFixtures } from './fixtures/ressourcespass'
 import { RessourcesPassCulturePageFixtures } from './fixtures/ressourcesPassCulture'
 import { simulatorPageFixtures } from './fixtures/simulator'
@@ -86,6 +88,18 @@ export const handlers = [
   }),
   http.get(`${CMS_BASE_URL}/api/resources`, () => {
     return jsonResponseOf(homePageFixtures.latestStudies)
+  }),
+  http.get(`${CMS_BASE_URL}/api/blogtech-list`, () => {
+    return jsonResponseOf(blogtechData)
+  }),
+  http.get(`${CMS_BASE_URL}/api/blogtech-pass-culture`, () => {
+    return jsonResponseOf(blogtechPage)
+  }),
+  http.get(`${CMS_BASE_URL}/api/reglements`, () => {
+    return jsonResponseOf(reglements)
+  }),
+  http.get(`${CMS_BASE_URL}/api/reglements-pass-culture`, () => {
+    return jsonResponseOf(reglementsPage)
   }),
 
   http.get(
