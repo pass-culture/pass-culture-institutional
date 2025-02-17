@@ -1,6 +1,6 @@
-on: 
+on:
   workflow_dispatch:
-    
+
 name: Deploy production CMS and static website
 
 jobs:
@@ -8,10 +8,10 @@ jobs:
     uses: ./.github/workflows/reusable_cms_deploy.yml
     with:
       project_id: passculture-cls-metier-prod
-      environment: production 
-      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
+      environment: production
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider
       cluster_scope: cls-metier
-      cluster-environment: prod
+      cluster_environment: prod
       image_tag: ${{ github.sha }}
       secrets_project_id: passculture-cls-metier-ehp
     secrets:
@@ -25,8 +25,8 @@ jobs:
     with:
       environment: production
       cluster_scope: cls-metier
-      cluster-environment: prod
-      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider 
+      cluster_environment: prod
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_cls_metier_prod_workload_identity_provider
       cms_url: https://siteinstit-cms.passculture.team
       backend_url: https://backend.passculture.app
       secrets_project_id: passculture-cls-metier-ehp
