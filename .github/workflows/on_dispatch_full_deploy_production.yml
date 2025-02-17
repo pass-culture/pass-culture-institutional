@@ -3,6 +3,10 @@ on:
 
 name: Deploy production CMS and static website
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy-cms-production:
     uses: ./.github/workflows/reusable_cms_deploy.yml
