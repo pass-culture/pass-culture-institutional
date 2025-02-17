@@ -6,6 +6,7 @@ import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { ImageTextProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { OutlinedText } from '@/ui/components/OutlinedText'
+import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
@@ -23,7 +24,9 @@ export function ImageText(props: ImageTextProps) {
             <StyledHeading>{title as string}</StyledHeading>
           </BlockRendererWithCondition>
 
-          <BlocksRenderer content={text} />
+          <StyledBlocksRenderer>
+            <BlocksRenderer content={text} />
+          </StyledBlocksRenderer>
         </StyledContentTextWrapper>
         <StyledContentImagetWrapper
           className="second"

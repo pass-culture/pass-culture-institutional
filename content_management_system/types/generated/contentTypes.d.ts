@@ -691,6 +691,106 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
   };
 }
 
+export interface ApiBlogtechBlogtech extends Schema.CollectionType {
+  collectionName: 'blogtech_list';
+  info: {
+    singularName: 'blogtech';
+    pluralName: 'blogtech-list';
+    displayName: 'Blogtech';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.simple-text-v2',
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
+      ]
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    aboveTitle: Attribute.String;
+    emoji: Attribute.String;
+    priority: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0.3>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blogtech.blogtech',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blogtech.blogtech',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogtechPassCultureBlogtechPassCulture
+  extends Schema.SingleType {
+  collectionName: 'blogtech_pass_cultures';
+  info: {
+    singularName: 'blogtech-pass-culture';
+    pluralName: 'blogtech-pass-cultures';
+    displayName: 'Blogtech - Pass Culture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    cta: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
+    priority: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0.5>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blogtech-pass-culture.blogtech-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blogtech-pass-culture.blogtech-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEtudesPassCultureEtudesPassCulture
   extends Schema.SingleType {
   collectionName: 'etudes_pass_cultures';
@@ -1461,6 +1561,109 @@ export interface ApiPressePresse extends Schema.SingleType {
   };
 }
 
+export interface ApiReglementReglement extends Schema.CollectionType {
+  collectionName: 'reglements';
+  info: {
+    singularName: 'reglement';
+    pluralName: 'reglements';
+    displayName: 'R\u00E8glements';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.DefaultTo<'2024-07-21T22:00:00.000Z'>;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.simple-text-v2',
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media'
+      ]
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    aboveTitle: Attribute.String;
+    emoji: Attribute.String;
+    priority: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0.3>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reglement.reglement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reglement.reglement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiReglementsPassCultureReglementsPassCulture
+  extends Schema.SingleType {
+  collectionName: 'reglements_pass_cultures';
+  info: {
+    singularName: 'reglements-pass-culture';
+    pluralName: 'reglements-pass-cultures';
+    displayName: 'R\u00E8glements - Pass Culture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    cta: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
+    priority: Attribute.Decimal &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 1;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0.5>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::reglements-pass-culture.reglements-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::reglements-pass-culture.reglements-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiResourceResource extends Schema.CollectionType {
   collectionName: 'resources';
   info: {
@@ -1809,6 +2012,8 @@ declare module '@strapi/types' {
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'api::actualites-pass-culture.actualites-pass-culture': ApiActualitesPassCultureActualitesPassCulture;
       'api::actualites-rdv-acteurs-culturel.actualites-rdv-acteurs-culturel': ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel;
+      'api::blogtech.blogtech': ApiBlogtechBlogtech;
+      'api::blogtech-pass-culture.blogtech-pass-culture': ApiBlogtechPassCultureBlogtechPassCulture;
       'api::etudes-pass-culture.etudes-pass-culture': ApiEtudesPassCultureEtudesPassCulture;
       'api::event.event': ApiEventEvent;
       'api::footer.footer': ApiFooterFooter;
@@ -1823,6 +2028,8 @@ declare module '@strapi/types' {
       'api::not-found.not-found': ApiNotFoundNotFound;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
+      'api::reglement.reglement': ApiReglementReglement;
+      'api::reglements-pass-culture.reglements-pass-culture': ApiReglementsPassCultureReglementsPassCulture;
       'api::resource.resource': ApiResourceResource;
       'api::ressourcepass.ressourcepass': ApiRessourcepassRessourcepass;
       'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;

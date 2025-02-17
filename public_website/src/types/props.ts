@@ -366,6 +366,7 @@ export type LatestNewsProps = {
   newsOrStudies:
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
+    | APIResponseData<'api::blogtech.blogtech'>[]
   cta?: CTA
   className?: string
   isNews: boolean
@@ -415,7 +416,7 @@ export type RecommendationsProps = {
 }
 export type ListCardProps = {
   title: string
-  category: string
+  category?: string
   date: Date | string
   imageUrl: string | null | undefined
   slug: string
@@ -423,7 +424,7 @@ export type ListCardProps = {
 }
 export type NewsCardProps = {
   title: string
-  category: string
+  category?: string
   date: Date | string
   imageUrl: string | null
   slug: string
@@ -546,4 +547,14 @@ export type PageLayoutProps = {
   seo?: APIResponseData<'api::page.page'>['attributes']['seo'] | null
   socialMediaSection?: SocialMediaProps
   title?: string
+}
+
+export type ListReglementsProps = {
+  reglementsData: APIResponseData<'api::reglement.reglement'>[]
+  reglementsPage: APIResponseData<'api::reglements-pass-culture.reglements-pass-culture'>
+}
+
+export type ListBlogtechProps = {
+  blogtechData: APIResponseData<'api::blogtech.blogtech'>[]
+  blogtechPage: APIResponseData<'api::blogtech-pass-culture.blogtech-pass-culture'>
 }

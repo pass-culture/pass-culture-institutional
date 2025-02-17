@@ -63,6 +63,20 @@ export function Breadcrumb(props: BreadcrumbProps) {
       typeof params?.['slug'] === 'string' && pathname.startsWith('/actualite/')
     )
   }
+
+  const isBlogTech = (): boolean => {
+    return (
+      typeof params?.['slug'] === 'string' && pathname.startsWith('/blog-tech/')
+    )
+  }
+
+  const isReglement = (): boolean => {
+    return (
+      typeof params?.['slug'] === 'string' &&
+      pathname.startsWith('/reglements/')
+    )
+  }
+
   const isResource = (): boolean => {
     return (
       typeof params?.['slug'] === 'string' &&
@@ -143,6 +157,16 @@ export function Breadcrumb(props: BreadcrumbProps) {
           {isResource() && (
             <StyledSimpleLink>
               <Link href="/ressources-pass-culture">Ressources</Link>
+            </StyledSimpleLink>
+          )}
+          {isBlogTech() && (
+            <StyledSimpleLink>
+              <Link href="/blog-tech">Blog Tech</Link>
+            </StyledSimpleLink>
+          )}
+          {isReglement() && (
+            <StyledSimpleLink>
+              <Link href="/reglements">Réglement</Link>
             </StyledSimpleLink>
           )}
           {footerLink && (

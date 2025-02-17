@@ -10,14 +10,14 @@ import { isStringAreEquals } from '@/utils/stringAreEquals'
 
 export function ResourceCard(props: {
   title: string
-  category: string
+  category?: string
   date: string | Date
   cta: CTA
 }) {
   const { title, category, date, cta } = props
 
   const setIcon = (): React.JSX.Element => {
-    if (isStringAreEquals(category, 'document')) {
+    if (category && isStringAreEquals(category, 'document')) {
       return <Download />
     }
     return <ExternalLink />
@@ -26,7 +26,8 @@ export function ResourceCard(props: {
   return (
     <Root>
       <StyledMeta id={`news-meta-${cta.URL}`}>
-        {category} - <span className="visually-hidden">Publié le</span>
+        {category ?? 'Règlement'} -{' '}
+        <span className="visually-hidden">Publié le</span>
         <time>{formatDate(date)}</time>
       </StyledMeta>
       <StyledCardTitle>{title}</StyledCardTitle>

@@ -6,6 +6,7 @@ import BlockRendererWithCondition from '../BlockRendererWithCondition'
 import { Video } from './Video'
 import { SimpleTextWithMediaProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
@@ -33,7 +34,11 @@ export function SimpleTextWithMedia(props: SimpleTextWithMediaProps) {
                     {parseText(col.title).processedText}
                   </ColumnTitle>
                 )}
-                {col?.text && <BlocksRenderer content={col.text} />}
+                {col?.text && (
+                  <StyledBlocksRenderer>
+                    <BlocksRenderer content={col.text} />
+                  </StyledBlocksRenderer>
+                )}
               </Column>
             ))}
           </Columns>

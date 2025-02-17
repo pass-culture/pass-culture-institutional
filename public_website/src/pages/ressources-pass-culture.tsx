@@ -132,7 +132,7 @@ export default function RessourcesPassCulture({
           surtitle={etudes.surtitle}
           icon={etudes.icon}
         />
-      )}{' '}
+      )}
       <Separator isActive={false} />
     </PageLayout>
   )
