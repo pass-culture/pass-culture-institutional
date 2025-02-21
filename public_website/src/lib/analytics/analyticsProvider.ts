@@ -1,9 +1,12 @@
-import { Analytics, getAnalytics, logEvent } from 'firebase/analytics'
-import { initializeApp } from 'firebase/app'
-
-import { analyticsConfig } from '@/lib/analytics/config'
-
-let analyticsInstance: Analytics
+declare global {
+  interface Window {
+    gtag: (
+      event: string,
+      action: string,
+      options: Record<string, unknown>
+    ) => void
+  }
+}
 
 export type EventMap = {
   testEvent: { origin: 'testOrigin' }
@@ -59,10 +62,9 @@ export enum eventOriginsEnum {
 }
 
 export const analyticsProvider = {
-  init: () => {
-    const app = initializeApp(analyticsConfig)
-    analyticsInstance = getAnalytics(app)
+  logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', eventName, options)
+    }
   },
-  logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) =>
-    logEvent<string>(analyticsInstance, eventName, options),
 }
