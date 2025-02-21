@@ -5,8 +5,8 @@ import { Montserrat } from 'next/font/google'
 import { stringify } from 'qs'
 import { ThemeProvider } from 'styled-components'
 
-import { useAxeptio } from '@/hooks/useAxeptio'
 import { useConsent } from '@/hooks/useConsent'
+import { useGoogleAnalytics } from '@/hooks/useGoogleAnalytics'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
 import { FooterProps, MyAppProps } from '@/types/props'
@@ -17,7 +17,6 @@ import { Header } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
 import { fetchCMS } from '@/utils/fetchCMS'
-
 const montSerrat = Montserrat({ subsets: ['latin'] })
 
 export default function MyApp({
@@ -26,23 +25,19 @@ export default function MyApp({
   headerData,
   footerData,
 }: MyAppProps) {
-  useAxeptio()
   const acceptedVendors = useConsent()
-  const hasAcceptedFirebase = acceptedVendors['firebase']
-
-  useEffect(() => {
-    if (hasAcceptedFirebase) analyticsProvider.init()
-  }, [hasAcceptedFirebase])
+  useGoogleAnalytics()
+  const hasAcceptedGoogleAnalytics = acceptedVendors['firebase']
 
   const path =
     typeof window !== 'undefined' ? window.location?.pathname : undefined
   useEffect(() => {
-    if (path && hasAcceptedFirebase) {
+    if (path && hasAcceptedGoogleAnalytics) {
       analyticsProvider.logEvent('pageView', {
         origin: path,
       })
     }
-  }, [hasAcceptedFirebase, path])
+  }, [hasAcceptedGoogleAnalytics, path])
 
   const breadcrumbContextValue = useMemo(
     () => ({
