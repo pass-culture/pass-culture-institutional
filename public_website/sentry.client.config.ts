@@ -9,6 +9,7 @@ Sentry.init({
   debug: false,
   replaysSessionSampleRate: 0.0,
   replaysOnErrorSampleRate: 0.1,
+  sampleRate: 0.1,
   integrations: [
     Sentry.replayIntegration({
       maskAllText: true,
