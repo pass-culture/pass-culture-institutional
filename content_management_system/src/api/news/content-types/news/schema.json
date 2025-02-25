@@ -103,7 +103,9 @@
         "block.simple-text-v2",
         "block.video",
         "block.double-push-cta",
-        "block.social-media"
+        "block.social-media",
+        "block.accordions-list",
+        "block.tabs-accordion"
       ]
     },
     "seo": {

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_tab_accordions",
+  "info": {
+    "displayName": "TabAccordion"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "block": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.accordions-list"
+    }
+  }
+}

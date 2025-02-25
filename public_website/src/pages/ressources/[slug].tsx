@@ -72,6 +72,14 @@ export const getStaticProps = (async ({ params }) => {
         'seo.metaSocial.image',
         'seo.metaSocial',
         'seo',
+        'blocks.tab.block.accordions',
+        'blocks.tab.block.accordions.simpleText',
+        'blocks.tab.block.accordions.simpleText.columns',
+        'blocks.tab.block.accordions.simpleText.columns.text',
+        'blocks.accordions',
+        'blocks.accordions.simpleText',
+        'blocks.accordions.simpleText.columns',
+        'blocks.accordions.simpleText.columns.text',
       ],
       filters: {
         slug: {

@@ -713,7 +713,9 @@ export interface ApiBlogtechBlogtech extends Schema.CollectionType {
         'block.simple-text-v2',
         'block.video',
         'block.double-push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -919,7 +921,9 @@ export interface ApiEventEvent extends Schema.CollectionType {
         'block.simple-text-v2',
         'block.video',
         'block.double-push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1379,7 +1383,9 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'block.simple-text-v2',
         'block.video',
         'block.double-push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1486,7 +1492,9 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.tabs-simple-text',
         'block.tabs-push-grey-cta',
         'block.tabs-little-list',
-        'block.tabs-image-text'
+        'block.tabs-image-text',
+        'block.tabs-accordion',
+        'block.accordions-list'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1586,7 +1594,9 @@ export interface ApiReglementReglement extends Schema.CollectionType {
         'block.simple-text-v2',
         'block.video',
         'block.double-push-cta',
-        'block.social-media'
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
@@ -1766,7 +1776,9 @@ export interface ApiResourceResource extends Schema.CollectionType {
         'block.organization-chart',
         'block.simple-text-v2',
         'block.image-gallery',
-        'block.breadcrumb'
+        'block.breadcrumb',
+        'block.accordions-list',
+        'block.tabs-accordion'
       ]
     >;
     partnership: Attribute.Enumeration<

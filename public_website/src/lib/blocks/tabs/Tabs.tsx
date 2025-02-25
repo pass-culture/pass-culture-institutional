@@ -3,10 +3,16 @@ import styled from 'styled-components'
 
 import Tab from './Tab'
 import TabPanel from './TabPannel'
-import { TabImageTextProps, TabPushGreyProps } from '@/types/props'
+import {
+  TabAccordionProps,
+  TabImageTextProps,
+  TabPushGreyProps,
+} from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
-const Tabs = (props: TabImageTextProps | TabPushGreyProps) => {
+const Tabs = (
+  props: TabImageTextProps | TabPushGreyProps | TabAccordionProps
+) => {
   const { tab, children } = props
   const [selectedTab, setSelectedTab] = useState<number>(0)
   const handleClick = (index: number): void => {
