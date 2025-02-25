@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { GetStaticProps } from 'next'
 import { stringify } from 'qs'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
@@ -12,33 +12,13 @@ import { SimulatorProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
-import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 
 export default function SimulatorPage(props: SimulatorProps) {
-  const {
-    seo,
-    title,
-    description,
-    ageQuestion,
-    nationnalityQuestion,
-    residencyQuestion,
-    successScreen,
-    failureScreen,
-    steps,
-    tooYoungScreen,
-    amountScreen_15,
-    amountScreen_16,
-    amountScreen_17,
-    amountScreen_18,
-    tooOldScreen,
-    topEmoji,
-    bottomEmoji,
-    socialMedias,
-    offres,
-  } = props.data.attributes
+  const { seo, title, description, /* steps,*/ socialMedias, offres } =
+    props.data.attributes
 
-  const memoSteps = useMemo(() => steps.map((s) => s.step), [steps])
+  // const memoSteps = useMemo(() => steps.map((s) => s.step), [steps])
 
   return (
     <PageLayout seo={seo} title={undefined} socialMediaSection={socialMedias}>
@@ -47,7 +27,8 @@ export default function SimulatorPage(props: SimulatorProps) {
           <Title>{title}</Title>
           <Description>{description}</Description>
           <UnpaddedBreadcrumb />
-          <StyledSimulator
+          Page bientôt disponible de nouveau
+          {/* <StyledSimulator
             ageQuestion={ageQuestion}
             nationnalityQuestion={nationnalityQuestion}
             residencyQuestion={residencyQuestion}
@@ -62,7 +43,7 @@ export default function SimulatorPage(props: SimulatorProps) {
             tooOldScreen={tooOldScreen}
             topEmoji={topEmoji}
             bottomEmoji={bottomEmoji}
-          />
+          /> */}
         </Root>
         {!!offres && (
           <SimplePushCta
@@ -97,14 +78,14 @@ const Description = styled(Typo.Body)`
   }
 `
 
-const StyledSimulator = styled(Simulator)`
-  ${({ theme }) => css`
-    @media (width < ${theme.mediaQueries.tablet}) {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
-  `}
-`
+// const StyledSimulator = styled(Simulator)`
+//   ${({ theme }) => css`
+//     @media (width < ${theme.mediaQueries.tablet}) {
+//       margin-top: 2rem;
+//       margin-bottom: 2rem;
+//     }
+//   `}
+// `
 
 export const getStaticProps = (async () => {
   const query = stringify(
