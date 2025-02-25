@@ -55,10 +55,6 @@ export default class MyDocument extends Document {
           <link rel="manifest" href="/site.webmanifest" />
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="#ffffff" />
-          <meta
-            name="google-site-verification"
-            content="l-GxSoFS8doxC2sWOQ4tEsUkpDHobbU4S12FQ114h9g"
-          />
         </Head>
         <Body>
           <Main />

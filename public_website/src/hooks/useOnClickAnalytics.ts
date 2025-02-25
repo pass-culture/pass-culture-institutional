@@ -39,7 +39,7 @@ export const useOnClickAnalytics = () => {
         origin: cta.eventOrigin,
       })
     } else {
-      // When Sentry is added to project: If the eventName is not in EventMap, do not send to Google Analytics and log to Sentry
+      // When Sentry is added to project: If the eventName is not in EventMap, do not send to Firebase and log to Sentry
       return undefined
     }
   }

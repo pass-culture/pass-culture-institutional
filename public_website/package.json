@@ -20,6 +20,7 @@
   "dependencies": {
     "@sentry/nextjs": "^7.105.0",
     "@strapi/blocks-react-renderer": "^1.0.1",
+    "firebase": "^10.8.1",
     "next": "14.2.8",
     "next-qrcode": "^2.5.1",
     "pure-react-carousel": "^1.30.1",
