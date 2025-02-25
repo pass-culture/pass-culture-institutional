@@ -1486,7 +1486,9 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.tabs-simple-text',
         'block.tabs-push-grey-cta',
         'block.tabs-little-list',
-        'block.tabs-image-text'
+        'block.tabs-image-text',
+        'block.tabs-accordion',
+        'block.accordions-list'
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;

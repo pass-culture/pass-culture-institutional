@@ -11,7 +11,7 @@ import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
 export function SimpleTextV2(props: SimpleTextV2Props) {
-  const { columns, title, text } = props
+  const { columns, title, text, padding = true } = props
 
   const isRenderColumns = (): boolean => {
     return columns?.length > 0
@@ -22,7 +22,12 @@ export function SimpleTextV2(props: SimpleTextV2Props) {
         <StyledHeading2>{title as string}</StyledHeading2>
       </BlockRendererWithCondition>
 
-      <Content>
+      <Content
+        padding={
+          padding
+            ? 'padding-left: 8.5%; padding-right: 8.5%;'
+            : 'padding-left: 0; padding-right: 0;'
+        }>
         <StyledBlocksRenderer>
           <BlocksRenderer content={text} />
         </StyledBlocksRenderer>
@@ -164,9 +169,10 @@ const Root = styled(ContentWrapper)`
   `}
 `
 
-const Content = styled.div`
-  padding-left: 8.5%;
-  padding-right: 8.5%;
+const Content = styled.div<{ padding: string }>`
+  ${({ padding }) => css`
+    ${padding}
+  `}
 
   @media (width < ${({ theme }) => theme.mediaQueries.mobile}) {
     padding-left: 0;

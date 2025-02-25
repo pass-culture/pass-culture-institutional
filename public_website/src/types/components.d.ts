@@ -88,66 +88,7 @@ export interface SimulatorAgeQuestion extends Schema.Component {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    answers: Attribute.Component<'simulator.answer', true> &
-      Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 6;
-          max: 6;
-        },
-        number
-      >;
-  };
-}
-
-export interface SharedSeo extends Schema.Component {
-  collectionName: 'components_shared_seos';
-  info: {
-    displayName: 'seo';
-    icon: 'search';
-  };
-  attributes: {
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 50;
-        maxLength: 160;
-      }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    keywords: Attribute.Text;
-    metaRobots: Attribute.String;
-    structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
-  };
-}
-
-export interface SharedMetaSocial extends Schema.Component {
-  collectionName: 'components_shared_meta_socials';
-  info: {
-    displayName: 'metaSocial';
-    icon: 'project-diagram';
-  };
-  attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 65;
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
+    answers: Attribute.Component<'simulator.answer', true> & Attribute.Required;
   };
 }
 
@@ -214,181 +155,6 @@ export interface HomeEligibilityItems extends Schema.Component {
   };
 }
 
-export interface HeaderNavigationItems extends Schema.Component {
-  collectionName: 'components_header_navigation_items';
-  info: {
-    displayName: 'navigationItems';
-  };
-  attributes: {
-    label: Attribute.String & Attribute.Required;
-    megaMenu: Attribute.Component<'header.mega-menu'>;
-  };
-}
-
-export interface HeaderMegaMenu extends Schema.Component {
-  collectionName: 'components_header_mega_menus';
-  info: {
-    displayName: 'megaMenu';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    primaryListItems: Attribute.Component<'common.link', true> &
-      Attribute.Required;
-    secondaryListItems: Attribute.Component<'common.link', true>;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    cardTitle: Attribute.String & Attribute.Required;
-    cardDescription: Attribute.String & Attribute.Required;
-    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
-    bannerText: Attribute.String;
-    cardFirstEmoji: Attribute.String & Attribute.Required;
-    cardSecondEmoji: Attribute.String & Attribute.Required;
-    bannerAndroidUrl: Attribute.String;
-    bannerIosUrl: Attribute.String;
-    bannerDefaultUrl: Attribute.String;
-    theme: Attribute.Enumeration<
-      [
-        'purple',
-        'yellow',
-        'magenta',
-        'orange',
-        'green',
-        'gold',
-        'sky',
-        'lila',
-        'deeppink',
-        'aquamarine',
-        'lightgray',
-        'saumon'
-      ]
-    > &
-      Attribute.DefaultTo<'gold'>;
-  };
-}
-
-export interface HeaderLogin extends Schema.Component {
-  collectionName: 'components_header_logins';
-  info: {
-    displayName: 'login';
-  };
-  attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
-    loginItems: Attribute.Component<'header.login-items', true> &
-      Attribute.SetMinMax<
-        {
-          max: 2;
-        },
-        number
-      >;
-  };
-}
-
-export interface HeaderLoginItems extends Schema.Component {
-  collectionName: 'components_header_login_items';
-  info: {
-    displayName: 'loginItems';
-    description: '';
-  };
-  attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface HeaderHeader extends Schema.Component {
-  collectionName: 'components_header_headers';
-  info: {
-    displayName: 'header';
-  };
-  attributes: {};
-}
-
-export interface HeaderAccountItem extends Schema.Component {
-  collectionName: 'components_header_account_item';
-  info: {
-    displayName: 'accountItem';
-    description: '';
-  };
-  attributes: {
-    label: Attribute.String & Attribute.Required;
-    color: Attribute.String & Attribute.Required;
-    emoji: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface HeaderAccountDropdown extends Schema.Component {
-  collectionName: 'components_header_account_dropdowns';
-  info: {
-    displayName: 'accountDropdown';
-  };
-  attributes: {
-    buttonLabel: Attribute.String & Attribute.Required;
-    items: Attribute.Component<'header.account-item', true> &
-      Attribute.Required;
-  };
-}
-
 export interface FooterList extends Schema.Component {
   collectionName: 'components_footer_lists';
   info: {
@@ -407,6 +173,57 @@ export interface FooterLegalLinks extends Schema.Component {
     displayName: 'LegalLinks';
   };
   attributes: {};
+}
+
+export interface SharedSeo extends Schema.Component {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
+  };
+}
+
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
+  };
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
@@ -688,6 +505,181 @@ export interface CommonDetailedLogo extends Schema.Component {
   };
 }
 
+export interface HeaderNavigationItems extends Schema.Component {
+  collectionName: 'components_header_navigation_items';
+  info: {
+    displayName: 'navigationItems';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    megaMenu: Attribute.Component<'header.mega-menu'>;
+  };
+}
+
+export interface HeaderMegaMenu extends Schema.Component {
+  collectionName: 'components_header_mega_menus';
+  info: {
+    displayName: 'megaMenu';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    primaryListItems: Attribute.Component<'common.link', true> &
+      Attribute.Required;
+    secondaryListItems: Attribute.Component<'common.link', true>;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    cardTitle: Attribute.String & Attribute.Required;
+    cardDescription: Attribute.String & Attribute.Required;
+    cardLink: Attribute.Component<'common.link'> & Attribute.Required;
+    bannerText: Attribute.String;
+    cardFirstEmoji: Attribute.String & Attribute.Required;
+    cardSecondEmoji: Attribute.String & Attribute.Required;
+    bannerAndroidUrl: Attribute.String;
+    bannerIosUrl: Attribute.String;
+    bannerDefaultUrl: Attribute.String;
+    theme: Attribute.Enumeration<
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
+    > &
+      Attribute.DefaultTo<'gold'>;
+  };
+}
+
+export interface HeaderLogin extends Schema.Component {
+  collectionName: 'components_header_logins';
+  info: {
+    displayName: 'login';
+  };
+  attributes: {
+    buttonLabel: Attribute.String & Attribute.Required;
+    loginItems: Attribute.Component<'header.login-items', true> &
+      Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
+  };
+}
+
+export interface HeaderLoginItems extends Schema.Component {
+  collectionName: 'components_header_login_items';
+  info: {
+    displayName: 'loginItems';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
+  };
+}
+
+export interface HeaderHeader extends Schema.Component {
+  collectionName: 'components_header_headers';
+  info: {
+    displayName: 'header';
+  };
+  attributes: {};
+}
+
+export interface HeaderAccountItem extends Schema.Component {
+  collectionName: 'components_header_account_item';
+  info: {
+    displayName: 'accountItem';
+    description: '';
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required;
+    color: Attribute.String & Attribute.Required;
+    emoji: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
+  };
+}
+
+export interface HeaderAccountDropdown extends Schema.Component {
+  collectionName: 'components_header_account_dropdowns';
+  info: {
+    displayName: 'accountDropdown';
+  };
+  attributes: {
+    buttonLabel: Attribute.String & Attribute.Required;
+    items: Attribute.Component<'header.account-item', true> &
+      Attribute.Required;
+  };
+}
+
 export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {
@@ -756,6 +748,16 @@ export interface BlockTabsImageText extends Schema.Component {
   };
 }
 
+export interface BlockTabsAccordion extends Schema.Component {
+  collectionName: 'components_block_tabs_accordions';
+  info: {
+    displayName: 'TabsAccordion';
+  };
+  attributes: {
+    tab: Attribute.Component<'block.tab-accordion', true>;
+  };
+}
+
 export interface BlockTabSimpleText extends Schema.Component {
   collectionName: 'components_block_tab_simple_texts';
   info: {
@@ -797,6 +799,17 @@ export interface BlockTabImageText extends Schema.Component {
   attributes: {
     title: Attribute.String & Attribute.Required;
     block: Attribute.Component<'block.image-text'>;
+  };
+}
+
+export interface BlockTabAccordion extends Schema.Component {
+  collectionName: 'components_block_tab_accordions';
+  info: {
+    displayName: 'TabAccordion';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    block: Attribute.Component<'block.accordions-list'>;
   };
 }
 
@@ -1236,6 +1249,28 @@ export interface BlockBreadcrumb extends Schema.Component {
   attributes: {};
 }
 
+export interface BlockAccordionsList extends Schema.Component {
+  collectionName: 'components_block_accordions_list';
+  info: {
+    displayName: 'AccordionsList';
+  };
+  attributes: {
+    text: Attribute.Component<'block.simple-text-v2'>;
+    accordions: Attribute.Component<'block.accordion', true>;
+  };
+}
+
+export interface BlockAccordion extends Schema.Component {
+  collectionName: 'components_block_accordions';
+  info: {
+    displayName: 'Accordion';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    simpleText: Attribute.Component<'block.simple-text-v2'>;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -1246,21 +1281,14 @@ declare module '@strapi/types' {
       'simulator.answer': SimulatorAnswer;
       'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.age-question': SimulatorAgeQuestion;
-      'shared.seo': SharedSeo;
-      'shared.meta-social': SharedMetaSocial;
       'home.recommendations-section': HomeRecommendationsSection;
       'home.hero-section': HomeHeroSection;
       'home.eligibility-section': HomeEligibilitySection;
       'home.eligibility-items': HomeEligibilityItems;
-      'header.navigation-items': HeaderNavigationItems;
-      'header.mega-menu': HeaderMegaMenu;
-      'header.login': HeaderLogin;
-      'header.login-items': HeaderLoginItems;
-      'header.header': HeaderHeader;
-      'header.account-item': HeaderAccountItem;
-      'header.account-dropdown': HeaderAccountDropdown;
       'footer.list': FooterList;
       'footer.legal-links': FooterLegalLinks;
+      'shared.seo': SharedSeo;
+      'shared.meta-social': SharedMetaSocial;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'common.simple-text-column': CommonSimpleTextColumn;
       'common.piled-card-item': CommonPiledCardItem;
@@ -1275,16 +1303,25 @@ declare module '@strapi/types' {
       'common.filtre': CommonFiltre;
       'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
       'common.detailed-logo': CommonDetailedLogo;
+      'header.navigation-items': HeaderNavigationItems;
+      'header.mega-menu': HeaderMegaMenu;
+      'header.login': HeaderLogin;
+      'header.login-items': HeaderLoginItems;
+      'header.header': HeaderHeader;
+      'header.account-item': HeaderAccountItem;
+      'header.account-dropdown': HeaderAccountDropdown;
       'block.video': BlockVideo;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.tabs-simple-text': BlockTabsSimpleText;
       'block.tabs-push-grey-cta': BlockTabsPushGreyCta;
       'block.tabs-little-list': BlockTabsLittleList;
       'block.tabs-image-text': BlockTabsImageText;
+      'block.tabs-accordion': BlockTabsAccordion;
       'block.tab-simple-text': BlockTabSimpleText;
       'block.tab-push-grey-cta': BlockTabPushGreyCta;
       'block.tab-little-list': BlockTabLittleList;
       'block.tab-image-text': BlockTabImageText;
+      'block.tab-accordion': BlockTabAccordion;
       'block.space': BlockSpace;
       'block.social-media': BlockSocialMedia;
       'block.simple-text-v2': BlockSimpleTextV2;
@@ -1315,6 +1352,8 @@ declare module '@strapi/types' {
       'block.centered-title': BlockCenteredTitle;
       'block.centered-text': BlockCenteredText;
       'block.breadcrumb': BlockBreadcrumb;
+      'block.accordions-list': BlockAccordionsList;
+      'block.accordion': BlockAccordion;
     }
   }
 }

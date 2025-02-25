@@ -41,6 +41,7 @@ const StyledTabButton = styled.button`
   ${({ theme }) => css`
     margin-left: 0.625rem;
     margin-right: 0.625rem;
+    padding: 2rem 1rem;
     border: none;
     border-bottom: 0.0625rem solid transparent;
     font-size: ${theme.fonts.sizes['xl']};
