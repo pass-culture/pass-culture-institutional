@@ -21,26 +21,13 @@ const getAcceptedVendors = (
         firebase: sdk.hasAcceptedVendor('googlefirebase'),
       })
     }
-
-    if (
-      typeof sdk === 'object' &&
-      sdk !== null &&
-      'on' in sdk &&
-      typeof sdk['on'] === 'function'
-    ) {
-      sdk.on('cookies:complete', function () {
-        window.dispatchEvent(new Event('axeptioConsentAccepted'))
-      })
-    }
   })
 }
 
 export const useConsent = () => {
   const [acceptedVendors, setAcceptedVendors] = useState<
     Record<string, boolean>
-  >({
-    firebase: false,
-  })
+  >({ firebase: false })
 
   useEffect(() => {
     getAcceptedVendors(setAcceptedVendors)

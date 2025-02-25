@@ -1,20 +1,7 @@
 import { useEffect } from 'react'
 
-declare global {
-  interface Window {
-    axeptioSettings?: {
-      clientId: string
-      cookiesVersion: string
-    }
-  }
-}
-
 export const useAxeptio = () => {
   useEffect(() => {
-    if (window.axeptioSettings) {
-      return
-    }
-
     const script = document.createElement('script')
     script.async = true
     script.innerHTML = `
