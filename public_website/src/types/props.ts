@@ -54,6 +54,15 @@ export type TabImageTextProps = {
     id: number
   }[]
 }
+export type TabAccordionProps = {
+  id: number
+  children: React.ReactNode
+  tab: {
+    title: string
+    block: AccordionsListProps
+    id: number
+  }[]
+}
 export type TabSimpleTextProps = {
   id: number
   children: React.ReactNode
@@ -199,6 +208,7 @@ export type SimpleTextV2Props = {
     title: string
     text: BlocksContent
   }[]
+  padding?: boolean
 }
 
 export type VideoProps = {
@@ -557,4 +567,14 @@ export type ListReglementsProps = {
 export type ListBlogtechProps = {
   blogtechData: APIResponseData<'api::blogtech.blogtech'>[]
   blogtechPage: APIResponseData<'api::blogtech-pass-culture.blogtech-pass-culture'>
+}
+
+export type AccordionsListProps = {
+  accordions: AccordionProps[]
+  simpleText: SimpleTextV2Props
+}
+
+export type AccordionProps = {
+  title: string
+  simpleText: SimpleTextV2Props
 }

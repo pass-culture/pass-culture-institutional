@@ -33,7 +33,9 @@
   },
   "devDependencies": {
     "@strapi/strapi": "^4.22.1",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20.11.0",
     "@types/qrcode": "^1.5.5",
     "@types/qs": "^6.9.11",
