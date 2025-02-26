@@ -1978,6 +1978,10 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
         number
       > &
       Attribute.DefaultTo<0.5>;
+    disableSimulator: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    disableText: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -12,6 +12,7 @@ import { SimulatorProps } from '@/types/props'
 import { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import DisabledSimulator from '@/ui/components/simulator/DisabledSimulator'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
 
@@ -36,6 +37,8 @@ export default function SimulatorPage(props: SimulatorProps) {
     bottomEmoji,
     socialMedias,
     offres,
+    disableSimulator,
+    disableText,
   } = props.data.attributes
 
   const memoSteps = useMemo(() => steps.map((s) => s.step), [steps])
@@ -47,22 +50,26 @@ export default function SimulatorPage(props: SimulatorProps) {
           <Title>{title}</Title>
           <Description>{description}</Description>
           <UnpaddedBreadcrumb />
-          <StyledSimulator
-            ageQuestion={ageQuestion}
-            nationnalityQuestion={nationnalityQuestion}
-            residencyQuestion={residencyQuestion}
-            successScreen={successScreen}
-            failureScreen={failureScreen}
-            steps={memoSteps}
-            tooYoungScreen={tooYoungScreen}
-            amountScreen15={amountScreen_15}
-            amountScreen16={amountScreen_16}
-            amountScreen17={amountScreen_17}
-            amountScreen18={amountScreen_18}
-            tooOldScreen={tooOldScreen}
-            topEmoji={topEmoji}
-            bottomEmoji={bottomEmoji}
-          />
+          {disableSimulator ? (
+            <DisabledSimulator disableText={disableText} />
+          ) : (
+            <StyledSimulator
+              ageQuestion={ageQuestion}
+              nationnalityQuestion={nationnalityQuestion}
+              residencyQuestion={residencyQuestion}
+              successScreen={successScreen}
+              failureScreen={failureScreen}
+              steps={memoSteps}
+              tooYoungScreen={tooYoungScreen}
+              amountScreen15={amountScreen_15}
+              amountScreen16={amountScreen_16}
+              amountScreen17={amountScreen_17}
+              amountScreen18={amountScreen_18}
+              tooOldScreen={tooOldScreen}
+              topEmoji={topEmoji}
+              bottomEmoji={bottomEmoji}
+            />
+          )}
         </Root>
         {!!offres && (
           <SimplePushCta
