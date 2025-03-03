@@ -7,7 +7,6 @@ export const blogtechData = [
       slug: 'first-blogtech',
       aboveTitle: null,
       emoji: null,
-      priority: 0.3,
       createdAt: '2025-02-11T10:46:32.193Z',
       updatedAt: '2025-02-12T10:03:09.555Z',
       publishedAt: '2025-02-11T10:46:49.797Z',
@@ -61,7 +60,7 @@ export const blogtechPage = {
   attributes: {
     title: 'Blog Tech',
     buttonText: 'Afficher la suite',
-    priority: 0.5,
+
     createdAt: '2025-02-10T15:08:52.924Z',
     updatedAt: '2025-02-10T15:08:53.814Z',
     publishedAt: '2025-02-10T15:08:53.806Z',

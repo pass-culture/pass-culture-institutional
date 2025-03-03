@@ -35,14 +35,13 @@
       "type": "media",
       "multiple": false,
       "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "slug": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "regex": "^(?!/).*"
     },
     "localisation": {
       "type": "enumeration",
@@ -157,12 +156,6 @@
         "S’informer - études"
       ],
       "customField": "plugin::multi-select.multi-select"
-    },
-    "priority": {
-      "type": "decimal",
-      "default": 0.3,
-      "max": 1,
-      "min": 0
     }
   }
 }

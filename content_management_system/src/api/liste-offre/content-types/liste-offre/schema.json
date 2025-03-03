@@ -52,12 +52,6 @@
       "type": "component",
       "repeatable": false,
       "component": "block.offers-carousel"
-    },
-    "priority": {
-      "type": "decimal",
-      "default": 0.5,
-      "max": 1,
-      "min": 0
     }
   }
 }

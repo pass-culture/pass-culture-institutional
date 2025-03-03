@@ -22,11 +22,7 @@
     },
     "category": {
       "type": "enumeration",
-      "enum": [
-        "Étude",
-        "Document",
-        "Article"
-      ],
+      "enum": ["Étude", "Document", "Article"],
       "required": true,
       "default": "Étude"
     },
@@ -35,12 +31,6 @@
       "repeatable": false,
       "component": "common.link",
       "required": true
-    },
-    "priority": {
-      "type": "decimal",
-      "max": 1,
-      "min": 0,
-      "default": 0.3
     }
   }
 }

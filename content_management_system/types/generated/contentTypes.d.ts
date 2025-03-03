@@ -613,15 +613,6 @@ export interface ApiActualitesPassCultureActualitesPassCulture
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -664,15 +655,6 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -721,15 +703,6 @@ export interface ApiBlogtechBlogtech extends Schema.CollectionType {
     seo: Attribute.Component<'shared.seo'>;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -766,15 +739,6 @@ export interface ApiBlogtechPassCultureBlogtechPassCulture
     separator: Attribute.Component<'block.separator'>;
     cta: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -816,15 +780,6 @@ export interface ApiEtudesPassCultureEtudesPassCulture
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -933,15 +888,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
         ['Acteurs culturels', 'S\u2019informer - presse']
       >;
     endDate: Attribute.Date;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1051,15 +997,6 @@ export interface ApiHelpHelp extends Schema.SingleType {
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1090,15 +1027,6 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1138,15 +1066,6 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
     latestStudies: Attribute.Component<'block.latest-news'> &
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1190,15 +1109,6 @@ export interface ApiHomeHome extends Schema.SingleType {
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<1>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1232,15 +1142,6 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1279,15 +1180,6 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
     seo: Attribute.Component<'shared.seo'>;
     experience: Attribute.Component<'block.experience-video-carousel'>;
     offres_culturelles: Attribute.Component<'block.offers-carousel'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1396,15 +1288,6 @@ export interface ApiNewsNews extends Schema.CollectionType {
       >;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1498,15 +1381,6 @@ export interface ApiPagePage extends Schema.CollectionType {
       ]
     >;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.6>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1542,15 +1416,6 @@ export interface ApiPressePresse extends Schema.SingleType {
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1602,15 +1467,6 @@ export interface ApiReglementReglement extends Schema.CollectionType {
     seo: Attribute.Component<'shared.seo'>;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1647,15 +1503,6 @@ export interface ApiReglementsPassCultureReglementsPassCulture
     separator: Attribute.Component<'block.separator'>;
     cta: Attribute.Component<'block.simple-push-cta'>;
     seo: Attribute.Component<'shared.seo'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1806,15 +1653,6 @@ export interface ApiResourceResource extends Schema.CollectionType {
           'S\u2019informer - \u00E9tudes'
         ]
       >;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1853,15 +1691,6 @@ export interface ApiRessourcepassRessourcepass extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<'\u00C9tude'>;
     cta: Attribute.Component<'common.link'> & Attribute.Required;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.3>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1903,15 +1732,6 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1981,15 +1801,6 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
       Attribute.Required;
     seo: Attribute.Component<'shared.seo'>;
     offres: Attribute.Component<'block.simple-push-cta'>;
-    priority: Attribute.Decimal &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-          max: 1;
-        },
-        number
-      > &
-      Attribute.DefaultTo<0.5>;
     disableSimulator: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;

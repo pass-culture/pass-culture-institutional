@@ -1,5 +1,5 @@
-import { APIResponseData } from '@/types/strapi'
-import { fetchCMS } from '@/utils/fetchCMS'
+import { APIResponseData } from '../../types/strapi'
+import { fetchCMS } from '../../utils/fetchCMS'
 
 export const getPage = async (
   section: string,

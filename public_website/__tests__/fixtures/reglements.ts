@@ -4,7 +4,6 @@ export const reglements = [
     attributes: {
       title: 'Test Xavier',
       date: '2025-02-10T23:00:00.000Z',
-      priority: 0.3,
       createdAt: '2025-02-10T16:54:37.991Z',
       updatedAt: '2025-02-11T09:38:35.982Z',
       publishedAt: '2025-02-10T16:54:38.902Z',
@@ -27,7 +26,6 @@ export const reglementsPage = {
   attributes: {
     title: 'Règlements des **jeux-concours**',
     buttonText: 'Afficher la suite',
-    priority: 0.5,
     createdAt: '2025-02-10T15:08:10.089Z',
     updatedAt: '2025-02-11T09:51:34.832Z',
     publishedAt: '2025-02-10T15:08:11.229Z',
