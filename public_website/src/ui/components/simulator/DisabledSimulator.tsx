@@ -10,7 +10,7 @@ const SimulatorWrapper = styled.div`
     padding: 2rem;
     box-shadow: ${theme.shadows.popover};
     text-align: center;
-    max-width: 800px;
+    max-width: 50rem;
     margin: 2rem auto;
     position: relative;
   `}

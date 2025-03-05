@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_block_tabs_accordions",
+  "info": {
+    "displayName": "TabsAccordion"
+  },
+  "options": {},
+  "attributes": {
+    "tab": {
+      "displayName": "TabAccordion",
+      "type": "component",
+      "repeatable": true,
+      "component": "block.tab-accordion"
+    }
+  }
+}

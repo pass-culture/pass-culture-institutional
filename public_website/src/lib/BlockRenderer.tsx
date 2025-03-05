@@ -1,5 +1,6 @@
 import React, { ComponentProps } from 'react'
 
+import AccordionsList from './blocks/AccordionsList'
 import { CenteredText } from './blocks/CenteredText'
 import { DetailedLogos } from './blocks/DetailedLogos'
 import { DoublePushCTA } from './blocks/DoublePushCta'
@@ -28,6 +29,7 @@ import { SimplePushCta } from './blocks/SimplePushCta'
 import { SimpleTextV2 } from './blocks/SimpleTextV2'
 import { SimpleTextWithMedia } from './blocks/SimpleTextWithMedia'
 import { SocialMedia } from './blocks/SocialMedia'
+import TabsAccordion from './blocks/tabs/TabsAccordion'
 import TabsImageText from './blocks/tabs/TabsImageText'
 import TabsPushGreyCta from './blocks/tabs/TabsPushGreyCta'
 import TabsLittleList from './blocks/tabs/TabsSimpleList'
@@ -87,6 +89,8 @@ const COMPONENTS: Record<
   'block.tabs-simple-text': TabsSimpleText,
   'block.tabs-little-list': TabsLittleList,
   'block.tabs-push-grey-cta': TabsPushGreyCta,
+  'block.tabs-accordion': TabsAccordion,
+  'block.accordions-list': AccordionsList,
 }
 
 export function BlockRenderer(props: BlockRendererProps) {

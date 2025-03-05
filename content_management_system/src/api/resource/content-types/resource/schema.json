@@ -123,7 +123,9 @@
         "block.organization-chart",
         "block.simple-text-v2",
         "block.image-gallery",
-        "block.breadcrumb"
+        "block.breadcrumb",
+        "block.accordions-list",
+        "block.tabs-accordion"
       ]
     },
     "partnership": {

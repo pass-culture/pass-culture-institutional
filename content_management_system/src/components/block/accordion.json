@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_accordions",
+  "info": {
+    "displayName": "Accordion"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "simpleText": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.simple-text-v2"
+    }
+  }
+}
