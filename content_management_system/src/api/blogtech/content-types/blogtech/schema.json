@@ -31,7 +31,8 @@
     "slug": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "regex": "^(?!/).*"
     },
     "blocks": {
       "type": "dynamiczone",
@@ -55,12 +56,6 @@
     },
     "emoji": {
       "type": "string"
-    },
-    "priority": {
-      "max": 1,
-      "default": 0.3,
-      "min": 0,
-      "type": "decimal"
     }
   }
 }

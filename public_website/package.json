@@ -2,7 +2,7 @@
   "name": "pass-culture-institutional-public-website",
   "version": "0.1.0",
   "private": true,
-  "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 300€ à dépenser sur l'application pass Culture.",
+  "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 150€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
   "scripts": {
     "build": "next build",
@@ -15,7 +15,8 @@
     "test:lint:fix": "next lint --fix",
     "test:types": "yarn tsc --noEmit",
     "postinstall": "node getFaqQuestions.js",
-    "prebuild": "node getFaqQuestions.js"
+    "prebuild": "node getFaqQuestions.js & yarn generate-sitemap",
+    "generate-sitemap": "ts-node -P tsconfig.scripts.json ./scripts/generateSiteMap.ts"
   },
   "dependencies": {
     "@sentry/nextjs": "^7.105.0",
@@ -57,6 +58,7 @@
     "jsdom": "^23.2.0",
     "msw": "^2.2.0",
     "prettier": "^3.0.3",
+    "ts-node": "^10.9.2",
     "ts-prune": "^0.10.3",
     "typescript": "^5",
     "vite-tsconfig-paths": "^4.2.3",

@@ -7,9 +7,6 @@ WORKDIR /build
 COPY package.json yarn.lock /build/
 RUN apk add git && yarn install --frozen-lockfile
 
-COPY src/plugins/sitemap-pass /build/src/plugins/sitemap-pass
-WORKDIR /build/src/plugins/sitemap-pass
-RUN yarn install --frozen-lockfile && yarn build
 
 WORKDIR /build
 COPY tsconfig.json /build/
@@ -33,10 +30,7 @@ COPY --from=builder /build/dist /app
 COPY public /app/public
 COPY config /app/config
 COPY database /app/database
-
-COPY --from=builder /build/src/plugins/sitemap-pass/dist /app/src/plugins/sitemap-pass/
-COPY --from=builder /build/src/plugins/sitemap-pass/package.json /app/src/plugins/sitemap-pass/package.json
-
+    
 RUN chown -R node:node /app/public
 
 USER node

@@ -32,7 +32,8 @@
     "slug": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": true,
+      "regex": "^(?!/).*"
     },
     "cta": {
       "type": "component",
@@ -62,12 +63,6 @@
     },
     "emoji": {
       "type": "string"
-    },
-    "priority": {
-      "max": 1,
-      "default": 0.3,
-      "min": 0,
-      "type": "decimal"
     }
   }
 }

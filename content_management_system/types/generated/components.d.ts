@@ -401,285 +401,6 @@ export interface FooterLegalLinks extends Schema.Component {
   attributes: {};
 }
 
-export interface CommonVerticalCarouselItem extends Schema.Component {
-  collectionName: 'components_common_vertical_carousel_items';
-  info: {
-    displayName: 'verticalCarouselItem';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    url: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'>;
-  };
-}
-
-export interface CommonSimpleTextColumn extends Schema.Component {
-  collectionName: 'components_common_simple_text_columns';
-  info: {
-    displayName: 'Simple Text Column';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String;
-    text: Attribute.Blocks & Attribute.Required;
-  };
-}
-
-export interface CommonPiledCardItem extends Schema.Component {
-  collectionName: 'components_common_piled_card_items';
-  info: {
-    displayName: 'PiledCardItem';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    firstIcon: Attribute.String;
-    secondIcon: Attribute.String;
-    theme: Attribute.Enumeration<
-      [
-        'purple',
-        'yellow',
-        'magenta',
-        'orange',
-        'green',
-        'blue',
-        'gold',
-        'sky',
-        'lila',
-        'deeppink',
-        'aquamarine',
-        'lightgray',
-        'saumon'
-      ]
-    > &
-      Attribute.Required &
-      Attribute.DefaultTo<'purple'>;
-  };
-}
-
-export interface CommonPerson extends Schema.Component {
-  collectionName: 'components_common_people';
-  info: {
-    displayName: 'Person';
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    position: Attribute.String & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
-export interface CommonOffers extends Schema.Component {
-  collectionName: 'components_common_offers';
-  info: {
-    displayName: 'Offers';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    previousButtonLabel: Attribute.String & Attribute.Required;
-    nextButtonLabel: Attribute.String & Attribute.Required;
-    controlsLabel: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface CommonOffersCarouselItem extends Schema.Component {
-  collectionName: 'components_common_offers_carousel_items';
-  info: {
-    displayName: 'OffersCarouselItem';
-    description: '';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    surtitle: Attribute.String & Attribute.Required;
-    firstIcon: Attribute.String & Attribute.Required;
-    secondIcon: Attribute.String & Attribute.Required;
-    text: Attribute.Text & Attribute.Required;
-    theme: Attribute.Enumeration<
-      [
-        'purple',
-        'yellow',
-        'magenta',
-        'orange',
-        'green',
-        'gold',
-        'sky',
-        'lila',
-        'deeppink',
-        'aquamarine',
-        'lightgray',
-        'saumon'
-      ]
-    > &
-      Attribute.Required &
-      Attribute.DefaultTo<'purple'>;
-  };
-}
-
-export interface CommonNotRequiredLink extends Schema.Component {
-  collectionName: 'components_common_not_required_links';
-  info: {
-    displayName: 'NotRequiredLink';
-    description: '';
-  };
-  attributes: {
-    Label: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface CommonLogo extends Schema.Component {
-  collectionName: 'components_common_logos';
-  info: {
-    displayName: 'Logo';
-    description: '';
-  };
-  attributes: {
-    logo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Attribute.Required;
-  };
-}
-
-export interface CommonLittleListComponent extends Schema.Component {
-  collectionName: 'components_common_little_list_components';
-  info: {
-    displayName: 'LittleListComponent';
-    description: '';
-  };
-  attributes: {
-    text: Attribute.Text & Attribute.Required;
-    description: Attribute.Text;
-    firstEmoji: Attribute.String;
-    secondEmoji: Attribute.String;
-  };
-}
-
-export interface CommonLink extends Schema.Component {
-  collectionName: 'components_common_links';
-  info: {
-    displayName: 'Link';
-    description: '';
-  };
-  attributes: {
-    Label: Attribute.String & Attribute.Required;
-    URL: Attribute.String & Attribute.Required;
-    eventName: Attribute.Enumeration<
-      [
-        'goToSignUpNative',
-        'goToSignUpPro',
-        'goToLoginNative',
-        'goToLoginPro',
-        'downloadApp',
-        'goToFaqNative',
-        'goToFaqPro',
-        'contactSupport'
-      ]
-    >;
-    eventOrigin: Attribute.Enumeration<
-      [
-        'header',
-        'home',
-        'menu-young-people-and-parents',
-        'menu-pros',
-        'get-your-credit',
-        'essential-pros',
-        'how-to-propose-offers',
-        'help-young-people-and-parents',
-        'help-pros',
-        'help-teachers',
-        'simulator',
-        'parents',
-        'footer'
-      ]
-    >;
-  };
-}
-
-export interface CommonKeyNumberItems extends Schema.Component {
-  collectionName: 'components_common_key_number_items';
-  info: {
-    displayName: 'KeyNumberItems';
-  };
-  attributes: {
-    firstEmoji: Attribute.String;
-    secondEmoji: Attribute.String;
-    thirdEmoji: Attribute.String;
-    title: Attribute.String;
-    description: Attribute.Text;
-  };
-}
-
-export interface CommonFiltre extends Schema.Component {
-  collectionName: 'components_common_filtres';
-  info: {
-    displayName: 'Filtre';
-    description: '';
-  };
-  attributes: {
-    filtre: Attribute.String & Attribute.Required;
-  };
-}
-
-export interface CommonExperienceVideoCarouselItem extends Schema.Component {
-  collectionName: 'components_common_experience_video_carousel_items';
-  info: {
-    displayName: 'ExperienceVideoCarouselItem';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    url: Attribute.String;
-    image: Attribute.Media<'images'>;
-  };
-}
-
-export interface CommonDetailedLogo extends Schema.Component {
-  collectionName: 'components_common_detailed_logos';
-  info: {
-    displayName: 'Detailed Logo';
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.String & Attribute.Required;
-    cta: Attribute.Component<'common.link'> & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
-  };
-}
-
 export interface BlockVideo extends Schema.Component {
   collectionName: 'components_block_videos';
   info: {
@@ -1271,6 +992,285 @@ export interface BlockAccordion extends Schema.Component {
   };
 }
 
+export interface CommonVerticalCarouselItem extends Schema.Component {
+  collectionName: 'components_common_vertical_carousel_items';
+  info: {
+    displayName: 'verticalCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    image: Attribute.Media<'images'>;
+  };
+}
+
+export interface CommonSimpleTextColumn extends Schema.Component {
+  collectionName: 'components_common_simple_text_columns';
+  info: {
+    displayName: 'Simple Text Column';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    text: Attribute.Blocks & Attribute.Required;
+  };
+}
+
+export interface CommonPiledCardItem extends Schema.Component {
+  collectionName: 'components_common_piled_card_items';
+  info: {
+    displayName: 'PiledCardItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    firstIcon: Attribute.String;
+    secondIcon: Attribute.String;
+    theme: Attribute.Enumeration<
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'blue',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
+  };
+}
+
+export interface CommonPerson extends Schema.Component {
+  collectionName: 'components_common_people';
+  info: {
+    displayName: 'Person';
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    position: Attribute.String & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+  };
+}
+
+export interface CommonOffers extends Schema.Component {
+  collectionName: 'components_common_offers';
+  info: {
+    displayName: 'Offers';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    previousButtonLabel: Attribute.String & Attribute.Required;
+    nextButtonLabel: Attribute.String & Attribute.Required;
+    controlsLabel: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonOffersCarouselItem extends Schema.Component {
+  collectionName: 'components_common_offers_carousel_items';
+  info: {
+    displayName: 'OffersCarouselItem';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    surtitle: Attribute.String & Attribute.Required;
+    firstIcon: Attribute.String & Attribute.Required;
+    secondIcon: Attribute.String & Attribute.Required;
+    text: Attribute.Text & Attribute.Required;
+    theme: Attribute.Enumeration<
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
+    > &
+      Attribute.Required &
+      Attribute.DefaultTo<'purple'>;
+  };
+}
+
+export interface CommonNotRequiredLink extends Schema.Component {
+  collectionName: 'components_common_not_required_links';
+  info: {
+    displayName: 'NotRequiredLink';
+    description: '';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
+  };
+}
+
+export interface CommonLogo extends Schema.Component {
+  collectionName: 'components_common_logos';
+  info: {
+    displayName: 'Logo';
+    description: '';
+  };
+  attributes: {
+    logo: Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Attribute.Required;
+  };
+}
+
+export interface CommonLittleListComponent extends Schema.Component {
+  collectionName: 'components_common_little_list_components';
+  info: {
+    displayName: 'LittleListComponent';
+    description: '';
+  };
+  attributes: {
+    text: Attribute.Text & Attribute.Required;
+    description: Attribute.Text;
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+  };
+}
+
+export interface CommonLink extends Schema.Component {
+  collectionName: 'components_common_links';
+  info: {
+    displayName: 'Link';
+    description: '';
+  };
+  attributes: {
+    Label: Attribute.String & Attribute.Required;
+    URL: Attribute.String & Attribute.Required;
+    eventName: Attribute.Enumeration<
+      [
+        'goToSignUpNative',
+        'goToSignUpPro',
+        'goToLoginNative',
+        'goToLoginPro',
+        'downloadApp',
+        'goToFaqNative',
+        'goToFaqPro',
+        'contactSupport'
+      ]
+    >;
+    eventOrigin: Attribute.Enumeration<
+      [
+        'header',
+        'home',
+        'menu-young-people-and-parents',
+        'menu-pros',
+        'get-your-credit',
+        'essential-pros',
+        'how-to-propose-offers',
+        'help-young-people-and-parents',
+        'help-pros',
+        'help-teachers',
+        'simulator',
+        'parents',
+        'footer'
+      ]
+    >;
+  };
+}
+
+export interface CommonKeyNumberItems extends Schema.Component {
+  collectionName: 'components_common_key_number_items';
+  info: {
+    displayName: 'KeyNumberItems';
+  };
+  attributes: {
+    firstEmoji: Attribute.String;
+    secondEmoji: Attribute.String;
+    thirdEmoji: Attribute.String;
+    title: Attribute.String;
+    description: Attribute.Text;
+  };
+}
+
+export interface CommonFiltre extends Schema.Component {
+  collectionName: 'components_common_filtres';
+  info: {
+    displayName: 'Filtre';
+    description: '';
+  };
+  attributes: {
+    filtre: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface CommonExperienceVideoCarouselItem extends Schema.Component {
+  collectionName: 'components_common_experience_video_carousel_items';
+  info: {
+    displayName: 'ExperienceVideoCarouselItem';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    url: Attribute.String;
+    image: Attribute.Media<'images'>;
+  };
+}
+
+export interface CommonDetailedLogo extends Schema.Component {
+  collectionName: 'components_common_detailed_logos';
+  info: {
+    displayName: 'Detailed Logo';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.String & Attribute.Required;
+    cta: Attribute.Component<'common.link'> & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -1296,20 +1296,6 @@ declare module '@strapi/types' {
       'header.account-dropdown': HeaderAccountDropdown;
       'footer.list': FooterList;
       'footer.legal-links': FooterLegalLinks;
-      'common.vertical-carousel-item': CommonVerticalCarouselItem;
-      'common.simple-text-column': CommonSimpleTextColumn;
-      'common.piled-card-item': CommonPiledCardItem;
-      'common.person': CommonPerson;
-      'common.offers': CommonOffers;
-      'common.offers-carousel-item': CommonOffersCarouselItem;
-      'common.not-required-link': CommonNotRequiredLink;
-      'common.logo': CommonLogo;
-      'common.little-list-component': CommonLittleListComponent;
-      'common.link': CommonLink;
-      'common.key-number-items': CommonKeyNumberItems;
-      'common.filtre': CommonFiltre;
-      'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
-      'common.detailed-logo': CommonDetailedLogo;
       'block.video': BlockVideo;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.tabs-simple-text': BlockTabsSimpleText;
@@ -1354,6 +1340,20 @@ declare module '@strapi/types' {
       'block.breadcrumb': BlockBreadcrumb;
       'block.accordions-list': BlockAccordionsList;
       'block.accordion': BlockAccordion;
+      'common.vertical-carousel-item': CommonVerticalCarouselItem;
+      'common.simple-text-column': CommonSimpleTextColumn;
+      'common.piled-card-item': CommonPiledCardItem;
+      'common.person': CommonPerson;
+      'common.offers': CommonOffers;
+      'common.offers-carousel-item': CommonOffersCarouselItem;
+      'common.not-required-link': CommonNotRequiredLink;
+      'common.logo': CommonLogo;
+      'common.little-list-component': CommonLittleListComponent;
+      'common.link': CommonLink;
+      'common.key-number-items': CommonKeyNumberItems;
+      'common.filtre': CommonFiltre;
+      'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
+      'common.detailed-logo': CommonDetailedLogo;
     }
   }
 }
