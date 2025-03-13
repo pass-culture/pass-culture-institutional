@@ -11,9 +11,15 @@ import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 
+const NEWS_TYPE_TO_SLUG_PREFIX = {
+  news: '/actualite/',
+  blogtech: '/blog-tech/',
+  resources: '/ressources/',
+} as const
+
 export function LatestNews(props: LatestNewsProps) {
-  const { title, newsOrStudies, cta, className, isNews } = props
-  const slugPrefix = isNews ? `/actualite/` : `/ressources/`
+  const { title, newsOrStudies, cta, className, newsType } = props
+  const slugPrefix = NEWS_TYPE_TO_SLUG_PREFIX[newsType] ?? '/ressources/'
   return (
     <Root className={className}>
       <HeadingWrapper>

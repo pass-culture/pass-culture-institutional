@@ -36,7 +36,7 @@ export default function CustomPage(props: CustomPageProps) {
       {memoBlocks}
       <StyledLatestNews
         newsOrStudies={props.latestStudies}
-        isNews={true}
+        newsType="news"
         title="Les dernières **actualités**"
       />
     </React.Fragment>

@@ -379,7 +379,7 @@ export type LatestNewsProps = {
     | APIResponseData<'api::blogtech.blogtech'>[]
   cta?: CTA
   className?: string
-  isNews: boolean
+  newsType: 'news' | 'blogtech' | 'resources'
 }
 export type OrganizationChartProps = {
   title?: string
