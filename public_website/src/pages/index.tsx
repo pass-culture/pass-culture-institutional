@@ -93,7 +93,7 @@ export default function Home({
       <Separator isActive={false} />
       <LatestStudiesSection
         newsOrStudies={latestStudies}
-        isNews={false}
+        newsType="resources"
         title={homeData.attributes.latestStudies.title}
         cta={homeData.attributes.latestStudies.cta}
       />

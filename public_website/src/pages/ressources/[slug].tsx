@@ -37,7 +37,7 @@ export default function CustomPage(props: CustomPageProps) {
       <Seo metaData={seo} />
       <StyledLatestNews
         newsOrStudies={latestStudies}
-        isNews={false}
+        newsType="resources"
         title="Les dernières **ressources**"
       />
     </React.Fragment>

@@ -37,8 +37,8 @@ export default function CustomPage(props: CustomPageProps) {
       {props.latestStudies.length > 0 && (
         <StyledLatestNews
           newsOrStudies={props.latestStudies}
-          isNews={true}
-          title="Les dernières **actualités**"
+          newsType="blogtech"
+          title="Les derniers **articles**"
         />
       )}
     </React.Fragment>
