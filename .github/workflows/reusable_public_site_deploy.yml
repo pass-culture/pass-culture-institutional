@@ -134,7 +134,7 @@ jobs:
             SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
       - name: "Post to a Slack channel on success"
         if: ${{ always() && contains(needs.deploy-static-site.result, 'success') }}
-        uses: slackapi/slack-github-action@v1.24.0
+        uses: slackapi/slack-github-action@v2.0.0
         with:
           # channel #alertes-deploiement-site-instit
           channel-id: "C06EKUL552T"
@@ -159,7 +159,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
       - name: "Post to a Slack channel on failure"
         if: ${{ always() && contains(needs.deploy-static-site.result, 'failure') }}
-        uses: slackapi/slack-github-action@v1.24.0
+        uses: slackapi/slack-github-action@v2.0.0
         with:
           # channel #alertes-deploiement-site-instit
           channel-id: "C06EKUL552T"
