@@ -22,4 +22,6 @@ export const PATHS = {
   BLOGTECH_PAGE: 'blogtech-pass-culture',
   REGLEMENTS: 'reglements',
   BLOGTECH: 'blogtech-list',
+  RUBRIQUE_INSTIT: 'rubrique-instit-list',
+  RUBRIQUE_INSTIT_PAGE: 'rubrique-instit-pass-culture',
 }

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import type React from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { LatestEventsProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { LatestEventsProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -16,6 +17,7 @@ export function ListItems(
         | APIResponseData<'api::news.news'>[]
         | APIResponseData<'api::resource.resource'>[]
         | APIResponseData<'api::blogtech.blogtech'>[]
+        | APIResponseData<'api::rubrique-instit.rubrique-instit'>[]
     },
     'events'
   >
