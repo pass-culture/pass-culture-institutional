@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-imports */
 import React from 'react'
-import { render, RenderOptions } from '@testing-library/react'
+import { render, type RenderOptions } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from '@/theme/theme'

@@ -2,7 +2,7 @@ import React from 'react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { axe } from 'vitest-axe'
 
-import { act, render } from '..'
+import { act, render } from '../index'
 import ListeJeune, { getStaticProps } from '@/pages/actualites-jeunes-parents'
 
 describe('Liste jeunes', () => {
