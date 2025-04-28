@@ -3,7 +3,7 @@ import { BlocksRenderer } from '@strapi/blocks-react-renderer'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { SimpleTextV2Props } from '@/types/props'
+import type { SimpleTextV2Props } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
@@ -57,18 +57,6 @@ const Root = styled(ContentWrapper)`
   ${({ theme }) => css`
     line-height: 2;
     font-weight: ${({ theme }) => theme.fonts.weights.medium};
-
-    img {
-      border-radius: ${theme.radius.sm};
-      object-fit: cover;
-      aspect-ratio: 1.2;
-      display: block;
-      margin: 0 auto;
-      height: auto;
-      width: 100%;
-      margin-top: 1.25rem;
-      margin-bottom: 1.25rem;
-    }
 
     h2 {
       font-size: 2.5rem;
