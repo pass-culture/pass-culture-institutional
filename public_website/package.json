@@ -21,7 +21,7 @@
   "dependencies": {
     "@strapi/blocks-react-renderer": "^1.0.1",
     "firebase": "^10.8.1",
-    "next": "15.2.4",
+    "next": "15.3.1",
     "next-qrcode": "^2.5.1",
     "pure-react-carousel": "^1.30.1",
     "qs": "^6.11.2",
