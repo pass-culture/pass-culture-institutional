@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { CTA } from '@/types/CTA'
-import { LatestNewsProps } from '@/types/props'
+import type { CTA } from '@/types/CTA'
+import type { LatestNewsProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
@@ -15,6 +15,7 @@ const NEWS_TYPE_TO_SLUG_PREFIX = {
   news: '/actualite/',
   blogtech: '/blog-tech/',
   resources: '/ressources/',
+  'rubrique-instit': '/rubrique-instit/',
 } as const
 
 export function LatestNews(props: LatestNewsProps) {

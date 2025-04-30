@@ -18,8 +18,8 @@ import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 
 interface ListProps {
-  blogtechData: APIResponseData<'api::blogtech.blogtech'>[]
-  blogtechPage: APIResponseData<'api::blogtech-pass-culture.blogtech-pass-culture'>
+  rubriqueInstitData: APIResponseData<'api::rubrique-instit.rubrique-instit'>[]
+  rubriqueInstitPage: APIResponseData<'api::rubrique-instit-pass-culture.rubrique-instit-pass-culture'>
 }
 
 const setQuery = (): string => {
@@ -30,12 +30,12 @@ const setQuery = (): string => {
   })
 }
 
-export default function ListeActualitesPassCulture({
-  blogtechData,
-  blogtechPage,
+export default function RubriqueInstit({
+  rubriqueInstitData,
+  rubriqueInstitPage,
 }: ListProps) {
   const { buttonText, seo, socialMediaSection, title, cta } =
-    blogtechPage.attributes
+    rubriqueInstitPage.attributes
 
   return (
     <PageLayout seo={seo} title={title} socialMediaSection={socialMediaSection}>
@@ -43,10 +43,10 @@ export default function ListeActualitesPassCulture({
         <UnpaddedBreadcrumb />
       </ContentWrapper>
 
-      {blogtechData.length > 0 ? (
+      {rubriqueInstitData.length > 0 ? (
         <StyledListItems
-          news={blogtechData}
-          type="blog-tech"
+          news={rubriqueInstitData}
+          type="rubrique-instit"
           buttonText={buttonText}
         />
       ) : (
@@ -62,12 +62,12 @@ export default function ListeActualitesPassCulture({
 }
 
 export const getStaticProps = (async () => {
-  const blogtechQuery = setQuery()
+  const rubriqueInstitQuery = setQuery()
 
-  const blogtechData = (await getPage(
-    PATHS.BLOGTECH,
-    blogtechQuery
-  )) as APIResponseData<'api::blogtech.blogtech'>[]
+  const rubriqueInstitData = (await getPage(
+    PATHS.RUBRIQUE_INSTIT,
+    rubriqueInstitQuery
+  )) as APIResponseData<'api::rubrique-instit.rubrique-instit'>[]
 
   const query = stringify({
     populate: [
@@ -85,15 +85,15 @@ export const getStaticProps = (async () => {
     ],
   })
 
-  const blogtechPage = (await Pages.getPage(
-    PATHS.BLOGTECH_PAGE,
+  const rubriqueInstitPage = (await Pages.getPage(
+    PATHS.RUBRIQUE_INSTIT_PAGE,
     query
-  )) as APIResponseData<'api::blogtech-pass-culture.blogtech-pass-culture'>
+  )) as APIResponseData<'api::rubrique-instit-pass-culture.rubrique-instit-pass-culture'>
 
   return {
     props: {
-      blogtechData,
-      blogtechPage,
+      rubriqueInstitData,
+      rubriqueInstitPage,
     },
   }
 }) satisfies GetStaticProps<ListProps>

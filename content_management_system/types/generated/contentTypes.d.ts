@@ -1750,6 +1750,90 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
   };
 }
 
+export interface ApiRubriqueInstitRubriqueInstit extends Schema.CollectionType {
+  collectionName: 'rubrique_instit_list';
+  info: {
+    singularName: 'rubrique-instit';
+    pluralName: 'rubrique-instit-list';
+    displayName: 'Rubrique Instit';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.simple-text-v2',
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion'
+      ]
+    >;
+    seo: Attribute.Component<'shared.seo'>;
+    aboveTitle: Attribute.String;
+    emoji: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::rubrique-instit.rubrique-instit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::rubrique-instit.rubrique-instit',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRubriqueInstitPassCultureRubriqueInstitPassCulture
+  extends Schema.SingleType {
+  collectionName: 'rubrique_instit_pass_culture';
+  info: {
+    singularName: 'rubrique-instit-pass-culture';
+    pluralName: 'rubrique-instit-pass-cultures';
+    displayName: 'Rubrique Instit - Pass Culture';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    buttonText: Attribute.String;
+    socialMediaSection: Attribute.Component<'block.social-media'>;
+    separator: Attribute.Component<'block.separator'>;
+    cta: Attribute.Component<'block.simple-push-cta'>;
+    seo: Attribute.Component<'shared.seo'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::rubrique-instit-pass-culture.rubrique-instit-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::rubrique-instit-pass-culture.rubrique-instit-pass-culture',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSimulatorSimulator extends Schema.SingleType {
   collectionName: 'simulators';
   info: {
@@ -1860,6 +1944,8 @@ declare module '@strapi/types' {
       'api::resource.resource': ApiResourceResource;
       'api::ressourcepass.ressourcepass': ApiRessourcepassRessourcepass;
       'api::ressources-pass-culture.ressources-pass-culture': ApiRessourcesPassCultureRessourcesPassCulture;
+      'api::rubrique-instit.rubrique-instit': ApiRubriqueInstitRubriqueInstit;
+      'api::rubrique-instit-pass-culture.rubrique-instit-pass-culture': ApiRubriqueInstitPassCultureRubriqueInstitPassCulture;
       'api::simulator.simulator': ApiSimulatorSimulator;
     }
   }

@@ -1,12 +1,13 @@
-import React, { AnchorHTMLAttributes, ReactNode } from 'react'
-import { type BlocksContent } from '@strapi/blocks-react-renderer'
-import { AppProps } from 'next/app'
-import { LinkProps as NextLinkProps } from 'next/link'
+import type React from 'react'
+import type { AnchorHTMLAttributes, ReactNode } from 'react'
+import type { BlocksContent } from '@strapi/blocks-react-renderer'
+import type { AppProps } from 'next/app'
+import type { LinkProps as NextLinkProps } from 'next/link'
 
-import { CTA } from './CTA'
-import { Offer } from './playlist'
-import { APIResponse, APIResponseData } from './strapi'
-import { ItemsTheme } from '@/theme/style'
+import type { CTA } from './CTA'
+import type { Offer } from './playlist'
+import type { APIResponse, APIResponseData } from './strapi'
+import type { ItemsTheme } from '@/theme/style'
 
 export type BaseTextProps = {
   title: string
@@ -379,7 +380,7 @@ export type LatestNewsProps = {
     | APIResponseData<'api::blogtech.blogtech'>[]
   cta?: CTA
   className?: string
-  newsType: 'news' | 'blogtech' | 'resources'
+  newsType: 'news' | 'blogtech' | 'resources' | 'rubrique-instit'
 }
 export type OrganizationChartProps = {
   title?: string

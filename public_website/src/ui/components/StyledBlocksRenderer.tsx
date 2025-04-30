@@ -11,8 +11,7 @@ const StyledBlocksRenderer = styled.div`
       border-radius: ${theme.radius.sm};
       margin: 1.25rem auto;
       display: block;
-      object-fit: cover;
-      aspect-ratio: 1.2;
+      object-fit: contain;
       height: auto;
       width: 100%;
     }
