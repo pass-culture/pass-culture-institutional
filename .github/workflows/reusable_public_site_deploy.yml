@@ -71,6 +71,7 @@ jobs:
             SENTRY_TOKEN:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_sentry-token
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
             API_TOKEN_GITHUB:passculture-cls-metier-ehp/passculture-institutional_${{ inputs.environment }}_github_token
+            BACKEND_API_KEY:${{ inputs.secrets_project_id }}/pcapi_${{ inputs.environment }}_institutional_api_key
 
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
@@ -100,6 +101,7 @@ jobs:
           NEXT_PUBLIC_BACKEND_API_URL: ${{ inputs.backend_url }}
           ID_TOKEN: ${{ steps.auth.outputs.id_token }}
           SENTRY_TOKEN: ${{ steps.secrets.outputs.SENTRY_TOKEN }}
+          BACKEND_API_KEY: ${{ steps.secrets.outputs.BACKEND_API_KEY }}
         run: |
           kubectl port-forward --namespace ${{ inputs.namespace }} service/site-instit-cms 1337:1337 &
           yarn install

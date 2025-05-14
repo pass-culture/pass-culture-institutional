@@ -2,11 +2,16 @@ export async function fetchBackend(path: string) {
   try {
     const requestUrl = `${process.env['NEXT_PUBLIC_BACKEND_API_URL']}/${path}`
 
-    const response = await fetch(requestUrl)
+    const response = await fetch(requestUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env['BACKEND_API_KEY']}`,
+      },
+    })
 
     if (!response.ok) {
+      const errorText = await response.text()
       throw new Error(
-        `Backend returned a non-OK status: ${response.status} on ${requestUrl}`
+        `Backend returned a non-OK status: ${response.status} on ${requestUrl}\n${errorText}`
       )
     }
 
