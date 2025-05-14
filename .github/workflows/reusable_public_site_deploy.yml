@@ -103,6 +103,9 @@ jobs:
         run: |
           kubectl port-forward --namespace ${{ inputs.namespace }} service/site-instit-cms 1337:1337 &
           yarn install
+          if [ "${{ inputs.environment }}" = "testing" ]; then
+            cp testing-robots.txt public/robots.txt
+          fi
           yarn build
 
       - name: "Setup firebase"
