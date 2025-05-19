@@ -5,8 +5,8 @@ import styled from 'styled-components'
 
 import { Header } from '@/lib/blocks/Header'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
-import { fetchCMS } from '@/utils/fetchCMS'
+import type { APIResponseData } from '@/types/strapi'
+import { fetchCMS, fetchLayoutData } from '@/utils/fetchCMS'
 
 interface ListProps {
   notData: APIResponseData<'api::not-found.not-found'>
@@ -42,7 +42,7 @@ export const getStaticProps = (async () => {
   )
 
   return {
-    props: { notData: data },
+    props: { ...(await fetchLayoutData()), notData: data },
   }
 }) satisfies GetStaticProps<ListProps>
 

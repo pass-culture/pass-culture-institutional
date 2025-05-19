@@ -11,6 +11,7 @@ import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Seo } from '@/lib/seo/seo'
 import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::rubrique-instit.rubrique-instit'>
@@ -120,6 +121,7 @@ export const getStaticProps = (async ({ params }) => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: rubriqueInstit[0]!,
       latestStudies: latestRubriqueInstit,
     },

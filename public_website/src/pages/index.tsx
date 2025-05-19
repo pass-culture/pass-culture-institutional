@@ -9,14 +9,14 @@ import { LatestNews as LatestStudiesSection } from '@/lib/blocks/LatestNews'
 import { PushCTA } from '@/lib/blocks/PushCTA'
 import { Separator } from '@/lib/blocks/Separator'
 import PageLayout from '@/lib/PageLayout'
-import { Offer } from '@/types/playlist'
-import { HomeProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { Offer } from '@/types/playlist'
+import type { HomeProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Eligibility as EligibilitySection } from '@/ui/components/home/Eligibility'
 import { Hero as HeroSection } from '@/ui/components/home/Hero'
 import { Recommendations as RecommendationsSection } from '@/ui/components/home/Recommendations'
 import { fetchBackend } from '@/utils/fetchBackend'
-import { fetchCMS } from '@/utils/fetchCMS'
+import { fetchCMS, fetchLayoutData } from '@/utils/fetchCMS'
 
 export default function Home({
   homeData,
@@ -155,6 +155,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       homeData: data,
       recommendationItems,
       latestStudies: latestStudies.data,

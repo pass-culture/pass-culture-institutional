@@ -49,8 +49,8 @@ export function ListItems(
               }
               date={newsItem.attributes.date}
               imageUrl={
-                newsItem.attributes.image &&
-                getStrapiURL(newsItem.attributes.image?.data.attributes.url)
+                newsItem.attributes.image?.data?.attributes?.url &&
+                getStrapiURL(newsItem.attributes.image.data.attributes.url)
               }
               slug={newsItem.attributes.slug}
             />

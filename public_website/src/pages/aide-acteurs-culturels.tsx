@@ -10,9 +10,10 @@ import { Header } from '@/lib/blocks/Header'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { CulturalActorsHelpProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { CulturalActorsHelpProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 export default function CulturalActorsHelp({
   helpData,
@@ -89,6 +90,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       helpData: help,
     },
   }

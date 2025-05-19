@@ -1,17 +1,18 @@
 import React, { useContext } from 'react'
-import { GetStaticProps } from 'next'
+import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Link } from '@/ui/components/Link'
 import MenuSection from '@/ui/components/sitemap/MenuSection'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface PlanDuSiteProps {
   mapSiteData: APIResponseData<'api::page.page'>[]
@@ -146,6 +147,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       mapSiteData: response,
     },
   }

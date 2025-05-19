@@ -1,4 +1,7 @@
+import { stringify } from 'qs'
+
 import { getStrapiURL } from './apiHelpers'
+import type { APIResponseData } from '@/types/strapi'
 
 type HttpResponse<T> = {
   data: T
@@ -41,5 +44,38 @@ export async function fetchCMS<T>(path: string) {
     throw new Error(
       `Please check if your CMS is running and you set all the required tokens. ${error}`
     )
+  }
+}
+
+export async function fetchLayoutData() {
+  const headerQuery = stringify({
+    populate: [
+      'targetItems.megaMenu',
+      'targetItems.megaMenu.primaryListItems',
+      'targetItems.megaMenu.secondaryListItems',
+      'targetItems.megaMenu.cta',
+      'targetItems.megaMenu.cardLink',
+      'aboutItems.megaMenu',
+      'aboutItems.megaMenu.primaryListItems',
+      'aboutItems.megaMenu.secondaryListItems',
+      'aboutItems.megaMenu.cta',
+      'aboutItems.megaMenu.cardLink',
+      'login',
+      'login.items',
+      'signup',
+      'signup.items',
+    ],
+  })
+  const headerData = await fetchCMS<APIResponseData<'api::header.header'>>(
+    `/header?${headerQuery}`
+  )
+
+  const footerData = await fetchCMS<APIResponseData<'api::footer.footer'>>(
+    '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'
+  )
+
+  return {
+    headerData: headerData.data.attributes,
+    footerData: footerData.data.attributes,
   }
 }

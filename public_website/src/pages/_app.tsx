@@ -1,31 +1,21 @@
 import React, { useEffect, useMemo } from 'react'
-import type { AppContext } from 'next/app'
-import App from 'next/app'
 import { Montserrat } from 'next/font/google'
-import { stringify } from 'qs'
 import { ThemeProvider } from 'styled-components'
 
 import { useAxeptio } from '@/hooks/useAxeptio'
 import { useConsent } from '@/hooks/useConsent'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
-import { FooterProps, MyAppProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { MyAppProps } from '@/types/props'
 import { BreadcrumbContext } from '@/ui/components/breadcrumb/breadcrumb-context'
 import { Footer } from '@/ui/components/footer/Footer'
 import { Header } from '@/ui/components/header/Header'
 import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
-import { fetchCMS } from '@/utils/fetchCMS'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })
 
-export default function MyApp({
-  Component,
-  pageProps,
-  headerData,
-  footerData,
-}: MyAppProps) {
+export default function MyApp({ Component, pageProps }: MyAppProps) {
   useAxeptio()
   const acceptedVendors = useConsent()
   const hasAcceptedFirebase = acceptedVendors['firebase']
@@ -46,11 +36,15 @@ export default function MyApp({
 
   const breadcrumbContextValue = useMemo(
     () => ({
-      targetItems: headerData.targetItems,
-      aboutItems: headerData.aboutItems,
-      footerItems: footerData.LegalLinks,
+      targetItems: pageProps.headerData.targetItems,
+      aboutItems: pageProps.headerData.aboutItems,
+      footerItems: pageProps.footerData.LegalLinks,
     }),
-    [headerData.targetItems, headerData.aboutItems, footerData.LegalLinks]
+    [
+      pageProps.headerData.targetItems,
+      pageProps.headerData.aboutItems,
+      pageProps.footerData.LegalLinks,
+    ]
   )
 
   return (
@@ -66,57 +60,16 @@ export default function MyApp({
         <SkipLink label="Aller au contenu principal" href="#main-content" />
         <SkipLink label="Aller au pied de page" href="#footer" />
         <Header
-          targetItems={headerData.targetItems}
-          aboutItems={headerData.aboutItems}
-          login={headerData.login}
-          signup={headerData.signup}
+          targetItems={pageProps.headerData.targetItems}
+          aboutItems={pageProps.headerData.aboutItems}
+          login={pageProps.headerData.login}
+          signup={pageProps.headerData.signup}
         />
         <main id="main-content">
           <Component {...pageProps} />
         </main>
-        <Footer {...footerData} />
+        <Footer {...pageProps.footerData} />
       </BreadcrumbContext.Provider>
     </ThemeProvider>
   )
-}
-
-type FooterData = {
-  id: number
-  attributes: FooterProps
-}
-
-MyApp.getInitialProps = async (context: AppContext) => {
-  // Fetch header data
-  const headerQuery = stringify({
-    populate: [
-      'targetItems.megaMenu',
-      'targetItems.megaMenu.primaryListItems',
-      'targetItems.megaMenu.secondaryListItems',
-      'targetItems.megaMenu.cta',
-      'targetItems.megaMenu.cardLink',
-      'aboutItems.megaMenu',
-      'aboutItems.megaMenu.primaryListItems',
-      'aboutItems.megaMenu.secondaryListItems',
-      'aboutItems.megaMenu.cta',
-      'aboutItems.megaMenu.cardLink',
-      'login',
-      'login.items',
-      'signup',
-      'signup.items',
-    ],
-  })
-  const headerData = await fetchCMS<APIResponseData<'api::header.header'>>(
-    `/header?${headerQuery}`
-  )
-
-  const footerData = await fetchCMS<FooterData>(
-    '/footer?populate[0]=Lists&populate[1]=Lists.Links&populate[2]=LegalLinks'
-  )
-  const ctx = await App.getInitialProps(context)
-
-  return {
-    ...ctx,
-    headerData: headerData.data.attributes,
-    footerData: footerData.data.attributes,
-  }
 }

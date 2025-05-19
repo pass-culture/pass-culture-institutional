@@ -8,8 +8,9 @@ import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Separator } from '@/lib/blocks/Separator'
 import { Seo } from '@/lib/seo/seo'
 import { PageWrapper } from '@/theme/style'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::page.page'>
@@ -125,6 +126,7 @@ export const getStaticProps = (async ({ params }) => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: response[0]!,
       eventsData: events,
     },
