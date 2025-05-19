@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import type React from 'react'
+import { useState } from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
-import { LatestEventsProps } from '@/types/props'
+import type { LatestEventsProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
@@ -34,8 +35,8 @@ export function EventListItems(props: LatestEventsProps) {
                 date={eventItem.attributes.date}
                 endDate={eventItem.attributes.endDate}
                 imageUrl={
-                  eventItem.attributes.image &&
-                  getStrapiURL(eventItem.attributes.image?.data.attributes.url)
+                  eventItem.attributes.image?.data?.attributes?.url &&
+                  getStrapiURL(eventItem.attributes.image.data.attributes.url)
                 }
                 startTime={eventItem.attributes.startTime}
                 endTime={eventItem.attributes.endTime}

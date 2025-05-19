@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Seo } from './seo/seo'
 import { StyledSocialMedia } from '@/theme/style'
-import { PageLayoutProps, SocialMediaProps } from '@/types/props'
+import type { PageLayoutProps, SocialMediaProps } from '@/types/props'
 import Title from '@/ui/components/title/Title'
 
 const PageLayout = (props: PageLayoutProps) => {
