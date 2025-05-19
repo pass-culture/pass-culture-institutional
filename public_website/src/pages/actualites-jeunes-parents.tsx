@@ -17,6 +17,7 @@ import type { PushCTAProps } from '@/types/props'
 import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 interface ListProps {
@@ -163,6 +164,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       newsData: news,
       listejeune: data,
     },

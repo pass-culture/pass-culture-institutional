@@ -11,10 +11,11 @@ import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import PageLayout from '@/lib/PageLayout'
-import { ListReglementsProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { ListReglementsProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 const reglementsPageQuery = stringify({
   populate: [
@@ -92,6 +93,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       reglementsData: reglements,
       reglementsPage,
     },

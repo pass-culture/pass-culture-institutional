@@ -8,11 +8,12 @@ import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import NoResult from '@/lib/blocks/NoResult'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { EventCard } from '@/ui/components/event-card/EventCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::event.event'>
@@ -147,6 +148,7 @@ export const getStaticProps = (async ({ params }) => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: latestEvents[0]!,
       related: latestEvents,
     },

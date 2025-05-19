@@ -12,6 +12,8 @@ import { AideEnseignantsPageFixtures } from './fixtures/aide-enseignants'
 import { AideJeunesParentsPageFixtures } from './fixtures/aide-jeunes-parents'
 import { blogtechData, blogtechPage } from './fixtures/blog-tech'
 import { EtudesPassCulturePageFixtures } from './fixtures/etudesPassCulture'
+import { footer } from './fixtures/footer'
+import { header } from './fixtures/header'
 import { homePageFixtures } from './fixtures/home'
 import { listeJeunePageFixtures } from './fixtures/listeJeune'
 import { listeOffrePageFixtures } from './fixtures/listeOffre'
@@ -27,6 +29,12 @@ const BACKEND_BASE_URL = 'http://dummy_localhost:5001'
 export const jsonResponseOf = <T>(data: T) => HttpResponse.json({ data })
 
 export const handlers = [
+  http.get(`${CMS_BASE_URL}/api/header`, () => {
+    return jsonResponseOf(header)
+  }),
+  http.get(`${CMS_BASE_URL}/api/footer`, () => {
+    return jsonResponseOf(footer)
+  }),
   http.get(`${CMS_BASE_URL}/api/test`, () => {
     return jsonResponseOf(testDataFixtures)
   }),

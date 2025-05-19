@@ -11,8 +11,9 @@ import { LatestNews } from '@/lib/blocks/LatestNews'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface TeachersHelpProps {
   data: APIResponseData<'api::help-teachers.help-teachers'>
@@ -121,6 +122,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: help,
       latestStudies: latestStudies,
     },

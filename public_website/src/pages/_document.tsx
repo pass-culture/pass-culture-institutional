@@ -1,6 +1,6 @@
 import React from 'react'
 import Document, {
-  DocumentContext,
+  type DocumentContext,
   Head,
   Html,
   Main,

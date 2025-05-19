@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
 import { EventListItems } from '@/lib/blocks/EventListItems'
-import { Filter } from '@/lib/blocks/FilterContainer'
+import type { Filter } from '@/lib/blocks/FilterContainer'
 import { ListItems } from '@/lib/blocks/ListItems'
 import NoResult from '@/lib/blocks/NoResult'
 import { Separator } from '@/lib/blocks/Separator'
@@ -15,11 +15,12 @@ import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
 import { StyledTitle } from '@/theme/style'
-import { ListOffresProps, PushCTAProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { ListOffresProps, PushCTAProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { Typo } from '@/ui/components/typographies'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
@@ -305,6 +306,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       newsRDVData: news,
       listeActuCulturel: data,
       eventsData: events,

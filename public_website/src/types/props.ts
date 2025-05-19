@@ -27,8 +27,10 @@ export type FacebookMetaProps = {
   image: APIResponse<'plugin::upload.file'> | null | undefined
 }
 export type MyAppProps = AppProps & {
-  headerData: HeaderMenuProps
-  footerData: FooterProps
+  pageProps: {
+    headerData: HeaderMenuProps
+    footerData: FooterProps
+  }
 }
 export type BreadcrumbProps = {
   isUnderHeader?: boolean

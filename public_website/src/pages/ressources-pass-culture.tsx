@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { Pages } from '@/domain/pages/pages.output'
 import { PATHS } from '@/domain/pages/pages.path'
-import { Filter } from '@/lib/blocks/FilterContainer'
+import type { Filter } from '@/lib/blocks/FilterContainer'
 import NoResult from '@/lib/blocks/NoResult'
 import { RessourceItems } from '@/lib/blocks/ResourceItems'
 import { Separator } from '@/lib/blocks/Separator'
@@ -13,10 +13,11 @@ import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import { WhiteSpace } from '@/lib/blocks/WhiteSpace'
 import FilterOption from '@/lib/filters/FilterOption'
 import PageLayout from '@/lib/PageLayout'
-import { ListRessourcesProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { ListRessourcesProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 import { filterByAttribute } from '@/utils/filterbyAttributes'
 
 const newsQuery = stringify({
@@ -151,6 +152,7 @@ export const getStaticProps = (async () => {
   )) as APIResponseData<'api::ressources-pass-culture.ressources-pass-culture'>
   return {
     props: {
+      ...(await fetchLayoutData()),
       ressourcesData: resources,
       ressourcesPassCultureListe: ressourcesPage,
     },

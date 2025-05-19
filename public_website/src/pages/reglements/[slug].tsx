@@ -7,8 +7,9 @@ import { PATHS } from '@/domain/pages/pages.path'
 import { BlockRenderer } from '@/lib/BlockRenderer'
 import { Header } from '@/lib/blocks/Header'
 import { Seo } from '@/lib/seo/seo'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 interface CustomPageProps {
   data: APIResponseData<'api::reglement.reglement'>
@@ -94,6 +95,7 @@ export const getStaticProps = (async ({ params }) => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: responseQuery[0]!,
     },
   }

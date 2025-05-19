@@ -11,16 +11,17 @@ import { OffersCarousel } from '@/lib/blocks/offersCarousel/offersCarousel'
 import { Separator } from '@/lib/blocks/Separator'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
-import { Offer } from '@/types/playlist'
-import {
+import type { Offer } from '@/types/playlist'
+import type {
   ExperienceVideoCarouselSlideProps,
   ListProps,
   OffersVideoCarouselProps,
 } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { OfferSection } from '@/ui/components/offer-section/OfferSection'
 import { fetchBackend } from '@/utils/fetchBackend'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 import { separatorIsActive } from '@/utils/separatorIsActive'
 
 export default function ListeOffre({ offerListe, offerItems }: ListProps) {
@@ -135,6 +136,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       offerListe: data,
       offerItems,
     },

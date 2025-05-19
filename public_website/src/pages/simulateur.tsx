@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { GetStaticProps } from 'next'
+import type { GetStaticProps } from 'next'
 import { stringify } from 'qs'
 import styled, { css } from 'styled-components'
 
@@ -8,13 +8,14 @@ import { PATHS } from '@/domain/pages/pages.path'
 import { SimplePushCta } from '@/lib/blocks/SimplePushCta'
 import PageLayout from '@/lib/PageLayout'
 import { PageWrapper } from '@/theme/style'
-import { SimulatorProps } from '@/types/props'
-import { APIResponseData } from '@/types/strapi'
+import type { SimulatorProps } from '@/types/props'
+import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import DisabledSimulator from '@/ui/components/simulator/DisabledSimulator'
 import { Simulator } from '@/ui/components/simulator/Simulator'
 import { Typo } from '@/ui/components/typographies'
+import { fetchLayoutData } from '@/utils/fetchCMS'
 
 export default function SimulatorPage(props: SimulatorProps) {
   const {
@@ -154,6 +155,7 @@ export const getStaticProps = (async () => {
 
   return {
     props: {
+      ...(await fetchLayoutData()),
       data: response,
     },
   }
