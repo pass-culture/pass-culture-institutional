@@ -37,6 +37,12 @@ on:
         required: true
       SECRETS_SERVICE_ACCOUNT:
         required: true
+      PASSCULTURE_GITHUB_ACTION_APP_ID:
+        required: true
+        description: "Github Application ID to use to clone other repos"
+      PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY:
+        required: true
+        description: "Private key for the Github application used to clone other repos"
 
 env:
   FIREBASE_CLI_VERSION: 13.0.3
@@ -70,7 +76,19 @@ jobs:
             IAP_CLIENT_ID:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_iap-client-id
             SENTRY_TOKEN:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_sentry-token
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
-            API_TOKEN_GITHUB:passculture-cls-metier-ehp/passculture-institutional_${{ inputs.environment }}_github_token
+
+      - name: Authenticate through github app ghactionci
+        uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # v2.0.6
+        id: github-token
+        with:
+          app-id: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_ID }}
+          private-key: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          # Liste des repositories à cloner
+          repositories: |
+            pass-culture-institutional
+            pc-connect
+          permission-contents: write
 
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
@@ -90,7 +108,7 @@ jobs:
         with:
           cluster_scope: ${{ inputs.cluster_scope }}
           cluster_environment: ${{ inputs.cluster_environment }}
-          api_token_github: ${{ steps.secrets.outputs.API_TOKEN_GITHUB }}
+          api_token_github: ${{ steps.github-token.outputs.token }}
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
