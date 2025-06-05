@@ -3,6 +3,9 @@ export default ({ env }) => ({
     enabled: true,
     config: {
       githubToken: env("GITHUB_TOKEN"),
+      githubAppID: env("GITHUB_APP_ID"),
+      githubInstallationID: env("GITHUB_INSTALLATION_ID"),
+      githubAppPrivateKey: env("GITHUB_APP_PRIVATE_KEY"),
       owner: "pass-culture",
       repo: "pass-culture-institutional",
       workflowId: env("DEPLOY_GHA_WORKFLOW_ID"),
