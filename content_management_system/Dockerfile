@@ -1,5 +1,5 @@
 # Builder
-FROM node:18.18-alpine3.18 AS builder
+FROM node:20.19-alpine3.22 AS builder
 
 RUN mkdir /build
 WORKDIR /build
@@ -19,7 +19,7 @@ COPY src /build/src
 RUN yarn build
 
 # Runner
-FROM node:18.18-alpine3.18 AS runner
+FROM node:20.19-alpine3.22 AS runner
 ENV NODE_ENV=production
 
 WORKDIR /app
@@ -30,7 +30,7 @@ COPY --from=builder /build/dist /app
 COPY public /app/public
 COPY config /app/config
 COPY database /app/database
-    
+
 RUN chown -R node:node /app/public
 
 USER node
