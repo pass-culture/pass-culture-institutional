@@ -11,6 +11,11 @@ import { isStringAreEquals } from '@/utils/stringAreEquals'
 export function Seo(props: SeoProps) {
   const { metaData } = props
   const meta_title = metaData?.metaTitle && isRenderable(metaData?.metaTitle)
+  if (!meta_title) {
+    throw new Error(
+      '[SEO] Le titre de la page est manquant. Vérifie la configuration SEO de cette page.'
+    )
+  }
   const meta_description =
     metaData?.metaDescription && isRenderable(metaData?.metaDescription)
   const meta_robots = metaData?.metaRobots && isRenderable(metaData?.metaRobots)

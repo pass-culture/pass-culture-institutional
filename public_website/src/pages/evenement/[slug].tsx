@@ -149,7 +149,7 @@ export const getStaticProps = (async ({ params }) => {
   return {
     props: {
       ...(await fetchLayoutData()),
-      data: latestEvents[0]!,
+      data: responseQuery[0]!,
       related: latestEvents,
     },
   }
