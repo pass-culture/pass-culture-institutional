@@ -4,7 +4,7 @@ on:
     inputs:
       project_id:
         type: string
-        description: GCP Project id to use 
+        description: GCP Project id to use
         required: true
       environment:
         type: string
@@ -46,7 +46,7 @@ on:
 
 permissions:
   id-token: write
-  contents: read 
+  contents: read
 
 jobs:
   deploy-cms:
@@ -55,18 +55,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
 
       - name: Get Secret
-        id: 'secrets'
-        uses: 'google-github-actions/get-secretmanager-secrets@v2'
+        id: "secrets"
+        uses: "google-github-actions/get-secretmanager-secrets@v2"
         with:
           secrets: |-
             INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
@@ -85,13 +85,14 @@ jobs:
             pass-culture-institutional
             rendered-manifests
             pc-connect
+            pc-firestore-cli
           permission-contents: write
 
       - name: "Generate and push rendered manifests"
         uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v3.0.0
         with:
           environment: ${{ inputs.environment }}
-          app_name: site-instit 
+          app_name: site-instit
           app_version: ${{ inputs.image_tag }}
           registry_workload_identity_secret_name: ${{ inputs.workload_identity_provider_secret_name }}
           registry_service_account_secret_name: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
@@ -101,14 +102,14 @@ jobs:
           helmfile_path: helm/site-instit
           additional_args: deployment.image.tag=${{ inputs.image_tag }}
 
-      - name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v2'
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
 
       - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
         with:
@@ -116,7 +117,7 @@ jobs:
           cluster_environment: ${{ inputs.cluster_environment }}
           api_token_github: ${{ steps.github-token.outputs.token }}
 
-      - name: Sync argoCD application 
+      - name: Sync argoCD application
         uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.5.0
         with:
           app_name: site-instit-${{ inputs.environment }}
@@ -128,13 +129,13 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: "Authentification to Google"
-        uses: 'google-github-actions/auth@v2'
+        uses: "google-github-actions/auth@v2"
         with:
           workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
       - name: "Get Secret"
-        id: 'secrets'
-        uses: 'google-github-actions/get-secretmanager-secrets@v2'
+        id: "secrets"
+        uses: "google-github-actions/get-secretmanager-secrets@v2"
         with:
           secrets: |-
             SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
@@ -188,4 +189,3 @@ jobs:
             }
         env:
           SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
-
