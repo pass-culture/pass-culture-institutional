@@ -14,6 +14,7 @@ import { SkipLink } from '@/ui/components/skipLink/SkipLink'
 import GlobalStyles from '@/ui/globalstyles'
 
 const montSerrat = Montserrat({ subsets: ['latin'] })
+const isProd = process.env.NODE_ENV === 'production'
 
 export default function MyApp({ Component, pageProps }: MyAppProps) {
   useAxeptio()
@@ -21,13 +22,13 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
   const hasAcceptedFirebase = acceptedVendors['firebase']
 
   useEffect(() => {
-    if (hasAcceptedFirebase) analyticsProvider.init()
+    if (isProd && hasAcceptedFirebase) analyticsProvider.init()
   }, [hasAcceptedFirebase])
 
   const path =
     typeof window !== 'undefined' ? window.location?.pathname : undefined
   useEffect(() => {
-    if (path && hasAcceptedFirebase) {
+    if (isProd && path && hasAcceptedFirebase) {
       analyticsProvider.logEvent('pageView', {
         origin: path,
       })
