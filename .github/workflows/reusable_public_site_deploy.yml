@@ -88,6 +88,7 @@ jobs:
           repositories: |
             pass-culture-institutional
             pc-connect
+            pc-firestore-cli
           permission-contents: write
 
       - name: "Authenticate to Google Cloud"
