@@ -24,6 +24,6 @@
     "proxy:transfer": "cd nginx-strapi-testing-proxy && bash transfer-from-testing.sh"
   },
   "devDependencies": {
-    "concurrently": "^9.0.0"
+    "concurrently": "^9.2.0"
   }
 }
