@@ -53,7 +53,8 @@
     "seo": {
       "type": "component",
       "repeatable": false,
-      "component": "shared.seo"
+      "component": "shared.seo",
+      "required": true
     },
     "titleEventSection": {
       "type": "string",

@@ -609,7 +609,7 @@ export interface ApiActualitesPassCultureActualitesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -651,7 +651,7 @@ export interface ApiActualitesRdvActeursCulturelActualitesRdvActeursCulturel
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
     titleEventSection: Attribute.String & Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -700,7 +700,7 @@ export interface ApiBlogtechBlogtech extends Schema.CollectionType {
         'block.tabs-accordion'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
     createdAt: Attribute.DateTime;
@@ -738,7 +738,7 @@ export interface ApiBlogtechPassCultureBlogtechPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     cta: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -776,7 +776,7 @@ export interface ApiEtudesPassCultureEtudesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     observatoire: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -881,7 +881,7 @@ export interface ApiEventEvent extends Schema.CollectionType {
         'block.tabs-accordion'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     pageLocalisation: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -996,7 +996,7 @@ export interface ApiHelpHelp extends Schema.SingleType {
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1026,7 +1026,7 @@ export interface ApiHelpCulturalActorsHelpCulturalActors
     simplepushcta: Attribute.Component<'block.simple-push-cta'> &
       Attribute.Required;
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1065,7 +1065,7 @@ export interface ApiHelpTeachersHelpTeachers extends Schema.SingleType {
     faq: Attribute.Component<'block.faq'> & Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &
       Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1108,7 +1108,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     heroSection: Attribute.Component<'home.hero-section'> & Attribute.Required;
     recommendationsSection: Attribute.Component<'home.recommendations-section'> &
       Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1138,7 +1138,7 @@ export interface ApiListeJeuneListeJeune extends Schema.SingleType {
       Attribute.Required;
     separator: Attribute.Component<'block.separator'>;
     aide: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -1177,7 +1177,7 @@ export interface ApiListeOffreListeOffre extends Schema.SingleType {
     separator: Attribute.Component<'block.separator'>;
     question: Attribute.Component<'block.simple-push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     experience: Attribute.Component<'block.experience-video-carousel'>;
     offres_culturelles: Attribute.Component<'block.offers-carousel'>;
     createdAt: Attribute.DateTime;
@@ -1280,7 +1280,7 @@ export interface ApiNewsNews extends Schema.CollectionType {
         'block.tabs-accordion'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     pageLocalisation: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -1311,7 +1311,7 @@ export interface ApiNotFoundNotFound extends Schema.SingleType {
   };
   attributes: {
     header: Attribute.Component<'block.header'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1380,7 +1380,7 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.accordions-list'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1411,7 +1411,7 @@ export interface ApiPressePresse extends Schema.SingleType {
     texteImage: Attribute.Component<'block.image-text'> & Attribute.Required;
     pushCta: Attribute.Component<'block.double-push-cta'> & Attribute.Required;
     aide: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     titleEventSection: Attribute.String & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
@@ -1464,7 +1464,7 @@ export interface ApiReglementReglement extends Schema.CollectionType {
         'block.tabs-accordion'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
     createdAt: Attribute.DateTime;
@@ -1502,7 +1502,7 @@ export interface ApiReglementsPassCultureReglementsPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     cta: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1642,7 +1642,7 @@ export interface ApiResourceResource extends Schema.CollectionType {
       ]
     > &
       Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     pageLocalisation: Attribute.JSON &
       Attribute.CustomField<
         'plugin::multi-select.multi-select',
@@ -1728,7 +1728,7 @@ export interface ApiRessourcesPassCultureRessourcesPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     etudes: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     showFilter: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
@@ -1777,7 +1777,7 @@ export interface ApiRubriqueInstitRubriqueInstit extends Schema.CollectionType {
         'block.tabs-accordion'
       ]
     >;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     aboveTitle: Attribute.String;
     emoji: Attribute.String;
     createdAt: Attribute.DateTime;
@@ -1815,7 +1815,7 @@ export interface ApiRubriqueInstitPassCultureRubriqueInstitPassCulture
     socialMediaSection: Attribute.Component<'block.social-media'>;
     separator: Attribute.Component<'block.separator'>;
     cta: Attribute.Component<'block.simple-push-cta'>;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1883,7 +1883,7 @@ export interface ApiSimulatorSimulator extends Schema.SingleType {
     bottomEmoji: Attribute.String & Attribute.Required;
     socialMedias: Attribute.Component<'block.social-media'> &
       Attribute.Required;
-    seo: Attribute.Component<'shared.seo'>;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
     offres: Attribute.Component<'block.simple-push-cta'>;
     disableSimulator: Attribute.Boolean &
       Attribute.Required &

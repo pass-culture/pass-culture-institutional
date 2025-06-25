@@ -206,6 +206,26 @@ export interface HomeEligibilityItems extends Schema.Component {
   };
 }
 
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'Lists';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
+}
+
 export interface HeaderNavigationItems extends Schema.Component {
   collectionName: 'components_header_navigation_items';
   info: {
@@ -379,26 +399,6 @@ export interface HeaderAccountDropdown extends Schema.Component {
     items: Attribute.Component<'header.account-item', true> &
       Attribute.Required;
   };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
@@ -1287,6 +1287,8 @@ declare module '@strapi/types' {
       'home.hero-section': HomeHeroSection;
       'home.eligibility-section': HomeEligibilitySection;
       'home.eligibility-items': HomeEligibilityItems;
+      'footer.list': FooterList;
+      'footer.legal-links': FooterLegalLinks;
       'header.navigation-items': HeaderNavigationItems;
       'header.mega-menu': HeaderMegaMenu;
       'header.login': HeaderLogin;
@@ -1294,8 +1296,6 @@ declare module '@strapi/types' {
       'header.header': HeaderHeader;
       'header.account-item': HeaderAccountItem;
       'header.account-dropdown': HeaderAccountDropdown;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'common.simple-text-column': CommonSimpleTextColumn;
       'common.piled-card-item': CommonPiledCardItem;
