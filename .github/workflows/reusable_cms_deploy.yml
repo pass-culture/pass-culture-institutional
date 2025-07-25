@@ -89,7 +89,7 @@ jobs:
           permission-contents: write
 
       - name: "Generate and push rendered manifests"
-        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v3.2.0
+        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v3.3.0
         with:
           environment: ${{ inputs.environment }}
           app_name: site-instit
