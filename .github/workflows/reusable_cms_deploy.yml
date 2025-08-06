@@ -61,9 +61,6 @@ jobs:
           workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
 
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v2"
-
       - name: Get Secret
         id: "secrets"
         uses: "google-github-actions/get-secretmanager-secrets@v2"
@@ -71,6 +68,26 @@ jobs:
           secrets: |-
             INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
+
+      - name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        id: google-auth
+        with:
+          create_credentials_file: true
+          token_format: "access_token"
+          workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Docker login"
+        id: "docker-login"
+        uses: "docker/login-action@v3"
+        with:
+          registry: "europe-west1-docker.pkg.dev"
+          username: "oauth2accesstoken"
+          password: "${{ steps.google-auth.outputs.access_token }}"
 
       - name: Authenticate through github app ghactionci
         uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # v2.0.6
@@ -84,32 +101,39 @@ jobs:
             infrastructure
             pass-culture-institutional
             rendered-manifests
+            pc-render-manifests
             pc-connect
             pc-firestore-cli
           permission-contents: write
 
+      - name: "Setup helmfile"
+        uses: mamezou-tech/setup-helmfile@v2.1.0
+        with:
+          helmfile-version: "v1.1.3"
+
+      # Executes helmfile templating and push results to render-manifests repository
+      - name: "Setup pc-render-manifests"
+        uses: pass-culture/common-workflows/actions/setup-pc-render-manifests@setup-pc-render-manifests/v0.1.0
+        with:
+          token: ${{ steps.github-token.outputs.token }}
+          version: "v0.7.1"
+
       - name: "Generate and push rendered manifests"
-        uses: pass-culture/common-workflows/actions/render-push-manifests@render-push-manifests/v3.3.0
-        with:
-          environment: ${{ inputs.environment }}
-          app_name: site-instit
-          app_version: ${{ inputs.image_tag }}
-          registry_workload_identity_secret_name: ${{ inputs.workload_identity_provider_secret_name }}
-          registry_service_account_secret_name: ${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
-          api_token_github: ${{ steps.github-token.outputs.token }}
-          chart_values_repository: pass-culture/infrastructure
-          chart_values_repository_ref: main
-          helmfile_path: helm/site-instit
-          additional_args: deployment.image.tag=${{ inputs.image_tag }}
-
-      - name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2"
-        with:
-          workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
-
-      - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v2"
+        env:
+          GITHUB_USERNAME: x-access-token
+          GITHUB_TOKEN: ${{ steps.github-token.outputs.token }}
+        run: |
+          pc-render-manifests render \
+            -a site-instit \
+            -e ${{ inputs.environment }} \
+            --sourceRepoURL https://github.com/pass-culture/infrastructure.git \
+            --sourcePath helm/site-instit \
+            --sourceRepoRef main \
+            --additionalArg "--set deployment.image.tag=${{ inputs.image_tag }}" \
+            --commitMsg "sit-instit(${{ inputs.environment }}) : manifests for app_version=${{ inputs.image_tag }}" \
+            --clean=false \
+            --push \
+            --silent
 
       - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
         with:
