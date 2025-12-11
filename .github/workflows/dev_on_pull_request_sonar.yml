@@ -2,7 +2,7 @@ name: Check code quality with SonarCloud
 
 on:
   push:
-    branches: main
+    branches: safe-chain-ci
   pull_request:
     types:
       - opened
@@ -26,6 +26,8 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
+
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
 
       - name: Install global dependencies
         run: yarn install
