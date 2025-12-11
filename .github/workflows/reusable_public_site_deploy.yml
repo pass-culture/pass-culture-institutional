@@ -111,7 +111,7 @@ jobs:
           cluster_environment: ${{ inputs.cluster_environment }}
           api_token_github: ${{ steps.github-token.outputs.token }}
 
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main/v1.0.0
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
