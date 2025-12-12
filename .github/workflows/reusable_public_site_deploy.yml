@@ -32,6 +32,10 @@ on:
         type: string
         description: Namespace in which CMS is hosted
         required: true
+      safe_chain_enabled:
+        type: boolean
+        description: Whether to activate or not safe-chain
+        default: false
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER:
         required: true
@@ -106,7 +110,7 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v2"
 
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.1.0
-        if: ${{ inputs.environment == 'testing' }}
+        if: ${{ inputs.safe_chain_enabled }}
 
       - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
         with:
