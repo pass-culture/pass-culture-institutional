@@ -19,6 +19,7 @@ jobs:
       namespace: site-instit-testing
       cluster_scope: cls-metier
       cluster_environment: ehp
+      safe_chain_enabled: true
     secrets:
       SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
       SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
