@@ -30,10 +30,10 @@ jobs:
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
 
       - name: Install global dependencies
-        run: yarn install --safe-chain-minimum-package-age-hours=0
+        run: yarn install --safe-chain-minimum-package-age-hours=0 --safe-chain-logging=silent
 
       - name: Install public_website dependencies
-        run: cd public_website && yarn install --safe-chain-minimum-package-age-hours=0
+        run: cd public_website && yarn install --safe-chain-minimum-package-age-hours=0 --safe-chain-logging=silent
 
       - name: Get public_website coverage
         run: cd public_website && yarn test:coverage
