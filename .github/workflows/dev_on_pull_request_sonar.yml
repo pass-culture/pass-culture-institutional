@@ -27,8 +27,7 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
 
-      # Currently broken : https://github.com/pass-culture/pass-culture-institutional/actions/runs/20160385392/job/57871282903#logs
-      # - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
 
       - name: Install global dependencies
         run: yarn install
