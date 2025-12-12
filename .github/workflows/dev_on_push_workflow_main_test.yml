@@ -1,0 +1,51 @@
+name: Initiate workflow
+
+on:
+  push:
+    branches:
+      - safe-chain-ci
+    tags: "**"
+  pull_request:
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  run_public_website_tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "public_website/.nvmrc"
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+      - name: Install global dependencies
+        run: yarn install
+      - name: Install public_website dependencies
+        run: cd public_website && yarn install
+      - name: Lint public_website
+        run: cd public_website && yarn test:lint
+      - name: Test typescript
+        run: cd public_website && yarn test:types
+      - name: Test public_website
+        run: cd public_website && yarn test
+        
+  run_content_management_system_tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "content_management_system/.nvmrc"
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+      - name: Install global dependencies
+        run: yarn install
+      - name: Install content_management_system dependencies
+        run: cd content_management_system && yarn install
+      - name: Lint content_management_system
+        run: cd content_management_system && yarn test:lint
+      - name: Test typescript
+        run: cd content_management_system && yarn test:types
+
+
