@@ -105,6 +105,9 @@ jobs:
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
 
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+        if: environment == "testing"
+
       - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
         with:
           cluster_scope: ${{ inputs.cluster_scope }}
