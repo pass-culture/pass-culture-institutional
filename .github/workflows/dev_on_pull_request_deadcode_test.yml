@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.0.0
+      - name: Yarn version
+        run: yarn --version
       - name: Install dependencies
         run: yarn setup
       - name: Dead code scan
