@@ -1,19 +1,22 @@
 name: Check no dead code is introduced
 
 on:
-  pull_request:
-    branches: main
-    types:
-      - opened
-      - edited
-      - synchronize
+  # pull_request:
+  #   branches: main
+  #   types:
+  #     - opened
+  #     - edited
+  #     - synchronize
+  push:
+    branches:
+      latest-version-safe-chain
 
 jobs:
   yarn-ts-prune:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.1.0
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup
       - name: Install dependencies
         run: yarn setup
       - name: Dead code scan
