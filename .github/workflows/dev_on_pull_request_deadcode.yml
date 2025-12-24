@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
       - name: Install dependencies
         run: yarn setup
       - name: Dead code scan
