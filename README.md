@@ -46,6 +46,9 @@ This README provides general project information, scripts, and setup instruction
 
 1. Ensure you have [Node.js 20.8.0](https://nodejs.org/) installed on your system. If you are using `NVM` you can simply use the command `nvm install` if you don't have 20.8.0 previously installed or `nvm use` if you do.
 2. You should have `Yarn` installed: `corepack enable`
+3. Install `safe-chain` (refer to internal knowledge base)
+4. Install `gitleaks`
+5. Set-up pre-commit hook: `chmod +x ./.githooks/pre-commit && git config --local core.hooksPath ./.githooks`
 
 ## Start the project
 
