@@ -122,15 +122,17 @@ jobs:
         env:
           GITHUB_USERNAME: x-access-token
           GITHUB_TOKEN: ${{ steps.github-token.outputs.token }}
+          ENVIRONMENT: ${{ inputs.environment }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
         run: |
           pc-render-manifests render \
             -a site-instit \
-            -e ${{ inputs.environment }} \
+            -e "$ENVIRONMENT" \
             --sourceRepoURL https://github.com/pass-culture/infrastructure.git \
             --sourcePath helm/site-instit \
             --sourceRepoRef main \
-            --additionalArg "--set deployment.image.tag=${{ inputs.image_tag }}" \
-            --commitMsg "sit-instit(${{ inputs.environment }}) : manifests for app_version=${{ inputs.image_tag }}" \
+            --additionalArg "--set deployment.image.tag=$IMAGE_TAG" \
+            --commitMsg "sit-instit($ENVIRONMENT) : manifests for app_version=$IMAGE_TAG" \
             --clean=false \
             --push \
             --silent
