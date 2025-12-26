@@ -140,7 +140,7 @@ jobs:
         env:
           ENVIRONMENT: ${{ inputs.environment }} 
         run: |
-          firebase "use pc-site-instit-$ENVIRONMENT"
+          firebase use "pc-site-instit-$ENVIRONMENT"
           firebase deploy --only "hosting:$ENVIRONMENT" --project "pc-site-instit-$ENVIRONMENT" --non-interactive
 
   notification:
