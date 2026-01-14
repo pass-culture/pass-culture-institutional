@@ -38,7 +38,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: "content_management_system/.nvmrc"
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@safe-chain-setup/v1.1.0
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
       - name: Install global dependencies
         run: yarn install
       - name: Install content_management_system dependencies

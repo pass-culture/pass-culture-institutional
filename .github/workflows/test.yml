@@ -1,0 +1,47 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - safechain-testing
+
+name: Deploy testing CMS and public website
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-cms-testing:
+    uses: ./.github/workflows/reusable_cms_deploy.yml
+    with:
+      project_id: passculture-cls-metier-ehp
+      environment: testing
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
+      image_tag: ${{ github.sha }}
+      secrets_project_id: passculture-cls-metier-ehp
+      cluster_scope: cls-metier
+      cluster_environment: ehp
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
+      PASSCULTURE_GITHUB_ACTION_APP_ID: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_ID }}
+      PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY }}
+
+  deploy-public-site-testing:
+    needs:
+      - deploy-cms-testing
+    uses: ./.github/workflows/reusable_public_site_deploy.yml
+    with:
+      environment: testing
+      workload_identity_provider_secret_name: passculture-cls-metier-ehp/gcp_metier_cls_ehp_workload_identity_provider
+      cms_url: https://siteinstit-cms.testing.passculture.team
+      backend_url: https://backend.passculture.app
+      secrets_project_id: passculture-cls-metier-ehp
+      cluster_scope: cls-metier
+      cluster_environment: ehp
+      namespace: site-instit-testing
+    secrets:
+      SECRETS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_CLS_EHP_WORKLOAD_IDENTITY_PROVIDER }}
+      SECRETS_SERVICE_ACCOUNT: ${{ secrets.GCP_CLS_EHP_SERVICE_ACCOUNT }}
+      PASSCULTURE_GITHUB_ACTION_APP_ID: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_ID }}
+      PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY: ${{ secrets.PASSCULTURE_GITHUB_ACTION_APP_PRIVATE_KEY }}
