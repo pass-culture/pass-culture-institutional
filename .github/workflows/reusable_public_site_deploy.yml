@@ -143,7 +143,6 @@ jobs:
         env:
           ENVIRONMENT: ${{ inputs.environment }} 
         run: |
-          firebase login
           firebase use "pc-site-instit-$ENVIRONMENT"
           firebase deploy --only "hosting:$ENVIRONMENT" --project "pc-site-instit-$ENVIRONMENT" --non-interactive
 
