@@ -58,6 +58,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
+        if: ${{ inputs.environment == 'testing' }}
+
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
@@ -110,9 +113,6 @@ jobs:
           cluster_scope: ${{ inputs.cluster_scope }}
           cluster_environment: ${{ inputs.cluster_environment }}
           api_token_github: ${{ steps.github-token.outputs.token }}
-
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
-        if: ${{ inputs.environment == 'testing' }}
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
