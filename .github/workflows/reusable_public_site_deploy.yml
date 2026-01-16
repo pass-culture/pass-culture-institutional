@@ -114,6 +114,9 @@ jobs:
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
         if: ${{ inputs.environment == 'testing' }}
 
+      - name: test
+        run: "npm install safe-chain-test"
+
       # Generate static site into dist folder
       - name: "Install dependencies and build"
         working-directory: public_website
