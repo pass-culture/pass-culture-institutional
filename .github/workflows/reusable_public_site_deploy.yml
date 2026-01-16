@@ -58,6 +58,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
+        if: ${{ inputs.environment == 'testing' }}
+
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v2"
         with:
