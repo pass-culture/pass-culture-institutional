@@ -114,9 +114,6 @@ jobs:
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
         if: ${{ inputs.environment == 'testing' }}
 
-      - name: test
-        run: "npm install chalk"
-
       # Generate static site into dist folder
       - name: "Install dependencies and build"
         working-directory: public_website
@@ -146,6 +143,7 @@ jobs:
         env:
           ENVIRONMENT: ${{ inputs.environment }} 
         run: |
+          firebase login
           firebase use "pc-site-instit-$ENVIRONMENT"
           firebase deploy --only "hosting:$ENVIRONMENT" --project "pc-site-instit-$ENVIRONMENT" --non-interactive
 
