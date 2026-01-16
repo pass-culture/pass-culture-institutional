@@ -115,7 +115,7 @@ jobs:
         if: ${{ inputs.environment == 'testing' }}
 
       - name: test
-        run: "npm install safe-chain-test"
+        run: "npm install chalk"
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
