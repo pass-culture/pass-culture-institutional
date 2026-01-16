@@ -111,8 +111,8 @@ jobs:
           cluster_environment: ${{ inputs.cluster_environment }}
           api_token_github: ${{ steps.github-token.outputs.token }}
 
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
-        if: ${{ inputs.environment == 'testing' }}
+      #- uses: pass-culture/common-workflows/actions/setup-safe-chain@main
+      #  if: ${{ inputs.environment == 'testing' }}
 
       # Generate static site into dist folder
       - name: "Install dependencies and build"
