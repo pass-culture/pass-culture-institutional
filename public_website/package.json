@@ -56,7 +56,7 @@
     "eslint-plugin-testing-library": "^6.1.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "jsdom": "^23.2.0",
-    "msw": "^2.2.0",
+    "msw": "^2.12.4",
     "prettier": "^3.0.3",
     "ts-node": "^10.9.2",
     "ts-prune": "^0.10.3",
