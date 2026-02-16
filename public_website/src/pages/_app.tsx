@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { useAxeptio } from '@/hooks/useAxeptio'
 import { useConsent } from '@/hooks/useConsent'
+import { useTolkai } from '@/hooks/useTolkai'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
 import type { MyAppProps } from '@/types/props'
@@ -18,6 +19,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 export default function MyApp({ Component, pageProps }: MyAppProps) {
   useAxeptio()
+  useTolkai()
   const acceptedVendors = useConsent()
   const hasAcceptedFirebase = acceptedVendors['firebase']
 
