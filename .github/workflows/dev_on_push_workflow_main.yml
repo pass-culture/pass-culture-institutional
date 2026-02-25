@@ -13,7 +13,6 @@ permissions:
 
 jobs:
   run_actionlint:
-    runs-on: ubuntu-22.04
     uses: pass-culture/common-workflows/actions/actionlint-check@f4db7db202ff3cddc97fcbf08c3821ebc78b10fb
   run_public_website_tests:
     runs-on: ubuntu-22.04
