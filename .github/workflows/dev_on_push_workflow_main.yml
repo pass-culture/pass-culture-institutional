@@ -12,6 +12,11 @@ permissions:
   contents: write
 
 jobs:
+  run_actionlint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pass-culture/common-workflows/actions/actionlint-check@f4db7db202ff3cddc97fcbf08c3821ebc78b10fb
   run_public_website_tests:
     runs-on: ubuntu-22.04
     steps:
@@ -19,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: "public_website/.nvmrc"
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@9a5f036470496551365fe9c26afbd4febe20a8cb
       - name: Install global dependencies
         run: yarn install
       - name: Install public_website dependencies
@@ -38,7 +43,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: "content_management_system/.nvmrc"
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@main
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@9a5f036470496551365fe9c26afbd4febe20a8cb
       - name: Install global dependencies
         run: yarn install
       - name: Install content_management_system dependencies
