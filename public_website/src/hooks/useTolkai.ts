@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
 
-import { useConsent } from './useConsent'
-
 declare global {
   interface Window {
     tcfbot?: string
@@ -13,20 +11,14 @@ declare global {
  * Hook pour charger le chatbot Tolk.ai
  * Respecte le consentement utilisateur via Axeptio
  */
-export const useTolkai = () => {
-  const acceptedVendors = useConsent()
+export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
+  const hasAcceptedChatbot = acceptedVendors['tolkai']
 
   useEffect(() => {
-    // Vérifier que l'utilisateur a accepté les cookies chatbot
-    // TODO: Ajouter 'chatbot' comme vendor dans Axeptio
-    // Pour l'instant, on utilise 'firebase' comme proxy (à ajuster)
-    const hasAcceptedChatbot = acceptedVendors['tolkai']
-
     if (!hasAcceptedChatbot) {
       return
     }
 
-    // Récupérer l'ID du bot depuis les variables d'environnement
     const botId = process.env.NEXT_PUBLIC_TOLKAI_BOT_ID
 
     if (!botId) {
@@ -36,38 +28,42 @@ export const useTolkai = () => {
       return
     }
 
-    // Vérifier si le script n'est pas déjà chargé
+    // Guard : ne pas charger le script deux fois
     if (window.tcfbot) {
       return
     }
 
-    // Configuration globale Tolk.ai
+    // Configuration globale Tolk.ai (requise avant le chargement du script)
     window.tcfbot = botId
     window.TcfWbchtParams = { behaviour: 'default' }
 
-    // Charger le script Tolk.ai
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = 'https://script.tolk.ai/iframe-latest.js'
     script.async = true
-    script.onload = () => {
-      console.log('[Tolk.ai] Chatbot loaded successfully')
-    }
     script.onerror = () => {
       console.error('[Tolk.ai] Failed to load chatbot script')
+      // Nettoyer pour permettre une nouvelle tentative au prochain render
+      delete window.tcfbot
+      delete window.TcfWbchtParams
+      if (script.parentNode) {
+        script.parentNode.removeChild(script)
+      }
     }
 
     document.body.appendChild(script)
 
-    // Cleanup function
     return () => {
-      // Retirer le script du DOM si le composant est démonté
+      // Note : ce cleanup retire le <script> et les globals Tolk.ai,
+      // mais le widget DOM (iframe) déjà créé par le SDK n'est pas détruit.
+      // Tolk.ai ne semble pas exposer d'API de destruction publique.
+      // En pratique, le retrait de consentement est géré côté Axeptio
+      // (le SDK bloque les cookies), mais le widget reste visible jusqu'au reload.
       if (script.parentNode) {
         script.parentNode.removeChild(script)
       }
-      // Nettoyer les variables globales
       delete window.tcfbot
       delete window.TcfWbchtParams
     }
-  }, [acceptedVendors])
+  }, [hasAcceptedChatbot])
 }

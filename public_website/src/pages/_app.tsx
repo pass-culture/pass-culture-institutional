@@ -19,9 +19,9 @@ const isProd = process.env.NODE_ENV === 'production'
 
 export default function MyApp({ Component, pageProps }: MyAppProps) {
   useAxeptio()
-  useTolkai()
   const acceptedVendors = useConsent()
   const hasAcceptedFirebase = acceptedVendors['firebase']
+  useTolkai(acceptedVendors)
 
   useEffect(() => {
     if (isProd && hasAcceptedFirebase) analyticsProvider.init()
