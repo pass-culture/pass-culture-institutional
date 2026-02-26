@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { useAxeptio } from '@/hooks/useAxeptio'
 import { useConsent } from '@/hooks/useConsent'
+import { useTolkai } from '@/hooks/useTolkai'
 import { analyticsProvider } from '@/lib/analytics/analyticsProvider'
 import { theme } from '@/theme/theme'
 import type { MyAppProps } from '@/types/props'
@@ -20,6 +21,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
   useAxeptio()
   const acceptedVendors = useConsent()
   const hasAcceptedFirebase = acceptedVendors['firebase']
+  useTolkai(acceptedVendors)
 
   useEffect(() => {
     if (isProd && hasAcceptedFirebase) analyticsProvider.init()

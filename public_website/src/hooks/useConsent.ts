@@ -19,6 +19,7 @@ const getAcceptedVendors = (
     ) {
       setAcceptedVendors({
         firebase: sdk.hasAcceptedVendor('googlefirebase'),
+        tolkai: sdk.hasAcceptedVendor('tolkai'),
       })
     }
   })
@@ -27,7 +28,7 @@ const getAcceptedVendors = (
 export const useConsent = () => {
   const [acceptedVendors, setAcceptedVendors] = useState<
     Record<string, boolean>
-  >({ firebase: false })
+  >({ firebase: false, tolkai: false })
 
   useEffect(() => {
     getAcceptedVendors(setAcceptedVendors)
