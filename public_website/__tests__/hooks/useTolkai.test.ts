@@ -10,7 +10,7 @@ const BOT_ID = 'test-bot-id-123'
 const getScript = () => document.querySelector(TOLKAI_SCRIPT_SELECTOR)
 
 beforeEach(() => {
-  process.env.NEXT_PUBLIC_TOLKAI_BOT_ID = BOT_ID
+  process.env['NEXT_PUBLIC_TOLKAI_BOT_ID'] = BOT_ID
   delete window.tcfbot
   delete window.TcfWbchtParams
   getScript()?.remove()
@@ -70,7 +70,7 @@ describe('useTolkai', () => {
 
   describe('when NEXT_PUBLIC_TOLKAI_BOT_ID is not defined', () => {
     it('should not inject the script and warn', () => {
-      delete process.env.NEXT_PUBLIC_TOLKAI_BOT_ID
+      delete process.env['NEXT_PUBLIC_TOLKAI_BOT_ID']
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
       renderHook(() => useTolkai({ firebase: true, tolkai: true }))

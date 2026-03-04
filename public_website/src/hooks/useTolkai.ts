@@ -19,7 +19,7 @@ export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
       return
     }
 
-    const botId = process.env.NEXT_PUBLIC_TOLKAI_BOT_ID
+    const botId = process.env['NEXT_PUBLIC_TOLKAI_BOT_ID']
 
     if (!botId) {
       console.warn(
