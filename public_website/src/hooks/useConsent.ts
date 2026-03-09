@@ -6,6 +6,11 @@ declare global {
   }
 }
 
+export type VendorConsent = {
+  firebase: boolean
+  tolkai: boolean
+}
+
 type AxeptioSDK = {
   hasAcceptedVendor: (vendor: string) => boolean
   on: (event: string, handler: () => void) => void
@@ -13,7 +18,7 @@ type AxeptioSDK = {
 
 const readVendors = (
   sdk: AxeptioSDK,
-  setAcceptedVendors: Dispatch<SetStateAction<Record<string, boolean>>>
+  setAcceptedVendors: Dispatch<SetStateAction<VendorConsent>>
 ) => {
   setAcceptedVendors({
     firebase: sdk.hasAcceptedVendor('googlefirebase'),
@@ -22,7 +27,7 @@ const readVendors = (
 }
 
 const getAcceptedVendors = (
-  setAcceptedVendors: Dispatch<SetStateAction<Record<string, boolean>>>
+  setAcceptedVendors: Dispatch<SetStateAction<VendorConsent>>
 ) => {
   window._axcb = window._axcb || []
   window._axcb.push(function (sdk: unknown) {
@@ -42,9 +47,10 @@ const getAcceptedVendors = (
 }
 
 export const useConsent = () => {
-  const [acceptedVendors, setAcceptedVendors] = useState<
-    Record<string, boolean>
-  >({ firebase: false, tolkai: false })
+  const [acceptedVendors, setAcceptedVendors] = useState<VendorConsent>({
+    firebase: false,
+    tolkai: false,
+  })
 
   useEffect(() => {
     getAcceptedVendors(setAcceptedVendors)

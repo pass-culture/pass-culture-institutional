@@ -2,6 +2,11 @@ import { useEffect } from 'react'
 
 export const useAxeptio = () => {
   useEffect(() => {
+    // Guard: ne pas charger le SDK deux fois (ex. React Strict Mode)
+    if (document.querySelector('script[src="//static.axept.io/sdk-slim.js"]')) {
+      return
+    }
+
     const script = document.createElement('script')
     script.async = true
     script.innerHTML = `

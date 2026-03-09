@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 
+import type { VendorConsent } from './useConsent'
 
 /**
  * Hook pour charger le chatbot Tolk.ai
  * Respecte le consentement utilisateur via Axeptio
  */
-export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
+export const useTolkai = (acceptedVendors: VendorConsent) => {
   const hasAcceptedChatbot = acceptedVendors['tolkai']
 
   useEffect(() => {
@@ -32,6 +33,8 @@ export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
     script.src = 'https://genii-script.tolk.ai/lightchat.js'
     script.async = true
     script.type = 'module'
+    script.setAttribute('project-id', botId)
+    script.setAttribute('template', 'widget')
     script.onerror = () => {
       console.error('[Tolk.ai] Failed to load chatbot script')
       // Nettoyer pour permettre une nouvelle tentative au prochain render
@@ -42,19 +45,15 @@ export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
 
     document.body.appendChild(script)
 
-    const tag = document.querySelector('#lightchat-bot')
-    if (tag) {
-      tag.setAttribute('project-id', botId)
-      tag.setAttribute('template', 'widget')
-    }
-
     return () => {
-      // Note : ce cleanup retire le <script>,
-      // mais le widget DOM déjà créé par le SDK n'est pas détruit.
-      // En pratique, le retrait de consentement est géré côté Axeptio
-      // (le SDK bloque les cookies), mais le widget reste visible jusqu'au reload.
       if (script.parentNode) {
         script.parentNode.removeChild(script)
+      }
+      // The lightchat SDK may create a widget container; hide it on cleanup
+      // since no public destroy API is available.
+      const widget = document.getElementById('lightchat-widget')
+      if (widget) {
+        widget.style.display = 'none'
       }
     }
   }, [hasAcceptedChatbot])

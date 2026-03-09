@@ -3,22 +3,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { renderHook } from '..'
 import { useTolkai } from '@/hooks/useTolkai'
 
-const TOLKAI_SCRIPT_SELECTOR =
-  'script[src="https://script.tolk.ai/iframe-latest.js"]'
+const TOLKAI_SCRIPT_SELECTOR = 'script#lightchat-bot'
 const BOT_ID = 'test-bot-id-123'
 
-const getScript = () => document.querySelector(TOLKAI_SCRIPT_SELECTOR)
+const getScript = () =>
+  document.querySelector<HTMLScriptElement>(TOLKAI_SCRIPT_SELECTOR)
 
 beforeEach(() => {
   process.env['NEXT_PUBLIC_TOLKAI_BOT_ID'] = BOT_ID
-  delete window.tcfbot
-  delete window.TcfWbchtParams
   getScript()?.remove()
 })
 
 afterEach(() => {
-  delete window.tcfbot
-  delete window.TcfWbchtParams
   getScript()?.remove()
 })
 
@@ -29,13 +25,6 @@ describe('useTolkai', () => {
 
       expect(getScript()).toBeNull()
     })
-
-    it('should not set globals', () => {
-      renderHook(() => useTolkai({ firebase: false, tolkai: false }))
-
-      expect(window.tcfbot).toBeUndefined()
-      expect(window.TcfWbchtParams).toBeUndefined()
-    })
   })
 
   describe('when chatbot consent is accepted', () => {
@@ -45,16 +34,16 @@ describe('useTolkai', () => {
       expect(getScript()).not.toBeNull()
     })
 
-    it('should set window.tcfbot to the bot id', () => {
+    it('should set project-id attribute to the bot id', () => {
       renderHook(() => useTolkai({ firebase: true, tolkai: true }))
 
-      expect(window.tcfbot).toBe(BOT_ID)
+      expect(getScript()?.getAttribute('project-id')).toBe(BOT_ID)
     })
 
-    it('should set window.TcfWbchtParams with default behaviour', () => {
+    it('should set template attribute to widget', () => {
       renderHook(() => useTolkai({ firebase: true, tolkai: true }))
 
-      expect(window.TcfWbchtParams).toEqual({ behaviour: 'default' })
+      expect(getScript()?.getAttribute('template')).toBe('widget')
     })
 
     it('should not inject the script twice on re-render', () => {
@@ -94,17 +83,6 @@ describe('useTolkai', () => {
       unmount()
       expect(getScript()).toBeNull()
     })
-
-    it('should clear window globals', () => {
-      const { unmount } = renderHook(() =>
-        useTolkai({ firebase: true, tolkai: true })
-      )
-
-      unmount()
-
-      expect(window.tcfbot).toBeUndefined()
-      expect(window.TcfWbchtParams).toBeUndefined()
-    })
   })
 
   describe('when consent is revoked after acceptance', () => {
@@ -118,8 +96,6 @@ describe('useTolkai', () => {
       rerender({ vendors: { firebase: true, tolkai: false } })
 
       expect(getScript()).toBeNull()
-      expect(window.tcfbot).toBeUndefined()
-      expect(window.TcfWbchtParams).toBeUndefined()
     })
   })
 })
