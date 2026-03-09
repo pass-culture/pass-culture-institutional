@@ -6,6 +6,21 @@ declare global {
   }
 }
 
+type AxeptioSDK = {
+  hasAcceptedVendor: (vendor: string) => boolean
+  on: (event: string, handler: () => void) => void
+}
+
+const readVendors = (
+  sdk: AxeptioSDK,
+  setAcceptedVendors: Dispatch<SetStateAction<Record<string, boolean>>>
+) => {
+  setAcceptedVendors({
+    firebase: sdk.hasAcceptedVendor('googlefirebase'),
+    tolkai: sdk.hasAcceptedVendor('Tolkai'),
+  })
+}
+
 const getAcceptedVendors = (
   setAcceptedVendors: Dispatch<SetStateAction<Record<string, boolean>>>
 ) => {
@@ -17,10 +32,11 @@ const getAcceptedVendors = (
       'hasAcceptedVendor' in sdk &&
       typeof sdk['hasAcceptedVendor'] === 'function'
     ) {
-      setAcceptedVendors({
-        firebase: sdk.hasAcceptedVendor('googlefirebase'),
-        tolkai: sdk.hasAcceptedVendor('tolkai'),
-      })
+      const axeptioSdk = sdk as AxeptioSDK
+      readVendors(axeptioSdk, setAcceptedVendors)
+      axeptioSdk.on('cookies:complete', () =>
+        readVendors(axeptioSdk, setAcceptedVendors)
+      )
     }
   })
 }

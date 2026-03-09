@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
 
-declare global {
-  interface Window {
-    tcfbot?: string
-    TcfWbchtParams?: { behaviour: string }
-  }
-}
 
 /**
  * Hook pour charger le chatbot Tolk.ai
@@ -29,23 +23,18 @@ export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
     }
 
     // Guard : ne pas charger le script deux fois
-    if (window.tcfbot) {
+    if (document.getElementById('lightchat-bot')) {
       return
     }
 
-    // Configuration globale Tolk.ai (requise avant le chargement du script)
-    window.tcfbot = botId
-    window.TcfWbchtParams = { behaviour: 'default' }
-
     const script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = 'https://script.tolk.ai/iframe-latest.js'
+    script.id = 'lightchat-bot'
+    script.src = 'https://genii-script.tolk.ai/lightchat.js'
     script.async = true
+    script.type = 'module'
     script.onerror = () => {
       console.error('[Tolk.ai] Failed to load chatbot script')
       // Nettoyer pour permettre une nouvelle tentative au prochain render
-      delete window.tcfbot
-      delete window.TcfWbchtParams
       if (script.parentNode) {
         script.parentNode.removeChild(script)
       }
@@ -53,17 +42,20 @@ export const useTolkai = (acceptedVendors: Record<string, boolean>) => {
 
     document.body.appendChild(script)
 
+    const tag = document.querySelector('#lightchat-bot')
+    if (tag) {
+      tag.setAttribute('project-id', botId)
+      tag.setAttribute('template', 'widget')
+    }
+
     return () => {
-      // Note : ce cleanup retire le <script> et les globals Tolk.ai,
-      // mais le widget DOM (iframe) déjà créé par le SDK n'est pas détruit.
-      // Tolk.ai ne semble pas exposer d'API de destruction publique.
+      // Note : ce cleanup retire le <script>,
+      // mais le widget DOM déjà créé par le SDK n'est pas détruit.
       // En pratique, le retrait de consentement est géré côté Axeptio
       // (le SDK bloque les cookies), mais le widget reste visible jusqu'au reload.
       if (script.parentNode) {
         script.parentNode.removeChild(script)
       }
-      delete window.tcfbot
-      delete window.TcfWbchtParams
     }
   }, [hasAcceptedChatbot])
 }
