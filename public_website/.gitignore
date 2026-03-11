@@ -45,3 +45,7 @@ cacert.pem
 
 # Sentry Config File
 .sentryclirc
+
+# Yarn Berry cache
+.yarn/cache
+.yarn/install-state.gz

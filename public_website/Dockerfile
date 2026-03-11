@@ -1,7 +1,7 @@
 ARG network_mode=default
 
 # Builder base
-FROM node:18.18-alpine3.18 AS base
+FROM node:20-alpine AS base
 COPY package.json yarn.lock tsconfig.json /app/
 COPY *.js /app
 WORKDIR  /app

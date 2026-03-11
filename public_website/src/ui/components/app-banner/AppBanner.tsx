@@ -37,7 +37,8 @@ const StyledAppBanner = styled(Link)`
     justify-self: stretch;
     padding: 1.5rem 2rem;
     border-radius: 0.625rem;
-    background: url('/images/banner-phone.png'),
+    background:
+      url('/images/banner-phone.png'),
       radial-gradient(ellipse at top, #eae3ff, transparent),
       radial-gradient(ellipse at bottom, #ffd7e9, transparent);
 
