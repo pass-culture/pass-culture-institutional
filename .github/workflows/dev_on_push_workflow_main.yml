@@ -15,12 +15,12 @@ jobs:
   run_actionlint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: pass-culture/common-workflows/actions/actionlint-check@f4db7db202ff3cddc97fcbf08c3821ebc78b10fb
   run_public_website_tests:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-node@v4
         with:
           node-version-file: "public_website/.nvmrc"
@@ -39,7 +39,7 @@ jobs:
   run_content_management_system_tests:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: actions/setup-node@v4
         with:
           node-version-file: "content_management_system/.nvmrc"
@@ -56,7 +56,7 @@ jobs:
   build-image-cms:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Authentification to Google to get secret
       uses: 'google-github-actions/auth@v2'
       with:
@@ -82,7 +82,7 @@ jobs:
   build-image-public-site-preview:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Authentification to Google to get secret
       uses: 'google-github-actions/auth@v2'
       with:
