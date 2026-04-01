@@ -53,24 +53,24 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
         with:
           workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
 
       - name: Get Secret
         id: "secrets"
-        uses: "google-github-actions/get-secretmanager-secrets@v2"
+        uses: "google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262" # v3.0.0
         with:
           secrets: |-
             INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
             GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
         id: google-auth
         with:
           create_credentials_file: true
@@ -79,11 +79,11 @@ jobs:
           service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
 
       - name: "Set up Cloud SDK"
-        uses: "google-github-actions/setup-gcloud@v2"
+        uses: "google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db" # v3.0.1
 
       - name: "Docker login"
         id: "docker-login"
-        uses: "docker/login-action@v3"
+        uses: "docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2" # v4.0.0
         with:
           registry: "europe-west1-docker.pkg.dev"
           username: "oauth2accesstoken"
@@ -107,7 +107,7 @@ jobs:
           permission-contents: write
 
       - name: "Setup helmfile"
-        uses: mamezou-tech/setup-helmfile@v2.1.0
+        uses: mamezou-tech/setup-helmfile@c04e83ec7650bf2ec910864bcb409479cf56d8e6 # v2.2.0
         with:
           helmfile-version: "v1.1.3"
 
@@ -155,19 +155,19 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: "Authentification to Google"
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
         with:
           workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
       - name: "Get Secret"
         id: "secrets"
-        uses: "google-github-actions/get-secretmanager-secrets@v2"
+        uses: "google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262" # v3.0.0
         with:
           secrets: |-
             SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
       - name: "Post to a Slack channel on success"
         if: ${{ always() && contains(needs.deploy-cms.result, 'success') }}
-        uses: slackapi/slack-github-action@v1.25.0
+        uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e # v1.26.0
         with:
           # channel #alertes-deploiement-site-instit
           channel-id: "C06EKUL552T"
@@ -192,7 +192,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
       - name: "Post to a Slack channel on failure"
         if: ${{ always() && contains(needs.deploy-cms.result, 'failure') }}
-        uses: slackapi/slack-github-action@v1.25.0
+        uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e # v1.26.0
         with:
           # channel #alertes-deploiement-site-instit
           channel-id: "C06EKUL552T"

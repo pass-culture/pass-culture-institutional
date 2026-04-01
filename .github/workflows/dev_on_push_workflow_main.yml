@@ -15,16 +15,16 @@ jobs:
   run_actionlint:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - uses: pass-culture/common-workflows/actions/actionlint-check@f4db7db202ff3cddc97fcbf08c3821ebc78b10fb
   run_public_website_tests:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: "public_website/.nvmrc"
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@9a5f036470496551365fe9c26afbd4febe20a8cb
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
       - name: Install global dependencies
         run: yarn install
       - name: Install public_website dependencies
@@ -39,11 +39,11 @@ jobs:
   run_content_management_system_tests:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: "content_management_system/.nvmrc"
-      - uses: pass-culture/common-workflows/actions/setup-safe-chain@9a5f036470496551365fe9c26afbd4febe20a8cb
+      - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
       - name: Install global dependencies
         run: yarn install
       - name: Install content_management_system dependencies
@@ -56,15 +56,15 @@ jobs:
   build-image-cms:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Authentification to Google to get secret
-      uses: 'google-github-actions/auth@v2'
+      uses: 'google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc0933' # v3.0.0
       with:
         workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
     - name: Get Secret
       id: 'secrets'
-      uses: 'google-github-actions/get-secretmanager-secrets@v2'
+      uses: 'google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262' # v3.0.0
       with:
         secrets: |-
           COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
@@ -82,15 +82,15 @@ jobs:
   build-image-public-site-preview:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
     - name: Authentification to Google to get secret
-      uses: 'google-github-actions/auth@v2'
+      uses: 'google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc0933' # v3.0.0
       with:
         workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
     - name: Get Secret
       id: 'secrets'
-      uses: 'google-github-actions/get-secretmanager-secrets@v2'
+      uses: 'google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262' # v3.0.0
       with:
         secrets: |-
           COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
