@@ -1,22 +1,16 @@
-name: Initiate workflow
+name: "[Merge] Build and deploy"
 
 on:
   push:
     branches:
       - main
     tags: "**"
-  pull_request:
 
 permissions:
   id-token: write
-  contents: write
+  contents: read
 
 jobs:
-  run_actionlint:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - uses: pass-culture/common-workflows/actions/actionlint-check@f4db7db202ff3cddc97fcbf08c3821ebc78b10fb
   run_public_website_tests:
     runs-on: ubuntu-22.04
     steps:
@@ -88,12 +82,6 @@ jobs:
       with:
         workload_identity_provider: ${{ secrets.GCP_EHP_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.GCP_EHP_SERVICE_ACCOUNT }}
-    - name: Get Secret
-      id: 'secrets'
-      uses: 'google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262' # v3.0.0
-      with:
-        secrets: |-
-          COSIGN_KMS_KEY:passculture-metier-ehp/cosign_kms_key
     - name: build image
       id: 'build'
       uses: pass-culture/common-workflows/actions/build-docker-image@main
@@ -103,5 +91,4 @@ jobs:
         context: public_website
         gcp_workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
         artifact_registry_service_account: ${{ secrets.ARTIFACT_REGISTRY_SERVICE_ACCOUNT }}
-        cosign_kms_key: ${{ steps.secrets.outputs.COSIGN_KMS_KEY }}
 
