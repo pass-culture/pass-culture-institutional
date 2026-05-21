@@ -14,29 +14,23 @@ on:
         type: string
         description: Image tag to deploy
         required: true
-      workload_identity_provider_secret_name:
-        type: string
-        description: Secret name to retrieve the workload identity provider
-        required: true
-      cluster_scope:
+      cluster_name:
         type: string
         required: true
-      cluster_environment:
+      cluster_location:
+        type: string
+        required: true
+      gcp_project_id:
         type: string
         required: true
       argocd_version:
         type: string
         required: false
         default: v2.8.4
-      secrets_project_id:
-        type: string
-        description: GCP project to retrieve secrets from
-        required: true
     secrets:
-      SECRETS_WORKLOAD_IDENTITY_PROVIDER:
+      SLACK_BOT_TOKEN:
         required: true
-      SECRETS_SERVICE_ACCOUNT:
-        required: true
+        description: A token to send message through slack
       PASSCULTURE_GITHUB_ACTION_APP_ID:
         required: true
         description: "Github Application ID to use to clone other repos"
@@ -44,30 +38,18 @@ on:
         required: true
         description: "Private key for the Github application used to clone other repos"
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   deploy-cms:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-22.04
+    environment:
+      name: site-instit-${{ inputs.environment }}
+      deployment: true 
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
-      - name: "Authenticate to Google Cloud"
-        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
-        with:
-          workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
-
-      - name: Get Secret
-        id: "secrets"
-        uses: "google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262" # v3.0.0
-        with:
-          secrets: |-
-            INSTIT_SITE_DEPLOY_SA:${{ inputs.secrets_project_id }}/passculture-institutional_${{ inputs.environment }}_deploy-service-account
-            GCP_WORKLOAD_IDENTITY_PROVIDER:${{ inputs.workload_identity_provider_secret_name }}
 
       - name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
@@ -75,8 +57,8 @@ jobs:
         with:
           create_credentials_file: true
           token_format: "access_token"
-          workload_identity_provider: ${{ steps.secrets.outputs.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ steps.secrets.outputs.INSTIT_SITE_DEPLOY_SA }}
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PRD }}
+          service_account: ${{ vars.SITE_INSTIT_CD_SERVICE_ACCOUNT }}
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db" # v3.0.1
@@ -137,11 +119,13 @@ jobs:
             --push \
             --silent
 
-      - uses: pass-culture/common-workflows/actions/pc-k8s-connect@main
+      - name: Authenticate to GKE cluster
+        uses: google-github-actions/get-gke-credentials@3da1e46a907576cefaa90c484278bb5b259dd395 # v3.0.0
         with:
-          cluster_scope: ${{ inputs.cluster_scope }}
-          cluster_environment: ${{ inputs.cluster_environment }}
-          api_token_github: ${{ steps.github-token.outputs.token }}
+          cluster_name: ${{ inputs.cluster_name }}
+          project_id: ${{ inputs.gcp_project_id }}
+          location: ${{ inputs.cluster_location }}
+          use_dns_based_endpoint: true
 
       - name: Sync argoCD application
         uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.5.0
@@ -151,20 +135,11 @@ jobs:
   notification:
     name: "Notification"
     runs-on: ubuntu-22.04
-    needs: [deploy-cms]
+    permissions: {}
+    needs: 
+      - deploy-cms
     if: ${{ always() }}
     steps:
-      - name: "Authentification to Google"
-        uses: "google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc09333" # v3.0.0
-        with:
-          workload_identity_provider: ${{ secrets.SECRETS_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.SECRETS_SERVICE_ACCOUNT }}
-      - name: "Get Secret"
-        id: "secrets"
-        uses: "google-github-actions/get-secretmanager-secrets@bc9c54b29fdffb8a47776820a7d26e77b379d262" # v3.0.0
-        with:
-          secrets: |-
-            SLACK_BOT_TOKEN:${{ inputs.secrets_project_id }}/passculture-ci-slack-bot-token
       - name: "Post to a Slack channel on success"
         if: ${{ always() && contains(needs.deploy-cms.result, 'success') }}
         uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e # v1.26.0
@@ -189,7 +164,7 @@ jobs:
               "unfurl_media": false
             }
         env:
-          SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       - name: "Post to a Slack channel on failure"
         if: ${{ always() && contains(needs.deploy-cms.result, 'failure') }}
         uses: slackapi/slack-github-action@70cd7be8e40a46e8b0eced40b0de447bdb42f68e # v1.26.0
@@ -214,4 +189,4 @@ jobs:
               "unfurl_media": false
             }
         env:
-          SLACK_BOT_TOKEN: ${{ steps.secrets.outputs.SLACK_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
