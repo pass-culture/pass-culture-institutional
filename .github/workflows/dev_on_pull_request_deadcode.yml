@@ -16,10 +16,30 @@ jobs:
         with:
           persist-credentials: false
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
-      - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+      # public_website and the CMS require different toolchains (Node 24 / Yarn 4
+      # vs Node 20 / Yarn 1), so each project is installed with its own version.
+      # ts-prune is static analysis, insensitive to the Node version used to run
+      # it, so the combined scan can run under whichever Node is active last.
+      - name: Setup Node for public_website
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: "public_website/.nvmrc"
-      - name: Install dependencies
-        run: yarn setup
+      - name: Enable corepack
+        run: corepack enable
+      - name: Install public_website dependencies
+        run: cd public_website && yarn install --immutable
+      - name: Setup Node for content_management_system
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version-file: "content_management_system/.nvmrc"
+      - name: Enable corepack
+        run: corepack enable
+      - name: Install content_management_system dependencies
+        run: cd content_management_system && yarn install
       - name: Dead code scan
+        # ts-prune runs through the root Yarn (1.x) which would reject
+        # public_website's "yarn >=4" engine constraint; ts-prune itself is
+        # version-insensitive, so engine checks are skipped for the scan only.
+        env:
+          YARN_IGNORE_ENGINES: "true"
         run: ./scripts/check_dead_code_introduced.sh

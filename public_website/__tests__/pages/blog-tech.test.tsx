@@ -13,18 +13,14 @@ describe('Blog tech', () => {
     }
   })
 
-  it(
-    'should pass accessibility tests',
-    async () => {
-      const { props } = await getStaticProps()
-      const { container } = render(<BlogTech {...props} />)
+  it('should pass accessibility tests', async () => {
+    const { props } = await getStaticProps()
+    const { container } = render(<BlogTech {...props} />)
 
-      let a11yResult
-      await act(async () => {
-        a11yResult = await axe(container)
-      })
-      expect(a11yResult).toHaveNoViolations()
-    },
-    { timeout: 10000 }
-  )
+    let a11yResult
+    await act(async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
+  }, 10000)
 })

@@ -22,11 +22,9 @@ type AttributeGetter = (
     | APIResponseData<'api::ressourcepass.ressourcepass'>
 ) => string
 const filterMappings: { [key: string]: AttributeGetter } = {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   [Options.Secteur]: (item) => item.attributes.secteur,
   [Options.Category]: (item) => item.attributes.category,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   [Options.Localisation]: (item) => item.attributes?.localisation,
   [Options.Partenariat]: (item) => item.attributes.category,

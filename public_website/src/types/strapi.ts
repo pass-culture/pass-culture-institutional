@@ -1,6 +1,6 @@
 /* eslint-disable */
 // Taken straight from https://strapi.io/blog/improve-your-frontend-experience-with-strapi-types-and-type-script
-import type { Attribute, Common, Utils } from '@strapi/strapi'
+import type { Attribute, Common, Utils } from '@strapi/types'
 
 type IDProperty = { id: number }
 

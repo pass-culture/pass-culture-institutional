@@ -49,7 +49,6 @@ interface BlockRendererProps {
 
 const COMPONENTS: Record<
   string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (props: ComponentProps<any>) => React.JSX.Element | null
 > = {
   'block.header': Header,
