@@ -11,6 +11,8 @@ jobs:
         with:
           persist-credentials: false
       - uses: pass-culture/common-workflows/actions/actionlint-check@b2eaf34df9945c76e68cffc6e4bf27037f6ea21a # actionlint/v0.2
+        with:
+          version: 0.3.0
   run_public_website_tests:
     runs-on: ubuntu-22.04
     steps:
