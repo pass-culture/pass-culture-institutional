@@ -5,7 +5,7 @@
   "description": "Le pass Culture, dispositif porté par le ministère de la Culture, a pour but de faciliter l'accès des jeunes de 18 ans à la culture en leur offrant un crédit de 150€ à dépenser sur l'application pass Culture.",
   "license": "MIT",
   "scripts": {
-    "build": "next build",
+    "build": "yarn generate-faq && yarn generate-sitemap && next build",
     "dev": "next dev --turbo",
     "start": "next start",
     "test": "vitest",
@@ -16,7 +16,7 @@
     "test:lint:fix": "eslint . --fix",
     "test:types": "next typegen && yarn tsc --noEmit",
     "postinstall": "node getFaqQuestions.js",
-    "prebuild": "node getFaqQuestions.js & yarn generate-sitemap",
+    "generate-faq": "FAQ_STRICT=true node getFaqQuestions.js",
     "generate-sitemap": "ts-node -P tsconfig.scripts.json ./scripts/generateSiteMap.ts"
   },
   "dependencies": {
@@ -25,7 +25,6 @@
     "firebase": "^12.14.0",
     "next": "16.2.9",
     "next-qrcode": "^2.5.1",
-    "node-fetch": "^2.7.0",
     "pure-react-carousel": "patch:pure-react-carousel@npm%3A1.35.0#~/.yarn/patches/pure-react-carousel-npm-1.35.0-4c539548d0.patch",
     "qs": "^6.15.2",
     "rc-slider": "^10.5.0",
