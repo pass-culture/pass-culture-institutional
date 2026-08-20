@@ -13,6 +13,11 @@ jobs:
       - uses: pass-culture/common-workflows/actions/actionlint-check@b2eaf34df9945c76e68cffc6e4bf27037f6ea21a # actionlint/v0.2
   run_public_website_tests:
     runs-on: ubuntu-22.04
+    # Tests must run offline: allow getFaqQuestions.js to write an empty
+    # faqData.json if Zendesk is unreachable. This flag is NEVER set on the
+    # production deploy workflow, so a real outage still fails the prod build.
+    env:
+      FAQ_ALLOW_EMPTY: "true"
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -21,6 +26,8 @@ jobs:
         with:
           node-version-file: "public_website/.nvmrc"
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
+      - name: Enable corepack
+        run: corepack enable
       - name: Install global dependencies
         run: yarn install
       - name: Install public_website dependencies
@@ -42,6 +49,8 @@ jobs:
         with:
           node-version-file: "content_management_system/.nvmrc"
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
+      - name: Enable corepack
+        run: corepack enable
       - name: Install global dependencies
         run: yarn install
       - name: Install content_management_system dependencies

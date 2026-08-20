@@ -1,4 +1,4 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Attribute } from '@strapi/types';
 
 export interface SimulatorSuccessScreen extends Schema.Component {
   collectionName: 'components_simulator_success_screens';

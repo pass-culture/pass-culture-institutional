@@ -16,6 +16,10 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
+    # Coverage runs the unit tests, which import the generated faqData.json.
+    # Allow an empty fallback so coverage works offline; never set on prod deploy.
+    env:
+      FAQ_ALLOW_EMPTY: "true"
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -30,9 +34,12 @@ jobs:
 
       - uses: pass-culture/common-workflows/actions/setup-safe-chain@5f7b7837d099ddbb8e4f2e15400434d41d78c51b
 
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0 
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          node-version: 'v20.20.2'
+          node-version: 'v24.17.0'
+
+      - name: Enable corepack
+        run: corepack enable
 
       - name: Install global dependencies
         run: yarn install

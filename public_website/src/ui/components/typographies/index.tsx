@@ -5,10 +5,10 @@ import { parseText } from '@/utils/parseText'
 
 interface HeadingProps {
   children: string
-  as?: keyof JSX.IntrinsicElements
+  as?: keyof React.JSX.IntrinsicElements
 }
 const getFilteredRest = (rest: ParsedTextProps) => {
-  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const { ['accessibilityLabel']: _, ...filterRest } = { ...rest }
   return filterRest
 }

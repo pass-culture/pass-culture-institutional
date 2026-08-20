@@ -65,7 +65,7 @@ export function SliderField({
   )
 
   const marks = useMemo(() => {
-    const computedMarks: { [key: number]: JSX.Element } = {}
+    const computedMarks: { [key: number]: React.JSX.Element } = {}
     options.forEach((option, index) => {
       computedMarks[index] = (
         <span aria-label={parseText(option).accessibilityLabel}>

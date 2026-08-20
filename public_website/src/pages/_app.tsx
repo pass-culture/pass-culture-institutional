@@ -54,7 +54,6 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
     <ThemeProvider theme={theme}>
       <BreadcrumbContext.Provider value={breadcrumbContextValue}>
         <GlobalStyles />
-        {/* eslint-disable-next-line react/no-unknown-property */}
         <style jsx global>{`
           html {
             font-family: ${montSerrat.style.fontFamily} !important;

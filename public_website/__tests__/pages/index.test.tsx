@@ -21,20 +21,16 @@ describe('Home page', () => {
     }
   })
 
-  it(
-    'should pass accessibility tests',
-    async () => {
-      const { props } = await getStaticProps()
-      const { container } = render(<Home {...props} />)
+  it('should pass accessibility tests', async () => {
+    const { props } = await getStaticProps()
+    const { container } = render(<Home {...props} />)
 
-      let a11yResult
-      await act(async () => {
-        a11yResult = await axe(container)
-      })
-      expect(a11yResult).toHaveNoViolations()
-    },
-    { timeout: 30000 }
-  )
+    let a11yResult
+    await act(async () => {
+      a11yResult = await axe(container)
+    })
+    expect(a11yResult).toHaveNoViolations()
+  }, 30000)
 
   describe('when eventName is defined in the cta and exists in EventMap', () => {
     it('should trigger event when clicking on the button', async () => {

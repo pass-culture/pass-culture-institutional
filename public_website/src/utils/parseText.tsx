@@ -3,7 +3,7 @@ import React from 'react'
 export const parseText = (
   text: string
 ): {
-  processedText: JSX.Element[]
+  processedText: React.JSX.Element[]
   accessibilityLabel: string
 } => {
   if (text) {

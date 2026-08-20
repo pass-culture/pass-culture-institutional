@@ -5,7 +5,7 @@ export const useDebounceCallback = <T>(
   func: UnaryVoidFunction<T>,
   wait: number
 ) => {
-  const timeout = useRef<NodeJS.Timeout>()
+  const timeout = useRef<NodeJS.Timeout | undefined>(undefined)
 
   const debouncedFunc = (arg: T): void => {
     if (timeout.current) clearTimeout(timeout.current)

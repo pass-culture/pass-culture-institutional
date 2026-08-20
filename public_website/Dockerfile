@@ -1,21 +1,23 @@
 ARG network_mode=default
 
 # Builder base
-FROM node:20-alpine AS base
-COPY package.json yarn.lock tsconfig.json /app/
+FROM node:24-alpine AS base
+RUN corepack enable
+COPY package.json yarn.lock tsconfig.json .yarnrc.yml /app/
+COPY .yarn/patches /app/.yarn/patches
 COPY *.js /app
 WORKDIR  /app
 
-# Builder simple 
-FROM base AS builder-default 
-RUN yarn install --frozen-lockfile
+# Builder simple
+FROM base AS builder-default
+RUN yarn install --immutable
 
 # Builder proxy
 FROM base AS builder-proxy
 COPY cacert.pem /cacert.pem
 ENV NODE_EXTRA_CA_CERTS='/cacert.pem'
-RUN yarn config set cafile '/cacert.pem' && \
-    yarn install --frozen-lockfile
+RUN yarn config set httpsCaFilePath '/cacert.pem' && \
+    yarn install --immutable
 
 # Runner
 FROM builder-${network_mode} AS runner
