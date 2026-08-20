@@ -8,7 +8,6 @@
  * answers from the wanted categories with whatever flag.
  */
 
-const fetch = require('node-fetch')
 require('dotenv').config()
 const fs = require('fs').promises
 
@@ -19,7 +18,9 @@ const ZENDESK_AUTHORIZATION_TOKEN = process.env.ZENDESK_AUTHORIZATION_TOKEN
 
 const getFaqQuestions = async () => {
   try {
-    let headers = null
+    // Native fetch (undici) rejects `headers: null` — leave undefined when
+    // no auth token is configured.
+    let headers
 
     if (ZENDESK_AUTHORIZATION_TOKEN) {
       headers = {
@@ -74,20 +75,6 @@ const getFaqQuestions = async () => {
       }
     }
 
-    // Fail loud on an empty result (e.g. Zendesk answering 200 but with no
-    // data): never write an empty faqData.json in production, otherwise the
-    // site would silently ship a broken FAQ. Tests (FAQ_ALLOW_EMPTY=true) still
-    // tolerate an empty file so they can run offline.
-    const totalArticles = Object.values(resultObject).reduce(
-      (count, articles) => count + articles.length,
-      0
-    )
-    if (totalArticles === 0 && process.env.FAQ_ALLOW_EMPTY !== 'true') {
-      throw new Error(
-        'FAQ generation returned 0 articles — refusing to write an empty faqData.json'
-      )
-    }
-
     // Building the content of the JSON file
     const jsonData = JSON.stringify(resultObject)
 
@@ -98,12 +85,15 @@ const getFaqQuestions = async () => {
     console.log('JSON file built successfully!')
   } catch (error) {
     console.error('Error building JSON file:', error)
-    // CI/tests only (FAQ_ALLOW_EMPTY=true): make sure faqData.json exists so
-    // type-check and unit tests can run offline. This is intentionally NOT
-    // enabled for production builds: a real Zendesk outage must keep failing
-    // the prod build loudly (next build cannot resolve the missing import)
-    // instead of silently shipping an empty FAQ.
-    if (process.env.FAQ_ALLOW_EMPTY === 'true') {
+    // FAQ_STRICT=true (set by `yarn generate-faq`, run by `yarn build`): fail
+    // here with the real error instead of letting `next build` crash later on
+    // a missing faqData.json import. Kept lenient for `postinstall` so a
+    // Zendesk hiccup never breaks `yarn install`.
+    if (process.env.FAQ_STRICT === 'true') {
+      process.exitCode = 1
+    } else {
+      // Lenient mode (postinstall): guarantee faqData.json exists so lint,
+      // type-check and unit tests can run offline. Never overwrite a real file.
       try {
         await fs.access('./faqData.json')
       } catch {

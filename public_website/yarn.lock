@@ -6567,7 +6567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.7.0, node-fetch@npm:^2.7.0":
+"node-fetch@npm:2.7.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -6913,7 +6913,6 @@ __metadata:
     msw: "npm:^2.14.6"
     next: "npm:16.2.9"
     next-qrcode: "npm:^2.5.1"
-    node-fetch: "npm:^2.7.0"
     prettier: "npm:~3.8.3"
     pure-react-carousel: "patch:pure-react-carousel@npm%3A1.35.0#~/.yarn/patches/pure-react-carousel-npm-1.35.0-4c539548d0.patch"
     qs: "npm:^6.15.2"

@@ -16,10 +16,6 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-    # Coverage runs the unit tests, which import the generated faqData.json.
-    # Allow an empty fallback so coverage works offline; never set on prod deploy.
-    env:
-      FAQ_ALLOW_EMPTY: "true"
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
