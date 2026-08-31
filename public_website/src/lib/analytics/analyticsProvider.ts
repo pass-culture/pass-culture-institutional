@@ -1,4 +1,9 @@
-import { Analytics, getAnalytics, logEvent } from 'firebase/analytics'
+import {
+  Analytics,
+  getAnalytics,
+  isSupported,
+  logEvent,
+} from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 
 import { analyticsConfig } from '@/lib/analytics/config'
@@ -59,10 +64,23 @@ export enum eventOriginsEnum {
 }
 
 export const analyticsProvider = {
-  init: () => {
+  init: async () => {
+    const supported = await isSupported()
+    if (!supported) {
+      console.warn('Firebase Analytics is not supported in this environment')
+      return
+    }
     const app = initializeApp(analyticsConfig)
     analyticsInstance = getAnalytics(app)
   },
-  logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) =>
-    logEvent<string>(analyticsInstance, eventName, options),
+  logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) => {
+    if (!analyticsInstance) {
+      console.warn(
+        'Firebase Analytics not initialized. Event not logged:',
+        eventName
+      )
+      return
+    }
+    logEvent<string>(analyticsInstance, eventName, options)
+  },
 }
