@@ -24,11 +24,7 @@ export default function MyApp({ Component, pageProps }: MyAppProps) {
   useTolkai(acceptedVendors)
 
   useEffect(() => {
-    if (isProd && hasAcceptedFirebase) {
-      analyticsProvider.init().catch(() => {
-        console.error('Failed to initialize Firebase Analytics')
-      })
-    }
+    if (isProd && hasAcceptedFirebase) analyticsProvider.init()
   }, [hasAcceptedFirebase])
 
   const path =

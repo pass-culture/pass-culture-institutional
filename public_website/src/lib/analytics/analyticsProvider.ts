@@ -65,13 +65,17 @@ export enum eventOriginsEnum {
 
 export const analyticsProvider = {
   init: async () => {
-    const supported = await isSupported()
-    if (!supported) {
-      console.warn('Firebase Analytics is not supported in this environment')
-      return
+    try {
+      const supported = await isSupported()
+      if (!supported) {
+        console.warn('Firebase Analytics is not supported in this environment')
+        return
+      }
+      const app = initializeApp(analyticsConfig)
+      analyticsInstance = getAnalytics(app)
+    } catch (error) {
+      console.error('Error initializing Firebase Analytics:', error)
     }
-    const app = initializeApp(analyticsConfig)
-    analyticsInstance = getAnalytics(app)
   },
   logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) => {
     if (!analyticsInstance) {
