@@ -9,6 +9,7 @@ import { initializeApp } from 'firebase/app'
 import { analyticsConfig } from '@/lib/analytics/config'
 
 let analyticsInstance: Analytics
+let initPromise: Promise<void> | null = null
 
 export type EventMap = {
   testEvent: { origin: 'testOrigin' }
@@ -64,27 +65,54 @@ export enum eventOriginsEnum {
 }
 
 export const analyticsProvider = {
-  init: async () => {
-    try {
-      const supported = await isSupported()
-      if (!supported) {
-        console.warn('Firebase Analytics is not supported in this environment')
-        return
+  init: () => {
+    if (initPromise) return initPromise
+
+    initPromise = (async () => {
+      try {
+        const supported = await isSupported()
+        if (!supported) {
+          console.warn(
+            'Firebase Analytics is not supported in this environment'
+          )
+          return
+        }
+        const app = initializeApp(analyticsConfig)
+        analyticsInstance = getAnalytics(app)
+      } catch (error) {
+        console.error('Error initializing Firebase Analytics:', error)
       }
-      const app = initializeApp(analyticsConfig)
-      analyticsInstance = getAnalytics(app)
-    } catch (error) {
-      console.error('Error initializing Firebase Analytics:', error)
-    }
+    })()
+
+    return initPromise
   },
   logEvent: <K extends keyof EventMap>(eventName: K, options: EventMap[K]) => {
-    if (!analyticsInstance) {
-      console.warn(
-        'Firebase Analytics not initialized. Event not logged:',
-        eventName
-      )
+    if (analyticsInstance) {
+      logEvent(analyticsInstance, eventName, options as Record<string, unknown>)
       return
     }
-    logEvent<string>(analyticsInstance, eventName, options)
+
+    if (initPromise) {
+      initPromise.then(() => {
+        if (analyticsInstance) {
+          logEvent(
+            analyticsInstance,
+            eventName,
+            options as Record<string, unknown>
+          )
+        } else {
+          console.warn(
+            'Firebase Analytics not initialized. Event not logged:',
+            eventName
+          )
+        }
+      })
+      return
+    }
+
+    console.warn(
+      'Firebase Analytics not initialized. Event not logged:',
+      eventName
+    )
   },
 }
