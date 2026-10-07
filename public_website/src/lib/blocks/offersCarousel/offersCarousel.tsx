@@ -15,6 +15,7 @@ import StyledBlocksRenderer from '@/ui/components/StyledBlocksRenderer'
 import { Typo } from '@/ui/components/typographies'
 import { cleanSlideAttributes } from '@/utils/carouselHelper'
 import { getMediaQuery } from '@/utils/getMediaQuery'
+import { isBlocksContentEmpty } from '@/utils/isBlocksContentEmpty'
 import { isRenderable } from '@/utils/isRenderable'
 import { stripTags } from '@/utils/stripTags'
 
@@ -55,11 +56,7 @@ export function OffersCarousel(props: OffersVideoCarouselProps) {
 
   const visibleSlides = getvisibleSlides
 
-  const descriptionIsEmpty =
-    !description ||
-    (description.length === 1 &&
-      description.at(0)?.children.at(0)?.type === 'text' &&
-      (description.at(0)?.children.at(0) as { text: string })?.text === '')
+  const descriptionIsEmpty = isBlocksContentEmpty(description)
 
   return (
     <StyledCarousel

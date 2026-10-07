@@ -92,57 +92,6 @@ export interface SimulatorAgeQuestion extends Schema.Component {
   };
 }
 
-export interface SharedSeo extends Schema.Component {
-  collectionName: 'components_shared_seos';
-  info: {
-    displayName: 'seo';
-    icon: 'search';
-  };
-  attributes: {
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 50;
-        maxLength: 160;
-      }>;
-    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
-    metaSocial: Attribute.Component<'shared.meta-social', true>;
-    keywords: Attribute.Text;
-    metaRobots: Attribute.String;
-    structuredData: Attribute.JSON;
-    metaViewport: Attribute.String;
-    canonicalURL: Attribute.String;
-  };
-}
-
-export interface SharedMetaSocial extends Schema.Component {
-  collectionName: 'components_shared_meta_socials';
-  info: {
-    displayName: 'metaSocial';
-    icon: 'project-diagram';
-  };
-  attributes: {
-    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
-      Attribute.Required;
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60;
-      }>;
-    description: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 65;
-      }>;
-    image: Attribute.Media<'images' | 'files' | 'videos'>;
-  };
-}
-
 export interface HomeRecommendationsSection extends Schema.Component {
   collectionName: 'components_home_recommendations_sections';
   info: {
@@ -204,26 +153,6 @@ export interface HomeEligibilityItems extends Schema.Component {
     description: Attribute.String & Attribute.Required;
     emoji: Attribute.String & Attribute.Required;
   };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
 }
 
 export interface HeaderNavigationItems extends Schema.Component {
@@ -585,6 +514,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: Attribute.Text;
     firstEmoji: Attribute.String;
     secondEmoji: Attribute.String;
+    url: Attribute.String;
   };
 }
 
@@ -643,6 +573,20 @@ export interface CommonKeyNumberItems extends Schema.Component {
   };
 }
 
+export interface CommonIconLinkItem extends Schema.Component {
+  collectionName: 'components_common_icon_link_items';
+  info: {
+    displayName: 'IconLinkItem';
+    description: '';
+  };
+  attributes: {
+    emoji: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    url: Attribute.String;
+  };
+}
+
 export interface CommonFiltre extends Schema.Component {
   collectionName: 'components_common_filtres';
   info: {
@@ -678,6 +622,77 @@ export interface CommonDetailedLogo extends Schema.Component {
     cta: Attribute.Component<'common.link'> & Attribute.Required;
     image: Attribute.Media<'images'> & Attribute.Required;
   };
+}
+
+export interface SharedSeo extends Schema.Component {
+  collectionName: 'components_shared_seos';
+  info: {
+    displayName: 'seo';
+    icon: 'search';
+  };
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 50;
+        maxLength: 160;
+      }>;
+    metaImage: Attribute.Media<'images' | 'files' | 'videos'>;
+    metaSocial: Attribute.Component<'shared.meta-social', true>;
+    keywords: Attribute.Text;
+    metaRobots: Attribute.String;
+    structuredData: Attribute.JSON;
+    metaViewport: Attribute.String;
+    canonicalURL: Attribute.String;
+  };
+}
+
+export interface SharedMetaSocial extends Schema.Component {
+  collectionName: 'components_shared_meta_socials';
+  info: {
+    displayName: 'metaSocial';
+    icon: 'project-diagram';
+  };
+  attributes: {
+    socialNetwork: Attribute.Enumeration<['Facebook', 'X']> &
+      Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60;
+      }>;
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 65;
+      }>;
+    image: Attribute.Media<'images' | 'files' | 'videos'>;
+  };
+}
+
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'Lists';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
 }
 
 export interface BlockVideo extends Schema.Component {
@@ -908,8 +923,9 @@ export interface BlockPushCta extends Schema.Component {
     description: Attribute.Text;
     image: Attribute.Media<'images'> & Attribute.Required;
     ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
-    qrCodeDescription: Attribute.String & Attribute.Required;
-    qrCodeUrl: Attribute.String & Attribute.Required;
+    qrCodeDescription: Attribute.String;
+    qrCodeUrl: Attribute.String;
+    isImageRight: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
@@ -989,6 +1005,41 @@ export interface BlockOfferList extends Schema.Component {
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
     ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface BlockObservatoryThemes extends Schema.Component {
+  collectionName: 'components_block_observatory_themes';
+  info: {
+    displayName: 'ObservatoryThemes';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks;
+    cta: Attribute.Component<'common.link'>;
+    themes: Attribute.Relation<
+      'block.observatory-themes',
+      'oneToMany',
+      'api::observatory-theme.observatory-theme'
+    >;
+  };
+}
+
+export interface BlockObservatoryArticles extends Schema.Component {
+  collectionName: 'components_block_observatory_articles';
+  info: {
+    displayName: 'ObservatoryArticles';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    theme: Attribute.Relation<
+      'block.observatory-articles',
+      'oneToOne',
+      'api::observatory-theme.observatory-theme'
+    >;
+    buttonText: Attribute.String & Attribute.DefaultTo<'Voir plus'>;
   };
 }
 
@@ -1110,6 +1161,18 @@ export interface BlockImageGallery extends Schema.Component {
   };
   attributes: {
     images: Attribute.Media<'images', true> & Attribute.Required;
+  };
+}
+
+export interface BlockIconLinksList extends Schema.Component {
+  collectionName: 'components_block_icon_links_lists';
+  info: {
+    displayName: 'IconLinksList';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    items: Attribute.Component<'common.icon-link-item', true>;
   };
 }
 
@@ -1281,14 +1344,10 @@ declare module '@strapi/types' {
       'simulator.answer': SimulatorAnswer;
       'simulator.amount-screen': SimulatorAmountScreen;
       'simulator.age-question': SimulatorAgeQuestion;
-      'shared.seo': SharedSeo;
-      'shared.meta-social': SharedMetaSocial;
       'home.recommendations-section': HomeRecommendationsSection;
       'home.hero-section': HomeHeroSection;
       'home.eligibility-section': HomeEligibilitySection;
       'home.eligibility-items': HomeEligibilityItems;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
       'header.navigation-items': HeaderNavigationItems;
       'header.mega-menu': HeaderMegaMenu;
       'header.login': HeaderLogin;
@@ -1307,9 +1366,14 @@ declare module '@strapi/types' {
       'common.little-list-component': CommonLittleListComponent;
       'common.link': CommonLink;
       'common.key-number-items': CommonKeyNumberItems;
+      'common.icon-link-item': CommonIconLinkItem;
       'common.filtre': CommonFiltre;
       'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
       'common.detailed-logo': CommonDetailedLogo;
+      'shared.seo': SharedSeo;
+      'shared.meta-social': SharedMetaSocial;
+      'footer.list': FooterList;
+      'footer.legal-links': FooterLegalLinks;
       'block.video': BlockVideo;
       'block.vertical-carousel': BlockVerticalCarousel;
       'block.tabs-simple-text': BlockTabsSimpleText;
@@ -1334,6 +1398,8 @@ declare module '@strapi/types' {
       'block.offers-section': BlockOffersSection;
       'block.offers-carousel': BlockOffersCarousel;
       'block.offer-list': BlockOfferList;
+      'block.observatory-themes': BlockObservatoryThemes;
+      'block.observatory-articles': BlockObservatoryArticles;
       'block.logos': BlockLogos;
       'block.little-list': BlockLittleList;
       'block.link': BlockLink;
@@ -1342,6 +1408,7 @@ declare module '@strapi/types' {
       'block.image': BlockImage;
       'block.image-text': BlockImageText;
       'block.image-gallery': BlockImageGallery;
+      'block.icon-links-list': BlockIconLinksList;
       'block.header': BlockHeader;
       'block.header-with-q-rcode': BlockHeaderWithQRcode;
       'block.faq': BlockFaq;

@@ -1,0 +1,73 @@
+{
+  "kind": "collectionType",
+  "collectionName": "observatories",
+  "info": {
+    "singularName": "observatory",
+    "pluralName": "observatories",
+    "displayName": "Observatoire - Articles",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "regex": "^(?!/).*"
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "theme": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::observatory-theme.observatory-theme",
+      "inversedBy": "articles"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::observatory-category.observatory-category",
+      "inversedBy": "articles"
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.image",
+        "block.simple-text-v2",
+        "block.video",
+        "block.double-push-cta",
+        "block.social-media",
+        "block.accordions-list",
+        "block.tabs-accordion",
+        "block.image-text",
+        "block.key-number-carousel",
+        "block.columns-text",
+        "block.icon-links-list",
+        "block.little-list"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "required": true
+    }
+  }
+}
