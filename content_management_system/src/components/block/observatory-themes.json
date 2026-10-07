@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_block_observatory_themes",
+  "info": {
+    "displayName": "ObservatoryThemes",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "common.link"
+    },
+    "themes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::observatory-theme.observatory-theme"
+    }
+  }
+}

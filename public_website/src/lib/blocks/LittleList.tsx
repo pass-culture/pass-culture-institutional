@@ -6,6 +6,8 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 import { MediaQueries } from '@/theme/media-queries'
 import { LittleListProps } from '@/types/props'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
+import { Link } from '@/ui/components/Link'
+import { LinkIcon } from '@/ui/components/link-icon/LinkIcon'
 import { OutlinedText } from '@/ui/components/OutlinedText'
 import { Typo } from '@/ui/components/typographies'
 import arrowUrl from '@/ui/image/arrowd.svg'
@@ -13,6 +15,9 @@ import { getMediaQuery } from '@/utils/getMediaQuery'
 import { isRenderable } from '@/utils/isRenderable'
 
 const MEDIA_QUERY = getMediaQuery(MediaQueries.MOBILE)
+
+type ListItem = NonNullable<LittleListProps['content']>[number]
+
 export function LittleList(props: LittleListProps) {
   const { title, description, content } = props
   const [collectionRefsOpened, setCollectionRefsOpened] = useState<number[]>([])
@@ -36,6 +41,42 @@ export function LittleList(props: LittleListProps) {
 
   const isMobile = width <= MEDIA_QUERY
 
+  const renderItemText = (item: ListItem, index: number) => {
+    // Linked items are not collapsible: a click opens the link
+    if (item.url) {
+      return (
+        <LinkedColumnText $isShow={false}>
+          <p>
+            <ItemLink href={item.url}>
+              {item.text}
+              <LinkIcon url={item.url} />
+            </ItemLink>
+          </p>
+          {item.description && <p>{item.description}</p>}
+        </LinkedColumnText>
+      )
+    }
+
+    if (isMobile) {
+      return (
+        <ColumnText
+          $isShow={!!item.description}
+          className={isOpen(index) ? 'open' : ''}
+          onClick={(): void => clickHandler(index)}>
+          <p>{item.text}</p>
+          {isOpen(index) && item.description && <p>{item.description}</p>}
+        </ColumnText>
+      )
+    }
+
+    return (
+      <ColumnText $isShow={!!item.description}>
+        <p>{item.text}</p>
+        <p>{item.description}</p>
+      </ColumnText>
+    )
+  }
+
   return (
     <Root>
       <Columns>
@@ -57,22 +98,7 @@ export function LittleList(props: LittleListProps) {
                   <OutlinedText shadow>{item.secondEmoji}</OutlinedText>
                 </ColumnEmoji>
 
-                {isMobile ? (
-                  <ColumnText
-                    $isShow={!!item.description}
-                    className={isOpen(index) ? 'open' : ''}
-                    onClick={(): void => clickHandler(index)}>
-                    <p>{item.text}</p>
-                    {isOpen(index)
-                      ? item.description && <p>{item.description}</p>
-                      : null}
-                  </ColumnText>
-                ) : (
-                  <ColumnText $isShow={!!item.description}>
-                    <p>{item.text}</p>
-                    <p>{item.description}</p>
-                  </ColumnText>
-                )}
+                {renderItemText(item, index)}
               </ColumnContent>
             )
           })}
@@ -138,6 +164,7 @@ const Description = styled(Typo.Body)`
 
 const ColumnContent = styled.div`
   ${({ theme }) => css`
+    position: relative;
     display: flex;
     gap: 2rem;
     @media (width < ${theme.mediaQueries.mobile}) {
@@ -233,4 +260,27 @@ const ColumnText = styled.div<{ $isShow?: boolean }>`
       }
     }
   `}
+`
+
+// The title must not be positioned, otherwise it bounds the link overlay
+const LinkedColumnText = styled(ColumnText)`
+  p:nth-child(1) {
+    position: static;
+  }
+`
+
+// The link covers the whole item so that it is entirely clickable
+const ItemLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 `

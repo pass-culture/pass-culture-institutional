@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "observatory_categories",
+  "info": {
+    "singularName": "observatory-category",
+    "pluralName": "observatory-categories",
+    "displayName": "Observatoire - Catégories",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::observatory.observatory",
+      "mappedBy": "category"
+    }
+  }
+}

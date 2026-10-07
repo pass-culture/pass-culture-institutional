@@ -24,6 +24,12 @@
       "component": "block.push-cta",
       "required": true
     },
+    "observatorySection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "block.push-cta",
+      "required": false
+    },
     "socialMediaSection": {
       "type": "component",
       "repeatable": false,

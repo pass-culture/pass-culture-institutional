@@ -21,6 +21,7 @@ export const getPage = async (
   | APIResponseData<'api::liste-offre.liste-offre'>
   | APIResponseData<'api::presse.presse'>
   | APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+  | APIResponseData<'api::observatory.observatory'>[]
 > => {
   const apiEndpoint =
     queryParams.trim().length > 0 ? `/${section}?${queryParams}` : `/${section}`
@@ -41,6 +42,7 @@ export const getPage = async (
     | APIResponseData<'api::liste-offre.liste-offre'>
     | APIResponseData<'api::presse.presse'>
     | APIResponseData<'api::etudes-pass-culture.etudes-pass-culture'>
+    | APIResponseData<'api::observatory.observatory'>[]
   >(apiEndpoint)
   const { data } = response
   return data

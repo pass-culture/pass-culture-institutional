@@ -6,6 +6,7 @@ import styled, { css } from 'styled-components'
 import { ContentWrapper } from '../ContentWrapper'
 import { ChevronDown } from '../icons/ChevronDown'
 import { BreadcrumbContext } from './breadcrumb-context'
+import { OBSERVATORY_PATHS } from '@/domain/pages/pages.path'
 import { useOnClickAnalytics } from '@/hooks/useOnClickAnalytics'
 import BlockRendererWithCondition from '@/lib/BlockRendererWithCondition'
 import { Separator } from '@/lib/blocks/Separator'
@@ -74,6 +75,13 @@ export function Breadcrumb(props: BreadcrumbProps) {
     return (
       typeof params?.['slug'] === 'string' &&
       pathname.startsWith('/reglements/')
+    )
+  }
+
+  const isObservatoryArticle = (): boolean => {
+    return (
+      typeof params?.['slug'] === 'string' &&
+      pathname.startsWith(`${OBSERVATORY_PATHS.ARTICLES}/`)
     )
   }
 
@@ -157,6 +165,11 @@ export function Breadcrumb(props: BreadcrumbProps) {
           {isResource() && (
             <StyledSimpleLink>
               <Link href="/ressources-pass-culture">Ressources</Link>
+            </StyledSimpleLink>
+          )}
+          {isObservatoryArticle() && (
+            <StyledSimpleLink>
+              <Link href={OBSERVATORY_PATHS.ROOT}>Observatoire</Link>
             </StyledSimpleLink>
           )}
           {isBlogTech() && (

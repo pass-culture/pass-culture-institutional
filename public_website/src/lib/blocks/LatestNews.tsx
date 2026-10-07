@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
+import { OBSERVATORY_PATHS } from '@/domain/pages/pages.path'
 import type { CTA } from '@/types/CTA'
 import type { LatestNewsProps } from '@/types/props'
 import { ButtonWithCTA } from '@/ui/components/buttonWithCTA/ButtonWithCTA'
@@ -9,6 +10,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { NewsCard } from '@/ui/components/news-card/NewsCard'
 import { Typo } from '@/ui/components/typographies'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { getItemCategory } from '@/utils/getItemCategory'
 import { isRenderable } from '@/utils/isRenderable'
 
 const NEWS_TYPE_TO_SLUG_PREFIX = {
@@ -16,6 +18,7 @@ const NEWS_TYPE_TO_SLUG_PREFIX = {
   blogtech: '/blog-tech/',
   resources: '/ressources/',
   'rubrique-instit': '/rubrique-instit/',
+  observatory: `${OBSERVATORY_PATHS.ARTICLES}/`,
 } as const
 
 export function LatestNews(props: LatestNewsProps) {
@@ -34,11 +37,7 @@ export function LatestNews(props: LatestNewsProps) {
               <li key={fullSlug}>
                 <NewsCard
                   title={item.attributes.title}
-                  category={
-                    'category' in item.attributes
-                      ? item.attributes.category
-                      : 'Article'
-                  }
+                  category={getItemCategory(item.attributes)}
                   date={item.attributes.date}
                   imageUrl={
                     item.attributes.image &&

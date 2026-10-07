@@ -52,7 +52,10 @@
         "block.tabs-little-list",
         "block.tabs-image-text",
         "block.tabs-accordion",
-        "block.accordions-list"
+        "block.accordions-list",
+        "block.observatory-themes",
+        "block.observatory-articles",
+        "block.icon-links-list"
       ]
     },
     "seo": {

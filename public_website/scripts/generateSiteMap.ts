@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 
 import { Pages } from '../src/domain/pages/pages.output'
-import { PATHS } from '../src/domain/pages/pages.path'
+import { OBSERVATORY_PATHS, PATHS } from '../src/domain/pages/pages.path'
 
 const FILES_TO_IGNORE = [
   '_app.tsx',
@@ -33,6 +33,12 @@ const SITEMAP_SECTIONS: SitemapSection[] = [
   { path: PATHS.BLOGTECH, prefix: 'blog-tech', name: 'blog-tech' },
   { path: PATHS.EVENTS, prefix: 'evenement', name: 'events' },
   { path: PATHS.NEWS, prefix: 'actualite', name: 'actualites' },
+  {
+    path: PATHS.OBSERVATORIES,
+    // Prefixes have no leading slash
+    prefix: OBSERVATORY_PATHS.ARTICLES.slice(1),
+    name: 'observatoire',
+  },
 ]
 
 function listStaticPages() {

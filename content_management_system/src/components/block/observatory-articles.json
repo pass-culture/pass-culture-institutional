@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_block_observatory_articles",
+  "info": {
+    "displayName": "ObservatoryArticles",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::observatory-theme.observatory-theme"
+    },
+    "buttonText": {
+      "type": "string",
+      "default": "Voir plus"
+    }
+  }
+}
