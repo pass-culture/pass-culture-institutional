@@ -70,7 +70,7 @@ jobs:
         service_account: ${{ vars.SITE_INSTIT_CD_SERVICE_ACCOUNT }}
     - name: build image
       id: 'build'
-      uses: pass-culture/common-workflows/actions/build-docker-image@main
+      uses: pass-culture/common-workflows/actions/build-docker-image@7ebd9f4b39a558370a8a7a125413f1faad7d638c # build-docker-image/v0.3.0
       with:
         image: pc-institutional 
         push: true 
@@ -98,7 +98,7 @@ jobs:
         service_account: ${{ vars.SITE_INSTIT_CD_SERVICE_ACCOUNT }}
     - name: build image
       id: 'build'
-      uses: pass-culture/common-workflows/actions/build-docker-image@main
+      uses: pass-culture/common-workflows/actions/build-docker-image@7ebd9f4b39a558370a8a7a125413f1faad7d638c # build-docker-image/v0.3.0
       with:
         image: pc-institutional-public-site-preview
         push: true 
@@ -109,6 +109,9 @@ jobs:
 
   deploy-cms-testing:
     uses: ./.github/workflows/reusable_cms_deploy.yml
+    permissions:
+      id-token: write
+      contents: read
     needs:
       - build-image-cms
       - build-image-public-site-preview
@@ -128,6 +131,9 @@ jobs:
     needs:
       - deploy-cms-testing
     uses: ./.github/workflows/reusable_public_site_deploy.yml
+    permissions:
+      id-token: write
+      contents: read
     with:
       environment: testing
       cms_url: https://siteinstit-cms.testing.passculture.team
