@@ -24,4 +24,12 @@ export const PATHS = {
   BLOGTECH: 'blogtech-list',
   RUBRIQUE_INSTIT: 'rubrique-instit-list',
   RUBRIQUE_INSTIT_PAGE: 'rubrique-instit-pass-culture',
+  OBSERVATORIES: 'observatories',
 }
+
+// Website routes of the Observatory. ROOT is not a Next.js page: it is served
+// by `[...slug].tsx`, so a CMS page with the `observatoire` Path must exist.
+export const OBSERVATORY_PATHS = {
+  ROOT: '/observatoire',
+  ARTICLES: '/observatoire/articles',
+} as const

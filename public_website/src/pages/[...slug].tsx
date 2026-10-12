@@ -11,6 +11,7 @@ import { PageWrapper } from '@/theme/style'
 import type { APIResponseData } from '@/types/strapi'
 import { Breadcrumb } from '@/ui/components/breadcrumb/Breadcrumb'
 import { fetchLayoutData } from '@/utils/fetchCMS'
+import { withObservatoryArticles } from '@/utils/fetchObservatoryArticles'
 
 interface CustomPageProps {
   data: APIResponseData<'api::page.page'>
@@ -97,6 +98,9 @@ export const getStaticProps = (async ({ params }) => {
       'Blocks.tab.block.accordions.simpleText.columns',
       'Blocks.tab.block.accordions.simpleText.columns.text',
       'Blocks.centered.title',
+      'Blocks.themes',
+      'Blocks.themes.image',
+      'Blocks.theme',
       'seo',
       'seo.metaSocial',
       'seo.metaSocial.image',
@@ -111,6 +115,9 @@ export const getStaticProps = (async ({ params }) => {
   if (response.length === 0) {
     return { notFound: true }
   }
+
+  const page = response[0]!
+  page.attributes.Blocks = await withObservatoryArticles(page.attributes.Blocks)
 
   const eventQuery = stringify({
     sort: ['date:desc'],
@@ -127,7 +134,7 @@ export const getStaticProps = (async ({ params }) => {
   return {
     props: {
       ...(await fetchLayoutData()),
-      data: response[0]!,
+      data: page,
       eventsData: events,
     },
   }

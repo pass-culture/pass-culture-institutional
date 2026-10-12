@@ -14,7 +14,9 @@ import { getStrapiURL } from '@/utils/apiHelpers'
 import { isRenderable } from '@/utils/isRenderable'
 import { parseText } from '@/utils/parseText'
 
-export function PushCTA(props: PushCTAProps & QRCodeProps) {
+export function PushCTA(
+  props: PushCTAProps & QRCodeProps & { isImageRight?: boolean | null }
+) {
   const { SVG: QrCode } = useQRCode()
   const {
     className = '',
@@ -25,35 +27,41 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
     qrCodeDescription,
     image,
     qrCodeUrl,
+    isImageRight,
   } = props
+
+  // Existing entries created before this field was added return null
+  const imageOnRight = isImageRight ?? false
 
   const { onClickAnalytics } = useOnClickAnalytics()
 
   const image_props = image?.data?.attributes?.url
 
   return (
-    <Root className={className}>
+    <Root className={className} $isImageRight={imageOnRight}>
       <BlockRendererWithCondition condition={isRenderable(image_props)}>
-        <CardContainer>
+        <CardContainer $isImageRight={imageOnRight}>
           <Card $imageUrl={getStrapiURL(image_props)}>
-            <QRCodeCard>
-              <QrCode
-                text={qrCodeUrl}
-                options={{
-                  width: 100,
-                  margin: 2,
-                  color: { dark: theme.colors.secondary },
-                }}
-              />
-              <p>{qrCodeDescription}</p>
-            </QRCodeCard>
+            <BlockRendererWithCondition condition={isRenderable(qrCodeUrl)}>
+              <QRCodeCard>
+                <QrCode
+                  text={qrCodeUrl as string}
+                  options={{
+                    width: 100,
+                    margin: 2,
+                    color: { dark: theme.colors.secondary },
+                  }}
+                />
+                <p>{qrCodeDescription}</p>
+              </QRCodeCard>
+            </BlockRendererWithCondition>
           </Card>
           <BlockRendererWithCondition condition={isRenderable(icon)}>
             <OutlinedText>{icon}</OutlinedText>
           </BlockRendererWithCondition>
         </CardContainer>
       </BlockRendererWithCondition>
-      <RightSide>
+      <TextSide $isImageRight={imageOnRight}>
         <Typo.Heading2>{title}</Typo.Heading2>
         <BlockRendererWithCondition condition={isRenderable(description)}>
           <p aria-label={parseText(description as string).accessibilityLabel}>
@@ -70,20 +78,20 @@ export function PushCTA(props: PushCTAProps & QRCodeProps) {
           }>
           <span>{ctaLink.Label}</span>
         </CtaLink>
-      </RightSide>
+      </TextSide>
     </Root>
   )
 }
 
-const Root = styled(ContentWrapper)`
-  ${({ theme }) => css`
+const Root = styled(ContentWrapper)<{ $isImageRight: boolean }>`
+  ${({ theme, $isImageRight }) => css`
     background-color: ${theme.colors.sky};
     max-width: 80rem;
     margin: 0 auto;
     gap: 5.625rem;
     border-radius: ${theme.radius.sm};
     display: grid;
-    grid-template-columns: 1fr 1.25fr;
+    grid-template-columns: ${$isImageRight ? '1.25fr 1fr' : '1fr 1.25fr'};
     position: relative;
     margin-top: calc(var(--module-margin) + 1.5625rem);
     margin-bottom: calc(var(--module-margin) + 1.5625rem);
@@ -112,11 +120,21 @@ const Root = styled(ContentWrapper)`
   `}
 `
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ $isImageRight: boolean }>`
   position: relative;
   z-index: 1;
-  margin: -3.125rem 0 -3.125rem 5rem;
+  margin: ${({ $isImageRight }) =>
+    $isImageRight
+      ? '-3.125rem 5rem -3.125rem 0'
+      : '-3.125rem 0 -3.125rem 5rem'};
   max-width: 28rem;
+  order: ${({ $isImageRight }) => ($isImageRight ? 2 : 1)};
+  ${({ $isImageRight }) =>
+    $isImageRight &&
+    css`
+      justify-self: end;
+      width: 100%;
+    `}
 
   @media (width < ${theme.mediaQueries.tablet}) {
     margin: 0 auto;
@@ -169,11 +187,12 @@ const QRCodeCard = styled.div`
     }
   `}
 `
-const RightSide = styled.div`
-  ${({ theme }) => css`
+const TextSide = styled.div<{ $isImageRight: boolean }>`
+  ${({ theme, $isImageRight }) => css`
     position: relative;
-    padding: 6.25rem 0;
+    padding: ${$isImageRight ? '6.25rem 0 6.25rem 5rem' : '6.25rem 0'};
     max-width: 32rem;
+    order: ${$isImageRight ? 1 : 2};
 
     h2 {
       margin-bottom: 1.25rem;

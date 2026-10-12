@@ -29,6 +29,7 @@ export default function Home({
     aboutSection,
     eligibilitySection,
     CTASection,
+    observatorySection,
     recommendationsSection,
     socialMediaSection,
   } = homeData.attributes
@@ -74,6 +75,20 @@ export default function Home({
         cardSecondEmoji={eligibilitySection.secondEmoji}
       />
       <Separator isActive={false} />
+      {observatorySection && (
+        <React.Fragment>
+          <PushCTA
+            title={observatorySection.title}
+            description={observatorySection.description}
+            image={observatorySection.image}
+            ctaLink={observatorySection.ctaLink}
+            qrCodeDescription={observatorySection.qrCodeDescription}
+            qrCodeUrl={observatorySection.qrCodeUrl}
+            isImageRight={observatorySection.isImageRight}
+          />
+          <Separator isActive={false} />
+        </React.Fragment>
+      )}
       <PushCTA
         title={CTASection.title}
         description={CTASection.description}
@@ -81,6 +96,7 @@ export default function Home({
         ctaLink={CTASection.ctaLink}
         qrCodeDescription={CTASection.qrCodeDescription}
         qrCodeUrl={CTASection.qrCodeUrl}
+        isImageRight={CTASection.isImageRight}
       />
       <Separator isActive={false} />
       <BlockRendererWithCondition condition={recommendationItems.length > 0}>
@@ -115,6 +131,9 @@ export const getStaticProps = (async () => {
       'CTASection',
       'CTASection.image',
       'CTASection.ctaLink',
+      'observatorySection',
+      'observatorySection.image',
+      'observatorySection.ctaLink',
       'recommendationsSection.cta',
       'recommendationsSection.recommendations.items',
       'recommendationsSection.recommendations.items.image',

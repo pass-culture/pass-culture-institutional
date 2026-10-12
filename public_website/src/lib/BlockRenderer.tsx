@@ -9,6 +9,7 @@ import { Faq } from './blocks/Faq'
 import { Header } from './blocks/Header'
 import { Headertest } from './blocks/HeaderTest'
 import { HeaderWithQRCode } from './blocks/HeaderWithQRCode'
+import { IconLinksList } from './blocks/IconLinksList'
 import { Imageblock } from './blocks/Image'
 import { ImageGallery } from './blocks/ImageGallery'
 import { ImageText } from './blocks/ImageText'
@@ -20,6 +21,8 @@ import { LittleList } from './blocks/LittleList'
 import { LogoCarousel } from './blocks/logoCarousel/logoCarousel'
 import { LogoCarouselSlide } from './blocks/logoCarousel/logoCarouselSlide'
 import { Logos } from './blocks/Logos'
+import { ObservatoryArticles } from './blocks/ObservatoryArticles'
+import { ObservatoryThemes } from './blocks/ObservatoryThemes'
 import { OffersCarousel } from './blocks/offersCarousel/offersCarousel'
 import { OrganizationChart } from './blocks/OrganizationChart'
 import { PiledCards } from './blocks/PiledCards/PiledCards'
@@ -75,6 +78,9 @@ const COMPONENTS: Record<
   'block.separator': Separator,
   'block.simple-push-cta': SimplePushCta,
   'block.offers-carousel': OffersCarousel,
+  'block.observatory-themes': ObservatoryThemes,
+  'block.observatory-articles': ObservatoryArticles,
+  'block.icon-links-list': IconLinksList,
   'block.piled-cards': PiledCards,
   'block.faq': Faq,
   'block.organization-chart': OrganizationChart,

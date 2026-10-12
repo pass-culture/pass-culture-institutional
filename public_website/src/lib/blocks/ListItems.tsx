@@ -8,6 +8,7 @@ import type { APIResponseData } from '@/types/strapi'
 import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { ListCard } from '@/ui/components/list-card/ListCard'
 import { getStrapiURL } from '@/utils/apiHelpers'
+import { getItemCategory } from '@/utils/getItemCategory'
 
 export function ListItems(
   props: Omit<
@@ -18,6 +19,7 @@ export function ListItems(
         | APIResponseData<'api::resource.resource'>[]
         | APIResponseData<'api::blogtech.blogtech'>[]
         | APIResponseData<'api::rubrique-instit.rubrique-instit'>[]
+        | APIResponseData<'api::observatory.observatory'>[]
     },
     'events'
   >
@@ -42,11 +44,7 @@ export function ListItems(
             <ListCard
               type={type}
               title={newsItem.attributes.title}
-              category={
-                'category' in newsItem.attributes
-                  ? newsItem.attributes.category
-                  : 'Article'
-              }
+              category={getItemCategory(newsItem.attributes)}
               date={newsItem.attributes.date}
               imageUrl={
                 newsItem.attributes.image?.data?.attributes?.url &&

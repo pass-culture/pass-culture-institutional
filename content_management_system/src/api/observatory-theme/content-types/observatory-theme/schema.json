@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "observatory_themes",
+  "info": {
+    "singularName": "observatory-theme",
+    "pluralName": "observatory-themes",
+    "displayName": "Observatoire - Thématiques",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
+    },
+    "firstIcon": {
+      "type": "string"
+    },
+    "secondIcon": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "purple",
+        "yellow",
+        "magenta",
+        "orange",
+        "green",
+        "gold",
+        "sky",
+        "lila",
+        "deeppink",
+        "aquamarine",
+        "lightgray",
+        "saumon"
+      ],
+      "default": "lila"
+    },
+    "pageUrl": {
+      "type": "string"
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::observatory.observatory",
+      "mappedBy": "theme"
+    }
+  }
+}

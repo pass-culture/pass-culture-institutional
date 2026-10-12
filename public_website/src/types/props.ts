@@ -170,9 +170,9 @@ export type HeaderNavigationItemProps = {
 }
 
 export type QRCodeProps = {
-  qrCodeDescription: string
+  qrCodeDescription?: string
   ctaLink: CTA
-  qrCodeUrl: string
+  qrCodeUrl?: string
 }
 
 export type PushCTAProps = {
@@ -301,6 +301,42 @@ export type OffersCarouselSlideProps = {
   text: string
   theme: ItemsTheme
 }
+
+export type ObservatoryThemesProps = {
+  title: string
+  description?: BlocksContent
+  cta?: CTA
+  themes?: {
+    data: APIResponseData<'api::observatory-theme.observatory-theme'>[]
+  }
+}
+
+export type IconLinksListProps = {
+  title?: string | null
+  items?: {
+    id: number
+    emoji: string
+    title: string
+    description?: string | null
+    url?: string | null
+  }[]
+}
+
+export type ObservatoryArticlesProps = {
+  title?: string | null
+  buttonText?: string | null
+  /** Articles of the block theme, added at build time */
+  articles?: APIResponseData<'api::observatory.observatory'>[]
+}
+
+export type ObservatoryThemeCardProps = {
+  name: string
+  color?: ItemsTheme | null
+  imageUrl?: string
+  firstIcon?: string | null
+  secondIcon?: string | null
+  url?: string | null
+}
 export type VerticalCarouselProps = {
   title: string
   items: Omit<VerticalCarouselSlideProps, 'slideIndex'>[]
@@ -380,9 +416,15 @@ export type LatestNewsProps = {
     | APIResponseData<'api::news.news'>[]
     | APIResponseData<'api::resource.resource'>[]
     | APIResponseData<'api::blogtech.blogtech'>[]
+    | APIResponseData<'api::observatory.observatory'>[]
   cta?: CTA
   className?: string
-  newsType: 'news' | 'blogtech' | 'resources' | 'rubrique-instit'
+  newsType:
+    | 'news'
+    | 'blogtech'
+    | 'resources'
+    | 'rubrique-instit'
+    | 'observatory'
 }
 export type OrganizationChartProps = {
   title?: string
@@ -526,6 +568,7 @@ type ContentItem = {
   description: string | null
   firstEmoji: string
   secondEmoji: string
+  url?: string | null
 }
 export type LittleListProps = {
   title?: string

@@ -2,6 +2,10 @@
  * page controller
  */
 
-import { factories } from '@strapi/strapi'
+import { factories } from "@strapi/strapi";
 
-export default factories.createCoreController('api::page.page');
+import { withPublicReadRelations } from "../../../utils/public-read-relations";
+
+export default factories.createCoreController("api::page.page", () =>
+  withPublicReadRelations()
+);

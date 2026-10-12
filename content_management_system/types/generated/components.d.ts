@@ -206,6 +206,26 @@ export interface HomeEligibilityItems extends Schema.Component {
   };
 }
 
+export interface FooterList extends Schema.Component {
+  collectionName: 'components_footer_lists';
+  info: {
+    displayName: 'Lists';
+    description: '';
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required;
+    Links: Attribute.Component<'common.link', true>;
+  };
+}
+
+export interface FooterLegalLinks extends Schema.Component {
+  collectionName: 'components_footer_legal_links';
+  info: {
+    displayName: 'LegalLinks';
+  };
+  attributes: {};
+}
+
 export interface HeaderNavigationItems extends Schema.Component {
   collectionName: 'components_header_navigation_items';
   info: {
@@ -379,26 +399,6 @@ export interface HeaderAccountDropdown extends Schema.Component {
     items: Attribute.Component<'header.account-item', true> &
       Attribute.Required;
   };
-}
-
-export interface FooterList extends Schema.Component {
-  collectionName: 'components_footer_lists';
-  info: {
-    displayName: 'Lists';
-    description: '';
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required;
-    Links: Attribute.Component<'common.link', true>;
-  };
-}
-
-export interface FooterLegalLinks extends Schema.Component {
-  collectionName: 'components_footer_legal_links';
-  info: {
-    displayName: 'LegalLinks';
-  };
-  attributes: {};
 }
 
 export interface CommonVerticalCarouselItem extends Schema.Component {
@@ -585,6 +585,7 @@ export interface CommonLittleListComponent extends Schema.Component {
     description: Attribute.Text;
     firstEmoji: Attribute.String;
     secondEmoji: Attribute.String;
+    url: Attribute.String;
   };
 }
 
@@ -640,6 +641,20 @@ export interface CommonKeyNumberItems extends Schema.Component {
     thirdEmoji: Attribute.String;
     title: Attribute.String;
     description: Attribute.Text;
+  };
+}
+
+export interface CommonIconLinkItem extends Schema.Component {
+  collectionName: 'components_common_icon_link_items';
+  info: {
+    displayName: 'IconLinkItem';
+    description: '';
+  };
+  attributes: {
+    emoji: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    url: Attribute.String;
   };
 }
 
@@ -908,8 +923,9 @@ export interface BlockPushCta extends Schema.Component {
     description: Attribute.Text;
     image: Attribute.Media<'images'> & Attribute.Required;
     ctaLink: Attribute.Component<'common.link'> & Attribute.Required;
-    qrCodeDescription: Attribute.String & Attribute.Required;
-    qrCodeUrl: Attribute.String & Attribute.Required;
+    qrCodeDescription: Attribute.String;
+    qrCodeUrl: Attribute.String;
+    isImageRight: Attribute.Boolean & Attribute.DefaultTo<false>;
   };
 }
 
@@ -989,6 +1005,41 @@ export interface BlockOfferList extends Schema.Component {
     firstIcon: Attribute.String & Attribute.Required;
     secondIcon: Attribute.String & Attribute.Required;
     ctaCard: Attribute.Component<'common.link'> & Attribute.Required;
+  };
+}
+
+export interface BlockObservatoryThemes extends Schema.Component {
+  collectionName: 'components_block_observatory_themes';
+  info: {
+    displayName: 'ObservatoryThemes';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Blocks;
+    cta: Attribute.Component<'common.link'>;
+    themes: Attribute.Relation<
+      'block.observatory-themes',
+      'oneToMany',
+      'api::observatory-theme.observatory-theme'
+    >;
+  };
+}
+
+export interface BlockObservatoryArticles extends Schema.Component {
+  collectionName: 'components_block_observatory_articles';
+  info: {
+    displayName: 'ObservatoryArticles';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    theme: Attribute.Relation<
+      'block.observatory-articles',
+      'oneToOne',
+      'api::observatory-theme.observatory-theme'
+    >;
+    buttonText: Attribute.String & Attribute.DefaultTo<'Voir plus'>;
   };
 }
 
@@ -1110,6 +1161,18 @@ export interface BlockImageGallery extends Schema.Component {
   };
   attributes: {
     images: Attribute.Media<'images', true> & Attribute.Required;
+  };
+}
+
+export interface BlockIconLinksList extends Schema.Component {
+  collectionName: 'components_block_icon_links_lists';
+  info: {
+    displayName: 'IconLinksList';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    items: Attribute.Component<'common.icon-link-item', true>;
   };
 }
 
@@ -1287,6 +1350,8 @@ declare module '@strapi/types' {
       'home.hero-section': HomeHeroSection;
       'home.eligibility-section': HomeEligibilitySection;
       'home.eligibility-items': HomeEligibilityItems;
+      'footer.list': FooterList;
+      'footer.legal-links': FooterLegalLinks;
       'header.navigation-items': HeaderNavigationItems;
       'header.mega-menu': HeaderMegaMenu;
       'header.login': HeaderLogin;
@@ -1294,8 +1359,6 @@ declare module '@strapi/types' {
       'header.header': HeaderHeader;
       'header.account-item': HeaderAccountItem;
       'header.account-dropdown': HeaderAccountDropdown;
-      'footer.list': FooterList;
-      'footer.legal-links': FooterLegalLinks;
       'common.vertical-carousel-item': CommonVerticalCarouselItem;
       'common.simple-text-column': CommonSimpleTextColumn;
       'common.piled-card-item': CommonPiledCardItem;
@@ -1307,6 +1370,7 @@ declare module '@strapi/types' {
       'common.little-list-component': CommonLittleListComponent;
       'common.link': CommonLink;
       'common.key-number-items': CommonKeyNumberItems;
+      'common.icon-link-item': CommonIconLinkItem;
       'common.filtre': CommonFiltre;
       'common.experience-video-carousel-item': CommonExperienceVideoCarouselItem;
       'common.detailed-logo': CommonDetailedLogo;
@@ -1334,6 +1398,8 @@ declare module '@strapi/types' {
       'block.offers-section': BlockOffersSection;
       'block.offers-carousel': BlockOffersCarousel;
       'block.offer-list': BlockOfferList;
+      'block.observatory-themes': BlockObservatoryThemes;
+      'block.observatory-articles': BlockObservatoryArticles;
       'block.logos': BlockLogos;
       'block.little-list': BlockLittleList;
       'block.link': BlockLink;
@@ -1342,6 +1408,7 @@ declare module '@strapi/types' {
       'block.image': BlockImage;
       'block.image-text': BlockImageText;
       'block.image-gallery': BlockImageGallery;
+      'block.icon-links-list': BlockIconLinksList;
       'block.header': BlockHeader;
       'block.header-with-q-rcode': BlockHeaderWithQRcode;
       'block.faq': BlockFaq;

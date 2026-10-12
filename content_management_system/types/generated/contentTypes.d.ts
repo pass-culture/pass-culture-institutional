@@ -1099,6 +1099,7 @@ export interface ApiHomeHome extends Schema.SingleType {
     aboutSection: Attribute.Component<'block.centered-text'> &
       Attribute.Required;
     CTASection: Attribute.Component<'block.push-cta'> & Attribute.Required;
+    observatorySection: Attribute.Component<'block.push-cta'>;
     socialMediaSection: Attribute.Component<'block.social-media'> &
       Attribute.Required;
     latestStudies: Attribute.Component<'block.latest-news'> &
@@ -1330,6 +1331,167 @@ export interface ApiNotFoundNotFound extends Schema.SingleType {
   };
 }
 
+export interface ApiObservatoryObservatory extends Schema.CollectionType {
+  collectionName: 'observatories';
+  info: {
+    singularName: 'observatory';
+    pluralName: 'observatories';
+    displayName: 'Observatoire - Articles';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    date: Attribute.DateTime & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    theme: Attribute.Relation<
+      'api::observatory.observatory',
+      'manyToOne',
+      'api::observatory-theme.observatory-theme'
+    >;
+    category: Attribute.Relation<
+      'api::observatory.observatory',
+      'manyToOne',
+      'api::observatory-category.observatory-category'
+    >;
+    blocks: Attribute.DynamicZone<
+      [
+        'block.image',
+        'block.simple-text-v2',
+        'block.video',
+        'block.double-push-cta',
+        'block.social-media',
+        'block.accordions-list',
+        'block.tabs-accordion',
+        'block.image-text',
+        'block.key-number-carousel',
+        'block.columns-text',
+        'block.icon-links-list',
+        'block.little-list'
+      ]
+    >;
+    seo: Attribute.Component<'shared.seo'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::observatory.observatory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::observatory.observatory',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiObservatoryCategoryObservatoryCategory
+  extends Schema.CollectionType {
+  collectionName: 'observatory_categories';
+  info: {
+    singularName: 'observatory-category';
+    pluralName: 'observatory-categories';
+    displayName: 'Observatoire - Cat\u00E9gories';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID<
+      'api::observatory-category.observatory-category',
+      'name'
+    > &
+      Attribute.Required;
+    articles: Attribute.Relation<
+      'api::observatory-category.observatory-category',
+      'oneToMany',
+      'api::observatory.observatory'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::observatory-category.observatory-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::observatory-category.observatory-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiObservatoryThemeObservatoryTheme
+  extends Schema.CollectionType {
+  collectionName: 'observatory_themes';
+  info: {
+    singularName: 'observatory-theme';
+    pluralName: 'observatory-themes';
+    displayName: 'Observatoire - Th\u00E9matiques';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    slug: Attribute.UID<'api::observatory-theme.observatory-theme', 'name'> &
+      Attribute.Required;
+    firstIcon: Attribute.String;
+    secondIcon: Attribute.String;
+    image: Attribute.Media<'images'>;
+    color: Attribute.Enumeration<
+      [
+        'purple',
+        'yellow',
+        'magenta',
+        'orange',
+        'green',
+        'gold',
+        'sky',
+        'lila',
+        'deeppink',
+        'aquamarine',
+        'lightgray',
+        'saumon'
+      ]
+    > &
+      Attribute.DefaultTo<'lila'>;
+    pageUrl: Attribute.String;
+    articles: Attribute.Relation<
+      'api::observatory-theme.observatory-theme',
+      'oneToMany',
+      'api::observatory.observatory'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::observatory-theme.observatory-theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::observatory-theme.observatory-theme',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPagePage extends Schema.CollectionType {
   collectionName: 'pages';
   info: {
@@ -1377,7 +1539,10 @@ export interface ApiPagePage extends Schema.CollectionType {
         'block.tabs-little-list',
         'block.tabs-image-text',
         'block.tabs-accordion',
-        'block.accordions-list'
+        'block.accordions-list',
+        'block.observatory-themes',
+        'block.observatory-articles',
+        'block.icon-links-list'
       ]
     >;
     seo: Attribute.Component<'shared.seo'> & Attribute.Required;
@@ -1937,6 +2102,9 @@ declare module '@strapi/types' {
       'api::liste-offre.liste-offre': ApiListeOffreListeOffre;
       'api::news.news': ApiNewsNews;
       'api::not-found.not-found': ApiNotFoundNotFound;
+      'api::observatory.observatory': ApiObservatoryObservatory;
+      'api::observatory-category.observatory-category': ApiObservatoryCategoryObservatoryCategory;
+      'api::observatory-theme.observatory-theme': ApiObservatoryThemeObservatoryTheme;
       'api::page.page': ApiPagePage;
       'api::presse.presse': ApiPressePresse;
       'api::reglement.reglement': ApiReglementReglement;

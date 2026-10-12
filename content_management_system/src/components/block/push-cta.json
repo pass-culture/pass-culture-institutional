@@ -28,12 +28,14 @@
       "required": true
     },
     "qrCodeDescription": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "qrCodeUrl": {
-      "type": "string",
-      "required": true
+      "type": "string"
+    },
+    "isImageRight": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
