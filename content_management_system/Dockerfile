@@ -20,6 +20,7 @@ RUN yarn build
 
 # Runner
 FROM node:20.19-alpine3.22 AS runner
+RUN apk update && apk add --no-cache ca-certificates
 ENV NODE_ENV=production
 
 WORKDIR /app
