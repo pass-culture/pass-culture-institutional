@@ -1,0 +1,17 @@
+# Propriétaires du code. Syntaxe : https://docs.github.com/articles/about-code-owners
+# La dernière règle qui correspond à un fichier l'emporte.
+# Les propriétaires sont ajoutés automatiquement comme reviewers des PR.
+
+# Par défaut, tout le repo
+*                                     @pass-culture/jeunes
+
+# CI, déploiement et infra
+/.github/workflows/                   @pass-culture/jeunes @pass-culture/sherif-ops
+/.github/dependabot.yml               @pass-culture/jeunes @pass-culture/sherif-ops
+/public_website/Dockerfile            @pass-culture/jeunes @pass-culture/sherif-ops
+/content_management_system/Dockerfile @pass-culture/jeunes @pass-culture/sherif-ops
+/nginx-strapi-testing-proxy/          @pass-culture/jeunes @pass-culture/sherif-ops
+/docker-compose.yaml                  @pass-culture/jeunes @pass-culture/sherif-ops
+
+# Le fichier CODEOWNERS lui-même
+/.github/CODEOWNERS                   @pass-culture/jeunes @pass-culture/sherif-ops
