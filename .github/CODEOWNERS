@@ -6,12 +6,12 @@
 *                                     @pass-culture/jeunes
 
 # CI, déploiement et infra
-/.github/workflows/                   @pass-culture/jeunes @pass-culture/sherif-ops
-/.github/dependabot.yml               @pass-culture/jeunes @pass-culture/sherif-ops
-/public_website/Dockerfile            @pass-culture/jeunes @pass-culture/sherif-ops
-/content_management_system/Dockerfile @pass-culture/jeunes @pass-culture/sherif-ops
-/nginx-strapi-testing-proxy/          @pass-culture/jeunes @pass-culture/sherif-ops
-/docker-compose.yaml                  @pass-culture/jeunes @pass-culture/sherif-ops
+/.github/workflows/                   @pass-culture/site-instit-ci-owners
+/.github/dependabot.yml               @pass-culture/site-instit-ci-owners
+/public_website/Dockerfile            @pass-culture/site-instit-ci-owners
+/content_management_system/Dockerfile @pass-culture/site-instit-ci-owners
+/nginx-strapi-testing-proxy/          @pass-culture/site-instit-ci-owners
+/docker-compose.yaml                  @pass-culture/site-instit-ci-owners
 
 # Le fichier CODEOWNERS lui-même
-/.github/CODEOWNERS                   @pass-culture/jeunes @pass-culture/sherif-ops
+/.github/CODEOWNERS                   @pass-culture/site-instit-ci-owners
