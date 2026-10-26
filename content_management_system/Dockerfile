@@ -1,10 +1,10 @@
 # Builder
-FROM node:20.19-alpine3.22 AS builder
+FROM node:22.23.4-alpine AS builder
 
 RUN mkdir /build
 WORKDIR /build
 
-COPY package.json yarn.lock /build/
+COPY package.json yarn.lock .yarnrc /build/
 RUN apk add git && yarn install --frozen-lockfile
 
 
@@ -19,7 +19,7 @@ COPY src /build/src
 RUN yarn build
 
 # Runner
-FROM node:20.19-alpine3.22 AS runner
+FROM node:22.23.4-alpine AS runner
 RUN apk update && apk add --no-cache ca-certificates
 ENV NODE_ENV=production
 
