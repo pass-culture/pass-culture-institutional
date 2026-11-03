@@ -96,7 +96,7 @@ jobs:
 
       # Executes helmfile templating and push results to render-manifests repository
       - name: "Setup pc-render-manifests"
-        uses: pass-culture/common-workflows/actions/setup-pc-render-manifests@setup-pc-render-manifests/v0.1.0
+        uses: pass-culture/common-workflows/actions/setup-pc-render-manifests@44a6b824c7b93cbeed2b49dc0d79e20d4b286694 # setup-pc-render-manifests/v0.1.0
         with:
           token: ${{ steps.github-token.outputs.token }}
           version: "v0.7.1"
@@ -129,7 +129,7 @@ jobs:
           use_dns_based_endpoint: true
 
       - name: Sync argoCD application
-        uses: pass-culture/common-workflows/actions/argocd-sync@argocd-sync/v0.8.0
+        uses: pass-culture/common-workflows/actions/argocd-sync@076783ee6943b5e698175bdcea46d7af18bc2742 # argocd-sync/v0.8.0
         with:
           app_name: site-instit-${{ inputs.environment }}
           argocd_app_wait: true
