@@ -75,26 +75,32 @@ const StyledAccountDropdown = styled.div<{
   ${({ theme, $align }) => css`
     position: absolute;
     top: calc(100% + 2.9rem);
-    ${$align === 'right' &&
-    `
+    ${
+      $align === 'right' &&
+      `
      top: calc(100% + 2rem);
-     `}
+     `
+    }
     left: 50%;
     transform: translateX(-50%);
     width: max-content;
 
-    ${$align === 'right' &&
-    `
+    ${
+      $align === 'right' &&
+      `
       right: 0;
       left: auto;
       transform: none;
-    `}
-
-    ${$align === 'left' &&
     `
+    }
+
+    ${
+      $align === 'left' &&
+      `
       left: 0;
       transform: none;
-    `}
+    `
+    }
 
     ul {
       background: ${theme.colors.white};
@@ -119,18 +125,22 @@ const StyledAccountDropdown = styled.div<{
         left: calc(50%);
         transform: translateX(-50%) rotate(45deg);
 
-        ${$align === 'right' &&
-        `
+        ${
+          $align === 'right' &&
+          `
           right: 2rem;
           left: auto;
           transform: rotate(45deg);
-        `}
-
-        ${$align === 'left' &&
         `
+        }
+
+        ${
+          $align === 'left' &&
+          `
           left: 2rem;
           transform: rotate(45deg);
-        `}
+        `
+        }
       }
     }
   `}

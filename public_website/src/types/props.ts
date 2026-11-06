@@ -420,11 +420,7 @@ export type LatestNewsProps = {
   cta?: CTA
   className?: string
   newsType:
-    | 'news'
-    | 'blogtech'
-    | 'resources'
-    | 'rubrique-instit'
-    | 'observatory'
+    'news' | 'blogtech' | 'resources' | 'rubrique-instit' | 'observatory'
 }
 export type OrganizationChartProps = {
   title?: string

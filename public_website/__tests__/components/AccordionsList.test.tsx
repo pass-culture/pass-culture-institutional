@@ -2,7 +2,7 @@ import React from 'react'
 import { userEvent } from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest'
 import { accordionsListFixtures } from '../fixtures/accordionsListFixtures'
 import { render, screen } from '../index'
 import AccordionsList from '@/lib/blocks/AccordionsList'

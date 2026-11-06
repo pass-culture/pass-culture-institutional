@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import BaseSlider from 'rc-slider'
+import BaseSlider from '@rc-component/slider'
 import styled, { css } from 'styled-components'
 
-import 'rc-slider/assets/index.css'
+import '@rc-component/slider/assets/index.css'
 import { Check } from '../icons/Check'
 import { ChevronDown } from '../icons/ChevronDown'
 import { Label } from './Label'
@@ -280,12 +280,16 @@ const SelectWrapper = styled.div<{ $isOpen: boolean }>`
       width: 100%;
       min-height: auto;
       box-sizing: border-box;
-      ${$isOpen
-        ? 'border-bottom-left-radius: 0;'
-        : 'border-bottom-left-radius: 1.25rem;'}
-      ${$isOpen
-        ? 'border-bottom-right-radius: 0;'
-        : 'border-bottom-right-radius: 1.25rem;'}
+      ${
+        $isOpen
+          ? 'border-bottom-left-radius: 0;'
+          : 'border-bottom-left-radius: 1.25rem;'
+      }
+      ${
+        $isOpen
+          ? 'border-bottom-right-radius: 0;'
+          : 'border-bottom-right-radius: 1.25rem;'
+      }
       span:first-child {
         display: none;
       }
@@ -299,9 +303,11 @@ const SelectIcon = styled(ChevronDown)<{ $isOpen: boolean }>`
     top: 50%;
     right: 1rem;
     transition: all 0.3s ease-in-out;
-    ${$isOpen
-      ? 'transform:  translateY(-50%) rotate(180deg);'
-      : 'translateY(-50%) transform: rotate(0deg);'}
+    ${
+      $isOpen
+        ? 'transform:  translateY(-50%) rotate(180deg);'
+        : 'translateY(-50%) transform: rotate(0deg);'
+    }
     @media (width < ${theme.mediaQueries.largeDesktop}) {
       right: 2.2rem;
     }

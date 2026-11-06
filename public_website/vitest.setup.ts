@@ -28,7 +28,7 @@ vi.mock('next/navigation', async () => {
   }
 })
 
+// Vitest 5: `Matchers` is shared by `Assertion` and `AsymmetricMatchersContaining`
 declare module 'vitest' {
-  export interface Assertion extends AxeMatchers {}
-  export interface AsymmetricMatchersContaining extends AxeMatchers {}
+  export interface Matchers extends AxeMatchers {}
 }
