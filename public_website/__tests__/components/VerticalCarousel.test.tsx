@@ -15,7 +15,9 @@ describe('header', () => {
   it('should render correct number of items', async () => {
     render(<VerticalCarousel {...verticalCarouselFixtures} />)
 
-    expect(screen.getAllByRole('link').length).toEqual(
+    // Off-screen slides are rendered with `aria-hidden` and `inert` by
+    // pure-react-carousel v3, so include hidden elements in the count.
+    expect(screen.getAllByRole('link', { hidden: true }).length).toEqual(
       verticalCarouselFixtures.items.length
     )
   })

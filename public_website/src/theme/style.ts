@@ -143,19 +143,23 @@ export const CustomSelectButton = styled.div<{ $isInBreadcrumb?: boolean }>`
     border-image: initial;
     background-color: transparent;
     appearance: none;
-    ${$isInBreadcrumb
-      ? 'border-left: none;'
-      : 'border-left: 1px solid rgba(0, 0, 0, 0.125);'}
+    ${
+      $isInBreadcrumb
+        ? 'border-left: none;'
+        : 'border-left: 1px solid rgba(0, 0, 0, 0.125);'
+    }
     ${$isInBreadcrumb ? 'font-size: 0.75rem;' : 'font-size: 1rem;'}
     ${!$isInBreadcrumb && 'padding: 0px 2rem;'}
     ${!$isInBreadcrumb ? 'font-weight: 700;' : 'font-weight: 500;'}
     ${!$isInBreadcrumb && 'text-transform: uppercase;'}
-    ${$isInBreadcrumb &&
-    css`
-      & svg {
-        width: 0.5rem;
-      }
-    `}
+    ${
+      $isInBreadcrumb &&
+      css`
+        & svg {
+          width: 0.5rem;
+        }
+      `
+    }
   `}
 `
 

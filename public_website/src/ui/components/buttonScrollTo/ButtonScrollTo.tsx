@@ -78,17 +78,21 @@ const StyledButton = styled.button<{
     align-items: center;
     outline-offset: 0.125rem;
     z-index: 1000;
-    ${$noTranslate &&
-    css`
-      transform: translateY(0rem);
-    `};
-    ${!$isVisible &&
-    css`
-      opacity: 0;
-      visibilty: hidden;
-      cursor: inherit;
-      pointer-events: none;
-    `};
+    ${
+      $noTranslate &&
+      css`
+        transform: translateY(0rem);
+      `
+    };
+    ${
+      !$isVisible &&
+      css`
+        opacity: 0;
+        visibilty: hidden;
+        cursor: inherit;
+        pointer-events: none;
+      `
+    };
     &:hover {
       background-color: ${theme.uniqueColors.blueDark};
     }

@@ -94,12 +94,14 @@ const StyledListItem = styled.li<{ $isLink: boolean }>`
       'emoji description';
     gap: 0 2.75rem;
 
-    ${$isLink &&
-    css`
-      &:hover a {
-        text-decoration: underline;
-      }
-    `}
+    ${
+      $isLink &&
+      css`
+        &:hover a {
+          text-decoration: underline;
+        }
+      `
+    }
 
     @media (width < ${theme.mediaQueries.mobile}) {
       grid-template-columns: 1fr;

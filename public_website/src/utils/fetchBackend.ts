@@ -14,7 +14,8 @@ export async function fetchBackend(path: string) {
     return data
   } catch (error) {
     throw new Error(
-      `Please check if the backend is running and you set all the required tokens. ${error}`
+      `Please check if the backend is running and you set all the required tokens. ${error}`,
+      { cause: error }
     )
   }
 }
