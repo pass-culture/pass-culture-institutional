@@ -129,6 +129,75 @@ describe('Observatory article page', () => {
     ).toBe('https://www.data.gouv.fr')
   })
 
+  it('should render the TabsImageText block of the article', () => {
+    const buildTab = (id: number) => ({
+      id,
+      title: `Onglet ${id}`,
+      block: {
+        id,
+        title: `Titre de l'onglet ${id}`,
+        isImageRight: true,
+        icon: null,
+        image: {
+          data: {
+            id,
+            attributes: {
+              url: `https://cdn.test/tab-${id}.png`,
+              alternativeText: `Illustration ${id}`,
+            },
+          },
+        },
+        text: [
+          {
+            type: 'paragraph',
+            children: [{ type: 'text', text: `Texte de l'onglet ${id}` }],
+          },
+        ],
+      },
+    })
+
+    render(
+      <ObservatoryArticlePage
+        data={buildArticle(1, {
+          blocks: [
+            {
+              __component: 'block.tabs-image-text',
+              id: 1,
+              tab: [buildTab(1), buildTab(2)],
+            },
+          ],
+        })}
+        relatedArticles={[]}
+      />
+    )
+
+    expect(
+      screen
+        .getByRole('tab', { name: 'Onglet 1' })
+        .getAttribute('aria-selected')
+    ).toBe('true')
+    expect(screen.getByRole('tab', { name: 'Onglet 2' })).toBeDefined()
+    expect(screen.getByText("Titre de l'onglet 1")).toBeDefined()
+    expect(screen.getByText("Texte de l'onglet 1")).toBeDefined()
+    expect(screen.getByAltText('Illustration 1').getAttribute('src')).toBe(
+      'https://cdn.test/tab-1.png'
+    )
+  })
+
+  it('should populate the image of the TabsImageText tabs', async () => {
+    vi.mocked(Pages.getPage)
+      .mockResolvedValueOnce([buildArticle(1)] as never)
+      .mockResolvedValueOnce([] as never)
+
+    await getStaticProps({ params: { slug: 'article-1' } })
+
+    const [, articleQuery] = vi.mocked(Pages.getPage).mock.calls[0]!
+    // The populate list exceeds qs' default arrayLimit (20)
+    expect(parse(articleQuery, { arrayLimit: 100 })['populate']).toContain(
+      'blocks.tab.block.image'
+    )
+  })
+
   it('should fetch the other articles of the same theme, without the current one', async () => {
     const related = [buildArticle(2)]
     vi.mocked(Pages.getPage)

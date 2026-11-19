@@ -60,7 +60,8 @@
         "block.key-number-carousel",
         "block.columns-text",
         "block.icon-links-list",
-        "block.little-list"
+        "block.little-list",
+        "block.tabs-image-text"
       ]
     },
     "seo": {
