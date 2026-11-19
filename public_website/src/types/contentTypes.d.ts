@@ -1370,7 +1370,8 @@ export interface ApiObservatoryObservatory extends Schema.CollectionType {
         'block.key-number-carousel',
         'block.columns-text',
         'block.icon-links-list',
-        'block.little-list'
+        'block.little-list',
+        'block.tabs-image-text'
       ]
     >;
     seo: Attribute.Component<'shared.seo'> & Attribute.Required;
