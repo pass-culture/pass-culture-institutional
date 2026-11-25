@@ -9,6 +9,7 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
+    "test": "node --test 'tests/*.test.js'",
     "test:deadcode": "ts-prune",
     "test:lint": "eslint .",
     "test:types": "yarn tsc --noEmit"
@@ -37,6 +38,9 @@
     "eslint-plugin-promise": "^6.1.1",
     "ts-prune": "^0.10.3",
     "typescript": "^5.3.3"
+  },
+  "resolutions": {
+    "@casl/ability": "6.7.5"
   },
   "engines": {
     "node": ">=22.23.4 <23",
