@@ -5,13 +5,15 @@
 # Par défaut, tout le repo
 *                                     @pass-culture/jeunes
 
+/.github/                             @pass-culture/sherif-ops
+
 # CI, déploiement et infra
-/.github/workflows/                   @pass-culture/site-instit-ci-owners
-/.github/dependabot.yml               @pass-culture/site-instit-ci-owners
+/.github/workflows/                   @pass-culture/sherif-ops @pass-culture/site-instit-ci-owners
+/.github/dependabot.yml               @pass-culture/sherif-ops @pass-culture/site-instit-ci-owners
 /public_website/Dockerfile            @pass-culture/site-instit-ci-owners
 /content_management_system/Dockerfile @pass-culture/site-instit-ci-owners
 /nginx-strapi-testing-proxy/          @pass-culture/site-instit-ci-owners
 /docker-compose.yaml                  @pass-culture/site-instit-ci-owners
 
 # Le fichier CODEOWNERS lui-même
-/.github/CODEOWNERS                   @pass-culture/site-instit-ci-owners
+/.github/CODEOWNERS                   @pass-culture/sherif-ops @pass-culture/site-instit-ci-owners

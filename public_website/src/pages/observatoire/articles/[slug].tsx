@@ -89,6 +89,7 @@ export const getStaticProps = (async ({ params }) => {
         'blocks.firstCta',
         'blocks.secondCta',
         'blocks.simpleText',
+        'blocks.tab.block.image',
         'blocks.tab.block.simpleText',
         'blocks.tab.block.accordions',
         'blocks.tab.block.accordions.simpleText',

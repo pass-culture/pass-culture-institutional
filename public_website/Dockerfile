@@ -21,6 +21,7 @@ RUN yarn config set httpsCaFilePath '/cacert.pem' && \
 
 # Runner
 FROM builder-${network_mode} AS runner
+RUN apk update && apk add --no-cache ca-certificates
 COPY .firebaserc firebase.json /app
 COPY public /app/public
 COPY src /app/src
