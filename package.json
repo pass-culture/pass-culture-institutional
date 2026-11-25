@@ -24,7 +24,7 @@
     "proxy:transfer": "cd nginx-strapi-testing-proxy && bash transfer-from-testing.sh"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.5"
   },
   "packageManager": "yarn@1.22.22"
 }
