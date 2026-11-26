@@ -1,5 +1,9 @@
 name: "[Merge] Build and deploy on testing"
 
+permissions:
+  id-token: write
+  contents: read
+
 on:
   push:
     branches:
