@@ -10,6 +10,18 @@ module.exports = {
   ],
   overrides: [
     {
+      files: ["tests/**/*.js"],
+      extends: ["eslint:recommended"],
+      env: {
+        node: true,
+        es2022: true,
+      },
+      parserOptions: {
+        ecmaVersion: 2022,
+        sourceType: "script",
+      },
+    },
+    {
       files: ["webpack.config.js", "webpack.config.example.js"],
       env: {
         es2021: true,
