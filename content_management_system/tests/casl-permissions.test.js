@@ -3,10 +3,14 @@
  *
  * @casl/ability is pinned by @strapi/admin, @strapi/permissions and
  * @strapi/types and forced to a patched version through "resolutions" in
- * package.json (GHSA-x9vf-53q3-cvx6). These tests exercise casl through
- * Strapi's own permission engine and the same casl helpers @strapi/admin uses
+ * package.json (GHSA-x9vf-53q3-cvx6). These tests exercise casl through the
+ * bare @strapi/permissions engine and the same casl helpers @strapi/admin uses
  * (subject, permittedFieldsOf, rulesFor, rulesToQuery), so a resolution that
  * changes casl's behaviour makes them fail.
+ *
+ * Scope: they check casl and @strapi/permissions, not Strapi's own filtering.
+ * The admin and content API engines register extra hooks (unknown actions,
+ * non-applicable properties, empty field lists) that are not reproduced here.
  *
  * Run with: yarn test (node --test, no extra dependency).
  */
@@ -30,7 +34,8 @@ const AUTHOR_ROLE_ID = 10;
 // Same handlers as the conditions @strapi/admin registers
 // (admin::is-creator and admin::has-same-role-as-creator). The admin engine
 // calls generateAbility(permissions, user), so each handler receives the
-// user merged with { permission }.
+// user merged with { permission }. Only the condition handlers are copied,
+// not the admin engine hooks.
 const conditions = {
   "admin::is-creator": {
     handler: (user) => ({ "createdBy.id": user.id }),
@@ -244,12 +249,15 @@ describe("permission engine (@strapi/permissions + casl)", () => {
   });
 
   // Content API path: users-permissions and custom API tokens build an
-  // ability from subject-less permissions and call ability.can(scope).
+  // ability from subject-less permissions, without options, and call
+  // ability.can(scope).
   it("checks content API scopes without a subject", async () => {
-    const ability = await buildAbility([
-      { action: "api::page.page.find" },
-      { action: "api::page.page.findOne" },
-    ]);
+    const ability = await permissions.engine
+      .new({ providers })
+      .generateAbility([
+        { action: "api::page.page.find" },
+        { action: "api::page.page.findOne" },
+      ]);
     assert.equal(ability.can("api::page.page.find"), true);
     assert.equal(ability.can("api::page.page.findOne"), true);
     assert.equal(ability.can("api::page.page.create"), false);
@@ -279,6 +287,9 @@ describe("field-level permissions (admin sanitize helpers)", () => {
     assert.equal(ability.can(action, article({ id: 1 }), "body"), false);
   });
 
+  // casl behaviour guard only: Strapi never stores wildcard fields (it keeps
+  // explicit schema paths and strips unknown fields at bootstrap), so this
+  // case detects a change in casl's field matcher, not a production path.
   it("matches wildcard field patterns", async () => {
     const ability = await buildAbility([
       { action, subject: ARTICLE, properties: { fields: ["title", "seo.*"] } },
