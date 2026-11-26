@@ -27,14 +27,16 @@ const ARTICLE = "api::article.article";
 const AUTHOR_ID = 1;
 const AUTHOR_ROLE_ID = 10;
 
-// Mirrors the conditions Strapi registers for the admin
-// (admin::is-creator and admin::has-same-role-as-creator).
+// Same handlers as the conditions @strapi/admin registers
+// (admin::is-creator and admin::has-same-role-as-creator). The admin engine
+// calls generateAbility(permissions, user), so each handler receives the
+// user merged with { permission }.
 const conditions = {
   "admin::is-creator": {
-    handler: ({ user }) => ({ "createdBy.id": user.id }),
+    handler: (user) => ({ "createdBy.id": user.id }),
   },
   "admin::has-same-role-as-creator": {
-    handler: ({ user }) => ({
+    handler: (user) => ({
       "createdBy.roles": {
         $elemMatch: { id: { $in: user.roles.map((role) => role.id) } },
       },
@@ -53,7 +55,7 @@ const author = { id: AUTHOR_ID, roles: [{ id: AUTHOR_ROLE_ID }] };
 const buildAbility = (permissionList, user = author) =>
   permissions.engine
     .new({ providers })
-    .generateAbility(permissionList, { user });
+    .generateAbility(permissionList, user);
 
 const article = (data) => subject(ARTICLE, data);
 
@@ -78,11 +80,18 @@ const buildCaslQuery = (ability, action, model) =>
 const caslVersionLoadedBy = (fromPackage) => {
   const fromDir = path.dirname(require.resolve(fromPackage));
   let dir = path.dirname(require.resolve("@casl/ability", { paths: [fromDir] }));
-  while (!fs.existsSync(path.join(dir, "package.json")) ||
-    JSON.parse(fs.readFileSync(path.join(dir, "package.json"), "utf8")).name !== "@casl/ability") {
-    dir = path.dirname(dir);
+  for (;;) {
+    const manifest = path.join(dir, "package.json");
+    if (fs.existsSync(manifest)) {
+      const pkg = JSON.parse(fs.readFileSync(manifest, "utf8"));
+      if (pkg.name === "@casl/ability") return pkg.version;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) {
+      throw new Error(`@casl/ability package.json not found from ${fromPackage}`);
+    }
+    dir = parent;
   }
-  return JSON.parse(fs.readFileSync(path.join(dir, "package.json"), "utf8")).version;
 };
 
 describe("casl version", () => {
@@ -233,6 +242,19 @@ describe("permission engine (@strapi/permissions + casl)", () => {
     ]);
     assert.equal(ability.can("admin::marketplace.read", "all"), true);
   });
+
+  // Content API path: users-permissions and custom API tokens build an
+  // ability from subject-less permissions and call ability.can(scope).
+  it("checks content API scopes without a subject", async () => {
+    const ability = await buildAbility([
+      { action: "api::page.page.find" },
+      { action: "api::page.page.findOne" },
+    ]);
+    assert.equal(ability.can("api::page.page.find"), true);
+    assert.equal(ability.can("api::page.page.findOne"), true);
+    assert.equal(ability.can("api::page.page.create"), false);
+    assert.equal(ability.can("api::news.news.find"), false);
+  });
 });
 
 describe("field-level permissions (admin sanitize helpers)", () => {
@@ -255,6 +277,19 @@ describe("field-level permissions (admin sanitize helpers)", () => {
     assert.equal(hasAtLeastOneRegistered, true);
     assert.equal(ability.can(action, article({ id: 1 }), "title"), true);
     assert.equal(ability.can(action, article({ id: 1 }), "body"), false);
+  });
+
+  it("matches wildcard field patterns", async () => {
+    const ability = await buildAbility([
+      { action, subject: ARTICLE, properties: { fields: ["title", "seo.*"] } },
+    ]);
+    const target = article({ id: 1 });
+    assert.equal(ability.can(action, target, "seo.metaTitle"), true);
+    assert.equal(ability.can(action, target, "seo.metaDescription"), true);
+    assert.equal(ability.can(action, target, "seo"), true);
+    assert.equal(ability.can(action, target, "body"), false);
+    const { permittedFields } = sanitizeFieldsInfo(ability, action, target);
+    assert.deepEqual([...permittedFields].sort(), ["seo.*", "title"]);
   });
 
   it("allows every field when no field is registered", async () => {
@@ -341,6 +376,7 @@ describe("prototype pollution (GHSA-x9vf-53q3-cvx6)", () => {
         },
       },
     ]);
+    assert.equal(typeof rulesToFields, "function");
     try {
       rulesToFields(ability, action, ARTICLE);
     } catch {

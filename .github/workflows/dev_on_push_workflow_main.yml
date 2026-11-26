@@ -50,6 +50,8 @@ jobs:
         run: cd content_management_system && yarn test:lint
       - name: Test typescript
         run: cd content_management_system && yarn test:types
+      - name: Test content_management_system
+        run: cd content_management_system && yarn test
 
   build-image-cms:
     runs-on: ubuntu-22.04

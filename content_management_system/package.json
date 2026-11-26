@@ -9,7 +9,7 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "strapi": "strapi",
-    "test": "node --test 'tests/*.test.js'",
+    "test": "node --test 'tests/**/*.test.js'",
     "test:deadcode": "ts-prune",
     "test:lint": "eslint .",
     "test:types": "yarn tsc --noEmit"
