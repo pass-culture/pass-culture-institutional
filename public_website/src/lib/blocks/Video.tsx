@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ReactPlayer from 'react-player/youtube'
+import ReactPlayer from 'react-player'
 import styled, { css } from 'styled-components'
 
 import BlockRendererWithCondition from '../BlockRendererWithCondition'
@@ -8,7 +8,7 @@ import { ContentWrapper } from '@/ui/components/ContentWrapper'
 import { isRenderable } from '@/utils/isRenderable'
 
 export function Video(props: VideoProps) {
-  const { description, url, alt } = props
+  const { description, url } = props
   const [isMounted, setIsMounted] = useState<boolean>(false)
 
   const renderVideo = (): boolean => {
@@ -24,11 +24,11 @@ export function Video(props: VideoProps) {
       <Root suppressHydrationWarning $noMargin>
         <BlockRendererWithCondition condition={renderVideo()}>
           <StyledVideo
-            url={url}
+            src={url}
+            wrapper="div"
             width="100%"
             controls
             height="100%"
-            alt={alt}
           />
         </BlockRendererWithCondition>
         <BlockRendererWithCondition condition={isRenderable(description)}>
@@ -47,10 +47,12 @@ const Root = styled.div<{ $noMargin?: boolean }>`
     max-width: 62.5rem;
     margin: 0 auto;
 
-    ${$noMargin &&
-    css`
-      padding: 0;
-    `}
+    ${
+      $noMargin &&
+      css`
+        padding: 0;
+      `
+    }
 
     @media (width < ${theme.mediaQueries.tablet}) {
       background: none;

@@ -248,12 +248,14 @@ const StyledButton = styled.button<{
       will-change: transform;
       transition: transform 0.2s linear;
     }
-    ${$isReverse &&
-    `&:hover {
+    ${
+      $isReverse &&
+      `&:hover {
       svg {
         transform: translateY(-0.3125rem) rotate(0deg);
       }
-    }`}
+    }`
+    }
 
     &:hover {
       svg {

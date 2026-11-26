@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ReactPlayer from 'react-player/youtube'
+import ReactPlayer from 'react-player'
 import { Slide } from 'pure-react-carousel'
 import styled, { css } from 'styled-components'
 
@@ -29,11 +29,11 @@ export function ExperienceVideoCarouselSlide(
       <StyledWrapper>
         <BlockRendererWithCondition condition={isMounted && isRenderable(url)}>
           <StyledExperienceVideo
-            url={url}
+            src={url}
+            wrapper="div"
             width="100%"
             controls
             height={isLandscape ? '100%' : 470}
-            alt={description}
           />
         </BlockRendererWithCondition>
         <StyledTitle>{title}</StyledTitle>

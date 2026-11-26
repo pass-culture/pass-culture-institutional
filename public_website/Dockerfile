@@ -4,7 +4,6 @@ ARG network_mode=default
 FROM node:24-alpine AS base
 RUN corepack enable
 COPY package.json yarn.lock tsconfig.json .yarnrc.yml /app/
-COPY .yarn/patches /app/.yarn/patches
 COPY *.js /app
 WORKDIR  /app
 

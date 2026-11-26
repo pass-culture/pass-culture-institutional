@@ -42,7 +42,8 @@ export async function fetchCMS<T>(path: string) {
     }
   } catch (error) {
     throw new Error(
-      `Please check if your CMS is running and you set all the required tokens. ${error}`
+      `Please check if your CMS is running and you set all the required tokens. ${error}`,
+      { cause: error }
     )
   }
 }

@@ -202,7 +202,7 @@ export function Simulator(props: SimulatorProps) {
   }
 
   function getDisplayedSteps(): string[] {
-    let maxStepIndex = 0
+    let maxStepIndex: number
     switch (currentStep) {
       case Step.AGE:
       case Step.TOO_YOUNG:

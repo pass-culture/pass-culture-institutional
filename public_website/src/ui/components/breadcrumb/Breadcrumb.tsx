@@ -254,12 +254,14 @@ const Root = styled(ContentWrapper)<{ $isUnderHeader?: boolean }>`
     font-size: ${theme.fonts.sizes['2xs']};
     font-weight: ${theme.fonts.weights.medium};
     margin-bottom: var(--module-margin);
-    ${$isUnderHeader &&
-    css`
-      @media (max-width: ${theme.mediaQueries.tablet}) {
-        transform: none;
-      }
-    `}
+    ${
+      $isUnderHeader &&
+      css`
+        @media (max-width: ${theme.mediaQueries.tablet}) {
+          transform: none;
+        }
+      `
+    }
   `};
 `
 const ListItem = styled.li`

@@ -83,27 +83,36 @@ const StyledButton = styled.button<{ $variant: ButtonVariants }>`
   ${({ theme, $variant }) => css`
     position: relative;
     cursor: pointer;
-    background: ${$variant
-      ? getVariantButtonBackground($variant)
-      : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`};
+    background: ${
+      $variant
+        ? getVariantButtonBackground($variant)
+        : `linear-gradient(90deg, ${theme.colors.tertiary} -11.18%, ${theme.colors.secondary} 64.8%)`
+    };
 
-    ${$variant !== 'primary' &&
-    `border: 0.0625rem solid ${theme.colors.white};`}
+    ${
+      $variant !== 'primary' && `border: 0.0625rem solid ${theme.colors.white};`
+    }
 
-    ${$variant === 'quaternary' &&
-    `border: 0.0625rem solid ${theme.colors.purple};`}
+    ${
+      $variant === 'quaternary' &&
+      `border: 0.0625rem solid ${theme.colors.purple};`
+    }
     outline-offset: 0.0625rem;
     transition: all 0.4s ease-in-out;
     &:active {
-      ${$variant === 'tertiary' &&
-      `background:rgba(255,255,255,0);
-        color:${theme.colors.white};`}
+      ${
+        $variant === 'tertiary' &&
+        `background:rgba(255,255,255,0);
+        color:${theme.colors.white};`
+      }
       ${$variant ? getFocusOutlineColor($variant) : ''}
     }
     &:hover {
-      ${$variant === 'tertiary' &&
-      `background:rgba(255,255,255,0);
-      color:${theme.colors.white};`}
+      ${
+        $variant === 'tertiary' &&
+        `background:rgba(255,255,255,0);
+      color:${theme.colors.white};`
+      }
       &::after {
         opacity: 1;
       }
@@ -119,18 +128,18 @@ const StyledButton = styled.button<{ $variant: ButtonVariants }>`
       height: 100%;
       width: 100%;
       border-radius: 2rem;
-      background: ${$variant
-        ? getHoverBackgroundColor($variant)
-        : 'transparent'};
+      background: ${
+        $variant ? getHoverBackgroundColor($variant) : 'transparent'
+      };
       opacity: 0;
       z-index: 0;
       transition: opacity 0.4s ease-in-out;
       pointer-events: none;
     }
     border-radius: 2rem;
-    color: ${$variant === 'tertiary'
-      ? theme.colors.secondary
-      : theme.colors.white};
+    color: ${
+      $variant === 'tertiary' ? theme.colors.secondary : theme.colors.white
+    };
 
     ${$variant === 'quaternary' && `color: ${theme.colors.purple};`}
 
